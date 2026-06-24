@@ -94,7 +94,7 @@ console.log(obj.inherited); // true (継承された)
 #### パラメータ
 
 - `prototype` (`T extends object`): 継承するプロトタイプオブジェクトです。
-- `properties` (`U extends object`, オプション): 新しいオブジェクトに追加するプロパティです。
+- `properties?` (`U extends object`): 新しいオブジェクトに追加するプロパティです。
 
 #### 戻り値
 

@@ -59,9 +59,9 @@ split(undefined);
 
 #### 参数
 
-- `string` (`string`, 可选): 要拆分的字符串。默认为空字符串。
-- `separator` (`RegExp | string`, 可选): 用于拆分的分隔符。
-- `limit` (`number`, 可选): 结果数组的最大长度。
+- `string?` (`string`): 要拆分的字符串。默认为空字符串。
+- `separator?` (`RegExp | string`): 用于拆分的分隔符。
+- `limit?` (`number`): 结果数组的最大长度。
 
 #### 返回值
 

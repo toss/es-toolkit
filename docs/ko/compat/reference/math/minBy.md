@@ -107,7 +107,7 @@ minBy(undefined);
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 함수, 속성명, 또는 조건이에요.
+- `iteratee?` (`ValueIteratee<T>`): 각 요소에 적용할 함수, 속성명, 또는 조건이에요.
 
 #### 반환 값
 

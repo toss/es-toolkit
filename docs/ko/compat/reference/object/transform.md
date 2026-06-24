@@ -99,9 +99,9 @@ const copy2 = transform(obj);
 
 #### 파라미터
 
-- `object` (`readonly T[] | T`, 선택): 순회할 배열이나 객체예요.
-- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`, 선택): 각 요소마다 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
-- `accumulator` (`U`, 선택): 초기값이에요. 생략하면 배열은 빈 배열, 객체는 빈 객체가 만들어져요.
+- `object?` (`readonly T[] | T`): 순회할 배열이나 객체예요.
+- `iteratee?` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`): 각 요소마다 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
+- `accumulator?` (`U`): 초기값이에요. 생략하면 배열은 빈 배열, 객체는 빈 객체가 만들어져요.
 
 #### 반환 값
 

@@ -99,13 +99,13 @@ safeCompiled({ html: '<div>content</div>' });
 #### Parameters
 
 - `string` (`string`): The template string.
-- `options` (`object`, optional): Configuration object.
-  - `options.escape` (`RegExp`, optional): Regular expression delimiter for HTML escaping. Default is `<%-([\s\S]+?)%>`.
-  - `options.evaluate` (`RegExp`, optional): Regular expression delimiter for executing JavaScript code. Default is `<%([\s\S]+?)%>`.
-  - `options.interpolate` (`RegExp`, optional): Regular expression delimiter for value interpolation. Default is `<%=([\s\S]+?)%>`.
-  - `options.variable` (`string`, optional): Variable name for the data object.
-  - `options.imports` (`object`, optional): Functions to be used in the template.
-  - `options.sourceURL` (`string`, optional): Source URL for debugging purposes.
+- `options?` (`object`): Configuration object.
+  - `options.escape?` (`RegExp`): Regular expression delimiter for HTML escaping. Default is `<%-([\s\S]+?)%>`.
+  - `options.evaluate?` (`RegExp`): Regular expression delimiter for executing JavaScript code. Default is `<%([\s\S]+?)%>`.
+  - `options.interpolate?` (`RegExp`): Regular expression delimiter for value interpolation. Default is `<%=([\s\S]+?)%>`.
+  - `options.variable?` (`string`): Variable name for the data object.
+  - `options.imports?` (`object`): Functions to be used in the template.
+  - `options.sourceURL?` (`string`): Source URL for debugging purposes.
 
 #### Returns
 

@@ -79,7 +79,7 @@ pickBy(undefined, () => true); // {}
 #### パラメータ
 
 - `object` (`Record<string, T> | Record<number, T> | object | null | undefined`): フィルタリングする元のオブジェクトです。
-- `predicate` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`, オプション): 各プロパティに対して実行する述語関数です。これがtrueを返すプロパティが選択されます。デフォルトは`identity`関数です。
+- `predicate?` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`): 各プロパティに対して実行する述語関数です。これがtrueを返すプロパティが選択されます。デフォルトは`identity`関数です。
 
 #### 戻り値
 

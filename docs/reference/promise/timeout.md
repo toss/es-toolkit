@@ -76,8 +76,8 @@ const result = await Promise.race([
 #### Parameters
 
 - `ms` (`number`): The amount of time in milliseconds until the `TimeoutError` is thrown.
-- `options` (`TimeoutOptions`, optional): Timeout options.
-  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the timeout. When aborted, the returned Promise stays pending and never rejects.
+- `options?` (`TimeoutOptions`): Timeout options.
+  - `signal?` (`AbortSignal`): An AbortSignal to cancel the timeout. When aborted, the returned Promise stays pending and never rejects.
 
 #### Returns
 

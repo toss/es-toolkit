@@ -94,7 +94,7 @@ inRange(3, false, 5);
 
 - `value` (`number`): 범위 안에 있는지 확인할 숫자예요.
 - `minimum` (`number`): 범위의 최솟값이에요 (포함). `maximum`이 없으면 이 값이 최댓값이 돼요.
-- `maximum` (`number`, 선택): 범위의 최댓값이에요 (포함되지 않음).
+- `maximum?` (`number`): 범위의 최댓값이에요 (포함되지 않음).
 
 #### 반환 값
 

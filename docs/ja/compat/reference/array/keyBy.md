@@ -57,7 +57,7 @@ keyBy(undefined, 'id'); // {}
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | null | undefined`): キーで構成する配列またはオブジェクトです。
-- `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, オプション): キーを生成する関数またはプロパティ名です。省略すると、要素自体がキーとして使用されます。
+- `iteratee?` (`ValueIterateeCustom<T, PropertyKey>`): キーを生成する関数またはプロパティ名です。省略すると、要素自体がキーとして使用されます。
 
 #### 戻り値
 

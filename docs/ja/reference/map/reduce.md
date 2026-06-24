@@ -70,7 +70,7 @@ const config = reduce(settings, (acc, value, key) => ({ ...acc, [key]: value }),
 
 - `map` (`Map<K, V>`): 縮小するMapです。
 - `callback` (`(accumulator: A, value: V, key: K, map: Map<K, V>) => A`): 各エントリを処理してアキュムレータを更新する関数です。
-- `initialValue` (`A`, オプション): アキュムレータの初期値です。提供されない場合、Mapの最初の値が使用されます。
+- `initialValue?` (`A`): アキュムレータの初期値です。提供されない場合、Mapの最初の値が使用されます。
 
 #### 戻り値
 

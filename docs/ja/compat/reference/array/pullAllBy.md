@@ -38,8 +38,8 @@ pullAllBy(null as any, [1, 2], x => x); // null
 #### パラメータ
 
 - `array` (`T[]`): 変更する配列です。
-- `values` (`ArrayLike<T>`, オプション): 削除する値の配列です。
-- `iteratee` (`ValueIteratee<T>`, オプション): 各要素に適用するiteratee関数です。プロパティ名、部分オブジェクト、または関数を使用できます。
+- `values?` (`ArrayLike<T>`): 削除する値の配列です。
+- `iteratee?` (`ValueIteratee<T>`): 各要素に適用するiteratee関数です。プロパティ名、部分オブジェクト、または関数を使用できます。
 
 #### 戻り値
 

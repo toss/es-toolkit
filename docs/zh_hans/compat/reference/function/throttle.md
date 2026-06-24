@@ -42,8 +42,8 @@ window.addEventListener('scroll', throttledScroll);
 #### 参数
 
 - `func` (`Function`): 要节流的函数。
-- `wait` (`number`, 可选): 等待时间(毫秒)。默认值为 `0`。
-- `options` (`ThrottleSettings`, 可选): 节流选项。
+- `wait?` (`number`): 等待时间(毫秒)。默认值为 `0`。
+- `options?` (`ThrottleSettings`): 节流选项。
   - `leading` (`boolean`): 是否在首次调用时执行。默认值为 `true`。
   - `trailing` (`boolean`): 是否在最后一次调用后执行。默认值为 `true`。
 

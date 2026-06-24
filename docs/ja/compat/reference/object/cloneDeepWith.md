@@ -104,7 +104,7 @@ console.log(cloned.b.self === cloned); // true (循環参照が保持される)
 #### パラメータ
 
 - `value` (`T`): 深くコピーする値です。
-- `customizer` (`function`, オプション): コピー方法を決定する関数です。`(value: any, key?: string, object?: any, stack?: Map<any, any>) => any` の形式です。
+- `customizer?` (`function`): コピー方法を決定する関数です。`(value: any, key?: string, object?: any, stack?: Map<any, any>) => any` の形式です。
 
 #### 戻り値
 

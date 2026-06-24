@@ -47,7 +47,7 @@ flatMap(arr, item => [[[item, item]]], 3);
 
 - `arr` (`T[]`): The array to transform.
 - `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): The function that transforms each array element. It receives the element, its index, and the array.
-- `depth` (`D`, optional): The depth to flatten. Default is `1`.
+- `depth?` (`D`): The depth to flatten. Default is `1`.
 
 #### Returns
 

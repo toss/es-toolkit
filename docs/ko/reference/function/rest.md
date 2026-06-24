@@ -72,7 +72,7 @@ console.log(restGreet('Hey'));
 #### 파라미터
 
 - `func` (`F`): 파라미터 처리 방식을 변경할 함수예요.
-- `startIndex` (`number`, 선택): 배열로 묶기 시작할 인덱스예요. 기본값은 `func.length - 1`으로, 마지막 파라미터부터 배열로 묶어요.
+- `startIndex?` (`number`): 배열로 묶기 시작할 인덱스예요. 기본값은 `func.length - 1`으로, 마지막 파라미터부터 배열로 묶어요.
 
 #### 반환 값
 

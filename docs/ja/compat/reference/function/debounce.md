@@ -253,8 +253,8 @@ window.addEventListener('beforeunload', () => {
 #### パラメータ
 
 - `func` (`Function`): デバウンスする関数です。
-- `wait` (`number`, オプション): 遅延するミリ秒数です。デフォルトは `0` です。
-- `options` (`DebounceSettings`, オプション): オプションオブジェクトです。
+- `wait?` (`number`): 遅延するミリ秒数です。デフォルトは `0` です。
+- `options?` (`DebounceSettings`): オプションオブジェクトです。
   - `leading` (`boolean`): `true` の場合、遅延開始時点で関数を実行します。デフォルトは `false` です。
   - `trailing` (`boolean`): `true` の場合、遅延終了時点で関数を実行します。デフォルトは `true` です。
   - `maxWait` (`number`): 関数実行が遅延できる最大時間です。デフォルトは `Infinity` です。

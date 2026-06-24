@@ -56,7 +56,7 @@ isEmpty('text'); // false (文字列は長さで判定)
 
 #### パラメータ
 
-- `value` (`unknown`, 任意): 確認する値です。
+- `value?` (`unknown`): 確認する値です。
 
 #### 戻り値
 

@@ -76,7 +76,7 @@ map(users, { age: 30 });
 #### Parameters
 
 - `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to iterate over.
-- `iteratee` (`function | string | object`, optional): The function to execute on each element, a property path, or an object to match. If not provided, returns each element as is.
+- `iteratee?` (`function | string | object`): The function to execute on each element, a property path, or an object to match. If not provided, returns each element as is.
   - When it's a function, it's called in the form `(value, key, collection)`.
   - When it's a string, it extracts that property.
   - When it's an object, it checks if each element matches the object.

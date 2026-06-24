@@ -66,9 +66,9 @@ controller.abort();
 
 - `func` (`F`): The function to create a debounced function from.
 - `debounceMs`(`number`): The number of milliseconds to delay.
-- `options` (`DebounceOptions`, optional): An options object.
-  - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the debounced function.
-  - `edges` (`Array<'leading' | 'trailing'>`, optional): An array indicating when to execute the original function. Defaults to `['trailing']`.
+- `options?` (`DebounceOptions`): An options object.
+  - `signal?` (`AbortSignal`): An optional `AbortSignal` to cancel the debounced function.
+  - `edges?` (`Array<'leading' | 'trailing'>`): An array indicating when to execute the original function. Defaults to `['trailing']`.
     - If `'leading'` is included, the original function is executed immediately on the first call to the debounced function.
     - If `'trailing'` is included, the original function is executed after `debounceMs` milliseconds have passed since the last call to the debounced function.
     - If both `'leading'` and `'trailing'` are included, the original function is called at both the start and end of the delay. However, the debounced function must be called at least twice within `debounceMs` milliseconds for this to happen, as a single call to the debounced function cannot trigger the original function twice.

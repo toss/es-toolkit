@@ -60,8 +60,8 @@ async function simulateNetworkRequest() {
 #### パラメータ
 
 - `ms` (`number`): 遅延させるミリ秒単位の時間です。
-- `options` (`DelayOptions`, オプション): 遅延オプションです。
-  - `signal` (`AbortSignal`, オプション): 遅延をキャンセルできるAbortSignalです。
+- `options?` (`DelayOptions`): 遅延オプションです。
+  - `signal?` (`AbortSignal`): 遅延をキャンセルできるAbortSignalです。
 
 #### 戻り値
 

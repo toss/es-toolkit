@@ -55,7 +55,7 @@ const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()]
 
 - `set` (`Set<T>`): 縮小するSetです。
 - `callback` (`(accumulator: A, value: T, value2: T, set: Set<T>) => A`): 各要素を処理してアキュムレータを更新する関数です。
-- `initialValue` (`A`, オプション): アキュムレータの初期値です。提供されない場合、Setの最初の要素が使用されます。
+- `initialValue?` (`A`): アキュムレータの初期値です。提供されない場合、Setの最初の要素が使用されます。
 
 #### 戻り値
 

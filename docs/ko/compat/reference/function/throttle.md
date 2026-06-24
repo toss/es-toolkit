@@ -42,8 +42,8 @@ window.addEventListener('scroll', throttledScroll);
 #### 파라미터
 
 - `func` (`Function`): 스로틀링할 함수예요.
-- `wait` (`number`, 선택): 밀리세컨드 단위의 대기 시간이에요. 기본값은 `0`이에요.
-- `options` (`ThrottleSettings`, 선택): 스로틀링 옵션이에요.
+- `wait?` (`number`): 밀리세컨드 단위의 대기 시간이에요. 기본값은 `0`이에요.
+- `options?` (`ThrottleSettings`): 스로틀링 옵션이에요.
   - `leading` (`boolean`): 첫 번째 호출에서 바로 실행할지 여부예요. 기본값은 `true`예요.
   - `trailing` (`boolean`): 마지막 호출 후에 실행할지 여부예요. 기본값은 `true`예요.
 

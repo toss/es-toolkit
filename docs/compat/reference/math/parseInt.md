@@ -67,7 +67,7 @@ parseInt('123abc');
 #### Parameters
 
 - `string` (`string`): The string to convert to an integer.
-- `radix` (`number`, optional): The radix to use for conversion. Default is `0`, which automatically determines based on string format.
+- `radix?` (`number`): The radix to use for conversion. Default is `0`, which automatically determines based on string format.
 
 #### Returns
 

@@ -109,11 +109,11 @@ try {
 #### パラメータ
 
 - `func` (`() => Promise<T>`): 再試行する非同期関数です。
-- `options` (`number | RetryOptions`, オプション): 再試行回数またはオプションオブジェクトです。
-  - `retries` (`number`, オプション): 再試行する回数です。デフォルトは `Infinity` で無限に再試行します。
-  - `delay` (`number | (attempts: number) => number`, オプション): 再試行間隔(ミリ秒)です。数値または関数を使用できます。デフォルトは `0` です。
-  - `signal` (`AbortSignal`, オプション): 再試行をキャンセルできるシグナルです。
-  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, オプション): 再試行するかどうかを決定する関数です。`false` を返すと即座にエラーをスローします。
+- `options?` (`number | RetryOptions`): 再試行回数またはオプションオブジェクトです。
+  - `retries?` (`number`): 再試行する回数です。デフォルトは `Infinity` で無限に再試行します。
+  - `delay?` (`number | (attempts: number) => number`): 再試行間隔(ミリ秒)です。数値または関数を使用できます。デフォルトは `0` です。
+  - `signal?` (`AbortSignal`): 再試行をキャンセルできるシグナルです。
+  - `shouldRetry?` (`(error: unknown, attempt: number) => boolean`): 再試行するかどうかを決定する関数です。`false` を返すと即座にエラーをスローします。
     - `error`: 発生したエラーオブジェクトです。
     - `attempt`: 現在の試行回数です (0から開始)。
 

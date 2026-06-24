@@ -40,7 +40,7 @@ deburr(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to remove special characters from.
+- `str?` (`string`): The string to remove special characters from.
 
 #### Returns
 

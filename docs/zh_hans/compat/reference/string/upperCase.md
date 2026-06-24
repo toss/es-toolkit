@@ -51,7 +51,7 @@ upperCase(undefined); // ''
 
 #### 参数
 
-- `str` (`string`, 可选): 要转换为大写形式的字符串。
+- `str?` (`string`): 要转换为大写形式的字符串。
 
 #### 返回值
 

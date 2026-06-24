@@ -51,8 +51,8 @@ fill(array, '*', -2, -1);
 
 - `arr` (`Array<T | U>`): The array to fill.
 - `value` (`U`): The value to fill the array with.
-- `start` (`number`, optional): The start position. Default is `0`.
-- `end` (`number`, optional): The end position. Default is the array length.
+- `start?` (`number`): The start position. Default is `0`.
+- `end?` (`number`): The end position. Default is the array length.
 
 #### Returns
 

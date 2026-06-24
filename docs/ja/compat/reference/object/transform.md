@@ -99,9 +99,9 @@ const copy2 = transform(obj);
 
 #### パラメータ
 
-- `object` (`readonly T[] | T`, オプション): 反復処理する配列またはオブジェクト。
-- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`, オプション): 各要素に対して実行する関数。`false` を返すと反復が停止します。デフォルトは `identity` 関数です。
-- `accumulator` (`U`, オプション): 初期値。省略すると、配列の場合は空配列、オブジェクトの場合は空オブジェクトが作成されます。
+- `object?` (`readonly T[] | T`): 反復処理する配列またはオブジェクト。
+- `iteratee?` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`): 各要素に対して実行する関数。`false` を返すと反復が停止します。デフォルトは `identity` 関数です。
+- `accumulator?` (`U`): 初期値。省略すると、配列の場合は空配列、オブジェクトの場合は空オブジェクトが作成されます。
 
 #### 戻り値
 

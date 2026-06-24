@@ -85,8 +85,8 @@ const memoizedWithCustomCache = memoize(expensiveFunction, {
 
 - `func` (`F`): メモ化する関数です。1つの引数のみを受け取る必要があります。
 - `options` (オブジェクト, オプション): メモ化設定オプションです。
-  - `cache` (`MemoizeCache<any, ReturnType<F>>`, オプション): 結果を保存するキャッシュオブジェクトです。デフォルト値は新しい `Map` です。
-  - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, オプション): キャッシュキーを生成する関数です。非プリミティブ値を引数として使用する場合に必要です。
+  - `cache?` (`MemoizeCache<any, ReturnType<F>>`): 結果を保存するキャッシュオブジェクトです。デフォルト値は新しい `Map` です。
+  - `getCacheKey?` (`(arg: Parameters<F>[0]) => unknown`): キャッシュキーを生成する関数です。非プリミティブ値を引数として使用する場合に必要です。
 
 #### 戻り値
 

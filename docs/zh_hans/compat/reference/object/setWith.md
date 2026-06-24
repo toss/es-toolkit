@@ -100,7 +100,7 @@ setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
 - `object` (`T`): 要设置值的对象。
 - `path` (`PropertyPath`): 要设置的属性路径。
 - `value` (`any`): 要设置的值。
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 可选): 自定义中间对象创建的函数。
+- `customizer?` (`(nsValue: any, key: string, nsObject: T) => any`): 自定义中间对象创建的函数。
 
 #### 返回值
 

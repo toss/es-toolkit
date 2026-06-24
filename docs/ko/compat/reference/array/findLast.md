@@ -67,8 +67,8 @@ findLast(undefined, x => x > 0); // undefined
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 검색할 배열이나 객체예요.
-- `predicate` (`ListIterateeCustom<T, boolean>`, 선택): 각 요소에 적용할 조건이에요. 함수, 객체, 키-값 쌍, 또는 속성 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
-- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수인 경우 끝에서부터 계산해요. 기본값은 배열의 마지막 인덱스예요.
+- `predicate?` (`ListIterateeCustom<T, boolean>`): 각 요소에 적용할 조건이에요. 함수, 객체, 키-값 쌍, 또는 속성 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
+- `fromIndex?` (`number`): 검색을 시작할 인덱스예요. 음수인 경우 끝에서부터 계산해요. 기본값은 배열의 마지막 인덱스예요.
 
 #### 반환 값
 

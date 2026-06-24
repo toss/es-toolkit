@@ -63,7 +63,7 @@ chunk([1, 2, 3], -1);
 #### Parameters
 
 - `arr` (`ArrayLike<T> | null | undefined`): The array to divide.
-- `size` (`number`, optional): The size of each smaller array. Default is `1`.
+- `size?` (`number`): The size of each smaller array. Default is `1`.
 
 #### Returns
 

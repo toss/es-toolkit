@@ -61,8 +61,8 @@ words(undefined); // []
 
 #### Parameters
 
-- `str` (`string`, optional): The string to split into words.
-- `pattern` (`RegExp | string`, optional): The pattern to match words. Defaults to a built-in Unicode word pattern.
+- `str?` (`string`): The string to split into words.
+- `pattern?` (`RegExp | string`): The pattern to match words. Defaults to a built-in Unicode word pattern.
 
 #### Returns
 

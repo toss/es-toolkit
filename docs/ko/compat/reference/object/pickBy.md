@@ -79,7 +79,7 @@ pickBy(undefined, () => true); // {}
 #### 파라미터
 
 - `object` (`Record<string, T> | Record<number, T> | object | null | undefined`): 필터링할 원본 객체예요.
-- `predicate` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`, 선택): 각 속성에 대해 실행할 조건 함수예요. 참을 반환하면 해당 속성이 선택돼요. 기본값은 `identity` 함수예요.
+- `predicate?` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`): 각 속성에 대해 실행할 조건 함수예요. 참을 반환하면 해당 속성이 선택돼요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

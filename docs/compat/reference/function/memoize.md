@@ -59,7 +59,7 @@ In most cases, it uses a basic hash map, but you can also use custom cache imple
 #### Parameters
 
 - `func` (`Function`): The function to memoize.
-- `resolver` (`Function`, optional): The function to determine the cache key. If not provided, uses the first argument as the key.
+- `resolver?` (`Function`): The function to determine the cache key. If not provided, uses the first argument as the key.
 
 #### Returns
 

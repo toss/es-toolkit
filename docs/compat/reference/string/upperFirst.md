@@ -47,7 +47,7 @@ upperFirst(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to convert the first character to uppercase.
+- `str?` (`string`): The string to convert the first character to uppercase.
 
 #### Returns
 

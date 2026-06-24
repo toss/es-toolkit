@@ -68,7 +68,7 @@ forEachRight([1, 2, 3, 4], value => {
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The collection to iterate over. Can be an array, object, string, or null/undefined.
-- `callback` (`(item: any, index: any, arr: any) => unknown`, optional): The function to execute for each element. Returns `false` to stop iteration. Default is the `identity` function.
+- `callback?` (`(item: any, index: any, arr: any) => unknown`): The function to execute for each element. Returns `false` to stop iteration. Default is the `identity` function.
 
 #### Returns
 

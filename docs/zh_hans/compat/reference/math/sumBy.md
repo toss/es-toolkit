@@ -96,7 +96,7 @@ sumBy(undefined);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要处理的数组。
-- `iteratee` (`((value: T) => number) | string`, 可选): 应用于每个元素的函数或属性名。
+- `iteratee?` (`((value: T) => number) | string`): 应用于每个元素的函数或属性名。
 
 #### 返回值
 

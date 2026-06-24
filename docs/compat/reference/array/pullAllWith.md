@@ -42,8 +42,8 @@ pullAllWith(null as any, [1], (a, b) => a === b); // null
 #### Parameters
 
 - `array` (`T[]`): The array to modify.
-- `values` (`ArrayLike<T>`, optional): The array of values to remove.
-- `comparator` (`(a: T, b: T) => boolean`, optional): The function to compare two elements. Should return `true` if the two elements are considered equal.
+- `values?` (`ArrayLike<T>`): The array of values to remove.
+- `comparator?` (`(a: T, b: T) => boolean`): The function to compare two elements. Should return `true` if the two elements are considered equal.
 
 #### Returns
 

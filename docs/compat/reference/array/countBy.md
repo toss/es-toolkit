@@ -81,7 +81,7 @@ countBy(undefined);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): The array or object to process.
-- `iteratee` (`ValueIteratee<T>`, optional): The function that defines the grouping criterion for each element. Can be a function, property name, or partial object.
+- `iteratee?` (`ValueIteratee<T>`): The function that defines the grouping criterion for each element. Can be a function, property name, or partial object.
 
 #### Returns
 

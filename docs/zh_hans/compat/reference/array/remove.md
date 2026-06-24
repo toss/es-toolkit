@@ -63,7 +63,7 @@ remove(users, 'isDeleted');
 #### 参数
 
 - `array` (`ArrayLike<T>`): 要修改的数组。
-- `predicate` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`, 可选): 对每个元素执行的条件。默认为 `identity`。
+- `predicate?` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`): 对每个元素执行的条件。默认为 `identity`。
 
 #### 返回值
 

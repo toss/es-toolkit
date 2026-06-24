@@ -51,7 +51,7 @@ each([1, 2, 3, 4], value => {
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 順回するコレクションです。
-- `iteratee` (`(item: any, index: any, collection: any) => unknown`, オプション): 各要素に対して実行する関数です。デフォルトは `identity` 関数です。
+- `iteratee?` (`(item: any, index: any, collection: any) => unknown`): 各要素に対して実行する関数です。デフォルトは `identity` 関数です。
 
 #### 戻り値
 

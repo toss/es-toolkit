@@ -48,7 +48,7 @@ await fetchData(controller.signal); // AbortErrorをスロー
 
 #### パラメータ
 
-- `message` (`string`, オプション): エラーメッセージです。デフォルト値は`'The operation was aborted'`です。
+- `message?` (`string`): エラーメッセージです。デフォルト値は`'The operation was aborted'`です。
 
 #### 戻り値
 

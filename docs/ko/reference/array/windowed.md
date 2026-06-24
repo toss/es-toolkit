@@ -65,8 +65,8 @@ console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 
 - `arr` (`readonly T[]`): 윈도우를 만들 배열이에요.
 - `size` (`number`): 각 윈도우의 크기예요. 양의 정수여야 해요.
-- `step` (`number`, 선택): 윈도우 간의 간격이에요. 양의 정수여야 하고, 기본값은 `1`이에요.
-- `options.partialWindows` (`boolean`, 선택): 배열 끝에서 완전하지 않은 윈도우도 포함할지 여부예요. 기본값은 `false`예요.
+- `step?` (`number`): 윈도우 간의 간격이에요. 양의 정수여야 하고, 기본값은 `1`이에요.
+- `options.partialWindows?` (`boolean`): 배열 끝에서 완전하지 않은 윈도우도 포함할지 여부예요. 기본값은 `false`예요.
 
 #### 반환 값
 

@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array from which elements will be removed.
-- `itemsCount` (`number`, optional): The number of elements to remove. Default is `1`.
+- `itemsCount?` (`number`): The number of elements to remove. Default is `1`.
 
 #### Returns
 

@@ -68,8 +68,8 @@ slice([1, 2, 3, 4, 5], -3, -1);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to slice.
-- `start` (`number`, optional): The start position. Negative values calculate from the end. The default is `0`.
-- `end` (`number`, optional): The end position (not included). Negative values calculate from the end. The default is the array's length.
+- `start?` (`number`): The start position. Negative values calculate from the end. The default is `0`.
+- `end?` (`number`): The end position (not included). Negative values calculate from the end. The default is the array's length.
 
 #### Returns
 

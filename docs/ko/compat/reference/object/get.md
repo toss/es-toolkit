@@ -58,7 +58,7 @@ get(undefined, ['a', 'b'], 'default');
 
 - `object` (`any`): 조회할 객체예요.
 - `path` (`PropertyPath`): 가져올 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
-- `defaultValue` (`any`, 선택): 값이 `undefined`일 때 반환할 기본값이에요.
+- `defaultValue?` (`any`): 값이 `undefined`일 때 반환할 기본값이에요.
 
 #### 반환 값
 

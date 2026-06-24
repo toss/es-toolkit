@@ -61,7 +61,7 @@ reject(users, 'premium');
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 要遍历的集合。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 对每个元素执行的条件。默认值为 `identity`。
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 对每个元素执行的条件。默认值为 `identity`。
 
 #### 返回值
 

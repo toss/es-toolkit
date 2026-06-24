@@ -74,8 +74,8 @@ orderBy(undefined, 'age'); // []
 #### 参数
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): 要排序的数组或对象。
-- `criteria` (`Criterion<T> | Array<Criterion<T>>`, 可选): 排序条件。可以使用属性名称、属性路径、函数等。默认为 `[null]`。
-- `orders` (`unknown | unknown[]`, 可选): 每个条件的排序顺序。可以使用 `'asc'`(升序)、`'desc'`(降序)、`true`(升序)、`false`(降序)。默认为 `[]`。
+- `criteria?` (`Criterion<T> | Array<Criterion<T>>`): 排序条件。可以使用属性名称、属性路径、函数等。默认为 `[null]`。
+- `orders?` (`unknown | unknown[]`): 每个条件的排序顺序。可以使用 `'asc'`(升序)、`'desc'`(降序)、`true`(升序)、`false`(降序)。默认为 `[]`。
 
 #### 返回值
 

@@ -51,9 +51,9 @@ pad(undefined, 3, '*'); // '***'
 
 #### Parameters
 
-- `str` (`string`, optional): The string to pad.
-- `length` (`number`, optional): The target length. Defaults to `0`.
-- `chars` (`string`, optional): The characters to use for padding. Defaults to space `' '`.
+- `str?` (`string`): The string to pad.
+- `length?` (`number`): The target length. Defaults to `0`.
+- `chars?` (`string`): The characters to use for padding. Defaults to space `' '`.
 
 #### Returns
 

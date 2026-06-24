@@ -100,7 +100,7 @@ setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
 - `object` (`T`): The object to set the value in.
 - `path` (`PropertyPath`): The path of the property to set.
 - `value` (`any`): The value to set.
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, optional): Function to customize the creation of intermediate objects.
+- `customizer?` (`(nsValue: any, key: string, nsObject: T) => any`): Function to customize the creation of intermediate objects.
 
 #### Returns
 

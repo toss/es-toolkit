@@ -56,7 +56,7 @@ toUpper();
 
 #### Parameters
 
-- `value` (`unknown`, optional): The value to convert to uppercase.
+- `value?` (`unknown`): The value to convert to uppercase.
 
 #### Returns
 

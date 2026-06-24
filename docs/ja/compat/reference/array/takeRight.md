@@ -56,7 +56,7 @@ takeRight(undefined, 2); // []
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 要素を取得する配列です。
-- `count` (`number`, オプション): 取得する要素の個数です。デフォルト値は`1`です。
+- `count?` (`number`): 取得する要素の個数です。デフォルト値は`1`です。
 
 #### 戻り値
 

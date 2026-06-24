@@ -203,7 +203,7 @@ const problematic = ['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 #### Parameters
 
 - `func` (`Function`): The function to bind.
-- `thisObj` (`any`, optional): The `this` value to bind to the function.
+- `thisObj?` (`any`): The `this` value to bind to the function.
 - `partialArgs` (`...any[]`): The arguments to provide in advance. You can use `bind.placeholder` to specify positions to be provided later.
 
 #### Returns

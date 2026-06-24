@@ -47,7 +47,7 @@ restProcess('update', 'user', 'name', 'John', 'age', 25);
 #### 파라미터
 
 - `func` (`Function`): 변환할 함수예요.
-- `start` (`number`, 선택): 배열로 그룹화를 시작할 인덱스예요. 기본값은 `func.length - 1`이에요.
+- `start?` (`number`): 배열로 그룹화를 시작할 인덱스예요. 기본값은 `func.length - 1`이에요.
 
 #### 반환 값
 

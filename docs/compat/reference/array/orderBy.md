@@ -74,8 +74,8 @@ orderBy(undefined, 'age'); // []
 #### Parameters
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): The array or object to sort.
-- `criteria` (`Criterion<T> | Array<Criterion<T>>`, optional): The sort criteria. Can use property names, property paths, functions, etc. Defaults to `[null]`.
-- `orders` (`unknown | unknown[]`, optional): The sort order for each criterion. Can use `'asc'` (ascending), `'desc'` (descending), `true` (ascending), `false` (descending). Defaults to `[]`.
+- `criteria?` (`Criterion<T> | Array<Criterion<T>>`): The sort criteria. Can use property names, property paths, functions, etc. Defaults to `[null]`.
+- `orders?` (`unknown | unknown[]`): The sort order for each criterion. Can use `'asc'` (ascending), `'desc'` (descending), `true` (ascending), `false` (descending). Defaults to `[]`.
 
 #### Returns
 

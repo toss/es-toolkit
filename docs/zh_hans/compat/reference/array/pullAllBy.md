@@ -38,8 +38,8 @@ pullAllBy(null as any, [1, 2], x => x); // null
 #### 参数
 
 - `array` (`T[]`): 要修改的数组。
-- `values` (`ArrayLike<T>`, 可选): 要删除的值的数组。
-- `iteratee` (`ValueIteratee<T>`, 可选): 应用于每个元素的iteratee函数。可以使用属性名、部分对象或函数。
+- `values?` (`ArrayLike<T>`): 要删除的值的数组。
+- `iteratee?` (`ValueIteratee<T>`): 应用于每个元素的iteratee函数。可以使用属性名、部分对象或函数。
 
 #### 返回值
 

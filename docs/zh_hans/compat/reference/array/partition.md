@@ -82,7 +82,7 @@ partition(undefined, 'active'); // [[], []]
 #### 参数
 
 - `collection` (`ArrayLike<T> | T | null | undefined`): 要分割的数组或对象。
-- `predicate` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`, 可选): 测试每个元素的条件。可以是函数、部分对象、属性-值数组或属性名称。默认为 `identity`。
+- `predicate?` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`): 测试每个元素的条件。可以是函数、部分对象、属性-值数组或属性名称。默认为 `identity`。
 
 #### 返回值
 

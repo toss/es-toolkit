@@ -86,7 +86,7 @@ updateWith(
 - `obj` (`T`): 要修改的对象。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 要更新的属性路径。可以指定为字符串或数组。
 - `updater` (`(oldValue: any) => any`): 接收现有值并返回新值的函数。
-- `customizer` (`(value: any, key: string, object: T) => any`, 可选): 路径不存在时返回要创建的中间对象的函数。返回 `undefined` 以使用默认行为。
+- `customizer?` (`(value: any, key: string, object: T) => any`): 路径不存在时返回要创建的中间对象的函数。返回 `undefined` 以使用默认行为。
 
 #### 返回值
 

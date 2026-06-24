@@ -62,7 +62,7 @@ max([0, -2, 5, -10]);
 
 #### Parameters
 
-- `items` (`ArrayLike<T> | null | undefined`, optional): The array to find the maximum value from.
+- `items?` (`ArrayLike<T> | null | undefined`): The array to find the maximum value from.
 
 #### Returns
 

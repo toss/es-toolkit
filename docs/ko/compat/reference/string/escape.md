@@ -41,7 +41,7 @@ escape(undefined); // ''
 
 #### 파라미터
 
-- `str` (`string`, 선택): HTML 특수 문자를 이스케이프할 문자열이에요.
+- `str?` (`string`): HTML 특수 문자를 이스케이프할 문자열이에요.
 
 #### 반환 값
 

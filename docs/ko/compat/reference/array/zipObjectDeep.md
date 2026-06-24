@@ -49,7 +49,7 @@ zipObjectDeep(undefined, [1, 2]); // {}
 #### 파라미터
 
 - `keys` (`ArrayLike<PropertyPath> | null | undefined`): 속성 경로 배열이에요. 점 표기법 문자열이나 속성 이름 배열을 사용할 수 있어요.
-- `values` (`ArrayLike<any>`, 선택): 해당하는 값들의 배열이에요. 제공하지 않으면 빈 배열로 처리해요.
+- `values?` (`ArrayLike<any>`): 해당하는 값들의 배열이에요. 제공하지 않으면 빈 배열로 처리해요.
 
 #### 반환 값
 

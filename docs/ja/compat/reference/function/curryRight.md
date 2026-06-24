@@ -235,7 +235,7 @@ console.log(curriedFixed(3)(2)(1)); // { a: 1, b: 2, c: 3, rest: [] }
 #### パラメータ
 
 - `func` (`Function`): 右からカリー化する関数です。
-- `arity` (`number`, オプション): 関数の引数数です。省略すると `func.length` が使用されます。
+- `arity?` (`number`): 関数の引数数です。省略すると `func.length` が使用されます。
 
 #### 戻り値
 

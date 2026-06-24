@@ -72,7 +72,7 @@ const byName = groupBy(products, ['name', 'apple']);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, T> | null | undefined`): The array or object to group.
-- `iteratee` (`Function | PropertyKey | Array | Object`, optional): The condition to group by. Can be a function, property name, property-value pair, or partial object. Default is the `identity` function.
+- `iteratee?` (`Function | PropertyKey | Array | Object`): The condition to group by. Can be a function, property name, property-value pair, or partial object. Default is the `identity` function.
 
 #### Returns
 

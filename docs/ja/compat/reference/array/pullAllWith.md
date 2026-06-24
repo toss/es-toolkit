@@ -42,8 +42,8 @@ pullAllWith(null as any, [1], (a, b) => a === b); // null
 #### パラメータ
 
 - `array` (`T[]`): 変更する配列です。
-- `values` (`ArrayLike<T>`, オプション): 削除する値の配列です。
-- `comparator` (`(a: T, b: T) => boolean`, オプション): 2つの要素を比較する関数です。2つの要素が等しいと判断される場合は `true` を返す必要があります。
+- `values?` (`ArrayLike<T>`): 削除する値の配列です。
+- `comparator?` (`(a: T, b: T) => boolean`): 2つの要素を比較する関数です。2つの要素が等しいと判断される場合は `true` を返す必要があります。
 
 #### 戻り値
 

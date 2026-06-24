@@ -77,7 +77,7 @@ unzipWith([], (a, b) => a + b); // []
 #### 파라미터
 
 - `array` (`ArrayLike<ArrayLike<T>> | null | undefined`): 언집할 중첩 배열이에요.
-- `iteratee` (`(...values: T[]) => R`, 선택): 각 그룹의 요소들에 적용할 변환 함수예요. 제공하지 않으면 기본 `unzip` 동작을 수행해요.
+- `iteratee?` (`(...values: T[]) => R`): 각 그룹의 요소들에 적용할 변환 함수예요. 제공하지 않으면 기본 `unzip` 동작을 수행해요.
 
 #### 반환 값
 

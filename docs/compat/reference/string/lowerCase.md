@@ -41,7 +41,7 @@ lowerCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string | object`, optional): The value to convert to lowercase format.
+- `str?` (`string | object`): The value to convert to lowercase format.
 
 #### Returns
 

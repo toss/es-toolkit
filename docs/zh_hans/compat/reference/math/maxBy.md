@@ -107,7 +107,7 @@ maxBy(undefined);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
-- `iteratee` (`ValueIteratee<T>`, 可选): 应用于每个元素的函数、属性名或条件。
+- `iteratee?` (`ValueIteratee<T>`): 应用于每个元素的函数、属性名或条件。
 
 #### 返回值
 

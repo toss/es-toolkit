@@ -82,8 +82,8 @@ const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
 
 - `run` (`() => Promise<T>`): The asynchronous function to execute.
 - `ms` (`number`): The amount of time in milliseconds until the timeout occurs.
-- `options` (`WithTimeoutOptions`, optional): Timeout options.
-  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the timeout. When aborted, the time limit is lifted and `run` is awaited without a deadline.
+- `options?` (`WithTimeoutOptions`): Timeout options.
+  - `signal?` (`AbortSignal`): An AbortSignal to cancel the timeout. When aborted, the time limit is lifted and `run` is awaited without a deadline.
 
 #### Returns
 

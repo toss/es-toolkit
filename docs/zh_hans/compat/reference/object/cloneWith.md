@@ -90,7 +90,7 @@ const cloned = cloneWith(obj, value => {
 #### 参数
 
 - `value` (`T`): 要复制的值。
-- `customizer` (`function`, 可选): 决定复制方式的函数。格式为 `(value: any) => any`。
+- `customizer?` (`function`): 决定复制方式的函数。格式为 `(value: any) => any`。
 
 #### 返回值
 

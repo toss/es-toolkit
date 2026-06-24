@@ -42,7 +42,7 @@ console.log(numbers); // [1, 2, 3]
 #### パラメータ
 
 - `array` (`T[]`): 変更する配列です。
-- `valuesToRemove` (`ArrayLike<T>`, オプション): 配列から削除する値を含む配列です。デフォルトは `[]` です。
+- `valuesToRemove?` (`ArrayLike<T>`): 配列から削除する値を含む配列です。デフォルトは `[]` です。
 
 #### 戻り値
 

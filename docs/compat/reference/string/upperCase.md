@@ -51,7 +51,7 @@ upperCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to convert to upper case.
+- `str?` (`string`): The string to convert to upper case.
 
 #### Returns
 

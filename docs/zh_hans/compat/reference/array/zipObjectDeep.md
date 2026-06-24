@@ -49,7 +49,7 @@ zipObjectDeep(undefined, [1, 2]); // {}
 #### 参数
 
 - `keys` (`ArrayLike<PropertyPath> | null | undefined`): 属性路径数组。可以使用点符号字符串或属性名称数组。
-- `values` (`ArrayLike<any>`, 可选): 相应值的数组。如果未提供,则视为空数组。
+- `values?` (`ArrayLike<any>`): 相应值的数组。如果未提供,则视为空数组。
 
 #### 返回值
 

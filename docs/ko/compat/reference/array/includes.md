@@ -89,7 +89,7 @@ includes({ a: 1, b: NaN }, NaN);
 
 - `collection` (`Array | Record<string, any> | string | null | undefined`): 검색할 배열, 객체, 또는 문자열이에요.
 - `target` (`any`): 찾으려는 값이에요.
-- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수 값은 끝에서부터 계산해요. 기본값은 `0`이에요.
+- `fromIndex?` (`number`): 검색을 시작할 인덱스예요. 음수 값은 끝에서부터 계산해요. 기본값은 `0`이에요.
 
 #### 반환 값
 

@@ -64,7 +64,7 @@ mapValues(undefined, iteratee); // {}
 #### 参数
 
 - `object` (`string | T[] | T | null | undefined`): 要转换值的对象、数组或字符串。
-- `iteratee` (`ValueIteratee<any>`, 可选): 用于转换每个值的函数、属性路径或匹配对象。默认为 `identity` 函数。
+- `iteratee?` (`ValueIteratee<any>`): 用于转换每个值的函数、属性路径或匹配对象。默认为 `identity` 函数。
 
 #### 返回值
 

@@ -79,7 +79,7 @@ pickBy(undefined, () => true); // {}
 #### 参数
 
 - `object` (`Record<string, T> | Record<number, T> | object | null | undefined`): 要过滤的源对象。
-- `predicate` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`, 可选): 对每个属性执行的断言函数。此函数返回true的属性将被选择。默认为 `identity` 函数。
+- `predicate?` (`ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`): 对每个属性执行的断言函数。此函数返回true的属性将被选择。默认为 `identity` 函数。
 
 #### 返回值
 

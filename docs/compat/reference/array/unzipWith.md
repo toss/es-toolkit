@@ -77,7 +77,7 @@ unzipWith([], (a, b) => a + b); // []
 #### Parameters
 
 - `array` (`ArrayLike<ArrayLike<T>> | null | undefined`): The nested array to unzip.
-- `iteratee` (`(...values: T[]) => R`, optional): The transformation function to apply to each group of elements. If not provided, performs the default `unzip` operation.
+- `iteratee?` (`(...values: T[]) => R`): The transformation function to apply to each group of elements. If not provided, performs the default `unzip` operation.
 
 #### Returns
 

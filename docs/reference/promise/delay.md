@@ -60,8 +60,8 @@ async function simulateNetworkRequest() {
 #### Parameters
 
 - `ms` (`number`): The amount of time to delay in milliseconds.
-- `options` (`DelayOptions`, optional): Delay options.
-  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the delay.
+- `options?` (`DelayOptions`): Delay options.
+  - `signal?` (`AbortSignal`): An AbortSignal to cancel the delay.
 
 #### Returns
 

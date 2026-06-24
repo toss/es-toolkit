@@ -253,8 +253,8 @@ window.addEventListener('beforeunload', () => {
 #### 参数
 
 - `func` (`Function`): 要防抖的函数。
-- `wait` (`number`, 可选): 要延迟的毫秒数。默认为 `0`。
-- `options` (`DebounceSettings`, 可选): 选项对象。
+- `wait?` (`number`): 要延迟的毫秒数。默认为 `0`。
+- `options?` (`DebounceSettings`): 选项对象。
   - `leading` (`boolean`): 如果为 `true`,则在延迟开始时执行函数。默认为 `false`。
   - `trailing` (`boolean`): 如果为 `true`,则在延迟结束时执行函数。默认为 `true`。
   - `maxWait` (`number`): 函数执行可以延迟的最大时间。默认为 `Infinity`。

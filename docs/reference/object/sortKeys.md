@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### Parameters
 
 - `object` (`T`): The object to sort keys from.
-- `compareKeys` (`(a: string, b: string) => number`, optional): A custom compare function for sorting keys. Defaults to alphabetical order.
+- `compareKeys?` (`(a: string, b: string) => number`): A custom compare function for sorting keys. Defaults to alphabetical order.
 
 #### Returns
 

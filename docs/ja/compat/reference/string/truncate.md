@@ -70,11 +70,11 @@ truncate('¥§✈✉🤓', { length: 4, omission: '…' });
 
 #### パラメータ
 
-- `string` (`string`, オプション): 切り詰める文字列。
-- `options` (`object`, オプション): オプションオブジェクト。
-  - `options.length` (`number`, オプション): 最大文字列長。デフォルトは `30`。
-  - `options.omission` (`string`, オプション): テキストが省略されたことを示す文字列。デフォルトは `'...'`。
-  - `options.separator` (`RegExp | string`, オプション): 切り詰める位置を決定するセパレーターパターン。
+- `string?` (`string`): 切り詰める文字列。
+- `options?` (`object`): オプションオブジェクト。
+  - `options.length?` (`number`): 最大文字列長。デフォルトは `30`。
+  - `options.omission?` (`string`): テキストが省略されたことを示す文字列。デフォルトは `'...'`。
+  - `options.separator?` (`RegExp | string`): 切り詰める位置を決定するセパレーターパターン。
 
 #### 戻り値
 

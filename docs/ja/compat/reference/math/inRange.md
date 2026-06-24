@@ -94,7 +94,7 @@ inRange(3, false, 5);
 
 - `value` (`number`): 範囲内にあるかを確認する数値です。
 - `minimum` (`number`): 範囲の最小値です（含まれる）。`maximum`がない場合、この値が最大値になります。
-- `maximum` (`number`, オプション): 範囲の最大値です（含まれない）。
+- `maximum?` (`number`): 範囲の最大値です（含まれない）。
 
 #### 戻り値
 

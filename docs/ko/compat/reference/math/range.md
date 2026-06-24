@@ -91,8 +91,8 @@ import { range } from 'es-toolkit/compat';
 #### 파라미터
 
 - `start` (`number`): 범위의 시작값이에요 (포함). `end`가 없으면 이 값이 end가 돼요.
-- `end` (`number`, 선택): 범위의 끝값이에요 (포함되지 않음).
-- `step` (`number`, 선택): 증가폭이에요. 기본값은 1 또는 -1이에요.
+- `end?` (`number`): 범위의 끝값이에요 (포함되지 않음).
+- `step?` (`number`): 증가폭이에요. 기본값은 1 또는 -1이에요.
 
 #### 반환 값
 

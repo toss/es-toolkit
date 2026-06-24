@@ -51,7 +51,7 @@ each([1, 2, 3, 4], value => {
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 要遍历的集合。
-- `iteratee` (`(item: any, index: any, collection: any) => unknown`, 可选): 对每个元素执行的函数。默认为 `identity` 函数。
+- `iteratee?` (`(item: any, index: any, collection: any) => unknown`): 对每个元素执行的函数。默认为 `identity` 函数。
 
 #### 返回值
 

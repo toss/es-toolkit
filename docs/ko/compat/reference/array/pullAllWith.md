@@ -42,8 +42,8 @@ pullAllWith(null as any, [1], (a, b) => a === b); // null
 #### 파라미터
 
 - `array` (`T[]`): 변경할 배열이에요.
-- `values` (`ArrayLike<T>`, 선택): 제거할 값들의 배열이에요.
-- `comparator` (`(a: T, b: T) => boolean`, 선택): 두 요소를 비교하는 함수예요. 두 요소가 같다고 판단되면 `true`를 반환해야 해요.
+- `values?` (`ArrayLike<T>`): 제거할 값들의 배열이에요.
+- `comparator?` (`(a: T, b: T) => boolean`): 두 요소를 비교하는 함수예요. 두 요소가 같다고 판단되면 `true`를 반환해야 해요.
 
 #### 반환 값
 

@@ -47,7 +47,7 @@ sampleSize(undefined, 2);
 #### Parameters
 
 - `collection` (`Record<string, T> | Record<number, T> | T | null | undefined`): The array or object to sample from.
-- `size` (`number`, optional): The number of elements to select. The default is `1`.
+- `size?` (`number`): The number of elements to select. The default is `1`.
 
 #### Returns
 

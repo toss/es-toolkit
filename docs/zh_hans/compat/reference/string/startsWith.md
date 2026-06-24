@@ -49,9 +49,9 @@ startsWith('test', null);
 
 #### 参数
 
-- `str` (`string`, 可选): 要检查的字符串。
-- `target` (`string`, 可选): 要在开头查找的字符串。
-- `position` (`number`, 可选): 开始搜索的位置。默认为 `0`。
+- `str?` (`string`): 要检查的字符串。
+- `target?` (`string`): 要在开头查找的字符串。
+- `position?` (`number`): 开始搜索的位置。默认为 `0`。
 
 #### 返回值
 

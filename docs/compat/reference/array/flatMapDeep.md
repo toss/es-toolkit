@@ -70,7 +70,7 @@ flatMapDeep(users, { active: [false] });
 #### Parameters
 
 - `collection` (`object | null | undefined`): The collection to iterate over. Can be an array, object, or string.
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, optional): The iteratee to apply to each element. Can be a function, property name, or partial object.
+- `iteratee?` (`ListIterator | ObjectIterator | string | object`): The iteratee to apply to each element. Can be a function, property name, or partial object.
 
 #### Returns
 

@@ -70,7 +70,7 @@ flatMapDeep(users, { active: [false] });
 #### 파라미터
 
 - `collection` (`object | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열이 될 수 있어요.
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, 선택): 각 요소에 적용할 반복자예요. 함수, 속성 이름, 또는 부분 객체가 될 수 있어요.
+- `iteratee?` (`ListIterator | ObjectIterator | string | object`): 각 요소에 적용할 반복자예요. 함수, 속성 이름, 또는 부분 객체가 될 수 있어요.
 
 #### 반환 값
 

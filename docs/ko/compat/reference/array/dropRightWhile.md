@@ -58,7 +58,7 @@ dropRightWhile(undefined, x => x > 0); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
-- `predicate` (`ListIteratee<T>`, 선택): 각 요소에 적용할 조건 함수예요. 함수, 객체 패턴, 배열 패턴, 또는 속성 이름을 받을 수 있어요.
+- `predicate?` (`ListIteratee<T>`): 각 요소에 적용할 조건 함수예요. 함수, 객체 패턴, 배열 패턴, 또는 속성 이름을 받을 수 있어요.
 
 #### 반환 값
 

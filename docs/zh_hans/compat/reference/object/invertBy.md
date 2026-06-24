@@ -70,7 +70,7 @@ invertBy(undefined);
 #### 参数
 
 - `object` (`object`): 要反转的对象。
-- `iteratee` (`ValueIteratee`, 可选): 用于转换值的函数。默认值是直接使用值本身的函数。
+- `iteratee?` (`ValueIteratee`): 用于转换值的函数。默认值是直接使用值本身的函数。
 
 #### 返回值
 

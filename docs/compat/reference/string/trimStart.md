@@ -47,8 +47,8 @@ trimStart(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to trim from the beginning.
-- `chars` (`string`, optional): The characters to remove. If not specified, whitespace will be removed.
+- `str?` (`string`): The string to trim from the beginning.
+- `chars?` (`string`): The characters to remove. If not specified, whitespace will be removed.
 
 #### Returns
 

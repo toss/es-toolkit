@@ -43,8 +43,8 @@ const products = await flatMapAsync(categories, async category => await fetchPro
 
 - `array` (`readonly T[]`)：要转换的数组。
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<R[]>`)：将每个元素转换为数组的异步函数。
-- `options` (`FlatMapAsyncOptions`, 可选)：控制并发的选项。
-  - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
+- `options?` (`FlatMapAsyncOptions`)：控制并发的选项。
+  - `concurrency?` (`number`)：最大并发操作数。如果未指定，所有操作将并发执行。
 
 #### 返回值
 

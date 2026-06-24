@@ -42,7 +42,7 @@ escapeRegExp(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to escape regular expression special characters.
+- `str?` (`string`): The string to escape regular expression special characters.
 
 #### Returns
 

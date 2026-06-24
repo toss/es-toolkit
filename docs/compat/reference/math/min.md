@@ -62,7 +62,7 @@ min([-1, -5, -3]);
 
 #### Parameters
 
-- `items` (`ArrayLike<T> | null | undefined`, optional): The array to find the minimum value from.
+- `items?` (`ArrayLike<T> | null | undefined`): The array to find the minimum value from.
 
 #### Returns
 

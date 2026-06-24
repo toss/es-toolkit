@@ -91,8 +91,8 @@ import { rangeRight } from 'es-toolkit/compat';
 #### 参数
 
 - `start` (`number`): 范围的起始值（包含）。如果没有 `end`，此值将成为 end。
-- `end` (`number`, 可选): 范围的结束值（不包含）。
-- `step` (`number`, 可选): 递增幅度。默认值为 1 或 -1。
+- `end?` (`number`): 范围的结束值（不包含）。
+- `step?` (`number`): 递增幅度。默认值为 1 或 -1。
 
 #### 返回值
 

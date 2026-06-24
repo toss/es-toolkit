@@ -72,13 +72,13 @@ await exec('sleep', ['10'], {
 #### パラメータ
 
 - `command` (`string`): 実行するコマンドです。
-- `args` (`string[]`, オプション): コマンドに渡される引数です。デフォルト値は `[]` です。
-- `options` (`ExecOptions`, オプション): オプションオブジェクトです。
-  - `signal` (`AbortSignal`, オプション): プロセスを中断するために使用する `AbortSignal` です。
-  - `timeout` (`number`, オプション): ミリ秒単位のタイムアウトです。タイムアウトが切れるとプロセスが中断されます。
-  - `stdin` (`string`, オプション): プロセスの stdin に書き込む文字列です。
-  - `spawnOptions` (`SpawnOptions`, オプション): `child_process.spawn` にそのまま転送される追加オプションです。
-  - `throwOnNonZeroExitCode` (`boolean`, オプション): プロセスが0以外の終了コードで終了した場合に `ExecError` をスローするかどうかです。デフォルト値は `true` です。
+- `args?` (`string[]`): コマンドに渡される引数です。デフォルト値は `[]` です。
+- `options?` (`ExecOptions`): オプションオブジェクトです。
+  - `signal?` (`AbortSignal`): プロセスを中断するために使用する `AbortSignal` です。
+  - `timeout?` (`number`): ミリ秒単位のタイムアウトです。タイムアウトが切れるとプロセスが中断されます。
+  - `stdin?` (`string`): プロセスの stdin に書き込む文字列です。
+  - `spawnOptions?` (`SpawnOptions`): `child_process.spawn` にそのまま転送される追加オプションです。
+  - `throwOnNonZeroExitCode?` (`boolean`): プロセスが0以外の終了コードで終了した場合に `ExecError` をスローするかどうかです。デフォルト値は `true` です。
 
 #### 戻り値
 

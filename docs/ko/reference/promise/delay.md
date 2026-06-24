@@ -60,8 +60,8 @@ async function simulateNetworkRequest() {
 #### 파라미터
 
 - `ms` (`number`): 지연시킬 밀리초 단위 시간이에요.
-- `options` (`DelayOptions`, 선택): 지연 옵션이에요.
-  - `signal` (`AbortSignal`, 선택): 지연을 취소할 수 있는 AbortSignal이에요.
+- `options?` (`DelayOptions`): 지연 옵션이에요.
+  - `signal?` (`AbortSignal`): 지연을 취소할 수 있는 AbortSignal이에요.
 
 #### 반환 값
 

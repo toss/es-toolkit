@@ -76,8 +76,8 @@ findLastIndex(undefined, n => n > 0); // -1
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値ペア、またはプロパティ名を使用できます。デフォルトは恒等関数です。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の場合は配列の末尾から計算します。デフォルトは`array.length - 1`です。
+- `predicate?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値ペア、またはプロパティ名を使用できます。デフォルトは恒等関数です。
+- `fromIndex?` (`number`): 検索を開始するインデックスです。負の場合は配列の末尾から計算します。デフォルトは`array.length - 1`です。
 
 #### 戻り値
 

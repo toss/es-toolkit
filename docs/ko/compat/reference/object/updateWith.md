@@ -86,7 +86,7 @@ updateWith(
 - `obj` (`T`): 수정할 객체예요.
 - `path` (`PropertyKey | readonly PropertyKey[]`): 업데이트할 속성의 경로예요. 문자열이나 배열로 지정할 수 있어요.
 - `updater` (`(oldValue: any) => any`): 기존 값을 받아서 새로운 값을 반환하는 함수예요.
-- `customizer` (`(value: any, key: string, object: T) => any`, 선택): 경로가 존재하지 않을 때 생성될 중간 객체를 반환하는 함수예요. `undefined`를 반환하면 기본 동작을 사용해요.
+- `customizer?` (`(value: any, key: string, object: T) => any`): 경로가 존재하지 않을 때 생성될 중간 객체를 반환하는 함수예요. `undefined`를 반환하면 기본 동작을 사용해요.
 
 #### 반환 값
 

@@ -92,8 +92,8 @@ findIndex(undefined, 'active'); // -1
 #### 파라미터
 
 - `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
-- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
+- `doesMatch?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
+- `fromIndex?` (`number`): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
 #### 반환 값
 

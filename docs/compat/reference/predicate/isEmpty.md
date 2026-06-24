@@ -56,7 +56,7 @@ isEmpty('text'); // false (strings are judged by length)
 
 #### Parameters
 
-- `value` (`unknown`, optional): The value to check.
+- `value?` (`unknown`): The value to check.
 
 #### Returns
 

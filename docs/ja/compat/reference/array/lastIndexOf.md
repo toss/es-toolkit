@@ -53,7 +53,7 @@ lastIndexOf(undefined, 1); // -1
 
 - `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
 - `searchElement` (`T`): 見つける要素です。
-- `fromIndex` (`true | number`, オプション): 検索を開始するインデックスです。`true`を渡すと配列の最後から検索します。デフォルト値は`array.length - 1`です。
+- `fromIndex?` (`true | number`): 検索を開始するインデックスです。`true`を渡すと配列の最後から検索します。デフォルト値は`array.length - 1`です。
 
 #### 戻り値
 

@@ -99,9 +99,9 @@ const copy2 = transform(obj);
 
 #### Parameters
 
-- `object` (`readonly T[] | T`, optional): The array or object to iterate over.
-- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`, optional): The function to execute for each element. Returning `false` stops the iteration. Default is the `identity` function.
-- `accumulator` (`U`, optional): The initial value. If omitted, an empty array is created for arrays, and an empty object for objects.
+- `object?` (`readonly T[] | T`): The array or object to iterate over.
+- `iteratee?` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`): The function to execute for each element. Returning `false` stops the iteration. Default is the `identity` function.
+- `accumulator?` (`U`): The initial value. If omitted, an empty array is created for arrays, and an empty object for objects.
 
 #### Returns
 

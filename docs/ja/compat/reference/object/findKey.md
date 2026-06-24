@@ -54,7 +54,7 @@ findKey({ a: 1, b: 2 }, value => value > 5);
 #### パラメータ
 
 - `obj` (`T | null | undefined`): 検索するオブジェクトです。
-- `predicate` (`ObjectIteratee<T>`, オプション): 各要素に適用する条件です。関数、オブジェクト、配列、文字列を指定できます。
+- `predicate?` (`ObjectIteratee<T>`): 各要素に適用する条件です。関数、オブジェクト、配列、文字列を指定できます。
 
 #### 戻り値
 

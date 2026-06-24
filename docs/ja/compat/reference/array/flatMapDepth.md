@@ -71,8 +71,8 @@ flatMapDepth(undefined, n => [n], 1); // => []
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): 反復処理する配列またはオブジェクトです。
-- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, オプション): 各要素に対して実行する変換関数またはプロパティ名です。デフォルトは`identity`です。
-- `depth` (`number`, オプション): 平坦化する最大深さです。デフォルトは`1`です。
+- `iteratee?` (`((value: T, index: number, collection: any) => any) | string | object`): 各要素に対して実行する変換関数またはプロパティ名です。デフォルトは`identity`です。
+- `depth?` (`number`): 平坦化する最大深さです。デフォルトは`1`です。
 
 #### 戻り値
 

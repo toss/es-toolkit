@@ -91,9 +91,9 @@ throttledFunc.cancel();
 
 - `func` (`F`): 実行を制限する関数です。
 - `throttleMs` (`number`): 実行を制限する時間間隔(ミリ秒)です。
-- `options` (`ThrottleOptions`, オプション): 追加オプションです。
-  - `signal` (`AbortSignal`, オプション): 関数実行をキャンセルできるシグナルです。
-  - `edges` (`Array<'leading' | 'trailing'>`, オプション): 関数実行のタイミングを決定します。デフォルトは `['leading', 'trailing']` です。
+- `options?` (`ThrottleOptions`): 追加オプションです。
+  - `signal?` (`AbortSignal`): 関数実行をキャンセルできるシグナルです。
+  - `edges?` (`Array<'leading' | 'trailing'>`): 関数実行のタイミングを決定します。デフォルトは `['leading', 'trailing']` です。
 
 #### 戻り値
 

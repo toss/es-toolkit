@@ -43,8 +43,8 @@ await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1
 
 - `array` (`readonly T[]`)：要迭代的数组。
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<void>`)：要为每个元素执行的异步函数。
-- `options` (`ForEachAsyncOptions`, 可选)：控制并发的选项。
-  - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
+- `options?` (`ForEachAsyncOptions`)：控制并发的选项。
+  - `concurrency?` (`number`)：最大并发操作数。如果未指定，所有操作将并发执行。
 
 #### 返回值
 

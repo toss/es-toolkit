@@ -96,7 +96,7 @@ sumBy(undefined);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 処理する配列です。
-- `iteratee` (`((value: T) => number) | string`, オプション): 各要素に適用する関数またはプロパティ名です。
+- `iteratee?` (`((value: T) => number) | string`): 各要素に適用する関数またはプロパティ名です。
 
 #### 戻り値
 

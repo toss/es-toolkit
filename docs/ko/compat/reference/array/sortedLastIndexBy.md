@@ -47,7 +47,7 @@ sortedLastIndexBy(undefined, { x: 1 }, 'x'); // 0
 
 - `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
 - `value` (`T`): 삽입할 값이에요.
-- `iteratee` (선택): 각 요소와 값에 적용할 변환 함수, 속성 이름, 또는 속성-값 배열이에요.
+- `iteratee?`: 각 요소와 값에 적용할 변환 함수, 속성 이름, 또는 속성-값 배열이에요.
 
 #### 반환 값
 

@@ -76,8 +76,8 @@ const result = await Promise.race([
 #### パラメータ
 
 - `ms` (`number`): `TimeoutError`が発生するまでのミリ秒単位の時間です。
-- `options` (`TimeoutOptions`, オプション): タイムアウトオプションです。
-  - `signal` (`AbortSignal`, オプション): タイムアウトをキャンセルできるAbortSignalです。中断されると、返されるPromiseは保留状態のままで拒否されません。
+- `options?` (`TimeoutOptions`): タイムアウトオプションです。
+  - `signal?` (`AbortSignal`): タイムアウトをキャンセルできるAbortSignalです。中断されると、返されるPromiseは保留状態のままで拒否されません。
 
 #### 戻り値
 

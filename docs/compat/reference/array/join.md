@@ -62,7 +62,7 @@ To ensure full compatibility with lodash, the `join` function processes `array` 
 
 :::
 
-- `separator` (`string`, optional) - The separator used to join the elements. Defaults to `,`.
+- `separator?` (`string`) - The separator used to join the elements. Defaults to `,`.
 
 #### Returns
 

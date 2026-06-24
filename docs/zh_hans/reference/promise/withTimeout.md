@@ -82,8 +82,8 @@ const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
 
 - `run` (`() => Promise<T>`): 要执行的异步函数。
 - `ms` (`number`): 超时前的毫秒数。
-- `options` (`WithTimeoutOptions`, 可选): 超时选项。
-  - `signal` (`AbortSignal`, 可选): 可以取消超时的 AbortSignal。中断后,时间限制将被解除,并在没有截止时间的情况下等待 `run`。
+- `options?` (`WithTimeoutOptions`): 超时选项。
+  - `signal?` (`AbortSignal`): 可以取消超时的 AbortSignal。中断后,时间限制将被解除,并在没有截止时间的情况下等待 `run`。
 
 #### 返回值
 

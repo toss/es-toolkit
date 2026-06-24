@@ -63,7 +63,7 @@ const identity = iteratee();
 
 #### パラメータ
 
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, オプション): イテレータに変換する値です。デフォルト値は`null`です。
+- `value?` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`): イテレータに変換する値です。デフォルト値は`null`です。
 
 #### 戻り値
 

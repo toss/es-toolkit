@@ -99,9 +99,9 @@ const copy2 = transform(obj);
 
 #### 参数
 
-- `object` (`readonly T[] | T`, 可选): 要迭代的数组或对象。
-- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`, 可选): 为每个元素执行的函数。返回 `false` 会停止迭代。默认为 `identity` 函数。
-- `accumulator` (`U`, 可选): 初始值。如果省略,数组会创建空数组,对象会创建空对象。
+- `object?` (`readonly T[] | T`): 要迭代的数组或对象。
+- `iteratee?` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`): 为每个元素执行的函数。返回 `false` 会停止迭代。默认为 `identity` 函数。
+- `accumulator?` (`U`): 初始值。如果省略,数组会创建空数组,对象会创建空对象。
 
 #### 返回值
 

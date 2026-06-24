@@ -58,7 +58,7 @@ get(undefined, ['a', 'b'], 'default');
 
 - `object` (`any`): 照会するオブジェクトです。
 - `path` (`PropertyPath`): 取得するプロパティのパスです。文字列、数値、シンボル、または配列で表すことができます。
-- `defaultValue` (`any`, オプション): 値が `undefined` のときに返すデフォルト値です。
+- `defaultValue?` (`any`): 値が `undefined` のときに返すデフォルト値です。
 
 #### 戻り値
 

@@ -69,7 +69,7 @@ omitBy(undefined, () => true); // {}
 #### パラメータ
 
 - `object` (`Record<string, T> | Record<number, T> | object | null | undefined`): フィルタリングする元のオブジェクトです。
-- `predicate` (`ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`, オプション): 各プロパティに対して実行する述語関数です。これがtrueを返すプロパティは削除されます。デフォルトは`identity`関数です。
+- `predicate?` (`ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`): 各プロパティに対して実行する述語関数です。これがtrueを返すプロパティは削除されます。デフォルトは`identity`関数です。
 
 #### 戻り値
 

@@ -72,7 +72,7 @@ console.log(restGreet('Hey'));
 #### 参数
 
 - `func` (`F`): 要更改参数处理方式的函数。
-- `startIndex` (`number`, 可选): 开始打包成数组的索引。默认值为 `func.length - 1`,从最后一个参数开始打包成数组。
+- `startIndex?` (`number`): 开始打包成数组的索引。默认值为 `func.length - 1`,从最后一个参数开始打包成数组。
 
 #### 返回值
 

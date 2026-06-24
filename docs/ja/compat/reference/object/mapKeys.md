@@ -56,7 +56,7 @@ mapKeys(undefined, iteratee); // {}
 #### パラメータ
 
 - `object` (`ArrayLike<T> | T | null | undefined`): キーを変換するオブジェクトまたは配列です。
-- `iteratee` (`ListIteratee<T> | ObjectIteratee<T>`, オプション): 各キーを変換する関数です。デフォルトは`identity`関数です。
+- `iteratee?` (`ListIteratee<T> | ObjectIteratee<T>`): 各キーを変換する関数です。デフォルトは`identity`関数です。
 
 #### 戻り値
 

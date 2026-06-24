@@ -49,9 +49,9 @@ startsWith('test', null);
 
 #### Parameters
 
-- `str` (`string`, optional): The string to check.
-- `target` (`string`, optional): The string to search for at the start.
-- `position` (`number`, optional): The position to start the search. Defaults to `0`.
+- `str?` (`string`): The string to check.
+- `target?` (`string`): The string to search for at the start.
+- `position?` (`number`): The position to start the search. Defaults to `0`.
 
 #### Returns
 

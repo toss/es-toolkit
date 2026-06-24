@@ -57,7 +57,7 @@ keyBy(undefined, 'id'); // {}
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | null | undefined`): 키로 구성할 배열이나 객체예요.
-- `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, 선택): 키를 생성할 함수나 속성 이름이에요. 생략하면 요소 자체를 키로 사용해요.
+- `iteratee?` (`ValueIterateeCustom<T, PropertyKey>`): 키를 생성할 함수나 속성 이름이에요. 생략하면 요소 자체를 키로 사용해요.
 
 #### 반환 값
 

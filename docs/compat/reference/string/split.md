@@ -59,9 +59,9 @@ split(undefined);
 
 #### Parameters
 
-- `string` (`string`, optional): The string to split. Defaults to an empty string.
-- `separator` (`RegExp | string`, optional): The separator to use for splitting.
-- `limit` (`number`, optional): The maximum length of the resulting array.
+- `string?` (`string`): The string to split. Defaults to an empty string.
+- `separator?` (`RegExp | string`): The separator to use for splitting.
+- `limit?` (`number`): The maximum length of the resulting array.
 
 #### Returns
 

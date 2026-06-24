@@ -72,7 +72,7 @@ console.log(restGreet('Hey'));
 #### Parameters
 
 - `func` (`F`): The function to change parameter handling.
-- `startIndex` (`number`, optional): The index from which to start bundling into an array. Defaults to `func.length - 1`, bundling from the last parameter.
+- `startIndex?` (`number`): The index from which to start bundling into an array. Defaults to `func.length - 1`, bundling from the last parameter.
 
 #### Returns
 

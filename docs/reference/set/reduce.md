@@ -55,7 +55,7 @@ const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()]
 
 - `set` (`Set<T>`): The Set to reduce.
 - `callback` (`(accumulator: A, value: T, value2: T, set: Set<T>) => A`): A function that processes each element and updates the accumulator.
-- `initialValue` (`A`, optional): The initial value for the accumulator. If not provided, the first element in the Set is used.
+- `initialValue?` (`A`): The initial value for the accumulator. If not provided, the first element in the Set is used.
 
 #### Returns
 

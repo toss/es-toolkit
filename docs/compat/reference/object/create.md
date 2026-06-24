@@ -94,7 +94,7 @@ console.log(obj.inherited); // true (inherited)
 #### Parameters
 
 - `prototype` (`T extends object`): The prototype object to inherit from.
-- `properties` (`U extends object`, optional): Properties to add to the new object.
+- `properties?` (`U extends object`): Properties to add to the new object.
 
 #### Returns
 

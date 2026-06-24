@@ -56,7 +56,7 @@ isEmpty('text'); // false (문자열은 길이로 판단)
 
 #### 파라미터
 
-- `value` (`unknown`, 선택): 확인할 값이에요.
+- `value?` (`unknown`): 확인할 값이에요.
 
 #### 반환 값
 

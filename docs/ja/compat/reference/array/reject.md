@@ -61,7 +61,7 @@ reject(users, 'premium');
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 走査するコレクションです。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 各要素に対して実行する条件です。デフォルト値は`identity`です。
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 各要素に対して実行する条件です。デフォルト値は`identity`です。
 
 #### 戻り値
 

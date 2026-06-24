@@ -65,8 +65,8 @@ console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 
 - `arr` (`readonly T[]`): ウィンドウを作る配列です。
 - `size` (`number`): 各ウィンドウのサイズです。正の整数である必要があります。
-- `step` (`number`, オプション): ウィンドウ間の間隔です。正の整数である必要があり、デフォルト値は `1` です。
-- `options.partialWindows` (`boolean`, オプション): 配列の最後で完全でないウィンドウも含めるかどうかです。デフォルト値は `false` です。
+- `step?` (`number`): ウィンドウ間の間隔です。正の整数である必要があり、デフォルト値は `1` です。
+- `options.partialWindows?` (`boolean`): 配列の最後で完全でないウィンドウも含めるかどうかです。デフォルト値は `false` です。
 
 #### 戻り値
 

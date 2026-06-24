@@ -56,7 +56,7 @@ toLower();
 
 #### Parameters
 
-- `value` (`unknown`, optional): The value to convert to lowercase.
+- `value?` (`unknown`): The value to convert to lowercase.
 
 #### Returns
 

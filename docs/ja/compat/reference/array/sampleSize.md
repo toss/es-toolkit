@@ -47,7 +47,7 @@ sampleSize(undefined, 2);
 #### パラメータ
 
 - `collection` (`Record<string, T> | Record<number, T> | T | null | undefined`): サンプリングする配列またはオブジェクト。
-- `size` (`number`、オプション): 選択する要素の個数。デフォルトは `1` です。
+- `size?` (`number`): 選択する要素の個数。デフォルトは `1` です。
 
 #### 戻り値
 

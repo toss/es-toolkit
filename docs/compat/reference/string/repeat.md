@@ -58,8 +58,8 @@ repeat('abc');
 
 #### Parameters
 
-- `str` (`string`, optional): The string to repeat.
-- `n` (`number`, optional): The number of times to repeat. Defaults to `1`.
+- `str?` (`string`): The string to repeat.
+- `n?` (`number`): The number of times to repeat. Defaults to `1`.
 
 #### Returns
 

@@ -70,7 +70,7 @@ every(undefined);
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 要检查的数组或对象。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 检查条件。可以使用函数、部分对象、属性-值对或属性名称。默认为 `identity` 函数。
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 检查条件。可以使用函数、部分对象、属性-值对或属性名称。默认为 `identity` 函数。
 
 #### 返回值
 

@@ -70,7 +70,7 @@ every(undefined);
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 検査する配列またはオブジェクトです。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検査条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。デフォルトは `identity` 関数です。
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 検査条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。デフォルトは `identity` 関数です。
 
 #### 戻り値
 

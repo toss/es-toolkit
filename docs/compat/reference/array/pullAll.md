@@ -42,7 +42,7 @@ console.log(numbers); // [1, 2, 3]
 #### Parameters
 
 - `array` (`T[]`): The array to modify.
-- `valuesToRemove` (`ArrayLike<T>`, optional): The array containing values to remove from the array. Defaults to `[]`.
+- `valuesToRemove?` (`ArrayLike<T>`): The array containing values to remove from the array. Defaults to `[]`.
 
 #### Returns
 

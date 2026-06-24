@@ -64,7 +64,7 @@ forOwn(undefined, iteratee); // undefined
 #### パラメータ
 
 - `object` (`T | null | undefined`): 反復するオブジェクトです。
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, オプション): 各プロパティに対して呼び出す関数です。デフォルト値は `identity` 関数です。
+- `iteratee?` (`(value: T[keyof T], key: string, collection: T) => any`): 各プロパティに対して呼び出す関数です。デフォルト値は `identity` 関数です。
 
 #### 戻り値
 

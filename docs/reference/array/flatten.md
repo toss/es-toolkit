@@ -46,7 +46,7 @@ const result2 = flatten(array, 2);
 #### Parameters
 
 - `arr` (`T[]`): The nested array to flatten.
-- `depth` (`D`, optional): The depth to flatten. Defaults to `1`.
+- `depth?` (`D`): The depth to flatten. Defaults to `1`.
 
 #### Returns
 

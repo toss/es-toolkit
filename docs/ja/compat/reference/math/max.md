@@ -62,7 +62,7 @@ max([0, -2, 5, -10]);
 
 #### パラメータ
 
-- `items` (`ArrayLike<T> | null | undefined`, オプション): 最大値を見つける配列です。
+- `items?` (`ArrayLike<T> | null | undefined`): 最大値を見つける配列です。
 
 #### 戻り値
 

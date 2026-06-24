@@ -53,8 +53,8 @@ toFilled(array, '*', -4, -1);
 
 - `arr` (`T[]`): The original array to base on.
 - `value` (`U`): The value to fill the array with.
-- `start` (`number`, optional): The start position for filling. Default is `0`.
-- `end` (`number`, optional): The end position for filling. Default is the array length.
+- `start?` (`number`): The start position for filling. Default is `0`.
+- `end?` (`number`): The end position for filling. Default is the array length.
 
 #### Returns
 

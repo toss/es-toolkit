@@ -62,7 +62,7 @@ min([-1, -5, -3]);
 
 #### 参数
 
-- `items` (`ArrayLike<T> | null | undefined`, 可选): 要查找最小值的数组。
+- `items?` (`ArrayLike<T> | null | undefined`): 要查找最小值的数组。
 
 #### 返回值
 

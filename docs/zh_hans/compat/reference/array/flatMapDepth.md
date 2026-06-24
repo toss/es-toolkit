@@ -71,8 +71,8 @@ flatMapDepth(undefined, n => [n], 1); // => []
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): 要迭代的数组或对象。
-- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, 可选): 对每个元素执行的转换函数或属性名。默认为 `identity`。
-- `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
+- `iteratee?` (`((value: T, index: number, collection: any) => any) | string | object`): 对每个元素执行的转换函数或属性名。默认为 `identity`。
+- `depth?` (`number`): 要展平的最大深度。默认为 `1`。
 
 #### 返回值
 

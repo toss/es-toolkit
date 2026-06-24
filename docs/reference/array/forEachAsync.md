@@ -43,8 +43,8 @@ await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1
 
 - `array` (`readonly T[]`): The array to iterate over.
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<void>`): An async function to execute for each element.
-- `options` (`ForEachAsyncOptions`, optional): Options to control concurrency.
-  - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
+- `options?` (`ForEachAsyncOptions`): Options to control concurrency.
+  - `concurrency?` (`number`): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
 #### Returns
 

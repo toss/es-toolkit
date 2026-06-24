@@ -51,7 +51,7 @@ snakeCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to convert to snake case.
+- `str?` (`string`): The string to convert to snake case.
 
 #### Returns
 

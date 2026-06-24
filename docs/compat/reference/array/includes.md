@@ -89,7 +89,7 @@ includes({ a: 1, b: NaN }, NaN);
 
 - `collection` (`Array | Record<string, any> | string | null | undefined`): The array, object, or string to search.
 - `target` (`any`): The value to find.
-- `fromIndex` (`number`, optional): The index to start searching from. Negative values count from the end. Default is `0`.
+- `fromIndex?` (`number`): The index to start searching from. Negative values count from the end. Default is `0`.
 
 #### Returns
 

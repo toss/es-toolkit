@@ -85,7 +85,7 @@ const calculatedValue = result(calculator, 'compute');
 
 - `object` (`any`): 값을 검색할 객체예요.
 - `path` (`PropertyPath`): 속성을 가져올 경로예요. 문자열, 배열, 또는 키의 배열이 될 수 있어요.
-- `defaultValue` (`R | ((...args: any[]) => R)`, 선택): 값이 `undefined`일 때 반환할 기본값이에요. 함수인 경우 호출해서 결과를 반환해요.
+- `defaultValue?` (`R | ((...args: any[]) => R)`): 값이 `undefined`일 때 반환할 기본값이에요. 함수인 경우 호출해서 결과를 반환해요.
 
 #### 반환 값
 

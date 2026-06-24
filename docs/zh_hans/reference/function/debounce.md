@@ -66,9 +66,9 @@ controller.abort();
 
 - `func` (`F`): 要创建防抖函数的函数。
 - `debounceMs`(`number`): 防抖延迟的毫秒数。
-- `options` (`DebounceOptions`, optional): 选项对象。
-  - `signal` (`AbortSignal`, optional): 用于取消防抖函数的可选 `AbortSignal`。
-  - `edges` (`Array<'leading' | 'trailing'>`, optional): 指示何时执行原始函数的数组。默认值为 `['trailing']`。
+- `options?` (`DebounceOptions`): 选项对象。
+  - `signal?` (`AbortSignal`): 用于取消防抖函数的可选 `AbortSignal`。
+  - `edges?` (`Array<'leading' | 'trailing'>`): 指示何时执行原始函数的数组。默认值为 `['trailing']`。
     - 如果包含 `'leading'`,则在首次调用防抖函数时立即执行原始函数。
     - 如果包含 `'trailing'`,则在最后一次调用防抖函数后等待 `debounceMs` 毫秒后执行原始函数。
     - 如果同时包含 `'leading'` 和 `'trailing'`,则原始函数会在延迟执行开始时和结束时都被调用。但是,要在两个时间点都被调用,防抖函数必须在 `debounceMs` 毫秒内至少被调用 2 次。因为不能通过一次调用防抖函数来调用原始函数两次。

@@ -43,8 +43,8 @@ await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1
 
 - `array` (`readonly T[]`): 반복할 배열이에요.
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<void>`): 각 요소에 대해 실행할 비동기 함수예요.
-- `options` (`ForEachAsyncOptions`, 선택): 동시 실행을 제어하는 옵션이에요.
-  - `concurrency` (`number`, 선택): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
+- `options?` (`ForEachAsyncOptions`): 동시 실행을 제어하는 옵션이에요.
+  - `concurrency?` (`number`): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
 
 #### 반환 값
 

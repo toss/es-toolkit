@@ -82,7 +82,7 @@ bound(20, 30);
 
 - `object` (`object`): 要调用方法的对象。
 - `key` (`string`): 要调用的方法的键。
-- `...partialArgs` (`any[]`, 可选): 要部分应用到方法的参数。您可以使用 `bindKey.placeholder` 来保留参数位置。
+- `...partialArgs?` (`any[]`): 要部分应用到方法的参数。您可以使用 `bindKey.placeholder` 来保留参数位置。
 
 #### 返回值
 

@@ -53,7 +53,7 @@ uniqWith(undefined); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要去除重复项的数组。
-- `comparator` (`(a: T, b: T) => boolean`, 可选): 比较两个元素是否相等的函数。如果相等则返回 `true`。默认为浅相等性比较。
+- `comparator?` (`(a: T, b: T) => boolean`): 比较两个元素是否相等的函数。如果相等则返回 `true`。默认为浅相等性比较。
 
 #### 返回值
 

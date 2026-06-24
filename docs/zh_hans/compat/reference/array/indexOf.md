@@ -64,7 +64,7 @@ indexOf(undefined, 1); // => -1
 :::
 
 - `searchElement` (`T`): 要查找的值。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数，则从数组末尾开始计算。默认值为 `0`。
+- `fromIndex?` (`number`): 开始搜索的索引。如果为负数，则从数组末尾开始计算。默认值为 `0`。
 
 #### 返回值
 

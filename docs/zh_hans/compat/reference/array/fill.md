@@ -74,8 +74,8 @@ fill('abc', 'x');
 
 - `array` (`ArrayLike<T> | null | undefined`): 要填充的数组。
 - `value` (`U`): 用于填充数组的值。
-- `start` (`number`, 可选): 起始位置。默认为 `0`。
-- `end` (`number`, 可选): 结束位置(不包括)。默认为 `array.length`。
+- `start?` (`number`): 起始位置。默认为 `0`。
+- `end?` (`number`): 结束位置(不包括)。默认为 `array.length`。
 
 #### 返回值
 

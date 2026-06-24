@@ -64,7 +64,7 @@ mapValues(undefined, iteratee); // {}
 #### Parameters
 
 - `object` (`string | T[] | T | null | undefined`): The object, array, or string to transform values from.
-- `iteratee` (`ValueIteratee<any>`, optional): The function, property path, or matching object to transform each value. Defaults to the `identity` function.
+- `iteratee?` (`ValueIteratee<any>`): The function, property path, or matching object to transform each value. Defaults to the `identity` function.
 
 #### Returns
 

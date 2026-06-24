@@ -56,7 +56,7 @@ nth(undefined, 0); // undefined
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要获取元素的数组。
-- `index` (`number`, 可选): 要获取的元素的索引。如果为负数,则从末尾开始计算。默认为 `0`。
+- `index?` (`number`): 要获取的元素的索引。如果为负数,则从末尾开始计算。默认为 `0`。
 
 #### 返回值
 

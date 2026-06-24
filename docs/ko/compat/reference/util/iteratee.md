@@ -63,7 +63,7 @@ const identity = iteratee();
 
 #### 파라미터
 
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, 선택): 반복자로 변환할 값이에요. 기본값은 `null`이에요.
+- `value?` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`): 반복자로 변환할 값이에요. 기본값은 `null`이에요.
 
 #### 반환 값
 

@@ -253,8 +253,8 @@ window.addEventListener('beforeunload', () => {
 #### Parameters
 
 - `func` (`Function`): The function to debounce.
-- `wait` (`number`, optional): The number of milliseconds to delay. Defaults to `0`.
-- `options` (`DebounceSettings`, optional): An options object.
+- `wait?` (`number`): The number of milliseconds to delay. Defaults to `0`.
+- `options?` (`DebounceSettings`): An options object.
   - `leading` (`boolean`): If `true`, executes the function at the start of the delay. Defaults to `false`.
   - `trailing` (`boolean`): If `true`, executes the function at the end of the delay. Defaults to `true`.
   - `maxWait` (`number`): The maximum time the function execution can be delayed. Defaults to `Infinity`.

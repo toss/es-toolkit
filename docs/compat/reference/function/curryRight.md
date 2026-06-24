@@ -235,7 +235,7 @@ console.log(curriedFixed(3)(2)(1)); // { a: 1, b: 2, c: 3, rest: [] }
 #### Parameters
 
 - `func` (`Function`): The function to curry from right to left.
-- `arity` (`number`, optional): The arity (number of arguments) of the function. If omitted, `func.length` is used.
+- `arity?` (`number`): The arity (number of arguments) of the function. If omitted, `func.length` is used.
 
 #### Returns
 

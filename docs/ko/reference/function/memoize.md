@@ -84,9 +84,9 @@ const memoizedWithCustomCache = memoize(expensiveFunction, {
 #### 파라미터
 
 - `func` (`F`): 메모이제이션할 함수예요. 하나의 인수만 받아야 해요.
-- `options` (객체, 선택): 메모이제이션 설정 옵션이에요.
-  - `cache` (`MemoizeCache<any, ReturnType<F>>`, 선택): 결과를 저장할 캐시 객체예요. 기본값은 새로운 `Map`이에요.
-  - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, 선택): 캐시 키를 생성하는 함수예요. 비원시 값을 인수로 사용할 때 필요해요.
+- `options?` (객체): 메모이제이션 설정 옵션이에요.
+  - `cache?` (`MemoizeCache<any, ReturnType<F>>`): 결과를 저장할 캐시 객체예요. 기본값은 새로운 `Map`이에요.
+  - `getCacheKey?` (`(arg: Parameters<F>[0]) => unknown`): 캐시 키를 생성하는 함수예요. 비원시 값을 인수로 사용할 때 필요해요.
 
 #### 반환 값
 

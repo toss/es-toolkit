@@ -53,7 +53,7 @@ console.log(result); // undefined
 
 - `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
 - `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 각 요소에 대해 호출할 함수예요. 누적값, 현재 값, 인덱스/키, 원본 배열/객체를 받아요.
-- `initialValue` (`any`, 선택): 누적값의 초기 값이에요. 제공하지 않으면 마지막 요소가 초기 값이 돼요.
+- `initialValue?` (`any`): 누적값의 초기 값이에요. 제공하지 않으면 마지막 요소가 초기 값이 돼요.
 
 #### 반환 값
 

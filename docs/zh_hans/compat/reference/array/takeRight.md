@@ -56,7 +56,7 @@ takeRight(undefined, 2); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要获取元素的数组。
-- `count` (`number`, 可选): 要获取的元素数量。默认值为 `1`。
+- `count?` (`number`): 要获取的元素数量。默认值为 `1`。
 
 #### 返回值
 

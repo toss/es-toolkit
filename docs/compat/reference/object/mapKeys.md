@@ -56,7 +56,7 @@ mapKeys(undefined, iteratee); // {}
 #### Parameters
 
 - `object` (`ArrayLike<T> | T | null | undefined`): The object or array to transform keys from.
-- `iteratee` (`ListIteratee<T> | ObjectIteratee<T>`, optional): The function to transform each key. Defaults to the `identity` function.
+- `iteratee?` (`ListIteratee<T> | ObjectIteratee<T>`): The function to transform each key. Defaults to the `identity` function.
 
 #### Returns
 

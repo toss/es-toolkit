@@ -99,13 +99,13 @@ safeCompiled({ html: '<div>내용</div>' });
 #### 파라미터
 
 - `string` (`string`): 템플릿 문자열이에요.
-- `options` (`object`, 선택): 설정 객체예요.
-  - `options.escape` (`RegExp`, 선택): HTML을 이스케이프할 구분자 정규식이에요. 기본값은 `<%-([\s\S]+?)%>`이에요.
-  - `options.evaluate` (`RegExp`, 선택): JavaScript 코드를 실행할 구분자 정규식이에요. 기본값은 `<%([\s\S]+?)%>`이에요.
-  - `options.interpolate` (`RegExp`, 선택): 값을 넣을 구분자 정규식이에요. 기본값은 `<%=([\s\S]+?)%>`이에요.
-  - `options.variable` (`string`, 선택): 데이터 객체의 변수 이름이에요.
-  - `options.imports` (`object`, 선택): 템플릿에서 사용할 함수들이에요.
-  - `options.sourceURL` (`string`, 선택): 디버깅용 소스 URL이에요.
+- `options?` (`object`): 설정 객체예요.
+  - `options.escape?` (`RegExp`): HTML을 이스케이프할 구분자 정규식이에요. 기본값은 `<%-([\s\S]+?)%>`이에요.
+  - `options.evaluate?` (`RegExp`): JavaScript 코드를 실행할 구분자 정규식이에요. 기본값은 `<%([\s\S]+?)%>`이에요.
+  - `options.interpolate?` (`RegExp`): 값을 넣을 구분자 정규식이에요. 기본값은 `<%=([\s\S]+?)%>`이에요.
+  - `options.variable?` (`string`): 데이터 객체의 변수 이름이에요.
+  - `options.imports?` (`object`): 템플릿에서 사용할 함수들이에요.
+  - `options.sourceURL?` (`string`): 디버깅용 소스 URL이에요.
 
 #### 반환 값
 

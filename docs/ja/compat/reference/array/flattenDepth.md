@@ -48,7 +48,7 @@ flattenDepth(undefined, 2); // []
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 平坦化する配列です。
-- `depth` (`number`, オプション): 平坦化する最大深さです。デフォルトは`1`です。
+- `depth?` (`number`): 平坦化する最大深さです。デフォルトは`1`です。
 
 #### 戻り値
 

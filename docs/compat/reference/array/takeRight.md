@@ -56,7 +56,7 @@ takeRight(undefined, 2); // []
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to take elements from.
-- `count` (`number`, optional): The number of elements to take. Default is `1`.
+- `count?` (`number`): The number of elements to take. Default is `1`.
 
 #### Returns
 

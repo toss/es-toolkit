@@ -64,7 +64,7 @@ To ensure full compatibility with lodash, the `indexOf` function handles `array`
 :::
 
 - `searchElement` (`T`): The value to find.
-- `fromIndex` (`number`, optional): The index to start searching from. If negative, it's calculated from the end of the array. Defaults to `0`.
+- `fromIndex?` (`number`): The index to start searching from. If negative, it's calculated from the end of the array. Defaults to `0`.
 
 #### Returns
 

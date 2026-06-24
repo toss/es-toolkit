@@ -72,13 +72,13 @@ await exec('sleep', ['10'], {
 #### 参数
 
 - `command` (`string`): 要执行的命令。
-- `args` (`string[]`, 可选): 传递给命令的参数。默认为 `[]`。
-- `options` (`ExecOptions`, 可选): 选项对象。
-  - `signal` (`AbortSignal`, 可选): 用于中断进程的 `AbortSignal`。
-  - `timeout` (`number`, 可选): 以毫秒为单位的超时时间。超时过期时进程被中断。
-  - `stdin` (`string`, 可选): 写入进程 stdin 的字符串。
-  - `spawnOptions` (`SpawnOptions`, 可选): 转发给 `child_process.spawn` 的额外选项。
-  - `throwOnNonZeroExitCode` (`boolean`, 可选): 当进程以非零退出码退出时是否抛出 `ExecError`。默认为 `true`。
+- `args?` (`string[]`): 传递给命令的参数。默认为 `[]`。
+- `options?` (`ExecOptions`): 选项对象。
+  - `signal?` (`AbortSignal`): 用于中断进程的 `AbortSignal`。
+  - `timeout?` (`number`): 以毫秒为单位的超时时间。超时过期时进程被中断。
+  - `stdin?` (`string`): 写入进程 stdin 的字符串。
+  - `spawnOptions?` (`SpawnOptions`): 转发给 `child_process.spawn` 的额外选项。
+  - `throwOnNonZeroExitCode?` (`boolean`): 当进程以非零退出码退出时是否抛出 `ExecError`。默认为 `true`。
 
 #### 返回值
 

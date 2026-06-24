@@ -88,7 +88,7 @@ random(5, 5, guard);
 
 #### パラメータ
 
-- `floating` (`boolean`, オプション): 小数を返すかどうかを決定します。デフォルトは `true` です。
+- `floating?` (`boolean`): 小数を返すかどうかを決定します。デフォルトは `true` です。
 - `max` (`number`): 範囲の最大値です（含まれません）。
 - `min` (`number`): 範囲の最小値です（含まれます）。
 - `index` (`string | number`): guardオブジェクトで確認するキーです。

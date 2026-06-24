@@ -53,7 +53,7 @@ modernAdd(...numbers); // 3 - 更简单、更快
 #### 参数
 
 - `func` (`Function`): 要转换的函数。
-- `argsIndex` (`number`, 可选): 数组参数的位置。默认值为 `0`。
+- `argsIndex?` (`number`): 数组参数的位置。默认值为 `0`。
 
 #### 返回值
 

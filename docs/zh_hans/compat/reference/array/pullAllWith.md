@@ -42,8 +42,8 @@ pullAllWith(null as any, [1], (a, b) => a === b); // null
 #### 参数
 
 - `array` (`T[]`): 要修改的数组。
-- `values` (`ArrayLike<T>`, 可选): 要删除的值的数组。
-- `comparator` (`(a: T, b: T) => boolean`, 可选): 比较两个元素的函数。如果认为两个元素相等，应返回 `true`。
+- `values?` (`ArrayLike<T>`): 要删除的值的数组。
+- `comparator?` (`(a: T, b: T) => boolean`): 比较两个元素的函数。如果认为两个元素相等，应返回 `true`。
 
 #### 返回值
 

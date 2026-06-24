@@ -51,7 +51,7 @@ startCase(undefined); // ''
 
 #### 参数
 
-- `str` (`string`, 可选): 要转换为 start case 的字符串。
+- `str?` (`string`): 要转换为 start case 的字符串。
 
 #### 返回值
 

@@ -76,8 +76,8 @@ const result = await Promise.race([
 #### 参数
 
 - `ms` (`number`): 抛出 `TimeoutError` 前的毫秒数。
-- `options` (`TimeoutOptions`, 可选): 超时选项。
-  - `signal` (`AbortSignal`, 可选): 可以取消超时的 AbortSignal。中断后,返回的 Promise 保持挂起状态且不会被拒绝。
+- `options?` (`TimeoutOptions`): 超时选项。
+  - `signal?` (`AbortSignal`): 可以取消超时的 AbortSignal。中断后,返回的 Promise 保持挂起状态且不会被拒绝。
 
 #### 返回值
 

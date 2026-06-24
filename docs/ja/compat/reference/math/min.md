@@ -62,7 +62,7 @@ min([-1, -5, -3]);
 
 #### パラメータ
 
-- `items` (`ArrayLike<T> | null | undefined`, オプション): 最小値を見つける配列です。
+- `items?` (`ArrayLike<T> | null | undefined`): 最小値を見つける配列です。
 
 #### 戻り値
 

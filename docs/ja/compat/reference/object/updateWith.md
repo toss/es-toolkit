@@ -86,7 +86,7 @@ updateWith(
 - `obj` (`T`): 変更するオブジェクトです。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパスです。文字列または配列で指定できます。
 - `updater` (`(oldValue: any) => any`): 既存の値を受け取って新しい値を返す関数です。
-- `customizer` (`(value: any, key: string, object: T) => any`, オプション): パスが存在しない場合に作成する中間オブジェクトを返す関数です。`undefined` を返すとデフォルトの動作を使用します。
+- `customizer?` (`(value: any, key: string, object: T) => any`): パスが存在しない場合に作成する中間オブジェクトを返す関数です。`undefined` を返すとデフォルトの動作を使用します。
 
 #### 戻り値
 

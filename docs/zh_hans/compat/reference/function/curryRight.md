@@ -235,7 +235,7 @@ console.log(curriedFixed(3)(2)(1)); // { a: 1, b: 2, c: 3, rest: [] }
 #### 参数
 
 - `func` (`Function`): 要从右到左柯里化的函数。
-- `arity` (`number`, 可选): 函数的参数数量。如果省略,则使用 `func.length`。
+- `arity?` (`number`): 函数的参数数量。如果省略,则使用 `func.length`。
 
 #### 返回值
 

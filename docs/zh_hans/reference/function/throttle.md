@@ -91,9 +91,9 @@ throttledFunc.cancel();
 
 - `func` (`F`): 要限制执行的函数。
 - `throttleMs` (`number`): 限制执行的时间间隔(毫秒)。
-- `options` (`ThrottleOptions`, 可选): 额外选项。
-  - `signal` (`AbortSignal`, 可选): 可以取消函数执行的信号。
-  - `edges` (`Array<'leading' | 'trailing'>`, 可选): 决定函数执行时机。默认值为 `['leading', 'trailing']`。
+- `options?` (`ThrottleOptions`): 额外选项。
+  - `signal?` (`AbortSignal`): 可以取消函数执行的信号。
+  - `edges?` (`Array<'leading' | 'trailing'>`): 决定函数执行时机。默认值为 `['leading', 'trailing']`。
 
 #### 返回值
 

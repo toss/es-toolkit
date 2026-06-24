@@ -82,7 +82,7 @@ partition(undefined, 'active'); // [[], []]
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | T | null | undefined`): 분할할 배열이나 객체예요.
-- `predicate` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`, 선택): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 속성-값 배열, 속성 이름을 사용할 수 있어요. 기본값은 `identity`예요.
+- `predicate?` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 속성-값 배열, 속성 이름을 사용할 수 있어요. 기본값은 `identity`예요.
 
 #### 반환 값
 

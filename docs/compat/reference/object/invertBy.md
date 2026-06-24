@@ -70,7 +70,7 @@ invertBy(undefined);
 #### Parameters
 
 - `object` (`object`): The object to invert.
-- `iteratee` (`ValueIteratee`, optional): The function to transform values. Defaults to a function that uses the value as-is.
+- `iteratee?` (`ValueIteratee`): The function to transform values. Defaults to a function that uses the value as-is.
 
 #### Returns
 

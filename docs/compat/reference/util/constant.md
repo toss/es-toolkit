@@ -74,7 +74,7 @@ console.log(getObj() === obj); // true (same object reference)
 
 #### Parameters
 
-- `value` (`T`, optional): The value the function should return. If not provided, returns `undefined`.
+- `value?` (`T`): The value the function should return. If not provided, returns `undefined`.
 
 #### Returns
 

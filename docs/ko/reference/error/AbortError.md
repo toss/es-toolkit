@@ -48,7 +48,7 @@ await fetchData(controller.signal); // AbortError 발생
 
 #### 파라미터
 
-- `message` (`string`, 선택): 에러 메시지예요. 기본값은 `'The operation was aborted'`예요.
+- `message?` (`string`): 에러 메시지예요. 기본값은 `'The operation was aborted'`예요.
 
 #### 반환 값
 

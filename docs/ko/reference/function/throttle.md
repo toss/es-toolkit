@@ -91,9 +91,9 @@ throttledFunc.cancel();
 
 - `func` (`F`): 실행을 제한할 함수예요.
 - `throttleMs` (`number`): 실행을 제한할 시간 간격(밀리초)이에요.
-- `options` (`ThrottleOptions`, 선택): 추가 옵션이에요.
-  - `signal` (`AbortSignal`, 선택): 함수 실행을 취소할 수 있는 시그널이에요.
-  - `edges` (`Array<'leading' | 'trailing'>`, 선택): 함수 실행 타이밍을 결정해요. 기본값은 `['leading', 'trailing']`이에요.
+- `options?` (`ThrottleOptions`): 추가 옵션이에요.
+  - `signal?` (`AbortSignal`): 함수 실행을 취소할 수 있는 시그널이에요.
+  - `edges?` (`Array<'leading' | 'trailing'>`): 함수 실행 타이밍을 결정해요. 기본값은 `['leading', 'trailing']`이에요.
 
 #### 반환 값
 

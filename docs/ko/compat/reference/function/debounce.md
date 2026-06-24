@@ -253,8 +253,8 @@ window.addEventListener('beforeunload', () => {
 #### 파라미터
 
 - `func` (`Function`): 디바운스할 함수예요.
-- `wait` (`number`, 선택): 지연할 밀리초 수예요. 기본값은 `0`이에요.
-- `options` (`DebounceSettings`, 선택): 옵션 객체예요.
+- `wait?` (`number`): 지연할 밀리초 수예요. 기본값은 `0`이에요.
+- `options?` (`DebounceSettings`): 옵션 객체예요.
   - `leading` (`boolean`): `true`이면 지연 시작 시점에 함수를 실행해요. 기본값은 `false`예요.
   - `trailing` (`boolean`): `true`이면 지연 종료 시점에 함수를 실행해요. 기본값은 `true`예요.
   - `maxWait` (`number`): 함수 실행이 지연될 수 있는 최대 시간이에요. 기본값은 `Infinity`예요.

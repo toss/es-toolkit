@@ -51,7 +51,7 @@ unescape(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to unescape.
+- `str?` (`string`): The string to unescape.
 
 #### Returns
 

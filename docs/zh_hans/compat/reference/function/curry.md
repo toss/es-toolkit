@@ -215,7 +215,7 @@ console.log(person2.city); // "Seoul"
 #### 参数
 
 - `func` (`Function`): 要柯里化的函数。
-- `arity` (`number`, 可选): 函数的参数个数。如果省略，使用 `func.length`。
+- `arity?` (`number`): 函数的参数个数。如果省略，使用 `func.length`。
 
 #### 返回值
 

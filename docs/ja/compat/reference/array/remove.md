@@ -63,7 +63,7 @@ remove(users, 'isDeleted');
 #### パラメータ
 
 - `array` (`ArrayLike<T>`): 変更する配列です。
-- `predicate` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`, オプション): 各要素に対して実行する条件です。デフォルトは`identity`です。
+- `predicate?` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`): 各要素に対して実行する条件です。デフォルトは`identity`です。
 
 #### 戻り値
 

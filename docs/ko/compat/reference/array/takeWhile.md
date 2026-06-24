@@ -64,7 +64,7 @@ takeWhile(undefined, x => x > 0); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 처리할 배열이에요.
-- `predicate` (`ListIteratee<T>`, 선택): 각 요소에 대해 실행할 조건이에요. 함수, 부분 객체, 속성-값 배열, 속성명을 사용할 수 있어요. 기본값은 항등 함수예요.
+- `predicate?` (`ListIteratee<T>`): 각 요소에 대해 실행할 조건이에요. 함수, 부분 객체, 속성-값 배열, 속성명을 사용할 수 있어요. 기본값은 항등 함수예요.
 
 #### 반환 값
 

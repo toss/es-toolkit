@@ -96,7 +96,7 @@ sumBy(undefined);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to process.
-- `iteratee` (`((value: T) => number) | string`, optional): The function or property name to apply to each element.
+- `iteratee?` (`((value: T) => number) | string`): The function or property name to apply to each element.
 
 #### Returns
 

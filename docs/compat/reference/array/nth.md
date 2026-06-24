@@ -54,7 +54,7 @@ nth(undefined, 0); // undefined
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to query.
-- `index` (`number`, optional): The index of the element to get. If negative, it counts from the end. Defaults to `0`.
+- `index?` (`number`): The index of the element to get. If negative, it counts from the end. Defaults to `0`.
 
 #### Returns
 

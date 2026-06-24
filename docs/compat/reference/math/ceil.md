@@ -55,7 +55,7 @@ ceil(-6.004, 2);
 #### Parameters
 
 - `number` (`number`): The number to round up.
-- `precision` (`number`, optional): The number of decimal places to round up to. Defaults to `0`.
+- `precision?` (`number`): The number of decimal places to round up to. Defaults to `0`.
 
 #### Returns
 

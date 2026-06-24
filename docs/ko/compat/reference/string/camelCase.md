@@ -41,7 +41,7 @@ camelCase(undefined); // ''
 
 #### 파라미터
 
-- `str` (`string | object`, 선택): 카멜 케이스로 변환할 값이에요.
+- `str?` (`string | object`): 카멜 케이스로 변환할 값이에요.
 
 #### 반환 값
 

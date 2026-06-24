@@ -70,7 +70,7 @@ const config = reduce(settings, (acc, value, key) => ({ ...acc, [key]: value }),
 
 - `map` (`Map<K, V>`): 줄일 Map이에요.
 - `callback` (`(accumulator: A, value: V, key: K, map: Map<K, V>) => A`): 각 항목을 처리하고 누산기를 업데이트하는 함수예요.
-- `initialValue` (`A`, 선택): 누산기의 초기값이에요. 제공되지 않으면 Map의 첫 번째 값을 사용해요.
+- `initialValue?` (`A`): 누산기의 초기값이에요. 제공되지 않으면 Map의 첫 번째 값을 사용해요.
 
 #### 반환 값
 

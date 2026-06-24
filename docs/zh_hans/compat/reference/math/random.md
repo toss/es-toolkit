@@ -88,7 +88,7 @@ random(5, 5, guard);
 
 #### 参数
 
-- `floating` (`boolean`, 可选): 决定是否返回小数。默认值为 `true`。
+- `floating?` (`boolean`): 决定是否返回小数。默认值为 `true`。
 - `max` (`number`): 范围的最大值（不包含）。
 - `min` (`number`): 范围的最小值（包含）。
 - `index` (`string | number`): 在 guard 对象中要检查的键。

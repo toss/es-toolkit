@@ -91,8 +91,8 @@ import { rangeRight } from 'es-toolkit/compat';
 #### Parameters
 
 - `start` (`number`): The start value of the range (inclusive). If `end` is not provided, this becomes the end value.
-- `end` (`number`, optional): The end value of the range (exclusive).
-- `step` (`number`, optional): The increment step. Default is 1 or -1.
+- `end?` (`number`): The end value of the range (exclusive).
+- `step?` (`number`): The increment step. Default is 1 or -1.
 
 #### Returns
 

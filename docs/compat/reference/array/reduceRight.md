@@ -53,7 +53,7 @@ console.log(result); // undefined
 
 - `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to iterate over.
 - `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): The function to call for each element. It receives the accumulated value, current value, index/key, and the original array/object.
-- `initialValue` (`any`, optional): The initial value for the accumulator. If not provided, the last element becomes the initial value.
+- `initialValue?` (`any`): The initial value for the accumulator. If not provided, the last element becomes the initial value.
 
 #### Returns
 

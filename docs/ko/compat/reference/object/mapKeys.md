@@ -56,7 +56,7 @@ mapKeys(undefined, iteratee); // {}
 #### 파라미터
 
 - `object` (`ArrayLike<T> | T | null | undefined`): 키를 변환할 객체나 배열이에요.
-- `iteratee` (`ListIteratee<T> | ObjectIteratee<T>`, 선택): 각 키를 변환할 함수예요. 기본값은 `identity` 함수예요.
+- `iteratee?` (`ListIteratee<T> | ObjectIteratee<T>`): 각 키를 변환할 함수예요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

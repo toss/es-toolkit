@@ -41,8 +41,8 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 
 - `array` (`readonly T[]`)：要过滤的数组。
 - `predicate` (`(item: T, index: number, array: readonly T[]) => Promise<boolean>`)：测试每个元素的异步函数。如果返回真值，该元素将包含在结果中。
-- `options` (`FilterAsyncOptions`, 可选)：控制并发的选项。
-  - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
+- `options?` (`FilterAsyncOptions`)：控制并发的选项。
+  - `concurrency?` (`number`)：最大并发操作数。如果未指定，所有操作将并发执行。
 
 #### 返回值
 

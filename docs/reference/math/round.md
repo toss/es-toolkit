@@ -89,7 +89,7 @@ try {
 #### Parameters
 
 - `value` (`number`): The number to round.
-- `precision` (`number`, optional): The number of decimal places. Must be an integer. Defaults to `0`.
+- `precision?` (`number`): The number of decimal places. Must be an integer. Defaults to `0`.
 
 #### Returns
 

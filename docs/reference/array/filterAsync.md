@@ -41,8 +41,8 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 
 - `array` (`readonly T[]`): The array to filter.
 - `predicate` (`(item: T, index: number, array: readonly T[]) => Promise<boolean>`): An async function that tests each element. If it returns a truthy value, the element is included in the result.
-- `options` (`FilterAsyncOptions`, optional): Options to control concurrency.
-  - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
+- `options?` (`FilterAsyncOptions`): Options to control concurrency.
+  - `concurrency?` (`number`): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
 #### Returns
 

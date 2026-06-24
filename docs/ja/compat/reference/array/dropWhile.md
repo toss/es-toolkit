@@ -60,7 +60,7 @@ dropWhile(undefined, x => x > 0); // []
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 要素を削除する配列です。
-- `predicate` (`ListIteratee<T>`, オプション): 各要素に適用する条件関数です。関数、オブジェクトパターン、配列パターン、またはプロパティ名を受け取ることができます。デフォルトは `identity` です。
+- `predicate?` (`ListIteratee<T>`): 各要素に適用する条件関数です。関数、オブジェクトパターン、配列パターン、またはプロパティ名を受け取ることができます。デフォルトは `identity` です。
 
 #### 戻り値
 

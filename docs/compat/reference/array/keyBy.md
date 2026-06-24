@@ -57,7 +57,7 @@ keyBy(undefined, 'id'); // {}
 #### Parameters
 
 - `collection` (`ArrayLike<T> | null | undefined`): The array or object to organize by key.
-- `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, optional): The function or property name to generate keys. If omitted, the element itself is used as the key.
+- `iteratee?` (`ValueIterateeCustom<T, PropertyKey>`): The function or property name to generate keys. If omitted, the element itself is used as the key.
 
 #### Returns
 

@@ -69,7 +69,7 @@ omitBy(undefined, () => true); // {}
 #### Parameters
 
 - `object` (`Record<string, T> | Record<number, T> | object | null | undefined`): The source object to filter.
-- `predicate` (`ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`, optional): The predicate function to execute for each property. Properties for which this returns true are removed. Defaults to the `identity` function.
+- `predicate?` (`ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>`): The predicate function to execute for each property. Properties for which this returns true are removed. Defaults to the `identity` function.
 
 #### Returns
 

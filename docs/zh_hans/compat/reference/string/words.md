@@ -61,8 +61,8 @@ words(undefined); // []
 
 #### 参数
 
-- `str` (`string`, 可选): 要拆分为单词的字符串。
-- `pattern` (`RegExp | string`, 可选): 用于匹配单词的模式。默认为内置的 Unicode 单词模式。
+- `str?` (`string`): 要拆分为单词的字符串。
+- `pattern?` (`RegExp | string`): 用于匹配单词的模式。默认为内置的 Unicode 单词模式。
 
 #### 返回值
 

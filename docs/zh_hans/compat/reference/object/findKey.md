@@ -54,7 +54,7 @@ findKey({ a: 1, b: 2 }, value => value > 5);
 #### 参数
 
 - `obj` (`T | null | undefined`): 要搜索的对象。
-- `predicate` (`ObjectIteratee<T>`, 可选): 应用于每个元素的条件。可以是函数、对象、数组或字符串。
+- `predicate?` (`ObjectIteratee<T>`): 应用于每个元素的条件。可以是函数、对象、数组或字符串。
 
 #### 返回值
 

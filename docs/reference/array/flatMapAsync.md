@@ -43,8 +43,8 @@ const products = await flatMapAsync(categories, async category => await fetchPro
 
 - `array` (`readonly T[]`): The array to transform.
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<R[]>`): An async function that transforms each element into an array.
-- `options` (`FlatMapAsyncOptions`, optional): Options to control concurrency.
-  - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
+- `options?` (`FlatMapAsyncOptions`): Options to control concurrency.
+  - `concurrency?` (`number`): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
 #### Returns
 

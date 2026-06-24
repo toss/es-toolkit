@@ -67,8 +67,8 @@ findLast(undefined, x => x > 0); // undefined
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 要搜索的数组或对象。
-- `predicate` (`ListIterateeCustom<T, boolean>`, 可选): 应用于每个元素的条件。可以使用函数、对象、键值对或属性名。默认为 `identity` 函数。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。负值从末尾计算。默认为数组的最后一个索引。
+- `predicate?` (`ListIterateeCustom<T, boolean>`): 应用于每个元素的条件。可以使用函数、对象、键值对或属性名。默认为 `identity` 函数。
+- `fromIndex?` (`number`): 开始搜索的索引。负值从末尾计算。默认为数组的最后一个索引。
 
 #### 返回值
 

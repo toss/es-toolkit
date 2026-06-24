@@ -82,7 +82,7 @@ partition(undefined, 'active'); // [[], []]
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | T | null | undefined`): 分割する配列またはオブジェクトです。
-- `predicate` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`, オプション): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値配列、またはプロパティ名を使用できます。デフォルトは `identity` です。
+- `predicate?` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値配列、またはプロパティ名を使用できます。デフォルトは `identity` です。
 
 #### 戻り値
 

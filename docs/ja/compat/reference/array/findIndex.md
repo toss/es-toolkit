@@ -92,8 +92,8 @@ findIndex(undefined, 'active'); // -1
 #### パラメータ
 
 - `arr` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 一致条件です。関数、部分オブジェクト、キーと値のペア、またはプロパティ名を指定できます。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。デフォルトは `0` です。
+- `doesMatch?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 一致条件です。関数、部分オブジェクト、キーと値のペア、またはプロパティ名を指定できます。
+- `fromIndex?` (`number`): 検索を開始するインデックスです。デフォルトは `0` です。
 
 #### 戻り値
 

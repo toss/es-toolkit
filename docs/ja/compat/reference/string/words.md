@@ -61,8 +61,8 @@ words(undefined); // []
 
 #### パラメータ
 
-- `str` (`string`, オプション): 単語に分割する文字列。
-- `pattern` (`RegExp | string`, オプション): 単語にマッチするパターン。デフォルトは組み込みの Unicode 単語パターン。
+- `str?` (`string`): 単語に分割する文字列。
+- `pattern?` (`RegExp | string`): 単語にマッチするパターン。デフォルトは組み込みの Unicode 単語パターン。
 
 #### 戻り値
 

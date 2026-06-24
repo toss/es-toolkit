@@ -64,7 +64,7 @@ mapValues(undefined, iteratee); // {}
 #### パラメータ
 
 - `object` (`string | T[] | T | null | undefined`): 値を変換するオブジェクト、配列、または文字列です。
-- `iteratee` (`ValueIteratee<any>`, オプション): 各値を変換する関数、プロパティパス、またはマッチングオブジェクトです。デフォルトは`identity`関数です。
+- `iteratee?` (`ValueIteratee<any>`): 各値を変換する関数、プロパティパス、またはマッチングオブジェクトです。デフォルトは`identity`関数です。
 
 #### 戻り値
 

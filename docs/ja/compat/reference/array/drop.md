@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 要素を削除する配列です。
-- `itemsCount` (`number`, オプション): 削除する要素の個数です。デフォルトは `1` です。
+- `itemsCount?` (`number`): 削除する要素の個数です。デフォルトは `1` です。
 
 #### 戻り値
 

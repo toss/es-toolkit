@@ -90,7 +90,7 @@ const cloned = cloneWith(obj, value => {
 #### パラメータ
 
 - `value` (`T`): コピーする値です。
-- `customizer` (`function`, オプション): コピー方法を決定する関数です。`(value: any) => any` の形式です。
+- `customizer?` (`function`): コピー方法を決定する関数です。`(value: any) => any` の形式です。
 
 #### 戻り値
 

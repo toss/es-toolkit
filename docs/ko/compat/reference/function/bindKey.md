@@ -84,7 +84,7 @@ bound(20, 30);
 
 - `object` (`object`): 메소드를 호출할 객체예요.
 - `key` (`string`): 호출할 메소드의 키예요.
-- `...partialArgs` (`any[]`, 선택): 메소드에 미리 전달할 인자들이에요. `bindKey.placeholder`를 사용하여 인자 위치를 예약할 수 있어요.
+- `...partialArgs?` (`any[]`): 메소드에 미리 전달할 인자들이에요. `bindKey.placeholder`를 사용하여 인자 위치를 예약할 수 있어요.
 
 #### 반환 값
 

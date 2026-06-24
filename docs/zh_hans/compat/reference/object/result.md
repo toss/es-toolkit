@@ -85,7 +85,7 @@ const calculatedValue = result(calculator, 'compute');
 
 - `object` (`any`): 要查询的对象。
 - `path` (`PropertyPath`): 要获取的属性路径。可以是字符串、数组或键的数组。
-- `defaultValue` (`R | ((...args: any[]) => R)`, 可选): 当值为 `undefined` 时返回的默认值。如果是函数,则调用并返回结果。
+- `defaultValue?` (`R | ((...args: any[]) => R)`): 当值为 `undefined` 时返回的默认值。如果是函数,则调用并返回结果。
 
 #### 返回值
 

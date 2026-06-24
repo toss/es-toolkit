@@ -63,7 +63,7 @@ remove(users, 'isDeleted');
 #### 파라미터
 
 - `array` (`ArrayLike<T>`): 수정할 배열이에요.
-- `predicate` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`, 선택): 각 요소에 대해 실행할 조건이에요. 기본값은 `identity`예요.
+- `predicate?` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`): 각 요소에 대해 실행할 조건이에요. 기본값은 `identity`예요.
 
 #### 반환 값
 

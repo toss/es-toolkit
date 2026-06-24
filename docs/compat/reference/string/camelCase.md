@@ -41,7 +41,7 @@ camelCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string | object`, optional): The value to convert to camel case.
+- `str?` (`string | object`): The value to convert to camel case.
 
 #### Returns
 

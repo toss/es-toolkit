@@ -82,7 +82,7 @@ bound(20, 30);
 
 - `object` (`object`): The object to invoke the method on.
 - `key` (`string`): The key of the method to call.
-- `...partialArgs` (`any[]`, optional): The arguments to be partially applied to the method. You can use `bindKey.placeholder` to reserve argument positions.
+- `...partialArgs?` (`any[]`): The arguments to be partially applied to the method. You can use `bindKey.placeholder` to reserve argument positions.
 
 #### Returns
 

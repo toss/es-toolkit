@@ -70,7 +70,7 @@ flatMap(users, { active: false });
 #### 参数
 
 - `collection` (`object | null | undefined`): 要迭代的集合。可以是数组、对象或字符串。
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, 可选): 应用于每个元素的迭代器。可以是函数、属性名或部分对象。
+- `iteratee?` (`ListIterator | ObjectIterator | string | object`): 应用于每个元素的迭代器。可以是函数、属性名或部分对象。
 
 #### 返回值
 

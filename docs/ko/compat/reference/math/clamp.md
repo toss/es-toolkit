@@ -75,7 +75,7 @@ clamp(5, 2, NaN);
 
 - `number` (`number`): 제한할 숫자예요.
 - `lower` (`number`): 최솟값이에요. 두 번째 파라미터만 있으면 최댓값이 돼요.
-- `upper` (`number`, 선택): 최댓값이에요.
+- `upper?` (`number`): 최댓값이에요.
 
 #### 반환 값
 

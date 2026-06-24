@@ -58,7 +58,7 @@ console.log(labelId); // => 'label_7'
 
 #### 参数
 
-- `prefix` (`string`, 可选): ID 前的前缀字符串。如果不提供，只返回数字。
+- `prefix?` (`string`): ID 前的前缀字符串。如果不提供，只返回数字。
 
 #### 返回值
 

@@ -70,7 +70,7 @@ console.log(result); // ['1th', '2th', '3th', '4th', '5th']
 #### Parameters
 
 - `func` (`F`): The function to partially apply parameters to.
-- `args` (`any[]`, optional): The parameters to pre-apply from the right.
+- `args?` (`any[]`): The parameters to pre-apply from the right.
 
 #### Returns
 

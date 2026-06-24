@@ -47,7 +47,7 @@ pad('abc', 10, '123');
 
 - `str` (`string`): The string to pad.
 - `length` (`number`): The target length.
-- `chars` (`string`, optional): The characters to use for padding. Defaults to `' '`.
+- `chars?` (`string`): The characters to use for padding. Defaults to `' '`.
 
 #### Returns
 

@@ -53,7 +53,7 @@ uniqWith(undefined); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 중복을 제거할 배열이에요.
-- `comparator` (`(a: T, b: T) => boolean`, 선택): 두 요소가 같은지 비교할 함수예요. `true`를 반환하면 같다고 판단해요. 기본값은 얕은 동등성 비교예요.
+- `comparator?` (`(a: T, b: T) => boolean`): 두 요소가 같은지 비교할 함수예요. `true`를 반환하면 같다고 판단해요. 기본값은 얕은 동등성 비교예요.
 
 #### 반환 값
 

@@ -59,9 +59,9 @@ split(undefined);
 
 #### パラメータ
 
-- `string` (`string`, オプション): 分割する文字列です。デフォルトは空文字列です。
-- `separator` (`RegExp | string`, オプション): 分割の基準となる区切り文字です。
-- `limit` (`number`, オプション): 結果配列の最大長です。
+- `string?` (`string`): 分割する文字列です。デフォルトは空文字列です。
+- `separator?` (`RegExp | string`): 分割の基準となる区切り文字です。
+- `limit?` (`number`): 結果配列の最大長です。
 
 #### 戻り値
 

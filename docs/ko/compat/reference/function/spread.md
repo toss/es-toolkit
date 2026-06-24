@@ -53,7 +53,7 @@ modernAdd(...numbers); // 3 - 더 간단하고 빠름
 #### 파라미터
 
 - `func` (`Function`): 변환할 함수예요.
-- `argsIndex` (`number`, 선택): 배열 인수의 위치예요. 기본값은 `0`이에요.
+- `argsIndex?` (`number`): 배열 인수의 위치예요. 기본값은 `0`이에요.
 
 #### 반환 값
 

@@ -82,7 +82,7 @@ find(undefined, x => x > 0);
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要搜索的数组或对象。
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 搜索条件。可以使用函数、部分对象、属性-值对或属性名称。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。默认为 `0`。
+- `fromIndex?` (`number`): 开始搜索的索引。默认为 `0`。
 
 #### 返回值
 

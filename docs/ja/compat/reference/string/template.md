@@ -99,13 +99,13 @@ safeCompiled({ html: '<div>内容</div>' });
 #### パラメータ
 
 - `string` (`string`): テンプレート文字列です。
-- `options` (`object`, オプション): 設定オブジェクトです。
-  - `options.escape` (`RegExp`, オプション): HTML をエスケープする区切り文字の正規表現です。デフォルトは `<%-([\s\S]+?)%>` です。
-  - `options.evaluate` (`RegExp`, オプション): JavaScript コードを実行する区切り文字の正規表現です。デフォルトは `<%([\s\S]+?)%>` です。
-  - `options.interpolate` (`RegExp`, オプション): 値を挿入する区切り文字の正規表現です。デフォルトは `<%=([\s\S]+?)%>` です。
-  - `options.variable` (`string`, オプション): データオブジェクトの変数名です。
-  - `options.imports` (`object`, オプション): テンプレートで使用する関数です。
-  - `options.sourceURL` (`string`, オプション): デバッグ用のソース URL です。
+- `options?` (`object`): 設定オブジェクトです。
+  - `options.escape?` (`RegExp`): HTML をエスケープする区切り文字の正規表現です。デフォルトは `<%-([\s\S]+?)%>` です。
+  - `options.evaluate?` (`RegExp`): JavaScript コードを実行する区切り文字の正規表現です。デフォルトは `<%([\s\S]+?)%>` です。
+  - `options.interpolate?` (`RegExp`): 値を挿入する区切り文字の正規表現です。デフォルトは `<%=([\s\S]+?)%>` です。
+  - `options.variable?` (`string`): データオブジェクトの変数名です。
+  - `options.imports?` (`object`): テンプレートで使用する関数です。
+  - `options.sourceURL?` (`string`): デバッグ用のソース URL です。
 
 #### 戻り値
 

@@ -67,8 +67,8 @@ findLast(undefined, x => x > 0); // undefined
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 検索する配列またはオブジェクトです。
-- `predicate` (`ListIterateeCustom<T, boolean>`, オプション): 各要素に適用する条件です。関数、オブジェクト、キー値ペア、またはプロパティ名を使用できます。デフォルトは`identity`関数です。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の場合は末尾から計算します。デフォルトは配列の最後のインデックスです。
+- `predicate?` (`ListIterateeCustom<T, boolean>`): 各要素に適用する条件です。関数、オブジェクト、キー値ペア、またはプロパティ名を使用できます。デフォルトは`identity`関数です。
+- `fromIndex?` (`number`): 検索を開始するインデックスです。負の場合は末尾から計算します。デフォルトは配列の最後のインデックスです。
 
 #### 戻り値
 

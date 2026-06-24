@@ -49,9 +49,9 @@ endsWith('test', null);
 
 #### Parameters
 
-- `str` (`string`, optional): The string to search in.
-- `target` (`string`, optional): The string to search for at the end.
-- `position` (`number`, optional): The position to end the search. Defaults to the full length of the string.
+- `str?` (`string`): The string to search in.
+- `target?` (`string`): The string to search for at the end.
+- `position?` (`number`): The position to end the search. Defaults to the full length of the string.
 
 #### Returns
 

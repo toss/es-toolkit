@@ -94,7 +94,7 @@ inRange(3, false, 5);
 
 - `value` (`number`): The number to check if it's within the range.
 - `minimum` (`number`): The minimum value of the range (inclusive). If `maximum` is not provided, this value becomes the maximum.
-- `maximum` (`number`, optional): The maximum value of the range (exclusive).
+- `maximum?` (`number`): The maximum value of the range (exclusive).
 
 #### Returns
 

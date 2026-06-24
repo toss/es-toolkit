@@ -48,7 +48,7 @@ flattenDepth(undefined, 2); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
-- `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
+- `depth?` (`number`): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
 
 #### 반환 값
 

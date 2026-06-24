@@ -41,8 +41,8 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 
 - `array` (`readonly T[]`): 필터링할 배열이에요.
 - `predicate` (`(item: T, index: number, array: readonly T[]) => Promise<boolean>`): 각 요소를 검사하는 비동기 함수예요. 참으로 평가되는 값을 반환하면 해당 요소가 결과에 포함돼요.
-- `options` (`FilterAsyncOptions`, 선택): 동시 실행을 제어하는 옵션이에요.
-  - `concurrency` (`number`, 선택): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
+- `options?` (`FilterAsyncOptions`): 동시 실행을 제어하는 옵션이에요.
+  - `concurrency?` (`number`): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
 
 #### 반환 값
 

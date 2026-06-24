@@ -58,7 +58,7 @@ console.log(labelId); // => 'label_7'
 
 #### Parameters
 
-- `prefix` (`string`, optional): The prefix string to prepend to the ID. If not provided, returns only the number.
+- `prefix?` (`string`): The prefix string to prepend to the ID. If not provided, returns only the number.
 
 #### Returns
 

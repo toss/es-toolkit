@@ -71,7 +71,7 @@ castArray();
 
 #### Parameters
 
-- `value` (`T | readonly T[]`, optional): The value to convert to an array. If no argument is provided, returns an empty array.
+- `value?` (`T | readonly T[]`): The value to convert to an array. If no argument is provided, returns an empty array.
 
 #### Returns
 

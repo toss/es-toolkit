@@ -71,8 +71,8 @@ flatMapDepth(undefined, n => [n], 1); // => []
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): The array or object to iterate over.
-- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, optional): The transformation function or property name to execute for each element. Default is `identity`.
-- `depth` (`number`, optional): The maximum depth to flatten. Default is `1`.
+- `iteratee?` (`((value: T, index: number, collection: any) => any) | string | object`): The transformation function or property name to execute for each element. Default is `identity`.
+- `depth?` (`number`): The maximum depth to flatten. Default is `1`.
 
 #### Returns
 

@@ -109,11 +109,11 @@ try {
 #### 参数
 
 - `func` (`() => Promise<T>`): 要重试的异步函数。
-- `options` (`number | RetryOptions`, 可选): 重试次数或选项对象。
-  - `retries` (`number`, 可选): 重试次数。默认值为 `Infinity`,无限重试。
-  - `delay` (`number | (attempts: number) => number`, 可选): 重试间隔(毫秒)。可以使用数字或函数。默认值为 `0`。
-  - `signal` (`AbortSignal`, 可选): 可以取消重试的信号。
-  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 可选): 决定是否重试的函数。如果返回 `false`,则立即抛出错误。
+- `options?` (`number | RetryOptions`): 重试次数或选项对象。
+  - `retries?` (`number`): 重试次数。默认值为 `Infinity`,无限重试。
+  - `delay?` (`number | (attempts: number) => number`): 重试间隔(毫秒)。可以使用数字或函数。默认值为 `0`。
+  - `signal?` (`AbortSignal`): 可以取消重试的信号。
+  - `shouldRetry?` (`(error: unknown, attempt: number) => boolean`): 决定是否重试的函数。如果返回 `false`,则立即抛出错误。
     - `error`: 发生的错误对象。
     - `attempt`: 当前尝试次数 (从 0 开始)。
 

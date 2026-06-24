@@ -94,7 +94,7 @@ console.log(obj.inherited); // true (继承的)
 #### 参数
 
 - `prototype` (`T extends object`): 要继承的原型对象。
-- `properties` (`U extends object`, 可选): 要添加到新对象的属性。
+- `properties?` (`U extends object`): 要添加到新对象的属性。
 
 #### 返回值
 

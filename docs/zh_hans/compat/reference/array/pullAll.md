@@ -42,7 +42,7 @@ console.log(numbers); // [1, 2, 3]
 #### 参数
 
 - `array` (`T[]`): 要修改的数组。
-- `valuesToRemove` (`ArrayLike<T>`, 可选): 包含要从数组中删除的值的数组。默认为 `[]`。
+- `valuesToRemove?` (`ArrayLike<T>`): 包含要从数组中删除的值的数组。默认为 `[]`。
 
 #### 返回值
 

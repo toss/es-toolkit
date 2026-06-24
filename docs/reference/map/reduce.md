@@ -70,7 +70,7 @@ const config = reduce(settings, (acc, value, key) => ({ ...acc, [key]: value }),
 
 - `map` (`Map<K, V>`): The Map to reduce.
 - `callback` (`(accumulator: A, value: V, key: K, map: Map<K, V>) => A`): A function that processes each entry and updates the accumulator.
-- `initialValue` (`A`, optional): The initial value for the accumulator. If not provided, the first value in the Map is used.
+- `initialValue?` (`A`): The initial value for the accumulator. If not provided, the first value in the Map is used.
 
 #### Returns
 

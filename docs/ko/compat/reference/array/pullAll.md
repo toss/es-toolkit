@@ -42,7 +42,7 @@ console.log(numbers); // [1, 2, 3]
 #### 파라미터
 
 - `array` (`T[]`): 수정할 배열이에요.
-- `valuesToRemove` (`ArrayLike<T>`, 선택): 배열에서 제거할 값들을 담은 배열이에요. 기본값은 `[]`이에요.
+- `valuesToRemove?` (`ArrayLike<T>`): 배열에서 제거할 값들을 담은 배열이에요. 기본값은 `[]`이에요.
 
 #### 반환 값
 

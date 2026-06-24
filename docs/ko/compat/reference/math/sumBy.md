@@ -96,7 +96,7 @@ sumBy(undefined);
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 처리할 배열이에요.
-- `iteratee` (`((value: T) => number) | string`, 선택): 각 요소에 적용할 함수나 속성명이에요.
+- `iteratee?` (`((value: T) => number) | string`): 각 요소에 적용할 함수나 속성명이에요.
 
 #### 반환 값
 

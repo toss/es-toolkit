@@ -75,7 +75,7 @@ clamp(5, 2, NaN);
 
 - `number` (`number`): 要限制的数字。
 - `lower` (`number`): 最小值。如果只有第二个参数，则为最大值。
-- `upper` (`number`, 可选): 最大值。
+- `upper?` (`number`): 最大值。
 
 #### 返回值
 

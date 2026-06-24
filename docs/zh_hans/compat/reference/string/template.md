@@ -99,13 +99,13 @@ safeCompiled({ html: '<div>内容</div>' });
 #### 参数
 
 - `string` (`string`): 模板字符串。
-- `options` (`object`, 可选): 配置对象。
-  - `options.escape` (`RegExp`, 可选): 用于 HTML 转义的正则表达式分隔符。默认为 `<%-([\s\S]+?)%>`。
-  - `options.evaluate` (`RegExp`, 可选): 用于执行 JavaScript 代码的正则表达式分隔符。默认为 `<%([\s\S]+?)%>`。
-  - `options.interpolate` (`RegExp`, 可选): 用于值插入的正则表达式分隔符。默认为 `<%=([\s\S]+?)%>`。
-  - `options.variable` (`string`, 可选): 数据对象的变量名。
-  - `options.imports` (`object`, 可选): 模板中使用的函数。
-  - `options.sourceURL` (`string`, 可选): 用于调试的源 URL。
+- `options?` (`object`): 配置对象。
+  - `options.escape?` (`RegExp`): 用于 HTML 转义的正则表达式分隔符。默认为 `<%-([\s\S]+?)%>`。
+  - `options.evaluate?` (`RegExp`): 用于执行 JavaScript 代码的正则表达式分隔符。默认为 `<%([\s\S]+?)%>`。
+  - `options.interpolate?` (`RegExp`): 用于值插入的正则表达式分隔符。默认为 `<%=([\s\S]+?)%>`。
+  - `options.variable?` (`string`): 数据对象的变量名。
+  - `options.imports?` (`object`): 模板中使用的函数。
+  - `options.sourceURL?` (`string`): 用于调试的源 URL。
 
 #### 返回值
 

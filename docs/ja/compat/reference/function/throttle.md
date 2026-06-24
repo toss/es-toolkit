@@ -42,8 +42,8 @@ window.addEventListener('scroll', throttledScroll);
 #### パラメータ
 
 - `func` (`Function`): スロットリングする関数です。
-- `wait` (`number`, オプション): ミリ秒単位の待機時間です。デフォルト値は `0` です。
-- `options` (`ThrottleSettings`, オプション): スロットリングオプションです。
+- `wait?` (`number`): ミリ秒単位の待機時間です。デフォルト値は `0` です。
+- `options?` (`ThrottleSettings`): スロットリングオプションです。
   - `leading` (`boolean`): 最初の呼び出しですぐに実行するかどうかです。デフォルト値は `true` です。
   - `trailing` (`boolean`): 最後の呼び出し後に実行するかどうかです。デフォルト値は `true` です。
 

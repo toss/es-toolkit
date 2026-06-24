@@ -51,7 +51,7 @@ unescape(undefined); // ''
 
 #### 参数
 
-- `str` (`string`, 可选): 要反转义的字符串。
+- `str?` (`string`): 要反转义的字符串。
 
 #### 返回值
 

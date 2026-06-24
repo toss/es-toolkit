@@ -82,7 +82,7 @@ find(undefined, x => x > 0);
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 検索する配列またはオブジェクトです。
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 検索条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。デフォルトは `0` です。
+- `fromIndex?` (`number`): 検索を開始するインデックスです。デフォルトは `0` です。
 
 #### 戻り値
 

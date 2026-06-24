@@ -104,7 +104,7 @@ console.log(cloned.b.self === cloned); // true (circular reference preserved)
 #### Parameters
 
 - `value` (`T`): The value to deep clone.
-- `customizer` (`function`, optional): A function that determines how to copy. In the form `(value: any, key?: string, object?: any, stack?: Map<any, any>) => any`.
+- `customizer?` (`function`): A function that determines how to copy. In the form `(value: any, key?: string, object?: any, stack?: Map<any, any>) => any`.
 
 #### Returns
 

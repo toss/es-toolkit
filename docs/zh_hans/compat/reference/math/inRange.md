@@ -94,7 +94,7 @@ inRange(3, false, 5);
 
 - `value` (`number`): 要检查是否在范围内的数字。
 - `minimum` (`number`): 范围的最小值（包含）。如果没有 `maximum`，此值变为最大值。
-- `maximum` (`number`, 可选): 范围的最大值（不包含）。
+- `maximum?` (`number`): 范围的最大值（不包含）。
 
 #### 返回值
 

@@ -42,8 +42,8 @@ It's essential for performance when handling rapidly occurring events like scrol
 #### Parameters
 
 - `func` (`Function`): The function to throttle.
-- `wait` (`number`, optional): The wait time in milliseconds. Default is `0`.
-- `options` (`ThrottleSettings`, optional): Throttling options.
+- `wait?` (`number`): The wait time in milliseconds. Default is `0`.
+- `options?` (`ThrottleSettings`): Throttling options.
   - `leading` (`boolean`): Whether to execute on the first call. Default is `true`.
   - `trailing` (`boolean`): Whether to execute after the last call. Default is `true`.
 

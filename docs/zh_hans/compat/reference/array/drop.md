@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要删除元素的数组。
-- `itemsCount` (`number`, 可选): 要删除的元素数量。默认为 `1`。
+- `itemsCount?` (`number`): 要删除的元素数量。默认为 `1`。
 
 #### 返回值
 

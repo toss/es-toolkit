@@ -74,7 +74,7 @@ console.log(getObj() === obj); // true (같은 객체 참조)
 
 #### 파라미터
 
-- `value` (`T`, 선택): 함수가 반환할 값이에요. 제공하지 않으면 `undefined`를 반환해요.
+- `value?` (`T`): 함수가 반환할 값이에요. 제공하지 않으면 `undefined`를 반환해요.
 
 #### 반환 값
 

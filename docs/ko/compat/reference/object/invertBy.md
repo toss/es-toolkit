@@ -70,7 +70,7 @@ invertBy(undefined);
 #### 파라미터
 
 - `object` (`object`): 뒤바꿀 객체예요.
-- `iteratee` (`ValueIteratee`, 선택): 값을 변환하는 함수예요. 기본값은 값 자체를 그대로 사용하는 함수예요.
+- `iteratee?` (`ValueIteratee`): 값을 변환하는 함수예요. 기본값은 값 자체를 그대로 사용하는 함수예요.
 
 #### 반환 값
 

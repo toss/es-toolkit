@@ -62,7 +62,7 @@ min([-1, -5, -3]);
 
 #### 파라미터
 
-- `items` (`ArrayLike<T> | null | undefined`, 선택): 최솟값을 찾을 배열이에요.
+- `items?` (`ArrayLike<T> | null | undefined`): 최솟값을 찾을 배열이에요.
 
 #### 반환 값
 

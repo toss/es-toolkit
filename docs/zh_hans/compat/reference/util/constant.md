@@ -74,7 +74,7 @@ console.log(getObj() === obj); // true (相同的对象引用)
 
 #### 参数
 
-- `value` (`T`, 可选): 函数将返回的值。如果不提供，则返回 `undefined`。
+- `value?` (`T`): 函数将返回的值。如果不提供，则返回 `undefined`。
 
 #### 返回值
 

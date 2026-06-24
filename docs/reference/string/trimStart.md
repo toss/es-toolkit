@@ -43,7 +43,7 @@ trimStart('  __hello', ['_', ' ']); // 'hello'
 #### Parameters
 
 - `str` (`string`): The string to remove characters from the start.
-- `chars` (`string | string[]`, optional): The characters to remove. Can be a string or an array of characters. Defaults to whitespace characters.
+- `chars?` (`string | string[]`): The characters to remove. Can be a string or an array of characters. Defaults to whitespace characters.
 
 #### Returns
 

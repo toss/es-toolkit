@@ -70,7 +70,7 @@ every(undefined);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): The array or object to check.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to check. Can use a function, partial object, property-value pair, or property name. Defaults to the `identity` function.
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The condition to check. Can use a function, partial object, property-value pair, or property name. Defaults to the `identity` function.
 
 #### Returns
 

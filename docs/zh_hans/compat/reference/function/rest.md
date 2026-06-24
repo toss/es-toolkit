@@ -47,7 +47,7 @@ restProcess('update', 'user', 'name', 'John', 'age', 25);
 #### 参数
 
 - `func` (`Function`): 要转换的函数。
-- `start` (`number`, 可选): 开始将参数分组到数组中的索引。默认值为 `func.length - 1`。
+- `start?` (`number`): 开始将参数分组到数组中的索引。默认值为 `func.length - 1`。
 
 #### 返回值
 

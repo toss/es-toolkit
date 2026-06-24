@@ -109,11 +109,11 @@ try {
 #### Parameters
 
 - `func` (`() => Promise<T>`): The asynchronous function to retry.
-- `options` (`number | RetryOptions`, optional): The number of retries or options object.
-  - `retries` (`number`, optional): The number of times to retry. Defaults to `Infinity` for infinite retries.
-  - `delay` (`number | (attempts: number) => number`, optional): The retry interval (in milliseconds). Can be a number or a function. Defaults to `0`.
-  - `signal` (`AbortSignal`, optional): A signal that can cancel retries.
-  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, optional): A function that determines whether to retry. If it returns `false`, the error is thrown immediately.
+- `options?` (`number | RetryOptions`): The number of retries or options object.
+  - `retries?` (`number`): The number of times to retry. Defaults to `Infinity` for infinite retries.
+  - `delay?` (`number | (attempts: number) => number`): The retry interval (in milliseconds). Can be a number or a function. Defaults to `0`.
+  - `signal?` (`AbortSignal`): A signal that can cancel retries.
+  - `shouldRetry?` (`(error: unknown, attempt: number) => boolean`): A function that determines whether to retry. If it returns `false`, the error is thrown immediately.
     - `error`: The error object that occurred.
     - `attempt`: The current attempt count (starting from 0).
 

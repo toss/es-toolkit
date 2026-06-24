@@ -51,7 +51,7 @@ startCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to convert to start case.
+- `str?` (`string`): The string to convert to start case.
 
 #### Returns
 

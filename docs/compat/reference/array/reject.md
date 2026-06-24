@@ -61,7 +61,7 @@ reject(users, 'premium');
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The collection to iterate over.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to execute for each element. Defaults to `identity`.
+- `predicate?` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The condition to execute for each element. Defaults to `identity`.
 
 #### Returns
 

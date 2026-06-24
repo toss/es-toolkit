@@ -68,7 +68,7 @@ forEachRight([1, 2, 3, 4], value => {
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열, 또는 null/undefined일 수 있어요.
-- `callback` (`(item: any, index: any, arr: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
+- `callback?` (`(item: any, index: any, arr: any) => unknown`): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

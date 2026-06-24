@@ -63,7 +63,7 @@ console.log(result); // [11, 12, 13, 14, 15]
 #### Parameters
 
 - `func` (`F`): The function to partially apply arguments to.
-- `args` (`any[]`, optional): The arguments to pre-apply.
+- `args?` (`any[]`): The arguments to pre-apply.
 
 #### Returns
 

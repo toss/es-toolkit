@@ -66,9 +66,9 @@ controller.abort();
 
 - `func` (`F`): デバウンスされた関数を作成する関数。
 - `debounceMs`(`number`): デバウンスで遅延させるミリ秒。
-- `options` (`DebounceOptions`, オプション): オプションオブジェクト。
-  - `signal` (`AbortSignal`, オプション): デバウンスされた関数をキャンセルするためのオプションの `AbortSignal`。
-  - `edges` (`Array<'leading' | 'trailing'>`, オプション): 元の関数をいつ実行するかを示す配列。デフォルトは `['trailing']` です。
+- `options?` (`DebounceOptions`): オプションオブジェクト。
+  - `signal?` (`AbortSignal`): デバウンスされた関数をキャンセルするためのオプションの `AbortSignal`。
+  - `edges?` (`Array<'leading' | 'trailing'>`): 元の関数をいつ実行するかを示す配列。デフォルトは `['trailing']` です。
     - `'leading'` が含まれている場合、デバウンスされた関数が最初に呼び出されたときに即座に元の関数を実行します。
     - `'trailing'` が含まれている場合、最後のデバウンスされた関数の呼び出しから `debounceMs` ミリ秒が経過した後に元の関数を実行します。
     - `'leading'` と `'trailing'` の両方が含まれている場合、元の関数は遅延の開始時と終了時の両方で呼び出されます。ただし、両方の時点で呼び出されるためには、デバウンスされた関数が `debounceMs` ミリ秒の間に少なくとも2回呼び出される必要があります。デバウンスされた関数を1回呼び出して元の関数を2回呼び出すことはできません。

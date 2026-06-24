@@ -64,7 +64,7 @@ forIn(undefined, iteratee); // undefined
 #### Parameters
 
 - `object` (`T | null | undefined`): The object to iterate over.
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, optional): The function to invoke for each property. Defaults to the `identity` function.
+- `iteratee?` (`(value: T[keyof T], key: string, collection: T) => any`): The function to invoke for each property. Defaults to the `identity` function.
 
 #### Returns
 

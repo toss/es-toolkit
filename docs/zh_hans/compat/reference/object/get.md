@@ -58,7 +58,7 @@ get(undefined, ['a', 'b'], 'default');
 
 - `object` (`any`): 要查询的对象。
 - `path` (`PropertyPath`): 要获取的属性路径。可以表示为字符串、数字、符号或数组。
-- `defaultValue` (`any`, 可选): 当值为 `undefined` 时返回的默认值。
+- `defaultValue?` (`any`): 当值为 `undefined` 时返回的默认值。
 
 #### 返回值
 

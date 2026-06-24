@@ -47,8 +47,8 @@ const processedImages = await mapAsync(
 
 - `array` (`readonly T[]`): 변환할 배열이에요.
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<R>`): 각 요소를 변환하는 비동기 함수예요.
-- `options` (`MapAsyncOptions`, 선택): 동시 실행을 제어하는 옵션이에요.
-  - `concurrency` (`number`, 선택): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
+- `options?` (`MapAsyncOptions`): 동시 실행을 제어하는 옵션이에요.
+  - `concurrency?` (`number`): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
 
 #### 반환 값
 

@@ -67,7 +67,7 @@ isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status
 
 - `target` (`unknown`): 일치하는지 확인할 객체예요.
 - `source` (`unknown`): 일치 패턴이 되는 객체예요.
-- `customizer` (`function`, 선택): 비교 로직을 커스터마이징하는 함수예요. `true`, `false`, 또는 `undefined`를 반환해야 해요.
+- `customizer?` (`function`): 비교 로직을 커스터마이징하는 함수예요. `true`, `false`, 또는 `undefined`를 반환해야 해요.
 
 #### 반환 값
 

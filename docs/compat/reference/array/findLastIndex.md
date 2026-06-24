@@ -76,8 +76,8 @@ findLastIndex(undefined, n => n > 0); // -1
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to search.
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to test each element. Can be a function, partial object, property-value pair, or property name. Default is the identity function.
-- `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end of the array. Default is `array.length - 1`.
+- `predicate?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The condition to test each element. Can be a function, partial object, property-value pair, or property name. Default is the identity function.
+- `fromIndex?` (`number`): The index to start the search from. If negative, it's calculated from the end of the array. Default is `array.length - 1`.
 
 #### Returns
 

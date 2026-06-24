@@ -76,8 +76,8 @@ findLastIndex(undefined, n => n > 0); // -1
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 测试每个元素的条件。可以是函数、部分对象、属性值对或属性名。默认为恒等函数。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数,则从数组末尾开始计算。默认为 `array.length - 1`。
+- `predicate?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 测试每个元素的条件。可以是函数、部分对象、属性值对或属性名。默认为恒等函数。
+- `fromIndex?` (`number`): 开始搜索的索引。如果为负数,则从数组末尾开始计算。默认为 `array.length - 1`。
 
 #### 返回值
 

@@ -60,8 +60,8 @@ async function simulateNetworkRequest() {
 #### 参数
 
 - `ms` (`number`): 要延迟的毫秒数。
-- `options` (`DelayOptions`, 可选): 延迟选项。
-  - `signal` (`AbortSignal`, 可选): 可以取消延迟的 AbortSignal。
+- `options?` (`DelayOptions`): 延迟选项。
+  - `signal?` (`AbortSignal`): 可以取消延迟的 AbortSignal。
 
 #### 返回值
 

@@ -41,7 +41,7 @@ capitalize(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to capitalize.
+- `str?` (`string`): The string to capitalize.
 
 #### Returns
 

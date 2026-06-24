@@ -58,7 +58,7 @@ findLastKey({ a: 1, b: 2 }, value => value > 5);
 #### Parameters
 
 - `obj` (`T | null | undefined`): The object to search.
-- `predicate` (`ObjectIteratee<T>`, optional): The predicate to apply to each element. Can be a function, object, array, or string.
+- `predicate?` (`ObjectIteratee<T>`): The predicate to apply to each element. Can be a function, object, array, or string.
 
 #### Returns
 

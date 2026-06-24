@@ -58,7 +58,7 @@ console.log(labelId); // => 'label_7'
 
 #### 파라미터
 
-- `prefix` (`string`, 선택): ID 앞에 붙는 접두사 문자열. 제공하지 않으면 숫자만 반환해요.
+- `prefix?` (`string`): ID 앞에 붙는 접두사 문자열. 제공하지 않으면 숫자만 반환해요.
 
 #### 반환 값
 

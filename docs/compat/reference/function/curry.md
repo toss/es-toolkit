@@ -215,7 +215,7 @@ console.log(person2.city); // "Seoul"
 #### Parameters
 
 - `func` (`Function`): The function to curry.
-- `arity` (`number`, optional): The arity (number of arguments) of the function. If omitted, `func.length` is used.
+- `arity?` (`number`): The arity (number of arguments) of the function. If omitted, `func.length` is used.
 
 #### Returns
 

@@ -45,7 +45,7 @@ trim('  __hello__  ', ['_', ' ']); // 'hello'
 #### Parameters
 
 - `str` (`string`): The string to remove characters from the beginning and end.
-- `chars` (`string | string[]`, optional): The characters to remove. Can use a string or character array. Defaults to whitespace characters.
+- `chars?` (`string | string[]`): The characters to remove. Can use a string or character array. Defaults to whitespace characters.
 
 #### Returns
 

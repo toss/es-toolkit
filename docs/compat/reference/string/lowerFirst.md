@@ -41,7 +41,7 @@ lowerFirst(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to convert the first character to lowercase.
+- `str?` (`string`): The string to convert the first character to lowercase.
 
 #### Returns
 

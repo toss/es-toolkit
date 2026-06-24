@@ -72,13 +72,13 @@ await exec('sleep', ['10'], {
 #### 파라미터
 
 - `command` (`string`): 실행할 명령어예요.
-- `args` (`string[]`, 선택): 명령어에 전달할 인자들이에요. 기본값은 `[]`예요.
-- `options` (`ExecOptions`, 선택): 옵션 객체예요.
-  - `signal` (`AbortSignal`, 선택): 프로세스를 중단시키는 데 사용할 `AbortSignal`이에요.
-  - `timeout` (`number`, 선택): 밀리초 단위의 타임아웃이에요. 타임아웃이 만료되면 프로세스가 중단돼요.
-  - `stdin` (`string`, 선택): 프로세스의 stdin에 쓸 문자열이에요.
-  - `spawnOptions` (`SpawnOptions`, 선택): `child_process.spawn`에 그대로 전달되는 추가 옵션이에요.
-  - `throwOnNonZeroExitCode` (`boolean`, 선택): 프로세스가 0이 아닌 종료 코드로 종료되었을 때 `ExecError`를 던질지 여부예요. 기본값은 `true`예요.
+- `args?` (`string[]`): 명령어에 전달할 인자들이에요. 기본값은 `[]`예요.
+- `options?` (`ExecOptions`): 옵션 객체예요.
+  - `signal?` (`AbortSignal`): 프로세스를 중단시키는 데 사용할 `AbortSignal`이에요.
+  - `timeout?` (`number`): 밀리초 단위의 타임아웃이에요. 타임아웃이 만료되면 프로세스가 중단돼요.
+  - `stdin?` (`string`): 프로세스의 stdin에 쓸 문자열이에요.
+  - `spawnOptions?` (`SpawnOptions`): `child_process.spawn`에 그대로 전달되는 추가 옵션이에요.
+  - `throwOnNonZeroExitCode?` (`boolean`): 프로세스가 0이 아닌 종료 코드로 종료되었을 때 `ExecError`를 던질지 여부예요. 기본값은 `true`예요.
 
 #### 반환 값
 

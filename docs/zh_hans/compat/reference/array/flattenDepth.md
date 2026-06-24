@@ -48,7 +48,7 @@ flattenDepth(undefined, 2); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要展平的数组。
-- `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
+- `depth?` (`number`): 要展平的最大深度。默认为 `1`。
 
 #### 返回值
 

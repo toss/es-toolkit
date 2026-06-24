@@ -49,7 +49,7 @@ zipObjectDeep(undefined, [1, 2]); // {}
 #### Parameters
 
 - `keys` (`ArrayLike<PropertyPath> | null | undefined`): An array of property paths. Can use dot notation strings or property name arrays.
-- `values` (`ArrayLike<any>`, optional): An array of corresponding values. If not provided, treated as an empty array.
+- `values?` (`ArrayLike<any>`): An array of corresponding values. If not provided, treated as an empty array.
 
 #### Returns
 

@@ -55,7 +55,7 @@ const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()]
 
 - `set` (`Set<T>`): 줄일 Set이에요.
 - `callback` (`(accumulator: A, value: T, value2: T, set: Set<T>) => A`): 각 요소를 처리하고 누산기를 업데이트하는 함수예요.
-- `initialValue` (`A`, 선택): 누산기의 초기값이에요. 제공되지 않으면 Set의 첫 번째 요소를 사용해요.
+- `initialValue?` (`A`): 누산기의 초기값이에요. 제공되지 않으면 Set의 첫 번째 요소를 사용해요.
 
 #### 반환 값
 

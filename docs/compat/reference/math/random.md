@@ -88,7 +88,7 @@ random(5, 5, guard);
 
 #### Parameters
 
-- `floating` (`boolean`, optional): Whether to return a decimal. Default is `true`.
+- `floating?` (`boolean`): Whether to return a decimal. Default is `true`.
 - `max` (`number`): The maximum value of the range (exclusive).
 - `min` (`number`): The minimum value of the range (inclusive).
 - `index` (`string | number`): The key to check in the guard object.

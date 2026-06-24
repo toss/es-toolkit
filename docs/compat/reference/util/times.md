@@ -36,7 +36,7 @@ times(3);
 #### Parameters
 
 - `n` (`number`): The number of times to iterate. Converted to an integer. Returns an empty array if less than 1 or not a safe integer.
-- `iteratee` (`(num: number) => T`, optional): The function to execute for each iteration. Receives the index as an argument. If not provided, returns the index as is.
+- `iteratee?` (`(num: number) => T`): The function to execute for each iteration. Receives the index as an argument. If not provided, returns the index as is.
 
 #### Returns
 

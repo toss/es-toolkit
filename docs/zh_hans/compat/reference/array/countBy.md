@@ -81,7 +81,7 @@ countBy(undefined);
 #### 参数
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): 要处理的数组或对象。
-- `iteratee` (`ValueIteratee<T>`, 可选): 决定每个元素分组标准的函数。可以使用函数、属性名或部分对象。
+- `iteratee?` (`ValueIteratee<T>`): 决定每个元素分组标准的函数。可以使用函数、属性名或部分对象。
 
 #### 返回值
 

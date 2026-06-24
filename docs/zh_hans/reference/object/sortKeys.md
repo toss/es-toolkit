@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### 参数
 
 - `object` (`T`): 要排序键的对象。
-- `compareKeys` (`(a: string, b: string) => number`, 可选): 用于排序键的自定义比较函数。默认为字母顺序。
+- `compareKeys?` (`(a: string, b: string) => number`): 用于排序键的自定义比较函数。默认为字母顺序。
 
 #### 返回值
 

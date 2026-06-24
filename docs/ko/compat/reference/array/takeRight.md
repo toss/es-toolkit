@@ -56,7 +56,7 @@ takeRight(undefined, 2); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 가져올 배열이에요.
-- `count` (`number`, 선택): 가져올 요소의 개수예요. 기본값은 `1`이에요.
+- `count?` (`number`): 가져올 요소의 개수예요. 기본값은 `1`이에요.
 
 #### 반환 값
 

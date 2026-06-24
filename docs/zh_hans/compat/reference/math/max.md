@@ -62,7 +62,7 @@ max([0, -2, 5, -10]);
 
 #### 参数
 
-- `items` (`ArrayLike<T> | null | undefined`, 可选): 要查找最大值的数组。
+- `items?` (`ArrayLike<T> | null | undefined`): 要查找最大值的数组。
 
 #### 返回值
 

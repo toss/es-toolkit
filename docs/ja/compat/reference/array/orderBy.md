@@ -74,8 +74,8 @@ orderBy(undefined, 'age'); // []
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): ソートする配列またはオブジェクトです。
-- `criteria` (`Criterion<T> | Array<Criterion<T>>`, オプション): ソート条件です。プロパティ名、プロパティパス、関数などを使用できます。デフォルトは `[null]` です。
-- `orders` (`unknown | unknown[]`, オプション): 各条件のソート順です。`'asc'`(昇順)、`'desc'`(降順)、`true`(昇順)、`false`(降順)を使用できます。デフォルトは `[]` です。
+- `criteria?` (`Criterion<T> | Array<Criterion<T>>`): ソート条件です。プロパティ名、プロパティパス、関数などを使用できます。デフォルトは `[null]` です。
+- `orders?` (`unknown | unknown[]`): 各条件のソート順です。`'asc'`(昇順)、`'desc'`(降順)、`true`(昇順)、`false`(降順)を使用できます。デフォルトは `[]` です。
 
 #### 戻り値
 

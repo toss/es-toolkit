@@ -56,7 +56,7 @@ mapKeys(undefined, iteratee); // {}
 #### 参数
 
 - `object` (`ArrayLike<T> | T | null | undefined`): 要转换键的对象或数组。
-- `iteratee` (`ListIteratee<T> | ObjectIteratee<T>`, 可选): 用于转换每个键的函数。默认为 `identity` 函数。
+- `iteratee?` (`ListIteratee<T> | ObjectIteratee<T>`): 用于转换每个键的函数。默认为 `identity` 函数。
 
 #### 返回值
 

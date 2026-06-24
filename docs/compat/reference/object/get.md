@@ -58,7 +58,7 @@ get(undefined, ['a', 'b'], 'default');
 
 - `object` (`any`): The object to query.
 - `path` (`PropertyPath`): The path of the property to get. Can be represented as a string, number, symbol, or array.
-- `defaultValue` (`any`, optional): The default value to return when the value is `undefined`.
+- `defaultValue?` (`any`): The default value to return when the value is `undefined`.
 
 #### Returns
 

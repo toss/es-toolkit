@@ -50,9 +50,9 @@ padStart(undefined, 3);
 
 #### Parameters
 
-- `str` (`string`, optional): The string to add padding to.
-- `length` (`number`, optional): The desired final string length. Defaults to `0`.
-- `chars` (`string`, optional): The character to use for padding. Defaults to `' '` (space).
+- `str?` (`string`): The string to add padding to.
+- `length?` (`number`): The desired final string length. Defaults to `0`.
+- `chars?` (`string`): The character to use for padding. Defaults to `' '` (space).
 
 #### Returns
 

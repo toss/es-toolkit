@@ -90,7 +90,7 @@ const cloned = cloneWith(obj, value => {
 #### Parameters
 
 - `value` (`T`): The value to clone.
-- `customizer` (`function`, optional): A function that determines how to copy. In the form `(value: any) => any`.
+- `customizer?` (`function`): A function that determines how to copy. In the form `(value: any) => any`.
 
 #### Returns
 

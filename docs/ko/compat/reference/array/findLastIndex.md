@@ -76,8 +76,8 @@ findLastIndex(undefined, n => n > 0); // -1
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 또는 프로퍼티 이름을 사용할 수 있어요. 기본값은 항등 함수예요.
-- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수면 배열의 끝에서부터 계산해요. 기본값은 `array.length - 1`이에요.
+- `predicate?` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 또는 프로퍼티 이름을 사용할 수 있어요. 기본값은 항등 함수예요.
+- `fromIndex?` (`number`): 검색을 시작할 인덱스예요. 음수면 배열의 끝에서부터 계산해요. 기본값은 `array.length - 1`이에요.
 
 #### 반환 값
 

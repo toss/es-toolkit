@@ -71,8 +71,8 @@ flatMapDepth(undefined, n => [n], 1); // => []
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): 순회할 배열이나 객체예요.
-- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, 선택): 각 요소에 대해 실행할 변환 함수나 속성명이에요. 기본값은 `identity`예요.
-- `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
+- `iteratee?` (`((value: T, index: number, collection: any) => any) | string | object`): 각 요소에 대해 실행할 변환 함수나 속성명이에요. 기본값은 `identity`예요.
+- `depth?` (`number`): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
 
 #### 반환 값
 

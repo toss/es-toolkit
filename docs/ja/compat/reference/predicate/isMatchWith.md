@@ -67,7 +67,7 @@ isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status
 
 - `target` (`unknown`): 一致するかどうかを確認するオブジェクトです。
 - `source` (`unknown`): 一致パターンとなるオブジェクトです。
-- `customizer` (`function`, オプション): 比較ロジックをカスタマイズする関数です。`true`、`false`、または `undefined` を返す必要があります。
+- `customizer?` (`function`): 比較ロジックをカスタマイズする関数です。`true`、`false`、または `undefined` を返す必要があります。
 
 #### 戻り値
 

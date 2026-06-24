@@ -47,8 +47,8 @@ trimEnd(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to trim from the end.
-- `chars` (`string`, optional): The characters to remove. If not specified, whitespace will be removed.
+- `str?` (`string`): The string to trim from the end.
+- `chars?` (`string`): The characters to remove. If not specified, whitespace will be removed.
 
 #### Returns
 

@@ -47,7 +47,7 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 #### 参数
 
-- `message` (`string`, 可选): 错误消息。默认为 `'The operation was timed out'`。
+- `message?` (`string`): 错误消息。默认为 `'The operation was timed out'`。
 
 #### 返回值
 

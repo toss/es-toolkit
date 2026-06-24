@@ -100,7 +100,7 @@ setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
 - `object` (`T`): 値を設定するオブジェクト。
 - `path` (`PropertyPath`): 値を設定するプロパティのパス。
 - `value` (`any`): 設定する値。
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, オプション): 中間オブジェクトの作成をカスタマイズする関数。
+- `customizer?` (`(nsValue: any, key: string, nsObject: T) => any`): 中間オブジェクトの作成をカスタマイズする関数。
 
 #### 戻り値
 

@@ -84,9 +84,9 @@ const memoizedWithCustomCache = memoize(expensiveFunction, {
 #### Parameters
 
 - `func` (`F`): The function to memoize. It must accept only one argument.
-- `options` (object, optional): Memoization configuration options.
-  - `cache` (`MemoizeCache<any, ReturnType<F>>`, optional): The cache object to store results. Defaults to a new `Map`.
-  - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, optional): A function to generate cache keys. Required when using non-primitive values as arguments.
+- `options?` (object): Memoization configuration options.
+  - `cache?` (`MemoizeCache<any, ReturnType<F>>`): The cache object to store results. Defaults to a new `Map`.
+  - `getCacheKey?` (`(arg: Parameters<F>[0]) => unknown`): A function to generate cache keys. Required when using non-primitive values as arguments.
 
 #### Returns
 

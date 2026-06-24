@@ -53,7 +53,7 @@ console.log(result); // undefined
 
 - `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 要迭代的数组或对象。
 - `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 对每个元素调用的函数。它接收累积值、当前值、索引/键和原始数组/对象。
-- `initialValue` (`any`, 可选): 累加器的初始值。如果未提供,第一个元素将成为初始值。
+- `initialValue?` (`any`): 累加器的初始值。如果未提供,第一个元素将成为初始值。
 
 #### 返回值
 

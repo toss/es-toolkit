@@ -59,9 +59,9 @@ split(undefined);
 
 #### 파라미터
 
-- `string` (`string`, 선택): 나눌 문자열이에요. 기본값은 빈 문자열이에요.
-- `separator` (`RegExp | string`, 선택): 나누는 기준이 되는 구분자예요.
-- `limit` (`number`, 선택): 결과 배열의 최대 길이예요.
+- `string?` (`string`): 나눌 문자열이에요. 기본값은 빈 문자열이에요.
+- `separator?` (`RegExp | string`): 나누는 기준이 되는 구분자예요.
+- `limit?` (`number`): 결과 배열의 최대 길이예요.
 
 #### 반환 값
 

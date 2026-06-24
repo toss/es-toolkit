@@ -56,7 +56,7 @@ toUpper();
 
 #### 参数
 
-- `value` (`unknown`, 可选): 要转换为大写的值。
+- `value?` (`unknown`): 要转换为大写的值。
 
 #### 返回值
 

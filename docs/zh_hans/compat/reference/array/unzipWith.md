@@ -77,7 +77,7 @@ unzipWith([], (a, b) => a + b); // []
 #### 参数
 
 - `array` (`ArrayLike<ArrayLike<T>> | null | undefined`): 要解压的嵌套数组。
-- `iteratee` (`(...values: T[]) => R`, 可选): 要应用于每组元素的转换函数。如果未提供,执行默认的 `unzip` 操作。
+- `iteratee?` (`(...values: T[]) => R`): 要应用于每组元素的转换函数。如果未提供,执行默认的 `unzip` 操作。
 
 #### 返回值
 

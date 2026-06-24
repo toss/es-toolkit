@@ -53,7 +53,7 @@ lastIndexOf(undefined, 1); // -1
 
 - `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
 - `searchElement` (`T`): 要查找的元素。
-- `fromIndex` (`true | number`, 可选): 开始搜索的索引。传递`true`从数组末尾开始搜索。默认值为`array.length - 1`。
+- `fromIndex?` (`true | number`): 开始搜索的索引。传递`true`从数组末尾开始搜索。默认值为`array.length - 1`。
 
 #### 返回值
 

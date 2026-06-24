@@ -38,8 +38,8 @@ pullAllBy(null as any, [1, 2], x => x); // null
 #### Parameters
 
 - `array` (`T[]`): The array to modify.
-- `values` (`ArrayLike<T>`, optional): The array of values to remove.
-- `iteratee` (`ValueIteratee<T>`, optional): The iteratee function to apply to each element. You can use a property name, partial object, or function.
+- `values?` (`ArrayLike<T>`): The array of values to remove.
+- `iteratee?` (`ValueIteratee<T>`): The iteratee function to apply to each element. You can use a property name, partial object, or function.
 
 #### Returns
 

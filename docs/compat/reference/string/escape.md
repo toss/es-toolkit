@@ -41,7 +41,7 @@ escape(undefined); // ''
 
 #### Parameters
 
-- `str` (`string`, optional): The string to escape HTML special characters.
+- `str?` (`string`): The string to escape HTML special characters.
 
 #### Returns
 

@@ -72,7 +72,7 @@ round(-1234, -2);
 #### Parameters
 
 - `number` (`number`): The number to round.
-- `precision` (`number`, optional): The number of decimal places to round to. Default is `0`.
+- `precision?` (`number`): The number of decimal places to round to. Default is `0`.
 
 #### Returns
 

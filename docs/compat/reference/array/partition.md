@@ -82,7 +82,7 @@ partition(undefined, 'active'); // [[], []]
 #### Parameters
 
 - `collection` (`ArrayLike<T> | T | null | undefined`): The array or object to partition.
-- `predicate` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`, optional): The condition to test each element. Can be a function, partial object, property-value array, or property name. Defaults to `identity`.
+- `predicate?` (`((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey`): The condition to test each element. Can be a function, partial object, property-value array, or property name. Defaults to `identity`.
 
 #### Returns
 

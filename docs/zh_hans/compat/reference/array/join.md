@@ -62,7 +62,7 @@ join(undefined, '-'); // => ""
 
 :::
 
-- `separator` (`string`, 可选) - 用于连接元素的分隔符。默认值为 `,`。
+- `separator?` (`string`) - 用于连接元素的分隔符。默认值为 `,`。
 
 #### 返回值
 

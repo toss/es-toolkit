@@ -47,7 +47,7 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 #### 파라미터
 
-- `message` (`string`, 선택): 에러 메시지예요. 기본값은 `'The operation was timed out'`예요.
+- `message?` (`string`): 에러 메시지예요. 기본값은 `'The operation was timed out'`예요.
 
 #### 반환 값
 

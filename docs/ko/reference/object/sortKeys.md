@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### 파라미터
 
 - `object` (`T`): 키를 정렬할 객체예요.
-- `compareKeys` (`(a: string, b: string) => number`, 선택): 키 정렬에 사용할 커스텀 비교 함수예요. 기본값은 알파벳순이에요.
+- `compareKeys?` (`(a: string, b: string) => number`): 키 정렬에 사용할 커스텀 비교 함수예요. 기본값은 알파벳순이에요.
 
 #### 반환 값
 

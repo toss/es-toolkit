@@ -85,7 +85,7 @@ const calculatedValue = result(calculator, 'compute');
 
 - `object` (`any`): The object to query.
 - `path` (`PropertyPath`): The path of the property to get. Can be a string, array, or array of keys.
-- `defaultValue` (`R | ((...args: any[]) => R)`, optional): The default value to return if the value is `undefined`. If it's a function, it calls and returns the result.
+- `defaultValue?` (`R | ((...args: any[]) => R)`): The default value to return if the value is `undefined`. If it's a function, it calls and returns the result.
 
 #### Returns
 

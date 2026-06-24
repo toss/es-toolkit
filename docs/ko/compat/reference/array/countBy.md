@@ -81,7 +81,7 @@ countBy(undefined);
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | object | null | undefined`): 처리할 배열이나 객체예요.
-- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소를 그룹화할 기준을 정하는 함수예요. 함수, 프로퍼티 이름, 또는 부분 객체를 사용할 수 있어요.
+- `iteratee?` (`ValueIteratee<T>`): 각 요소를 그룹화할 기준을 정하는 함수예요. 함수, 프로퍼티 이름, 또는 부분 객체를 사용할 수 있어요.
 
 #### 반환 값
 

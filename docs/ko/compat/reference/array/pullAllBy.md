@@ -38,8 +38,8 @@ pullAllBy(null as any, [1, 2], x => x); // null
 #### 파라미터
 
 - `array` (`T[]`): 변경할 배열이에요.
-- `values` (`ArrayLike<T>`, 선택): 제거할 값들의 배열이에요.
-- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 iteratee 함수예요. 속성 이름, 부분 객체, 또는 함수를 사용할 수 있어요.
+- `values?` (`ArrayLike<T>`): 제거할 값들의 배열이에요.
+- `iteratee?` (`ValueIteratee<T>`): 각 요소에 적용할 iteratee 함수예요. 속성 이름, 부분 객체, 또는 함수를 사용할 수 있어요.
 
 #### 반환 값
 

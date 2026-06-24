@@ -118,8 +118,8 @@ console.log(result);
 #### 参数
 
 - `object` (`object`): 要扁平化的对象。
-- `options` (`FlattenObjectOptions`, 可选): 扁平化选项。
-  - `delimiter` (`string`, 可选): 用于连接嵌套键的分隔符。默认为 `'.'`。
+- `options?` (`FlattenObjectOptions`): 扁平化选项。
+  - `delimiter?` (`string`): 用于连接嵌套键的分隔符。默认为 `'.'`。
 
 #### 返回值
 

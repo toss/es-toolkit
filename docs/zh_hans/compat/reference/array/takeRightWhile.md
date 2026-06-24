@@ -64,7 +64,7 @@ takeRightWhile(undefined, x => x > 0); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要处理的数组。
-- `predicate` (`ListIteratee<T>`, 可选): 对每个元素执行的条件。可以是函数、部分对象、属性-值数组或属性名。默认值为恒等函数。
+- `predicate?` (`ListIteratee<T>`): 对每个元素执行的条件。可以是函数、部分对象、属性-值数组或属性名。默认值为恒等函数。
 
 #### 返回值
 

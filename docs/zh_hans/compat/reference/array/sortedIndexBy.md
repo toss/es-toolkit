@@ -52,7 +52,7 @@ sortedIndexBy(undefined, { x: 1 }, 'x'); // 0
 
 - `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。使用未排序的数组可能会产生错误的结果。
 - `value` (`T`): 要插入的值。
-- `iteratee` (可选): 要应用于每个元素和值的转换函数、属性名称或属性值数组。
+- `iteratee?`: 要应用于每个元素和值的转换函数、属性名称或属性值数组。
 
 #### 返回值
 

@@ -56,7 +56,7 @@ nth(undefined, 0); // undefined
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 가져올 배열이에요.
-- `index` (`number`, 선택): 가져올 요소의 인덱스예요. 음수면 끝에서부터 계산해요. 기본값은 `0`이에요.
+- `index?` (`number`): 가져올 요소의 인덱스예요. 음수면 끝에서부터 계산해요. 기본값은 `0`이에요.
 
 #### 반환 값
 

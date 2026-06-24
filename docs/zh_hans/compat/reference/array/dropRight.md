@@ -48,7 +48,7 @@ dropRight(undefined, 2); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要删除元素的数组。
-- `itemsCount` (`number`, 可选): 要从数组末尾删除的元素数量。默认为 `1`。
+- `itemsCount?` (`number`): 要从数组末尾删除的元素数量。默认为 `1`。
 
 #### 返回值
 

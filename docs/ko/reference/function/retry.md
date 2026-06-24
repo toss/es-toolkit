@@ -109,11 +109,11 @@ try {
 #### 파라미터
 
 - `func` (`() => Promise<T>`): 재시도할 비동기 함수예요.
-- `options` (`number | RetryOptions`, 선택): 재시도 횟수나 옵션 객체예요.
-  - `retries` (`number`, 선택): 재시도할 횟수예요. 기본값은 `Infinity`로 무한 재시도해요.
-  - `delay` (`number | (attempts: number) => number`, 선택): 재시도 간격(밀리초)이에요. 숫자나 함수를 사용할 수 있어요. 기본값은 `0`이에요.
-  - `signal` (`AbortSignal`, 선택): 재시도를 취소할 수 있는 시그널이에요.
-  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 선택): 재시도 여부를 결정하는 함수예요. `false`를 반환하면 즉시 에러를 던져요.
+- `options?` (`number | RetryOptions`): 재시도 횟수나 옵션 객체예요.
+  - `retries?` (`number`): 재시도할 횟수예요. 기본값은 `Infinity`로 무한 재시도해요.
+  - `delay?` (`number | (attempts: number) => number`): 재시도 간격(밀리초)이에요. 숫자나 함수를 사용할 수 있어요. 기본값은 `0`이에요.
+  - `signal?` (`AbortSignal`): 재시도를 취소할 수 있는 시그널이에요.
+  - `shouldRetry?` (`(error: unknown, attempt: number) => boolean`): 재시도 여부를 결정하는 함수예요. `false`를 반환하면 즉시 에러를 던져요.
     - `error`: 발생한 에러 객체예요.
     - `attempt`: 현재 시도 횟수예요 (0부터 시작).
 

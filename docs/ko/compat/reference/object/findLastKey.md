@@ -58,7 +58,7 @@ findLastKey({ a: 1, b: 2 }, value => value > 5);
 #### 파라미터
 
 - `obj` (`T | null | undefined`): 검색할 객체예요.
-- `predicate` (`ObjectIteratee<T>`, 선택): 각 요소에 적용할 조건이에요. 함수, 객체, 배열, 문자열이 될 수 있어요.
+- `predicate?` (`ObjectIteratee<T>`): 각 요소에 적용할 조건이에요. 함수, 객체, 배열, 문자열이 될 수 있어요.
 
 #### 반환 값
 

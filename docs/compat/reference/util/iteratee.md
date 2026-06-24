@@ -63,7 +63,7 @@ Actions based on argument type:
 
 #### Parameters
 
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, optional): The value to convert to an iteratee. Default is `null`.
+- `value?` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`): The value to convert to an iteratee. Default is `null`.
 
 #### Returns
 

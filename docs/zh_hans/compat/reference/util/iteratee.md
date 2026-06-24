@@ -63,7 +63,7 @@ const identity = iteratee();
 
 #### 参数
 
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, 可选): 要转换为迭代器的值。默认值为 `null`。
+- `value?` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`): 要转换为迭代器的值。默认值为 `null`。
 
 #### 返回值
 

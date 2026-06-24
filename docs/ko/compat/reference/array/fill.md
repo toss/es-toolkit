@@ -74,8 +74,8 @@ fill('abc', 'x');
 
 - `array` (`ArrayLike<T> | null | undefined`): 채울 배열이에요.
 - `value` (`U`): 배열을 채울 값이에요.
-- `start` (`number`, 선택): 시작 위치예요. 기본값은 `0`이에요.
-- `end` (`number`, 선택): 끝 위치예요 (포함되지 않음). 기본값은 `array.length`예요.
+- `start?` (`number`): 시작 위치예요. 기본값은 `0`이에요.
+- `end?` (`number`): 끝 위치예요 (포함되지 않음). 기본값은 `array.length`예요.
 
 #### 반환 값
 

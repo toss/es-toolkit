@@ -88,7 +88,7 @@ random(5, 5, guard);
 
 #### 파라미터
 
-- `floating` (`boolean`, 선택): 소수를 반환할지 정해요. 기본값은 `true`예요.
+- `floating?` (`boolean`): 소수를 반환할지 정해요. 기본값은 `true`예요.
 - `max` (`number`): 범위의 최댓값이에요 (포함되지 않음).
 - `min` (`number`): 범위의 최솟값이에요 (포함).
 - `index` (`string | number`): guard 객체에서 확인할 키예요.

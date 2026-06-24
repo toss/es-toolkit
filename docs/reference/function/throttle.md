@@ -91,9 +91,9 @@ throttledFunc.cancel();
 
 - `func` (`F`): The function to throttle.
 - `throttleMs` (`number`): The time interval (in milliseconds) to throttle execution.
-- `options` (`ThrottleOptions`, optional): Additional options.
-  - `signal` (`AbortSignal`, optional): A signal that can cancel function execution.
-  - `edges` (`Array<'leading' | 'trailing'>`, optional): Determines when to execute the function. Defaults to `['leading', 'trailing']`.
+- `options?` (`ThrottleOptions`): Additional options.
+  - `signal?` (`AbortSignal`): A signal that can cancel function execution.
+  - `edges?` (`Array<'leading' | 'trailing'>`): Determines when to execute the function. Defaults to `['leading', 'trailing']`.
 
 #### Returns
 

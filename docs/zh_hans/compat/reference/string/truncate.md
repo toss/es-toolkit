@@ -70,11 +70,11 @@ truncate('¥§✈✉🤓', { length: 4, omission: '…' });
 
 #### 参数
 
-- `string` (`string`, 可选): 要截断的字符串。
-- `options` (`object`, 可选): 选项对象。
-  - `options.length` (`number`, 可选): 最大字符串长度。默认值为 `30`。
-  - `options.omission` (`string`, 可选): 表示文本被省略的字符串。默认值为 `'...'`。
-  - `options.separator` (`RegExp | string`, 可选): 决定截断位置的分隔符模式。
+- `string?` (`string`): 要截断的字符串。
+- `options?` (`object`): 选项对象。
+  - `options.length?` (`number`): 最大字符串长度。默认值为 `30`。
+  - `options.omission?` (`string`): 表示文本被省略的字符串。默认值为 `'...'`。
+  - `options.separator?` (`RegExp | string`): 决定截断位置的分隔符模式。
 
 #### 返回值
 

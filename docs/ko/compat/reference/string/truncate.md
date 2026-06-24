@@ -70,11 +70,11 @@ truncate('¥§✈✉🤓', { length: 4, omission: '…' });
 
 #### 파라미터
 
-- `string` (`string`, 선택): 자를 문자열이에요.
-- `options` (`object`, 선택): 설정 객체예요.
-  - `options.length` (`number`, 선택): 최대 문자열 길이예요. 기본값은 `30`이에요.
-  - `options.omission` (`string`, 선택): 생략을 나타내는 문자열이에요. 기본값은 `'...'`이에요.
-  - `options.separator` (`RegExp | string`, 선택): 자를 위치를 결정하는 구분자예요.
+- `string?` (`string`): 자를 문자열이에요.
+- `options?` (`object`): 설정 객체예요.
+  - `options.length?` (`number`): 최대 문자열 길이예요. 기본값은 `30`이에요.
+  - `options.omission?` (`string`): 생략을 나타내는 문자열이에요. 기본값은 `'...'`이에요.
+  - `options.separator?` (`RegExp | string`): 자를 위치를 결정하는 구분자예요.
 
 #### 반환 값
 

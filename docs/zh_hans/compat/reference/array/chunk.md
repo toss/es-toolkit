@@ -63,7 +63,7 @@ chunk([1, 2, 3], -1);
 #### 参数
 
 - `arr` (`ArrayLike<T> | null | undefined`): 要划分的数组。
-- `size` (`number`, 可选): 每个较小数组的大小。默认值为 `1`。
+- `size?` (`number`): 每个较小数组的大小。默认值为 `1`。
 
 #### 返回值
 

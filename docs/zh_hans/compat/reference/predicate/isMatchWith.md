@@ -67,7 +67,7 @@ isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status
 
 - `target` (`unknown`): 要检查是否匹配的对象。
 - `source` (`unknown`): 作为匹配模式的对象。
-- `customizer` (`function`, 可选): 自定义比较逻辑的函数。应该返回 `true`、`false` 或 `undefined`。
+- `customizer?` (`function`): 自定义比较逻辑的函数。应该返回 `true`、`false` 或 `undefined`。
 
 #### 返回值
 

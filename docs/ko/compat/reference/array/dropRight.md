@@ -48,7 +48,7 @@ dropRight(undefined, 2); // []
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
-- `itemsCount` (`number`, 선택): 배열의 끝에서부터 제거할 요소의 개수예요. 기본값은 `1`이에요.
+- `itemsCount?` (`number`): 배열의 끝에서부터 제거할 요소의 개수예요. 기본값은 `1`이에요.
 
 #### 반환 값
 

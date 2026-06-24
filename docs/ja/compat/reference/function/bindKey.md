@@ -82,7 +82,7 @@ bound(20, 30);
 
 - `object` (`object`): メソッドを呼び出すオブジェクトです。
 - `key` (`string`): 呼び出すメソッドのキーです。
-- `...partialArgs` (`any[]`, オプション): メソッドに事前に渡す引数です。`bindKey.placeholder` を使用して引数の位置を予約できます。
+- `...partialArgs?` (`any[]`): メソッドに事前に渡す引数です。`bindKey.placeholder` を使用して引数の位置を予約できます。
 
 #### 戻り値
 

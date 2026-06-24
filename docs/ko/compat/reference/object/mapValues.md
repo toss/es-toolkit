@@ -64,7 +64,7 @@ mapValues(undefined, iteratee); // {}
 #### 파라미터
 
 - `object` (`string | T[] | T | null | undefined`): 값을 변환할 객체, 배열, 또는 문자열이에요.
-- `iteratee` (`ValueIteratee<any>`, 선택): 각 값을 변환할 함수, 속성 경로, 또는 매칭 객체예요. 기본값은 `identity` 함수예요.
+- `iteratee?` (`ValueIteratee<any>`): 각 값을 변환할 함수, 속성 경로, 또는 매칭 객체예요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

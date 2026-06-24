@@ -118,8 +118,8 @@ console.log(result);
 #### Parameters
 
 - `object` (`object`): The object to flatten.
-- `options` (`FlattenObjectOptions`, optional): Flattening options.
-  - `delimiter` (`string`, optional): The delimiter to connect nested keys. Defaults to `'.'`.
+- `options?` (`FlattenObjectOptions`): Flattening options.
+  - `delimiter?` (`string`): The delimiter to connect nested keys. Defaults to `'.'`.
 
 #### Returns
 

@@ -82,8 +82,8 @@ const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
 
 - `run` (`() => Promise<T>`): 실행할 비동기 함수예요.
 - `ms` (`number`): 타임아웃이 발생하기까지의 밀리초 단위 시간이에요.
-- `options` (`WithTimeoutOptions`, 선택): 타임아웃 옵션이에요.
-  - `signal` (`AbortSignal`, 선택): 타임아웃을 취소할 수 있는 AbortSignal이에요. 중단되면 시간 제한이 해제되고 `run`이 마감 시간 없이 기다려져요.
+- `options?` (`WithTimeoutOptions`): 타임아웃 옵션이에요.
+  - `signal?` (`AbortSignal`): 타임아웃을 취소할 수 있는 AbortSignal이에요. 중단되면 시간 제한이 해제되고 `run`이 마감 시간 없이 기다려져요.
 
 #### 반환 값
 

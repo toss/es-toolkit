@@ -78,7 +78,7 @@ console.log(pageNumbers); // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 - `start` (`number`): The start value. Included in the result array.
 - `end` (`number`): The end value. Not included in the result array.
-- `step` (`number`, optional): The increment between each number. Must be a non-zero integer. Defaults to `1`.
+- `step?` (`number`): The increment between each number. Must be a non-zero integer. Defaults to `1`.
 
 #### Returns
 

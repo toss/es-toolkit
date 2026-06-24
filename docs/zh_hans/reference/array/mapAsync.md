@@ -47,8 +47,8 @@ const processedImages = await mapAsync(
 
 - `array` (`readonly T[]`)：要转换的数组。
 - `callback` (`(item: T, index: number, array: readonly T[]) => Promise<R>`)：转换每个元素的异步函数。
-- `options` (`MapAsyncOptions`, 可选)：控制并发的选项。
-  - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
+- `options?` (`MapAsyncOptions`)：控制并发的选项。
+  - `concurrency?` (`number`)：最大并发操作数。如果未指定，所有操作将并发执行。
 
 #### 返回值
 

@@ -41,7 +41,7 @@ kebabCase(undefined); // ''
 
 #### Parameters
 
-- `str` (`string | object`, optional): The value to convert to kebab case.
+- `str?` (`string | object`): The value to convert to kebab case.
 
 #### Returns
 

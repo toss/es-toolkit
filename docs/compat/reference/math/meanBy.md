@@ -96,7 +96,7 @@ meanBy(undefined);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to process.
-- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element.
+- `iteratee?` (`ValueIteratee<T>`): The function, property name, or condition to apply to each element.
 
 #### Returns
 

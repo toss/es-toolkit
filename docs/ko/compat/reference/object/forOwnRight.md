@@ -64,7 +64,7 @@ forOwnRight(undefined, iteratee); // undefined
 #### 파라미터
 
 - `object` (`T | null | undefined`): 반복할 객체예요.
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 선택): 각 속성에 대해 호출할 함수예요. 기본값은 `identity` 함수예요.
+- `iteratee?` (`(value: T[keyof T], key: string, collection: T) => any`): 각 속성에 대해 호출할 함수예요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

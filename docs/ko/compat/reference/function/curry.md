@@ -217,7 +217,7 @@ console.log(person2.city); // "서울"
 #### 파라미터
 
 - `func` (`Function`): 커링할 함수예요.
-- `arity` (`number`, 선택): 함수의 arity(인수 개수)예요. 생략하면 `func.length`를 사용해요.
+- `arity?` (`number`): 함수의 arity(인수 개수)예요. 생략하면 `func.length`를 사용해요.
 
 #### 반환 값
 

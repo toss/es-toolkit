@@ -63,7 +63,7 @@ remove(users, 'isDeleted');
 #### Parameters
 
 - `array` (`ArrayLike<T>`): The array to modify.
-- `predicate` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`, optional): The condition to execute for each element. Default is `identity`.
+- `predicate?` (`((value: T, index: number, array: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T`): The condition to execute for each element. Default is `identity`.
 
 #### Returns
 

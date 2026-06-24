@@ -53,7 +53,7 @@ It's especially useful when passing arrays as function arguments, but in modern 
 #### Parameters
 
 - `func` (`Function`): The function to transform.
-- `argsIndex` (`number`, optional): The position of the array argument. Default is `0`.
+- `argsIndex?` (`number`): The position of the array argument. Default is `0`.
 
 #### Returns
 

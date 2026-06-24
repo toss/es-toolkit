@@ -86,7 +86,7 @@ updateWith(
 - `obj` (`T`): The object to modify.
 - `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to update. Can be specified as a string or array.
 - `updater` (`(oldValue: any) => any`): A function that receives the existing value and returns the new value.
-- `customizer` (`(value: any, key: string, object: T) => any`, optional): A function that returns the intermediate object to be created when the path doesn't exist. Returns `undefined` to use default behavior.
+- `customizer?` (`(value: any, key: string, object: T) => any`): A function that returns the intermediate object to be created when the path doesn't exist. Returns `undefined` to use default behavior.
 
 #### Returns
 

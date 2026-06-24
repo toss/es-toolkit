@@ -56,7 +56,7 @@ isEmpty('text'); // false (字符串按长度判断)
 
 #### 参数
 
-- `value` (`unknown`, 可选): 要检查的值。
+- `value?` (`unknown`): 要检查的值。
 
 #### 返回值
 

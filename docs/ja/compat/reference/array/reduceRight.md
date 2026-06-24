@@ -53,7 +53,7 @@ console.log(result); // undefined
 
 - `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 反復処理する配列またはオブジェクトです。
 - `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 各要素に対して呼び出す関数です。累積値、現在の値、インデックス/キー、元の配列/オブジェクトを受け取ります。
-- `initialValue` (`any`, オプション): 累積値の初期値です。提供しない場合、最後の要素が初期値になります。
+- `initialValue?` (`any`): 累積値の初期値です。提供しない場合、最後の要素が初期値になります。
 
 #### 戻り値
 

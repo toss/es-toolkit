@@ -53,7 +53,7 @@ uniqWith(undefined); // []
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to remove duplicates from.
-- `comparator` (`(a: T, b: T) => boolean`, optional): The function to compare if two elements are equal. Returns `true` if they are considered equal. Default is shallow equality comparison.
+- `comparator?` (`(a: T, b: T) => boolean`): The function to compare if two elements are equal. Returns `true` if they are considered equal. Default is shallow equality comparison.
 
 #### Returns
 

@@ -118,8 +118,8 @@ console.log(result);
 #### 파라미터
 
 - `object` (`object`): 평탄화할 객체예요.
-- `options` (`FlattenObjectOptions`, 선택): 평탄화 옵션이에요.
-  - `delimiter` (`string`, 선택): 중첩된 키를 연결할 구분자예요. 기본값은 `'.'`예요.
+- `options?` (`FlattenObjectOptions`): 평탄화 옵션이에요.
+  - `delimiter?` (`string`): 중첩된 키를 연결할 구분자예요. 기본값은 `'.'`예요.
 
 #### 반환 값
 

@@ -83,7 +83,7 @@ console.log(ary(func, NaN)(1, 2, 3)); // [undefined, undefined, undefined] (NaN 
 #### Parameters
 
 - `func` (`Function`): The function to cap arguments for.
-- `n` (`number`, optional): The maximum number of arguments to allow. If omitted, uses the function's `length` property.
+- `n?` (`number`): The maximum number of arguments to allow. If omitted, uses the function's `length` property.
 
 #### Returns
 

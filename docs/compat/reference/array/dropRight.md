@@ -48,7 +48,7 @@ dropRight(undefined, 2); // []
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to remove elements from.
-- `itemsCount` (`number`, optional): The number of elements to remove from the end of the array. Default is `1`.
+- `itemsCount?` (`number`): The number of elements to remove from the end of the array. Default is `1`.
 
 #### Returns
 

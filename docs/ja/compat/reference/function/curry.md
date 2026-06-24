@@ -215,7 +215,7 @@ console.log(person2.city); // "Seoul"
 #### パラメータ
 
 - `func` (`Function`): カリー化する関数。
-- `arity` (`number`, オプション): 関数の引数個数。省略すると `func.length` が使用されます。
+- `arity?` (`number`): 関数の引数個数。省略すると `func.length` が使用されます。
 
 #### 戻り値
 

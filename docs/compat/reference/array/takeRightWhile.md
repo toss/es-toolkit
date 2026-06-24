@@ -64,7 +64,7 @@ takeRightWhile(undefined, x => x > 0); // []
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to process.
-- `predicate` (`ListIteratee<T>`, optional): The condition to run for each element. Can be a function, partial object, property-value array, or property name. Default is the identity function.
+- `predicate?` (`ListIteratee<T>`): The condition to run for each element. Can be a function, partial object, property-value array, or property name. Default is the identity function.
 
 #### Returns
 

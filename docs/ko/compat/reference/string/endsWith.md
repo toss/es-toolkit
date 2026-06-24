@@ -49,9 +49,9 @@ endsWith('test', null);
 
 #### 파라미터
 
-- `str` (`string`, 선택): 확인할 문자열이에요.
-- `target` (`string`, 선택): 끝에 있는지 찾을 문자열이에요.
-- `position` (`number`, 선택): 검색을 끝낼 위치예요. 기본값은 문자열 전체 길이예요.
+- `str?` (`string`): 확인할 문자열이에요.
+- `target?` (`string`): 끝에 있는지 찾을 문자열이에요.
+- `position?` (`number`): 검색을 끝낼 위치예요. 기본값은 문자열 전체 길이예요.
 
 #### 반환 값
 

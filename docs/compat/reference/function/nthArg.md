@@ -67,7 +67,7 @@ getLastArg('first', 'middle', 'last');
 
 #### Parameters
 
-- `n` (`number`, optional): The index of the argument to return. Negative values count from the end. Default is `0`.
+- `n?` (`number`): The index of the argument to return. Negative values count from the end. Default is `0`.
 
 #### Returns
 

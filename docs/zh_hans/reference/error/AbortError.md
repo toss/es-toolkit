@@ -48,7 +48,7 @@ await fetchData(controller.signal); // 抛出 AbortError
 
 #### 参数
 
-- `message` (`string`, 可选): 错误消息。默认为 `'The operation was aborted'`。
+- `message?` (`string`): 错误消息。默认为 `'The operation was aborted'`。
 
 #### 返回值
 

@@ -107,7 +107,7 @@ maxBy(undefined);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `iteratee` (`ValueIteratee<T>`, オプション): 各要素に適用する関数、プロパティ名、または条件です。
+- `iteratee?` (`ValueIteratee<T>`): 各要素に適用する関数、プロパティ名、または条件です。
 
 #### 戻り値
 

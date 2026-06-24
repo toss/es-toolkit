@@ -45,7 +45,7 @@ takeRight([1, 2, 3]);
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
-- `count` (`number`, optional): The number of elements to take. Default is `1`.
+- `count?` (`number`): The number of elements to take. Default is `1`.
 
 #### Returns
 

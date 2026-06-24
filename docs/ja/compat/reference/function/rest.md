@@ -47,7 +47,7 @@ restProcess('update', 'user', 'name', 'John', 'age', 25);
 #### パラメータ
 
 - `func` (`Function`): 変換する関数です。
-- `start` (`number`, オプション): 配列へのグループ化を開始するインデックスです。デフォルト値は `func.length - 1` です。
+- `start?` (`number`): 配列へのグループ化を開始するインデックスです。デフォルト値は `func.length - 1` です。
 
 #### 戻り値
 

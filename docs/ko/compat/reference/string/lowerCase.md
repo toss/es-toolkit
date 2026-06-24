@@ -41,7 +41,7 @@ lowerCase(undefined); // ''
 
 #### 파라미터
 
-- `str` (`string | object`, 선택): 소문자 형태로 변환할 값이에요.
+- `str?` (`string | object`): 소문자 형태로 변환할 값이에요.
 
 #### 반환 값
 

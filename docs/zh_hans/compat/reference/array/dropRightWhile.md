@@ -58,7 +58,7 @@ dropRightWhile(undefined, x => x > 0); // []
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要删除元素的数组。
-- `predicate` (`ListIteratee<T>`, 可选): 应用于每个元素的条件函数。可以接受函数、对象模式、数组模式或属性名。
+- `predicate?` (`ListIteratee<T>`): 应用于每个元素的条件函数。可以接受函数、对象模式、数组模式或属性名。
 
 #### 返回值
 

@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### パラメータ
 
 - `object` (`T`): キーをソートするオブジェクトです。
-- `compareKeys` (`(a: string, b: string) => number`, オプション): キーのソートに使用するカスタム比較関数です。デフォルトはアルファベット順です。
+- `compareKeys?` (`(a: string, b: string) => number`): キーのソートに使用するカスタム比較関数です。デフォルトはアルファベット順です。
 
 #### 戻り値
 

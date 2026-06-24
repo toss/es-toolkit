@@ -47,7 +47,7 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 #### Parameters
 
-- `message` (`string`, optional): The error message. Defaults to `'The operation was timed out'`.
+- `message?` (`string`): The error message. Defaults to `'The operation was timed out'`.
 
 #### Returns
 

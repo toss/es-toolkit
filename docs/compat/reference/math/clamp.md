@@ -75,7 +75,7 @@ clamp(5, 2, NaN);
 
 - `number` (`number`): The number to clamp.
 - `lower` (`number`): The minimum value. If only the second parameter is provided, it becomes the maximum value.
-- `upper` (`number`, optional): The maximum value.
+- `upper?` (`number`): The maximum value.
 
 #### Returns
 

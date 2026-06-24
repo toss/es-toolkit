@@ -75,7 +75,7 @@ clamp(5, 2, NaN);
 
 - `number` (`number`): 制限する数値です。
 - `lower` (`number`): 最小値です。2番目のパラメータのみがある場合は最大値になります。
-- `upper` (`number`, オプション): 最大値です。
+- `upper?` (`number`): 最大値です。
 
 #### 戻り値
 

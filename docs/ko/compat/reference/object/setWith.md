@@ -100,7 +100,7 @@ setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
 - `object` (`T`): 값을 설정할 객체예요.
 - `path` (`PropertyPath`): 값을 설정할 속성의 경로예요.
 - `value` (`any`): 설정할 값이에요.
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 선택): 중간 객체 생성을 커스터마이즈하는 함수예요.
+- `customizer?` (`(nsValue: any, key: string, nsObject: T) => any`): 중간 객체 생성을 커스터마이즈하는 함수예요.
 
 #### 반환 값
 

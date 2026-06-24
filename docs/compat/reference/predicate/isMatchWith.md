@@ -67,7 +67,7 @@ isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status
 
 - `target` (`unknown`): The object to check for matching.
 - `source` (`unknown`): The object serving as the match pattern.
-- `customizer` (`function`, optional): Function to customize comparison logic. Should return `true`, `false`, or `undefined`.
+- `customizer?` (`function`): Function to customize comparison logic. Should return `true`, `false`, or `undefined`.
 
 #### Returns
 

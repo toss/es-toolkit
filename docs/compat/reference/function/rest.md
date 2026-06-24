@@ -47,7 +47,7 @@ Use this when you want the last arguments of a function to be received as an arr
 #### Parameters
 
 - `func` (`Function`): The function to transform.
-- `start` (`number`, optional): The index from which to start grouping arguments into an array. Default is `func.length - 1`.
+- `start?` (`number`): The index from which to start grouping arguments into an array. Default is `func.length - 1`.
 
 #### Returns
 

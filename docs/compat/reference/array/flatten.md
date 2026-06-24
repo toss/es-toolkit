@@ -62,7 +62,7 @@ flatten([1, spreadable, 3]);
 #### Parameters
 
 - `value` (`ArrayLike<T> | null | undefined`): The array to flatten.
-- `depth` (`number`, optional): The maximum depth to flatten. Default is `1`.
+- `depth?` (`number`): The maximum depth to flatten. Default is `1`.
 
 #### Returns
 

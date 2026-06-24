@@ -70,7 +70,7 @@ invertBy(undefined);
 #### パラメータ
 
 - `object` (`object`): 反転するオブジェクトです。
-- `iteratee` (`ValueIteratee`, オプション): 値を変換する関数です。デフォルトは値をそのまま使用する関数です。
+- `iteratee?` (`ValueIteratee`): 値を変換する関数です。デフォルトは値をそのまま使用する関数です。
 
 #### 戻り値
 

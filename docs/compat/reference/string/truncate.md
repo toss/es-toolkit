@@ -70,11 +70,11 @@ truncate('¥§✈✉🤓', { length: 4, omission: '…' });
 
 #### Parameters
 
-- `string` (`string`, optional): The string to truncate.
-- `options` (`object`, optional): The options object.
-  - `options.length` (`number`, optional): The maximum string length. Defaults to `30`.
-  - `options.omission` (`string`, optional): The string to indicate text is omitted. Defaults to `'...'`.
-  - `options.separator` (`RegExp | string`, optional): The separator pattern to truncate to.
+- `string?` (`string`): The string to truncate.
+- `options?` (`object`): The options object.
+  - `options.length?` (`number`): The maximum string length. Defaults to `30`.
+  - `options.omission?` (`string`): The string to indicate text is omitted. Defaults to `'...'`.
+  - `options.separator?` (`RegExp | string`): The separator pattern to truncate to.
 
 #### Returns
 

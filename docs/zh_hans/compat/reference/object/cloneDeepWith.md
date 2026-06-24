@@ -104,7 +104,7 @@ console.log(cloned.b.self === cloned); // true (保留循环引用)
 #### 参数
 
 - `value` (`T`): 要深拷贝的值。
-- `customizer` (`function`, 可选): 决定复制方式的函数。格式为 `(value: any, key?: string, object?: any, stack?: Map<any, any>) => any`。
+- `customizer?` (`function`): 决定复制方式的函数。格式为 `(value: any, key?: string, object?: any, stack?: Map<any, any>) => any`。
 
 #### 返回值
 

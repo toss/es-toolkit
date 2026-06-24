@@ -55,7 +55,7 @@ floor(-6.994, 2);
 #### Parameters
 
 - `number` (`number`): The number to round down.
-- `precision` (`number`, optional): The number of decimal places to round down to. Defaults to `0`.
+- `precision?` (`number`): The number of decimal places to round down to. Defaults to `0`.
 
 #### Returns
 

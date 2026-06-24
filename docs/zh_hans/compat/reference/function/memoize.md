@@ -59,7 +59,7 @@ console.log(memoizedCalc(7)); // 49 (使用缓存值，不计算)
 #### 参数
 
 - `func` (`Function`): 要记忆化的函数。
-- `resolver` (`Function`, 可选): 确定缓存键的函数。如果未提供，使用第一个参数作为键。
+- `resolver?` (`Function`): 确定缓存键的函数。如果未提供，使用第一个参数作为键。
 
 #### 返回值
 

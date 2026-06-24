@@ -63,7 +63,7 @@ forOwnRight(undefined, iteratee); // undefined
 #### 参数
 
 - `object` (`T | null | undefined`): 要迭代的对象。
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 可选): 为每个属性调用的函数。默认为 `identity` 函数。
+- `iteratee?` (`(value: T[keyof T], key: string, collection: T) => any`): 为每个属性调用的函数。默认为 `identity` 函数。
 
 #### 返回值
 

@@ -84,9 +84,9 @@ const memoizedWithCustomCache = memoize(expensiveFunction, {
 #### 参数
 
 - `func` (`F`): 要进行记忆化的函数。只能接收一个参数。
-- `options` (对象, 可选): 记忆化设置选项。
-  - `cache` (`MemoizeCache<any, ReturnType<F>>`, 可选): 用于存储结果的缓存对象。默认值为新的 `Map`。
-  - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, 可选): 生成缓存键的函数。在使用非原始值作为参数时需要。
+- `options?` (对象): 记忆化设置选项。
+  - `cache?` (`MemoizeCache<any, ReturnType<F>>`): 用于存储结果的缓存对象。默认值为新的 `Map`。
+  - `getCacheKey?` (`(arg: Parameters<F>[0]) => unknown`): 生成缓存键的函数。在使用非原始值作为参数时需要。
 
 #### 返回值
 

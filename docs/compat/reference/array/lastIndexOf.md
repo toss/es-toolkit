@@ -53,7 +53,7 @@ lastIndexOf(undefined, 1); // -1
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to search.
 - `searchElement` (`T`): The element to find.
-- `fromIndex` (`true | number`, optional): The index to start searching from. Passing `true` searches from the end of the array. Defaults to `array.length - 1`.
+- `fromIndex?` (`true | number`): The index to start searching from. Passing `true` searches from the end of the array. Defaults to `array.length - 1`.
 
 #### Returns
 

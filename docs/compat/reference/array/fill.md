@@ -74,8 +74,8 @@ fill('abc', 'x');
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to fill.
 - `value` (`U`): The value to fill the array with.
-- `start` (`number`, optional): The start position. Defaults to `0`.
-- `end` (`number`, optional): The end position (not included). Defaults to `array.length`.
+- `start?` (`number`): The start position. Defaults to `0`.
+- `end?` (`number`): The end position (not included). Defaults to `array.length`.
 
 #### Returns
 

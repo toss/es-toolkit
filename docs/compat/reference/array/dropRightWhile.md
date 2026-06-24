@@ -58,7 +58,7 @@ dropRightWhile(undefined, x => x > 0); // []
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to remove elements from.
-- `predicate` (`ListIteratee<T>`, optional): The predicate function to apply to each element. Can accept a function, object pattern, array pattern, or property name.
+- `predicate?` (`ListIteratee<T>`): The predicate function to apply to each element. Can accept a function, object pattern, array pattern, or property name.
 
 #### Returns
 

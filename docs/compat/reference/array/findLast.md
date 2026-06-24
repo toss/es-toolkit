@@ -67,8 +67,8 @@ findLast(undefined, x => x > 0); // undefined
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to search.
-- `predicate` (`ListIterateeCustom<T, boolean>`, optional): The condition to apply to each element. Can be a function, object, key-value pair, or property name. Default is the `identity` function.
-- `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end. Default is the last index of the array.
+- `predicate?` (`ListIterateeCustom<T, boolean>`): The condition to apply to each element. Can be a function, object, key-value pair, or property name. Default is the `identity` function.
+- `fromIndex?` (`number`): The index to start the search from. If negative, it's calculated from the end. Default is the last index of the array.
 
 #### Returns
 

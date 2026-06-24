@@ -85,7 +85,7 @@ const calculatedValue = result(calculator, 'compute');
 
 - `object` (`any`): クエリを実行するオブジェクトです。
 - `path` (`PropertyPath`): 取得するプロパティのパスです。文字列、配列、またはキーの配列を指定できます。
-- `defaultValue` (`R | ((...args: any[]) => R)`, オプション): 値が `undefined` の場合に返すデフォルト値です。関数の場合は呼び出して結果を返します。
+- `defaultValue?` (`R | ((...args: any[]) => R)`): 値が `undefined` の場合に返すデフォルト値です。関数の場合は呼び出して結果を返します。
 
 #### 戻り値
 

@@ -48,7 +48,7 @@ await fetchData(controller.signal); // Throws AbortError
 
 #### Parameters
 
-- `message` (`string`, optional): The error message. Defaults to `'The operation was aborted'`.
+- `message?` (`string`): The error message. Defaults to `'The operation was aborted'`.
 
 #### Returns
 

@@ -72,13 +72,13 @@ await exec('sleep', ['10'], {
 #### Parameters
 
 - `command` (`string`): The command to execute.
-- `args` (`string[]`, optional): The arguments passed to the command. Defaults to `[]`.
-- `options` (`ExecOptions`, optional): The options object.
-  - `signal` (`AbortSignal`, optional): An `AbortSignal` used to abort the process.
-  - `timeout` (`number`, optional): A timeout in milliseconds. The process is aborted when the timeout expires.
-  - `stdin` (`string`, optional): A string written to the process stdin.
-  - `spawnOptions` (`SpawnOptions`, optional): Additional options forwarded to `child_process.spawn`.
-  - `throwOnNonZeroExitCode` (`boolean`, optional): Whether to throw `ExecError` when the process exits with a non-zero exit code. Defaults to `true`.
+- `args?` (`string[]`): The arguments passed to the command. Defaults to `[]`.
+- `options?` (`ExecOptions`): The options object.
+  - `signal?` (`AbortSignal`): An `AbortSignal` used to abort the process.
+  - `timeout?` (`number`): A timeout in milliseconds. The process is aborted when the timeout expires.
+  - `stdin?` (`string`): A string written to the process stdin.
+  - `spawnOptions?` (`SpawnOptions`): Additional options forwarded to `child_process.spawn`.
+  - `throwOnNonZeroExitCode?` (`boolean`): Whether to throw `ExecError` when the process exits with a non-zero exit code. Defaults to `true`.
 
 #### Returns
 

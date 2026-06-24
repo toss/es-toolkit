@@ -74,8 +74,8 @@ fill('abc', 'x');
 
 - `array` (`ArrayLike<T> | null | undefined`): 埋める配列です。
 - `value` (`U`): 配列を埋める値です。
-- `start` (`number`, オプション): 開始位置です。デフォルトは `0` です。
-- `end` (`number`, オプション): 終了位置です(含まれません)。デフォルトは `array.length` です。
+- `start?` (`number`): 開始位置です。デフォルトは `0` です。
+- `end?` (`number`): 終了位置です(含まれません)。デフォルトは `array.length` です。
 
 #### 戻り値
 

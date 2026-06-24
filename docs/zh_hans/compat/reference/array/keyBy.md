@@ -57,7 +57,7 @@ keyBy(undefined, 'id'); // {}
 #### 参数
 
 - `collection` (`ArrayLike<T> | null | undefined`): 要按键组织的数组或对象。
-- `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, 可选): 用于生成键的函数或属性名。如果省略,则使用元素本身作为键。
+- `iteratee?` (`ValueIterateeCustom<T, PropertyKey>`): 用于生成键的函数或属性名。如果省略,则使用元素本身作为键。
 
 #### 返回值
 
