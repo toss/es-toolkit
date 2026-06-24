@@ -16,7 +16,7 @@ const result = each(collection, iteratee);
 
 ## Usage
 
-### `each(collection, iteratee)`
+### `each(collection, iteratee?)`
 
 Iterates through each element of an array, object, or string and executes the given function. For arrays, it iterates in index order; for objects, it iterates through enumerable properties.
 
