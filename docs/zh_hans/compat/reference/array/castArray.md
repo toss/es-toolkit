@@ -1,4 +1,4 @@
-# castArray（Lodash 兼容性）
+# castArray(Lodash 兼容性)
 
 ::: warning 使用 `Array.from()` 或数组字面量（`[value]`）
 

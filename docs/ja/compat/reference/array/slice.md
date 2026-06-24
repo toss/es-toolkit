@@ -1,4 +1,4 @@
-# slice（Lodash 互換性）
+# slice(Lodash 互換性)
 
 ::: warning `Array.prototype.slice` を使用してください
 

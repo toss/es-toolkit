@@ -1,4 +1,4 @@
-# countBy (Lodash compatible)
+# countBy (Lodash Compatibility)
 
 ::: warning Use `countBy` from `es-toolkit` instead
 

@@ -1,4 +1,4 @@
-# cloneDeep (Lodash compatibility)
+# cloneDeep (Lodash Compatibility)
 
 ::: warning Use `cloneDeep` from `es-toolkit` instead
 

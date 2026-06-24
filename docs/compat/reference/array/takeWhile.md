@@ -1,4 +1,4 @@
-# takeWhile (Lodash compatibility)
+# takeWhile (Lodash Compatibility)
 
 ::: warning Please use [takeWhile](../../../reference/array/takeWhile.md) from `es-toolkit`
 

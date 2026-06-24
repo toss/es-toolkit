@@ -1,4 +1,4 @@
-# overSome (Lodash互換性)
+# overSome (Lodash 互換性)
 
 ::: warning `Array.some`を使用してください
 

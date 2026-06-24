@@ -1,4 +1,4 @@
-# differenceBy（Lodash 兼容性）
+# differenceBy(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 `differenceBy`
 

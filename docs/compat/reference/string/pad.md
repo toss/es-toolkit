@@ -1,4 +1,4 @@
-# pad (Lodash compatibility)
+# pad (Lodash Compatibility)
 
 ::: warning Use `pad` from `es-toolkit`
 
