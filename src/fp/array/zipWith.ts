@@ -1,3 +1,5 @@
+import { zipWith as zipWithToolkit } from '../../array/zipWith.ts';
+
 /**
  * Creates a function that maps each value in the piped array with its index.
  *
@@ -66,15 +68,6 @@ export function zipWith<T, U, V, W, R>(
 ): (array: readonly T[]) => R[];
 export function zipWith(...rest: unknown[]): unknown {
   return function (array: readonly unknown[]): unknown[] {
-    const combine = rest[rest.length - 1] as (...values: unknown[]) => unknown;
-    const arrays = [array, ...(rest.slice(0, -1) as Array<readonly unknown[]>)];
-    const minLength = Math.min(...arrays.map(item => item.length));
-    const result: unknown[] = [];
-
-    for (let index = 0; index < minLength; index++) {
-      result.push(combine(...arrays.map(item => item[index]), index));
-    }
-
-    return result;
+    return (zipWithToolkit as (array: readonly unknown[], ...rest: unknown[]) => unknown[])(array, ...rest);
   };
 }
