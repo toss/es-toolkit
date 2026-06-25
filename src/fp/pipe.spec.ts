@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { filter } from './array/filter.ts';
 import { map } from './array/map.ts';
 import { take } from './array/take.ts';
+import { takeWhile } from './array/takeWhile.ts';
 import { uniq } from './array/uniq.ts';
 import { pipe } from './pipe.ts';
 
@@ -79,5 +80,18 @@ describe('pipe', () => {
         map((value, index) => value + index)
       )
     ).toEqual([20, 31]);
+  });
+
+  it('uses lazy metadata from the first operator in a lazy group', () => {
+    const mapSpy = vi.fn((x: number) => x * 2);
+
+    const result = pipe(
+      [1, 2, 3, 4],
+      takeWhile(x => x < 3),
+      map(mapSpy)
+    );
+
+    expect(result).toEqual([2, 4]);
+    expect(mapSpy).toHaveBeenCalledTimes(2);
   });
 });

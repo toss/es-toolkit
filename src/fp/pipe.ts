@@ -452,6 +452,13 @@ function chunkFunctions(functions: readonly OperatorFunction[]): OperatorFunctio
   const result: OperatorFunctionGroup[] = [currentGroup];
   let previousIsLazy: boolean = currentGroup[0].lazy != null;
 
+  if (previousIsLazy) {
+    currentGroup.lazy = true;
+  }
+  if (currentGroup[0].shortCircuit) {
+    currentGroup.shortCircuit = true;
+  }
+
   for (let index = 1; index < functions.length; index++) {
     const func = functions[index];
     const isLazy = func.lazy != null;

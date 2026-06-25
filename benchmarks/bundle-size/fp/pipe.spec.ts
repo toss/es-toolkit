@@ -3,7 +3,7 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/pipe bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { pipe } from "es-toolkit/fp"; console.log(pipe)')).toBe(759);
+    expect(await getBundleSizeFromScript('import { pipe } from "es-toolkit/fp"; console.log(pipe)')).toBe(813);
   });
 
   it('lodash/fp/pipe', async () => {
