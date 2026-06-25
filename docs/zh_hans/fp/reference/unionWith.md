@@ -6,14 +6,23 @@
 const result = pipe(array, unionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`unionWith`](../../reference/array/unionWith.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `unionWith` 会按顺序遍历合并后的数组,并保留按 `areItemsEqual` 尚未与已保留值匹配的第一个值。
 
 ```typescript
-import { unionWith, pipe } from 'es-toolkit/fp';
+import { pipe, unionWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
 #### 参数

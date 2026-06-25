@@ -6,6 +6,12 @@
 const result = pipe(array, flatMapDeep(iteratee));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`flatMapDeep`](../../reference/array/flatMapDeep.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `flatMapDeep` はパイプされた配列の各値に `iteratee` を呼び出し、返された配列を再帰的に平坦化します。
@@ -13,7 +19,10 @@ const result = pipe(array, flatMapDeep(iteratee));
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
+pipe(
+  [1, 2],
+  flatMapDeep(value => [[value, value]])
+); // => [1, 1, 2, 2]
 ```
 
 #### パラメータ

@@ -6,6 +6,12 @@ Creates a function that returns the value with the largest computed score. Use i
 const result = pipe(array, maxBy(getValue));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`maxBy`](../../reference/array/maxBy.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `maxBy` calls `getValue` for each value in the piped array and returns the value with the largest result. If the array is empty, it returns `undefined`.
@@ -13,7 +19,10 @@ const result = pipe(array, maxBy(getValue));
 ```typescript
 import { maxBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ score: 10 }, { score: 30 }, { score: 20 }], maxBy(item => item.score)); // => { score: 30 }
+pipe(
+  [{ score: 10 }, { score: 30 }, { score: 20 }],
+  maxBy(item => item.score)
+); // => { score: 30 }
 ```
 
 #### Parameters

@@ -6,14 +6,23 @@
 const result = pipe(array, takeWhile(predicate));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`takeWhile`](../../reference/array/takeWhile.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `takeWhile` 会从管道中数组的开头开始遍历,并在 `predicate` 返回 `true` 时保留值。它支持惰性求值,可以在 [`pipe`](./pipe.md) 中提前停止前面的惰性操作。
 
 ```typescript
-import { takeWhile, pipe } from 'es-toolkit/fp';
+import { pipe, takeWhile } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 1], takeWhile(value => value < 3)); // => [1, 2]
+pipe(
+  [1, 2, 3, 1],
+  takeWhile(value => value < 3)
+); // => [1, 2]
 ```
 
 #### 参数

@@ -6,6 +6,12 @@ Creates a function that returns the first value of an array. Use it with [`pipe`
 const result = pipe(array, head());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`head`](../../reference/array/head.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `head` returns the first value in the piped array. If the array is empty, it returns `undefined`.

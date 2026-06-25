@@ -6,6 +6,12 @@
 const result = pipe(array, dropWhile(predicate));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`dropWhile`](../../reference/array/dropWhile.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `dropWhile` 会从管道中数组的开头开始遍历,并在 `predicate` 返回 `true` 时移除值。它在 [`pipe`](./pipe.md) 中支持惰性求值。
@@ -13,7 +19,10 @@ const result = pipe(array, dropWhile(predicate));
 ```typescript
 import { dropWhile, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 1], dropWhile(value => value < 3)); // => [3, 1]
+pipe(
+  [1, 2, 3, 1],
+  dropWhile(value => value < 3)
+); // => [3, 1]
 ```
 
 #### 参数

@@ -6,14 +6,23 @@
 const result = pipe(array, uniqBy(mapper));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`uniqBy`](../../reference/array/uniqBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `uniqBy` は `mapper` が返す各キーの最初の値を残します。最初に現れた順序を保ち、[`pipe`](./pipe.md) の中では遅延評価に対応しています。
 
 ```typescript
-import { uniqBy, pipe } from 'es-toolkit/fp';
+import { pipe, uniqBy } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqBy(item => item.id)); // => [{ id: 1 }, { id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 1 }, { id: 2 }],
+  uniqBy(item => item.id)
+); // => [{ id: 1 }, { id: 2 }]
 ```
 
 #### パラメータ

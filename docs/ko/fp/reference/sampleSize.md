@@ -6,12 +6,18 @@
 const result = pipe(array, sampleSize(size));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`sampleSize`](../../reference/array/sampleSize.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `sampleSize`는 파이프된 배열에서 `size`개의 임의 값을 반환해요. 같은 배열 위치는 반복하지 않아요.
 
 ```typescript
-import { sampleSize, pipe } from 'es-toolkit/fp';
+import { pipe, sampleSize } from 'es-toolkit/fp';
 
 const values = pipe([1, 2, 3, 4], sampleSize(2));
 // values has length 2 and contains values from the input array.

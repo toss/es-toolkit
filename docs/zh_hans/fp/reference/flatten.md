@@ -6,6 +6,12 @@
 const result = pipe(array, flatten(depth));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`flatten`](../../reference/array/flatten.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `flatten` 会将管道中的数组展平到 `depth` 深度。省略 `depth` 时只展平一层。一层展平在 [`pipe`](./pipe.md) 中支持惰性求值。

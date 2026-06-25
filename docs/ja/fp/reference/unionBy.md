@@ -6,14 +6,23 @@
 const result = pipe(array, unionBy(secondArray, mapper));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`unionBy`](../../reference/array/unionBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `unionBy` は `mapper` が返す値を比較します。パイプされた配列から各マッピングキーの最初の値を残し、続いて `secondArray` の値を処理します。
 
 ```typescript
-import { unionBy, pipe } from 'es-toolkit/fp';
+import { pipe, unionBy } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], unionBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
+); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
 #### パラメータ

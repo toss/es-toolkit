@@ -6,6 +6,12 @@
 const result = pipe(array, flatMap(callback));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`flatMap`](../../reference/array/flatMap.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `flatMap` 会对管道中数组的每个值调用 `callback`,并连接返回的数组。它在 [`pipe`](./pipe.md) 中支持惰性求值。
@@ -13,7 +19,10 @@ const result = pipe(array, flatMap(callback));
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
+pipe(
+  [1, 2, 3],
+  flatMap(value => [value, value * 10])
+); // => [1, 10, 2, 20, 3, 30]
 ```
 
 #### 参数

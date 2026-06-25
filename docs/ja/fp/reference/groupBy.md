@@ -6,6 +6,12 @@
 const result = pipe(array, groupBy(getKey));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`groupBy`](../../reference/array/groupBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `groupBy` はパイプされた配列の各値に `getKey` を呼び出し、返されたキーをキー、一致する項目の配列を値にしたオブジェクトを返します。
@@ -13,7 +19,10 @@ const result = pipe(array, groupBy(getKey));
 ```typescript
 import { groupBy, pipe } from 'es-toolkit/fp';
 
-pipe(['one', 'two', 'three'], groupBy(word => word.length)); // => { 3: ['one', 'two'], 5: ['three'] }
+pipe(
+  ['one', 'two', 'three'],
+  groupBy(word => word.length)
+); // => { 3: ['one', 'two'], 5: ['three'] }
 ```
 
 #### パラメータ

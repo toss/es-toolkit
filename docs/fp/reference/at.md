@@ -6,6 +6,12 @@ Creates a function that returns the values at the given indices. Use it with [`p
 const result = pipe(array, at(indices));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`at`](../../reference/array/at.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `at` reads values from the piped array at each index in `indices`. Negative indices count from the end, matching `Array.prototype.at`.

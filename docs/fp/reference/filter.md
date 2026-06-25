@@ -6,6 +6,12 @@ Creates a function that keeps only the elements that pass a test, equivalent to 
 const result = pipe(array, filter(predicate));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `filter` keeps the elements for which `predicate` returns a truthy value. A type predicate narrows the element type of the result. It is **lazy-capable**: inside a [`pipe`](./pipe.md) it is fused with adjacent lazy operations.

@@ -6,12 +6,18 @@
 const result = pipe(array, windowed(size, step, options));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`windowed`](../../reference/array/windowed.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `windowed`는 길이가 `size`인 하위 배열을 반환하고, 매번 `step`만큼 앞으로 이동해요. 전체 윈도우만 반환하는 형태는 [`pipe`](./pipe.md) 안에서 지연 평가가 가능해요.
 
 ```typescript
-import { windowed, pipe } from 'es-toolkit/fp';
+import { pipe, windowed } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
 

@@ -6,12 +6,18 @@ Creates a function that returns a reversed copy of an array. Use it with [`pipe`
 const result = pipe(array, reverse());
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `reverse` returns a new array with the values of the piped array in reverse order. It does not mutate the input array.
 
 ```typescript
-import { reverse, pipe } from 'es-toolkit/fp';
+import { pipe, reverse } from 'es-toolkit/fp';
 
 const array = [1, 2, 3];
 

@@ -6,6 +6,12 @@ Creates a function that joins array values into a string. Use it with [`pipe`](.
 const result = pipe(array, join(separator));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `join` converts the piped array to a string by joining its values with `separator`. When `separator` is omitted, it uses a comma.

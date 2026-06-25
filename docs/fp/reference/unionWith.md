@@ -6,14 +6,23 @@ Creates a function that combines arrays using a custom equality function. Use it
 const result = pipe(array, unionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`unionWith`](../../reference/array/unionWith.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `unionWith` keeps the first value from the combined arrays for which `areItemsEqual` does not match an already kept value.
 
 ```typescript
-import { unionWith, pipe } from 'es-toolkit/fp';
+import { pipe, unionWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
 #### Parameters

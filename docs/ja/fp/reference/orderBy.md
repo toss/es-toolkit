@@ -6,6 +6,12 @@
 const result = pipe(array, orderBy(criteria, orders));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`orderBy`](../../reference/array/orderBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `orderBy` はパイプされた配列を各条件の順にソートします。各並び順は、対応する条件を昇順または降順のどちらでソートするかを制御します。

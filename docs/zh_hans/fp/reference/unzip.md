@@ -6,14 +6,26 @@
 const result = pipe(array, unzip());
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`unzip`](../../reference/array/unzip.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `unzip` 接收由分组值组成的数组,并返回按每个位置收集值的数组。
 
 ```typescript
-import { unzip, pipe } from 'es-toolkit/fp';
+import { pipe, unzip } from 'es-toolkit/fp';
 
-pipe([[1, 'a'], [2, 'b']], unzip()); // => [[1, 2], ['a', 'b']]
+pipe(
+  [
+    [1, 'a'],
+    [2, 'b'],
+  ],
+  unzip()
+); // => [[1, 2], ['a', 'b']]
 ```
 
 #### 参数

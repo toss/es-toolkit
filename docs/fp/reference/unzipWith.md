@@ -6,14 +6,26 @@ Creates a function that regroups zipped arrays and combines each position. Use i
 const result = pipe(array, unzipWith(iteratee));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`unzipWith`](../../reference/array/unzipWith.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `unzipWith` collects values at the same position from grouped rows, calls `iteratee` with those values, and returns the results.
 
 ```typescript
-import { unzipWith, pipe } from 'es-toolkit/fp';
+import { pipe, unzipWith } from 'es-toolkit/fp';
 
-pipe([[1, 10], [2, 20]], unzipWith((a, b) => a + b)); // => [3, 30]
+pipe(
+  [
+    [1, 10],
+    [2, 20],
+  ],
+  unzipWith((a, b) => a + b)
+); // => [3, 30]
 ```
 
 #### Parameters

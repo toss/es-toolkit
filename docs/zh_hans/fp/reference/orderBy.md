@@ -6,6 +6,12 @@
 const result = pipe(array, orderBy(criteria, orders));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`orderBy`](../../reference/array/orderBy.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `orderBy` 会按每个条件依次对管道中的数组排序。每个排序方向控制对应条件是升序还是降序。

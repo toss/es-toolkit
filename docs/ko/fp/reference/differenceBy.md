@@ -6,6 +6,12 @@
 const result = pipe(array, differenceBy(secondArray, mapper));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`differenceBy`](../../reference/array/differenceBy.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `differenceBy`는 `mapper`가 반환한 값을 비교해요. 파이프된 배열의 값은 매핑된 키가 `secondArray`에 없을 때만 유지돼요.
@@ -13,7 +19,10 @@ const result = pipe(array, differenceBy(secondArray, mapper));
 ```typescript
 import { differenceBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], differenceBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 1 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
+); // => [{ id: 1 }]
 ```
 
 #### 파라미터

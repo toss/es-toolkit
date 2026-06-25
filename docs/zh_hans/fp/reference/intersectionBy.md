@@ -6,6 +6,12 @@
 const result = pipe(array, intersectionBy(secondArray, mapper));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`intersectionBy`](../../reference/array/intersectionBy.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `intersectionBy` 比较 `mapper` 返回的值。当管道中数组值的映射键存在于 `secondArray` 时,该值会被保留。
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionBy(secondArray, mapper));
 ```typescript
 import { intersectionBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionBy([2], value => (typeof value === 'number' ? value : value.id))
+); // => [{ id: 2 }]
 ```
 
 #### 参数

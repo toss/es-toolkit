@@ -6,12 +6,18 @@
 const result = pipe(array, union(secondArray));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`union`](../../reference/array/union.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `union` は、まずパイプされた配列の一意な値を返し、続いて `secondArray` のうちまだ現れていない値を返します。
 
 ```typescript
-import { union, pipe } from 'es-toolkit/fp';
+import { pipe, union } from 'es-toolkit/fp';
 
 pipe([1, 2, 2], union([2, 3])); // => [1, 2, 3]
 ```

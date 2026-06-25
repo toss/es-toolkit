@@ -6,6 +6,12 @@
 const result = pipe(array, take(count));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`take`](../../reference/array/take.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `take`는 처음 `count`개 요소를 반환해요. `count`가 배열 길이보다 크면 배열 전체를 반환해요. `count`가 0 이상의 정수일 때는 **지연 평가가 가능해요**. [`pipe`](./pipe.md) 안에서는 `count`개 요소가 모이는 즉시 순회를 끝내기 때문에, 앞에 오는 지연 연산들은 나머지 입력을 처리하지 않아요.

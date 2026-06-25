@@ -6,6 +6,12 @@
 const result = pipe(array, flatten(depth));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`flatten`](../../reference/array/flatten.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `flatten` はパイプされた配列を `depth` の深さまで平坦化します。`depth` を省略すると 1 段階だけ平坦化します。1 段階の平坦化は [`pipe`](./pipe.md) の中で遅延評価に対応しています。

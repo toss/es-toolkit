@@ -6,6 +6,12 @@ Creates a function that checks subset membership using a custom equality functio
 const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`isSubsetWith`](../../reference/array/isSubsetWith.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `isSubsetWith` returns `true` when every value in the piped array matches at least one value in `superset` according to `areItemsEqual`.
@@ -13,7 +19,10 @@ const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```typescript
 import { isSubsetWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }], isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)); // => true
+pipe(
+  [{ id: 1 }],
+  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
+); // => true
 ```
 
 #### Parameters

@@ -6,12 +6,18 @@
 const result = pipe(array, xor(secondArray));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`xor`](../../reference/array/xor.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `xor` は、パイプされた配列と `secondArray` の対称差を重複なしで返します。
 
 ```typescript
-import { xor, pipe } from 'es-toolkit/fp';
+import { pipe, xor } from 'es-toolkit/fp';
 
 pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
 ```

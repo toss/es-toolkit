@@ -6,6 +6,12 @@
 const result = pipe(array, drop(count));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`drop`](../../reference/array/drop.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `drop` はパイプされた配列の先頭から `count` 個の値を取り除きます。[`pipe`](./pipe.md) の中では遅延評価に対応しています。

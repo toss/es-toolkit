@@ -6,12 +6,18 @@ Creates a function that builds an object from keys and values. Use it with [`pip
 const result = pipe(array, zipObject(values));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`zipObject`](../../reference/array/zipObject.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `zipObject` uses the piped array as keys and pairs each key with the value at the same index in `values`.
 
 ```typescript
-import { zipObject, pipe } from 'es-toolkit/fp';
+import { pipe, zipObject } from 'es-toolkit/fp';
 
 pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```

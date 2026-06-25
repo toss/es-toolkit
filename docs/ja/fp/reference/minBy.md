@@ -6,6 +6,12 @@
 const result = pipe(array, minBy(getValue));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`minBy`](../../reference/array/minBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `minBy` はパイプされた配列の各値に `getValue` を呼び出し、その結果が最小の値を返します。配列が空の場合は `undefined` を返します。
@@ -13,7 +19,10 @@ const result = pipe(array, minBy(getValue));
 ```typescript
 import { minBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ score: 10 }, { score: 30 }, { score: 20 }], minBy(item => item.score)); // => { score: 10 }
+pipe(
+  [{ score: 10 }, { score: 30 }, { score: 20 }],
+  minBy(item => item.score)
+); // => { score: 10 }
 ```
 
 #### パラメータ

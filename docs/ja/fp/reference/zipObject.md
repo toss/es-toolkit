@@ -6,12 +6,18 @@
 const result = pipe(array, zipObject(values));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`zipObject`](../../reference/array/zipObject.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `zipObject` はパイプされた配列をキーとして使い、各キーを `values` の同じインデックスの値と組み合わせます。
 
 ```typescript
-import { zipObject, pipe } from 'es-toolkit/fp';
+import { pipe, zipObject } from 'es-toolkit/fp';
 
 pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```

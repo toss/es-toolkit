@@ -6,6 +6,12 @@
 const result = pipe(array, join(separator));
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `join` 会使用 `separator` 连接管道中数组的值并转换为字符串。省略 `separator` 时使用逗号。

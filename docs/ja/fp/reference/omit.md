@@ -6,6 +6,12 @@
 const result = pipe(obj, omit(keys));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`omit`](../../reference/object/omit.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `omit` は、入力オブジェクトから指定した `keys` を取り除いた新しいオブジェクトを返します。

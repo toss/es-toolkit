@@ -6,6 +6,12 @@
 const result = pipe(array, intersectionBy(secondArray, mapper));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`intersectionBy`](../../reference/array/intersectionBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `intersectionBy` は `mapper` が返す値を比較します。パイプされた配列の値は、マッピングされたキーが `secondArray` に存在する場合だけ残ります。
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionBy(secondArray, mapper));
 ```typescript
 import { intersectionBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionBy([2], value => (typeof value === 'number' ? value : value.id))
+); // => [{ id: 2 }]
 ```
 
 #### パラメータ

@@ -6,6 +6,12 @@
 const result = pipe(array, keyBy(getKey));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`keyBy`](../../reference/array/keyBy.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `keyBy`는 파이프된 배열의 각 값에 `getKey`를 호출하고, 반환된 키를 키로, 원래 항목을 값으로 하는 객체를 반환해요. 같은 키가 있으면 뒤의 값이 앞의 값을 덮어써요.
@@ -13,7 +19,13 @@ const result = pipe(array, keyBy(getKey));
 ```typescript
 import { keyBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 'a', value: 1 }, { id: 'b', value: 2 }], keyBy(item => item.id)); // => { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
+pipe(
+  [
+    { id: 'a', value: 1 },
+    { id: 'b', value: 2 },
+  ],
+  keyBy(item => item.id)
+); // => { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
 ```
 
 #### 파라미터

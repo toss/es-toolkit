@@ -6,6 +6,12 @@
 const result = pipe(array, intersection(secondArray));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`intersection`](../../reference/array/intersection.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `intersection` は、パイプされた配列のうち `secondArray` にも含まれる値だけを残します。パイプされた配列の順序は保たれます。

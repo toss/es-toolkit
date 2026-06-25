@@ -6,12 +6,18 @@
 const result = pipe(array, takeRight(count));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`takeRight`](../../reference/array/takeRight.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `takeRight` 返回管道中数组末尾的 `count` 个值。
 
 ```typescript
-import { takeRight, pipe } from 'es-toolkit/fp';
+import { pipe, takeRight } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], takeRight(2)); // => [3, 4]
 ```

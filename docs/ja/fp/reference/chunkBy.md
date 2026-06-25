@@ -6,6 +6,12 @@
 const result = pipe(array, chunkBy(iteratee));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `chunkBy` はパイプされた配列を左から右へ走査し、`iteratee` が同じキーを返す隣接値をまとめます。キーが変わると新しいチャンクが始まります。
@@ -13,7 +19,10 @@ const result = pipe(array, chunkBy(iteratee));
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
+pipe(
+  [1, 1, 2, 2, 1],
+  chunkBy(value => value)
+); // => [[1, 1], [2, 2], [1]]
 ```
 
 #### パラメータ

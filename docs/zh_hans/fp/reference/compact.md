@@ -6,6 +6,12 @@
 const result = pipe(array, compact());
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`compact`](../../reference/array/compact.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `compact` 会移除 `false`、`null`、`undefined`、`0`、`-0`、`0n`、空字符串和 `NaN`。它在 [`pipe`](./pipe.md) 中支持惰性求值,因此末尾的 `take` 可以提前停止遍历。

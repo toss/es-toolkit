@@ -6,6 +6,12 @@
 const result = pipe(array, join(separator));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `join` は、パイプされた配列の値を `separator` で結合して文字列に変換します。`separator` を省略するとカンマを使います。

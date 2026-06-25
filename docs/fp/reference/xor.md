@@ -6,12 +6,18 @@ Creates a function that returns values that appear in exactly one of two arrays.
 const result = pipe(array, xor(secondArray));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`xor`](../../reference/array/xor.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `xor` returns the symmetric difference of the piped array and `secondArray`, without duplicate values.
 
 ```typescript
-import { xor, pipe } from 'es-toolkit/fp';
+import { pipe, xor } from 'es-toolkit/fp';
 
 pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
 ```

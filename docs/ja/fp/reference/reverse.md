@@ -6,12 +6,18 @@
 const result = pipe(array, reverse());
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `reverse` はパイプされた配列の値を逆順にした新しい配列を返します。入力配列は変更しません。
 
 ```typescript
-import { reverse, pipe } from 'es-toolkit/fp';
+import { pipe, reverse } from 'es-toolkit/fp';
 
 const array = [1, 2, 3];
 

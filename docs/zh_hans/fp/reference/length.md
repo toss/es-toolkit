@@ -6,6 +6,12 @@
 const result = pipe(array, length());
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `length` 返回管道中数组包含的值数量。

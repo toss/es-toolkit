@@ -6,12 +6,18 @@
 const result = pipe(array, zip(...arrs));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`zip`](../../reference/array/zip.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `zip` は、パイプされた配列と設定した配列の同じインデックスの値をまとめます。配列の長さが異なる場合、足りない値は `undefined` になります。
 
 ```typescript
-import { zip, pipe } from 'es-toolkit/fp';
+import { pipe, zip } from 'es-toolkit/fp';
 
 pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
 

@@ -6,6 +6,12 @@ Creates a function that returns combinations of a given size. Use it with [`pipe
 const result = pipe(array, combinations(size));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`combinations`](../../reference/array/combinations.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `combinations` returns every way to choose `size` values from the piped array while preserving their original order in each combination.

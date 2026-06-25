@@ -6,6 +6,12 @@
 const result = pipe(array, findLastIndex(predicate));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `findLastIndex` はパイプされた配列を末尾から検索し、`predicate` が `true` を返す最初の値のインデックスを返します。一致する値がなければ `-1` を返します。
@@ -13,7 +19,10 @@ const result = pipe(array, findLastIndex(predicate));
 ```typescript
 import { findLastIndex, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], findLastIndex(value => value % 2 === 0)); // => 3
+pipe(
+  [1, 2, 3, 4],
+  findLastIndex(value => value % 2 === 0)
+); // => 3
 ```
 
 #### パラメータ

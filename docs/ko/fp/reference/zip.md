@@ -6,12 +6,18 @@
 const result = pipe(array, zip(...arrs));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`zip`](../../reference/array/zip.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `zip`은 파이프된 배열과 설정한 배열들의 같은 인덱스 값을 묶어요. 배열 길이가 다르면 빠진 값은 `undefined`가 돼요.
 
 ```typescript
-import { zip, pipe } from 'es-toolkit/fp';
+import { pipe, zip } from 'es-toolkit/fp';
 
 pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
 

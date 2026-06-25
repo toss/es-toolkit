@@ -6,6 +6,12 @@ Creates a function that splits adjacent values whenever a key changes. Use it wi
 const result = pipe(array, chunkBy(iteratee));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `chunkBy` walks the piped array from left to right and groups adjacent values while `iteratee` returns the same key. A new chunk starts when the key changes.
@@ -13,7 +19,10 @@ const result = pipe(array, chunkBy(iteratee));
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
+pipe(
+  [1, 1, 2, 2, 1],
+  chunkBy(value => value)
+); // => [[1, 1], [2, 2], [1]]
 ```
 
 #### Parameters

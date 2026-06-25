@@ -6,6 +6,12 @@ Creates a function that excludes values by a mapped key. Use it with [`pipe`](./
 const result = pipe(array, differenceBy(secondArray, mapper));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`differenceBy`](../../reference/array/differenceBy.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `differenceBy` compares the values returned by `mapper`. Values from the piped array are kept when their mapped key does not appear in `secondArray`.
@@ -13,7 +19,10 @@ const result = pipe(array, differenceBy(secondArray, mapper));
 ```typescript
 import { differenceBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], differenceBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 1 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
+); // => [{ id: 1 }]
 ```
 
 #### Parameters

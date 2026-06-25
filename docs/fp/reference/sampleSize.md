@@ -6,12 +6,18 @@ Creates a function that returns random values from an array. Use it with [`pipe`
 const result = pipe(array, sampleSize(size));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`sampleSize`](../../reference/array/sampleSize.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `sampleSize` returns `size` random values from the piped array without repeating the same array position.
 
 ```typescript
-import { sampleSize, pipe } from 'es-toolkit/fp';
+import { pipe, sampleSize } from 'es-toolkit/fp';
 
 const values = pipe([1, 2, 3, 4], sampleSize(2));
 // values has length 2 and contains values from the input array.

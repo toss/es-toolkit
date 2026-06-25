@@ -6,12 +6,18 @@ Creates a function that returns a shuffled copy of an array. Use it with [`pipe`
 const result = pipe(array, shuffle());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`shuffle`](../../reference/array/shuffle.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `shuffle` returns a new array containing the same values as the piped array in random order. It does not mutate the input array.
 
 ```typescript
-import { shuffle, pipe } from 'es-toolkit/fp';
+import { pipe, shuffle } from 'es-toolkit/fp';
 
 const values = pipe([1, 2, 3], shuffle());
 // values contains 1, 2, and 3 in random order.

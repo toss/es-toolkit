@@ -6,6 +6,12 @@
 const result = pipe(array, isSubset(superset));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`isSubset`](../../reference/array/isSubset.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `isSubset`은 파이프된 배열의 모든 값이 `superset`에 있으면 `true`를 반환해요.

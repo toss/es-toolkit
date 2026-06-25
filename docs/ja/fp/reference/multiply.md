@@ -6,6 +6,12 @@
 const result = pipe(value, multiply(multiplicand));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `multiply` は、入力に `multiplicand` を掛ける関数を返します。合成のために設計されており、[`pipe`](./pipe.md) を流れる値を変換したり、[`map`](./map.md) のような関数のコールバックとして使ったりできます。

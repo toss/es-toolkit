@@ -6,6 +6,12 @@
 const result = pipe(array, findLastIndex(predicate));
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `findLastIndex` 会从管道中数组的末尾开始搜索,并返回第一个使 `predicate` 返回 `true` 的值的索引。如果没有匹配值,则返回 `-1`。
@@ -13,7 +19,10 @@ const result = pipe(array, findLastIndex(predicate));
 ```typescript
 import { findLastIndex, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], findLastIndex(value => value % 2 === 0)); // => 3
+pipe(
+  [1, 2, 3, 4],
+  findLastIndex(value => value % 2 === 0)
+); // => 3
 ```
 
 #### 参数

@@ -6,6 +6,12 @@
 const result = pipe(array, forEach(callback));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `forEach` はパイプラインに副作用のステップを入れたい場合に便利です。各値に `callback` を呼び出し、元の配列をそのまま渡します。[`pipe`](./pipe.md) の中では、隣接する遅延処理が早期停止できる場合に遅延評価に対応します。
@@ -15,7 +21,10 @@ import { forEach, pipe } from 'es-toolkit/fp';
 
 const values: number[] = [];
 
-pipe([1, 2, 3], forEach(value => values.push(value))); // => [1, 2, 3]
+pipe(
+  [1, 2, 3],
+  forEach(value => values.push(value))
+); // => [1, 2, 3]
 values; // => [1, 2, 3]
 ```
 

@@ -6,6 +6,12 @@
 const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`isSubsetWith`](../../reference/array/isSubsetWith.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `isSubsetWith`는 파이프된 배열의 모든 값이 `areItemsEqual` 기준으로 `superset`의 값 하나 이상과 일치하면 `true`를 반환해요.
@@ -13,7 +19,10 @@ const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```typescript
 import { isSubsetWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }], isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)); // => true
+pipe(
+  [{ id: 1 }],
+  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
+); // => true
 ```
 
 #### 파라미터

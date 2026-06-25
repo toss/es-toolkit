@@ -6,6 +6,12 @@ Creates a function that returns the first value that passes a test. Use it with 
 const result = pipe(array, find(predicate));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `find` returns the first value in the piped array for which `predicate` returns `true`. If no value matches, it returns `undefined`.
@@ -13,7 +19,10 @@ const result = pipe(array, find(predicate));
 ```typescript
 import { find, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], find(value => value > 2)); // => 3
+pipe(
+  [1, 2, 3, 4],
+  find(value => value > 2)
+); // => 3
 ```
 
 #### Parameters

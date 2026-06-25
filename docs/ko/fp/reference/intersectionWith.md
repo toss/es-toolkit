@@ -6,6 +6,12 @@
 const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`intersectionWith`](../../reference/array/intersectionWith.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `intersectionWith`는 `secondArray`의 값 중 하나 이상에 대해 `areItemsEqual`이 `true`를 반환할 때 파이프된 배열의 값을 유지해요.
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```typescript
 import { intersectionWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)
+); // => [{ id: 2 }]
 ```
 
 #### 파라미터

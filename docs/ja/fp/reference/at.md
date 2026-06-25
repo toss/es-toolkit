@@ -6,6 +6,12 @@
 const result = pipe(array, at(indices));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`at`](../../reference/array/at.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `at` は `indices` の各インデックスにある値をパイプされた配列から読み取ります。負のインデックスは `Array.prototype.at` と同じく末尾から数えます。

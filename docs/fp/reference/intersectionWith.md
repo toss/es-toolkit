@@ -6,6 +6,12 @@ Creates a function that keeps values using a custom equality function. Use it wi
 const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`intersectionWith`](../../reference/array/intersectionWith.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `intersectionWith` keeps values from the piped array when `areItemsEqual` returns `true` for at least one value in `secondArray`.
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```typescript
 import { intersectionWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)
+); // => [{ id: 2 }]
 ```
 
 #### Parameters

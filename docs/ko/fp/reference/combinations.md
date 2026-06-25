@@ -6,6 +6,12 @@
 const result = pipe(array, combinations(size));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`combinations`](../../reference/array/combinations.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `combinations`는 파이프된 배열에서 `size`개의 값을 고르는 모든 방법을 반환해요. 각 조합 안에서는 원래 순서가 유지돼요.

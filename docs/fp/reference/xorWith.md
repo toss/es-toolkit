@@ -6,14 +6,23 @@ Creates a function that returns the symmetric difference using a custom equality
 const result = pipe(array, xorWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`xorWith`](../../reference/array/xorWith.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `xorWith` returns values that are not matched across the two arrays according to `areItemsEqual`.
 
 ```typescript
-import { xorWith, pipe } from 'es-toolkit/fp';
+import { pipe, xorWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 3 }]
 ```
 
 #### Parameters

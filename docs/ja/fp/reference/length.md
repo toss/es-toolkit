@@ -6,6 +6,12 @@
 const result = pipe(array, length());
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `length` はパイプされた配列に含まれる値の数を返します。

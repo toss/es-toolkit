@@ -6,6 +6,12 @@
 const result = pipe(array, at(indices));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`at`](../../reference/array/at.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `at`는 `indices`의 각 인덱스에 있는 값을 파이프된 배열에서 읽어요. 음수 인덱스는 `Array.prototype.at`처럼 배열 끝에서부터 세요.

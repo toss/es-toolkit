@@ -6,12 +6,18 @@
 const result = pipe(array, zipObject(values));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`zipObject`](../../reference/array/zipObject.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `zipObject`는 파이프된 배열을 키로 사용하고, 각 키를 `values`의 같은 인덱스 값과 짝지어요.
 
 ```typescript
-import { zipObject, pipe } from 'es-toolkit/fp';
+import { pipe, zipObject } from 'es-toolkit/fp';
 
 pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```

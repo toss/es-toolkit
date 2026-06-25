@@ -6,6 +6,12 @@
 const result = pipe(array, findLast(predicate));
 ```
 
+::: info
+
+このヘルパーは `es-toolkit/fp` 専用です。この操作を [`pipe`](./pipe.md) パイプラインの 1 ステップとして組み合わせたいときに使用してください。
+
+:::
+
 ## 使用法
 
 `findLast` はパイプされた配列を末尾から検索し、`predicate` が `true` を返す最初の値を返します。一致する値がなければ `undefined` を返します。
@@ -13,7 +19,10 @@ const result = pipe(array, findLast(predicate));
 ```typescript
 import { findLast, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], findLast(value => value % 2 === 0)); // => 4
+pipe(
+  [1, 2, 3, 4],
+  findLast(value => value % 2 === 0)
+); // => 4
 ```
 
 #### パラメータ

@@ -6,6 +6,12 @@
 const result = pipe(array, filter(predicate));
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `filter`는 `predicate`가 참 같은 값(truthy)을 반환하는 요소만 남겨요. 타입 술어(type predicate)를 쓰면 결과의 요소 타입이 좁혀져요. 이 함수는 **지연 평가가 가능해요**. [`pipe`](./pipe.md) 안에서는 인접한 지연 연산과 합쳐져요.

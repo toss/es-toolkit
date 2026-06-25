@@ -6,6 +6,12 @@
 const result = pipe(array, flattenDeep());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`flattenDeep`](../../reference/array/flattenDeep.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `flattenDeep` はパイプされた配列のすべてのネストした配列レイヤーを再帰的に取り除きます。[`pipe`](./pipe.md) の中では遅延評価に対応しています。

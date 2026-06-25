@@ -6,6 +6,12 @@
 const result = pipe(obj, omit(keys));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`omit`](../../reference/object/omit.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `omit` 返回一个新对象,其中已从输入对象中移除指定的 `keys`。

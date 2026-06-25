@@ -6,14 +6,23 @@
 const result = pipe(array, uniqWith(areItemsEqual));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`uniqWith`](../../reference/array/uniqWith.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `uniqWith` 会保留按 `areItemsEqual` 尚未与已保留值匹配的第一个值。它在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { uniqWith, pipe } from 'es-toolkit/fp';
+import { pipe, uniqWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqWith((a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 1 }, { id: 2 }],
+  uniqWith((a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 2 }]
 ```
 
 #### 参数

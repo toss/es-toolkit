@@ -6,6 +6,12 @@
 const result = pipe(array, partition(predicate));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`partition`](../../reference/array/partition.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `partition`은 배열 두 개로 이루어진 쌍을 반환해요. 첫 번째 배열에는 `predicate`가 `true`를 반환한 값이, 두 번째 배열에는 나머지 값이 들어가요.
@@ -13,7 +19,10 @@ const result = pipe(array, partition(predicate));
 ```typescript
 import { partition, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], partition(value => value % 2 === 0)); // => [[2, 4], [1, 3]]
+pipe(
+  [1, 2, 3, 4],
+  partition(value => value % 2 === 0)
+); // => [[2, 4], [1, 3]]
 ```
 
 #### 파라미터

@@ -6,12 +6,18 @@
 const result = pipe(array, sample());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`sample`](../../reference/array/sample.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `sample` はパイプされた配列からランダムな値を 1 つ返します。
 
 ```typescript
-import { sample, pipe } from 'es-toolkit/fp';
+import { pipe, sample } from 'es-toolkit/fp';
 
 const value = pipe([1, 2, 3], sample());
 // value is one of 1, 2, or 3.

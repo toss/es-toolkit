@@ -6,6 +6,12 @@ Creates a function that flattens nested arrays to a given depth. Use it with [`p
 const result = pipe(array, flatten(depth));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`flatten`](../../reference/array/flatten.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `flatten` flattens the piped array up to `depth`. When `depth` is omitted, it flattens one level. It is lazy-capable for one-level flattening inside [`pipe`](./pipe.md).

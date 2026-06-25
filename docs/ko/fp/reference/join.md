@@ -6,6 +6,12 @@
 const result = pipe(array, join(separator));
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `join`은 파이프된 배열의 값을 `separator`로 이어 붙여 문자열로 바꿔요. `separator`를 생략하면 쉼표를 사용해요.

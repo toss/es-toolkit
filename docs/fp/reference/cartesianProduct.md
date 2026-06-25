@@ -6,6 +6,12 @@ Creates a function that computes the Cartesian product with the piped array. Use
 const result = pipe(array, cartesianProduct(...arrs));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`cartesianProduct`](../../reference/array/cartesianProduct.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `cartesianProduct` returns every possible tuple formed by taking one value from the piped array and one value from each configured array. The rightmost array advances fastest.

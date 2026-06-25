@@ -6,12 +6,18 @@
 const result = pipe(array, windowed(size, step, options));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`windowed`](../../reference/array/windowed.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `windowed` 返回长度为 `size` 的子数组,每次前进 `step`。只返回完整窗口的形式在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { windowed, pipe } from 'es-toolkit/fp';
+import { pipe, windowed } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
 

@@ -6,6 +6,12 @@ Creates a function that returns the last value of an array. Use it with [`pipe`]
 const result = pipe(array, last());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`last`](../../reference/array/last.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `last` returns the last value in the piped array. If the array is empty, it returns `undefined`.

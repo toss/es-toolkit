@@ -6,6 +6,12 @@
 const result = pipe(array, at(indices));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`at`](../../reference/array/at.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `at` 会从管道中的数组读取 `indices` 中每个索引对应的值。负数索引会像 `Array.prototype.at` 一样从末尾开始计数。

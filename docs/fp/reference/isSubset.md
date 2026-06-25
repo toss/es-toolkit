@@ -6,6 +6,12 @@ Creates a function that checks whether the piped array is a subset of another ar
 const result = pipe(array, isSubset(superset));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`isSubset`](../../reference/array/isSubset.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `isSubset` returns `true` when every value in the piped array is present in `superset`.

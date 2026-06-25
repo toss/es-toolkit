@@ -6,6 +6,12 @@ Creates a function that recursively flattens nested arrays. Use it with [`pipe`]
 const result = pipe(array, flattenDeep());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`flattenDeep`](../../reference/array/flattenDeep.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `flattenDeep` recursively removes every nested array layer from the piped array. It is lazy-capable inside [`pipe`](./pipe.md).

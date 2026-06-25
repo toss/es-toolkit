@@ -6,6 +6,12 @@ Creates a function that returns the length of an array. Use it with [`pipe`](./p
 const result = pipe(array, length());
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `length` returns the number of values in the piped array.

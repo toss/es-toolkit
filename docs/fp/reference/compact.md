@@ -6,6 +6,12 @@ Creates a function that removes falsey values from an array. Use it with [`pipe`
 const result = pipe(array, compact());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`compact`](../../reference/array/compact.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `compact` removes `false`, `null`, `undefined`, `0`, `-0`, `0n`, an empty string, and `NaN`. It is lazy-capable inside [`pipe`](./pipe.md), so a trailing `take` can stop the walk early.

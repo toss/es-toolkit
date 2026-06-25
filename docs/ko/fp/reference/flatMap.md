@@ -6,6 +6,12 @@
 const result = pipe(array, flatMap(callback));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`flatMap`](../../reference/array/flatMap.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `flatMap`은 파이프된 배열의 각 값에 `callback`을 호출하고 반환된 배열들을 이어 붙여요. [`pipe`](./pipe.md) 안에서는 지연 평가가 가능해요.
@@ -13,7 +19,10 @@ const result = pipe(array, flatMap(callback));
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
+pipe(
+  [1, 2, 3],
+  flatMap(value => [value, value * 10])
+); // => [1, 10, 2, 20, 3, 30]
 ```
 
 #### 파라미터

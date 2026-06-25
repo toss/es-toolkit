@@ -6,6 +6,12 @@
 const result = pipe(array, forEach(callback));
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `forEach`는 파이프라인에서 부수 효과 단계를 넣고 싶을 때 유용해요. 각 값에 `callback`을 호출하고 원래 배열을 그대로 통과시켜요. [`pipe`](./pipe.md) 안에서는 인접한 지연 연산이 일찍 멈출 수 있을 때 지연 평가가 가능해요.
@@ -15,7 +21,10 @@ import { forEach, pipe } from 'es-toolkit/fp';
 
 const values: number[] = [];
 
-pipe([1, 2, 3], forEach(value => values.push(value))); // => [1, 2, 3]
+pipe(
+  [1, 2, 3],
+  forEach(value => values.push(value))
+); // => [1, 2, 3]
 values; // => [1, 2, 3]
 ```
 

@@ -6,12 +6,18 @@
 const result = pipe(array, zipObject(values));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`zipObject`](../../reference/array/zipObject.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `zipObject` 使用管道中的数组作为键,并将每个键与 `values` 中相同索引处的值配对。
 
 ```typescript
-import { zipObject, pipe } from 'es-toolkit/fp';
+import { pipe, zipObject } from 'es-toolkit/fp';
 
 pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```

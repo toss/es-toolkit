@@ -6,6 +6,12 @@
 const result = pipe(array, flatMapDeep(iteratee));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`flatMapDeep`](../../reference/array/flatMapDeep.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `flatMapDeep` 会对管道中数组的每个值调用 `iteratee`,并递归展平返回的数组。
@@ -13,7 +19,10 @@ const result = pipe(array, flatMapDeep(iteratee));
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
+pipe(
+  [1, 2],
+  flatMapDeep(value => [[value, value]])
+); // => [1, 1, 2, 2]
 ```
 
 #### 参数

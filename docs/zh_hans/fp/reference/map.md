@@ -6,6 +6,12 @@
 const result = pipe(array, map(callbackfn));
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `map` 通过对每个元素调用 `callbackfn` 来构建一个新数组。它**支持惰性求值**:在 [`pipe`](./pipe.md) 中,它会与相邻的惰性操作融合,因此位于末尾的 `take` 可以提前结束工作。

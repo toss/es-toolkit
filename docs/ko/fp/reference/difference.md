@@ -6,6 +6,12 @@
 const result = pipe(array, difference(secondArray));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`difference`](../../reference/array/difference.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `difference`는 파이프된 배열에서 `secondArray`에 없는 값만 유지해요. 파이프된 배열의 순서를 보존해요.

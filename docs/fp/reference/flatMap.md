@@ -6,6 +6,12 @@ Creates a function that maps each value to an array and flattens the result by o
 const result = pipe(array, flatMap(callback));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`flatMap`](../../reference/array/flatMap.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `flatMap` calls `callback` for each value in the piped array and concatenates the returned arrays. It is lazy-capable inside [`pipe`](./pipe.md).
@@ -13,7 +19,10 @@ const result = pipe(array, flatMap(callback));
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
+pipe(
+  [1, 2, 3],
+  flatMap(value => [value, value * 10])
+); // => [1, 10, 2, 20, 3, 30]
 ```
 
 #### Parameters

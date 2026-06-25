@@ -6,6 +6,12 @@
 const result = pipe(array, initial());
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`initial`](../../reference/array/initial.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `initial`은 파이프된 배열에서 마지막 값을 제외한 새 배열을 반환해요.

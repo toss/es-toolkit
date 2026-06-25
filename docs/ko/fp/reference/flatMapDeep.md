@@ -6,6 +6,12 @@
 const result = pipe(array, flatMapDeep(iteratee));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`flatMapDeep`](../../reference/array/flatMapDeep.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `flatMapDeep`은 파이프된 배열의 각 값에 `iteratee`를 호출하고 반환된 배열을 재귀적으로 펼쳐요.
@@ -13,7 +19,10 @@ const result = pipe(array, flatMapDeep(iteratee));
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
+pipe(
+  [1, 2],
+  flatMapDeep(value => [[value, value]])
+); // => [1, 1, 2, 2]
 ```
 
 #### 파라미터

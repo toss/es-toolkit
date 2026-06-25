@@ -6,12 +6,18 @@
 const result = pipe(array, reverse());
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `reverse` 返回一个按相反顺序包含管道中数组值的新数组。它不会修改输入数组。
 
 ```typescript
-import { reverse, pipe } from 'es-toolkit/fp';
+import { pipe, reverse } from 'es-toolkit/fp';
 
 const array = [1, 2, 3];
 

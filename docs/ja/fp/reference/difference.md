@@ -6,6 +6,12 @@
 const result = pipe(array, difference(secondArray));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`difference`](../../reference/array/difference.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `difference` は、パイプされた配列のうち `secondArray` に含まれない値だけを残します。パイプされた配列の順序は保たれます。

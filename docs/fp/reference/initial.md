@@ -6,6 +6,12 @@ Creates a function that returns all values except the last one. Use it with [`pi
 const result = pipe(array, initial());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`initial`](../../reference/array/initial.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `initial` returns a new array without the last value of the piped array.

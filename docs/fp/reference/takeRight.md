@@ -6,12 +6,18 @@ Creates a function that returns values from the end of an array. Use it with [`p
 const result = pipe(array, takeRight(count));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`takeRight`](../../reference/array/takeRight.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `takeRight` returns the last `count` values from the piped array.
 
 ```typescript
-import { takeRight, pipe } from 'es-toolkit/fp';
+import { pipe, takeRight } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], takeRight(2)); // => [3, 4]
 ```

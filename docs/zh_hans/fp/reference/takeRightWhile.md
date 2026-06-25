@@ -6,14 +6,23 @@
 const result = pipe(array, takeRightWhile(predicate));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`takeRightWhile`](../../reference/array/takeRightWhile.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `takeRightWhile` 会从管道中数组的末尾开始遍历,并在 `predicate` 返回 `true` 时保留值。遇到第一个不满足条件的值时停止。
 
 ```typescript
-import { takeRightWhile, pipe } from 'es-toolkit/fp';
+import { pipe, takeRightWhile } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], takeRightWhile(value => value > 2)); // => [3, 4]
+pipe(
+  [1, 2, 3, 4],
+  takeRightWhile(value => value > 2)
+); // => [3, 4]
 ```
 
 #### 参数

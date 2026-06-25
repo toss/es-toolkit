@@ -6,12 +6,18 @@
 const result = pipe(array, tail());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`tail`](../../reference/array/tail.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `tail` はパイプされた配列から最初の値を除いた新しい配列を返します。
 
 ```typescript
-import { tail, pipe } from 'es-toolkit/fp';
+import { pipe, tail } from 'es-toolkit/fp';
 
 pipe([1, 2, 3], tail()); // => [2, 3]
 ```

@@ -6,14 +6,23 @@
 const result = pipe(array, xorWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`xorWith`](../../reference/array/xorWith.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `xorWith` は、`areItemsEqual` によって 2 つの配列の間で一致しない値を返します。
 
 ```typescript
-import { xorWith, pipe } from 'es-toolkit/fp';
+import { pipe, xorWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 3 }]
 ```
 
 #### パラメータ

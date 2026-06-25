@@ -6,6 +6,12 @@
 const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`intersectionWith`](../../reference/array/intersectionWith.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `intersectionWith` は、`secondArray` の少なくとも 1 つの値に対して `areItemsEqual` が `true` を返す場合、パイプされた配列の値を残します。
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```typescript
 import { intersectionWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)
+); // => [{ id: 2 }]
 ```
 
 #### パラメータ

@@ -6,6 +6,12 @@
 const result = pipe(array, maxBy(getValue));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`maxBy`](../../reference/array/maxBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `maxBy` はパイプされた配列の各値に `getValue` を呼び出し、その結果が最大の値を返します。配列が空の場合は `undefined` を返します。
@@ -13,7 +19,10 @@ const result = pipe(array, maxBy(getValue));
 ```typescript
 import { maxBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ score: 10 }, { score: 30 }, { score: 20 }], maxBy(item => item.score)); // => { score: 30 }
+pipe(
+  [{ score: 10 }, { score: 30 }, { score: 20 }],
+  maxBy(item => item.score)
+); // => { score: 30 }
 ```
 
 #### パラメータ

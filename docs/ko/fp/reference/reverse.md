@@ -6,12 +6,18 @@
 const result = pipe(array, reverse());
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `reverse`는 파이프된 배열의 값을 역순으로 담은 새 배열을 반환해요. 입력 배열은 변경하지 않아요.
 
 ```typescript
-import { reverse, pipe } from 'es-toolkit/fp';
+import { pipe, reverse } from 'es-toolkit/fp';
 
 const array = [1, 2, 3];
 

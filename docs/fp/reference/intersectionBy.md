@@ -6,6 +6,12 @@ Creates a function that keeps values by a mapped key. Use it with [`pipe`](./pip
 const result = pipe(array, intersectionBy(secondArray, mapper));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`intersectionBy`](../../reference/array/intersectionBy.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `intersectionBy` compares the values returned by `mapper`. Values from the piped array are kept when their mapped key appears in `secondArray`.
@@ -13,7 +19,10 @@ const result = pipe(array, intersectionBy(secondArray, mapper));
 ```typescript
 import { intersectionBy, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], intersectionBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  intersectionBy([2], value => (typeof value === 'number' ? value : value.id))
+); // => [{ id: 2 }]
 ```
 
 #### Parameters

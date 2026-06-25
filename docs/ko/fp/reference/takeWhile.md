@@ -6,14 +6,23 @@
 const result = pipe(array, takeWhile(predicate));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`takeWhile`](../../reference/array/takeWhile.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `takeWhile`는 파이프된 배열을 앞에서부터 보면서 `predicate`가 `true`를 반환하는 동안 값을 유지해요. 지연 평가가 가능해서 [`pipe`](./pipe.md) 안의 앞선 지연 연산을 일찍 멈출 수 있어요.
 
 ```typescript
-import { takeWhile, pipe } from 'es-toolkit/fp';
+import { pipe, takeWhile } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 1], takeWhile(value => value < 3)); // => [1, 2]
+pipe(
+  [1, 2, 3, 1],
+  takeWhile(value => value < 3)
+); // => [1, 2]
 ```
 
 #### 파라미터

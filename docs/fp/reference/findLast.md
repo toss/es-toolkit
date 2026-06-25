@@ -6,6 +6,12 @@ Creates a function that returns the last value that passes a test. Use it with [
 const result = pipe(array, findLast(predicate));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `findLast` searches the piped array from the end and returns the first value for which `predicate` returns `true`. If no value matches, it returns `undefined`.
@@ -13,7 +19,10 @@ const result = pipe(array, findLast(predicate));
 ```typescript
 import { findLast, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], findLast(value => value % 2 === 0)); // => 4
+pipe(
+  [1, 2, 3, 4],
+  findLast(value => value % 2 === 0)
+); // => 4
 ```
 
 #### Parameters

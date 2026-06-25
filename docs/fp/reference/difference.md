@@ -6,6 +6,12 @@ Creates a function that excludes values found in another array. Use it with [`pi
 const result = pipe(array, difference(secondArray));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`difference`](../../reference/array/difference.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `difference` keeps values from the piped array that are not present in `secondArray`. It preserves the order of the piped array.

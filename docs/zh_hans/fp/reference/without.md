@@ -6,12 +6,18 @@
 const result = pipe(array, without(...values));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`without`](../../reference/array/without.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `without` 会从管道中的数组移除所有等于 `values` 中任意值的值。它在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { without, pipe } from 'es-toolkit/fp';
+import { pipe, without } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 2], without(2)); // => [1, 3]
 ```

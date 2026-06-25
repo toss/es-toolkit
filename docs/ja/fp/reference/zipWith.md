@@ -6,16 +6,28 @@
 const result = pipe(array, zipWith(...arrs, combine));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`zipWith`](../../reference/array/zipWith.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `zipWith` は、パイプされた配列と設定した配列の同じインデックスの値を `combine` に渡します。配列の長さが異なる場合、足りない値は `undefined` として渡されます。
 
 ```typescript
-import { zipWith, pipe } from 'es-toolkit/fp';
+import { pipe, zipWith } from 'es-toolkit/fp';
 
-pipe([1, 2], zipWith([10, 20], (a, b) => a + b)); // => [11, 22]
+pipe(
+  [1, 2],
+  zipWith([10, 20], (a, b) => a + b)
+); // => [11, 22]
 
-pipe([1, 2, 3], zipWith([10], (a, b = 0) => a + b)); // => [11, 2, 3]
+pipe(
+  [1, 2, 3],
+  zipWith([10], (a, b = 0) => a + b)
+); // => [11, 2, 3]
 ```
 
 #### パラメータ

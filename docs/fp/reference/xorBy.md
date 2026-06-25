@@ -6,14 +6,23 @@ Creates a function that returns the symmetric difference by a mapped key. Use it
 const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`xorBy`](../../reference/array/xorBy.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `xorBy` compares the values returned by `mapper` and returns values whose mapped key appears in exactly one array.
 
 ```typescript
-import { xorBy, pipe } from 'es-toolkit/fp';
+import { pipe, xorBy } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
+); // => [{ id: 1 }, { id: 3 }]
 ```
 
 #### Parameters

@@ -6,12 +6,18 @@ Creates a function that returns a filled copy of an array. Use it with [`pipe`](
 const result = pipe(array, toFilled(value, start, end));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`toFilled`](../../reference/array/toFilled.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `toFilled` fills a copy of the piped array with `value` from `start` up to, but not including, `end`. It follows `Array.prototype.fill` index semantics and does not mutate the input array.
 
 ```typescript
-import { toFilled, pipe } from 'es-toolkit/fp';
+import { pipe, toFilled } from 'es-toolkit/fp';
 
 const array = [1, 2, 3, 4];
 

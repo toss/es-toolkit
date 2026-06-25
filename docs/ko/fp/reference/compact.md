@@ -6,6 +6,12 @@
 const result = pipe(array, compact());
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`compact`](../../reference/array/compact.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `compact`는 `false`, `null`, `undefined`, `0`, `-0`, `0n`, 빈 문자열, `NaN`을 제거해요. [`pipe`](./pipe.md) 안에서는 지연 평가가 가능해서, 마지막에 오는 `take`가 순회를 일찍 멈출 수 있어요.

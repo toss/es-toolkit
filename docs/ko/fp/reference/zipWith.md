@@ -6,16 +6,28 @@
 const result = pipe(array, zipWith(...arrs, combine));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`zipWith`](../../reference/array/zipWith.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `zipWith`는 파이프된 배열과 설정한 배열들의 같은 인덱스 값을 `combine`에 전달해요. 배열 길이가 다르면 빠진 값은 `undefined`로 전달돼요.
 
 ```typescript
-import { zipWith, pipe } from 'es-toolkit/fp';
+import { pipe, zipWith } from 'es-toolkit/fp';
 
-pipe([1, 2], zipWith([10, 20], (a, b) => a + b)); // => [11, 22]
+pipe(
+  [1, 2],
+  zipWith([10, 20], (a, b) => a + b)
+); // => [11, 22]
 
-pipe([1, 2, 3], zipWith([10], (a, b = 0) => a + b)); // => [11, 2, 3]
+pipe(
+  [1, 2, 3],
+  zipWith([10], (a, b = 0) => a + b)
+); // => [11, 2, 3]
 ```
 
 #### 파라미터

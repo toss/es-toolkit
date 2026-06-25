@@ -6,6 +6,12 @@
 const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`differenceWith`](../../reference/array/differenceWith.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `differenceWith` は、`secondArray` のすべての値に対して `areItemsEqual` が `false` を返す場合だけ、パイプされた配列の値を残します。
@@ -13,7 +19,10 @@ const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```typescript
 import { differenceWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], differenceWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 1 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  differenceWith([{ id: 2 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }]
 ```
 
 #### パラメータ

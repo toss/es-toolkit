@@ -6,6 +6,12 @@ Creates a function that maps each value and deeply flattens the result. Use it w
 const result = pipe(array, flatMapDeep(iteratee));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`flatMapDeep`](../../reference/array/flatMapDeep.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `flatMapDeep` calls `iteratee` for each value in the piped array and recursively flattens the returned arrays.
@@ -13,7 +19,10 @@ const result = pipe(array, flatMapDeep(iteratee));
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
+pipe(
+  [1, 2],
+  flatMapDeep(value => [[value, value]])
+); // => [1, 1, 2, 2]
 ```
 
 #### Parameters

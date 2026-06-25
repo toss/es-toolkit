@@ -6,12 +6,18 @@
 const result = pipe(array, zip(...arrs));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`zip`](../../reference/array/zip.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `zip` 会组合管道中的数组和配置数组在相同索引处的值。如果数组长度不同,缺失值会是 `undefined`。
 
 ```typescript
-import { zip, pipe } from 'es-toolkit/fp';
+import { pipe, zip } from 'es-toolkit/fp';
 
 pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
 

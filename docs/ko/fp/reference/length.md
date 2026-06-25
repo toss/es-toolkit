@@ -6,6 +6,12 @@
 const result = pipe(array, length());
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `length`는 파이프된 배열에 들어 있는 값의 개수를 반환해요.

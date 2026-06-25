@@ -6,6 +6,12 @@
 const result = pipe(array, flatten(depth));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`flatten`](../../reference/array/flatten.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `flatten`은 파이프된 배열을 `depth` 깊이까지 펼쳐요. `depth`를 생략하면 한 단계만 펼쳐요. 한 단계 펼치기는 [`pipe`](./pipe.md) 안에서 지연 평가가 가능해요.

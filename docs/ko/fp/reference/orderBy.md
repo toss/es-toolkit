@@ -6,6 +6,12 @@
 const result = pipe(array, orderBy(criteria, orders));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`orderBy`](../../reference/array/orderBy.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `orderBy`는 파이프된 배열을 각 기준 순서대로 정렬해요. 각 정렬 방향은 대응하는 기준을 오름차순이나 내림차순으로 정렬할지 정해요.

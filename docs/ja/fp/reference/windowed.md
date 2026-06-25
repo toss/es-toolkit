@@ -6,12 +6,18 @@
 const result = pipe(array, windowed(size, step, options));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`windowed`](../../reference/array/windowed.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `windowed` は長さ `size` のサブ配列を返し、毎回 `step` ずつ前に進みます。完全なウィンドウだけを返す形式は [`pipe`](./pipe.md) の中で遅延評価に対応しています。
 
 ```typescript
-import { windowed, pipe } from 'es-toolkit/fp';
+import { pipe, windowed } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
 

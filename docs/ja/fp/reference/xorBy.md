@@ -6,14 +6,23 @@
 const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`xorBy`](../../reference/array/xorBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `xorBy` は `mapper` が返す値を比較し、マッピングされたキーが片方の配列にだけ存在する値を返します。
 
 ```typescript
-import { xorBy, pipe } from 'es-toolkit/fp';
+import { pipe, xorBy } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
+); // => [{ id: 1 }, { id: 3 }]
 ```
 
 #### パラメータ

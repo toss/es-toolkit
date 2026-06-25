@@ -6,12 +6,18 @@
 const result = pipe(array, toFilled(value, start, end));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`toFilled`](../../reference/array/toFilled.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `toFilled`는 파이프된 배열의 복사본에서 `start`부터 `end` 직전까지 `value`로 채워요. `Array.prototype.fill`의 인덱스 규칙을 따르고 입력 배열은 변경하지 않아요.
 
 ```typescript
-import { toFilled, pipe } from 'es-toolkit/fp';
+import { pipe, toFilled } from 'es-toolkit/fp';
 
 const array = [1, 2, 3, 4];
 

@@ -6,14 +6,23 @@
 const result = pipe(array, unionWith(secondArray, areItemsEqual));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`unionWith`](../../reference/array/unionWith.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `unionWith` は結合された配列を順に見て、`areItemsEqual` によって既に残した値と一致しない最初の値を残します。
 
 ```typescript
-import { unionWith, pipe } from 'es-toolkit/fp';
+import { pipe, unionWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
 #### パラメータ

@@ -6,12 +6,18 @@
 const result = pipe(array, toFilled(value, start, end));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`toFilled`](../../reference/array/toFilled.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `toFilled` は、パイプされた配列のコピーを `start` から `end` の直前まで `value` で埋めます。`Array.prototype.fill` のインデックス規則に従い、入力配列は変更しません。
 
 ```typescript
-import { toFilled, pipe } from 'es-toolkit/fp';
+import { pipe, toFilled } from 'es-toolkit/fp';
 
 const array = [1, 2, 3, 4];
 

@@ -6,6 +6,12 @@
 const result = pipe(array, countBy(mapper));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`countBy`](../../reference/array/countBy.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `countBy` はパイプされた配列の各値に `mapper` を呼び出し、mapper の結果をキー、個数を値にしたオブジェクトを返します。
@@ -13,7 +19,10 @@ const result = pipe(array, countBy(mapper));
 ```typescript
 import { countBy, pipe } from 'es-toolkit/fp';
 
-pipe(['one', 'two', 'three'], countBy(word => word.length)); // => { 3: 2, 5: 1 }
+pipe(
+  ['one', 'two', 'three'],
+  countBy(word => word.length)
+); // => { 3: 2, 5: 1 }
 ```
 
 #### パラメータ

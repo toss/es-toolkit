@@ -6,6 +6,12 @@ Creates a function that drops values from the beginning of an array. Use it with
 const result = pipe(array, drop(count));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`drop`](../../reference/array/drop.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `drop` removes the first `count` values from the piped array. It is lazy-capable inside [`pipe`](./pipe.md).

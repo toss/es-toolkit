@@ -6,14 +6,23 @@
 const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`xorBy`](../../reference/array/xorBy.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `xorBy` 比较 `mapper` 返回的值,并返回映射键只存在于一个数组中的值。
 
 ```typescript
-import { xorBy, pipe } from 'es-toolkit/fp';
+import { pipe, xorBy } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
+pipe(
+  [{ id: 1 }, { id: 2 }],
+  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
+); // => [{ id: 1 }, { id: 3 }]
 ```
 
 #### 参数

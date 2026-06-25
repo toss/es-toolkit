@@ -6,6 +6,12 @@
 const result = pipe(array, last());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`last`](../../reference/array/last.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `last` はパイプされた配列の最後の値を返します。配列が空の場合は `undefined` を返します。

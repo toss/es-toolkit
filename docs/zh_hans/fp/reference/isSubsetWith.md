@@ -6,6 +6,12 @@
 const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`isSubsetWith`](../../reference/array/isSubsetWith.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `isSubsetWith` 在管道中数组的每个值都按 `areItemsEqual` 与 `superset` 中至少一个值匹配时返回 `true`。
@@ -13,7 +19,10 @@ const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```typescript
 import { isSubsetWith, pipe } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }], isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)); // => true
+pipe(
+  [{ id: 1 }],
+  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
+); // => true
 ```
 
 #### 参数

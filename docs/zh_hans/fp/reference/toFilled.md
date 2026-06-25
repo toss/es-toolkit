@@ -6,12 +6,18 @@
 const result = pipe(array, toFilled(value, start, end));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`toFilled`](../../reference/array/toFilled.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `toFilled` 会在管道中数组的副本中,从 `start` 到 `end` 之前的位置填入 `value`。它遵循 `Array.prototype.fill` 的索引语义,且不会修改输入数组。
 
 ```typescript
-import { toFilled, pipe } from 'es-toolkit/fp';
+import { pipe, toFilled } from 'es-toolkit/fp';
 
 const array = [1, 2, 3, 4];
 

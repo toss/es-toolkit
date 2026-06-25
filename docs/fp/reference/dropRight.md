@@ -6,6 +6,12 @@ Creates a function that drops values from the end of an array. Use it with [`pip
 const result = pipe(array, dropRight(count));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`dropRight`](../../reference/array/dropRight.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `dropRight` removes the last `count` values from the piped array.

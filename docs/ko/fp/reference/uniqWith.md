@@ -6,14 +6,23 @@
 const result = pipe(array, uniqWith(areItemsEqual));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`uniqWith`](../../reference/array/uniqWith.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `uniqWith`는 `areItemsEqual` 기준으로 이미 유지한 값과 일치하지 않는 첫 값을 유지해요. [`pipe`](./pipe.md) 안에서는 지연 평가가 가능해요.
 
 ```typescript
-import { uniqWith, pipe } from 'es-toolkit/fp';
+import { pipe, uniqWith } from 'es-toolkit/fp';
 
-pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqWith((a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }]
+pipe(
+  [{ id: 1 }, { id: 1 }, { id: 2 }],
+  uniqWith((a, b) => a.id === b.id)
+); // => [{ id: 1 }, { id: 2 }]
 ```
 
 #### 파라미터

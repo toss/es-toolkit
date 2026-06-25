@@ -6,6 +6,12 @@
 const result = pipe(array, flatMap(callback));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`flatMap`](../../reference/array/flatMap.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `flatMap` はパイプされた配列の各値に `callback` を呼び出し、返された配列を連結します。[`pipe`](./pipe.md) の中では遅延評価に対応しています。
@@ -13,7 +19,10 @@ const result = pipe(array, flatMap(callback));
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
+pipe(
+  [1, 2, 3],
+  flatMap(value => [value, value * 10])
+); // => [1, 10, 2, 20, 3, 30]
 ```
 
 #### パラメータ

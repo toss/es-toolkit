@@ -6,6 +6,12 @@
 const result = pipe(array, initial());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`initial`](../../reference/array/initial.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `initial` はパイプされた配列から最後の値を除いた新しい配列を返します。

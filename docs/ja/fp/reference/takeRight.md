@@ -6,12 +6,18 @@
 const result = pipe(array, takeRight(count));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`takeRight`](../../reference/array/takeRight.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `takeRight` はパイプされた配列の末尾から `count` 個の値を返します。
 
 ```typescript
-import { takeRight, pipe } from 'es-toolkit/fp';
+import { pipe, takeRight } from 'es-toolkit/fp';
 
 pipe([1, 2, 3, 4], takeRight(2)); // => [3, 4]
 ```

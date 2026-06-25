@@ -6,6 +6,12 @@
 const result = pipe(value, add(addend));
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `add` 返回一个把 `addend` 加到其输入上的函数。它是为组合而设计的:既可以转换流经 [`pipe`](./pipe.md) 的值,也可以作为 [`map`](./map.md) 等函数的回调。

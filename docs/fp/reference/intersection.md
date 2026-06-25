@@ -6,6 +6,12 @@ Creates a function that keeps values found in another array. Use it with [`pipe`
 const result = pipe(array, intersection(secondArray));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`intersection`](../../reference/array/intersection.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `intersection` keeps values from the piped array that are also present in `secondArray`. It preserves the order of the piped array.

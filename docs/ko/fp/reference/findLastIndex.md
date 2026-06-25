@@ -6,6 +6,12 @@
 const result = pipe(array, findLastIndex(predicate));
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `findLastIndex`는 파이프된 배열을 끝에서부터 검색해서 `predicate`가 `true`를 반환하는 첫 번째 값의 인덱스를 반환해요. 일치하는 값이 없으면 `-1`을 반환해요.
@@ -13,7 +19,10 @@ const result = pipe(array, findLastIndex(predicate));
 ```typescript
 import { findLastIndex, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 4], findLastIndex(value => value % 2 === 0)); // => 3
+pipe(
+  [1, 2, 3, 4],
+  findLastIndex(value => value % 2 === 0)
+); // => 3
 ```
 
 #### 파라미터

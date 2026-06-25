@@ -6,6 +6,12 @@
 const result = pipe(array, cartesianProduct(...arrs));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`cartesianProduct`](../../reference/array/cartesianProduct.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `cartesianProduct` は、パイプされた配列と設定した各配列から 1 つずつ値を選んで作れるすべてのタプルを返します。右端の配列が最も速く進みます。

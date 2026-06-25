@@ -6,6 +6,12 @@
 const result = pipe(array, dropWhile(predicate));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`dropWhile`](../../reference/array/dropWhile.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `dropWhile` はパイプされた配列を先頭から見て、`predicate` が `true` を返す間だけ値を取り除きます。[`pipe`](./pipe.md) の中では遅延評価に対応しています。
@@ -13,7 +19,10 @@ const result = pipe(array, dropWhile(predicate));
 ```typescript
 import { dropWhile, pipe } from 'es-toolkit/fp';
 
-pipe([1, 2, 3, 1], dropWhile(value => value < 3)); // => [3, 1]
+pipe(
+  [1, 2, 3, 1],
+  dropWhile(value => value < 3)
+); // => [3, 1]
 ```
 
 #### パラメータ
