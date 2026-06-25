@@ -1,4 +1,4 @@
-# map
+# map (Functional Programming)
 
 Creates a function that transforms every element of an array, equivalent to `Array.prototype.map`. Use it with [`pipe`](./pipe.md).
 

@@ -1,4 +1,4 @@
-# pipe
+# pipe (Functional Programming)
 
 Performs left-to-right function composition, threading a value through a sequence of functions.
 

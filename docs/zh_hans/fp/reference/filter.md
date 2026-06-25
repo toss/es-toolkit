@@ -1,4 +1,4 @@
-# filter
+# filter (函数式编程)
 
 创建一个只保留通过测试的元素的函数,等价于 `Array.prototype.filter`。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 

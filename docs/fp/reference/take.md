@@ -1,4 +1,4 @@
-# take
+# take (Functional Programming)
 
 Creates a function that returns the first `count` elements of an array. Use it with [`pipe`](./pipe.md).
 

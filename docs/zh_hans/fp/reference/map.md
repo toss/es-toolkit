@@ -1,4 +1,4 @@
-# map
+# map (函数式编程)
 
 创建一个转换数组中每个元素的函数,等价于 `Array.prototype.map`。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 

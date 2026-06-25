@@ -1,4 +1,4 @@
-# multiply
+# multiply (Functional Programming)
 
 Creates a function that multiplies its input by a number. Use it with [`pipe`](./pipe.md).
 

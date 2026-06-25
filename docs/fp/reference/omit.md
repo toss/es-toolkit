@@ -1,4 +1,4 @@
-# omit
+# omit (Functional Programming)
 
 Creates a function that removes the given keys from an object. Use it with [`pipe`](./pipe.md).
 

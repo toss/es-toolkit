@@ -1,4 +1,4 @@
-# chunk
+# chunk (Functional Programming)
 
 Creates a function that splits an array into sub-arrays of a given length. Use it with [`pipe`](./pipe.md).
 

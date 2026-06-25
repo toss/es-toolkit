@@ -1,4 +1,4 @@
-# filter
+# filter (関数型プログラミング)
 
 テストを通過した要素だけを残す関数を作成します。`Array.prototype.filter` と同等です。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 

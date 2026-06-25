@@ -1,4 +1,4 @@
-# filter
+# filter (함수형 프로그래밍)
 
 `Array.prototype.filter`처럼, 검사를 통과하는 요소만 남기는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 

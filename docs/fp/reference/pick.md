@@ -1,4 +1,4 @@
-# pick
+# pick (Functional Programming)
 
 Creates a function that keeps only the given keys of an object. Use it with [`pipe`](./pipe.md).
 

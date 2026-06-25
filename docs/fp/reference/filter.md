@@ -1,4 +1,4 @@
-# filter
+# filter (Functional Programming)
 
 Creates a function that keeps only the elements that pass a test, equivalent to `Array.prototype.filter`. Use it with [`pipe`](./pipe.md).
 

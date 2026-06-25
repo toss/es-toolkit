@@ -1,4 +1,4 @@
-# add
+# add (Functional Programming)
 
 Creates a function that adds a number to its input. Use it with [`pipe`](./pipe.md).
 

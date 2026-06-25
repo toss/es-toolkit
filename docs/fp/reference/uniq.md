@@ -1,4 +1,4 @@
-# uniq
+# uniq (Functional Programming)
 
 Creates a function that removes duplicate values from an array. Use it with [`pipe`](./pipe.md).
 

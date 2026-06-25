@@ -107,7 +107,11 @@ export const flavors = [
     label: 'es-toolkit/fp',
     description: 'Functional pipelines',
     prefix: 'fp',
-    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    guideItems: [
+      { labelKey: 'introduction', slug: 'intro' },
+      { labelKey: 'bundleSize', slug: 'bundle-size' },
+      { labelKey: 'performance', slug: 'performance' },
+    ],
     categories: [],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',

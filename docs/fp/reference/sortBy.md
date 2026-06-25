@@ -1,4 +1,4 @@
-# sortBy
+# sortBy (Functional Programming)
 
 Creates a function that sorts an array of objects in ascending order by one or more criteria. Use it with [`pipe`](./pipe.md).
 
