@@ -7,6 +7,10 @@ export async function getBundleSize(
 ) {
   const script = `import { ${funcName} } from "${pkg}"; console.log(${funcName})`;
 
+  return getBundleSizeFromScript(script);
+}
+
+export async function getBundleSizeFromScript(script: string) {
   const bundled = await esbuild.build({
     stdin: {
       contents: script,
