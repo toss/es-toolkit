@@ -1,4 +1,4 @@
-import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that builds a new array by calling `callback` on every
@@ -10,9 +10,8 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  *
  * @template T - The type of elements in the input array.
  * @template U - The type of elements in the output array.
- * @param callback - Called with `(value, index, array)` for each element; its
- *   return value becomes the corresponding element of the output array. During
- *   lazy evaluation `array` holds only the elements seen so far.
+ * @param callback - Called with `(value, index)` for each element; its return
+ *   value becomes the corresponding element of the output array.
  * @returns A function that maps a `readonly T[]` to a new `U[]`.
  *
  * @example
@@ -24,18 +23,14 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  * // The index is available as the second argument.
  * pipe([10, 20, 30], map((value, index) => value + index)); // => [10, 21, 32]
  */
-export function map<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): (array: readonly T[]) => U[] {
+export function map<T, U>(callback: (value: T, index: number) => U): (array: readonly T[]) => U[] {
   function mapEager(array: readonly T[]): U[] {
     return array.map(callback);
   }
 
-  function* mapLazy(values: Iterable<T>): Generator<U> {
-    const seen: T[] = [];
-    for (const value of values) {
-      seen.push(value);
-      yield callback(value, seen.length - 1, seen);
-    }
-  }
+  const mapLazy = createLazyFunction<T, U>((value, index, emit) => {
+    emit(callback(value, index));
+  });
 
   return combineEagerAndLazyFunctions(mapEager, mapLazy);
 }

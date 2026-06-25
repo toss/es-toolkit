@@ -34,7 +34,7 @@ pipe(
 
 #### パラメータ
 
-- `callbackfn` (`(value: T, index: number, array: readonly T[]) => U`): 各要素に対して呼び出される関数です。その戻り値が出力配列の対応する要素になります。遅延評価の間、`array` にはそれまでに処理した要素だけが含まれます。
+- `callbackfn` (`(value: T, index: number) => U`): 各要素に対して呼び出される関数です。その戻り値が出力配列の対応する要素になります。
 
 #### 戻り値
 

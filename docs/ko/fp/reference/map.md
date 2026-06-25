@@ -34,7 +34,7 @@ pipe(
 
 #### 파라미터
 
-- `callbackfn` (`(value: T, index: number, array: readonly T[]) => U`): 각 요소마다 호출되는 함수예요. 이 함수의 반환 값이 출력 배열의 해당 요소가 돼요. 지연 평가가 진행되는 동안에는 `array`에 지금까지 본 요소들만 담겨 있어요.
+- `callbackfn` (`(value: T, index: number) => U`): 각 요소마다 호출되는 함수예요. 이 함수의 반환 값이 출력 배열의 해당 요소가 돼요.
 
 #### 반환 값
 

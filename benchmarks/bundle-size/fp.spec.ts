@@ -6,7 +6,7 @@ import { getBundleSize } from './utils/getBundleSize';
 
 describe('pipe bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'pipe')).toMatchInlineSnapshot(`436`);
+    expect(await getBundleSize('es-toolkit/fp', 'pipe')).toMatchInlineSnapshot(`759`);
   });
 
   it('remeda', async () => {
@@ -16,7 +16,7 @@ describe('pipe bundle size', () => {
 
 describe('map bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'map')).toMatchInlineSnapshot(`206`);
+    expect(await getBundleSize('es-toolkit/fp', 'map')).toMatchInlineSnapshot(`314`);
   });
 
   it('remeda', async () => {
@@ -26,7 +26,7 @@ describe('map bundle size', () => {
 
 describe('filter bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'filter')).toMatchInlineSnapshot(`214`);
+    expect(await getBundleSize('es-toolkit/fp', 'filter')).toMatchInlineSnapshot(`320`);
   });
 
   it('remeda', async () => {
@@ -36,7 +36,7 @@ describe('filter bundle size', () => {
 
 describe('take bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'take')).toMatchInlineSnapshot(`554`);
+    expect(await getBundleSize('es-toolkit/fp', 'take')).toMatchInlineSnapshot(`413`);
   });
 
   it('remeda', async () => {
@@ -46,7 +46,7 @@ describe('take bundle size', () => {
 
 describe('flatMap bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'flatMap')).toMatchInlineSnapshot(`210`);
+    expect(await getBundleSize('es-toolkit/fp', 'flatMap')).toMatchInlineSnapshot(`556`);
   });
 
   it('remeda', async () => {

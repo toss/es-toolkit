@@ -41,8 +41,6 @@ pipe(
 );
 ```
 
-在惰性求值期间,回调的第三个参数(数据数组)只包含到目前为止已处理的元素,而不是完整的输入。
-
 ## 与 es-toolkit 的关系
 
 `es-toolkit/fp` 复用了 `es-toolkit` 的实现;它只改变了你的调用方式——在 `pipe` 内部调用。如果你更喜欢直接调用,请使用 [`es-toolkit`](/zh_hans/intro)。如果你想在迁移时与 Lodash 的调用方式保持一致,请使用 [`es-toolkit/compat`](/zh_hans/compat/intro)。

@@ -40,7 +40,7 @@ const result = pipe(
 
 #### Parameters
 
-- `predicate` (`(value: T, index: number, array: readonly T[]) => boolean`): A function called for each element; return `true` to keep the element. A type guard (`value is S`) narrows the result. During lazy evaluation, `array` holds only the elements seen so far.
+- `predicate` (`(value: T, index: number) => boolean`): A function called for each element; return `true` to keep the element. A type guard (`value is S`) narrows the result.
 
 #### Returns
 

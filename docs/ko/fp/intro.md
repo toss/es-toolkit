@@ -41,8 +41,6 @@ pipe(
 );
 ```
 
-지연 평가가 진행되는 동안, 콜백의 세 번째 인자(데이터 배열)에는 전체 입력이 아니라 지금까지 처리된 요소들만 담겨 있어요.
-
 ## es-toolkit과의 관계
 
 `es-toolkit/fp`는 `es-toolkit`의 구현을 그대로 재사용해요. 달라지는 건 호출 방식뿐이에요 — `pipe` 안에서 호출하는 거죠. 직접 호출하는 방식을 선호한다면 [`es-toolkit`](/ko/intro)을 사용하세요. 마이그레이션하면서 Lodash 호출부와 맞추고 싶다면 [`es-toolkit/compat`](/ko/compat/intro)을 사용하세요.

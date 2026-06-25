@@ -40,7 +40,7 @@ const result = pipe(
 
 #### 파라미터
 
-- `predicate` (`(value: T, index: number, array: readonly T[]) => boolean`): 각 요소마다 호출되는 함수예요. 요소를 남기려면 `true`를 반환하세요. 타입 가드(`value is S`)를 쓰면 결과 타입이 좁혀져요. 지연 평가가 진행되는 동안에는 `array`에 지금까지 본 요소들만 담겨 있어요.
+- `predicate` (`(value: T, index: number) => boolean`): 각 요소마다 호출되는 함수예요. 요소를 남기려면 `true`를 반환하세요. 타입 가드(`value is S`)를 쓰면 결과 타입이 좁혀져요.
 
 #### 반환 값
 

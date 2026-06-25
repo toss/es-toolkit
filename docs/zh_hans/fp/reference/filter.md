@@ -40,7 +40,7 @@ const result = pipe(
 
 #### 参数
 
-- `predicate` (`(value: T, index: number, array: readonly T[]) => boolean`): 对每个元素调用的函数;返回 `true` 以保留该元素。类型守卫(`value is S`)会收窄结果。在惰性求值期间,`array` 只包含到目前为止已遍历的元素。
+- `predicate` (`(value: T, index: number) => boolean`): 对每个元素调用的函数;返回 `true` 以保留该元素。类型守卫(`value is S`)会收窄结果。
 
 #### 返回值
 

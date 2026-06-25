@@ -34,7 +34,7 @@ pipe(
 
 #### 参数
 
-- `callbackfn` (`(value: T, index: number, array: readonly T[]) => U`): 对每个元素调用的函数;其返回值会成为输出数组中对应的元素。在惰性求值期间,`array` 只包含到目前为止已遍历的元素。
+- `callbackfn` (`(value: T, index: number) => U`): 对每个元素调用的函数;其返回值会成为输出数组中对应的元素。
 
 #### 返回值
 

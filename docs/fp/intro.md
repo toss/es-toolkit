@@ -41,8 +41,6 @@ pipe(
 );
 ```
 
-During lazy evaluation, the third argument of a callback (the data array) holds only the elements processed so far, not the complete input.
-
 ## Relationship to es-toolkit
 
 `es-toolkit/fp` reuses the implementations from `es-toolkit`; it only changes how you call them — inside `pipe`. If you prefer direct calls, use [`es-toolkit`](/intro). To match Lodash call sites while migrating, use [`es-toolkit/compat`](/compat/intro).

@@ -69,14 +69,15 @@ describe('pipe', () => {
     expect(result).toEqual([1, 2]);
   });
 
-  it('exposes only the elements seen so far to a lazy callback (the third argument)', () => {
-    // Eager `Array.prototype.map` would see the full array on every call and
-    // return [3, 3, 3]; lazy evaluation sees a growing prefix.
+  it('passes a per-stage index to lazy callbacks', () => {
+    // `map`'s index counts the values it receives (after `filter`), not the
+    // positions in the source array.
     expect(
       pipe(
-        [1, 2, 3],
-        map((_value, _index, data) => data.length)
+        [10, 20, 30],
+        filter(x => x > 10),
+        map((value, index) => value + index)
       )
-    ).toEqual([1, 2, 3]);
+    ).toEqual([20, 31]);
   });
 });

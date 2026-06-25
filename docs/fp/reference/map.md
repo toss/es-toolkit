@@ -34,7 +34,7 @@ pipe(
 
 #### Parameters
 
-- `callbackfn` (`(value: T, index: number, array: readonly T[]) => U`): A function called for each element; its return value becomes the corresponding element of the output array. During lazy evaluation, `array` holds only the elements seen so far.
+- `callbackfn` (`(value: T, index: number) => U`): A function called for each element; its return value becomes the corresponding element of the output array.
 
 #### Returns
 

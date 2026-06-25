@@ -1,5 +1,5 @@
 import { take as takeToolkit } from '../../array/take.ts';
-import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that returns the first `count` elements of an array. If
@@ -36,19 +36,13 @@ export function take<T>(count: number): (array: readonly T[]) => T[] {
     return takeEager;
   }
 
-  function* takeLazy(values: Iterable<T>): Generator<T> {
-    let remaining = count;
-    if (remaining <= 0) {
-      return;
+  const takeLazy = createLazyFunction<T, T>((value, index, emit) => {
+    if (index >= count) {
+      return false;
     }
-    for (const value of values) {
-      yield value;
-      remaining -= 1;
-      if (remaining <= 0) {
-        return;
-      }
-    }
-  }
+    emit(value);
+    return index < count - 1;
+  });
 
-  return combineEagerAndLazyFunctions(takeEager, takeLazy);
+  return combineEagerAndLazyFunctions(takeEager, takeLazy, { shortCircuit: true });
 }

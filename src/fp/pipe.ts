@@ -1,5 +1,4 @@
-import type { LazyFunction } from './_internal/lazy.ts';
-import { chunkBy } from '../array/chunkBy.ts';
+import type { OperatorFunction, Sink } from './_internal/lazy.ts';
 
 /**
  * Returns `value` unchanged — the identity case of {@link pipe} with no functions.
@@ -388,9 +387,6 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
  * early termination: a trailing `take(n)` stops the walk as soon as `n`
  * results exist, so the remaining input is never visited.
  *
- * IMPORTANT: during lazy evaluation, a callback's third argument (the data
- * array) contains only the elements processed so far, not the complete input.
- *
  * @param value - The initial value fed into the pipe.
  * @param functions - Data-last operators (or any unary functions) applied in order.
  * @returns The result of applying every function, left to right.
@@ -419,19 +415,19 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
  * ); // => 'hello'
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- variadic; the overloads carry the real types.
-export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) => unknown>): unknown {
+export function pipe(value: unknown, ...functions: Array<(input: any) => any>): unknown {
   let output = value;
 
   // Partition the functions into maximal runs of consecutive lazy / non-lazy
   // functions. A lazy run over an array is fused into one short-circuiting pass
   // by `lazyPipe`; everything else is applied one function at a time.
-  const groups = chunkBy(functions, isLazyFunction);
+  const groups = chunkFunctions(functions);
 
   for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
     const group = groups[groupIndex];
 
-    if (isLazyFunction(group[0]) && Array.isArray(output)) {
-      output = lazyPipe(output, group as unknown as readonly LazyFunction[]);
+    if (group.lazy && isIterable(output) && (group.shortCircuit || !Array.isArray(output))) {
+      output = lazyPipe(output, group);
     } else {
       for (let index = 0; index < group.length; index++) {
         output = group[index](output);
@@ -442,32 +438,91 @@ export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) =>
   return output;
 }
 
-/**
- * Determines whether a piped function carries a lazy generator (i.e. was built
- * by `combineEagerAndLazyFunctions`). Such functions can be fused into a single
- * pass; every other function runs eagerly.
- *
- * @param func - A function supplied to `pipe`.
- * @returns `true` if `func` is a lazy-capable function.
- */
-function isLazyFunction(func: (input: unknown) => unknown): func is LazyFunction {
-  return 'lazy' in func;
+interface OperatorFunctionGroup extends Array<OperatorFunction> {
+  lazy?: boolean;
+  shortCircuit?: boolean;
+}
+
+function chunkFunctions(functions: readonly OperatorFunction[]): OperatorFunctionGroup[] {
+  if (functions.length === 0) {
+    return [];
+  }
+
+  let currentGroup: OperatorFunctionGroup = [functions[0]];
+  const result: OperatorFunctionGroup[] = [currentGroup];
+  let previousIsLazy: boolean = currentGroup[0].lazy != null;
+
+  for (let index = 1; index < functions.length; index++) {
+    const func = functions[index];
+    const isLazy = func.lazy != null;
+
+    if (isLazy !== previousIsLazy) {
+      currentGroup = [func];
+      result.push(currentGroup);
+    } else {
+      currentGroup.push(func);
+    }
+
+    if (isLazy) {
+      currentGroup.lazy = true;
+    }
+    if (func.shortCircuit) {
+      currentGroup.shortCircuit = true;
+    }
+
+    previousIsLazy = isLazy;
+  }
+
+  return result;
 }
 
 /**
- * Fuses a run of lazy functions into a single pass over `data` by chaining their
- * generators: each function lazily consumes the previous one's output, so a
- * short-circuiting function (e.g. `take`) ends iteration early and the functions
- * before it never run on the rest of the input.
+ * Fuses a run of lazy functions into a single pass over `data`. The functions'
+ * push transforms are composed (last function first) into one sink, then `data`
+ * is driven through it element-by-element. A short-circuiting function (e.g.
+ * `take`) returns `false`, which stops the drive loop at once, so the functions
+ * before it never run on the rest of the input — no intermediate arrays.
  *
- * @param data - The iterable (an array, in practice) fed into the run.
+ * @param data - The iterable fed into the run (an array, `Set`, generator, ...).
  * @param lazyFunctions - The consecutive lazy functions to fuse, in order.
  * @returns The collected results.
  */
-function lazyPipe(data: Iterable<unknown>, lazyFunctions: readonly LazyFunction[]): unknown[] {
-  let values: Iterable<unknown> = data;
-  for (let index = 0; index < lazyFunctions.length; index++) {
-    values = lazyFunctions[index].lazy(values);
+function lazyPipe(data: Iterable<unknown>, lazyFunctions: readonly OperatorFunction[]): unknown[] {
+  const result: unknown[] = [];
+  let sink: Sink<unknown> = value => {
+    result.push(value);
+    return true;
+  };
+  for (let index = lazyFunctions.length - 1; index >= 0; index--) {
+    sink = lazyFunctions[index].lazy!(sink);
   }
-  return [...values];
+
+  if (Array.isArray(data)) {
+    for (let index = 0; index < data.length; index++) {
+      if (sink(data[index]) === false) {
+        break;
+      }
+    }
+  } else {
+    const iterator = data[Symbol.iterator]();
+    let step = iterator.next();
+    while (!step.done) {
+      if (sink(step.value) === false) {
+        break;
+      }
+      step = iterator.next();
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Whether `value` can be fed through the lazy path. A non-array iterable (a
+ * `Set`, a generator, ...) can only go through `lazyPipe`, since the eager path
+ * relies on array methods. Primitives and plain objects (no `Symbol.iterator`)
+ * fall through to the eager branch.
+ */
+function isIterable(value: unknown): value is Iterable<unknown> {
+  return typeof value === 'object' && value !== null && Symbol.iterator in value;
 }

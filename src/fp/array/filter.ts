@@ -1,4 +1,4 @@
-import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that keeps only the elements for which `predicate` returns
@@ -10,9 +10,8 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  *
  * @template T - The type of elements in the input array.
  * @template S - The narrowed element type when `predicate` is a type guard.
- * @param predicate - Called with `(value, index, array)` for each element;
- *   return `true` to keep the element. During lazy evaluation `array` holds
- *   only the elements seen so far.
+ * @param predicate - Called with `(value, index)` for each element; return
+ *   `true` to keep the element.
  * @returns A function that maps a `readonly T[]` to a filtered array.
  *
  * @example
@@ -25,27 +24,19 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  * pipe([1, 'a', 2, 'b'], filter((x): x is string => typeof x === 'string')); // => ['a', 'b']
  */
 export function filter<T, S extends T>(
-  predicate: (value: T, index: number, array: readonly T[]) => value is S
+  predicate: (value: T, index: number) => value is S
 ): (array: readonly T[]) => S[];
-export function filter<T>(
-  predicate: (value: T, index: number, array: readonly T[]) => boolean
-): (array: readonly T[]) => T[];
-export function filter<T>(
-  predicate: (value: T, index: number, array: readonly T[]) => boolean
-): (array: readonly T[]) => T[] {
+export function filter<T>(predicate: (value: T, index: number) => boolean): (array: readonly T[]) => T[];
+export function filter<T>(predicate: (value: T, index: number) => boolean): (array: readonly T[]) => T[] {
   function filterEager(array: readonly T[]): T[] {
     return array.filter(predicate);
   }
 
-  function* filterLazy(values: Iterable<T>): Generator<T> {
-    const seen: T[] = [];
-    for (const value of values) {
-      seen.push(value);
-      if (predicate(value, seen.length - 1, seen)) {
-        yield value;
-      }
+  const filterLazy = createLazyFunction<T, T>((value, index, emit) => {
+    if (predicate(value, index)) {
+      emit(value);
     }
-  }
+  });
 
   return combineEagerAndLazyFunctions(filterEager, filterLazy);
 }

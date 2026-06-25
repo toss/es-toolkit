@@ -49,10 +49,6 @@ pipe(
 ); // => [4, 16]
 ```
 
-::: tip
-During lazy evaluation, the third argument of a callback (the data array) contains only the elements processed so far, not the complete input. If you depend on the full array, transform it before the pipe or use a non-lazy step.
-:::
-
 #### Parameters
 
 - `value` (`T`): The initial value fed into the pipeline.

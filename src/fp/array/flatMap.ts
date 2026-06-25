@@ -1,4 +1,5 @@
-import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
+import { flatMap as flatMapToolkit } from '../../array/flatMap.ts';
+import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that maps every element to an array with `callback` and
@@ -11,9 +12,8 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  *
  * @template T - The type of elements in the input array.
  * @template U - The type of elements in the output array.
- * @param callback - Called with `(value, index, array)` for each element;
- *   returns an array whose elements are flattened into the output. During lazy
- *   evaluation `array` holds only the elements seen so far.
+ * @param callback - Called with `(value, index)` for each element; returns an
+ *   array whose elements are flattened into the output.
  * @returns A function that maps a `readonly T[]` to a new `U[]`.
  *
  * @example
@@ -25,20 +25,17 @@ import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
  * // Returning an empty array drops the element.
  * pipe([1, 2, 3, 4], flatMap(x => (x % 2 === 0 ? [x] : []))); // => [2, 4]
  */
-export function flatMap<T, U>(
-  callback: (value: T, index: number, array: readonly T[]) => U[]
-): (array: readonly T[]) => U[] {
+export function flatMap<T, U>(callback: (value: T, index: number) => U[]): (array: readonly T[]) => U[] {
   function flatMapEager(array: readonly T[]): U[] {
-    return array.flatMap(callback);
+    return flatMapToolkit(array, callback);
   }
 
-  function* flatMapLazy(values: Iterable<T>): Generator<U> {
-    const seen: T[] = [];
-    for (const value of values) {
-      seen.push(value);
-      yield* callback(value, seen.length - 1, seen);
+  const flatMapLazy = createLazyFunction<T, U>((value, index, emit) => {
+    const items = callback(value, index);
+    for (let i = 0; i < items.length; i++) {
+      emit(items[i]);
     }
-  }
+  });
 
   return combineEagerAndLazyFunctions(flatMapEager, flatMapLazy);
 }

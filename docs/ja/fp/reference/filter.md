@@ -40,7 +40,7 @@ const result = pipe(
 
 #### パラメータ
 
-- `predicate` (`(value: T, index: number, array: readonly T[]) => boolean`): 各要素に対して呼び出される関数です。要素を残すには `true` を返します。型ガード（`value is S`）を使うと結果の型が絞り込まれます。遅延評価の間、`array` にはそれまでに処理した要素だけが含まれます。
+- `predicate` (`(value: T, index: number) => boolean`): 各要素に対して呼び出される関数です。要素を残すには `true` を返します。型ガード（`value is S`）を使うと結果の型が絞り込まれます。
 
 #### 戻り値
 
