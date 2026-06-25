@@ -27,7 +27,7 @@
 <script setup>
 import { useData } from 'vitepress';
 import { computed } from 'vue';
-import raw from '../../data/benchmark-results.json';
+import raw from '../../data/fp-benchmark-results.json';
 
 const { lang } = useData();
 

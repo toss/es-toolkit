@@ -1,16 +1,14 @@
 # 성능
 
-`es-toolkit/fp`는 같은 파이프라인 작업을 기준으로 `lodash/fp`, `remeda`와 비교해요. `sortBy`는 지금은 제외했어요.
+<FpBenchmarkChart />
+
+`es-toolkit/fp`는 설계할 때 성능을 우선적으로 고려하고 있어요. [remeda](https://remedajs.com/)와 같은 다른 라이브러리와 비교했을 때, 평균적으로 1.5-3배의 성능 향상을 확인할 수 있었어요. 현대적인 JavaScript API를 이용하고, 꼭 필요한 기능들 중심으로 구현했기 때문이에요.
 
 ## 성능 비교
 
-| 시나리오                      | es-toolkit/fp     | lodash/fp      | remeda            | 가장 빠름     |
-| ----------------------------- | ----------------- | -------------- | ----------------- | ------------- |
-| `pipe/map`                    | 20,063 ops/sec    | 93,033 ops/sec | 6,849 ops/sec     | lodash/fp     |
-| `pipe/filter + map`           | 12,305 ops/sec    | 11,931 ops/sec | 4,092 ops/sec     | es-toolkit/fp |
-| `pipe/map + filter + take(5)` | 1,897,403 ops/sec | 9,181 ops/sec  | 1,165,963 ops/sec | es-toolkit/fp |
-| `pipe/uniq`                   | 16,295 ops/sec    | 15,002 ops/sec | 4,358 ops/sec     | es-toolkit/fp |
-| `pipe/chunk(10)`              | 80,763 ops/sec    | 67,825 ops/sec | 80,757 ops/sec    | es-toolkit/fp |
+<FpBenchmarkEnvironment />
+
+<FpBenchmarkTable />
 
 ## 측정 방법
 
