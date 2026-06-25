@@ -7,7 +7,7 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: 'Introduction',
     installation: 'Installation & Usage',
-    bundleSize: 'Impact on Bundle Size',
+    bundleSize: 'Bundle Size',
     performance: 'Performance',
     aiIntegration: 'AI Integration',
   },

@@ -1,5 +1,3 @@
-import { toInteger } from '../compat/util/toInteger.ts';
-
 /**
  * Returns a new array containing the first `count` elements from the input array `arr`.
  * If `count` is greater than the length of `arr`, the entire array is returned.
@@ -8,7 +6,6 @@ import { toInteger } from '../compat/util/toInteger.ts';
  *
  * @param arr - The array to take elements from.
  * @param count - The number of elements to take.
- * @param guard - If truthy, ignores `count` and defaults to 1.
  * @returns A new array containing the first `count` elements from `arr`.
  *
  * @example
@@ -22,13 +19,7 @@ import { toInteger } from '../compat/util/toInteger.ts';
  * @example
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
- *
- * @example
- * // Returns [[1], [1], [1]]
- * const arr = [1, 2, 3];
- * const result = arr.map((v, i, array) => take(array, i, true));
  */
-export function take<T>(arr: readonly T[], count?: number, guard?: unknown): T[] {
-  count = guard || count === undefined ? 1 : toInteger(count);
+export function take<T>(arr: readonly T[], count: number): T[] {
   return arr.slice(0, count);
 }

@@ -42,3 +42,5 @@ umd
 
 .omc
 *.log
+
+/CHOICES.md

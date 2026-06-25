@@ -1,12 +1,10 @@
-import { toInteger } from '../compat/util/toInteger.ts';
-
 /**
  * Returns a new array containing the last `count` elements from the input array `arr`.
  * If `count` is greater than the length of `arr`, the entire array is returned.
  *
  * @template T - The type of elements in the array.
  * @param arr - The array to take elements from.
- * @param [count=1] - The number of elements to take.
+ * @param count - The number of elements to take.
  * @returns A new array containing the last `count` elements from `arr`.
  *
  * @example
@@ -21,8 +19,7 @@ import { toInteger } from '../compat/util/toInteger.ts';
  * // Returns [1, 2, 3]
  * takeRight([1, 2, 3], 5);
  */
-export function takeRight<T>(arr: readonly T[], count?: number, guard?: unknown): T[] {
-  count = guard || count === undefined ? 1 : toInteger(count);
+export function takeRight<T>(arr: readonly T[], count: number): T[] {
   if (count <= 0 || arr.length === 0) {
     return [];
   }
