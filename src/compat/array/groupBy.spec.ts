@@ -70,6 +70,13 @@ describe('groupBy', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error - The return type is safer (Partial) than lodash's Dictionary
     expectTypeOf(groupBy).toEqualTypeOf<typeof groupByLodash>();
+  });
+
+  it('should return Partial<Record<string, T[]>> for type safety', () => {
+    const result = groupBy([1, 2, 3], Math.floor);
+    expectTypeOf(result).toEqualTypeOf<Partial<Record<string, number[]>>>();
   });
 });

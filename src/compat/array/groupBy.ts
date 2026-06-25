@@ -23,7 +23,7 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
 export function groupBy<T>(
   collection: ArrayLike<T> | null | undefined,
   iteratee?: ValueIteratee<T>
-): Record<string, T[]>;
+): Partial<Record<string, T[]>>;
 
 /**
  * Creates an object composed of keys generated from the results of running each element of collection through iteratee.
@@ -41,7 +41,7 @@ export function groupBy<T>(
 export function groupBy<T extends object>(
   collection: T | null | undefined,
   iteratee?: ValueIteratee<T[keyof T]>
-): Record<string, Array<T[keyof T]>>;
+): Partial<Record<string, Array<T[keyof T]>>>;
 
 /**
  * Groups the elements of an array or object based on a provided key-generating function.
@@ -81,9 +81,9 @@ export function groupBy<T, K extends PropertyKey>(
     | [keyof T, unknown]
     | PropertyKey
     | null
-): Record<K, T[]> {
+): Partial<Record<K, T[]>> {
   if (source == null) {
-    return {} as Record<K, T[]>;
+    return {} as Partial<Record<K, T[]>>;
   }
 
   const items = isArrayLike(source) ? Array.from(source) : Object.values(source);

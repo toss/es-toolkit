@@ -39,8 +39,8 @@
 export function groupBy<T, K extends PropertyKey>(
   arr: readonly T[],
   getKeyFromItem: (item: T, index: number, array: readonly T[]) => K
-): Record<K, T[]> {
-  const result = {} as Record<K, T[]>;
+): Partial<Record<K, T[]>> {
+  const result = {} as Partial<Record<K, T[]>>;
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
@@ -50,7 +50,7 @@ export function groupBy<T, K extends PropertyKey>(
       result[key] = [];
     }
 
-    result[key].push(item);
+    result[key]!.push(item);
   }
 
   return result;
