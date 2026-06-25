@@ -11,12 +11,12 @@
 配列の先頭から指定された個数の要素を削除します。
 
 ```typescript
-const result = drop(array, n);
+const result = drop(array, itemsCount);
 ```
 
 ## 使用法
 
-### `drop(array, n?)`
+### `drop(array, itemsCount?)`
 
 配列の先頭からいくつかの要素を削除し、残りを取得したい場合に `drop` を使用します。デフォルトでは、最初の要素を1つ削除します。
 
@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 要素を削除する配列です。
-- `n` (`number`, オプション): 削除する要素の個数です。デフォルトは `1` です。
+- `itemsCount` (`number`, オプション): 削除する要素の個数です。デフォルトは `1` です。
 
 #### 戻り値
 

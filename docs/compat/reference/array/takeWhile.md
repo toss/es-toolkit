@@ -40,7 +40,7 @@ takeWhile(users, o => !o.active);
 
 // Matching with partial object
 takeWhile(users, { active: false });
-// Returns: [{ user: 'barney', active: false }]
+// Returns: [{ user: 'barney', active: false }, { user: 'fred', active: false }]
 
 // Matching with property-value array
 takeWhile(users, ['active', false]);

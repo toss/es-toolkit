@@ -26,8 +26,8 @@ console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
 // Remove by comparing string length
 const words = ['hello', 'world', 'test', 'code'];
-pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
-console.log(words); // ['hello', 'world', 'code'] ('test' removed as it has same length as 'hi')
+pullAllWith(words, ['star'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world'] ('test' and 'code' removed as they have length 4)
 ```
 
 If the array is empty or `null`, `undefined`, the original array is returned as is.

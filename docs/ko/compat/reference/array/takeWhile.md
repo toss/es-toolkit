@@ -40,7 +40,7 @@ takeWhile(users, o => !o.active);
 
 // 부분 객체로 조건 매칭
 takeWhile(users, { active: false });
-// Returns: [{ user: 'barney', active: false }]
+// Returns: [{ user: 'barney', active: false }, { user: 'fred', active: false }]
 
 // 속성-값 배열로 조건 매칭
 takeWhile(users, ['active', false]);

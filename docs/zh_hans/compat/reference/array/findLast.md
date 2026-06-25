@@ -42,7 +42,7 @@ findLast(users, ['age', 18]);
 
 // 使用属性名指定条件(具有真值的最后一个元素)
 findLast(users, 'age');
-// => { user: 'fred', age: 40 }
+// => { user: 'pebbles', age: 18 }
 ```
 
 也可以指定搜索起始索引。

@@ -16,7 +16,7 @@ const result = eachRight(collection, iteratee);
 
 ## 使用法
 
-### `eachRight(collection, iteratee)`
+### `eachRight(collection, iteratee?)`
 
 配列、オブジェクト、文字列の各要素を右から左へ順回しながら与えられた関数を実行します。配列の場合は最後のインデックスから逆順に、オブジェクトの場合は列挙可能なプロパティを逆順に順回します。
 

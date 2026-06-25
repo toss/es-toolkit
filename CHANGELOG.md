@@ -1,5 +1,26 @@
 # es-toolkit Changelog
 
+## Version v1.48.1
+
+Released on June 21st, 2026.
+
+- Fixed the `jsdelivr` and `unpkg` CDN `<script>` entry that regressed in v1.48.0. The fields are now declared at the package root so `yarn pack` preserves them, since `publishConfig` only carries standard fields and dropped them. Both CDNs now serve the UMD bundle again.
+
+## Version v1.48.0
+
+Released on June 21st, 2026.
+
+- Added `AbortSignal` support to `timeout` and `withTimeout`. ([#1617])
+- Fixed CDN `<script>` resolution by pointing `jsdelivr`/`unpkg` to the UMD bundle and dropping the misused `browser` field. ([#1395])
+- Fixed `toMerged` to deep clone the target so untouched nested values stay independent. ([#1780])
+- Fixed `compat/toPath` to keep empty segments for consecutive and trailing dots. ([#1778])
+- Fixed `compat/difference` to treat sparse array holes as `undefined`. ([#1773])
+- Fixed `compat/parseInt` to coerce input to a string before parsing. ([#1771])
+- Fixed `compat/isNaN` to improve checks for boxed values and non-numbers. ([#1646])
+- Fixed `compat/isMatchWith` to align nested primitive matching with lodash. ([#1647])
+
+We sincerely thank @aidant, @Antoliny0919, @D-Sketon, @miinhho, @MyraxByte, @raon0211, @sarathfrancis90, and @ssi02014 for their contributions. We appreciate your great efforts!
+
 ## Version v1.47.1
 
 Released on June 12th, 2026.

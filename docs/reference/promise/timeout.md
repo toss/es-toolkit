@@ -3,12 +3,12 @@
 Returns a `Promise` that throws a `TimeoutError` after the specified time.
 
 ```typescript
-await timeout(ms);
+await timeout(ms, options?);
 ```
 
 ## Usage
 
-### `timeout(ms)`
+### `timeout(ms, options?)`
 
 Use `timeout` when you want to throw a timeout error after a specific time has passed. It's useful when used together with `Promise.race()` to set time limits on tasks.
 
@@ -59,14 +59,30 @@ async function multipleOperationsWithTimeout() {
 }
 ```
 
+You can pass an `AbortSignal` to cancel the timeout. Unlike `delay`, aborting does not reject the Promise. Because `timeout` only exists to lose a `Promise.race()`, cancelling it leaves the Promise pending so the operation it guards can finish without the time limit.
+
+```typescript
+const controller = new AbortController();
+
+// Lift the 1 second limit when the user chooses to keep waiting.
+keepWaitingButton.onclick = () => controller.abort();
+
+const result = await Promise.race([
+  doWork(),
+  timeout(1000, { signal: controller.signal }), // never rejects once aborted
+]);
+```
+
 #### Parameters
 
 - `ms` (`number`): The amount of time in milliseconds until the `TimeoutError` is thrown.
+- `options` (`TimeoutOptions`, optional): Timeout options.
+  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the timeout. When aborted, the returned Promise stays pending and never rejects.
 
 #### Returns
 
-(`Promise<never>`): Returns a Promise that rejects with a `TimeoutError` after the specified time.
+(`Promise<never>`): Returns a Promise that rejects with a `TimeoutError` after the specified time. If the `AbortSignal` is aborted first, the Promise never settles.
 
 #### Errors
 
-Throws `TimeoutError` after the specified time has passed.
+Throws `TimeoutError` after the specified time has passed. Aborting the `AbortSignal` does not throw; it cancels the timeout so the Promise stays pending.
