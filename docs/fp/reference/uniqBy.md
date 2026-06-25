@@ -1,30 +1,25 @@
-# uniqBy
+# uniqBy (Functional Programming)
 
-Creates a data-last uniqBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that removes duplicates by a mapped key. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  uniqBy(item => item.id)
-);
+const result = pipe(array, uniqBy(mapper));
 ```
 
 ## Usage
 
-`uniqBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`uniqBy` keeps the first value for each key returned by `mapper`. It preserves the order of first occurrence and is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
-import { pipe, uniqBy } from 'es-toolkit/fp';
+import { uniqBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 1 }, { id: 2 }],
-  uniqBy(item => item.id)
-);
-// [{ id: 1 }, { id: 2 }]
+pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqBy(item => item.id)); // => [{ id: 1 }, { id: 2 }]
 ```
 
-## API
+#### Parameters
 
-### `uniqBy(...)`
+- `mapper` (`(item: T, index: number) => U`): The function that returns the key used for uniqueness.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a duplicate-free array by key.

@@ -1,30 +1,26 @@
-# differenceBy
+# differenceBy (Functional Programming)
 
-Creates a data-last differenceBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that excludes values by a mapped key. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
+const result = pipe(array, differenceBy(secondArray, mapper));
 ```
 
 ## Usage
 
-`differenceBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`differenceBy` compares the values returned by `mapper`. Values from the piped array are kept when their mapped key does not appear in `secondArray`.
 
 ```typescript
 import { differenceBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 1 }]
 ```
 
-## API
+#### Parameters
 
-### `differenceBy(...)`
+- `secondArray` (`readonly U[]`): The array containing values whose mapped keys should be excluded.
+- `mapper` (`(item: T | U) => unknown`): The function that returns the comparison key.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to values whose keys are not found in `secondArray`.

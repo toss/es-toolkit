@@ -1,24 +1,29 @@
-# combinations
+# combinations (函数式编程)
 
-创建可用于函数式管道的 data-last `combinations` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回指定大小组合的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, combinations(2));
+const result = pipe(array, combinations(size));
 ```
 
 ## 用法
 
-`combinations` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`combinations` 返回从管道中的数组选择 `size` 个值的所有方式,每个组合内会保留原始顺序。
 
 ```typescript
 import { combinations, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], combinations(2));
-// [[1, 2], [1, 3], [2, 3]]
+pipe(['a', 'b', 'c'], combinations(2)); // => [['a', 'b'], ['a', 'c'], ['b', 'c']]
 ```
 
-## API
+#### 参数
 
-### `combinations(...)`
+- `size` (`number`): 每个组合包含的值数量。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[][]`): 一个将 `readonly T[]` 映射为组合数组的函数。
+
+#### 异常
+
+如果 `size` 不是非负整数,则抛出错误。

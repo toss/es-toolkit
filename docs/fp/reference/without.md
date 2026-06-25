@@ -1,24 +1,25 @@
-# without
+# without (Functional Programming)
 
-Creates a data-last without operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that removes specific values from an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, without(2));
+const result = pipe(array, without(...values));
 ```
 
 ## Usage
 
-`without` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`without` removes every value from the piped array that is equal to one of `values`. It is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
-import { pipe, without } from 'es-toolkit/fp';
+import { without, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 2], without(2));
-// [1, 3]
+pipe([1, 2, 3, 2], without(2)); // => [1, 3]
 ```
 
-## API
+#### Parameters
 
-### `without(...)`
+- `values` (`T[]`): The values to remove from the piped array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to an array without `values`.

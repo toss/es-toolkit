@@ -1,30 +1,25 @@
-# dropWhile
+# dropWhile (函数式编程)
 
-创建可用于函数式管道的 data-last `dropWhile` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个在谓词通过时丢弃开头值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  dropWhile(value => value < 3)
-);
+const result = pipe(array, dropWhile(predicate));
 ```
 
 ## 用法
 
-`dropWhile` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`dropWhile` 会从管道中数组的开头开始遍历,并在 `predicate` 返回 `true` 时移除值。它在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
 import { dropWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 1],
-  dropWhile(value => value < 3)
-);
-// [3, 1]
+pipe([1, 2, 3, 1], dropWhile(value => value < 3)); // => [3, 1]
 ```
 
-## API
+#### 参数
 
-### `dropWhile(...)`
+- `predicate` (`(item: T, index: number) => boolean`): 判断是否应移除开头值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为从开头移除值后剩余数组的函数。

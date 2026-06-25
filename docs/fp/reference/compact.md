@@ -1,6 +1,6 @@
-# compact
+# compact (Functional Programming)
 
-Creates a data-last compact operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that removes falsey values from an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, compact());
@@ -8,17 +8,18 @@ const result = pipe(array, compact());
 
 ## Usage
 
-`compact` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`compact` removes `false`, `null`, `undefined`, `0`, `-0`, `0n`, an empty string, and `NaN`. It is lazy-capable inside [`pipe`](./pipe.md), so a trailing `take` can stop the walk early.
 
 ```typescript
 import { compact, pipe } from 'es-toolkit/fp';
 
-const result = pipe([0, 1, false, 2, '', 3], compact());
-// [1, 2, 3]
+pipe([0, 1, false, 2, '', 3], compact()); // => [1, 2, 3]
 ```
 
-## API
+#### Parameters
 
-### `compact(...)`
+This function takes no arguments; call it as `compact()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => Array<NotFalsey<T>>`): A function that maps a `readonly T[]` to an array without falsey values.

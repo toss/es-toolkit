@@ -1,30 +1,26 @@
-# xorWith
+# xorWith (Functional Programming)
 
-Creates a data-last xorWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the symmetric difference using a custom equality function. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
+const result = pipe(array, xorWith(secondArray, areItemsEqual));
 ```
 
 ## Usage
 
-`xorWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`xorWith` returns values that are not matched across the two arrays according to `areItemsEqual`.
 
 ```typescript
-import { pipe, xorWith } from 'es-toolkit/fp';
+import { xorWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 3 }]
 ```
 
-## API
+#### Parameters
 
-### `xorWith(...)`
+- `secondArray` (`readonly T[]`): The array to compare with the piped array.
+- `areItemsEqual` (`(item: T, other: T) => boolean`): The function that decides whether two values are equal.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the symmetric difference by custom equality.

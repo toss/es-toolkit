@@ -1,30 +1,28 @@
-# forEach
+# forEach (函数式编程)
 
-创建可用于函数式管道的 data-last `forEach` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个对每个值运行回调并返回输入数组的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  forEach(value => console.log(value))
-);
+const result = pipe(array, forEach(callback));
 ```
 
 ## 用法
 
-`forEach` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`forEach` 适合在管道中插入副作用步骤。它会对每个值调用 `callback`,并把原数组继续传递下去。在 [`pipe`](./pipe.md) 中,当相邻惰性操作可以提前停止时,它支持惰性求值。
 
 ```typescript
 import { forEach, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3],
-  forEach(value => console.log(value))
-);
-// [1, 2, 3]
+const values: number[] = [];
+
+pipe([1, 2, 3], forEach(value => values.push(value))); // => [1, 2, 3]
+values; // => [1, 2, 3]
 ```
 
-## API
+#### 参数
 
-### `forEach(...)`
+- `callback` (`(value: T, index: number) => void`): 要对每个值运行的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => readonly T[]`): 一个在运行 callback 后返回同一个数组的函数。

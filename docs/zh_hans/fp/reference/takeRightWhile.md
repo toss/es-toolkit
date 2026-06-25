@@ -1,30 +1,25 @@
-# takeRightWhile
+# takeRightWhile (函数式编程)
 
-创建可用于函数式管道的 data-last `takeRightWhile` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个在谓词通过时获取末尾值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  takeRightWhile(value => value > 2)
-);
+const result = pipe(array, takeRightWhile(predicate));
 ```
 
 ## 用法
 
-`takeRightWhile` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`takeRightWhile` 会从管道中数组的末尾开始遍历,并在 `predicate` 返回 `true` 时保留值。遇到第一个不满足条件的值时停止。
 
 ```typescript
-import { pipe, takeRightWhile } from 'es-toolkit/fp';
+import { takeRightWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  takeRightWhile(value => value > 2)
-);
-// [3, 4]
+pipe([1, 2, 3, 4], takeRightWhile(value => value > 2)); // => [3, 4]
 ```
 
-## API
+#### 参数
 
-### `takeRightWhile(...)`
+- `predicate` (`(item: T) => boolean`): 判断是否应保留末尾值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为通过条件的末尾值数组的函数。

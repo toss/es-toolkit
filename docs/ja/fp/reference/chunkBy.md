@@ -1,30 +1,25 @@
-# chunkBy
+# chunkBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `chunkBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+キーが変わるたびに隣り合う値を分割する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  chunkBy(value => value)
-);
+const result = pipe(array, chunkBy(iteratee));
 ```
 
-## 使い方
+## 使用法
 
-`chunkBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`chunkBy` はパイプされた配列を左から右へ走査し、`iteratee` が同じキーを返す隣接値をまとめます。キーが変わると新しいチャンクが始まります。
 
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 1, 2, 3, 3],
-  chunkBy(value => value)
-);
-// [[1, 1], [2], [3, 3]]
+pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
 ```
 
-## API
+#### パラメータ
 
-### `chunkBy(...)`
+- `iteratee` (`(value: T) => unknown`): 各値のグループキーを返す関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[][]`): `readonly T[]` を隣接値のチャンク配列に変換する関数です。

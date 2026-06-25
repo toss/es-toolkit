@@ -1,6 +1,6 @@
-# shuffle
+# shuffle (Functional Programming)
 
-Creates a data-last shuffle operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns a shuffled copy of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, shuffle());
@@ -8,17 +8,19 @@ const result = pipe(array, shuffle());
 
 ## Usage
 
-`shuffle` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`shuffle` returns a new array containing the same values as the piped array in random order. It does not mutate the input array.
 
 ```typescript
-import { pipe, shuffle } from 'es-toolkit/fp';
+import { shuffle, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], shuffle());
-// a shuffled copy
+const values = pipe([1, 2, 3], shuffle());
+// values contains 1, 2, and 3 in random order.
 ```
 
-## API
+#### Parameters
 
-### `shuffle(...)`
+This function takes no arguments; call it as `shuffle()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a shuffled copy.

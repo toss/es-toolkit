@@ -1,24 +1,30 @@
-# sampleSize
+# sampleSize (函数式编程)
 
-创建可用于函数式管道的 data-last `sampleSize` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组中返回多个随机值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, sampleSize(2));
+const result = pipe(array, sampleSize(size));
 ```
 
 ## 用法
 
-`sampleSize` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`sampleSize` 从管道中的数组返回 `size` 个随机值,不会重复同一个数组位置。
 
 ```typescript
-import { pipe, sampleSize } from 'es-toolkit/fp';
+import { sampleSize, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], sampleSize(2));
-// two elements from the array
+const values = pipe([1, 2, 3, 4], sampleSize(2));
+// values has length 2 and contains values from the input array.
 ```
 
-## API
+#### 参数
 
-### `sampleSize(...)`
+- `size` (`number`): 要返回的随机值数量。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为随机值数组的函数。
+
+#### 异常
+
+如果 `size` 大于管道中数组的长度,则抛出错误。

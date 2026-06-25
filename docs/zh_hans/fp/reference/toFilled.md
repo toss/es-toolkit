@@ -1,24 +1,30 @@
-# toFilled
+# toFilled (函数式编程)
 
-创建可用于函数式管道的 data-last `toFilled` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回数组填充副本的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, toFilled(0, 1, 3));
+const result = pipe(array, toFilled(value, start, end));
 ```
 
 ## 用法
 
-`toFilled` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`toFilled` 会在管道中数组的副本中,从 `start` 到 `end` 之前的位置填入 `value`。它遵循 `Array.prototype.fill` 的索引语义,且不会修改输入数组。
 
 ```typescript
-import { pipe, toFilled } from 'es-toolkit/fp';
+import { toFilled, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], toFilled(0, 1, 3));
-// [1, 0, 0]
+const array = [1, 2, 3, 4];
+
+pipe(array, toFilled(0, 1, 3)); // => [1, 0, 0, 4]
+array; // => [1, 2, 3, 4]
 ```
 
-## API
+#### 参数
 
-### `toFilled(...)`
+- `value` (`U`): 要写入返回数组的值。
+- `start` (`number, optional`): 开始索引。默认为 `0`。
+- `end` (`number, optional`): 结束索引。默认为数组长度。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Array<T | U>`): 一个将 `readonly T[]` 映射为填充副本的函数。

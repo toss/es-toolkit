@@ -1,24 +1,25 @@
-# xor
+# xor (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `xor` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(array, xor([2, 3]));
-```
-
-## 使い方
-
-`xor` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+2 つの配列のうち片方にだけ現れる値を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, xor } from 'es-toolkit/fp';
-
-const result = pipe([1, 2], xor([2, 3]));
-// [1, 3]
+const result = pipe(array, xor(secondArray));
 ```
 
-## API
+## 使用法
 
-### `xor(...)`
+`xor` は、パイプされた配列と `secondArray` の対称差を重複なしで返します。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { xor, pipe } from 'es-toolkit/fp';
+
+pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
+```
+
+#### パラメータ
+
+- `secondArray` (`readonly T[]`): パイプされた配列と比較する配列です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を対称差に変換する関数です。

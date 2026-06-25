@@ -1,30 +1,25 @@
-# countBy
+# countBy (函数式编程)
 
-创建可用于函数式管道的 data-last `countBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按键统计值数量的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  countBy(value => value.length)
-);
+const result = pipe(array, countBy(mapper));
 ```
 
 ## 用法
 
-`countBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`countBy` 会对管道中数组的每个值调用 `mapper`,并返回一个以 mapper 结果为键、出现次数为值的对象。
 
 ```typescript
 import { countBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  ['a', 'bb', 'c'],
-  countBy(value => value.length)
-);
-// { 1: 2, 2: 1 }
+pipe(['one', 'two', 'three'], countBy(word => word.length)); // => { 3: 2, 5: 1 }
 ```
 
-## API
+#### 参数
 
-### `countBy(...)`
+- `mapper` (`(item: T) => K`): 返回用于计数的键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Record<K, number>`): 一个将 `readonly T[]` 映射为按键计数对象的函数。

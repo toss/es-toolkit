@@ -1,30 +1,25 @@
-# minBy
+# minBy (函数式编程)
 
-创建可用于函数式管道的 data-last `minBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回计算分数最小的值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  minBy(item => item.score)
-);
+const result = pipe(array, minBy(getValue));
 ```
 
 ## 用法
 
-`minBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`minBy` 会对管道中数组的每个值调用 `getValue`,并返回结果最小的值。如果数组为空,则返回 `undefined`。
 
 ```typescript
 import { minBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ score: 1 }, { score: 3 }, { score: 2 }],
-  minBy(item => item.score)
-);
-// { score: 1 }
+pipe([{ score: 10 }, { score: 30 }, { score: 20 }], minBy(item => item.score)); // => { score: 10 }
 ```
 
-## API
+#### 参数
 
-### `minBy(...)`
+- `getValue` (`(item: T) => number`): 返回用于比较的值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T | undefined`): 一个将 `readonly T[]` 映射为最小项或 `undefined` 的函数。

@@ -1,30 +1,25 @@
-# partition
+# partition (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `partition` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+값을 조건을 만족하는 그룹과 만족하지 않는 그룹으로 나누는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  partition(value => value % 2 === 0)
-);
+const result = pipe(array, partition(predicate));
 ```
 
 ## 사용법
 
-`partition`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`partition`은 배열 두 개로 이루어진 쌍을 반환해요. 첫 번째 배열에는 `predicate`가 `true`를 반환한 값이, 두 번째 배열에는 나머지 값이 들어가요.
 
 ```typescript
 import { partition, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  partition(value => value % 2 === 0)
-);
-// [[2, 4], [1, 3]]
+pipe([1, 2, 3, 4], partition(value => value % 2 === 0)); // => [[2, 4], [1, 3]]
 ```
 
-## API
+#### 파라미터
 
-### `partition(...)`
+- `predicate` (`(value: T) => boolean`): 각 값이 어느 그룹에 들어갈지 판단하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => [truthy: T[], falsy: T[]]`): `readonly T[]`를 조건을 만족하는 배열과 만족하지 않는 배열로 변환하는 함수예요.

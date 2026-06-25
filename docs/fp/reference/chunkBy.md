@@ -1,30 +1,25 @@
-# chunkBy
+# chunkBy (Functional Programming)
 
-Creates a data-last chunkBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that splits adjacent values whenever a key changes. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  chunkBy(value => value)
-);
+const result = pipe(array, chunkBy(iteratee));
 ```
 
 ## Usage
 
-`chunkBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`chunkBy` walks the piped array from left to right and groups adjacent values while `iteratee` returns the same key. A new chunk starts when the key changes.
 
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 1, 2, 3, 3],
-  chunkBy(value => value)
-);
-// [[1, 1], [2], [3, 3]]
+pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
 ```
 
-## API
+#### Parameters
 
-### `chunkBy(...)`
+- `iteratee` (`(value: T) => unknown`): The function that returns the grouping key for each value.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[][]`): A function that maps a `readonly T[]` to chunks of adjacent values.

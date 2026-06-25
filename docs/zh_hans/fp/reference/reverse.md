@@ -1,6 +1,6 @@
-# reverse
+# reverse (函数式编程)
 
-创建可用于函数式管道的 data-last `reverse` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回数组反转副本的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, reverse());
@@ -8,17 +8,21 @@ const result = pipe(array, reverse());
 
 ## 用法
 
-`reverse` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`reverse` 返回一个按相反顺序包含管道中数组值的新数组。它不会修改输入数组。
 
 ```typescript
-import { pipe, reverse } from 'es-toolkit/fp';
+import { reverse, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], reverse());
-// [3, 2, 1]
+const array = [1, 2, 3];
+
+pipe(array, reverse()); // => [3, 2, 1]
+array; // => [1, 2, 3]
 ```
 
-## API
+#### 参数
 
-### `reverse(...)`
+此函数不接收参数;请以 `reverse()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为反转副本的函数。

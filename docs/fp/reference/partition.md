@@ -1,30 +1,25 @@
-# partition
+# partition (Functional Programming)
 
-Creates a data-last partition operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that splits values into passing and failing groups. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  partition(value => value % 2 === 0)
-);
+const result = pipe(array, partition(predicate));
 ```
 
 ## Usage
 
-`partition` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`partition` returns a pair of arrays. The first array contains values for which `predicate` returns `true`, and the second contains the rest.
 
 ```typescript
 import { partition, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  partition(value => value % 2 === 0)
-);
-// [[2, 4], [1, 3]]
+pipe([1, 2, 3, 4], partition(value => value % 2 === 0)); // => [[2, 4], [1, 3]]
 ```
 
-## API
+#### Parameters
 
-### `partition(...)`
+- `predicate` (`(value: T) => boolean`): The function that decides which group each value belongs to.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => [truthy: T[], falsy: T[]]`): A function that maps a `readonly T[]` to passing and failing arrays.

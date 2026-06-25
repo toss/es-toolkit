@@ -1,30 +1,25 @@
-# uniqBy
+# uniqBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `uniqBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  uniqBy(item => item.id)
-);
-```
-
-## 使い方
-
-`uniqBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+マッピングされたキーを基準に重複を取り除く関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, uniqBy } from 'es-toolkit/fp';
-
-const result = pipe(
-  [{ id: 1 }, { id: 1 }, { id: 2 }],
-  uniqBy(item => item.id)
-);
-// [{ id: 1 }, { id: 2 }]
+const result = pipe(array, uniqBy(mapper));
 ```
 
-## API
+## 使用法
 
-### `uniqBy(...)`
+`uniqBy` は `mapper` が返す各キーの最初の値を残します。最初に現れた順序を保ち、[`pipe`](./pipe.md) の中では遅延評価に対応しています。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { uniqBy, pipe } from 'es-toolkit/fp';
+
+pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqBy(item => item.id)); // => [{ id: 1 }, { id: 2 }]
+```
+
+#### パラメータ
+
+- `mapper` (`(item: T, index: number) => U`): 一意性の判定に使うキーを返す関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をキー基準で重複を取り除いた配列に変換する関数です。

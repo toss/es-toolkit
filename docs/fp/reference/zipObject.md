@@ -1,24 +1,25 @@
-# zipObject
+# zipObject (Functional Programming)
 
-Creates a data-last zipObject operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that builds an object from keys and values. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, zipObject([1, 2]));
+const result = pipe(array, zipObject(values));
 ```
 
 ## Usage
 
-`zipObject` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`zipObject` uses the piped array as keys and pairs each key with the value at the same index in `values`.
 
 ```typescript
-import { pipe, zipObject } from 'es-toolkit/fp';
+import { zipObject, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b'], zipObject([1, 2]));
-// { a: 1, b: 2 }
+pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```
 
-## API
+#### Parameters
 
-### `zipObject(...)`
+- `values` (`readonly V[]`): The values assigned to keys from the piped array by index.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(keys: readonly P[]) => Record<P, V>`): A function that maps keys to an object built from `values`.

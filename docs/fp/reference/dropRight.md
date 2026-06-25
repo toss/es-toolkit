@@ -1,24 +1,25 @@
-# dropRight
+# dropRight (Functional Programming)
 
-Creates a data-last dropRight operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that drops values from the end of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, dropRight(2));
+const result = pipe(array, dropRight(count));
 ```
 
 ## Usage
 
-`dropRight` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`dropRight` removes the last `count` values from the piped array.
 
 ```typescript
 import { dropRight, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], dropRight(2));
-// [1, 2]
+pipe([1, 2, 3, 4], dropRight(2)); // => [1, 2]
 ```
 
-## API
+#### Parameters
 
-### `dropRight(...)`
+- `count` (`number`): The number of values to drop from the end.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the remaining values.

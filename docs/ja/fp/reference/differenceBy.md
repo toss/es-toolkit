@@ -1,30 +1,26 @@
-# differenceBy
+# differenceBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `differenceBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+マッピングされたキーを基準に値を除外する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
+const result = pipe(array, differenceBy(secondArray, mapper));
 ```
 
-## 使い方
+## 使用法
 
-`differenceBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`differenceBy` は `mapper` が返す値を比較します。パイプされた配列の値は、マッピングされたキーが `secondArray` に存在しない場合だけ残ります。
 
 ```typescript
 import { differenceBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 1 }]
 ```
 
-## API
+#### パラメータ
 
-### `differenceBy(...)`
+- `secondArray` (`readonly U[]`): マッピングされたキーを除外基準として使う値の配列です。
+- `mapper` (`(item: T | U) => unknown`): 比較キーを返す関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を `secondArray` にキーが存在しない値の配列に変換する関数です。

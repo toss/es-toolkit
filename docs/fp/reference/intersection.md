@@ -1,24 +1,25 @@
-# intersection
+# intersection (Functional Programming)
 
-Creates a data-last intersection operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that keeps values found in another array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, intersection([2, 4]));
+const result = pipe(array, intersection(secondArray));
 ```
 
 ## Usage
 
-`intersection` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`intersection` keeps values from the piped array that are also present in `secondArray`. It preserves the order of the piped array.
 
 ```typescript
 import { intersection, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], intersection([2, 4]));
-// [2]
+pipe([1, 2, 3], intersection([2, 3, 4])); // => [2, 3]
 ```
 
-## API
+#### Parameters
 
-### `intersection(...)`
+- `secondArray` (`readonly T[]`): The array containing values to keep.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to values also found in `secondArray`.

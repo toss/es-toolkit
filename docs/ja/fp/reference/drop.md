@@ -1,24 +1,25 @@
-# drop
+# drop (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `drop` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+配列の先頭から値を取り除く関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, drop(2));
+const result = pipe(array, drop(count));
 ```
 
-## 使い方
+## 使用法
 
-`drop` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`drop` はパイプされた配列の先頭から `count` 個の値を取り除きます。[`pipe`](./pipe.md) の中では遅延評価に対応しています。
 
 ```typescript
 import { drop, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], drop(2));
-// [3, 4]
+pipe([1, 2, 3, 4], drop(2)); // => [3, 4]
 ```
 
-## API
+#### パラメータ
 
-### `drop(...)`
+- `count` (`number`): 先頭から取り除く値の数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を残りの値の配列に変換する関数です。

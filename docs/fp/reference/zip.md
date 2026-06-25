@@ -1,24 +1,27 @@
-# zip
+# zip (Functional Programming)
 
-Creates a data-last zip operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that groups values from arrays by index. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, zip(['a', 'b']));
+const result = pipe(array, zip(...arrs));
 ```
 
 ## Usage
 
-`zip` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`zip` groups the value at each index from the piped array and the configured arrays. If arrays have different lengths, missing values are `undefined`.
 
 ```typescript
-import { pipe, zip } from 'es-toolkit/fp';
+import { zip, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], zip(['a', 'b']));
-// [[1, 'a'], [2, 'b']]
+pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
+
+pipe([1, 2, 3], zip(['a'])); // => [[1, 'a'], [2, undefined], [3, undefined]]
 ```
 
-## API
+#### Parameters
 
-### `zip(...)`
+- `arrs` (`Array<readonly T[]>`): The arrays to zip with the piped array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[][]`): A function that maps the piped array to grouped rows by index.

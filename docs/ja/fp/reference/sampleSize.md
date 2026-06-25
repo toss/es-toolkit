@@ -1,24 +1,30 @@
-# sampleSize
+# sampleSize (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `sampleSize` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(array, sampleSize(2));
-```
-
-## 使い方
-
-`sampleSize` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+配列からランダムな値を複数返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, sampleSize } from 'es-toolkit/fp';
-
-const result = pipe([1, 2, 3, 4], sampleSize(2));
-// two elements from the array
+const result = pipe(array, sampleSize(size));
 ```
 
-## API
+## 使用法
 
-### `sampleSize(...)`
+`sampleSize` はパイプされた配列から `size` 個のランダムな値を返します。同じ配列位置は繰り返しません。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { sampleSize, pipe } from 'es-toolkit/fp';
+
+const values = pipe([1, 2, 3, 4], sampleSize(2));
+// values has length 2 and contains values from the input array.
+```
+
+#### パラメータ
+
+- `size` (`number`): 返すランダムな値の数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をランダムな値の配列に変換する関数です。
+
+#### エラー
+
+`size` がパイプされた配列の長さより大きい場合、エラーを投げます。

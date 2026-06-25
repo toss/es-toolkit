@@ -1,24 +1,25 @@
-# xor
+# xor (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `xor` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+두 배열 중 정확히 하나에만 있는 값을 반환하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, xor([2, 3]));
+const result = pipe(array, xor(secondArray));
 ```
 
 ## 사용법
 
-`xor`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`xor`는 파이프된 배열과 `secondArray`의 대칭 차집합을 중복 없이 반환해요.
 
 ```typescript
-import { pipe, xor } from 'es-toolkit/fp';
+import { xor, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], xor([2, 3]));
-// [1, 3]
+pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
 ```
 
-## API
+#### 파라미터
 
-### `xor(...)`
+- `secondArray` (`readonly T[]`): 파이프된 배열과 비교할 배열이에요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 대칭 차집합으로 변환하는 함수예요.

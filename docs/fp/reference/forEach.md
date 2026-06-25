@@ -1,30 +1,28 @@
-# forEach
+# forEach (Functional Programming)
 
-Creates a data-last forEach operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that runs a callback for each value and returns the input array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  forEach(value => console.log(value))
-);
+const result = pipe(array, forEach(callback));
 ```
 
 ## Usage
 
-`forEach` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`forEach` is useful as a side-effect step in a pipeline. It calls `callback` for each value and passes the original array through. Inside [`pipe`](./pipe.md), it is lazy-capable when adjacent lazy operations can stop early.
 
 ```typescript
 import { forEach, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3],
-  forEach(value => console.log(value))
-);
-// [1, 2, 3]
+const values: number[] = [];
+
+pipe([1, 2, 3], forEach(value => values.push(value))); // => [1, 2, 3]
+values; // => [1, 2, 3]
 ```
 
-## API
+#### Parameters
 
-### `forEach(...)`
+- `callback` (`(value: T, index: number) => void`): The function to run for each value.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => readonly T[]`): A function that returns the same array after running the callback.

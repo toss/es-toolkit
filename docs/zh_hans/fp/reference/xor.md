@@ -1,24 +1,25 @@
-# xor
+# xor (函数式编程)
 
-创建可用于函数式管道的 data-last `xor` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回只出现在两个数组之一中的值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, xor([2, 3]));
+const result = pipe(array, xor(secondArray));
 ```
 
 ## 用法
 
-`xor` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`xor` 返回管道中数组与 `secondArray` 的对称差,且不包含重复值。
 
 ```typescript
-import { pipe, xor } from 'es-toolkit/fp';
+import { xor, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], xor([2, 3]));
-// [1, 3]
+pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
 ```
 
-## API
+#### 参数
 
-### `xor(...)`
+- `secondArray` (`readonly T[]`): 要与管道中的数组比较的数组。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为对称差的函数。

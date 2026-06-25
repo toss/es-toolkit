@@ -1,6 +1,6 @@
-# unzip
+# unzip (函数式编程)
 
-创建可用于函数式管道的 data-last `unzip` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按位置重新分组已 zip 数组的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, unzip());
@@ -8,23 +8,18 @@ const result = pipe(array, unzip());
 
 ## 用法
 
-`unzip` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`unzip` 接收由分组值组成的数组,并返回按每个位置收集值的数组。
 
 ```typescript
-import { pipe, unzip } from 'es-toolkit/fp';
+import { unzip, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 'a'],
-    [2, 'b'],
-  ],
-  unzip()
-);
-// [[1, 2], ['a', 'b']]
+pipe([[1, 'a'], [2, 'b']], unzip()); // => [[1, 2], ['a', 'b']]
 ```
 
-## API
+#### 参数
 
-### `unzip(...)`
+此函数不接收参数;请以 `unzip()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(zipped: ReadonlyArray<[...T]>) => Unzip<T>`): 一个将 zip 后的行映射为按位置分组数组的函数。

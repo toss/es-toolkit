@@ -1,30 +1,26 @@
-# unionBy
+# unionBy (Functional Programming)
 
-Creates a data-last unionBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that combines arrays by a mapped key without duplicates. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
+const result = pipe(array, unionBy(secondArray, mapper));
 ```
 
 ## Usage
 
-`unionBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`unionBy` compares the values returned by `mapper`. It keeps the first value for each mapped key from the piped array, then from `secondArray`.
 
 ```typescript
-import { pipe, unionBy } from 'es-toolkit/fp';
+import { unionBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], unionBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
-## API
+#### Parameters
 
-### `unionBy(...)`
+- `secondArray` (`readonly T[]`): The array to combine after the piped array.
+- `mapper` (`(item: T) => U`): The function that returns the key used for uniqueness.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a union by mapped key.

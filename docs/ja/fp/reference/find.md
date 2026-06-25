@@ -1,30 +1,25 @@
-# find
+# find (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `find` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+条件を満たす最初の値を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  find(value => value > 2)
-);
+const result = pipe(array, find(predicate));
 ```
 
-## 使い方
+## 使用法
 
-`find` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`find` は、パイプされた配列のうち `predicate` が `true` を返す最初の値を返します。一致する値がなければ `undefined` を返します。
 
 ```typescript
 import { find, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  find(value => value > 2)
-);
-// 3
+pipe([1, 2, 3, 4], find(value => value > 2)); // => 3
 ```
 
-## API
+#### パラメータ
 
-### `find(...)`
+- `predicate` (`(value: T, index: number) => boolean`): 各値をテストする関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T | undefined`): `readonly T[]` を最初に一致した値、または `undefined` に変換する関数です。

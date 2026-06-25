@@ -1,24 +1,25 @@
-# dropRight
+# dropRight (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `dropRight` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+配列の末尾から値を取り除く関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, dropRight(2));
+const result = pipe(array, dropRight(count));
 ```
 
-## 使い方
+## 使用法
 
-`dropRight` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`dropRight` はパイプされた配列の末尾から `count` 個の値を取り除きます。
 
 ```typescript
 import { dropRight, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], dropRight(2));
-// [1, 2]
+pipe([1, 2, 3, 4], dropRight(2)); // => [1, 2]
 ```
 
-## API
+#### パラメータ
 
-### `dropRight(...)`
+- `count` (`number`): 末尾から取り除く値の数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を残りの値の配列に変換する関数です。

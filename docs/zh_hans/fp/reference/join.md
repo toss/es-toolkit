@@ -1,24 +1,27 @@
-# join
+# join (函数式编程)
 
-创建可用于函数式管道的 data-last `join` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个将数组值连接成字符串的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, join('-'));
+const result = pipe(array, join(separator));
 ```
 
 ## 用法
 
-`join` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`join` 会使用 `separator` 连接管道中数组的值并转换为字符串。省略 `separator` 时使用逗号。
 
 ```typescript
 import { join, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b', 'c'], join('-'));
-// 'a-b-c'
+pipe(['a', 'b', 'c'], join('-')); // => 'a-b-c'
+
+pipe(['a', 'b', 'c'], join()); // => 'a,b,c'
 ```
 
-## API
+#### 参数
 
-### `join(...)`
+- `separator` (`string, optional`): 插入到值之间的字符串。默认为 `,`。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => string`): 一个将 `readonly T[]` 映射为连接后字符串的函数。

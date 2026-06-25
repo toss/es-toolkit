@@ -1,24 +1,27 @@
-# zip
+# zip (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `zip` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(array, zip(['a', 'b']));
-```
-
-## 使い方
-
-`zip` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+複数の配列の値をインデックスごとにまとめる関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, zip } from 'es-toolkit/fp';
-
-const result = pipe([1, 2], zip(['a', 'b']));
-// [[1, 'a'], [2, 'b']]
+const result = pipe(array, zip(...arrs));
 ```
 
-## API
+## 使用法
 
-### `zip(...)`
+`zip` は、パイプされた配列と設定した配列の同じインデックスの値をまとめます。配列の長さが異なる場合、足りない値は `undefined` になります。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { zip, pipe } from 'es-toolkit/fp';
+
+pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
+
+pipe([1, 2, 3], zip(['a'])); // => [[1, 'a'], [2, undefined], [3, undefined]]
+```
+
+#### パラメータ
+
+- `arrs` (`Array<readonly T[]>`): パイプされた配列と一緒に zip する配列です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[][]`): パイプされた配列をインデックスごとの行に変換する関数です。

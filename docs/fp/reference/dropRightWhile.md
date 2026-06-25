@@ -1,30 +1,25 @@
-# dropRightWhile
+# dropRightWhile (Functional Programming)
 
-Creates a data-last dropRightWhile operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that drops trailing values while a predicate passes. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  dropRightWhile(value => value > 2)
-);
+const result = pipe(array, dropRightWhile(predicate));
 ```
 
 ## Usage
 
-`dropRightWhile` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`dropRightWhile` walks the piped array from the end and removes values while `predicate` returns `true`. It stops at the first value that does not pass.
 
 ```typescript
 import { dropRightWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  dropRightWhile(value => value > 2)
-);
-// [1, 2]
+pipe([1, 2, 3, 4], dropRightWhile(value => value > 2)); // => [1, 2]
 ```
 
-## API
+#### Parameters
 
-### `dropRightWhile(...)`
+- `predicate` (`(item: T) => boolean`): The function that decides whether a trailing value should be dropped.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the values left after dropping from the end.

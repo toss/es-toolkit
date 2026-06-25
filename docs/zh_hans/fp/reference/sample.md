@@ -1,6 +1,6 @@
-# sample
+# sample (函数式编程)
 
-创建可用于函数式管道的 data-last `sample` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组中返回随机值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, sample());
@@ -8,17 +8,19 @@ const result = pipe(array, sample());
 
 ## 用法
 
-`sample` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`sample` 从管道中的数组返回一个随机值。
 
 ```typescript
-import { pipe, sample } from 'es-toolkit/fp';
+import { sample, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], sample());
-// one element from the array
+const value = pipe([1, 2, 3], sample());
+// value is one of 1, 2, or 3.
 ```
 
-## API
+#### 参数
 
-### `sample(...)`
+此函数不接收参数;请以 `sample()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T`): 一个将 `readonly T[]` 映射为一个随机值的函数。

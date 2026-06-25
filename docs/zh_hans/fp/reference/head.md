@@ -1,6 +1,6 @@
-# head
+# head (函数式编程)
 
-创建可用于函数式管道的 data-last `head` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回数组第一个值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, head());
@@ -8,17 +8,20 @@ const result = pipe(array, head());
 
 ## 用法
 
-`head` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`head` 返回管道中数组的第一个值。如果数组为空,则返回 `undefined`。
 
 ```typescript
 import { head, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], head());
-// 1
+pipe([1, 2, 3], head()); // => 1
+
+pipe([], head()); // => undefined
 ```
 
-## API
+#### 参数
 
-### `head(...)`
+此函数不接收参数;请以 `head()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T | undefined`): 一个将 `readonly T[]` 映射为其第一个值的函数。

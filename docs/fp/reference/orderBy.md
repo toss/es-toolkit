@@ -1,30 +1,31 @@
-# orderBy
+# orderBy (Functional Programming)
 
-Creates a data-last orderBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that sorts objects by criteria and sort orders. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, orderBy(['age'], ['asc']));
+const result = pipe(array, orderBy(criteria, orders));
 ```
 
 ## Usage
 
-`orderBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`orderBy` sorts the piped array by each criterion in order. Each order controls whether the matching criterion is sorted ascending or descending.
 
 ```typescript
 import { orderBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    { name: 'a', age: 2 },
-    { name: 'b', age: 1 },
-  ],
-  orderBy(['age'], ['asc'])
-);
-// [{ name: 'b', age: 1 }, { name: 'a', age: 2 }]
+const users = [
+  { name: 'a', age: 2 },
+  { name: 'b', age: 1 },
+];
+
+pipe(users, orderBy(['age'], ['asc'])); // => [{ name: 'b', age: 1 }, { name: 'a', age: 2 }]
 ```
 
-## API
+#### Parameters
 
-### `orderBy(...)`
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): The object keys and/or selector functions used for comparison.
+- `orders` (`Array<'asc' | 'desc'>`): The sort order for each criterion.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a new, sorted array.

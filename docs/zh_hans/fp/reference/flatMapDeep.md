@@ -1,30 +1,25 @@
-# flatMapDeep
+# flatMapDeep (函数式编程)
 
-创建可用于函数式管道的 data-last `flatMapDeep` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个映射每个值并深度展平结果的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  flatMapDeep(value => [[value, value]])
-);
+const result = pipe(array, flatMapDeep(iteratee));
 ```
 
 ## 用法
 
-`flatMapDeep` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`flatMapDeep` 会对管道中数组的每个值调用 `iteratee`,并递归展平返回的数组。
 
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2],
-  flatMapDeep(value => [[value, value]])
-);
-// [1, 1, 2, 2]
+pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
 ```
 
-## API
+#### 参数
 
-### `flatMapDeep(...)`
+- `iteratee` (`(item: T, index: number) => U`): 在深度展平前映射每个值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Array<ExtractNestedArrayType<U>>`): 一个将 `readonly T[]` 映射为深度展平数组的函数。

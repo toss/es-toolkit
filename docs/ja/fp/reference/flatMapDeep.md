@@ -1,30 +1,25 @@
-# flatMapDeep
+# flatMapDeep (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `flatMapDeep` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+各値を変換し、結果を深く平坦化する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  flatMapDeep(value => [[value, value]])
-);
+const result = pipe(array, flatMapDeep(iteratee));
 ```
 
-## 使い方
+## 使用法
 
-`flatMapDeep` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`flatMapDeep` はパイプされた配列の各値に `iteratee` を呼び出し、返された配列を再帰的に平坦化します。
 
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2],
-  flatMapDeep(value => [[value, value]])
-);
-// [1, 1, 2, 2]
+pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
 ```
 
-## API
+#### パラメータ
 
-### `flatMapDeep(...)`
+- `iteratee` (`(item: T, index: number) => U`): 深く平坦化する前に各値を変換する関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => Array<ExtractNestedArrayType<U>>`): `readonly T[]` を深く平坦化した配列に変換する関数です。

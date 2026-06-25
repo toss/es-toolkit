@@ -1,24 +1,27 @@
-# cartesianProduct
+# cartesianProduct (函数式编程)
 
-创建可用于函数式管道的 data-last `cartesianProduct` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个计算管道中数组与其他数组笛卡尔积的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, cartesianProduct(['a', 'b']));
+const result = pipe(array, cartesianProduct(...arrs));
 ```
 
 ## 用法
 
-`cartesianProduct` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`cartesianProduct` 返回从管道中的数组和每个配置数组各取一个值所能组成的所有元组。最右侧的数组变化最快。
 
 ```typescript
 import { cartesianProduct, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], cartesianProduct(['a', 'b']));
-// [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+pipe([1, 2], cartesianProduct(['a', 'b'])); // => [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+
+pipe([], cartesianProduct(['a', 'b'])); // => []
 ```
 
-## API
+#### 参数
 
-### `cartesianProduct(...)`
+- `arrs` (`Array<readonly T[]>`): 要接在管道中数组之后参与计算的数组。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[][]`): 一个将管道中的数组映射为笛卡尔积元组数组的函数。

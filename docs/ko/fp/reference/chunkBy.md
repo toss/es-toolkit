@@ -1,30 +1,25 @@
-# chunkBy
+# chunkBy (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `chunkBy` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+키가 바뀔 때마다 인접한 값을 나누는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  chunkBy(value => value)
-);
+const result = pipe(array, chunkBy(iteratee));
 ```
 
 ## 사용법
 
-`chunkBy`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`chunkBy`는 파이프된 배열을 왼쪽에서 오른쪽으로 순회하면서 `iteratee`가 같은 키를 반환하는 인접 값을 묶어요. 키가 바뀌면 새 청크가 시작돼요.
 
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 1, 2, 3, 3],
-  chunkBy(value => value)
-);
-// [[1, 1], [2], [3, 3]]
+pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
 ```
 
-## API
+#### 파라미터
 
-### `chunkBy(...)`
+- `iteratee` (`(value: T) => unknown`): 각 값의 그룹 키를 반환하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[][]`): `readonly T[]`를 인접 값 청크 배열로 변환하는 함수예요.

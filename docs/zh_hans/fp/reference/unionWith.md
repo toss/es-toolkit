@@ -1,30 +1,26 @@
-# unionWith
+# unionWith (函数式编程)
 
-创建可用于函数式管道的 data-last `unionWith` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个使用自定义相等函数合并数组的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
+const result = pipe(array, unionWith(secondArray, areItemsEqual));
 ```
 
 ## 用法
 
-`unionWith` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`unionWith` 会按顺序遍历合并后的数组,并保留按 `areItemsEqual` 尚未与已保留值匹配的第一个值。
 
 ```typescript
-import { pipe, unionWith } from 'es-toolkit/fp';
+import { unionWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
-## API
+#### 参数
 
-### `unionWith(...)`
+- `secondArray` (`readonly T[]`): 要接在管道中数组之后合并的数组。
+- `areItemsEqual` (`(item: T, other: T) => boolean`): 判断两个值是否相等的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为按自定义相等关系合并结果的函数。

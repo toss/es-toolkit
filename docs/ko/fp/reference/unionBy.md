@@ -1,30 +1,26 @@
-# unionBy
+# unionBy (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `unionBy` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+매핑된 키를 기준으로 두 배열을 중복 없이 합치는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
+const result = pipe(array, unionBy(secondArray, mapper));
 ```
 
 ## 사용법
 
-`unionBy`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`unionBy`는 `mapper`가 반환한 값을 비교해요. 파이프된 배열에서 각 매핑 키의 첫 값을 먼저 유지하고, 이어서 `secondArray`의 값을 처리해요.
 
 ```typescript
-import { pipe, unionBy } from 'es-toolkit/fp';
+import { unionBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], unionBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
-## API
+#### 파라미터
 
-### `unionBy(...)`
+- `secondArray` (`readonly T[]`): 파이프된 배열 뒤에 합칠 배열이에요.
+- `mapper` (`(item: T) => U`): 고유성을 판단할 키를 반환하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 매핑 키 기준 합집합으로 변환하는 함수예요.

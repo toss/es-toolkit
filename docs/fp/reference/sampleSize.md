@@ -1,24 +1,30 @@
-# sampleSize
+# sampleSize (Functional Programming)
 
-Creates a data-last sampleSize operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns random values from an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, sampleSize(2));
+const result = pipe(array, sampleSize(size));
 ```
 
 ## Usage
 
-`sampleSize` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`sampleSize` returns `size` random values from the piped array without repeating the same array position.
 
 ```typescript
-import { pipe, sampleSize } from 'es-toolkit/fp';
+import { sampleSize, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], sampleSize(2));
-// two elements from the array
+const values = pipe([1, 2, 3, 4], sampleSize(2));
+// values has length 2 and contains values from the input array.
 ```
 
-## API
+#### Parameters
 
-### `sampleSize(...)`
+- `size` (`number`): The number of random values to return.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to random values.
+
+#### Throws
+
+Throws an error if `size` is greater than the length of the piped array.

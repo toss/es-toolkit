@@ -1,24 +1,30 @@
-# toFilled
+# toFilled (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `toFilled` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(array, toFilled(0, 1, 3));
-```
-
-## 使い方
-
-`toFilled` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+配列の一部を埋めたコピーを返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, toFilled } from 'es-toolkit/fp';
-
-const result = pipe([1, 2, 3], toFilled(0, 1, 3));
-// [1, 0, 0]
+const result = pipe(array, toFilled(value, start, end));
 ```
 
-## API
+## 使用法
 
-### `toFilled(...)`
+`toFilled` は、パイプされた配列のコピーを `start` から `end` の直前まで `value` で埋めます。`Array.prototype.fill` のインデックス規則に従い、入力配列は変更しません。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { toFilled, pipe } from 'es-toolkit/fp';
+
+const array = [1, 2, 3, 4];
+
+pipe(array, toFilled(0, 1, 3)); // => [1, 0, 0, 4]
+array; // => [1, 2, 3, 4]
+```
+
+#### パラメータ
+
+- `value` (`U`): 返される配列に書き込む値です。
+- `start` (`number, optional`): 開始インデックスです。デフォルトは `0` です。
+- `end` (`number, optional`): 終了インデックスです。デフォルトは配列の長さです。
+
+#### 戻り値
+
+(`(array: readonly T[]) => Array<T | U>`): `readonly T[]` を一部が埋められたコピーに変換する関数です。

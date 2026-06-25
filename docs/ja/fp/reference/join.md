@@ -1,24 +1,27 @@
-# join
+# join (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `join` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+配列の値を文字列に結合する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, join('-'));
+const result = pipe(array, join(separator));
 ```
 
-## 使い方
+## 使用法
 
-`join` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`join` は、パイプされた配列の値を `separator` で結合して文字列に変換します。`separator` を省略するとカンマを使います。
 
 ```typescript
 import { join, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b', 'c'], join('-'));
-// 'a-b-c'
+pipe(['a', 'b', 'c'], join('-')); // => 'a-b-c'
+
+pipe(['a', 'b', 'c'], join()); // => 'a,b,c'
 ```
 
-## API
+#### パラメータ
 
-### `join(...)`
+- `separator` (`string, optional`): 値の間に挿入する文字列です。デフォルトは `,` です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => string`): `readonly T[]` を結合された文字列に変換する関数です。

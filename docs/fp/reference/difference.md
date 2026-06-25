@@ -1,24 +1,25 @@
-# difference
+# difference (Functional Programming)
 
-Creates a data-last difference operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that excludes values found in another array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, difference([2, 4]));
+const result = pipe(array, difference(secondArray));
 ```
 
 ## Usage
 
-`difference` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`difference` keeps values from the piped array that are not present in `secondArray`. It preserves the order of the piped array.
 
 ```typescript
 import { difference, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], difference([2, 4]));
-// [1, 3]
+pipe([1, 2, 3, 4], difference([2, 4])); // => [1, 3]
 ```
 
-## API
+#### Parameters
 
-### `difference(...)`
+- `secondArray` (`readonly T[]`): The array containing values to exclude.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to values not found in `secondArray`.

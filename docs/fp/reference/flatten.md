@@ -1,24 +1,25 @@
-# flatten
+# flatten (Functional Programming)
 
-Creates a data-last flatten operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that flattens nested arrays to a given depth. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, flatten(2));
+const result = pipe(array, flatten(depth));
 ```
 
 ## Usage
 
-`flatten` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`flatten` flattens the piped array up to `depth`. When `depth` is omitted, it flattens one level. It is lazy-capable for one-level flattening inside [`pipe`](./pipe.md).
 
 ```typescript
 import { flatten, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, [2, [3]]], flatten(2));
-// [1, 2, 3]
+pipe([[1], [2, 3], [4]], flatten()); // => [1, 2, 3, 4]
 ```
 
-## API
+#### Parameters
 
-### `flatten(...)`
+- `depth` (`number, optional`): The depth to flatten. Defaults to `1`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => Array<FlatArray<T[], D>>`): A function that maps a nested array to a flattened array.

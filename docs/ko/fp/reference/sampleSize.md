@@ -1,24 +1,30 @@
-# sampleSize
+# sampleSize (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `sampleSize` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+배열에서 임의의 값 여러 개를 반환하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, sampleSize(2));
+const result = pipe(array, sampleSize(size));
 ```
 
 ## 사용법
 
-`sampleSize`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`sampleSize`는 파이프된 배열에서 `size`개의 임의 값을 반환해요. 같은 배열 위치는 반복하지 않아요.
 
 ```typescript
-import { pipe, sampleSize } from 'es-toolkit/fp';
+import { sampleSize, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], sampleSize(2));
-// two elements from the array
+const values = pipe([1, 2, 3, 4], sampleSize(2));
+// values has length 2 and contains values from the input array.
 ```
 
-## API
+#### 파라미터
 
-### `sampleSize(...)`
+- `size` (`number`): 반환할 임의 값의 개수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 임의 값 배열로 변환하는 함수예요.
+
+#### 에러
+
+`size`가 파이프된 배열의 길이보다 크면 에러를 던져요.

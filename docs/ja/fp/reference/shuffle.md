@@ -1,24 +1,26 @@
-# shuffle
+# shuffle (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `shuffle` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+配列をシャッフルしたコピーを返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, shuffle());
 ```
 
-## 使い方
+## 使用法
 
-`shuffle` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`shuffle` はパイプされた配列と同じ値をランダムな順序で含む新しい配列を返します。入力配列は変更しません。
 
 ```typescript
-import { pipe, shuffle } from 'es-toolkit/fp';
+import { shuffle, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], shuffle());
-// a shuffled copy
+const values = pipe([1, 2, 3], shuffle());
+// values contains 1, 2, and 3 in random order.
 ```
 
-## API
+#### パラメータ
 
-### `shuffle(...)`
+この関数は引数を受け取りません。`shuffle()` のように呼び出してください。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をシャッフルしたコピーに変換する関数です。

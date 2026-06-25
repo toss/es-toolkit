@@ -1,30 +1,25 @@
-# dropRightWhile
+# dropRightWhile (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `dropRightWhile` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+조건을 만족하는 동안 배열 끝의 값을 버리는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  dropRightWhile(value => value > 2)
-);
+const result = pipe(array, dropRightWhile(predicate));
 ```
 
 ## 사용법
 
-`dropRightWhile`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`dropRightWhile`는 파이프된 배열을 끝에서부터 보면서 `predicate`가 `true`를 반환하는 동안 값을 제거해요. 조건을 만족하지 않는 첫 값에서 멈춰요.
 
 ```typescript
 import { dropRightWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  dropRightWhile(value => value > 2)
-);
-// [1, 2]
+pipe([1, 2, 3, 4], dropRightWhile(value => value > 2)); // => [1, 2]
 ```
 
-## API
+#### 파라미터
 
-### `dropRightWhile(...)`
+- `predicate` (`(item: T) => boolean`): 끝의 값을 제거할지 판단하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 끝에서 값을 제거한 뒤 남은 배열로 변환하는 함수예요.

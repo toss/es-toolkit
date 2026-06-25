@@ -1,24 +1,25 @@
-# flatten
+# flatten (函数式编程)
 
-创建可用于函数式管道的 data-last `flatten` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按指定深度展平嵌套数组的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, flatten(2));
+const result = pipe(array, flatten(depth));
 ```
 
 ## 用法
 
-`flatten` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`flatten` 会将管道中的数组展平到 `depth` 深度。省略 `depth` 时只展平一层。一层展平在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
 import { flatten, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, [2, [3]]], flatten(2));
-// [1, 2, 3]
+pipe([[1], [2, 3], [4]], flatten()); // => [1, 2, 3, 4]
 ```
 
-## API
+#### 参数
 
-### `flatten(...)`
+- `depth` (`number, optional`): 要展平的深度。默认为 `1`。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Array<FlatArray<T[], D>>`): 一个将嵌套数组映射为展平数组的函数。

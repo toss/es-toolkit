@@ -1,30 +1,26 @@
-# intersectionWith
+# intersectionWith (函数式编程)
 
-创建可用于函数式管道的 data-last `intersectionWith` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个使用自定义相等函数保留值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  intersectionWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```
 
 ## 用法
 
-`intersectionWith` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`intersectionWith` 会在 `areItemsEqual` 对 `secondArray` 中至少一个值返回 `true` 时保留管道中数组的值。
 
 ```typescript
 import { intersectionWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  intersectionWith([2], (item, id) => item.id === id)
-);
-// [{ id: 2 }]
+pipe([{ id: 1 }, { id: 2 }], intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 2 }]
 ```
 
-## API
+#### 参数
 
-### `intersectionWith(...)`
+- `secondArray` (`readonly U[]`): 包含用于比较的值的数组。
+- `areItemsEqual` (`(item: T, other: U) => boolean`): 判断两个值是否相等的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为被比较函数匹配的值数组的函数。

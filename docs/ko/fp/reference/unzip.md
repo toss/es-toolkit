@@ -1,6 +1,6 @@
-# unzip
+# unzip (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `unzip` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+zip으로 묶인 배열을 위치별로 다시 묶는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
 const result = pipe(array, unzip());
@@ -8,23 +8,18 @@ const result = pipe(array, unzip());
 
 ## 사용법
 
-`unzip`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`unzip`은 묶인 값들의 배열을 받아 각 위치의 값끼리 모은 배열들을 반환해요.
 
 ```typescript
-import { pipe, unzip } from 'es-toolkit/fp';
+import { unzip, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 'a'],
-    [2, 'b'],
-  ],
-  unzip()
-);
-// [[1, 2], ['a', 'b']]
+pipe([[1, 'a'], [2, 'b']], unzip()); // => [[1, 2], ['a', 'b']]
 ```
 
-## API
+#### 파라미터
 
-### `unzip(...)`
+이 함수는 인자를 받지 않아요. `unzip()`처럼 호출하세요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(zipped: ReadonlyArray<[...T]>) => Unzip<T>`): zip된 행을 위치별 배열로 변환하는 함수예요.

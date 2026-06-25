@@ -1,24 +1,25 @@
-# flatten
+# flatten (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `flatten` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+ネストした配列を指定した深さまで平坦化する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, flatten(2));
+const result = pipe(array, flatten(depth));
 ```
 
-## 使い方
+## 使用法
 
-`flatten` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`flatten` はパイプされた配列を `depth` の深さまで平坦化します。`depth` を省略すると 1 段階だけ平坦化します。1 段階の平坦化は [`pipe`](./pipe.md) の中で遅延評価に対応しています。
 
 ```typescript
 import { flatten, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, [2, [3]]], flatten(2));
-// [1, 2, 3]
+pipe([[1], [2, 3], [4]], flatten()); // => [1, 2, 3, 4]
 ```
 
-## API
+#### パラメータ
 
-### `flatten(...)`
+- `depth` (`number, optional`): 平坦化する深さです。デフォルトは `1` です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => Array<FlatArray<T[], D>>`): ネストした配列を平坦化した配列に変換する関数です。

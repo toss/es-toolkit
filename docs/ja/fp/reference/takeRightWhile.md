@@ -1,30 +1,25 @@
-# takeRightWhile
+# takeRightWhile (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `takeRightWhile` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  takeRightWhile(value => value > 2)
-);
-```
-
-## 使い方
-
-`takeRightWhile` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+述語が通る間、末尾の値を取り出す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, takeRightWhile } from 'es-toolkit/fp';
-
-const result = pipe(
-  [1, 2, 3, 4],
-  takeRightWhile(value => value > 2)
-);
-// [3, 4]
+const result = pipe(array, takeRightWhile(predicate));
 ```
 
-## API
+## 使用法
 
-### `takeRightWhile(...)`
+`takeRightWhile` はパイプされた配列を末尾から見て、`predicate` が `true` を返す間だけ値を残します。条件を満たさない最初の値で止まります。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { takeRightWhile, pipe } from 'es-toolkit/fp';
+
+pipe([1, 2, 3, 4], takeRightWhile(value => value > 2)); // => [3, 4]
+```
+
+#### パラメータ
+
+- `predicate` (`(item: T) => boolean`): 末尾の値を残すかどうかを判定する関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を条件を満たす末尾の値の配列に変換する関数です。

@@ -1,24 +1,25 @@
-# zipObject
+# zipObject (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `zipObject` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(array, zipObject([1, 2]));
-```
-
-## 使い方
-
-`zipObject` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+キーと値からオブジェクトを作成する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, zipObject } from 'es-toolkit/fp';
-
-const result = pipe(['a', 'b'], zipObject([1, 2]));
-// { a: 1, b: 2 }
+const result = pipe(array, zipObject(values));
 ```
 
-## API
+## 使用法
 
-### `zipObject(...)`
+`zipObject` はパイプされた配列をキーとして使い、各キーを `values` の同じインデックスの値と組み合わせます。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { zipObject, pipe } from 'es-toolkit/fp';
+
+pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
+```
+
+#### パラメータ
+
+- `values` (`readonly V[]`): パイプされた配列のキーにインデックスごとに割り当てる値です。
+
+#### 戻り値
+
+(`(keys: readonly P[]) => Record<P, V>`): キー配列を `values` から作られたオブジェクトに変換する関数です。

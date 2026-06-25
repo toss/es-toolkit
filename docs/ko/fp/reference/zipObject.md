@@ -1,24 +1,25 @@
-# zipObject
+# zipObject (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `zipObject` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+키와 값으로 객체를 만드는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, zipObject([1, 2]));
+const result = pipe(array, zipObject(values));
 ```
 
 ## 사용법
 
-`zipObject`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`zipObject`는 파이프된 배열을 키로 사용하고, 각 키를 `values`의 같은 인덱스 값과 짝지어요.
 
 ```typescript
-import { pipe, zipObject } from 'es-toolkit/fp';
+import { zipObject, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b'], zipObject([1, 2]));
-// { a: 1, b: 2 }
+pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```
 
-## API
+#### 파라미터
 
-### `zipObject(...)`
+- `values` (`readonly V[]`): 파이프된 배열의 키에 인덱스별로 할당할 값들이에요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(keys: readonly P[]) => Record<P, V>`): 키 배열을 `values`로 만든 객체로 변환하는 함수예요.

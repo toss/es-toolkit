@@ -1,6 +1,6 @@
-# compact
+# compact (函数式编程)
 
-创建可用于函数式管道的 data-last `compact` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组中移除假值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, compact());
@@ -8,17 +8,18 @@ const result = pipe(array, compact());
 
 ## 用法
 
-`compact` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`compact` 会移除 `false`、`null`、`undefined`、`0`、`-0`、`0n`、空字符串和 `NaN`。它在 [`pipe`](./pipe.md) 中支持惰性求值,因此末尾的 `take` 可以提前停止遍历。
 
 ```typescript
 import { compact, pipe } from 'es-toolkit/fp';
 
-const result = pipe([0, 1, false, 2, '', 3], compact());
-// [1, 2, 3]
+pipe([0, 1, false, 2, '', 3], compact()); // => [1, 2, 3]
 ```
 
-## API
+#### 参数
 
-### `compact(...)`
+此函数不接收参数;请以 `compact()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Array<NotFalsey<T>>`): 一个将 `readonly T[]` 映射为不含假值数组的函数。

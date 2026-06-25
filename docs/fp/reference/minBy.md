@@ -1,30 +1,25 @@
-# minBy
+# minBy (Functional Programming)
 
-Creates a data-last minBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the value with the smallest computed score. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  minBy(item => item.score)
-);
+const result = pipe(array, minBy(getValue));
 ```
 
 ## Usage
 
-`minBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`minBy` calls `getValue` for each value in the piped array and returns the value with the smallest result. If the array is empty, it returns `undefined`.
 
 ```typescript
 import { minBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ score: 1 }, { score: 3 }, { score: 2 }],
-  minBy(item => item.score)
-);
-// { score: 1 }
+pipe([{ score: 10 }, { score: 30 }, { score: 20 }], minBy(item => item.score)); // => { score: 10 }
 ```
 
-## API
+#### Parameters
 
-### `minBy(...)`
+- `getValue` (`(item: T) => number`): The function that returns the value used for comparison.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T | undefined`): A function that maps a `readonly T[]` to the minimum item, or `undefined`.

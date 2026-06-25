@@ -1,24 +1,27 @@
-# zip
+# zip (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `zip` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+여러 배열의 값을 인덱스별로 묶는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, zip(['a', 'b']));
+const result = pipe(array, zip(...arrs));
 ```
 
 ## 사용법
 
-`zip`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`zip`은 파이프된 배열과 설정한 배열들의 같은 인덱스 값을 묶어요. 배열 길이가 다르면 빠진 값은 `undefined`가 돼요.
 
 ```typescript
-import { pipe, zip } from 'es-toolkit/fp';
+import { zip, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], zip(['a', 'b']));
-// [[1, 'a'], [2, 'b']]
+pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
+
+pipe([1, 2, 3], zip(['a'])); // => [[1, 'a'], [2, undefined], [3, undefined]]
 ```
 
-## API
+#### 파라미터
 
-### `zip(...)`
+- `arrs` (`Array<readonly T[]>`): 파이프된 배열과 함께 묶을 배열들이에요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[][]`): 파이프된 배열을 인덱스별로 묶인 행 배열로 변환하는 함수예요.

@@ -1,24 +1,29 @@
-# combinations
+# combinations (Functional Programming)
 
-Creates a data-last combinations operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns combinations of a given size. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, combinations(2));
+const result = pipe(array, combinations(size));
 ```
 
 ## Usage
 
-`combinations` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`combinations` returns every way to choose `size` values from the piped array while preserving their original order in each combination.
 
 ```typescript
 import { combinations, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], combinations(2));
-// [[1, 2], [1, 3], [2, 3]]
+pipe(['a', 'b', 'c'], combinations(2)); // => [['a', 'b'], ['a', 'c'], ['b', 'c']]
 ```
 
-## API
+#### Parameters
 
-### `combinations(...)`
+- `size` (`number`): The number of values in each combination.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[][]`): A function that maps a `readonly T[]` to an array of combinations.
+
+#### Throws
+
+Throws an error if `size` is not a non-negative integer.

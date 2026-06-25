@@ -1,30 +1,25 @@
-# find
+# find (Functional Programming)
 
-Creates a data-last find operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the first value that passes a test. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  find(value => value > 2)
-);
+const result = pipe(array, find(predicate));
 ```
 
 ## Usage
 
-`find` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`find` returns the first value in the piped array for which `predicate` returns `true`. If no value matches, it returns `undefined`.
 
 ```typescript
 import { find, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  find(value => value > 2)
-);
-// 3
+pipe([1, 2, 3, 4], find(value => value > 2)); // => 3
 ```
 
-## API
+#### Parameters
 
-### `find(...)`
+- `predicate` (`(value: T, index: number) => boolean`): The function that tests each value.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T | undefined`): A function that maps a `readonly T[]` to the first matching value, or `undefined`.

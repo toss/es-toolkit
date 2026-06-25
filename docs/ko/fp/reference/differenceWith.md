@@ -1,30 +1,26 @@
-# differenceWith
+# differenceWith (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `differenceWith` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+사용자 정의 동등성 함수로 값을 제외하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  differenceWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```
 
 ## 사용법
 
-`differenceWith`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`differenceWith`는 `secondArray`의 모든 값에 대해 `areItemsEqual`이 `false`를 반환할 때만 파이프된 배열의 값을 유지해요.
 
 ```typescript
 import { differenceWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceWith([2], (item, id) => item.id === id)
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 1 }]
 ```
 
-## API
+#### 파라미터
 
-### `differenceWith(...)`
+- `secondArray` (`readonly U[]`): 비교할 값을 담은 배열이에요.
+- `areItemsEqual` (`(item: T, other: U) => boolean`): 두 값이 같은지 판단하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 비교 함수와 일치하지 않는 값 배열로 변환하는 함수예요.

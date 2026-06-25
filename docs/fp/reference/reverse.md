@@ -1,6 +1,6 @@
-# reverse
+# reverse (Functional Programming)
 
-Creates a data-last reverse operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns a reversed copy of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, reverse());
@@ -8,17 +8,21 @@ const result = pipe(array, reverse());
 
 ## Usage
 
-`reverse` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`reverse` returns a new array with the values of the piped array in reverse order. It does not mutate the input array.
 
 ```typescript
-import { pipe, reverse } from 'es-toolkit/fp';
+import { reverse, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], reverse());
-// [3, 2, 1]
+const array = [1, 2, 3];
+
+pipe(array, reverse()); // => [3, 2, 1]
+array; // => [1, 2, 3]
 ```
 
-## API
+#### Parameters
 
-### `reverse(...)`
+This function takes no arguments; call it as `reverse()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a reversed copy.

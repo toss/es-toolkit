@@ -1,33 +1,25 @@
-# unzipWith
+# unzipWith (Functional Programming)
 
-Creates a data-last unzipWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that regroups zipped arrays and combines each position. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  unzipWith((a, b) => a + b)
-);
+const result = pipe(array, unzipWith(iteratee));
 ```
 
 ## Usage
 
-`unzipWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`unzipWith` collects values at the same position from grouped rows, calls `iteratee` with those values, and returns the results.
 
 ```typescript
-import { pipe, unzipWith } from 'es-toolkit/fp';
+import { unzipWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 10],
-    [2, 20],
-  ],
-  unzipWith((a, b) => a + b)
-);
-// [3, 30]
+pipe([[1, 10], [2, 20]], unzipWith((a, b) => a + b)); // => [3, 30]
 ```
 
-## API
+#### Parameters
 
-### `unzipWith(...)`
+- `iteratee` (`(...args: T[]) => R`): The function that combines values from the same position.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(target: readonly T[][]) => R[]`): A function that maps zipped rows to combined values by position.

@@ -1,33 +1,25 @@
-# unzipWith
+# unzipWith (函数式编程)
 
-创建可用于函数式管道的 data-last `unzipWith` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按位置重新分组已 zip 数组并组合每个位置的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  unzipWith((a, b) => a + b)
-);
+const result = pipe(array, unzipWith(iteratee));
 ```
 
 ## 用法
 
-`unzipWith` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`unzipWith` 会从分组行中收集相同位置的值,传给 `iteratee`,并返回结果。
 
 ```typescript
-import { pipe, unzipWith } from 'es-toolkit/fp';
+import { unzipWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 10],
-    [2, 20],
-  ],
-  unzipWith((a, b) => a + b)
-);
-// [3, 30]
+pipe([[1, 10], [2, 20]], unzipWith((a, b) => a + b)); // => [3, 30]
 ```
 
-## API
+#### 参数
 
-### `unzipWith(...)`
+- `iteratee` (`(...args: T[]) => R`): 组合相同位置值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(target: readonly T[][]) => R[]`): 一个将 zip 后的行映射为按位置组合结果的函数。

@@ -1,6 +1,6 @@
-# unzip
+# unzip (Functional Programming)
 
-Creates a data-last unzip operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that regroups zipped arrays by position. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, unzip());
@@ -8,23 +8,18 @@ const result = pipe(array, unzip());
 
 ## Usage
 
-`unzip` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`unzip` takes an array of grouped values and returns arrays that collect the values at each position.
 
 ```typescript
-import { pipe, unzip } from 'es-toolkit/fp';
+import { unzip, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 'a'],
-    [2, 'b'],
-  ],
-  unzip()
-);
-// [[1, 2], ['a', 'b']]
+pipe([[1, 'a'], [2, 'b']], unzip()); // => [[1, 2], ['a', 'b']]
 ```
 
-## API
+#### Parameters
 
-### `unzip(...)`
+This function takes no arguments; call it as `unzip()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(zipped: ReadonlyArray<[...T]>) => Unzip<T>`): A function that maps zipped rows to arrays grouped by position.

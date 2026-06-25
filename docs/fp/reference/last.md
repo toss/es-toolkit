@@ -1,6 +1,6 @@
-# last
+# last (Functional Programming)
 
-Creates a data-last last operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the last value of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, last());
@@ -8,17 +8,20 @@ const result = pipe(array, last());
 
 ## Usage
 
-`last` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`last` returns the last value in the piped array. If the array is empty, it returns `undefined`.
 
 ```typescript
 import { last, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], last());
-// 3
+pipe([1, 2, 3], last()); // => 3
+
+pipe([], last()); // => undefined
 ```
 
-## API
+#### Parameters
 
-### `last(...)`
+This function takes no arguments; call it as `last()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T | undefined`): A function that maps a `readonly T[]` to its last value.

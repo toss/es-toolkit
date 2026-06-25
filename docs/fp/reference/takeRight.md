@@ -1,24 +1,25 @@
-# takeRight
+# takeRight (Functional Programming)
 
-Creates a data-last takeRight operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns values from the end of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, takeRight(2));
+const result = pipe(array, takeRight(count));
 ```
 
 ## Usage
 
-`takeRight` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`takeRight` returns the last `count` values from the piped array.
 
 ```typescript
-import { pipe, takeRight } from 'es-toolkit/fp';
+import { takeRight, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], takeRight(2));
-// [3, 4]
+pipe([1, 2, 3, 4], takeRight(2)); // => [3, 4]
 ```
 
-## API
+#### Parameters
 
-### `takeRight(...)`
+- `count` (`number`): The number of values to take from the end.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the last `count` values.

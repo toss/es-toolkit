@@ -1,30 +1,26 @@
-# xorBy
+# xorBy (函数式编程)
 
-创建可用于函数式管道的 data-last `xorBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按映射键返回对称差的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
+const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
 ## 用法
 
-`xorBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`xorBy` 比较 `mapper` 返回的值,并返回映射键只存在于一个数组中的值。
 
 ```typescript
-import { pipe, xorBy } from 'es-toolkit/fp';
+import { xorBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
 ```
 
-## API
+#### 参数
 
-### `xorBy(...)`
+- `secondArray` (`readonly T[]`): 要与管道中的数组比较的数组。
+- `mapper` (`(item: T) => U`): 返回比较键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为按键计算的对称差的函数。

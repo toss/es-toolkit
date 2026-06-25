@@ -1,30 +1,25 @@
-# uniqWith
+# uniqWith (Functional Programming)
 
-Creates a data-last uniqWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that removes duplicates using a custom equality function. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  uniqWith((a, b) => a.id === b.id)
-);
+const result = pipe(array, uniqWith(areItemsEqual));
 ```
 
 ## Usage
 
-`uniqWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`uniqWith` keeps the first value that does not match a previously kept value according to `areItemsEqual`. It is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
-import { pipe, uniqWith } from 'es-toolkit/fp';
+import { uniqWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 1 }, { id: 2 }],
-  uniqWith((a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 2 }]
+pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqWith((a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }]
 ```
 
-## API
+#### Parameters
 
-### `uniqWith(...)`
+- `areItemsEqual` (`(item: T, other: T) => boolean`): The function that decides whether two values are equal.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a duplicate-free array by custom equality.

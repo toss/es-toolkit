@@ -1,30 +1,25 @@
-# findIndex
+# findIndex (函数式编程)
 
-创建可用于函数式管道的 data-last `findIndex` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回第一个通过测试的值的索引的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  findIndex(value => value > 2)
-);
+const result = pipe(array, findIndex(predicate));
 ```
 
 ## 用法
 
-`findIndex` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`findIndex` 返回管道中数组里第一个使 `predicate` 返回 `true` 的值的索引。如果没有匹配值,则返回 `-1`。
 
 ```typescript
 import { findIndex, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  findIndex(value => value > 2)
-);
-// 2
+pipe([1, 2, 3, 4], findIndex(value => value > 2)); // => 2
 ```
 
-## API
+#### 参数
 
-### `findIndex(...)`
+- `predicate` (`(value: T, index: number) => boolean`): 测试每个值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => number`): 一个将 `readonly T[]` 映射为第一个匹配索引或 `-1` 的函数。

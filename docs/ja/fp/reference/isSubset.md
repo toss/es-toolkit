@@ -1,24 +1,27 @@
-# isSubset
+# isSubset (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `isSubset` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+パイプされた配列が別の配列の部分集合かどうかを確認する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, isSubset([1, 2, 3]));
+const result = pipe(array, isSubset(superset));
 ```
 
-## 使い方
+## 使用法
 
-`isSubset` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`isSubset` は、パイプされた配列のすべての値が `superset` に含まれる場合に `true` を返します。
 
 ```typescript
 import { isSubset, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], isSubset([1, 2, 3]));
-// true
+pipe([1, 2], isSubset([1, 2, 3])); // => true
+
+pipe([1, 4], isSubset([1, 2, 3])); // => false
 ```
 
-## API
+#### パラメータ
 
-### `isSubset(...)`
+- `superset` (`readonly T[]`): パイプされた配列のすべての値を含む可能性がある配列です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => boolean`): `readonly T[]` を部分集合かどうかに変換する関数です。

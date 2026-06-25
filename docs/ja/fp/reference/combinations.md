@@ -1,24 +1,29 @@
-# combinations
+# combinations (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `combinations` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+指定したサイズの組み合わせを返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, combinations(2));
+const result = pipe(array, combinations(size));
 ```
 
-## 使い方
+## 使用法
 
-`combinations` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`combinations` は、パイプされた配列から `size` 個の値を選ぶすべての方法を返します。各組み合わせ内では元の順序が保たれます。
 
 ```typescript
 import { combinations, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], combinations(2));
-// [[1, 2], [1, 3], [2, 3]]
+pipe(['a', 'b', 'c'], combinations(2)); // => [['a', 'b'], ['a', 'c'], ['b', 'c']]
 ```
 
-## API
+#### パラメータ
 
-### `combinations(...)`
+- `size` (`number`): 各組み合わせに含める値の数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[][]`): `readonly T[]` を組み合わせの配列に変換する関数です。
+
+#### エラー
+
+`size` が 0 以上の整数でない場合、エラーを投げます。

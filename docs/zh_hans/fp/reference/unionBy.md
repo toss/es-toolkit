@@ -1,30 +1,26 @@
-# unionBy
+# unionBy (函数式编程)
 
-创建可用于函数式管道的 data-last `unionBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按映射键合并数组并去重的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
+const result = pipe(array, unionBy(secondArray, mapper));
 ```
 
 ## 用法
 
-`unionBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`unionBy` 比较 `mapper` 返回的值。它先保留管道中数组里每个映射键的第一个值,再处理 `secondArray` 中的值。
 
 ```typescript
-import { pipe, unionBy } from 'es-toolkit/fp';
+import { unionBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], unionBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
-## API
+#### 参数
 
-### `unionBy(...)`
+- `secondArray` (`readonly T[]`): 要接在管道中数组之后合并的数组。
+- `mapper` (`(item: T) => U`): 返回用于判断唯一性的键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为按映射键合并结果的函数。

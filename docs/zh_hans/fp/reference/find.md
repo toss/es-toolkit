@@ -1,30 +1,25 @@
-# find
+# find (函数式编程)
 
-创建可用于函数式管道的 data-last `find` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回第一个通过测试的值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  find(value => value > 2)
-);
+const result = pipe(array, find(predicate));
 ```
 
 ## 用法
 
-`find` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`find` 返回管道中数组里第一个使 `predicate` 返回 `true` 的值。如果没有匹配值,则返回 `undefined`。
 
 ```typescript
 import { find, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  find(value => value > 2)
-);
-// 3
+pipe([1, 2, 3, 4], find(value => value > 2)); // => 3
 ```
 
-## API
+#### 参数
 
-### `find(...)`
+- `predicate` (`(value: T, index: number) => boolean`): 测试每个值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T | undefined`): 一个将 `readonly T[]` 映射为第一个匹配值或 `undefined` 的函数。

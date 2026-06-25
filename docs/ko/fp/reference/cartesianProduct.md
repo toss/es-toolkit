@@ -1,24 +1,27 @@
-# cartesianProduct
+# cartesianProduct (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `cartesianProduct` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+파이프된 배열과 다른 배열들의 카테시안 곱을 구하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, cartesianProduct(['a', 'b']));
+const result = pipe(array, cartesianProduct(...arrs));
 ```
 
 ## 사용법
 
-`cartesianProduct`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`cartesianProduct`는 파이프된 배열과 설정한 각 배열에서 값을 하나씩 뽑아 만들 수 있는 모든 튜플을 반환해요. 가장 오른쪽 배열이 가장 빠르게 바뀌어요.
 
 ```typescript
 import { cartesianProduct, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], cartesianProduct(['a', 'b']));
-// [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+pipe([1, 2], cartesianProduct(['a', 'b'])); // => [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+
+pipe([], cartesianProduct(['a', 'b'])); // => []
 ```
 
-## API
+#### 파라미터
 
-### `cartesianProduct(...)`
+- `arrs` (`Array<readonly T[]>`): 파이프된 배열 뒤에 포함할 배열들이에요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[][]`): 파이프된 배열을 카테시안 곱 튜플 배열로 변환하는 함수예요.

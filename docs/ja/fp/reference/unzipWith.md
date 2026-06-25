@@ -1,33 +1,25 @@
-# unzipWith
+# unzipWith (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `unzipWith` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  unzipWith((a, b) => a + b)
-);
-```
-
-## 使い方
-
-`unzipWith` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+zip された配列を位置ごとに再グループ化し、各位置を結合する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, unzipWith } from 'es-toolkit/fp';
-
-const result = pipe(
-  [
-    [1, 10],
-    [2, 20],
-  ],
-  unzipWith((a, b) => a + b)
-);
-// [3, 30]
+const result = pipe(array, unzipWith(iteratee));
 ```
 
-## API
+## 使用法
 
-### `unzipWith(...)`
+`unzipWith` はグループ化された行から同じ位置の値を集め、`iteratee` に渡して、その結果を返します。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { unzipWith, pipe } from 'es-toolkit/fp';
+
+pipe([[1, 10], [2, 20]], unzipWith((a, b) => a + b)); // => [3, 30]
+```
+
+#### パラメータ
+
+- `iteratee` (`(...args: T[]) => R`): 同じ位置の値を結合する関数です。
+
+#### 戻り値
+
+(`(target: readonly T[][]) => R[]`): zip された行を位置ごとの結合結果に変換する関数です。

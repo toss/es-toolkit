@@ -1,30 +1,25 @@
-# chunkBy
+# chunkBy (函数式编程)
 
-创建可用于函数式管道的 data-last `chunkBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个在键发生变化时拆分相邻值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  chunkBy(value => value)
-);
+const result = pipe(array, chunkBy(iteratee));
 ```
 
 ## 用法
 
-`chunkBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`chunkBy` 从左到右遍历管道中的数组,并把 `iteratee` 返回相同键的相邻值分到同一组。键发生变化时会开始新的分块。
 
 ```typescript
 import { chunkBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 1, 2, 3, 3],
-  chunkBy(value => value)
-);
-// [[1, 1], [2], [3, 3]]
+pipe([1, 1, 2, 2, 1], chunkBy(value => value)); // => [[1, 1], [2, 2], [1]]
 ```
 
-## API
+#### 参数
 
-### `chunkBy(...)`
+- `iteratee` (`(value: T) => unknown`): 为每个值返回分组键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[][]`): 一个将 `readonly T[]` 映射为相邻值分块数组的函数。

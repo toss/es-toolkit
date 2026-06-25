@@ -1,30 +1,26 @@
-# xorBy
+# xorBy (Functional Programming)
 
-Creates a data-last xorBy operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the symmetric difference by a mapped key. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
+const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
 ## Usage
 
-`xorBy` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`xorBy` compares the values returned by `mapper` and returns values whose mapped key appears in exactly one array.
 
 ```typescript
-import { pipe, xorBy } from 'es-toolkit/fp';
+import { xorBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
 ```
 
-## API
+#### Parameters
 
-### `xorBy(...)`
+- `secondArray` (`readonly T[]`): The array to compare with the piped array.
+- `mapper` (`(item: T) => U`): The function that returns the comparison key.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the symmetric difference by key.

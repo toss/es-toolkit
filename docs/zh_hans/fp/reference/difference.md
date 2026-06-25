@@ -1,24 +1,25 @@
-# difference
+# difference (函数式编程)
 
-创建可用于函数式管道的 data-last `difference` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个排除另一个数组中已有值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, difference([2, 4]));
+const result = pipe(array, difference(secondArray));
 ```
 
 ## 用法
 
-`difference` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`difference` 会保留管道中数组里不存在于 `secondArray` 的值,并保留管道中数组的顺序。
 
 ```typescript
 import { difference, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], difference([2, 4]));
-// [1, 3]
+pipe([1, 2, 3, 4], difference([2, 4])); // => [1, 3]
 ```
 
-## API
+#### 参数
 
-### `difference(...)`
+- `secondArray` (`readonly T[]`): 包含要排除值的数组。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为不在 `secondArray` 中的值数组的函数。

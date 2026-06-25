@@ -1,24 +1,25 @@
-# xor
+# xor (Functional Programming)
 
-Creates a data-last xor operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns values that appear in exactly one of two arrays. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, xor([2, 3]));
+const result = pipe(array, xor(secondArray));
 ```
 
 ## Usage
 
-`xor` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`xor` returns the symmetric difference of the piped array and `secondArray`, without duplicate values.
 
 ```typescript
-import { pipe, xor } from 'es-toolkit/fp';
+import { xor, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], xor([2, 3]));
-// [1, 3]
+pipe([1, 2, 3], xor([2, 3, 4])); // => [1, 4]
 ```
 
-## API
+#### Parameters
 
-### `xor(...)`
+- `secondArray` (`readonly T[]`): The array to compare with the piped array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the symmetric difference.

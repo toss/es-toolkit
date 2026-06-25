@@ -1,24 +1,25 @@
-# takeRight
+# takeRight (函数式编程)
 
-创建可用于函数式管道的 data-last `takeRight` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组末尾获取值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, takeRight(2));
+const result = pipe(array, takeRight(count));
 ```
 
 ## 用法
 
-`takeRight` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`takeRight` 返回管道中数组末尾的 `count` 个值。
 
 ```typescript
-import { pipe, takeRight } from 'es-toolkit/fp';
+import { takeRight, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], takeRight(2));
-// [3, 4]
+pipe([1, 2, 3, 4], takeRight(2)); // => [3, 4]
 ```
 
-## API
+#### 参数
 
-### `takeRight(...)`
+- `count` (`number`): 要从末尾获取的值数量。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为末尾 `count` 个值的函数。

@@ -1,24 +1,28 @@
-# reverse
+# reverse (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `reverse` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+配列を反転したコピーを返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, reverse());
 ```
 
-## 使い方
+## 使用法
 
-`reverse` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`reverse` はパイプされた配列の値を逆順にした新しい配列を返します。入力配列は変更しません。
 
 ```typescript
-import { pipe, reverse } from 'es-toolkit/fp';
+import { reverse, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], reverse());
-// [3, 2, 1]
+const array = [1, 2, 3];
+
+pipe(array, reverse()); // => [3, 2, 1]
+array; // => [1, 2, 3]
 ```
 
-## API
+#### パラメータ
 
-### `reverse(...)`
+この関数は引数を受け取りません。`reverse()` のように呼び出してください。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を反転したコピーに変換する関数です。

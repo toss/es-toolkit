@@ -1,30 +1,26 @@
-# differenceWith
+# differenceWith (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `differenceWith` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+カスタム等価関数を使って値を除外する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  differenceWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```
 
-## 使い方
+## 使用法
 
-`differenceWith` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`differenceWith` は、`secondArray` のすべての値に対して `areItemsEqual` が `false` を返す場合だけ、パイプされた配列の値を残します。
 
 ```typescript
 import { differenceWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceWith([2], (item, id) => item.id === id)
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 1 }]
 ```
 
-## API
+#### パラメータ
 
-### `differenceWith(...)`
+- `secondArray` (`readonly U[]`): 比較対象の値を含む配列です。
+- `areItemsEqual` (`(item: T, other: U) => boolean`): 2 つの値が等しいかどうかを判定する関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を比較関数に一致しない値の配列に変換する関数です。

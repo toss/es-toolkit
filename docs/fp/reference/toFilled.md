@@ -1,24 +1,30 @@
-# toFilled
+# toFilled (Functional Programming)
 
-Creates a data-last toFilled operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns a filled copy of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, toFilled(0, 1, 3));
+const result = pipe(array, toFilled(value, start, end));
 ```
 
 ## Usage
 
-`toFilled` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`toFilled` fills a copy of the piped array with `value` from `start` up to, but not including, `end`. It follows `Array.prototype.fill` index semantics and does not mutate the input array.
 
 ```typescript
-import { pipe, toFilled } from 'es-toolkit/fp';
+import { toFilled, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], toFilled(0, 1, 3));
-// [1, 0, 0]
+const array = [1, 2, 3, 4];
+
+pipe(array, toFilled(0, 1, 3)); // => [1, 0, 0, 4]
+array; // => [1, 2, 3, 4]
 ```
 
-## API
+#### Parameters
 
-### `toFilled(...)`
+- `value` (`U`): The value to write into the returned array.
+- `start` (`number, optional`): The start index. Defaults to `0`.
+- `end` (`number, optional`): The end index. Defaults to the array length.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => Array<T | U>`): A function that maps a `readonly T[]` to a filled copy.

@@ -1,24 +1,25 @@
-# without
+# without (函数式编程)
 
-创建可用于函数式管道的 data-last `without` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组中移除指定值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, without(2));
+const result = pipe(array, without(...values));
 ```
 
 ## 用法
 
-`without` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`without` 会从管道中的数组移除所有等于 `values` 中任意值的值。它在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { pipe, without } from 'es-toolkit/fp';
+import { without, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 2], without(2));
-// [1, 3]
+pipe([1, 2, 3, 2], without(2)); // => [1, 3]
 ```
 
-## API
+#### 参数
 
-### `without(...)`
+- `values` (`T[]`): 要从管道中的数组移除的值。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为不含 `values` 的数组的函数。

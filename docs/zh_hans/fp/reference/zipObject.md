@@ -1,24 +1,25 @@
-# zipObject
+# zipObject (函数式编程)
 
-创建可用于函数式管道的 data-last `zipObject` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个根据键和值构建对象的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, zipObject([1, 2]));
+const result = pipe(array, zipObject(values));
 ```
 
 ## 用法
 
-`zipObject` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`zipObject` 使用管道中的数组作为键,并将每个键与 `values` 中相同索引处的值配对。
 
 ```typescript
-import { pipe, zipObject } from 'es-toolkit/fp';
+import { zipObject, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b'], zipObject([1, 2]));
-// { a: 1, b: 2 }
+pipe(['a', 'b'] as const, zipObject([1, 2])); // => { a: 1, b: 2 }
 ```
 
-## API
+#### 参数
 
-### `zipObject(...)`
+- `values` (`readonly V[]`): 按索引分配给管道中数组键的值。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(keys: readonly P[]) => Record<P, V>`): 一个将键数组映射为由 `values` 构建对象的函数。

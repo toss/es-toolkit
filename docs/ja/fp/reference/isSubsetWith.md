@@ -1,30 +1,26 @@
-# isSubsetWith
+# isSubsetWith (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `isSubsetWith` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+カスタム等価関数を使って部分集合かどうかを確認する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
-);
+const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```
 
-## 使い方
+## 使用法
 
-`isSubsetWith` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`isSubsetWith` は、パイプされた配列のすべての値が `areItemsEqual` によって `superset` の少なくとも 1 つの値と一致する場合に `true` を返します。
 
 ```typescript
 import { isSubsetWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }],
-  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
-);
-// true
+pipe([{ id: 1 }], isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)); // => true
 ```
 
-## API
+#### パラメータ
 
-### `isSubsetWith(...)`
+- `superset` (`readonly T[]`): パイプされた配列のすべての値を含む可能性がある配列です。
+- `areItemsEqual` (`(item: T, other: T) => boolean`): 2 つの値が等しいかどうかを判定する関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => boolean`): `readonly T[]` を部分集合かどうかに変換する関数です。

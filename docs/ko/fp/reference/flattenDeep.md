@@ -1,6 +1,6 @@
-# flattenDeep
+# flattenDeep (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `flattenDeep` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+중첩 배열을 재귀적으로 펼치는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
 const result = pipe(array, flattenDeep());
@@ -8,17 +8,18 @@ const result = pipe(array, flattenDeep());
 
 ## 사용법
 
-`flattenDeep`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`flattenDeep`은 파이프된 배열의 모든 중첩 배열 층을 재귀적으로 제거해요. [`pipe`](./pipe.md) 안에서는 지연 평가가 가능해요.
 
 ```typescript
 import { flattenDeep, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, [2, [3]]], flattenDeep());
-// [1, 2, 3]
+pipe([1, [2, [3, [4]]]], flattenDeep()); // => [1, 2, 3, 4]
 ```
 
-## API
+#### 파라미터
 
-### `flattenDeep(...)`
+이 함수는 인자를 받지 않아요. `flattenDeep()`처럼 호출하세요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => Array<ExtractNestedArrayType<T>>`): 중첩 배열을 깊게 펼친 배열로 변환하는 함수예요.

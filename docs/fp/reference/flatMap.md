@@ -1,30 +1,25 @@
-# flatMap
+# flatMap (Functional Programming)
 
-Creates a data-last flatMap operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that maps each value to an array and flattens the result by one level. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  flatMap(value => [value, value * 10])
-);
+const result = pipe(array, flatMap(callback));
 ```
 
 ## Usage
 
-`flatMap` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`flatMap` calls `callback` for each value in the piped array and concatenates the returned arrays. It is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3],
-  flatMap(value => [value, value * 10])
-);
-// [1, 10, 2, 20, 3, 30]
+pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
 ```
 
-## API
+#### Parameters
 
-### `flatMap(...)`
+- `callback` (`(value: T, index: number) => U[]`): The function that maps each value to an array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => U[]`): A function that maps a `readonly T[]` to a flattened array of callback results.

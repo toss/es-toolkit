@@ -1,30 +1,25 @@
-# uniqBy
+# uniqBy (函数式编程)
 
-创建可用于函数式管道的 data-last `uniqBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按映射键移除重复项的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  uniqBy(item => item.id)
-);
+const result = pipe(array, uniqBy(mapper));
 ```
 
 ## 用法
 
-`uniqBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`uniqBy` 会保留 `mapper` 返回的每个键的第一个值。它保留首次出现的顺序,并在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { pipe, uniqBy } from 'es-toolkit/fp';
+import { uniqBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 1 }, { id: 2 }],
-  uniqBy(item => item.id)
-);
-// [{ id: 1 }, { id: 2 }]
+pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqBy(item => item.id)); // => [{ id: 1 }, { id: 2 }]
 ```
 
-## API
+#### 参数
 
-### `uniqBy(...)`
+- `mapper` (`(item: T, index: number) => U`): 返回用于判断唯一性的键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为按键去重数组的函数。

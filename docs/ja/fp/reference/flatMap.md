@@ -1,30 +1,25 @@
-# flatMap
+# flatMap (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `flatMap` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+各値を配列に変換し、結果を 1 段階平坦化する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  flatMap(value => [value, value * 10])
-);
+const result = pipe(array, flatMap(callback));
 ```
 
-## 使い方
+## 使用法
 
-`flatMap` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`flatMap` はパイプされた配列の各値に `callback` を呼び出し、返された配列を連結します。[`pipe`](./pipe.md) の中では遅延評価に対応しています。
 
 ```typescript
 import { flatMap, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3],
-  flatMap(value => [value, value * 10])
-);
-// [1, 10, 2, 20, 3, 30]
+pipe([1, 2, 3], flatMap(value => [value, value * 10])); // => [1, 10, 2, 20, 3, 30]
 ```
 
-## API
+#### パラメータ
 
-### `flatMap(...)`
+- `callback` (`(value: T, index: number) => U[]`): 各値を配列に変換する関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => U[]`): `readonly T[]` を callback の結果を平坦化した配列に変換する関数です。

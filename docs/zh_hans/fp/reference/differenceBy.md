@@ -1,30 +1,26 @@
-# differenceBy
+# differenceBy (函数式编程)
 
-创建可用于函数式管道的 data-last `differenceBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按映射键排除值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
+const result = pipe(array, differenceBy(secondArray, mapper));
 ```
 
 ## 用法
 
-`differenceBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`differenceBy` 比较 `mapper` 返回的值。当管道中数组值的映射键不存在于 `secondArray` 时,该值会被保留。
 
 ```typescript
 import { differenceBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceBy([2], value => (typeof value === 'number' ? value : value.id))
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 1 }]
 ```
 
-## API
+#### 参数
 
-### `differenceBy(...)`
+- `secondArray` (`readonly U[]`): 包含要按映射键排除的值的数组。
+- `mapper` (`(item: T | U) => unknown`): 返回比较键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为键不存在于 `secondArray` 的值数组的函数。

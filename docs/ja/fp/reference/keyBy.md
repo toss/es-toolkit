@@ -1,33 +1,25 @@
-# keyBy
+# keyBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `keyBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+各値を基準にキー付けされたオブジェクトを作成する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  keyBy(item => item.id)
-);
+const result = pipe(array, keyBy(getKey));
 ```
 
-## 使い方
+## 使用法
 
-`keyBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`keyBy` はパイプされた配列の各値に `getKey` を呼び出し、返されたキーをキー、元の項目を値にしたオブジェクトを返します。同じキーがある場合、後の値が前の値を上書きします。
 
 ```typescript
 import { keyBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    { id: 'a', value: 1 },
-    { id: 'b', value: 2 },
-  ],
-  keyBy(item => item.id)
-);
-// { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
+pipe([{ id: 'a', value: 1 }, { id: 'b', value: 2 }], keyBy(item => item.id)); // => { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
 ```
 
-## API
+#### パラメータ
 
-### `keyBy(...)`
+- `getKey` (`(item: T) => K`): 各値のキーを返す関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => Record<K, T>`): `readonly T[]` を `getKey` によってキー付けされたオブジェクトに変換する関数です。

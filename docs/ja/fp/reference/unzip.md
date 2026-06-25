@@ -1,30 +1,25 @@
-# unzip
+# unzip (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `unzip` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+zip された配列を位置ごとに再グループ化する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, unzip());
 ```
 
-## 使い方
+## 使用法
 
-`unzip` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`unzip` はグループ化された値の配列を受け取り、各位置の値を集めた配列を返します。
 
 ```typescript
-import { pipe, unzip } from 'es-toolkit/fp';
+import { unzip, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    [1, 'a'],
-    [2, 'b'],
-  ],
-  unzip()
-);
-// [[1, 2], ['a', 'b']]
+pipe([[1, 'a'], [2, 'b']], unzip()); // => [[1, 2], ['a', 'b']]
 ```
 
-## API
+#### パラメータ
 
-### `unzip(...)`
+この関数は引数を受け取りません。`unzip()` のように呼び出してください。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(zipped: ReadonlyArray<[...T]>) => Unzip<T>`): zip された行を位置ごとの配列に変換する関数です。

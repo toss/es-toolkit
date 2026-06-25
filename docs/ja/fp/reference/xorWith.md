@@ -1,30 +1,26 @@
-# xorWith
+# xorWith (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `xorWith` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
-```
-
-## 使い方
-
-`xorWith` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+カスタム等価関数を使って対称差を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, xorWith } from 'es-toolkit/fp';
-
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 3 }]
+const result = pipe(array, xorWith(secondArray, areItemsEqual));
 ```
 
-## API
+## 使用法
 
-### `xorWith(...)`
+`xorWith` は、`areItemsEqual` によって 2 つの配列の間で一致しない値を返します。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { xorWith, pipe } from 'es-toolkit/fp';
+
+pipe([{ id: 1 }, { id: 2 }], xorWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 3 }]
+```
+
+#### パラメータ
+
+- `secondArray` (`readonly T[]`): パイプされた配列と比較する配列です。
+- `areItemsEqual` (`(item: T, other: T) => boolean`): 2 つの値が等しいかどうかを判定する関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をカスタム等価基準の対称差に変換する関数です。

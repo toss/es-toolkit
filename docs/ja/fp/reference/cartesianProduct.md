@@ -1,24 +1,27 @@
-# cartesianProduct
+# cartesianProduct (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `cartesianProduct` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+パイプされた配列と他の配列の直積を求める関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, cartesianProduct(['a', 'b']));
+const result = pipe(array, cartesianProduct(...arrs));
 ```
 
-## 使い方
+## 使用法
 
-`cartesianProduct` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`cartesianProduct` は、パイプされた配列と設定した各配列から 1 つずつ値を選んで作れるすべてのタプルを返します。右端の配列が最も速く進みます。
 
 ```typescript
 import { cartesianProduct, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], cartesianProduct(['a', 'b']));
-// [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+pipe([1, 2], cartesianProduct(['a', 'b'])); // => [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+
+pipe([], cartesianProduct(['a', 'b'])); // => []
 ```
 
-## API
+#### パラメータ
 
-### `cartesianProduct(...)`
+- `arrs` (`Array<readonly T[]>`): パイプされた配列の後に含める配列です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[][]`): パイプされた配列を直積のタプル配列に変換する関数です。

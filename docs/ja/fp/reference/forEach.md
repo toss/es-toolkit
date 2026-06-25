@@ -1,30 +1,28 @@
-# forEach
+# forEach (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `forEach` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+各値にコールバックを実行し、入力配列を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  forEach(value => console.log(value))
-);
+const result = pipe(array, forEach(callback));
 ```
 
-## 使い方
+## 使用法
 
-`forEach` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`forEach` はパイプラインに副作用のステップを入れたい場合に便利です。各値に `callback` を呼び出し、元の配列をそのまま渡します。[`pipe`](./pipe.md) の中では、隣接する遅延処理が早期停止できる場合に遅延評価に対応します。
 
 ```typescript
 import { forEach, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3],
-  forEach(value => console.log(value))
-);
-// [1, 2, 3]
+const values: number[] = [];
+
+pipe([1, 2, 3], forEach(value => values.push(value))); // => [1, 2, 3]
+values; // => [1, 2, 3]
 ```
 
-## API
+#### パラメータ
 
-### `forEach(...)`
+- `callback` (`(value: T, index: number) => void`): 各値に対して実行する関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => readonly T[]`): callback を実行した後、同じ配列を返す関数です。

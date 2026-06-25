@@ -1,6 +1,6 @@
-# last
+# last (函数式编程)
 
-创建可用于函数式管道的 data-last `last` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个返回数组最后一个值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, last());
@@ -8,17 +8,20 @@ const result = pipe(array, last());
 
 ## 用法
 
-`last` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`last` 返回管道中数组的最后一个值。如果数组为空,则返回 `undefined`。
 
 ```typescript
 import { last, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], last());
-// 3
+pipe([1, 2, 3], last()); // => 3
+
+pipe([], last()); // => undefined
 ```
 
-## API
+#### 参数
 
-### `last(...)`
+此函数不接收参数;请以 `last()` 的形式调用。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T | undefined`): 一个将 `readonly T[]` 映射为其最后一个值的函数。

@@ -1,24 +1,25 @@
-# drop
+# drop (Functional Programming)
 
-Creates a data-last drop operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that drops values from the beginning of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, drop(2));
+const result = pipe(array, drop(count));
 ```
 
 ## Usage
 
-`drop` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`drop` removes the first `count` values from the piped array. It is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
 import { drop, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], drop(2));
-// [3, 4]
+pipe([1, 2, 3, 4], drop(2)); // => [3, 4]
 ```
 
-## API
+#### Parameters
 
-### `drop(...)`
+- `count` (`number`): The number of values to drop from the beginning.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the remaining values.

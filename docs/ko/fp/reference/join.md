@@ -1,24 +1,27 @@
-# join
+# join (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `join` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+배열 값을 문자열로 이어 붙이는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, join('-'));
+const result = pipe(array, join(separator));
 ```
 
 ## 사용법
 
-`join`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`join`은 파이프된 배열의 값을 `separator`로 이어 붙여 문자열로 바꿔요. `separator`를 생략하면 쉼표를 사용해요.
 
 ```typescript
 import { join, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b', 'c'], join('-'));
-// 'a-b-c'
+pipe(['a', 'b', 'c'], join('-')); // => 'a-b-c'
+
+pipe(['a', 'b', 'c'], join()); // => 'a,b,c'
 ```
 
-## API
+#### 파라미터
 
-### `join(...)`
+- `separator` (`string, optional`): 값 사이에 넣을 문자열이에요. 기본값은 `,`예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => string`): `readonly T[]`를 이어 붙인 문자열로 변환하는 함수예요.

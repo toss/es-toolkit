@@ -1,30 +1,25 @@
-# takeWhile
+# takeWhile (函数式编程)
 
-创建可用于函数式管道的 data-last `takeWhile` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个在谓词通过时获取开头值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  takeWhile(value => value < 3)
-);
+const result = pipe(array, takeWhile(predicate));
 ```
 
 ## 用法
 
-`takeWhile` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`takeWhile` 会从管道中数组的开头开始遍历,并在 `predicate` 返回 `true` 时保留值。它支持惰性求值,可以在 [`pipe`](./pipe.md) 中提前停止前面的惰性操作。
 
 ```typescript
-import { pipe, takeWhile } from 'es-toolkit/fp';
+import { takeWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 1],
-  takeWhile(value => value < 3)
-);
-// [1, 2]
+pipe([1, 2, 3, 1], takeWhile(value => value < 3)); // => [1, 2]
 ```
 
-## API
+#### 参数
 
-### `takeWhile(...)`
+- `predicate` (`(element: T, index: number) => boolean`): 判断是否应保留开头值的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为通过条件的开头值数组的函数。

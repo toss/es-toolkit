@@ -1,30 +1,26 @@
-# intersectionBy
+# intersectionBy (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `intersectionBy` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+매핑된 키를 기준으로 값을 유지하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(
-  array,
-  intersectionBy([2], value => (typeof value === 'number' ? value : value.id))
-);
+const result = pipe(array, intersectionBy(secondArray, mapper));
 ```
 
 ## 사용법
 
-`intersectionBy`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`intersectionBy`는 `mapper`가 반환한 값을 비교해요. 파이프된 배열의 값은 매핑된 키가 `secondArray`에 있을 때만 유지돼요.
 
 ```typescript
 import { intersectionBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  intersectionBy([2], value => (typeof value === 'number' ? value : value.id))
-);
-// [{ id: 2 }]
+pipe([{ id: 1 }, { id: 2 }], intersectionBy([2], value => (typeof value === 'number' ? value : value.id))); // => [{ id: 2 }]
 ```
 
-## API
+#### 파라미터
 
-### `intersectionBy(...)`
+- `secondArray` (`readonly U[]`): 매핑된 키를 유지 기준으로 사용할 값 배열이에요.
+- `mapper` (`(item: T | U) => unknown`): 비교할 키를 반환하는 함수예요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[]`): `readonly T[]`를 `secondArray`에 키가 있는 값 배열로 변환하는 함수예요.

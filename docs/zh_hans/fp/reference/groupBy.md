@@ -1,30 +1,25 @@
-# groupBy
+# groupBy (函数式编程)
 
-创建可用于函数式管道的 data-last `groupBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按键分组值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  groupBy(value => value.length)
-);
+const result = pipe(array, groupBy(getKey));
 ```
 
 ## 用法
 
-`groupBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`groupBy` 会对管道中数组的每个值调用 `getKey`,并返回一个以返回键为键、匹配项数组为值的对象。
 
 ```typescript
 import { groupBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  ['a', 'bb', 'c'],
-  groupBy(value => value.length)
-);
-// { 1: ['a', 'c'], 2: ['bb'] }
+pipe(['one', 'two', 'three'], groupBy(word => word.length)); // => { 3: ['one', 'two'], 5: ['three'] }
 ```
 
-## API
+#### 参数
 
-### `groupBy(...)`
+- `getKey` (`(item: T) => K`): 为每个值返回分组键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Record<K, T[]>`): 一个将 `readonly T[]` 映射为按键分组数组对象的函数。

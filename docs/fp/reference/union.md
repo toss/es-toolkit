@@ -1,24 +1,25 @@
-# union
+# union (Functional Programming)
 
-Creates a data-last union operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that combines two arrays without duplicate values. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, union([2, 3]));
+const result = pipe(array, union(secondArray));
 ```
 
 ## Usage
 
-`union` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`union` returns unique values from the piped array followed by values from `secondArray` that have not appeared yet.
 
 ```typescript
-import { pipe, union } from 'es-toolkit/fp';
+import { union, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], union([2, 3]));
-// [1, 2, 3]
+pipe([1, 2, 2], union([2, 3])); // => [1, 2, 3]
 ```
 
-## API
+#### Parameters
 
-### `union(...)`
+- `secondArray` (`readonly T[]`): The array to combine after the piped array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the union of both arrays.

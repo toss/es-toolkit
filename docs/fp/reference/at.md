@@ -1,24 +1,25 @@
-# at
+# at (Functional Programming)
 
-Creates a data-last at operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the values at the given indices. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, at([0, -1]));
+const result = pipe(array, at(indices));
 ```
 
 ## Usage
 
-`at` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`at` reads values from the piped array at each index in `indices`. Negative indices count from the end, matching `Array.prototype.at`.
 
 ```typescript
 import { at, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b', 'c'], at([0, -1]));
-// ['a', 'c']
+pipe(['a', 'b', 'c'], at([0, -1])); // => ['a', 'c']
 ```
 
-## API
+#### Parameters
 
-### `at(...)`
+- `indices` (`number[]`): The indices to read from the piped array.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the selected values.

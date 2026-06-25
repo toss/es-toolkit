@@ -1,30 +1,25 @@
-# findIndex
+# findIndex (Functional Programming)
 
-Creates a data-last findIndex operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the index of the first value that passes a test. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  findIndex(value => value > 2)
-);
+const result = pipe(array, findIndex(predicate));
 ```
 
 ## Usage
 
-`findIndex` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`findIndex` returns the index of the first value in the piped array for which `predicate` returns `true`. If no value matches, it returns `-1`.
 
 ```typescript
 import { findIndex, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  findIndex(value => value > 2)
-);
-// 2
+pipe([1, 2, 3, 4], findIndex(value => value > 2)); // => 2
 ```
 
-## API
+#### Parameters
 
-### `findIndex(...)`
+- `predicate` (`(value: T, index: number) => boolean`): The function that tests each value.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => number`): A function that maps a `readonly T[]` to the first matching index, or `-1`.

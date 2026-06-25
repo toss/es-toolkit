@@ -1,24 +1,27 @@
-# zip
+# zip (函数式编程)
 
-创建可用于函数式管道的 data-last `zip` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按索引组合多个数组值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, zip(['a', 'b']));
+const result = pipe(array, zip(...arrs));
 ```
 
 ## 用法
 
-`zip` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`zip` 会组合管道中的数组和配置数组在相同索引处的值。如果数组长度不同,缺失值会是 `undefined`。
 
 ```typescript
-import { pipe, zip } from 'es-toolkit/fp';
+import { zip, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], zip(['a', 'b']));
-// [[1, 'a'], [2, 'b']]
+pipe([1, 2], zip(['a', 'b'])); // => [[1, 'a'], [2, 'b']]
+
+pipe([1, 2, 3], zip(['a'])); // => [[1, 'a'], [2, undefined], [3, undefined]]
 ```
 
-## API
+#### 参数
 
-### `zip(...)`
+- `arrs` (`Array<readonly T[]>`): 要与管道中的数组一起 zip 的数组。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[][]`): 一个将管道中的数组映射为按索引分组行的函数。

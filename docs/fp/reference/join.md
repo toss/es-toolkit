@@ -1,24 +1,27 @@
-# join
+# join (Functional Programming)
 
-Creates a data-last join operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that joins array values into a string. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, join('-'));
+const result = pipe(array, join(separator));
 ```
 
 ## Usage
 
-`join` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`join` converts the piped array to a string by joining its values with `separator`. When `separator` is omitted, it uses a comma.
 
 ```typescript
 import { join, pipe } from 'es-toolkit/fp';
 
-const result = pipe(['a', 'b', 'c'], join('-'));
-// 'a-b-c'
+pipe(['a', 'b', 'c'], join('-')); // => 'a-b-c'
+
+pipe(['a', 'b', 'c'], join()); // => 'a,b,c'
 ```
 
-## API
+#### Parameters
 
-### `join(...)`
+- `separator` (`string, optional`): The string inserted between values. Defaults to `,`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => string`): A function that maps a `readonly T[]` to a joined string.

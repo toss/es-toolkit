@@ -1,30 +1,25 @@
-# takeRightWhile
+# takeRightWhile (Functional Programming)
 
-Creates a data-last takeRightWhile operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that takes trailing values while a predicate passes. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  takeRightWhile(value => value > 2)
-);
+const result = pipe(array, takeRightWhile(predicate));
 ```
 
 ## Usage
 
-`takeRightWhile` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`takeRightWhile` walks the piped array from the end and keeps values while `predicate` returns `true`. It stops at the first value that does not pass.
 
 ```typescript
-import { pipe, takeRightWhile } from 'es-toolkit/fp';
+import { takeRightWhile, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  takeRightWhile(value => value > 2)
-);
-// [3, 4]
+pipe([1, 2, 3, 4], takeRightWhile(value => value > 2)); // => [3, 4]
 ```
 
-## API
+#### Parameters
 
-### `takeRightWhile(...)`
+- `predicate` (`(item: T) => boolean`): The function that decides whether a trailing value should be kept.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to the trailing values that pass.

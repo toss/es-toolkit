@@ -1,24 +1,33 @@
-# windowed
+# windowed (Functional Programming)
 
-Creates a data-last windowed operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns sliding windows from an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(array, windowed(2));
+const result = pipe(array, windowed(size, step, options));
 ```
 
 ## Usage
 
-`windowed` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`windowed` returns sub-arrays of length `size`, moving forward by `step` each time. Full-window mode is lazy-capable inside [`pipe`](./pipe.md).
 
 ```typescript
-import { pipe, windowed } from 'es-toolkit/fp';
+import { windowed, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], windowed(2));
-// [[1, 2], [2, 3], [3, 4]]
+pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
+
+pipe([1, 2, 3, 4], windowed(2, 2)); // => [[1, 2], [3, 4]]
 ```
 
-## API
+#### Parameters
 
-### `windowed(...)`
+- `size` (`number`): The length of each window.
+- `step` (`number, optional`): The number of positions to move between windows. Defaults to `1`.
+- `options` (`WindowedOptions, optional`): Options such as whether to include partial trailing windows.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[][]`): A function that maps a `readonly T[]` to sliding windows.
+
+#### Throws
+
+Throws an error if `size` or `step` is not a positive integer.

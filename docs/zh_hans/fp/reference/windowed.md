@@ -1,24 +1,33 @@
-# windowed
+# windowed (函数式编程)
 
-创建可用于函数式管道的 data-last `windowed` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个从数组返回滑动窗口的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, windowed(2));
+const result = pipe(array, windowed(size, step, options));
 ```
 
 ## 用法
 
-`windowed` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`windowed` 返回长度为 `size` 的子数组,每次前进 `step`。只返回完整窗口的形式在 [`pipe`](./pipe.md) 中支持惰性求值。
 
 ```typescript
-import { pipe, windowed } from 'es-toolkit/fp';
+import { windowed, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], windowed(2));
-// [[1, 2], [2, 3], [3, 4]]
+pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
+
+pipe([1, 2, 3, 4], windowed(2, 2)); // => [[1, 2], [3, 4]]
 ```
 
-## API
+#### 参数
 
-### `windowed(...)`
+- `size` (`number`): 每个窗口的长度。
+- `step` (`number, optional`): 窗口之间前进的位置数。默认为 `1`。
+- `options` (`WindowedOptions, optional`): 选项,例如是否包含末尾的部分窗口。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[][]`): 一个将 `readonly T[]` 映射为滑动窗口数组的函数。
+
+#### 异常
+
+如果 `size` 或 `step` 不是正整数,则抛出错误。

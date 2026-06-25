@@ -1,30 +1,26 @@
-# unionWith
+# unionWith (Functional Programming)
 
-Creates a data-last unionWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that combines arrays using a custom equality function. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
+const result = pipe(array, unionWith(secondArray, areItemsEqual));
 ```
 
 ## Usage
 
-`unionWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`unionWith` keeps the first value from the combined arrays for which `areItemsEqual` does not match an already kept value.
 
 ```typescript
-import { pipe, unionWith } from 'es-toolkit/fp';
+import { unionWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+pipe([{ id: 1 }, { id: 2 }], unionWith([{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
 
-## API
+#### Parameters
 
-### `unionWith(...)`
+- `secondArray` (`readonly T[]`): The array to combine after the piped array.
+- `areItemsEqual` (`(item: T, other: T) => boolean`): The function that decides whether two values are equal.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a union by custom equality.

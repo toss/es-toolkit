@@ -1,30 +1,26 @@
-# unionBy
+# unionBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `unionBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-```
-
-## 使い方
-
-`unionBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+マッピングされたキーを基準に配列を重複なしで結合する関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, unionBy } from 'es-toolkit/fp';
-
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  unionBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 2 }, { id: 3 }]
+const result = pipe(array, unionBy(secondArray, mapper));
 ```
 
-## API
+## 使用法
 
-### `unionBy(...)`
+`unionBy` は `mapper` が返す値を比較します。パイプされた配列から各マッピングキーの最初の値を残し、続いて `secondArray` の値を処理します。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { unionBy, pipe } from 'es-toolkit/fp';
+
+pipe([{ id: 1 }, { id: 2 }], unionBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 2 }, { id: 3 }]
+```
+
+#### パラメータ
+
+- `secondArray` (`readonly T[]`): パイプされた配列の後に結合する配列です。
+- `mapper` (`(item: T) => U`): 一意性の判定に使うキーを返す関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をマッピングキー基準の和集合に変換する関数です。

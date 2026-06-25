@@ -1,30 +1,25 @@
-# uniqWith
+# uniqWith (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `uniqWith` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  uniqWith((a, b) => a.id === b.id)
-);
-```
-
-## 使い方
-
-`uniqWith` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+カスタム等価関数を使って重複を取り除く関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, uniqWith } from 'es-toolkit/fp';
-
-const result = pipe(
-  [{ id: 1 }, { id: 1 }, { id: 2 }],
-  uniqWith((a, b) => a.id === b.id)
-);
-// [{ id: 1 }, { id: 2 }]
+const result = pipe(array, uniqWith(areItemsEqual));
 ```
 
-## API
+## 使用法
 
-### `uniqWith(...)`
+`uniqWith` は、`areItemsEqual` によって既に残した値と一致しない最初の値を残します。[`pipe`](./pipe.md) の中では遅延評価に対応しています。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { uniqWith, pipe } from 'es-toolkit/fp';
+
+pipe([{ id: 1 }, { id: 1 }, { id: 2 }], uniqWith((a, b) => a.id === b.id)); // => [{ id: 1 }, { id: 2 }]
+```
+
+#### パラメータ
+
+- `areItemsEqual` (`(item: T, other: T) => boolean`): 2 つの値が等しいかどうかを判定する関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をカスタム等価基準で重複を取り除いた配列に変換する関数です。

@@ -1,30 +1,31 @@
-# orderBy
+# orderBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `orderBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+条件と並び順に従ってオブジェクトをソートする関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(array, orderBy(['age'], ['asc']));
+const result = pipe(array, orderBy(criteria, orders));
 ```
 
-## 使い方
+## 使用法
 
-`orderBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`orderBy` はパイプされた配列を各条件の順にソートします。各並び順は、対応する条件を昇順または降順のどちらでソートするかを制御します。
 
 ```typescript
 import { orderBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    { name: 'a', age: 2 },
-    { name: 'b', age: 1 },
-  ],
-  orderBy(['age'], ['asc'])
-);
-// [{ name: 'b', age: 1 }, { name: 'a', age: 2 }]
+const users = [
+  { name: 'a', age: 2 },
+  { name: 'b', age: 1 },
+];
+
+pipe(users, orderBy(['age'], ['asc'])); // => [{ name: 'b', age: 1 }, { name: 'a', age: 2 }]
 ```
 
-## API
+#### パラメータ
 
-### `orderBy(...)`
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 比較に使うオブジェクトキーやセレクター関数です。
+- `orders` (`Array<'asc' | 'desc'>`): 各条件の並び順です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` を新しくソートされた配列に変換する関数です。

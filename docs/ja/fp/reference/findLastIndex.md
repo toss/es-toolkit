@@ -1,30 +1,25 @@
-# findLastIndex
+# findLastIndex (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `findLastIndex` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+条件を満たす最後の値のインデックスを返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  findLastIndex(value => value % 2 === 0)
-);
+const result = pipe(array, findLastIndex(predicate));
 ```
 
-## 使い方
+## 使用法
 
-`findLastIndex` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`findLastIndex` はパイプされた配列を末尾から検索し、`predicate` が `true` を返す最初の値のインデックスを返します。一致する値がなければ `-1` を返します。
 
 ```typescript
 import { findLastIndex, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  findLastIndex(value => value % 2 === 0)
-);
-// 3
+pipe([1, 2, 3, 4], findLastIndex(value => value % 2 === 0)); // => 3
 ```
 
-## API
+#### パラメータ
 
-### `findLastIndex(...)`
+- `predicate` (`(value: T, index: number) => boolean`): 各値をテストする関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => number`): `readonly T[]` を最後に一致したインデックス、または `-1` に変換する関数です。

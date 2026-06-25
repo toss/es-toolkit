@@ -1,30 +1,26 @@
-# isSubsetWith
+# isSubsetWith (函数式编程)
 
-创建可用于函数式管道的 data-last `isSubsetWith` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个使用自定义相等函数检查子集关系的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
-);
+const result = pipe(array, isSubsetWith(superset, areItemsEqual));
 ```
 
 ## 用法
 
-`isSubsetWith` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`isSubsetWith` 在管道中数组的每个值都按 `areItemsEqual` 与 `superset` 中至少一个值匹配时返回 `true`。
 
 ```typescript
 import { isSubsetWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }],
-  isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)
-);
-// true
+pipe([{ id: 1 }], isSubsetWith([{ id: 1 }, { id: 2 }], (a, b) => a.id === b.id)); // => true
 ```
 
-## API
+#### 参数
 
-### `isSubsetWith(...)`
+- `superset` (`readonly T[]`): 可能包含管道中数组所有值的数组。
+- `areItemsEqual` (`(item: T, other: T) => boolean`): 判断两个值是否相等的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => boolean`): 一个将 `readonly T[]` 映射为是否为子集的函数。

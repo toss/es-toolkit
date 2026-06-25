@@ -1,30 +1,26 @@
-# xorBy
+# xorBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `xorBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
-
-```typescript
-const result = pipe(
-  array,
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-```
-
-## 使い方
-
-`xorBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+マッピングされたキーを基準に対称差を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-import { pipe, xorBy } from 'es-toolkit/fp';
-
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  xorBy([{ id: 2 }, { id: 3 }], item => item.id)
-);
-// [{ id: 1 }, { id: 3 }]
+const result = pipe(array, xorBy(secondArray, mapper));
 ```
 
-## API
+## 使用法
 
-### `xorBy(...)`
+`xorBy` は `mapper` が返す値を比較し、マッピングされたキーが片方の配列にだけ存在する値を返します。
 
-戻り値: A function that accepts the piped input.
+```typescript
+import { xorBy, pipe } from 'es-toolkit/fp';
+
+pipe([{ id: 1 }, { id: 2 }], xorBy([{ id: 2 }, { id: 3 }], item => item.id)); // => [{ id: 1 }, { id: 3 }]
+```
+
+#### パラメータ
+
+- `secondArray` (`readonly T[]`): パイプされた配列と比較する配列です。
+- `mapper` (`(item: T) => U`): 比較キーを返す関数です。
+
+#### 戻り値
+
+(`(array: readonly T[]) => T[]`): `readonly T[]` をキー基準の対称差に変換する関数です。

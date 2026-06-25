@@ -1,30 +1,26 @@
-# intersectionWith
+# intersectionWith (Functional Programming)
 
-Creates a data-last intersectionWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that keeps values using a custom equality function. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  intersectionWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, intersectionWith(secondArray, areItemsEqual));
 ```
 
 ## Usage
 
-`intersectionWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`intersectionWith` keeps values from the piped array when `areItemsEqual` returns `true` for at least one value in `secondArray`.
 
 ```typescript
 import { intersectionWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  intersectionWith([2], (item, id) => item.id === id)
-);
-// [{ id: 2 }]
+pipe([{ id: 1 }, { id: 2 }], intersectionWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 2 }]
 ```
 
-## API
+#### Parameters
 
-### `intersectionWith(...)`
+- `secondArray` (`readonly U[]`): The array containing values to compare against.
+- `areItemsEqual` (`(item: T, other: U) => boolean`): The function that decides whether two values are equal.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to values matched by the comparator.

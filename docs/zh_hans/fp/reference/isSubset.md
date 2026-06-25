@@ -1,24 +1,27 @@
-# isSubset
+# isSubset (函数式编程)
 
-创建可用于函数式管道的 data-last `isSubset` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个检查管道中的数组是否为另一个数组子集的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(array, isSubset([1, 2, 3]));
+const result = pipe(array, isSubset(superset));
 ```
 
 ## 用法
 
-`isSubset` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`isSubset` 在管道中数组的每个值都存在于 `superset` 中时返回 `true`。
 
 ```typescript
 import { isSubset, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2], isSubset([1, 2, 3]));
-// true
+pipe([1, 2], isSubset([1, 2, 3])); // => true
+
+pipe([1, 4], isSubset([1, 2, 3])); // => false
 ```
 
-## API
+#### 参数
 
-### `isSubset(...)`
+- `superset` (`readonly T[]`): 可能包含管道中数组所有值的数组。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => boolean`): 一个将 `readonly T[]` 映射为是否为子集的函数。

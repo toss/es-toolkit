@@ -1,30 +1,25 @@
-# flatMapDeep
+# flatMapDeep (Functional Programming)
 
-Creates a data-last flatMapDeep operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that maps each value and deeply flattens the result. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  flatMapDeep(value => [[value, value]])
-);
+const result = pipe(array, flatMapDeep(iteratee));
 ```
 
 ## Usage
 
-`flatMapDeep` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`flatMapDeep` calls `iteratee` for each value in the piped array and recursively flattens the returned arrays.
 
 ```typescript
 import { flatMapDeep, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2],
-  flatMapDeep(value => [[value, value]])
-);
-// [1, 1, 2, 2]
+pipe([1, 2], flatMapDeep(value => [[value, value]])); // => [1, 1, 2, 2]
 ```
 
-## API
+#### Parameters
 
-### `flatMapDeep(...)`
+- `iteratee` (`(item: T, index: number) => U`): The function that maps each value before deep flattening.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => Array<ExtractNestedArrayType<U>>`): A function that maps a `readonly T[]` to a deeply flattened array.

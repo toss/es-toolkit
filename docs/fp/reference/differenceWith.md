@@ -1,30 +1,26 @@
-# differenceWith
+# differenceWith (Functional Programming)
 
-Creates a data-last differenceWith operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that excludes values using a custom equality function. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  differenceWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```
 
 ## Usage
 
-`differenceWith` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`differenceWith` keeps values from the piped array only when `areItemsEqual` returns `false` for every value in `secondArray`.
 
 ```typescript
 import { differenceWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceWith([2], (item, id) => item.id === id)
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 1 }]
 ```
 
-## API
+#### Parameters
 
-### `differenceWith(...)`
+- `secondArray` (`readonly U[]`): The array containing values to compare against.
+- `areItemsEqual` (`(item: T, other: U) => boolean`): The function that decides whether two values are equal.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to values not matched by the comparator.

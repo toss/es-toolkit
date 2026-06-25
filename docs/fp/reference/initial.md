@@ -1,6 +1,6 @@
-# initial
+# initial (Functional Programming)
 
-Creates a data-last initial operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns all values except the last one. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, initial());
@@ -8,17 +8,18 @@ const result = pipe(array, initial());
 
 ## Usage
 
-`initial` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`initial` returns a new array without the last value of the piped array.
 
 ```typescript
 import { initial, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3], initial());
-// [1, 2]
+pipe([1, 2, 3], initial()); // => [1, 2]
 ```
 
-## API
+#### Parameters
 
-### `initial(...)`
+This function takes no arguments; call it as `initial()`.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to all values except the last one.

@@ -1,24 +1,33 @@
-# windowed
+# windowed (함수형 프로그래밍)
 
-함수형 파이프라인에서 사용할 수 있는 data-last `windowed` 연산자를 만들어요. [`pipe`](./pipe.md)와 함께 사용하세요.
+배열에서 슬라이딩 윈도우를 반환하는 함수를 만들어요. 함수형 프로그래밍의 [`pipe`](./pipe.md) 와 같이 사용해요.
 
 ```typescript
-const result = pipe(array, windowed(2));
+const result = pipe(array, windowed(size, step, options));
 ```
 
 ## 사용법
 
-`windowed`는 `pipe`를 통해 흐르는 값을 받는 함수를 반환해요. 데이터는 `pipe`의 첫 번째 인자로 두고, 연산자 설정은 변환 단계 옆에 둘 수 있어요.
+`windowed`는 길이가 `size`인 하위 배열을 반환하고, 매번 `step`만큼 앞으로 이동해요. 전체 윈도우만 반환하는 형태는 [`pipe`](./pipe.md) 안에서 지연 평가가 가능해요.
 
 ```typescript
-import { pipe, windowed } from 'es-toolkit/fp';
+import { windowed, pipe } from 'es-toolkit/fp';
 
-const result = pipe([1, 2, 3, 4], windowed(2));
-// [[1, 2], [2, 3], [3, 4]]
+pipe([1, 2, 3, 4], windowed(2)); // => [[1, 2], [2, 3], [3, 4]]
+
+pipe([1, 2, 3, 4], windowed(2, 2)); // => [[1, 2], [3, 4]]
 ```
 
-## API
+#### 파라미터
 
-### `windowed(...)`
+- `size` (`number`): 각 윈도우의 길이예요.
+- `step` (`number, optional`): 윈도우 사이에서 이동할 칸 수예요. 기본값은 `1`이에요.
+- `options` (`WindowedOptions, optional`): 끝의 부분 윈도우를 포함할지 같은 옵션이에요.
 
-반환값: A function that accepts the piped input.
+#### 반환 값
+
+(`(array: readonly T[]) => T[][]`): `readonly T[]`를 슬라이딩 윈도우 배열로 변환하는 함수예요.
+
+#### 에러
+
+`size`나 `step`이 양의 정수가 아니면 에러를 던져요.

@@ -1,30 +1,25 @@
-# countBy
+# countBy (関数型プログラミング)
 
-関数型パイプラインで使える data-last の `countBy` 演算子を作成します。[`pipe`](./pipe.md) と一緒に使用します。
+キーごとに値の数を数える関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
-const result = pipe(
-  array,
-  countBy(value => value.length)
-);
+const result = pipe(array, countBy(mapper));
 ```
 
-## 使い方
+## 使用法
 
-`countBy` は `pipe` を流れる値を受け取る関数を返します。データを `pipe` の最初の引数に置き、演算子の設定を変換ステップの近くに書けます。
+`countBy` はパイプされた配列の各値に `mapper` を呼び出し、mapper の結果をキー、個数を値にしたオブジェクトを返します。
 
 ```typescript
 import { countBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  ['a', 'bb', 'c'],
-  countBy(value => value.length)
-);
-// { 1: 2, 2: 1 }
+pipe(['one', 'two', 'three'], countBy(word => word.length)); // => { 3: 2, 5: 1 }
 ```
 
-## API
+#### パラメータ
 
-### `countBy(...)`
+- `mapper` (`(item: T) => K`): 数えるために使うキーを返す関数です。
 
-戻り値: A function that accepts the piped input.
+#### 戻り値
+
+(`(array: readonly T[]) => Record<K, number>`): `readonly T[]` をキーごとの個数オブジェクトに変換する関数です。

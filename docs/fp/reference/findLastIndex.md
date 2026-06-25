@@ -1,30 +1,25 @@
-# findLastIndex
+# findLastIndex (Functional Programming)
 
-Creates a data-last findLastIndex operator for functional pipelines. Use it with [`pipe`](./pipe.md).
+Creates a function that returns the index of the last value that passes a test. Use it with [`pipe`](./pipe.md).
 
 ```typescript
-const result = pipe(
-  array,
-  findLastIndex(value => value % 2 === 0)
-);
+const result = pipe(array, findLastIndex(predicate));
 ```
 
 ## Usage
 
-`findLastIndex` returns a function that receives the value flowing through `pipe`. This keeps the data as the first argument of `pipe` and puts the operator configuration next to the transformation step.
+`findLastIndex` searches the piped array from the end and returns the index of the first value for which `predicate` returns `true`. If no value matches, it returns `-1`.
 
 ```typescript
 import { findLastIndex, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [1, 2, 3, 4],
-  findLastIndex(value => value % 2 === 0)
-);
-// 3
+pipe([1, 2, 3, 4], findLastIndex(value => value % 2 === 0)); // => 3
 ```
 
-## API
+#### Parameters
 
-### `findLastIndex(...)`
+- `predicate` (`(value: T, index: number) => boolean`): The function that tests each value.
 
-Returns: A function that accepts the piped input.
+#### Returns
+
+(`(array: readonly T[]) => number`): A function that maps a `readonly T[]` to the last matching index, or `-1`.

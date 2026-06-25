@@ -1,30 +1,26 @@
-# differenceWith
+# differenceWith (函数式编程)
 
-创建可用于函数式管道的 data-last `differenceWith` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个使用自定义相等函数排除值的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  differenceWith([2], (item, id) => item.id === id)
-);
+const result = pipe(array, differenceWith(secondArray, areItemsEqual));
 ```
 
 ## 用法
 
-`differenceWith` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`differenceWith` 只有在 `areItemsEqual` 对 `secondArray` 中所有值都返回 `false` 时,才会保留管道中数组的值。
 
 ```typescript
 import { differenceWith, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [{ id: 1 }, { id: 2 }],
-  differenceWith([2], (item, id) => item.id === id)
-);
-// [{ id: 1 }]
+pipe([{ id: 1 }, { id: 2 }], differenceWith([{ id: 2 }], (a, b) => a.id === b.id)); // => [{ id: 1 }]
 ```
 
-## API
+#### 参数
 
-### `differenceWith(...)`
+- `secondArray` (`readonly U[]`): 包含用于比较的值的数组。
+- `areItemsEqual` (`(item: T, other: U) => boolean`): 判断两个值是否相等的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为未被比较函数匹配的值数组的函数。

@@ -1,33 +1,25 @@
-# keyBy
+# keyBy (函数式编程)
 
-创建可用于函数式管道的 data-last `keyBy` 操作符。与 [`pipe`](./pipe.md) 一起使用。
+创建一个按每个值生成键来构建对象的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
-const result = pipe(
-  array,
-  keyBy(item => item.id)
-);
+const result = pipe(array, keyBy(getKey));
 ```
 
 ## 用法
 
-`keyBy` 返回一个接收 `pipe` 中流动值的函数。这样数据保留为 `pipe` 的第一个参数，操作符配置则写在对应的转换步骤旁边。
+`keyBy` 会对管道中数组的每个值调用 `getKey`,并返回一个以返回键为键、原始项为值的对象。相同键的后续值会覆盖之前的值。
 
 ```typescript
 import { keyBy, pipe } from 'es-toolkit/fp';
 
-const result = pipe(
-  [
-    { id: 'a', value: 1 },
-    { id: 'b', value: 2 },
-  ],
-  keyBy(item => item.id)
-);
-// { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
+pipe([{ id: 'a', value: 1 }, { id: 'b', value: 2 }], keyBy(item => item.id)); // => { a: { id: 'a', value: 1 }, b: { id: 'b', value: 2 } }
 ```
 
-## API
+#### 参数
 
-### `keyBy(...)`
+- `getKey` (`(item: T) => K`): 为每个值返回键的函数。
 
-返回值: A function that accepts the piped input.
+#### 返回值
+
+(`(array: readonly T[]) => Record<K, T>`): 一个将 `readonly T[]` 映射为按 `getKey` 生成键的对象的函数。
