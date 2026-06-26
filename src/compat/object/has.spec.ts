@@ -101,6 +101,11 @@ describe('has', () => {
     });
   });
 
+  it('should return true for nullish literal keys that look like paths', () => {
+    expect(has({ 'a.b': undefined }, 'a.b')).toBe(true);
+    expect(has({ 'a.b': null }, 'a.b')).toBe(true);
+  });
+
   it(`should return \`true\` for indexes of sparse values`, () => {
     const sparseArgs = toArgs([1]);
     const sparseArray = Array(1);
