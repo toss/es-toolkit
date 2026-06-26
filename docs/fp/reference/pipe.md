@@ -6,6 +6,12 @@ Performs left-to-right function composition, threading a value through a sequenc
 const result = pipe(value, ...functions);
 ```
 
+::: info
+
+`pipe` is the composition entry point for `es-toolkit/fp`. Use it when you want to pass a value through transformations from left to right.
+
+:::
+
 ## Usage
 
 `pipe` is the entry point of `es-toolkit/fp`. It takes an initial `value` and applies each function to it in order, passing the result of one function as the input to the next. This reads top-to-bottom in the same order the transformation runs, which removes nesting and temporary variables.

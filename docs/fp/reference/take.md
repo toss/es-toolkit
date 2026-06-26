@@ -6,6 +6,12 @@ Creates a function that returns the first `count` elements of an array. Use it w
 const result = pipe(array, take(count));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`take`](../../reference/array/take.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `take` returns the first `count` elements. If `count` is greater than the array length, the whole array is returned. For a non-negative integer `count` it is **lazy-capable**: inside a [`pipe`](./pipe.md) it ends the walk as soon as `count` elements have been collected, so preceding lazy operations never process the rest of the input.

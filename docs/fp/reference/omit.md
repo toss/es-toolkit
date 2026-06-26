@@ -6,6 +6,12 @@ Creates a function that removes the given keys from an object. Use it with [`pip
 const result = pipe(obj, omit(keys));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`omit`](../../reference/object/omit.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `omit` returns a new object with the specified `keys` removed from the input object.

@@ -6,6 +6,12 @@
 const result = pipe(array, map(callbackfn));
 ```
 
+::: info
+
+이 헬퍼는 `es-toolkit/fp` 전용이에요. 이 동작을 [`pipe`](./pipe.md) 파이프라인의 한 단계로 조합하고 싶을 때 사용하세요.
+
+:::
+
 ## 사용법
 
 `map`은 각 요소에 `callbackfn`을 호출해서 새로운 배열을 만들어요. 이 함수는 **지연 평가가 가능해요**. [`pipe`](./pipe.md) 안에서는 인접한 지연 연산과 합쳐지기 때문에, 마지막에 오는 `take`가 작업을 일찍 멈출 수 있어요.

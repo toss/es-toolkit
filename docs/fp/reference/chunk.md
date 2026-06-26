@@ -6,6 +6,12 @@ Creates a function that splits an array into sub-arrays of a given length. Use i
 const result = pipe(array, chunk(size));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`chunk`](../../reference/array/chunk.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `chunk` divides an array into sub-arrays, each of length `size`. When the array cannot be divided evenly, the final chunk holds the remaining elements.

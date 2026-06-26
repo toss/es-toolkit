@@ -6,6 +6,12 @@
 const result = pipe(array, filter(predicate));
 ```
 
+::: info
+
+这个辅助函数专用于 `es-toolkit/fp`。当你想把这个操作作为 [`pipe`](./pipe.md) 管道中的一步来组合时使用它。
+
+:::
+
 ## 用法
 
 `filter` 会保留那些使 `predicate` 返回真值的元素。类型谓词会收窄结果的元素类型。它**支持惰性求值**:在 [`pipe`](./pipe.md) 中,它会与相邻的惰性操作融合。

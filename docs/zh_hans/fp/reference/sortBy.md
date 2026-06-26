@@ -6,6 +6,12 @@
 const result = pipe(array, sortBy(criteria));
 ```
 
+::: info
+
+在不需要管道组合的普通代码中，建议使用原始 es-toolkit 的 [`sortBy`](../../reference/array/sortBy.md)。当你要用 [`pipe`](./pipe.md) 串联转换时，请使用这个 `fp` 版本。
+
+:::
+
 ## 用法
 
 `sortBy` 将对象数组按升序排序。每个条件可以是对象的某个键,也可以是一个返回用于比较的值的函数。当两个元素在某个条件上相等时,会用下一个条件来决定先后。该排序是稳定的,并且不会修改输入。

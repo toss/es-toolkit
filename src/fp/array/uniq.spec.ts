@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { map } from './map.ts';
+import { take } from './take.ts';
 import { uniq } from './uniq.ts';
 import { pipe } from '../pipe.ts';
 
@@ -24,5 +25,12 @@ describe('uniq', () => {
         uniq()
       )
     ).toEqual([1, 0]);
+  });
+
+  it('supports lazy evaluation with a short-circuiting operator', () => {
+    const spy = vi.fn((value: number) => value);
+
+    expect(pipe([1, 1, 2, 3, 4], map(spy), uniq(), take(2))).toEqual([1, 2]);
+    expect(spy).toHaveBeenCalledTimes(3);
   });
 });

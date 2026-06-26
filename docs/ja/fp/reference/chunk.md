@@ -6,6 +6,12 @@
 const result = pipe(array, chunk(size));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`chunk`](../../reference/array/chunk.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `chunk` は配列を、それぞれ長さ `size` のサブ配列に分割します。配列を均等に分割できない場合、最後のチャンクには残りの要素が入ります。

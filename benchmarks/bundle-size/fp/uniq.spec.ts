@@ -3,7 +3,7 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/uniq bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { uniq } from "es-toolkit/fp"; console.log(uniq)')).toBe(108);
+    expect(await getBundleSizeFromScript('import { uniq } from "es-toolkit/fp"; console.log(uniq)')).toBe(255);
   });
 
   it('lodash/fp/uniq', async () => {
