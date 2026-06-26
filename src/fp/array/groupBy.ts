@@ -19,8 +19,8 @@ import { groupBy as groupByToolkit } from '../../array/groupBy.ts';
  */
 export function groupBy<T, K extends PropertyKey>(
   getKey: (item: T, index: number, array: readonly T[]) => K
-): (array: readonly T[]) => Record<K, T[]> {
-  return function (array: readonly T[]): Record<K, T[]> {
+): (array: readonly T[]) => Partial<Record<K, T[]>> {
+  return function (array: readonly T[]): Partial<Record<K, T[]>> {
     return groupByToolkit(array, getKey);
   };
 }
