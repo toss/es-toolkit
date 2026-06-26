@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { groupBy } from './groupBy';
 
 describe('groupBy', () => {
@@ -116,5 +116,21 @@ describe('groupBy', () => {
         { category: 'fruit', name: 'apple' },
       ],
     });
+  });
+
+  it('should type missing grouped keys as possibly undefined', () => {
+    type Grocery = {
+      category: 'fruit' | 'vegetable' | 'meat';
+      name: string;
+    };
+
+    const array: Grocery[] = [
+      { category: 'fruit', name: 'apple' },
+      { category: 'vegetable', name: 'carrot' },
+    ];
+    const result = groupBy(array, item => item.category);
+
+    expectTypeOf(result).toEqualTypeOf<Partial<Record<Grocery['category'], Grocery[]>>>();
+    expectTypeOf(result.meat).toEqualTypeOf<Grocery[] | undefined>();
   });
 });
