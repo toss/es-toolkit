@@ -6,6 +6,12 @@ Creates a function that multiplies its input by a number. Use it with [`pipe`](.
 const result = pipe(value, multiply(multiplicand));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `multiply` returns a function that multiplies its input by `multiplicand`. It is designed for composition: it can transform the value flowing through a [`pipe`](./pipe.md), or serve as the callback of a function such as [`map`](./map.md).

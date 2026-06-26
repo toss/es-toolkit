@@ -26,6 +26,24 @@ import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/l
 export function filter<T, S extends T>(
   predicate: (value: T, index: number) => value is S
 ): (array: readonly T[]) => S[];
+
+/**
+ * Creates a function that keeps only the elements for which `predicate` returns
+ * a truthy value, equivalent to `Array.prototype.filter`. Use it with {@link pipe}.
+ *
+ * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
+ * with adjacent lazy functions and runs element-by-element.
+ *
+ * @template T - The type of elements in the input array.
+ * @param predicate - Called with `(value, index)` for each element; return
+ *   `true` to keep the element.
+ * @returns A function that maps a `readonly T[]` to a filtered array.
+ *
+ * @example
+ * import { pipe, filter } from 'es-toolkit/fp';
+ *
+ * pipe([1, 2, 3, 4], filter(x => x % 2 === 0)); // => [2, 4]
+ */
 export function filter<T>(predicate: (value: T, index: number) => boolean): (array: readonly T[]) => T[];
 export function filter<T>(predicate: (value: T, index: number) => boolean): (array: readonly T[]) => T[] {
   function filterEager(array: readonly T[]): T[] {

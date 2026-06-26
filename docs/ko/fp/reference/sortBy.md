@@ -6,6 +6,12 @@
 const result = pipe(array, sortBy(criteria));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`sortBy`](../../reference/array/sortBy.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `sortBy`는 객체 배열을 오름차순으로 정렬해요. 각 기준은 객체의 키이거나, 비교할 값을 반환하는 함수예요. 두 요소가 한 기준에서 같으면, 다음 기준으로 순서를 정해요. 정렬은 안정적이고, 입력을 변경하지 않아요.

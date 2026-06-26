@@ -6,6 +6,12 @@
 const result = pipe(array, uniq());
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`uniq`](../../reference/array/uniq.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `uniq` は一意な値だけを含む新しい配列を返し、最初に現れる順序を保持します。等価性は `SameValueZero`（`Set` のセマンティクス）に従います。

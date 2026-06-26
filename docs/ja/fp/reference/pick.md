@@ -6,6 +6,12 @@
 const result = pipe(obj, pick(keys));
 ```
 
+::: info
+
+パイプラインとして組み合わせない通常のコードでは、元の es-toolkit の [`pick`](../../reference/object/pick.md) を使うのがおすすめです。[`pipe`](./pipe.md) で変換をつなげるときは、この `fp` 版を使用してください。
+
+:::
+
 ## 使用法
 
 `pick` は、入力オブジェクトから指定した `keys` だけを含む新しいオブジェクトを返します。入力に存在しないキーはスキップされます。

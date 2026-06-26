@@ -6,6 +6,12 @@ Creates a function that removes duplicate values from an array. Use it with [`pi
 const result = pipe(array, uniq());
 ```
 
+::: info
+
+Prefer the original es-toolkit [`uniq`](../../reference/array/uniq.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `uniq` returns a new array containing only unique values, preserving the order of first occurrence. Equality follows `SameValueZero` (the semantics of `Set`).

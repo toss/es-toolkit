@@ -6,6 +6,12 @@
 const result = pipe(array, chunk(size));
 ```
 
+::: info
+
+파이프라인으로 조합하지 않는 일반 코드에서는 원래 es-toolkit의 [`chunk`](../../reference/array/chunk.md)를 쓰는 것이 좋아요. [`pipe`](./pipe.md)로 변환을 이어 붙일 때 이 `fp` 버전을 사용하세요.
+
+:::
+
 ## 사용법
 
 `chunk`는 배열을 각각 `size` 길이의 하위 배열로 나눠요. 배열이 균등하게 나눠지지 않으면, 마지막 청크에 남은 요소들이 담겨요.

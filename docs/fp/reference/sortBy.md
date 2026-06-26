@@ -6,6 +6,12 @@ Creates a function that sorts an array of objects in ascending order by one or m
 const result = pipe(array, sortBy(criteria));
 ```
 
+::: info
+
+Prefer the original es-toolkit [`sortBy`](../../reference/array/sortBy.md) in ordinary code. Use this `fp` variant when composing transformations with [`pipe`](./pipe.md).
+
+:::
+
 ## Usage
 
 `sortBy` sorts an array of objects in ascending order. Each criterion is either an object key or a function that returns the value to compare. When two elements tie on a criterion, the next criterion breaks the tie. The sort is stable and does not mutate the input.

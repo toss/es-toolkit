@@ -6,6 +6,12 @@ Creates a function that transforms every element of an array, equivalent to `Arr
 const result = pipe(array, map(callbackfn));
 ```
 
+::: info
+
+This helper is specific to `es-toolkit/fp`. Use it when you want this operation as part of a [`pipe`](./pipe.md) pipeline.
+
+:::
+
 ## Usage
 
 `map` builds a new array by calling `callbackfn` on each element. It is **lazy-capable**: inside a [`pipe`](./pipe.md) it is fused with adjacent lazy operations, so a trailing `take` can stop the work early.
