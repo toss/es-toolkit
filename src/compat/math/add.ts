@@ -17,18 +17,21 @@ import { toString } from '../util/toString.ts';
  * const result3 = add(NaN, 10); // result3 will be NaN
  */
 export function add(value: number, other: number): number {
-  if (value === undefined && other === undefined) {
+  let left: any = value;
+  let right: any = other;
+
+  if (left === undefined && right === undefined) {
     return 0;
   }
-  if (value === undefined || other === undefined) {
-    return value ?? other;
+  if (left === undefined || right === undefined) {
+    return left ?? right;
   }
-  if (typeof value === 'string' || typeof other === 'string') {
-    value = toString(value) as any;
-    other = toString(other) as any;
+  if (typeof left === 'string' || typeof right === 'string') {
+    left = toString(left);
+    right = toString(right);
   } else {
-    value = toNumber(value);
-    other = toNumber(other);
+    left = toNumber(left);
+    right = toNumber(right);
   }
-  return value + other;
+  return left + right;
 }
