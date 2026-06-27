@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { add, chunk, filter, flatMap, map, multiply, omit, pick, pipe, sortBy, take, uniq } from './index.ts';
+import { add, chunk, filter, flatMap, flow, map, multiply, omit, pick, pipe, sortBy, take, uniq } from './index.ts';
 
 describe('es-toolkit/fp', () => {
   it('exports pipe and every v1 operator from the public entry', () => {
-    for (const fn of [pipe, map, filter, flatMap, take, uniq, chunk, sortBy, multiply, add, pick, omit]) {
+    for (const fn of [pipe, flow, map, filter, flatMap, take, uniq, chunk, sortBy, multiply, add, pick, omit]) {
       expect(typeof fn).toBe('function');
     }
   });
