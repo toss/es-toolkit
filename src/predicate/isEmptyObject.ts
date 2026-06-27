@@ -3,8 +3,8 @@ import { isPlainObject } from './isPlainObject.ts';
 /**
  * Checks if a value is an empty plain object.
  *
- * @param {unknown} value - The value to check.
- * @returns {value is Record<PropertyKey, never>} - True if the value is an empty plain object, otherwise false.
+ * @param value - The value to check.
+ * @returns True if the value is an empty plain object, otherwise false.
  *
  * @example
  * isEmptyObject({}); // true

@@ -167,6 +167,21 @@ describe('unset', () => {
     expect(object).toEqual({ b: null });
   });
 
+  it('should prioritize a literal key over a path when the literal value is undefined', () => {
+    const object: Record<string, unknown> = { 'a.b': undefined, a: { b: 99 } };
+
+    expect(unset(object, 'a.b')).toBe(true);
+    expect(Object.hasOwn(object, 'a.b')).toBe(false);
+    expect((object.a as { b: number }).b).toBe(99);
+  });
+
+  it('should delete a literal undefined-valued key even without a nested counterpart', () => {
+    const object: Record<string, unknown> = { 'x.y': undefined };
+
+    expect(unset(object, 'x.y')).toBe(true);
+    expect(Object.hasOwn(object, 'x.y')).toBe(false);
+  });
+
   it('should prevent prototype pollution by rejecting __proto__ deletion', () => {
     expect(unset({ ['__proto__']: {} }, '__proto__')).toBe(false);
     expect(unset({ ['__proto__']: {} }, ['__proto__'])).toBe(false);

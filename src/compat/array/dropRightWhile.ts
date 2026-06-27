@@ -1,6 +1,7 @@
 import { dropRightWhile as dropRightWhileToolkit } from '../../array/dropRightWhile.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
@@ -11,9 +12,9 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * The predicate is invoked with three arguments: (value, index, array).
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @param {ListIteratee<T>} [predicate] - The function invoked per iteration.
- * @returns {T[]} Returns the slice of array.
+ * @param array - The array to query.
+ * @param [predicate] - The function invoked per iteration.
+ * @returns Returns the slice of array.
  * @example
  *
  * const users = [
@@ -36,7 +37,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  *
  * // Using property shorthand
  * dropRightWhile(users, 'active');
- * // => [{ user: 'barney', active: true }]
+ * // => [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
  */
 export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[];
 
@@ -47,11 +48,11 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * predicate function returns false. It then returns a new array with the remaining elements.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} arr - The array from which to drop elements.
- * @param {(item: T, index: number, arr: T[]) => unknown} predicate - A predicate function that determines
+ * @param array - The array from which to drop elements.
+ * @param predicate - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element, index, and array, and dropping
  * continues as long as it returns true.
- * @returns {T[]} A new array with the elements remaining after the predicate returns false.
+ * @returns A new array with the elements remaining after the predicate returns false.
  *
  * @example
  * const array = [3, 2, 1];
@@ -59,18 +60,18 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * // Returns: [3]
  */
 export function dropRightWhile<T>(
-  arr: ArrayLike<T> | null | undefined,
+  array: ArrayLike<T> | null | undefined,
   predicate:
-    | ((item: T, index: number, arr: readonly T[]) => unknown)
+    | ((item: T, index: number, array: readonly T[]) => unknown)
     | Partial<T>
     | [keyof T, unknown]
     | PropertyKey = identity
 ): T[] {
-  if (!isArrayLike(arr)) {
+  if (!isArrayLike(array)) {
     return [];
   }
 
-  return dropRightWhileImpl(Array.from(arr), predicate);
+  return dropRightWhileImpl(toArray(array), predicate);
 }
 
 function dropRightWhileImpl<T>(

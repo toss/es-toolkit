@@ -5,10 +5,10 @@
  *
  * Note: Unlike native `Function#bind`, this method doesn't set the `length` property of bound functions.
  *
- * @param {(...args: any[]) => any} func - The function to bind.
- * @param {any} thisObj - The `this` binding of `func`.
- * @param {...any} partialArgs - The arguments to be partially applied.
- * @returns {(...args: any[]) => any} - Returns the new bound function.
+ * @param func - The function to bind.
+ * @param thisObj - The `this` binding of `func`.
+ * @param partialArgs - The arguments to be partially applied.
+ * @returns Returns the new bound function.
  *
  * @example
  * function greet(greeting, punctuation) {

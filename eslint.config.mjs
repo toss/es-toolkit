@@ -8,7 +8,17 @@ import pluginJs from '@eslint/js';
 import vitest from '@vitest/eslint-plugin';
 
 export default defineConfig(
-  globalIgnores(['.yarn/**', 'coverage/**', '**/dist/**', '**/cache/**', '.pnp.*', '**/*.d.ts', '**/*.tgz']),
+  globalIgnores([
+    '.yarn/**',
+    'coverage/**',
+    '**/dist/**',
+    '**/cache/**',
+    '.pnp.*',
+    '**/*.d.ts',
+    '**/*.tgz',
+    'node_modules/**',
+    'es-toolkit-plugin/skills/*/docs',
+  ]),
   {
     languageOptions: {
       globals: {

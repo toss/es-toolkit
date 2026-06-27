@@ -2,6 +2,7 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { dropRight as dropRightLodash } from 'lodash';
 import { dropRight } from './dropRight';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/dropRight.spec.js#L1
@@ -11,6 +12,13 @@ describe('dropRight', () => {
 
   it('should drop the last two elements', () => {
     expect(dropRight(array, 2)).toEqual([1]);
+  });
+
+  it('should treat falsey `n` values, except `undefined`, as `0`', () => {
+    const expected = falsey.map(value => (value === undefined ? [1, 2] : array));
+    const actual = falsey.map(value => dropRight(array, value as any));
+
+    expect(actual).toEqual(expected);
   });
 
   it('should return all elements when `n` < `1`', () => {

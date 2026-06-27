@@ -1,5 +1,5 @@
-import { computed, onMounted, ref } from 'vue';
-import { type Banner, EN_BANNER_DATA, KO_BANNER_DATA } from '../data/bannerData';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { type Banner, EN_BANNER_DATA, JA_BANNER_DATA, KO_BANNER_DATA, ZH_HANS_BANNER_DATA } from '../data/bannerData';
 
 export function useBanner() {
   const currentLang = ref<string | null>(null);
@@ -7,9 +7,19 @@ export function useBanner() {
     if (currentLang.value === 'ko') {
       return KO_BANNER_DATA;
     }
+
     if (currentLang.value === 'en') {
       return EN_BANNER_DATA;
     }
+
+    if (currentLang.value === 'ja') {
+      return JA_BANNER_DATA;
+    }
+
+    if (currentLang.value === 'zh-hans') {
+      return ZH_HANS_BANNER_DATA;
+    }
+
     return [];
   });
 
@@ -52,6 +62,8 @@ export function useBanner() {
     }
   };
 
+  let originalPushState: typeof history.pushState | null = null;
+
   onMounted(() => {
     updateCurrentLang();
 
@@ -65,19 +77,21 @@ export function useBanner() {
 
     window.addEventListener('popstate', updateCurrentLang);
 
-    const originalPushState = history.pushState;
+    originalPushState = history.pushState;
     history.pushState = function (...args) {
-      originalPushState.apply(this, args);
+      originalPushState!.apply(this, args);
       updateCurrentLang();
     };
+  });
 
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-      window.removeEventListener('popstate', updateCurrentLang);
+  onUnmounted(() => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    window.removeEventListener('popstate', updateCurrentLang);
+    if (originalPushState) {
       history.pushState = originalPushState;
-    };
+    }
   });
 
   const setBannerIndex = (index: number) => {
@@ -113,8 +127,14 @@ const getCurrentLang = (): string | null => {
   if (path.startsWith('/ko/')) {
     return 'ko';
   }
-  if (path.startsWith('/zh_hans/') || path.startsWith('/ja/')) {
-    return null;
+
+  if (path.startsWith('/zh_hans/')) {
+    return 'zh-hans';
   }
+
+  if (path.startsWith('/ja/')) {
+    return 'ja';
+  }
+
   return 'en';
 };

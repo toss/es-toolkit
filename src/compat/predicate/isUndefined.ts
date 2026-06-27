@@ -8,8 +8,8 @@ import { isUndefined as isUndefinedToolkit } from '../../predicate/isUndefined.t
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `undefined`.
  *
- * @param {any} x - The value to test if it is undefined.
- * @returns {x is undefined} true if the value is undefined, false otherwise.
+ * @param x - The value to test if it is undefined.
+ * @returns true if the value is undefined, false otherwise.
  *
  * @example
  * const value1 = undefined;

@@ -10,6 +10,7 @@ export { isEqualWith } from './isEqualWith.ts';
 export { isError } from './isError.ts';
 export { isFile } from './isFile.ts';
 export { isFunction } from './isFunction.ts';
+export { isIterable } from './isIterable.ts';
 export { isJSON } from './isJSON.ts';
 export { isJSONArray, isJSONObject, isJSONValue } from './isJSONValue.ts';
 export { isLength } from './isLength.ts';

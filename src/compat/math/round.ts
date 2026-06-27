@@ -3,9 +3,9 @@ import { decimalAdjust } from '../_internal/decimalAdjust.ts';
 /**
  * Computes number rounded to precision.
  *
- * @param {number} number  The number to round.
- * @param {number} precision The precision to round to.
- * @returns {number} Returns the rounded number.
+ * @param number  The number to round.
+ * @param precision The precision to round to.
+ * @returns Returns the rounded number.
  *
  * @example
  * round(4.006); // => 4

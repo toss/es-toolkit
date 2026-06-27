@@ -28,6 +28,12 @@ describe('get', () => {
     expect(get(obj, 'a[].b')).toBe(undefined);
   });
 
+  it('should prioritize literal key over path when value is undefined', () => {
+    const object = { 'a.b': undefined, a: { b: 99 } };
+    expect(get(object, 'a.b')).toBe(undefined);
+    expect(get(object, 'a.b', 'default')).toBe('default');
+  });
+
   /**
    * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/get-and-result.spec.js#L1
    */
@@ -163,5 +169,9 @@ describe('get', () => {
   it('should return defaultValue when property value is undefined', () => {
     const object = { '-0': undefined };
     expect(get(object, Object(-0), 'defaultValue')).toBe('defaultValue');
+  });
+
+  it('should read empty-string keys produced by consecutive dots', () => {
+    expect(get({ a: { '': { b: 1 } } }, 'a..b')).toBe(1);
   });
 });

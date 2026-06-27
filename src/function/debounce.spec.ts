@@ -96,6 +96,30 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
+  it('should immediately invoke the pending function when flush is called', () => {
+    const func = vi.fn();
+    const debounceMs = 50;
+    const debouncedFunc = debounce(func, debounceMs);
+
+    debouncedFunc();
+    debouncedFunc.flush();
+
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('should invoke the function on the leading edge when edges includes "leading"', async () => {
+    const func = vi.fn();
+    const debounceMs = 50;
+    const debouncedFunc = debounce(func, debounceMs, { edges: ['leading'] });
+
+    debouncedFunc();
+    expect(func).toHaveBeenCalledTimes(1);
+
+    debouncedFunc();
+    await delay(debounceMs);
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
   it('should cancel the debounced function call if aborted via AbortSignal', async () => {
     const func = vi.fn();
     const debounceMs = 50;

@@ -26,6 +26,7 @@ isNumber('123'); // false
 isNumber(true); // false
 isNumber(null); // false
 isNumber(undefined); // false
+isNumber(new Number(42)); // false
 ```
 
 TypeScript에서 타입 가드로 사용할 때 특히 유용해요.

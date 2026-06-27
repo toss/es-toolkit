@@ -6,9 +6,9 @@
  * it returns undefined.
  *
  * @template T - The type of elements in the Set.
- * @param {Set<T>} set - The Set to search.
- * @param {(value: T, value2: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
- * @returns {T | undefined} The first element that satisfies the predicate, or undefined if none found.
+ * @param set - The Set to search.
+ * @param doesMatch - A predicate function that tests each element.
+ * @returns The first element that satisfies the predicate, or undefined if none found.
  *
  * @example
  * const set = new Set([

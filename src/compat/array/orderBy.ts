@@ -13,10 +13,10 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * Sorts an array of elements based on multiple iteratee functions and their corresponding order directions.
  *
  * @template T The type of elements in the array
- * @param {ArrayLike<T> | null | undefined} collection The array to sort
- * @param {Many<ListIterator<T, unknown>>} iteratees The iteratee functions to sort by
- * @param {Many<boolean | 'asc' | 'desc'>} orders The sort orders
- * @returns {T[]} Returns the new sorted array
+ * @param collection The array to sort
+ * @param iteratees The iteratee functions to sort by
+ * @param orders The sort orders
+ * @returns Returns the new sorted array
  * @example
  * const users = [
  *   { name: 'fred', age: 48 },
@@ -37,10 +37,10 @@ export function orderBy<T>(
  * Sorts an array of elements based on multiple property names/paths and their corresponding order directions.
  *
  * @template T The type of elements in the array
- * @param {ArrayLike<T> | null | undefined} collection The array to sort
- * @param {Many<ListIteratee<T>>} iteratees The property names/paths to sort by
- * @param {Many<boolean | 'asc' | 'desc'>} orders The sort orders
- * @returns {T[]} Returns the new sorted array
+ * @param collection The array to sort
+ * @param iteratees The property names/paths to sort by
+ * @param orders The sort orders
+ * @returns Returns the new sorted array
  * @example
  * const users = [
  *   { name: 'fred', age: 48 },
@@ -61,10 +61,10 @@ export function orderBy<T>(
  * Sorts an object's values based on multiple iteratee functions and their corresponding order directions.
  *
  * @template T The object type
- * @param {T | null | undefined} collection The object to sort values from
- * @param {Many<ObjectIterator<T, unknown>>} iteratees The iteratee functions to sort by
- * @param {Many<boolean | 'asc' | 'desc'>} orders The sort orders
- * @returns {Array<T[keyof T]>} Returns the new sorted array
+ * @param collection The object to sort values from
+ * @param iteratees The iteratee functions to sort by
+ * @param orders The sort orders
+ * @returns Returns the new sorted array
  * @example
  * const obj = {
  *   a: { name: 'fred', age: 48 },
@@ -85,10 +85,10 @@ export function orderBy<T extends object>(
  * Sorts an object's values based on multiple property names/paths and their corresponding order directions.
  *
  * @template T The object type
- * @param {T | null | undefined} collection The object to sort values from
- * @param {Many<ObjectIteratee<T>>} iteratees The property names/paths to sort by
- * @param {Many<boolean | 'asc' | 'desc'>} orders The sort orders
- * @returns {Array<T[keyof T]>} Returns the new sorted array
+ * @param collection The object to sort values from
+ * @param iteratees The property names/paths to sort by
+ * @param orders The sort orders
+ * @returns Returns the new sorted array
  * @example
  * const obj = {
  *   a: { name: 'fred', age: 48 },
@@ -113,11 +113,11 @@ export function orderBy<T extends object>(
  * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | object | null | undefined} collection - The array of objects to be sorted.
- * @param {Criterion<T> | Array<Criterion<T>>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
- * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
- * @param {unknown} [guard] Enables use as an iteratee for methods like `_.reduce`.
- * @returns {T[]} - The sorted array.
+ * @param collection - The array of objects to be sorted.
+ * @param criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
+ * @param orders - An array of order directions ('asc' for ascending or 'desc' for descending).
+ * @param [guard] Enables use as an iteratee for methods like `_.reduce`.
+ * @returns The sorted array.
  *
  * @example
  * // Sort an array of objects by 'user' in ascending order and 'age' in descending order.

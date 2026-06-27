@@ -24,6 +24,7 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
+import { isBuffer } from '../predicate/isBuffer.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -36,9 +37,9 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * if it returns `undefined`, the default cloning method is used.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @param {Function} [cloneValue] - A function to customize the cloning process.
- * @returns {T} - A deep clone of the given object.
+ * @param obj - The object to clone.
+ * @param [cloneValue] - A function to customize the cloning process.
+ * @returns A deep clone of the given object.
  *
  * @example
  * // Clone a primitive value
@@ -152,12 +153,8 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (typeof Buffer !== 'undefined' && Buffer.isBuffer(valueToClone)) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return valueToClone.subarray() as T;
+  if (isBuffer(valueToClone)) {
+    return (valueToClone as any).subarray() as T;
   }
 
   if (isTypedArray(valueToClone)) {

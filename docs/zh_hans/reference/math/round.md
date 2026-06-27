@@ -65,7 +65,7 @@ import { round } from 'es-toolkit/math';
 // 整理数学计算结果
 const result = Math.PI * 2;
 const cleanResult = round(result, 5);
-console.log(cleanResult); // 6.28318
+console.log(cleanResult); // 6.28319
 
 // 四舍五入测量值
 const measurement = 15.789123;

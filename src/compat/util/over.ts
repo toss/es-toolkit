@@ -3,8 +3,8 @@ import { iteratee } from '../util/iteratee.ts';
 /**
  * Creates a function that invokes given functions and returns their results as an array.
  *
- * @param {Array<Iteratee | Iteratee[]>} iteratees - The iteratees to invoke.
- * @returns {(...args: any[]) => unknown[]} Returns the new function.
+ * @param iteratees - The iteratees to invoke.
+ * @returns Returns the new function.
  *
  * @example
  * const func = over([Math.max, Math.min]);
@@ -20,7 +20,7 @@ import { iteratee } from '../util/iteratee.ts';
  *
  * const func = over([{ a: 1 }, { b: 2 }]);
  * func({ a: 1, b: 2 });
- * // => [true, false]
+ * // => [true, true]
  *
  * const func = over([['a', 1], ['b', 2]]);
  * func({ a: 1, b: 2 });

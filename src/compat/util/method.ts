@@ -3,9 +3,9 @@ import { invoke } from './invoke.ts';
 /**
  * Creates a function that invokes the method at `path` of a given object with the provided arguments.
  *
- * @param {PropertyKey | PropertyKey[]} path - The path of the method to invoke.
- * @param {...any} args - The arguments to invoke the method with.
- * @returns {(object?: unknown) => any} - Returns a new function that takes an object and invokes the method at `path` with `args`.
+ * @param path - The path of the method to invoke.
+ * @param args - The arguments to invoke the method with.
+ * @returns Returns a new function that takes an object and invokes the method at `path` with `args`.
  *
  * @example
  * const object = {
