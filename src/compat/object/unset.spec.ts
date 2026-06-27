@@ -168,9 +168,6 @@ describe('unset', () => {
   });
 
   it('should prioritize a literal key over a path when the literal value is undefined', () => {
-    // Mirrors the literal-key-over-path fix applied to `get`/`pick` (#1775).
-    // When `'a.b'` exists as an own key whose value is `undefined`, lodash deletes
-    // that literal key and leaves the nested `a.b` untouched.
     const object: Record<string, unknown> = { 'a.b': undefined, a: { b: 99 } };
 
     expect(unset(object, 'a.b')).toBe(true);
