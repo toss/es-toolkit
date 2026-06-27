@@ -57,7 +57,11 @@ export function deburr(str: string): string {
   for (let i = 0; i < str.length; i++) {
     const char = str[i];
 
-    if ((char >= '\u0300' && char <= '\u036f') || (char >= '\ufe20' && char <= '\ufe23')) {
+    if (
+      (char >= '\u0300' && char <= '\u036f') ||
+      (char >= '\u20d0' && char <= '\u20ff') ||
+      (char >= '\ufe20' && char <= '\ufe2f')
+    ) {
       continue;
     }
 
