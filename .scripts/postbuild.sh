@@ -39,9 +39,14 @@ create_compat_alias() {
 }
 
 # Create root exports
-for module in array server error compat fp function math map object predicate promise set string util; do
+for module in array server error compat fp function iterator math map object predicate promise set string util; do
     create_root_export $module
 done
+
+# Create nested fp/iterator export shim
+mkdir -p fp
+echo "export * from './dist/fp/iterator';" > fp/iterator.d.ts
+echo "module.exports = require('./dist/fp/iterator');" > fp/iterator.js
 
 # Create compat directory
 mkdir -p compat
