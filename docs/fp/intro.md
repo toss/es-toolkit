@@ -13,6 +13,12 @@ const result = pipe(
 ); // => [20, 40]
 ```
 
+## Why es-toolkit/fp
+
+- **Readable** — steps read top-to-bottom, in the order they run. No more parsing `take(map(filter(xs)))` inside-out, and no temporary variables between steps.
+- **Fast** — consecutive steps are fused into a single pass: no intermediate array is built between them, and a `take`/`takeWhile` ends the walk as soon as it has enough, so the earlier steps skip the rest of the input.
+- **No tradeoff** — when fusion cannot help, `pipe` runs the native array path, so it is never slower than `xs.filter().map()` — only sometimes much faster.
+
 ## How es-toolkit/fp functions work
 
 Every `es-toolkit/fp` function is called with its configuration (for example `map(fn)` or `take(2)`) and returns a function that takes the data. `pipe` supplies that data, threading the result of each step into the next.
@@ -27,7 +33,13 @@ pipe([1, 2, 3], triple); // => [3, 6, 9]
 
 ## Lazy evaluation
 
-When consecutive lazy-capable functions (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass over the data and processes one element at a time. A trailing `take` can then end the walk early, so the earlier functions never run on the rest of the input.
+When consecutive lazy-capable functions (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass over the data and processes one element at a time. A trailing `take` then ends the walk early, so the earlier steps never run on the rest of the input.
+
+The two sides below run the **same pipeline**. The eager version processes the whole array at every step and allocates a new array each time; the fused version walks one element all the way through and stops as soon as `take(2)` is satisfied — so `5` and `6` are never visited, and no intermediate array is built.
+
+<FpLazySimulation />
+
+On a large input with an early `take`, this is the difference between touching the whole array and touching just its front:
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';
