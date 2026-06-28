@@ -43,6 +43,12 @@ for module in array server error compat fp function math map object predicate pr
     create_root_export $module
 done
 
+# The types module is declaration-only. Drop the empty JS the build emits so the
+# package ships only .d.ts/.d.mts (exposed via the "types" condition in publishConfig).
+if [ -d dist/types ]; then
+    find dist/types -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) -delete
+fi
+
 # Create compat directory
 mkdir -p compat
 
