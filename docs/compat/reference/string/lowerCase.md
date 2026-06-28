@@ -1,4 +1,4 @@
-# lowerCase (Lodash compatibility)
+# lowerCase (Lodash Compatibility)
 
 ::: warning Use `lowerCase` from `es-toolkit`
 

@@ -1,4 +1,4 @@
-# isArrayLikeObject (Lodash互換性)
+# isArrayLikeObject (Lodash 互換性)
 
 値がプリミティブではない配列のようなオブジェクトかどうかを確認します。
 

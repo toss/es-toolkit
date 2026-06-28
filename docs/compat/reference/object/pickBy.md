@@ -1,4 +1,4 @@
-# pickBy (Lodash compatibility)
+# pickBy (Lodash Compatibility)
 
 ::: warning Use `pickBy` from `es-toolkit`
 

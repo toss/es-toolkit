@@ -1,4 +1,4 @@
-# findLast (Lodash互換性)
+# findLast (Lodash 互換性)
 
 ::: warning `Array.prototype.findLast`を使用してください
 
@@ -42,7 +42,7 @@ findLast(users, ['age', 18]);
 
 // プロパティ名で条件を指定（真として評価される値を持つ最後の要素）
 findLast(users, 'age');
-// => { user: 'fred', age: 40 }
+// => { user: 'pebbles', age: 18 }
 ```
 
 検索開始インデックスを指定することもできます。

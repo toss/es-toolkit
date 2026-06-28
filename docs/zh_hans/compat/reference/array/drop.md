@@ -11,12 +11,12 @@
 从数组的开头删除指定数量的元素。
 
 ```typescript
-const result = drop(array, n);
+const result = drop(array, itemsCount);
 ```
 
 ## 用法
 
-### `drop(array, n?)`
+### `drop(array, itemsCount?)`
 
 当您想从数组的开头删除几个元素并获取其余元素时,使用 `drop`。默认情况下,它会删除第一个元素。
 
@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要删除元素的数组。
-- `n` (`number`, 可选): 要删除的元素数量。默认为 `1`。
+- `itemsCount` (`number`, 可选): 要删除的元素数量。默认为 `1`。
 
 #### 返回值
 

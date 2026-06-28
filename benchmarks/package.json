@@ -9,6 +9,7 @@
     "esbuild": "0.28.0",
     "lodash": "4.18.1",
     "lodash-es": "4.18.1",
+    "remeda": "^2.39.0",
     "vitest": "4.0.17"
   },
   "devDependencies": {

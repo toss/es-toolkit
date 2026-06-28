@@ -1,4 +1,4 @@
-# findIndex（Lodash 互換性）
+# findIndex(Lodash 互換性)
 
 ::: warning `Array.prototype.findIndex` を使用してください
 

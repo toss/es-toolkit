@@ -1,4 +1,4 @@
-# sortedIndexBy (Lodash compatibility)
+# sortedIndexBy (Lodash Compatibility)
 
 ::: warning Implement binary search and transformation function directly
 

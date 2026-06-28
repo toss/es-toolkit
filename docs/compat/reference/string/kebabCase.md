@@ -1,4 +1,4 @@
-# kebabCase (Lodash compatibility)
+# kebabCase (Lodash Compatibility)
 
 ::: warning Use `kebabCase` from `es-toolkit`
 

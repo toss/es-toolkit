@@ -1,4 +1,4 @@
-# last (Lodash互換性)
+# last (Lodash 互換性)
 
 ::: warning `es-toolkit`の[last](../../../reference/array/last.md)を使用してください
 

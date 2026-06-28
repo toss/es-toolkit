@@ -162,7 +162,7 @@ describe('invokeMap', () => {
     };
 
     const aEmptyDotC = invokeMap([objectWithEmptyPart], 'a..c');
-    expect(aEmptyDotC[0]).toBeUndefined();
+    expect(aEmptyDotC[0]).toBe(objectWithEmptyPart.a['']);
   });
 
   it('should match the type of lodash', () => {

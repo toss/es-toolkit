@@ -26,8 +26,8 @@ console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
 // 문자열 길이로 비교해서 제거해요
 const words = ['hello', 'world', 'test', 'code'];
-pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
-console.log(words); // ['hello', 'world', 'code'] ('test'가 'hi'와 같은 길이라서 제거됨)
+pullAllWith(words, ['star'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world'] ('test'와 'code'가 길이 4라서 제거됨)
 ```
 
 배열이 비어있거나 `null`, `undefined`면 원본 배열을 그대로 반환해요.

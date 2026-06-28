@@ -1,0 +1,56 @@
+{
+  "labels": {
+    "esToolkit": "es-toolkit/fp",
+    "remeda": "remeda"
+  },
+  "data": {
+    "add": {
+      "esToolkit": 72,
+      "remeda": 301
+    },
+    "chunk": {
+      "esToolkit": 286,
+      "remeda": 607
+    },
+    "filter": {
+      "esToolkit": 320,
+      "remeda": 391
+    },
+    "flatMap": {
+      "esToolkit": 556,
+      "remeda": 434
+    },
+    "map": {
+      "esToolkit": 314,
+      "remeda": 359
+    },
+    "multiply": {
+      "esToolkit": 72,
+      "remeda": 301
+    },
+    "omit": {
+      "esToolkit": 164,
+      "remeda": 471
+    },
+    "pick": {
+      "esToolkit": 180,
+      "remeda": 353
+    },
+    "pipe": {
+      "esToolkit": 759,
+      "remeda": 908
+    },
+    "sortBy": {
+      "esToolkit": 497,
+      "remeda": 612
+    },
+    "take": {
+      "esToolkit": 413,
+      "remeda": 443
+    },
+    "uniq": {
+      "esToolkit": 108,
+      "remeda": 1233
+    }
+  }
+}

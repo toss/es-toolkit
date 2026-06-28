@@ -1,4 +1,4 @@
-# isBoolean (Lodash互換性)
+# isBoolean (Lodash 互換性)
 
 ::: warning `typeof`演算子を使用してください
 この`isBoolean`関数はBooleanオブジェクトラッパーの処理により複雑になります。

@@ -1,4 +1,4 @@
-# differenceBy (Lodash compatible)
+# differenceBy (Lodash Compatibility)
 
 ::: warning Use `differenceBy` from `es-toolkit` instead
 

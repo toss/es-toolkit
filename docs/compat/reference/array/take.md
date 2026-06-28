@@ -1,4 +1,4 @@
-# take (Lodash compatibility)
+# take (Lodash Compatibility)
 
 ::: warning Please use [take](../../../reference/array/take.md) from `es-toolkit`
 

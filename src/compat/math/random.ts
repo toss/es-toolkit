@@ -4,7 +4,7 @@ import { randomInt as randomIntToolkit } from '../../math/randomInt.ts';
 
 /**
  * Generate a random number between 0 and 1.
- * @param [floating] - Whether to return a floating point number. Defaults to true.
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
  * @returns A random number between 0 and 1.
  * @example
  * random(); // Returns a random number between 0 and 1
@@ -16,7 +16,7 @@ export function random(floating?: boolean): number;
 /**
  * Generate a random number between 0 and max.
  * @param max - The upper bound (exclusive).
- * @param [floating] - Whether to return a floating point number. Defaults to true.
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
  * @returns A random number between 0 and max.
  * @example
  * random(5); // Returns a random number between 0 and 5
@@ -29,7 +29,7 @@ export function random(max: number, floating?: boolean): number;
  * Generate a random number between min and max.
  * @param min - The lower bound (inclusive).
  * @param max - The upper bound (exclusive).
- * @param [floating] - Whether to return a floating point number. Defaults to true.
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
  * @returns A random number between min and max.
  * @example
  * random(1, 5); // Returns a random number between 1 and 5
@@ -82,6 +82,7 @@ export function random(...args: any[]): number {
       if (typeof args[1] === 'boolean') {
         maximum = args[0];
         floating = args[1];
+        break;
       } else {
         minimum = args[0];
         maximum = args[1];
@@ -121,6 +122,10 @@ export function random(...args: any[]): number {
     [minimum, maximum] = [maximum, minimum];
   }
 
+  if (!floating && (!Number.isInteger(minimum) || !Number.isInteger(maximum))) {
+    floating = true;
+  }
+
   minimum = clamp(minimum, -Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
   maximum = clamp(maximum, -Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
@@ -129,7 +134,7 @@ export function random(...args: any[]): number {
   }
 
   if (floating) {
-    return randomToolkit(minimum, maximum + 1);
+    return randomToolkit(minimum, maximum);
   } else {
     return randomIntToolkit(minimum, maximum + 1);
   }

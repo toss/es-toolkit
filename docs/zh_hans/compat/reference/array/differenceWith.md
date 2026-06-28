@@ -1,4 +1,4 @@
-# differenceWith（Lodash 兼容性）
+# differenceWith(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 `differenceWith`
 

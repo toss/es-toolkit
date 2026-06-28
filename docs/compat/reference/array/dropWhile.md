@@ -16,7 +16,7 @@ const result = dropWhile(array, predicate);
 
 ## Usage
 
-### `dropWhile(array, predicate)`
+### `dropWhile(array, predicate?)`
 
 Use `dropWhile` when you want to consecutively remove elements from the beginning of an array that satisfy a specific condition. Removal stops when the predicate function returns `false`.
 

@@ -1,4 +1,4 @@
-# unionWith (Lodash互換)
+# unionWith (Lodash 互換性)
 
 ::: warning `es-toolkit`の[unionWith](../../../reference/array/unionWith.md)を使用してください
 

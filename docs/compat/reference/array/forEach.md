@@ -1,4 +1,4 @@
-# forEach (Lodash compatible)
+# forEach (Lodash Compatibility)
 
 ::: warning Use `Array.prototype.forEach()` instead
 

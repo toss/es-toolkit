@@ -102,6 +102,11 @@ describe('compat/pick', () => {
     });
   });
 
+  it('should pick a key with undefined value over a path', () => {
+    const object = { 'a.b': undefined, a: { b: 2 } };
+    expect(pick(object, 'a.b')).toEqual({ 'a.b': undefined });
+  });
+
   it('should coerce `paths` to strings', () => {
     expect(pick({ 0: 'a', 1: 'b' }, 0)).toEqual({ 0: 'a' });
   });

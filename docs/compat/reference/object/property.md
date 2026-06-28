@@ -1,4 +1,4 @@
-# property (Lodash compatibility)
+# property (Lodash Compatibility)
 
 ::: warning Use `get` function directly
 

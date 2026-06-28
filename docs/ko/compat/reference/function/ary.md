@@ -76,8 +76,8 @@ import { ary } from 'es-toolkit/compat';
 
 const func = (a, b, c) => [a, b, c];
 
-console.log(ary(func, -1)(1, 2, 3)); // [] (음수는 0으로 처리)
-console.log(ary(func, NaN)(1, 2, 3)); // [] (NaN은 0으로 처리)
+console.log(ary(func, -1)(1, 2, 3)); // [undefined, undefined, undefined] (음수는 0으로 처리)
+console.log(ary(func, NaN)(1, 2, 3)); // [undefined, undefined, undefined] (NaN은 0으로 처리)
 ```
 
 #### 파라미터

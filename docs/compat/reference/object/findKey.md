@@ -1,4 +1,4 @@
-# findKey (Lodash compatibility)
+# findKey (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s `findKey`
 

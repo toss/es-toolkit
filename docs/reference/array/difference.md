@@ -46,10 +46,3 @@ difference([], [1, 2, 3]); // []
 #### Returns
 
 (`T[]`): A new array containing elements that are only in the first array and not in the second array.
-
-## Performance Comparison
-
-|            | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
-| ---------- | ----------------------------------- | ----------------------------------- |
-| es-toolkit | 90 bytes (92.4% smaller)            | 9,317,227 times (85% faster)        |
-| lodash-es  | 7,958 bytes                         | 5,030,861 times                     |
