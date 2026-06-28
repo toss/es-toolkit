@@ -9,7 +9,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  *
  * @template T
  * @param arr - The array to search through.
- * @param doesMatch - The criteria to match against the items in the array. This can be a function, a partial object, a key-value pair, or a property name.
+ * @param [predicate=identity] - The criteria to match against the items in the array. This can be a function, a partial object, a key-value pair, or a property name.
  * @param propertyToCheck - The property name to check for in the items of the array.
  * @param [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns The index of the first item that has the specified property, or `-1` if no match is found.
@@ -22,7 +22,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  */
 export function findIndex<T>(
   arr: ArrayLike<T> | null | undefined,
-  doesMatch: ListIterateeCustom<T, boolean> = identity,
+  predicate: ListIterateeCustom<T, boolean> = identity,
   fromIndex = 0
 ): number {
   if (!arr) {
@@ -33,26 +33,26 @@ export function findIndex<T>(
   }
   const subArray = Array.from(arr).slice(fromIndex);
   let index = -1;
-  switch (typeof doesMatch) {
+  switch (typeof predicate) {
     case 'function': {
-      index = subArray.findIndex(doesMatch);
+      index = subArray.findIndex(predicate);
       break;
     }
     case 'object': {
-      if (Array.isArray(doesMatch) && doesMatch.length === 2) {
-        const key = doesMatch[0];
-        const value = doesMatch[1];
+      if (Array.isArray(predicate) && predicate.length === 2) {
+        const key = predicate[0];
+        const value = predicate[1];
 
         index = subArray.findIndex(matchesProperty(key, value));
       } else {
-        index = subArray.findIndex(matches(doesMatch));
+        index = subArray.findIndex(matches(predicate));
       }
       break;
     }
     case 'number':
     case 'symbol':
     case 'string': {
-      index = subArray.findIndex(property(doesMatch));
+      index = subArray.findIndex(property(predicate));
     }
   }
   return index === -1 ? -1 : index + fromIndex;

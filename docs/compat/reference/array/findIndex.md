@@ -11,12 +11,12 @@ Use the faster and more modern `Array.prototype.findIndex` instead.
 Finds the index of the first element in an array that matches a condition.
 
 ```typescript
-const index = findIndex(arr, doesMatch, fromIndex);
+const index = findIndex(arr, predicate, fromIndex);
 ```
 
 ## Usage
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, predicate, fromIndex)`
 
 Use `findIndex` when you want to find the position of the first element in an array that matches a specific condition. You can specify the condition in various ways. If no element matches the condition, it returns `-1`.
 
@@ -92,7 +92,7 @@ findIndex(undefined, 'active'); // -1
 #### Parameters
 
 - `arr` (`ArrayLike<T> | null | undefined`): The array to search.
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The matching condition. Can be a function, partial object, key-value pair, or property name.
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The matching condition. Can be a function, partial object, key-value pair, or property name.
 - `fromIndex` (`number`, optional): The index to start the search from. Default is `0`.
 
 #### Returns

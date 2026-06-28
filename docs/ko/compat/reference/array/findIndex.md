@@ -11,12 +11,12 @@
 배열에서 조건에 맞는 첫 번째 요소의 인덱스를 찾아요.
 
 ```typescript
-const index = findIndex(arr, doesMatch, fromIndex);
+const index = findIndex(arr, predicate, fromIndex);
 ```
 
 ## 사용법
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, predicate, fromIndex)`
 
 배열에서 특정 조건에 맞는 첫 번째 요소의 위치를 찾고 싶을 때 `findIndex`를 사용하세요. 다양한 방식으로 조건을 지정할 수 있어요. 조건에 맞는 요소가 없으면 `-1`을 반환해요.
 
@@ -92,7 +92,7 @@ findIndex(undefined, 'active'); // -1
 #### 파라미터
 
 - `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
 #### 반환 값

@@ -11,12 +11,12 @@
 配列内で条件に一致する最初の要素のインデックスを検索します。
 
 ```typescript
-const index = findIndex(arr, doesMatch, fromIndex);
+const index = findIndex(arr, predicate, fromIndex);
 ```
 
 ## 使用法
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, predicate, fromIndex)`
 
 配列内で特定の条件に一致する最初の要素の位置を見つけたい場合は `findIndex` を使用してください。さまざまな方法で条件を指定できます。条件に一致する要素がない場合は `-1` を返します。
 
@@ -92,7 +92,7 @@ findIndex(undefined, 'active'); // -1
 #### パラメータ
 
 - `arr` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 一致条件です。関数、部分オブジェクト、キーと値のペア、またはプロパティ名を指定できます。
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 一致条件です。関数、部分オブジェクト、キーと値のペア、またはプロパティ名を指定できます。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックスです。デフォルトは `0` です。
 
 #### 戻り値
