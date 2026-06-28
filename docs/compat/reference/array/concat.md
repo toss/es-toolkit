@@ -1,4 +1,4 @@
-# concat (Lodash compatible)
+# concat (Lodash Compatibility)
 
 ::: warning Use spread operator or [`Array#concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) instead
 

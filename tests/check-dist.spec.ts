@@ -27,6 +27,7 @@ const ENTRYPOINTS = [
   './compat/*',
   './server',
   './error',
+  './fp',
   './function',
   './map',
   './math',

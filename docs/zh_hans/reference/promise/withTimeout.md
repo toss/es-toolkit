@@ -3,12 +3,12 @@
 为异步函数设置时间限制,如果在指定时间内未完成,则抛出 `TimeoutError`。
 
 ```typescript
-await withTimeout(run, ms);
+await withTimeout(run, ms, options?);
 ```
 
 ## 用法
 
-### `withTimeout(run, ms)`
+### `withTimeout(run, ms, options?)`
 
 当您想要为异步任务设置超时时,可以使用 `withTimeout`。如果 Promise 在指定时间内未完成,将以 `TimeoutError` 拒绝,从而防止无限等待的情况。
 
@@ -67,10 +67,23 @@ async function getFastestResponse() {
 }
 ```
 
+您可以传入 `AbortSignal` 来取消超时。中断它会解除时间限制,因此会在没有截止时间的情况下等待 `run`。它不会拒绝返回的 Promise,也不会中断 `run` 本身;如果您也想取消实际的工作,请将同一个信号传入 `run`。
+
+```typescript
+const controller = new AbortController();
+
+// 当用户选择继续等待时,解除 1 秒的限制。
+keepWaitingButton.onclick = () => controller.abort();
+
+const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
+```
+
 #### 参数
 
 - `run` (`() => Promise<T>`): 要执行的异步函数。
 - `ms` (`number`): 超时前的毫秒数。
+- `options` (`WithTimeoutOptions`, 可选): 超时选项。
+  - `signal` (`AbortSignal`, 可选): 可以取消超时的 AbortSignal。中断后,时间限制将被解除,并在没有截止时间的情况下等待 `run`。
 
 #### 返回值
 

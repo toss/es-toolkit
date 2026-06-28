@@ -1,4 +1,4 @@
-# difference（Lodash 兼容性）
+# difference(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 `difference`
 

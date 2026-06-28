@@ -1,4 +1,4 @@
-# map (Lodash compatibility)
+# map (Lodash Compatibility)
 
 ::: warning Use `Array.prototype.map`
 

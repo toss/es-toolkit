@@ -27,6 +27,11 @@ export interface FlavorSpec {
   value: string;
   label: string;
   description: string;
+  /**
+   * Localized descriptions keyed by locale `lang` (e.g. `ko`, `ja`, `zh_hans`).
+   * Falls back to `description` (English) when a locale has no entry.
+   */
+  descriptions?: Readonly<Record<string, string>>;
   prefix: string;
   guideItems: readonly GuideItem[];
   categories: readonly string[];
@@ -50,12 +55,18 @@ const SERVER_ICON = [
   'M6 8h.01',
   'M6 16h.01',
 ];
+const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
 
 export const flavors = [
   {
     value: 'esToolkit',
     label: 'es-toolkit',
-    description: 'Strict Utilities',
+    description: 'Modern Utilities',
+    descriptions: {
+      ko: '현대적인 유틸리티',
+      ja: 'モダンなユーティリティ',
+      zh_hans: '现代工具集',
+    },
     prefix: '',
     guideItems: [
       { labelKey: 'introduction', slug: 'intro' },
@@ -84,6 +95,11 @@ export const flavors = [
     value: 'server',
     label: 'es-toolkit/server',
     description: 'Server utilities',
+    descriptions: {
+      ko: '서버 유틸리티',
+      ja: 'サーバーユーティリティ',
+      zh_hans: '服务器工具集',
+    },
     prefix: 'server',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: [],
@@ -95,11 +111,36 @@ export const flavors = [
     value: 'compat',
     label: 'es-toolkit/compat',
     description: 'Lodash compatibility',
+    descriptions: {
+      ko: 'Lodash 호환성',
+      ja: 'Lodash 互換性',
+      zh_hans: 'Lodash 兼容性',
+    },
     prefix: 'compat',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],
     icon: ARROW_LEFT_RIGHT_ICON,
     iconColor: 'var(--vp-c-warning-1)',
+  },
+  {
+    value: 'fp',
+    label: 'es-toolkit/fp',
+    description: 'Functional pipelines',
+    descriptions: {
+      ko: '함수형 파이프라인',
+      ja: '関数型パイプライン',
+      zh_hans: '函数式管道',
+    },
+    prefix: 'fp',
+    guideItems: [
+      { labelKey: 'introduction', slug: 'intro' },
+      { labelKey: 'bundleSize', slug: 'bundle-size' },
+      { labelKey: 'performance', slug: 'performance' },
+    ],
+    categories: [],
+    icon: CHEVRONS_RIGHT_ICON,
+    iconColor: 'var(--vp-c-green-1)',
+    badge: 'NEW',
   },
 ] as const satisfies readonly FlavorSpec[];
 

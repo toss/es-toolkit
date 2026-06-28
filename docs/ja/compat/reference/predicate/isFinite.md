@@ -1,4 +1,4 @@
-# isFinite (Lodash互換性)
+# isFinite (Lodash 互換性)
 
 ::: warning `Number.isFinite`を使用してください
 

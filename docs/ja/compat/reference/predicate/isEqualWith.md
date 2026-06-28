@@ -1,4 +1,4 @@
-# isEqualWith (Lodash互換性)
+# isEqualWith (Lodash 互換性)
 
 ::: warning es-toolkitの[isEqualWith](../../../reference/predicate/isEqualWith.md)を使用してください
 この`isEqualWith`関数はLodash互換性のための複雑な処理により動作が遅くなります。

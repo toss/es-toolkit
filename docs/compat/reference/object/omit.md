@@ -1,4 +1,4 @@
-# omit (Lodash compatibility)
+# omit (Lodash Compatibility)
 
 ::: warning Use `omit` from `es-toolkit`
 

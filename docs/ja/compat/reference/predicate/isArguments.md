@@ -1,4 +1,4 @@
-# isArguments (Lodash互換性)
+# isArguments (Lodash 互換性)
 
 値がargumentsオブジェクトかどうかを確認します。
 

@@ -64,8 +64,8 @@ console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 #### 参数
 
 - `arr` (`readonly T[]`): 要创建窗口的数组。
-- `size` (`number`): 每个窗口的大小。必须是大于1的整数。
-- `step` (`number`, 可选): 窗口之间的间隔。必须是大于1的整数,默认值为 `1`。
+- `size` (`number`): 每个窗口的大小。必须是正整数。
+- `step` (`number`, 可选): 窗口之间的间隔。必须是正整数,默认值为 `1`。
 - `options.partialWindows` (`boolean`, 可选): 是否在数组末尾包含不完整的窗口。默认值为 `false`。
 
 #### 返回值

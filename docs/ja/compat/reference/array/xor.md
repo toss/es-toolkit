@@ -1,4 +1,4 @@
-# xor (Lodash互換)
+# xor (Lodash 互換性)
 
 ::: warning `es-toolkit`の[xor](../../../reference/array/xor.md)を使用してください
 

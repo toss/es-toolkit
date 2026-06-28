@@ -1,4 +1,4 @@
-# padStart (Lodash compatibility)
+# padStart (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.padStart`
 

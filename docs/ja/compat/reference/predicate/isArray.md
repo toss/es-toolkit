@@ -1,4 +1,4 @@
-# isArray (Lodash互換性)
+# isArray (Lodash 互換性)
 
 ::: warning `Array.isArray`を使用してください
 

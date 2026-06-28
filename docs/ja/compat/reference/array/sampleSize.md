@@ -1,4 +1,4 @@
-# sampleSize（Lodash 互換性）
+# sampleSize(Lodash 互換性)
 
 ::: warning `es-toolkit` の [sampleSize](../../../reference/array/sampleSize.md) を使用してください
 

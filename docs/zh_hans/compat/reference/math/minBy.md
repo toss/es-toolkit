@@ -1,4 +1,4 @@
-# minBy（Lodash 兼容性）
+# minBy(Lodash 兼容性)
 
 ::: warning 请使用 es-toolkit 的 [minBy](../../../reference/array/minBy.md)
 

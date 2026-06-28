@@ -1,4 +1,4 @@
-# findIndex（Lodash 兼容性）
+# findIndex(Lodash 兼容性)
 
 ::: warning 使用 `Array.prototype.findIndex`
 

@@ -58,11 +58,3 @@ function processConfig(config: unknown) {
 #### 返回值
 
 (`value is Record<PropertyKey, any>`): 如果值为普通对象则返回 `true`，否则返回 `false`。
-
-## 性能比较
-
-|                   | [包大小](../../bundle-size.md) | [运行时性能](../../performance.md) |
-| ----------------- | ------------------------------ | ---------------------------------- |
-| es-toolkit        | 279 字节（减少 82.4%）         | 1,505,684 次（快 1.70×）           |
-| es-toolkit/compat | 435 字节（减少 72.5%）         | 2,013,760 次（快 2.28×）           |
-| lodash-es         | 1,586 字节                     | 882,669 次                         |

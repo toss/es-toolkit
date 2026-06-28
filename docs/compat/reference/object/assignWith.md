@@ -1,4 +1,4 @@
-# assignWith (Lodash compatibility)
+# assignWith (Lodash Compatibility)
 
 ::: warning Implementing custom logic is recommended
 

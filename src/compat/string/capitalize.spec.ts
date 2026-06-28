@@ -7,6 +7,16 @@ describe('capitalize', () => {
     expect(capitalize('fred')).toBe('Fred');
     expect(capitalize('Fred')).toBe('Fred');
     expect(capitalize(' fred')).toBe(' fred');
+    expect(capitalize(' fred  ')).toBe(' fred  ');
+  });
+
+  it('should lowercase the remaining characters', () => {
+    expect(capitalize('FRED')).toBe('Fred');
+    expect(capitalize('FOO BAR')).toBe('Foo bar');
+  });
+
+  it('should return an empty string for an empty string', () => {
+    expect(capitalize('')).toBe('');
   });
 
   it('should match the type of lodash', () => {

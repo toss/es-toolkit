@@ -1,5 +1,68 @@
 # es-toolkit Changelog
 
+## Version v1.49.0
+
+Released on June 26th, 2026.
+
+- Added the `es-toolkit/fp` entrypoint with data-last, pipeable utilities,
+  documentation, benchmarks, and bundle-size checks. ([#1781])
+- Added a broad set of array utilities to `es-toolkit/fp`, covering slicing,
+  grouping, set operations, ordering, zipping, and collection helpers. ([#1801])
+- Fixed `trimStart` to validate multi-character trim strings correctly before
+  it stops trimming. ([#1615])
+- Fixed `compat/pick` to prefer a literal key over a dot-notation path when the
+  picked value is `undefined`. ([#1775])
+- Fixed `compat/random` to better match Lodash behavior for coerced bounds and
+  floating-point options. ([#1767])
+- Fixed `compat/chunk` to handle `NaN` and `Infinity` size values consistently
+  with Lodash. ([#1797])
+- Improved documentation and JSDoc accuracy across array, function, and compat
+  references. ([#1785], [#1786], [#1788], [#1790], [#1791], [#1792], [#1793],
+  [#1795], [#1800])
+
+We sincerely thank @Antoliny0919, @D-Sketon, @eunwoo-levi, and @raon0211 for
+their contributions. We appreciate your great efforts!
+
+## Version v1.48.1
+
+Released on June 21st, 2026.
+
+- Fixed the `jsdelivr` and `unpkg` CDN `<script>` entry that regressed in v1.48.0. The fields are now declared at the package root so `yarn pack` preserves them, since `publishConfig` only carries standard fields and dropped them. Both CDNs now serve the UMD bundle again.
+
+## Version v1.48.0
+
+Released on June 21st, 2026.
+
+- Added `AbortSignal` support to `timeout` and `withTimeout`. ([#1617])
+- Fixed CDN `<script>` resolution by pointing `jsdelivr`/`unpkg` to the UMD bundle and dropping the misused `browser` field. ([#1395])
+- Fixed `toMerged` to deep clone the target so untouched nested values stay independent. ([#1780])
+- Fixed `compat/toPath` to keep empty segments for consecutive and trailing dots. ([#1778])
+- Fixed `compat/difference` to treat sparse array holes as `undefined`. ([#1773])
+- Fixed `compat/parseInt` to coerce input to a string before parsing. ([#1771])
+- Fixed `compat/isNaN` to improve checks for boxed values and non-numbers. ([#1646])
+- Fixed `compat/isMatchWith` to align nested primitive matching with lodash. ([#1647])
+
+We sincerely thank @aidant, @Antoliny0919, @D-Sketon, @miinhho, @MyraxByte, @raon0211, @sarathfrancis90, and @ssi02014 for their contributions. We appreciate your great efforts!
+
+## Version v1.47.1
+
+Released on June 12th, 2026.
+
+- Fixed `maxBy` and `minBy` to propagate `NaN`, matching `Math.max`/`Math.min` behavior. ([#1749])
+- Fixed `orderBy` and `sortBy` to place `null` and `undefined` values last when sorting. ([#1681])
+- Fixed `isNumber` to no longer treat boxed `Number` objects as numbers. ([#1726])
+- Fixed `reduce` and `reduceRight` to respect explicitly passed nullish accumulators. ([#1742])
+- Fixed `isEmpty` to handle functions with own enumerable properties. ([#1645])
+- Fixed the `globalThis` polyfill to avoid `Function(...)`, supporting CSP environments without `unsafe-eval`.
+- Fixed ESM resolution for `./compat/*` subpaths in package exports. ([#1757])
+- Fixed `compat/size` to count array-like objects by their `length`. ([#1766])
+- Fixed `compat/round`, `compat/ceil`, and `compat/floor` to return `Infinity` for infinite values with precision. ([#1764])
+- Fixed `compat/random` to coerce the upper bound for non-number `max`. ([#1751])
+- Fixed `compat/toLength` to coerce non-numeric values to 0. ([#1758])
+- Removed unused generic type parameters from `pull`. ([#1746])
+
+We sincerely thank @Amund211, @Antoliny0919, @chatman-media, @D-Sketon, @dayongkr, @JetProc, @parkhojeong, @pbk95120, @raon0211, @sarathfrancis90, @shaked-shlomo, and @sukvvon for their contributions. We appreciate your great efforts!
+
 ## Version v1.47.0
 
 Released on May 25th, 2026.

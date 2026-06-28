@@ -1,4 +1,4 @@
-# isMap (Lodash互換性)
+# isMap (Lodash 互換性)
 
 ::: warning es-toolkitの[isMap](../../../reference/predicate/isMap.md)を使用してください
 
