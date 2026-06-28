@@ -1,11 +1,10 @@
 export { chunk } from './chunk.ts';
 export { count } from './count.ts';
 export { dropWhile } from './dropWhile.ts';
-export { iterate } from './iterate.ts';
+export { head } from './head.ts';
 export { partition } from './partition.ts';
 export { range } from './range.ts';
 export { scan } from './scan.ts';
 export { takeWhile } from './takeWhile.ts';
-export { toSet } from './toSet.ts';
 export { uniqBy } from './uniqBy.ts';
 export { zip } from './zip.ts';

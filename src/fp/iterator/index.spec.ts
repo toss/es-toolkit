@@ -9,6 +9,7 @@ import {
   find,
   flatMap,
   forEach,
+  head,
   map,
   partition,
   reduce,
@@ -17,7 +18,6 @@ import {
   take,
   takeWhile,
   toArray,
-  toSet,
   uniqBy,
   zip,
 } from './index.ts';
@@ -38,7 +38,7 @@ describe('es-toolkit/fp/iterator', () => {
       uniqBy,
       zip,
       toArray,
-      toSet,
+      head,
       count,
       partition,
       reduce,
@@ -99,7 +99,7 @@ describe('es-toolkit/fp/iterator', () => {
     expect(total).toBe(4);
   });
 
-  it('supports terminal partition and toSet', () => {
+  it('supports terminal partition and head', () => {
     expect(
       pipe(
         [1, 2, 3, 4].values(),
@@ -113,9 +113,9 @@ describe('es-toolkit/fp/iterator', () => {
       pipe(
         [1, 2, 2, 3].values(),
         uniqBy(x => x),
-        toSet()
+        head()
       )
-    ).toEqual(new Set([1, 2, 3]));
+    ).toBe(1);
   });
 
   it('zips the piped iterator with another', () => {
