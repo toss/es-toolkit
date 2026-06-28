@@ -8,6 +8,7 @@ import { iteratee } from '../util/iteratee.ts';
 /**
  * Finds the first element in an array-like object that matches a type guard predicate.
  *
+ * @template T, U
  * @param collection - The array-like object to search
  * @param predicate - The type guard function to test each element
  * @param fromIndex - The index to start searching from
@@ -26,6 +27,7 @@ export function find<T, U extends T>(
 /**
  * Finds the first element in an array-like object that matches a predicate.
  *
+ * @template T
  * @param collection - The array-like object to search
  * @param predicate - The function or shorthand to test each element
  * @param fromIndex - The index to start searching from
@@ -47,6 +49,7 @@ export function find<T>(
 /**
  * Finds the first value in an object that matches a type guard predicate.
  *
+ * @template T, U
  * @param collection - The object to search
  * @param predicate - The type guard function to test each value
  * @param fromIndex - The index to start searching from
@@ -65,6 +68,7 @@ export function find<T extends object, U extends T[keyof T]>(
 /**
  * Finds the first value in an object that matches a predicate.
  *
+ * @template T
  * @param collection - The object to search
  * @param predicate - The function or shorthand to test each value
  * @param fromIndex - The index to start searching from

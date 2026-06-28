@@ -23,6 +23,7 @@ export function filter(collection: string | null | undefined, predicate?: String
 /**
  * Filters elements in an array-like object using a type guard predicate.
  *
+ * @template T, U
  * @param collection - The array-like object to filter
  * @param predicate - The type guard function to test each element
  * @returns An array of elements that are of type U
@@ -39,6 +40,7 @@ export function filter<T, U extends T>(
 /**
  * Filters elements in an array-like object based on the predicate.
  *
+ * @template T
  * @param collection - The array-like object to filter
  * @param predicate - The function or shorthand to test each element
  * @returns An array of elements that pass the predicate test
@@ -55,6 +57,7 @@ export function filter<T>(collection: ArrayLike<T> | null | undefined, predicate
 /**
  * Filters values in an object using a type guard predicate.
  *
+ * @template T, U
  * @param collection - The object to filter
  * @param predicate - The type guard function to test each value
  * @returns An array of values that are of type U
@@ -71,6 +74,7 @@ export function filter<T extends object, U extends T[keyof T]>(
 /**
  * Filters values in an object based on the predicate.
  *
+ * @template T
  * @param collection - The object to filter
  * @param predicate - The function or shorthand to test each value
  * @returns An array of values that pass the predicate test
