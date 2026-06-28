@@ -28,6 +28,7 @@
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
     "./server": "./src/server/index.ts",
+    "./types": "./src/types/index.ts",
     "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
@@ -258,6 +259,14 @@
         "require": {
           "types": "./dist/string/index.d.ts",
           "default": "./dist/string/index.js"
+        }
+      },
+      "./types": {
+        "import": {
+          "types": "./dist/types/index.d.mts"
+        },
+        "require": {
+          "types": "./dist/types/index.d.ts"
         }
       },
       "./util": {
