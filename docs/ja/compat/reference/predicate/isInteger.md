@@ -1,4 +1,4 @@
-# isInteger (Lodash互換性)
+# isInteger (Lodash 互換性)
 
 ::: warning `Number.isInteger`を使用してください
 

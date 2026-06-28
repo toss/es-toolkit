@@ -1,0 +1,27 @@
+{
+  "labels": {
+    "esToolkit": "es-toolkit/fp",
+    "remeda": "remeda"
+  },
+  "environment": {
+    "node": "v22.18.0",
+    "platform": "Darwin arm64",
+    "cpu": "Apple M4 Max",
+    "cpuCores": 16,
+    "memory": "64.00 GB"
+  },
+  "data": {
+    "pipe/map": {
+      "esToolkit": 20063,
+      "remeda": 6849
+    },
+    "pipe/filter + map": {
+      "esToolkit": 12305,
+      "remeda": 4092
+    },
+    "pipe/uniq": {
+      "esToolkit": 16295,
+      "remeda": 4358
+    }
+  }
+}

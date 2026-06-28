@@ -1,4 +1,4 @@
-# endsWith (Lodash compatibility)
+# endsWith (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.endsWith`
 

@@ -1,4 +1,4 @@
-# has (Lodash互換性)
+# has (Lodash 互換性)
 
 ::: warning `Object.hasOwn` または `in` 演算子を使用してください
 

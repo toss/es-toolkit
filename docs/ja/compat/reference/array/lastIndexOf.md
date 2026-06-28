@@ -1,4 +1,4 @@
-# lastIndexOf (Lodash互換性)
+# lastIndexOf (Lodash 互換性)
 
 ::: warning `Array.lastIndexOf`を使用してください
 

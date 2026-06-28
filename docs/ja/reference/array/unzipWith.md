@@ -78,28 +78,6 @@ console.log(empty); // throws Error
 
 (`R[]`): 変換関数を適用した結果で作られた新しい配列です。
 
-## Lodashとの互換性
-
-`es-toolkit/compat`から`unzipWith`をインポートすると、lodashと完全に互換性があります。
-
-互換モードでは以下の機能を提供します：
-
-- **null/undefinedの処理**: 入力配列がnullまたはundefinedの場合、空の配列を返します。
-- **配列風オブジェクト**: 通常の配列の他に、配列風オブジェクト(array-like objects)も処理できます。
-- **iteratee関数**: iteratee関数は再構成された要素を引数として受け取り、任意の型に変換できます。iterateeがnullまたはundefinedの場合、`unzip`のように動作し、変換せずに結合が解かれた配列を返します。
-
-### 使用法
-
-```typescript
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
-function unzipWith<T>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: any[]) => unknown
-): any[];
-```
-
 ### 例
 
 ```typescript

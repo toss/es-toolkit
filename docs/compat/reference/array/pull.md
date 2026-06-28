@@ -1,4 +1,4 @@
-# pull (Lodash compatibility)
+# pull (Lodash Compatibility)
 
 ::: warning Use [pull](../../../reference/array/pull.md) from `es-toolkit`
 

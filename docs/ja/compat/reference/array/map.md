@@ -1,4 +1,4 @@
-# map (Lodash互換性)
+# map (Lodash 互換性)
 
 ::: warning `Array.prototype.map`を使用してください
 

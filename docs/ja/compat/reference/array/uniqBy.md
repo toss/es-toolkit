@@ -1,4 +1,4 @@
-# uniqBy (Lodash互換)
+# uniqBy (Lodash 互換性)
 
 ::: warning `es-toolkit`の[uniqBy](../../../reference/array/uniqBy.md)を使用してください
 

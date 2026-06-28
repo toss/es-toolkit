@@ -1,4 +1,4 @@
-# fromPairs (Lodash compatibility)
+# fromPairs (Lodash Compatibility)
 
 ::: warning Use `Object.fromEntries`
 

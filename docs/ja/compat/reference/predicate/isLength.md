@@ -1,4 +1,4 @@
-# isLength (Lodash互換性)
+# isLength (Lodash 互換性)
 
 ::: warning es-toolkitの[isLength](../../../reference/predicate/isLength.md)を使用してください
 この`isLength`関数はLodash互換性のための複雑な処理により動作が遅くなります。

@@ -1,4 +1,4 @@
-# xorBy (Lodash互換)
+# xorBy (Lodash 互換性)
 
 ::: warning `es-toolkit`の[xorBy](../../../reference/array/xorBy.md)を使用してください
 

@@ -1,4 +1,4 @@
-# reverse（Lodash 互換性）
+# reverse(Lodash 互換性)
 
 ::: warning `Array.prototype.reverse()` を使用してください
 

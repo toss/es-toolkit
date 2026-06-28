@@ -16,7 +16,7 @@ const result = eachRight(collection, iteratee);
 
 ## Usage
 
-### `eachRight(collection, iteratee)`
+### `eachRight(collection, iteratee?)`
 
 Iterates through each element of an array, object, or string from right to left and executes the given function. For arrays, it iterates in reverse order from the last index; for objects, it iterates through enumerable properties in reverse order.
 

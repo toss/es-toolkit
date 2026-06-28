@@ -1,4 +1,4 @@
-# tail (Lodash compatibility)
+# tail (Lodash Compatibility)
 
 ::: warning Please use [tail](../../../reference/array/tail.md) from `es-toolkit`
 

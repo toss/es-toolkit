@@ -26,10 +26,15 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  */
 export function chunk<T>(arr: ArrayLike<T> | null | undefined, size = 1): T[][] {
   size = Math.max(Math.floor(size), 0);
-
-  if (size === 0 || !isArrayLike(arr)) {
+  if (size === 0 || !isArrayLike(arr) || Number.isNaN(size)) {
     return [];
   }
 
-  return chunkToolkit(toArray(arr), size);
+  const array = toArray(arr);
+
+  if (!isFinite(size)) {
+    return [array];
+  }
+
+  return chunkToolkit(array, size);
 }

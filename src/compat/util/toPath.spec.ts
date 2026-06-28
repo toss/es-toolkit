@@ -48,6 +48,18 @@ describe('toPath function', () => {
     expect(result).toEqual(['a', '', 'b']);
   });
 
+  it('keeps empty segments for consecutive dots', () => {
+    expect(toPath('a..b')).toEqual(['a', '', 'b']);
+    expect(toPath('a...b')).toEqual(['a', '', '', 'b']);
+    expect(toPath('..a')).toEqual(['', '', 'a']);
+    expect(toPath('a.b..c.d')).toEqual(['a', 'b', '', 'c', 'd']);
+  });
+
+  it('keeps a trailing empty segment for a trailing dot', () => {
+    expect(toPath('a.')).toEqual(['a', '']);
+    expect(toPath('a.b.')).toEqual(['a', 'b', '']);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(toPath).toEqualTypeOf<typeof toPathLodash>();
   });

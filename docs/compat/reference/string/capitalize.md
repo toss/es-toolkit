@@ -1,4 +1,4 @@
-# capitalize (Lodash compatibility)
+# capitalize (Lodash Compatibility)
 
 ::: warning Use `capitalize` from `es-toolkit`
 

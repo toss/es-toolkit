@@ -1,4 +1,4 @@
-# zip (Lodash互換)
+# zip (Lodash 互換性)
 
 ::: warning `es-toolkit`の[zip](../../../reference/array/zip.md)を使用してください
 

@@ -1,4 +1,4 @@
-# split (Lodash compatibility)
+# split (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.split`
 

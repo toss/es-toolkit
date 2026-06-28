@@ -1,4 +1,4 @@
-# pullAll (Lodash compatibility)
+# pullAll (Lodash Compatibility)
 
 Removes all values from the array that are contained in the array of specified values.
 
