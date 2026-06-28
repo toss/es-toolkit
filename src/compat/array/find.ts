@@ -87,8 +87,8 @@ export function find<T extends object>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param source - The source array or object to search through.
- * @param doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param collection - The source array or object to search through.
+ * @param predicate - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns The first property value that has the specified property, or `undefined` if no match is found.
  *
@@ -99,30 +99,26 @@ export function find<T extends object>(
  * console.log(result); // { id: 1, name: 'Alice' }
  */
 export function find<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
-  _doesMatch:
-    | ((item: T, index: number, arr: any) => unknown)
-    | Partial<T>
-    | [keyof T, unknown]
-    | PropertyKey = identity,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
+  predicate: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey = identity,
   fromIndex = 0
 ): T | undefined {
-  if (!source) {
+  if (!collection) {
     return undefined;
   }
   if (fromIndex < 0) {
-    fromIndex = Math.max(source.length + fromIndex, 0);
+    fromIndex = Math.max(collection.length + fromIndex, 0);
   }
 
-  const doesMatch = iteratee(_doesMatch);
-  if (!Array.isArray(source)) {
-    const keys = Object.keys(source) as Array<keyof T>;
+  const doesMatch = iteratee(predicate);
+  if (!Array.isArray(collection)) {
+    const keys = Object.keys(collection) as Array<keyof T>;
 
     for (let i = fromIndex; i < keys.length; i++) {
       const key = keys[i];
-      const value = source[key] as T;
+      const value = collection[key] as T;
 
-      if (doesMatch(value, key as number, source)) {
+      if (doesMatch(value, key as number, collection)) {
         return value;
       }
     }
@@ -130,5 +126,5 @@ export function find<T>(
     return undefined;
   }
 
-  return source.slice(fromIndex).find(doesMatch);
+  return collection.slice(fromIndex).find(doesMatch);
 }
