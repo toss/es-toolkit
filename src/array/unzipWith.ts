@@ -13,7 +13,17 @@
  * // result will be [9, 12]
  */
 export function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[]) => R): R[] {
-  const maxLength = Math.max(...target.map(innerArray => innerArray.length));
+  // Compute the longest inner array with a loop seeded at 0 instead of
+  // `Math.max(...target.map(...))`, which returns `-Infinity` for an empty
+  // `target` and makes `new Array(maxLength)` throw a RangeError.
+  let maxLength = 0;
+
+  for (let i = 0; i < target.length; i++) {
+    if (target[i].length > maxLength) {
+      maxLength = target[i].length;
+    }
+  }
+
   const result: R[] = new Array(maxLength);
 
   for (let i = 0; i < maxLength; i++) {
