@@ -100,8 +100,8 @@ const { banners, currentBanner, setBannerIndex, trackBannerClick, currentBannerI
   margin-top: 12px;
 }
 .custom-banner-dot {
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background-color: var(--vp-c-text-3);
   margin: 0 4px;
