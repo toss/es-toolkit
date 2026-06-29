@@ -16,7 +16,7 @@ const lastIndex = findLastIndex(array, predicate, fromIndex);
 
 ## 使用法
 
-### `findLastIndex(array, predicate, fromIndex)`
+### `findLastIndex(array, predicate?, fromIndex?)`
 
 配列の末尾から開始して、与えられた条件に一致する最初の要素のインデックスを見つけたい場合は`findLastIndex`を使用してください。条件を満たす要素がない場合は`-1`を返します。
 
