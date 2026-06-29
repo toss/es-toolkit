@@ -1,4 +1,5 @@
 export { isArrayBuffer } from './isArrayBuffer.ts';
+export { isBigInt } from './isBigInt.ts';
 export { isBlob } from './isBlob.ts';
 export { isBoolean } from './isBoolean.ts';
 export { isBrowser } from './isBrowser.ts';
