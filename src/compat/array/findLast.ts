@@ -47,7 +47,7 @@ export function findLast<T, S extends T>(
  * // => { user: 'pebbles', age: 18 }
  *
  * findLast(users, 'age');
- * // => { user: 'fred', age: 40 }
+ * // => { user: 'pebbles', age: 18 }
  */
 export function findLast<T>(
   collection: ArrayLike<T> | null | undefined,
