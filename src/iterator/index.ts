@@ -2,6 +2,7 @@ export { chunk } from './chunk.ts';
 export { count } from './count.ts';
 export { dropWhile } from './dropWhile.ts';
 export { head } from './head.ts';
+export { iterate } from './iterate.ts';
 export { partition } from './partition.ts';
 export { range } from './range.ts';
 export { scan } from './scan.ts';
