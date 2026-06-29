@@ -16,7 +16,7 @@ const result = filter(collection, predicate);
 
 ## Usage
 
-### `filter(collection, predicate)`
+### `filter(collection, predicate?)`
 
 Use `filter` when you want to filter out only elements that satisfy a specific condition from an array or object. The condition can be specified in various formats such as a function, partial object, property-value pair, property name, etc.
 
@@ -71,7 +71,7 @@ filter(undefined, x => x > 0);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to filter.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The filtering condition. Can use a function, partial object, property-value pair, or property name.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The filtering condition. Can use a function, partial object, property-value pair, or property name.
 
 #### Returns
 
