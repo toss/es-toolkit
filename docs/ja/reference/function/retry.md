@@ -50,6 +50,22 @@ const data4 = await retry(
     delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
   }
 );
+
+// エラーに基づく再試行間隔 (例: Retry-After ヘッダー)
+const data5 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: (_attempts, error) => {
+      if ((error as { status?: number }).status === 429) {
+        return (error as { retryAfter: number }).retryAfter * 1000;
+      }
+      return 1000;
+    },
+  }
+);
 ```
 
 特定のエラーでのみ再試行したい場合は `shouldRetry` オプションを使用できます。
@@ -64,7 +80,7 @@ class NetworkError extends Error {
 }
 
 // 500エラー以上でのみ再試行
-const data5 = await retry(
+const data6 = await retry(
   async () => {
     const response = await fetch('/api/data');
     if (!response.ok) {
@@ -111,7 +127,7 @@ try {
 - `func` (`() => Promise<T>`): 再試行する非同期関数です。
 - `options` (`number | RetryOptions`, オプション): 再試行回数またはオプションオブジェクトです。
   - `retries` (`number`, オプション): 再試行する回数です。デフォルトは `Infinity` で無限に再試行します。
-  - `delay` (`number | (attempts: number) => number`, オプション): 再試行間隔(ミリ秒)です。数値または関数を使用できます。デフォルトは `0` です。
+  - `delay` (`number | (attempts: number, error: unknown) => number`, オプション): 再試行間隔(ミリ秒)です。数値または関数を使用できます。関数は試行回数とエラーオブジェクトを受け取ります。デフォルトは `0` です。
   - `signal` (`AbortSignal`, オプション): 再試行をキャンセルできるシグナルです。
   - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, オプション): 再試行するかどうかを決定する関数です。`false` を返すと即座にエラーをスローします。
     - `error`: 発生したエラーオブジェクトです。

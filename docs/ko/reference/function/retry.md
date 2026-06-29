@@ -50,6 +50,22 @@ const data4 = await retry(
     delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
   }
 );
+
+// 에러 기반 재시도 간격 (예: Retry-After 헤더 활용)
+const data5 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: (_attempts, error) => {
+      if ((error as { status?: number }).status === 429) {
+        return (error as { retryAfter: number }).retryAfter * 1000;
+      }
+      return 1000;
+    },
+  }
+);
 ```
 
 특정 에러에서만 재시도하고 싶을 때 `shouldRetry` 옵션을 사용할 수 있어요.
@@ -64,7 +80,7 @@ class NetworkError extends Error {
 }
 
 // 500 에러 이상에서만 재시도
-const data5 = await retry(
+const data6 = await retry(
   async () => {
     const response = await fetch('/api/data');
     if (!response.ok) {
@@ -111,7 +127,7 @@ try {
 - `func` (`() => Promise<T>`): 재시도할 비동기 함수예요.
 - `options` (`number | RetryOptions`, 선택): 재시도 횟수나 옵션 객체예요.
   - `retries` (`number`, 선택): 재시도할 횟수예요. 기본값은 `Infinity`로 무한 재시도해요.
-  - `delay` (`number | (attempts: number) => number`, 선택): 재시도 간격(밀리초)이에요. 숫자나 함수를 사용할 수 있어요. 기본값은 `0`이에요.
+  - `delay` (`number | (attempts: number, error: unknown) => number`, 선택): 재시도 간격(밀리초)이에요. 숫자나 함수를 사용할 수 있어요. 함수는 시도 횟수와 에러 객체를 인자로 받아요. 기본값은 `0`이에요.
   - `signal` (`AbortSignal`, 선택): 재시도를 취소할 수 있는 시그널이에요.
   - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 선택): 재시도 여부를 결정하는 함수예요. `false`를 반환하면 즉시 에러를 던져요.
     - `error`: 발생한 에러 객체예요.

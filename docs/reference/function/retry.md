@@ -50,6 +50,22 @@ const data4 = await retry(
     delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
   }
 );
+
+// Error-based retry interval (e.g., respect Retry-After headers)
+const data5 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: (_attempts, error) => {
+      if ((error as { status?: number }).status === 429) {
+        return (error as { retryAfter: number }).retryAfter * 1000;
+      }
+      return 1000;
+    },
+  }
+);
 ```
 
 You can use `shouldRetry` option when you want to retry only on specific errors.
@@ -64,7 +80,7 @@ class NetworkError extends Error {
 }
 
 // Retry only on 500+ errors
-const data5 = await retry(
+const data6 = await retry(
   async () => {
     const response = await fetch('/api/data');
     if (!response.ok) {
@@ -111,7 +127,7 @@ try {
 - `func` (`() => Promise<T>`): The asynchronous function to retry.
 - `options` (`number | RetryOptions`, optional): The number of retries or options object.
   - `retries` (`number`, optional): The number of times to retry. Defaults to `Infinity` for infinite retries.
-  - `delay` (`number | (attempts: number) => number`, optional): The retry interval (in milliseconds). Can be a number or a function. Defaults to `0`.
+  - `delay` (`number | (attempts: number, error: unknown) => number`, optional): The retry interval (in milliseconds). Can be a number or a function. The function receives the attempt number and the error object. Defaults to `0`.
   - `signal` (`AbortSignal`, optional): A signal that can cancel retries.
   - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, optional): A function that determines whether to retry. If it returns `false`, the error is thrown immediately.
     - `error`: The error object that occurred.
