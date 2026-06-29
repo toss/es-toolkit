@@ -11,7 +11,7 @@ import { iteratee } from '../util/iteratee.ts';
  * @template T, U
  * @param collection - The array-like object to search
  * @param predicate - The type guard function to test each element
- * @param fromIndex - The index to start searching from
+ * @param [fromIndex] - The index to start searching from
  * @returns The first element that matches the type guard, or undefined if none found
  *
  * @example
@@ -29,8 +29,8 @@ export function find<T, U extends T>(
  *
  * @template T
  * @param collection - The array-like object to search
- * @param predicate - The function or shorthand to test each element
- * @param fromIndex - The index to start searching from
+ * @param [predicate] - The function or shorthand to test each element
+ * @param [fromIndex] - The index to start searching from
  * @returns The first matching element, or undefined if none found
  *
  * @example
@@ -52,7 +52,7 @@ export function find<T>(
  * @template T, U
  * @param collection - The object to search
  * @param predicate - The type guard function to test each value
- * @param fromIndex - The index to start searching from
+ * @param [fromIndex] - The index to start searching from
  * @returns The first value that matches the type guard, or undefined if none found
  *
  * @example
@@ -70,8 +70,8 @@ export function find<T extends object, U extends T[keyof T]>(
  *
  * @template T
  * @param collection - The object to search
- * @param predicate - The function or shorthand to test each value
- * @param fromIndex - The index to start searching from
+ * @param [predicate] - The function or shorthand to test each value
+ * @param [fromIndex] - The index to start searching from
  * @returns The first matching value, or undefined if none found
  *
  * @example
@@ -92,7 +92,7 @@ export function find<T extends object>(
  *
  * @template T
  * @param source - The source array or object to search through.
- * @param doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [doesMatch=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns The first property value that has the specified property, or `undefined` if no match is found.
  *

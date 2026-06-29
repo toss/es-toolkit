@@ -11,7 +11,7 @@ import { iteratee } from '../util/iteratee.ts';
  * Filters characters in a string based on the predicate function.
  *
  * @param collection - The string to filter
- * @param predicate - The function to test each character
+ * @param [predicate] - The function to test each character
  * @returns An array of characters that pass the predicate test
  *
  * @example
@@ -42,7 +42,7 @@ export function filter<T, U extends T>(
  *
  * @template T
  * @param collection - The array-like object to filter
- * @param predicate - The function or shorthand to test each element
+ * @param [predicate] - The function or shorthand to test each element
  * @returns An array of elements that pass the predicate test
  *
  * @example
@@ -76,7 +76,7 @@ export function filter<T extends object, U extends T[keyof T]>(
  *
  * @template T
  * @param collection - The object to filter
- * @param predicate - The function or shorthand to test each value
+ * @param [predicate] - The function or shorthand to test each value
  * @returns An array of values that pass the predicate test
  *
  * @example
