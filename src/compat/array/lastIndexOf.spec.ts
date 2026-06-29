@@ -48,6 +48,14 @@ describe('lastIndexOf', () => {
 
   it(`should coerce \`fromIndex\` to an integer`, () => {
     expect(lastIndexOf(array, 2, 4.2)).toBe(4);
+    expect(lastIndexOf(array, 1, '-1' as any)).toBe(3);
+  });
+
+  it(`should treat explicit falsey \`fromIndex\` values as \`0\``, () => {
+    expect(lastIndexOf(array, 1, null as any)).toBe(0);
+    expect(lastIndexOf(array, 2, null as any)).toBe(-1);
+    expect(lastIndexOf(array, 1, false as any)).toBe(0);
+    expect(lastIndexOf(array, 1, true)).toBe(0);
   });
 
   it(`should return -1 for empty array or nullish values`, () => {
