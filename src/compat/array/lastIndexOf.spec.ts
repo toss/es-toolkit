@@ -51,7 +51,7 @@ describe('lastIndexOf', () => {
     expect(lastIndexOf(array, 1, '-1' as any)).toBe(3);
   });
 
-  it(`should treat explicit falsey \`fromIndex\` values as \`0\``, () => {
+  it(`should coerce null and boolean \`fromIndex\` values to integers`, () => {
     expect(lastIndexOf(array, 1, null as any)).toBe(0);
     expect(lastIndexOf(array, 2, null as any)).toBe(-1);
     expect(lastIndexOf(array, 1, false as any)).toBe(0);
