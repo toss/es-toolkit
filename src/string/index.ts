@@ -2,6 +2,7 @@ export { camelCase } from './camelCase.ts';
 export { capitalize } from './capitalize.ts';
 export { constantCase } from './constantCase.ts';
 export { deburr } from './deburr.ts';
+export { dedent } from './dedent.ts';
 export { escape } from './escape.ts';
 export { escapeRegExp } from './escapeRegExp.ts';
 export { kebabCase } from './kebabCase.ts';
