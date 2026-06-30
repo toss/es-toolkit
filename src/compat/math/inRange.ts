@@ -1,47 +1,34 @@
-import { inRange as inRangeToolkit } from '../../math/inRange.ts';
+import { toFinite } from '../util/toFinite.ts';
+import { toNumber } from '../util/toNumber.ts';
 
 /**
  * Checks if the value is within a specified range.
+ *
+ * If only `minimum` is provided, it is treated as the exclusive upper bound and the range starts at `0`.
+ * When the resolved bounds are out of order they are swapped, so the lower one is always inclusive
+ * and the higher one exclusive.
  *
  * @param value The value to check.
  * @param minimum The lower bound of the range (inclusive).
  * @param maximum The upper bound of the range (exclusive).
  * @returns `true` if the value is within the specified range, otherwise `false`.
- * @throws {Error} Throws an error if the `minimum` is greater or equal than the `maximum`.
  *
  * @example
  * const result1 = inRange(3, 5); // result1 will be true.
  * const result2 = inRange(1, 2, 5); // result2 will be false.
- * const result3 = inRange(1, 5, 2); // If the minimum is greater or equal than the maximum, an error is thrown.
+ * const result3 = inRange(-2, -4); // result3 will be true, the range is [-4, 0).
  */
 export function inRange(value: number, minimum: number, maximum?: number): boolean {
-  if (!minimum) {
+  minimum = toFinite(minimum);
+
+  if (maximum === undefined) {
+    maximum = minimum;
     minimum = 0;
+  } else {
+    maximum = toFinite(maximum);
   }
 
-  if (maximum != null && !maximum) {
-    maximum = 0;
-  }
+  value = toNumber(value);
 
-  if (minimum != null && typeof minimum !== 'number') {
-    minimum = Number(minimum);
-  }
-
-  if (maximum == null && minimum === 0) {
-    return false;
-  }
-
-  if (maximum != null && typeof maximum !== 'number') {
-    maximum = Number(maximum);
-  }
-
-  if (maximum != null && minimum > maximum) {
-    [minimum, maximum] = [maximum, minimum];
-  }
-
-  if (minimum === maximum) {
-    return false;
-  }
-
-  return inRangeToolkit(value, minimum, maximum!);
+  return value >= Math.min(minimum, maximum) && value < Math.max(minimum, maximum);
 }
