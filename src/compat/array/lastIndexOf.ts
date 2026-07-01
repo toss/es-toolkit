@@ -1,4 +1,5 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Gets the index at which the last occurrence of value is found in array.
@@ -36,8 +37,8 @@ export function lastIndexOf<T>(
 
   const length = array.length;
 
-  let index = (fromIndex as number) ?? length - 1;
-  if (fromIndex != null) {
+  let index = fromIndex === undefined ? length - 1 : toInteger(fromIndex);
+  if (fromIndex !== undefined) {
     index = index < 0 ? Math.max(length + index, 0) : Math.min(index, length - 1);
   }
 

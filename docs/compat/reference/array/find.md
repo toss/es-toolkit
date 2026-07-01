@@ -16,7 +16,7 @@ const result = find(collection, predicate, fromIndex);
 
 ## Usage
 
-### `find(collection, predicate, fromIndex?)`
+### `find(collection, predicate?, fromIndex?)`
 
 Use `find` when you want to find the first element that satisfies a specific condition in an array or object. The condition can be specified in various formats such as a function, partial object, property-value pair, property name, etc.
 
@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to search.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The search condition. Can use a function, partial object, property-value pair, or property name.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The search condition. Can use a function, partial object, property-value pair, or property name.
 - `fromIndex` (`number`, optional): The index to start searching from. Defaults to `0`.
 
 #### Returns

@@ -16,7 +16,7 @@ const result = filter(collection, predicate);
 
 ## 使用法
 
-### `filter(collection, predicate)`
+### `filter(collection, predicate?)`
 
 配列またはオブジェクトから特定の条件を満たす要素だけをフィルタリングしたい場合に `filter` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
@@ -71,7 +71,7 @@ filter(undefined, x => x > 0);
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): フィルタリングする配列またはオブジェクトです。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): フィルタリング条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): フィルタリング条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
 
 #### 戻り値
 

@@ -16,7 +16,7 @@ const lastIndex = findLastIndex(array, predicate, fromIndex);
 
 ## 用法
 
-### `findLastIndex(array, predicate, fromIndex)`
+### `findLastIndex(array, predicate?, fromIndex?)`
 
 当您想要从数组末尾开始查找满足给定条件的第一个元素的索引时,使用 `findLastIndex`。如果没有元素满足条件,则返回 `-1`。
 
