@@ -14,6 +14,7 @@ import FpBenchmarkEnvironment from '../components/FpBenchmarkEnvironment.vue';
 import FpBenchmarkTable from '../components/FpBenchmarkTable.vue';
 import FpBundleSizeChart from '../components/FpBundleSizeChart.vue';
 import FpBundleSizeTable from '../components/FpBundleSizeTable.vue';
+import FpLazySimulation from '../components/FpLazySimulation.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {
@@ -35,6 +36,7 @@ export default {
     app.component('FpBenchmarkChart', FpBenchmarkChart);
     app.component('FpBenchmarkTable', FpBenchmarkTable);
     app.component('FpBenchmarkEnvironment', FpBenchmarkEnvironment);
+    app.component('FpLazySimulation', FpLazySimulation);
   },
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
