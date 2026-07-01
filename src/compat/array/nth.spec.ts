@@ -51,6 +51,12 @@ describe('nth', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should support strings', () => {
+    expect(nth('abc', 0)).toBe('a');
+    expect(nth('abc', 1)).toBe('b');
+    expect(nth('abc', -1)).toBe('c');
+  });
+
   it('should return `undefined` for non-indexes', () => {
     const array = [1, 2];
     const values = [Infinity, array.length];
