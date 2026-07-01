@@ -41,6 +41,14 @@ describe('inRange', () => {
     expect(inRange(-3, -2, -6)).toBe(true);
   });
 
+  it('should treat a lone negative `end` as the range `[end, 0)`', () => {
+    expect(inRange(-1, -2)).toBe(true);
+    expect(inRange(-2, -4)).toBe(true);
+    expect(inRange(0, -1)).toBe(false);
+    expect(inRange(-6, -5)).toBe(false);
+    expect(inRange(-1, -1)).toBe(true);
+  });
+
   it('should work with a floating point `n` value', () => {
     expect(inRange(0.5, 5)).toBe(true);
     expect(inRange(1.2, 1, 5)).toBe(true);
