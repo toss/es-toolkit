@@ -62,6 +62,12 @@ describe('startCase', () => {
     expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
   });
 
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(startCase('foo1stPlace')).toBe('Foo 1st Place');
+    expect(startCase('top10th')).toBe('Top 10th');
+    expect(startCase('1st place 2nd 3rd 4th')).toBe('1st Place 2nd 3rd 4th');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(startCase).toEqualTypeOf<typeof startCaseLodash>();
   });

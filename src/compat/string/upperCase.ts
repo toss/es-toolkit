@@ -1,5 +1,5 @@
 import { deburr } from './deburr.ts';
-import { upperCase as upperCaseToolkit } from '../../string/upperCase.ts';
+import { words } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -17,5 +17,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr4 = upperCase('HTTPRequest') // returns 'HTTP REQUEST'
  */
 export function upperCase(str?: string): string {
-  return upperCaseToolkit(normalizeForCase(deburr(str)));
+  return words(normalizeForCase(deburr(str)))
+    .map(word => word.toUpperCase())
+    .join(' ');
 }
