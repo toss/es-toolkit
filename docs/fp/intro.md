@@ -16,7 +16,7 @@ const result = pipe(
 ## Why es-toolkit/fp
 
 - **Readable** — steps read top-to-bottom, in the order they run. No more parsing `take(map(filter(xs)))` inside-out, and no temporary variables between steps.
-- **Fast** — consecutive steps are fused into a single pass: no intermediate array is built between them, and a `take`/`takeWhile` ends the walk as soon as it has enough, so the earlier steps skip the rest of the input.
+- **Fast** — consecutive steps are fused into a single pass: no intermediate array between steps, and the walk stops as soon as enough results are collected. See it happen in [Lazy evaluation](#lazy-evaluation) below.
 - **No tradeoff** — when fusion cannot help, `pipe` runs the native array path, so it is never slower than `xs.filter().map()` — only sometimes much faster.
 
 ## How es-toolkit/fp functions work
@@ -31,15 +31,17 @@ const triple = map((x: number) => x * 3); // (array) => number[]
 pipe([1, 2, 3], triple); // => [3, 6, 9]
 ```
 
+Because every step is a function still waiting for its data, `pipe` can see the whole shape of the pipeline before running it. That is the starting point for lazy evaluation.
+
 ## Lazy evaluation
 
-When consecutive lazy-capable functions (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass over the data and processes one element at a time. A trailing `take` then ends the walk early, so the earlier steps never run on the rest of the input.
+Lazy evaluation is where the "fast" above comes from. When consecutive lazy-capable functions (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass: instead of the whole array going through the steps one by one, each element travels through all the steps at once. No intermediate array is built between steps, and the moment the trailing `take` is satisfied, the whole walk stops.
 
-The two sides below run the **same pipeline**. The eager version processes the whole array at every step and allocates a new array each time; the fused version walks one element all the way through and stops as soon as `take(2)` is satisfied — so `5` and `6` are never visited, and no intermediate array is built.
+The two panels below run the **same pipeline**. **Eager** processes the whole array at every step and allocates a new array each time. **Lazy fusion** walks one element all the way through and stops as soon as `take(2)` is satisfied — `5` and `6` are never visited, and no intermediate array is built.
 
 <FpLazySimulation />
 
-On a large input with an early `take`, this is the difference between touching the whole array and touching just its front:
+The larger the input and the earlier `take` fills up, the bigger this difference gets — it is the difference between touching the whole array and touching just its front:
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';

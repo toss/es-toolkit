@@ -24,18 +24,17 @@
 
           <template v-for="row in panel.rows" :key="row.label">
             <span class="hm-rowh">{{ row.label }}</span>
-            <span
-              v-for="(c, i) in row.cells"
-              :key="i"
-              class="hm-cell"
-              :class="cellClass(c)"
-            >{{ cellText(c) }}</span>
+            <span v-for="(c, i) in row.cells" :key="i" class="hm-cell" :class="cellClass(c)">{{ cellText(c) }}</span>
           </template>
         </div>
 
         <footer>
-          <span><b>{{ worked(panel) }}</b> {{ text.cells }}</span>
-          <span><b>{{ arrays(panel) }}</b> {{ text.arrays }}</span>
+          <span
+            ><b>{{ worked(panel) }}</b> {{ text.cells }}</span
+          >
+          <span
+            ><b>{{ arrays(panel) }}</b> {{ text.arrays }}</span
+          >
         </footer>
       </section>
     </div>
@@ -51,7 +50,8 @@ const { lang } = useData();
 const i18n = {
   'en-US': {
     pipe: 'pipe([1,2,3,4,5,6], filter(even), map(×10), take(2))',
-    legend: 'A filled square = work actually done. Eager fills the whole grid; lazy stops early, so it finishes sooner.',
+    legend:
+      'A filled square = work actually done. Eager fills the whole grid; lazy stops early, so it finishes sooner.',
     eager: 'Eager',
     eagerCap: 'every step runs over the whole array',
     lazy: 'Lazy fusion',
@@ -131,21 +131,44 @@ function next() {
     tick.value++;
     timer = setTimeout(next, STEP);
   } else {
-    timer = setTimeout(() => { tick.value = 0; timer = setTimeout(next, STEP); }, PAUSE);
+    timer = setTimeout(() => {
+      tick.value = 0;
+      timer = setTimeout(next, STEP);
+    }, PAUSE);
   }
 }
-function start() { if (!timer) timer = setTimeout(next, STEP); }
-function stop() { if (timer) { clearTimeout(timer); timer = null; } }
+function start() {
+  if (!timer) timer = setTimeout(next, STEP);
+}
+function stop() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
 
 onMounted(() => {
   const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { tick.value = LAST; return; }
-  if (typeof IntersectionObserver === 'undefined') { start(); return; }
+  if (reduce) {
+    tick.value = LAST;
+    return;
+  }
+  if (typeof IntersectionObserver === 'undefined') {
+    start();
+    return;
+  }
   const root = document.querySelector('.lazy-sim');
-  if (!root) { start(); return; }
-  const io = new IntersectionObserver(entries => {
-    if (entries.some(e => e.isIntersecting)) start(); else stop();
-  }, { threshold: 0.35 });
+  if (!root) {
+    start();
+    return;
+  }
+  const io = new IntersectionObserver(
+    entries => {
+      if (entries.some(e => e.isIntersecting)) start();
+      else stop();
+    },
+    { threshold: 0.35 }
+  );
   io.observe(root);
 });
 onUnmounted(stop);
@@ -160,7 +183,9 @@ onUnmounted(stop);
   padding: 16px 18px;
   font-size: 0.85em;
 }
-.sim-head { display: flex; }
+.sim-head {
+  display: flex;
+}
 .sim-pipe {
   font-family: var(--vp-font-family-mono);
   font-size: 0.92em;
@@ -180,7 +205,10 @@ onUnmounted(stop);
   gap: 20px;
 }
 @media (max-width: 640px) {
-  .sim-grid { grid-template-columns: 1fr; gap: 24px; }
+  .sim-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 .sim-col header {
   display: flex;
@@ -189,9 +217,17 @@ onUnmounted(stop);
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.sim-tag { font-weight: 600; color: var(--vp-c-text-1); }
-.sim-col.accent .sim-tag { color: var(--vp-c-brand-1); }
-.sim-cap { font-size: 0.85em; color: var(--vp-c-text-3); }
+.sim-tag {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+.sim-col.accent .sim-tag {
+  color: var(--vp-c-brand-1);
+}
+.sim-cap {
+  font-size: 0.85em;
+  color: var(--vp-c-text-3);
+}
 
 /* lazy finishes first → a subtle "done" cue */
 .sim-col.accent.done .sim-tag::after {
@@ -206,7 +242,9 @@ onUnmounted(stop);
   gap: 5px;
   align-items: center;
 }
-.hm-corner { height: 18px; }
+.hm-corner {
+  height: 18px;
+}
 .hm-colh {
   text-align: center;
   font-size: 0.8em;
@@ -227,7 +265,11 @@ onUnmounted(stop);
   font-family: var(--vp-font-family-mono);
   font-size: 0.82em;
   border: 1px solid transparent;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.25s ease;
 }
 .hm-cell.off,
 .hm-cell.pending {
@@ -269,6 +311,11 @@ onUnmounted(stop);
   color: var(--vp-c-text-2);
   flex-wrap: wrap;
 }
-.sim-col footer b { color: var(--vp-c-text-1); font-size: 1.15em; }
-.sim-col.accent footer b { color: var(--vp-c-brand-1); }
+.sim-col footer b {
+  color: var(--vp-c-text-1);
+  font-size: 1.15em;
+}
+.sim-col.accent footer b {
+  color: var(--vp-c-brand-1);
+}
 </style>
