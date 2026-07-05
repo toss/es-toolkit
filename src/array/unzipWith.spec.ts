@@ -16,4 +16,10 @@ describe('unzipWith', () => {
 
     expect(result).toEqual([4321, NaN]);
   });
+
+  it('should return an empty array when given an empty array', () => {
+    const result = unzipWith([], (...items: number[]) => items.reduce((sum, value) => sum + value, 0));
+
+    expect(result).toEqual([]);
+  });
 });
