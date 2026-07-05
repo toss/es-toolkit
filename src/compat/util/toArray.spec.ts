@@ -26,6 +26,13 @@ describe('toArray', () => {
     }
   });
 
+  it('should convert sets to arrays', () => {
+    if (Set) {
+      const set = new Set([1, 2, 3]);
+      expect(toArray(set)).toEqual([1, 2, 3]);
+    }
+  });
+
   it('should convert strings to arrays', () => {
     expect(toArray('')).toEqual([]);
     expect(toArray('ab')).toEqual(['a', 'b']);
