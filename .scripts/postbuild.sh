@@ -49,6 +49,10 @@ if [ -d dist/types ]; then
     find dist/types -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) -delete
 fi
 
+# node10 moduleResolution ignores "exports", so it needs a root shim like the other
+# modules. Declaration-only, so only the .d.ts is created (no types.js counterpart).
+echo "export * from './dist/types';" > types.d.ts
+
 # Create compat directory
 mkdir -p compat
 
