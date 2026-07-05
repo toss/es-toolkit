@@ -1,3 +1,4 @@
+export type { DeepPartial } from './DeepPartial.ts';
 export type { Merge } from './Merge.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';
 export type { SetOptional } from './SetOptional.ts';
