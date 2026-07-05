@@ -1,4 +1,4 @@
-export function setToEntries<T>(set: Set<T>): [T, T][] {
+export function setToEntries<T>(set: Set<T>): Array<[T, T]> {
   const arr = new Array<[T, T]>(set.size);
   const values = set.values();
 
