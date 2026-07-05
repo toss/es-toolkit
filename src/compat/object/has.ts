@@ -89,7 +89,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
+  } else if (typeof path === 'string' && isDeepKey(path) && !(path in Object(object))) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];
