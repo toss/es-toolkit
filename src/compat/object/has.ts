@@ -89,13 +89,8 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
-    // lodash는 `castPath`/`isKey` 단계에서 객체가 문자열 키를 own 또는 inherited key로 가지고 있으면
-    // `a.b`를 deep path가 아니라 literal key로 취급한다. 그 다음 `has`는 own 여부를 검사한다.
-    // 따라서 `{ 'a.b': undefined }`는 true, inherited `{ 'a.b': undefined }`는 false가 된다.
-    // 참고: https://github.com/lodash/lodash/blob/4.17.21-npm/_isKey.js#L16-L27
-    // 참고: https://github.com/lodash/lodash/blob/4.17.21-npm/_hasPath.js#L17-L37
-    resolvedPath = path in Object(object) ? [path] : toPath(path);
+  } else if (typeof path === 'string' && isDeepKey(path) && !(path in Object(object))) {
+    resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];
   }
