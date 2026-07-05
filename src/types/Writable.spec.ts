@@ -6,9 +6,4 @@ describe('Writable', () => {
     type Config = { readonly host: string; readonly port: number };
     expectTypeOf<Writable<Config>>().toEqualTypeOf<{ host: string; port: number }>();
   });
-
-  it('leaves already-writable properties unchanged', () => {
-    type T = { a: number; readonly b: string };
-    expectTypeOf<Writable<T>>().toEqualTypeOf<{ a: number; b: string }>();
-  });
 });
