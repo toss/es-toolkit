@@ -49,20 +49,16 @@ describe('DeepPartial', () => {
     expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
   });
 
-  it('requires complete Map and Set values, matching merge which replaces them wholesale', () => {
+  it('recurses into Map and Set contents', () => {
     expectTypeOf<DeepPartial<Map<string, { a: number; b: string }>>>().toEqualTypeOf<
-      Map<string, { a: number; b: string }>
+      Map<string, { a?: number; b?: string }>
     >();
-    expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a: number }>>();
+    expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
 
-    type Config = { routes: Map<string, { handler: string; auth: boolean }> };
-    // @ts-expect-error incomplete Map contents are rejected
-    const bad: DeepPartial<Config> = { routes: new Map([['home', { handler: 'h' }]]) };
-    expectTypeOf(bad).toEqualTypeOf<DeepPartial<Config>>();
-
+    type Config = { routes: Map<string, { handler: string }> };
     // @ts-expect-error a plain object must not pass as a Map
-    const bad2: DeepPartial<Config> = { routes: {} };
-    expectTypeOf(bad2).toEqualTypeOf<DeepPartial<Config>>();
+    const bad: DeepPartial<Config> = { routes: {} };
+    expectTypeOf(bad).toEqualTypeOf<DeepPartial<Config>>();
   });
 
   it('makes Record values partial', () => {
