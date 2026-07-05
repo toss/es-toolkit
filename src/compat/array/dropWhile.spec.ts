@@ -77,4 +77,10 @@ describe('dropWhile', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(dropWhile).toEqualTypeOf<typeof dropWhileLodash>();
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(dropWhile([1, 2, 3, 4])).toEqual([]);
+    expect(dropWhile([1, 2, 3, 0])).toEqual([0]);
+    expect(dropWhile([false, 0, null, undefined, ''])).toEqual([false, 0, null, undefined, '']);
+  });
 });

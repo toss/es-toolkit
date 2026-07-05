@@ -6,8 +6,8 @@ type PropertyName = string | number | symbol;
  * Converts an array of key-value pairs into an object.
  *
  * @template T - The type of the values.
- * @param {ArrayLike<[PropertyName, T]> | null | undefined} pairs - An array of key-value pairs.
- * @returns {Record<string, T>} - An object where keys are strings and values are of type T.
+ * @param pairs - An array of key-value pairs.
+ * @returns An object where keys are strings and values are of type T.
  *
  * @example
  * const pairs = [['a', 1], ['b', 2]];
@@ -19,8 +19,8 @@ export function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefi
 /**
  * Converts an array of key-value pairs into an object.
  *
- * @param {ArrayLike<any[]> | null | undefined} pairs - An array of key-value pairs.
- * @returns {Record<string, any>} - An object where keys are strings and values can be any type.
+ * @param pairs - An array of key-value pairs.
+ * @returns An object where keys are strings and values can be any type.
  *
  * @example
  * const pairs = [['a', 1], ['b', 'hello']];
@@ -35,8 +35,8 @@ export function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<st
  * @template T - The type of the keys in the resulting object. It must extend `PropertyKey`.
  * @template U - The type of the values in the resulting object.
  *
- * @param {Array<[T, U]>} pairs - An array of key-value pairs where each key is a `PropertyKey` and each value is of type `U`.
- * @returns {Record<T, U>} - An object where the keys are of type `T` and the values are of type `U`.
+ * @param pairs - An array of key-value pairs where each key is a `PropertyKey` and each value is of type `U`.
+ * @returns An object where the keys are of type `T` and the values are of type `U`.
  *
  * @example
  * const pairs = [['a', 1], ['b', 2]];

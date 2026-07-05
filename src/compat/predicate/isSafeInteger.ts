@@ -7,8 +7,8 @@
  * This function also serves as a type predicate in TypeScript,
  * narrowing the type of the argument to `number`.
  *
- * @param {unknown} value - The value to check
- * @returns {value is number} `true` if `value` is an integer and between the safe values, otherwise `false`
+ * @param value - The value to check
+ * @returns `true` if `value` is an integer and between the safe values, otherwise `false`
  *
  * @example
  * isSafeInteger(3); // Returns: true

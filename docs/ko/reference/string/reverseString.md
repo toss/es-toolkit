@@ -48,7 +48,7 @@ reverseString('a-b-c'); // 'c-b-a'
 
 (`string`): 글자 순서가 뒤집힌 새로운 문자열을 반환해요.
 
-## 데모
+## 사용해보기
 
 ::: sandpack
 

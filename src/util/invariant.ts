@@ -1,9 +1,9 @@
 /**
  * Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message.
  *
- * @param {unknown} condition - The condition to evaluate.
- * @param {string} message - The error message to throw if the condition is false.
- * @returns {void} Returns void if the condition is true.
+ * @param condition - The condition to evaluate.
+ * @param message - The error message to throw if the condition is false.
+ * @returns Returns void if the condition is true.
  * @throws {Error} Throws an error if the condition is false.
  *
  * @example
@@ -18,9 +18,9 @@ export function invariant(condition: unknown, message: string): asserts conditio
 /**
  * Asserts that a given condition is true. If the condition is false, an error is thrown with the provided error.
  *
- * @param {unknown} condition - The condition to evaluate.
- * @param {Error} error - The error to throw if the condition is false.
- * @returns {void} Returns void if the condition is true.
+ * @param condition - The condition to evaluate.
+ * @param error - The error to throw if the condition is false.
+ * @returns Returns void if the condition is true.
  * @throws {Error} Throws an error if the condition is false.
  *
  * @example
@@ -41,9 +41,9 @@ export function invariant(condition: unknown, error: Error): asserts condition;
 /**
  * Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message.
  *
- * @param {unknown} condition - The condition to evaluate.
- * @param {string | Error} [message] - The error message to throw if the condition is false.
- * @returns {void} Returns void if the condition is true.
+ * @param condition - The condition to evaluate.
+ * @param [message] - The error message to throw if the condition is false.
+ * @returns Returns void if the condition is true.
  * @throws {Error} Throws an error if the condition is false.
  *
  * @example

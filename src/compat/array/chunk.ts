@@ -10,9 +10,9 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * the final sub-array will contain the remaining elements.
  *
  * @template T The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} arr - The array to be chunked into smaller arrays.
- * @param {number} size - The size of each smaller array. Must be a positive integer.
- * @returns {T[][]} A two-dimensional array where each sub-array has a maximum length of `size`.
+ * @param arr - The array to be chunked into smaller arrays.
+ * @param size - The size of each smaller array. Must be a positive integer.
+ * @returns A two-dimensional array where each sub-array has a maximum length of `size`.
  *
  * @example
  * // Splits an array of numbers into sub-arrays of length 2
@@ -26,10 +26,15 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  */
 export function chunk<T>(arr: ArrayLike<T> | null | undefined, size = 1): T[][] {
   size = Math.max(Math.floor(size), 0);
-
-  if (size === 0 || !isArrayLike(arr)) {
+  if (size === 0 || !isArrayLike(arr) || Number.isNaN(size)) {
     return [];
   }
 
-  return chunkToolkit(toArray(arr), size);
+  const array = toArray(arr);
+
+  if (!isFinite(size)) {
+    return [array];
+  }
+
+  return chunkToolkit(array, size);
 }

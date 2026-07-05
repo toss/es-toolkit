@@ -60,6 +60,11 @@ describe('findIndex', () => {
     expect(findIndex(objects, { b: 2 }, 4)).toBe(-1);
   });
 
+  it('findIndex with NaN fromIndex should start from 0', () => {
+    const arr = [1, 2, 3];
+    expect(findIndex(arr, x => x === 1, NaN)).toBe(0);
+  });
+
   it('should return `-1` when provided `null` or `undefined`', () => {
     expect(findIndex(null, 'a')).toBe(-1);
     expect(findIndex(undefined, 'a')).toBe(-1);
@@ -73,5 +78,10 @@ describe('findIndex', () => {
 
   it('should match the type of lodash', () => {
     expectTypeOf(findIndex).toEqualTypeOf<typeof findIndexLodash>();
+  });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findIndex([0, false, null, undefined, '', 1, 2, 3])).toBe(5);
+    expect(findIndex([0, false, null, undefined, ''])).toBe(-1);
   });
 });

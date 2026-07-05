@@ -9,9 +9,9 @@ import { toPath } from '../util/toPath.ts';
  *
  * @template T
  * @template K
- * @param {T} object - The object to query.
- * @param {K} path - The path to check.
- * @returns {object is T & { [P in K]: P extends keyof T ? T[P] : Record<string, unknown> extends T ? T[keyof T] : unknown } & { [key: symbol]: unknown }} Returns a type guard indicating if the path exists in the object.
+ * @param object - The object to query.
+ * @param path - The path to check.
+ * @returns & { [key: symbol]: unknown }} Returns a type guard indicating if the path exists in the object.
  *
  * @example
  * const obj = { a: 1, b: { c: 2 } };
@@ -35,10 +35,10 @@ export function has<T, K extends PropertyKey>(
  * Checks if a given path exists within an object.
  *
  * @template T
- * @param {T} object - The object to query.
- * @param {PropertyPath} path - The path to check. This can be a single property key,
+ * @param object - The object to query.
+ * @param path - The path to check. This can be a single property key,
  *        an array of property keys, or a string representing a deep path.
- * @returns {boolean} Returns `true` if the path exists in the object, `false` otherwise.
+ * @returns Returns `true` if the path exists in the object, `false` otherwise.
  *
  * @example
  * const obj = { a: { b: { c: 3 } } };
@@ -65,10 +65,10 @@ export function has<T>(object: T, path: PropertyPath): boolean;
  * if the index is valid and within the bounds of the array or arguments object, even if the array or
  * arguments object is sparse (i.e., not all indexes are defined).
  *
- * @param {any} object - The object to query.
- * @param {PropertyKey | readonly PropertyKey[]} path - The path to check. This can be a single property key,
+ * @param object - The object to query.
+ * @param path - The path to check. This can be a single property key,
  *        an array of property keys, or a string representing a deep path.
- * @returns {boolean} Returns `true` if the path exists in the object, `false` otherwise.
+ * @returns Returns `true` if the path exists in the object, `false` otherwise.
  *
  * @example
  *
@@ -89,7 +89,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
+  } else if (typeof path === 'string' && isDeepKey(path) && !(path in Object(object))) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];

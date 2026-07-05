@@ -11,9 +11,9 @@ import { isObject } from '../predicate/isObject.ts';
  *
  * @template T - The prototype object type.
  * @template U - The properties object type.
- * @param {T} prototype - The object to inherit from.
- * @param {U} properties - The properties to assign to the created object.
- * @returns {T & U} The new object.
+ * @param prototype - The object to inherit from.
+ * @param properties - The properties to assign to the created object.
+ * @returns The new object.
  */
 export function create<T extends object, U extends object>(prototype: T, properties?: U): T & U {
   const proto = isObject(prototype) ? Object.create(prototype) : ({} as unknown as T);

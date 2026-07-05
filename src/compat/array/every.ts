@@ -12,9 +12,9 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * The predicate is invoked with three arguments: (value, index|key, collection).
  *
  * @template T - The type of elements in the collection
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over
- * @param {ListIterateeCustom<T, boolean>} [predicate=identity] - The function invoked per iteration
- * @returns {boolean} Returns true if all elements pass the predicate check, else false
+ * @param collection - The collection to iterate over
+ * @param [predicate=identity] - The function invoked per iteration
+ * @returns Returns true if all elements pass the predicate check, else false
  *
  * @example
  * // Using a function predicate
@@ -44,9 +44,9 @@ export function every<T>(
  * The predicate is invoked with three arguments: (value, key, object).
  *
  * @template T - The type of the object
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {ObjectIterateeCustom<T, boolean>} [predicate=identity] - The function invoked per iteration
- * @returns {boolean} Returns true if all elements pass the predicate check, else false
+ * @param collection - The object to iterate over
+ * @param [predicate=identity] - The function invoked per iteration
+ * @returns Returns true if all elements pass the predicate check, else false
  *
  * @example
  * // Using a function predicate
@@ -78,12 +78,12 @@ export function every<T extends object>(
  * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to check through.
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to check through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {PropertyKey} propertyToCheck - The property name to check.
- * @param {unknown} guard - Enables use as an iteratee for methods like `_.map`.
- * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
+ * @param object - The object to check through.
+ * @param source - The source array or object to check through.
+ * @param doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param propertyToCheck - The property name to check.
+ * @param guard - Enables use as an iteratee for methods like `_.map`.
+ * @returns `true` if every property value has the specified property, or `false` if at least one does not match.
  *
  * @example
  * // Using a property name

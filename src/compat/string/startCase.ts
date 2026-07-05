@@ -1,13 +1,13 @@
 import { deburr } from './deburr.ts';
-import { words as getWords } from '../../string/words.ts';
+import { words as getWords } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts the first character of each word in a string to uppercase and the remaining characters to lowercase.
  *
  * Start case is the naming convention in which each word is written with an initial capital letter.
- * @param {string | object} str - The string to convert.
- * @returns {string} The converted string.
+ * @param str - The string to convert.
+ * @returns The converted string.
  *
  * @example
  * const result1 = startCase('hello world');  // result will be 'Hello World'

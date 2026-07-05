@@ -3,12 +3,12 @@
 Sets a time limit on an asynchronous function, throwing a `TimeoutError` if it doesn't complete within the specified time.
 
 ```typescript
-await withTimeout(run, ms);
+await withTimeout(run, ms, options?);
 ```
 
 ## Usage
 
-### `withTimeout(run, ms)`
+### `withTimeout(run, ms, options?)`
 
 Use `withTimeout` when you want to set a timeout on an asynchronous task. If the Promise doesn't complete within the specified time, it's rejected with a `TimeoutError`, preventing indefinite waiting.
 
@@ -67,10 +67,23 @@ async function getFastestResponse() {
 }
 ```
 
+You can pass an `AbortSignal` to cancel the timeout. Aborting it lifts the time limit, so `run` is awaited without a deadline. It does not reject the returned Promise or abort `run` itself. Pass the same signal into `run` if you also want to cancel the underlying work.
+
+```typescript
+const controller = new AbortController();
+
+// Remove the 1 second limit when the user opts to keep waiting.
+keepWaitingButton.onclick = () => controller.abort();
+
+const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
+```
+
 #### Parameters
 
 - `run` (`() => Promise<T>`): The asynchronous function to execute.
 - `ms` (`number`): The amount of time in milliseconds until the timeout occurs.
+- `options` (`WithTimeoutOptions`, optional): Timeout options.
+  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the timeout. When aborted, the time limit is lifted and `run` is awaited without a deadline.
 
 #### Returns
 

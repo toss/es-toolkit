@@ -9,9 +9,9 @@
  * @template K - The type of keys in the original Map.
  * @template V - The type of values in the original Map.
  * @template K2 - The type of keys to produce in the returned Map.
- * @param {Map<K, V>} map - The map of entries to be mapped.
- * @param {(value: V, key: K, object: Map<K, V>) => K2} getKeyFromEntry - A function that generates a key from a value-key pair.
- * @returns {Map<K2, V>} A Map where the generated keys are mapped to each entry's value.
+ * @param map - The map of entries to be mapped.
+ * @param getKeyFromEntry - A function that generates a key from a value-key pair.
+ * @returns A Map where the generated keys are mapped to each entry's value.
  *
  * @example
  * const map = new Map([

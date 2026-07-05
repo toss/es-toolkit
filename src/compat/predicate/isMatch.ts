@@ -4,9 +4,9 @@ import { isMatchWith } from './isMatchWith.ts';
  * Checks if the target matches the source by comparing their structures and values.
  * This function supports deep comparison for objects, arrays, maps, and sets.
  *
- * @param {object} target - The target value to match against.
- * @param {object} source - The source value to match with.
- * @returns {boolean} - Returns `true` if the target matches the source, otherwise `false`.
+ * @param target - The target value to match against.
+ * @param source - The source value to match with.
+ * @returns Returns `true` if the target matches the source, otherwise `false`.
  *
  * @example
  * // Basic usage

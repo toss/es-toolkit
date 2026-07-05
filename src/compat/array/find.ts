@@ -8,9 +8,10 @@ import { iteratee } from '../util/iteratee.ts';
 /**
  * Finds the first element in an array-like object that matches a type guard predicate.
  *
+ * @template T, U
  * @param collection - The array-like object to search
  * @param predicate - The type guard function to test each element
- * @param fromIndex - The index to start searching from
+ * @param [fromIndex] - The index to start searching from
  * @returns The first element that matches the type guard, or undefined if none found
  *
  * @example
@@ -26,9 +27,10 @@ export function find<T, U extends T>(
 /**
  * Finds the first element in an array-like object that matches a predicate.
  *
+ * @template T
  * @param collection - The array-like object to search
- * @param predicate - The function or shorthand to test each element
- * @param fromIndex - The index to start searching from
+ * @param [predicate] - The function or shorthand to test each element
+ * @param [fromIndex] - The index to start searching from
  * @returns The first matching element, or undefined if none found
  *
  * @example
@@ -47,9 +49,10 @@ export function find<T>(
 /**
  * Finds the first value in an object that matches a type guard predicate.
  *
+ * @template T, U
  * @param collection - The object to search
  * @param predicate - The type guard function to test each value
- * @param fromIndex - The index to start searching from
+ * @param [fromIndex] - The index to start searching from
  * @returns The first value that matches the type guard, or undefined if none found
  *
  * @example
@@ -65,9 +68,10 @@ export function find<T extends object, U extends T[keyof T]>(
 /**
  * Finds the first value in an object that matches a predicate.
  *
+ * @template T
  * @param collection - The object to search
- * @param predicate - The function or shorthand to test each value
- * @param fromIndex - The index to start searching from
+ * @param [predicate] - The function or shorthand to test each value
+ * @param [fromIndex] - The index to start searching from
  * @returns The first matching value, or undefined if none found
  *
  * @example
@@ -87,10 +91,10 @@ export function find<T extends object>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to search through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
- * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
+ * @param source - The source array or object to search through.
+ * @param [doesMatch=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [fromIndex=0] - The index to start the search from, defaults to 0.
+ * @returns The first property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
  * // Using a property name

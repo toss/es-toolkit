@@ -1,8 +1,4 @@
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
+import { globalThis } from '../_internal/globalThis';
 
 /**
  * Checks if the given value is a Buffer instance.
@@ -12,8 +8,8 @@ declare let Buffer:
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Buffer`.
  *
- * @param {unknown} x - The value to check if it is a Buffer.
- * @returns {boolean} Returns `true` if `x` is a Buffer, else `false`.
+ * @param x - The value to check if it is a Buffer.
+ * @returns Returns `true` if `x` is a Buffer, else `false`.
  *
  * @example
  * const buffer = Buffer.from("test");
@@ -25,5 +21,5 @@ declare let Buffer:
 export function isBuffer(x: unknown): boolean {
   // eslint-disable-next-line
   // @ts-ignore
-  return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
+  return typeof globalThis.Buffer !== 'undefined' && globalThis.Buffer.isBuffer(x);
 }

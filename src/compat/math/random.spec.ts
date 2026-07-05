@@ -69,24 +69,52 @@ describe('random', () => {
     expect(actual).toEqual([0, 1, Number.MAX_SAFE_INTEGER]);
   });
 
+  it('should coerce a string upper bound and respect both bounds', () => {
+    for (let i = 0; i < 100; i++) {
+      // eslint-disable-next-line
+      // @ts-ignore
+      const actual = random('5', '10');
+      expect(actual).toBeGreaterThanOrEqual(5);
+      expect(actual).toBeLessThanOrEqual(10);
+    }
+  });
+
+  it('should support a float `min` or `max`', () => {
+    const floatMinSamples = array.map(() => random(1.5, 2));
+    expect(floatMinSamples.some(v => v % 1 !== 0)).toBeTruthy();
+    expect(floatMinSamples.every(v => v >= 1.5 && v <= 2)).toBeTruthy();
+
+    const floatMaxSamples = array.map(() => random(1, 2.5));
+    expect(floatMaxSamples.some(v => v % 1 !== 0)).toBeTruthy();
+    expect(floatMaxSamples.every(v => v >= 1 && v <= 2.5)).toBeTruthy();
+  });
+
+  it('should support a float `max`', () => {
+    const max = 2.5;
+    const samples = array.map(() => random(max));
+
+    expect(samples.some(v => v % 1 !== 0)).toBeTruthy();
+    expect(samples.every(v => v >= 0 && v <= max)).toBeTruthy();
+  });
+
   it('should support floats', () => {
     const min = 1.5;
     const max = 1.6;
     const actual = random(min, max);
 
-    expect(actual % 1);
-    expect(actual >= min && actual <= max);
+    expect(actual % 1).toBeTruthy();
+    expect(actual >= min && actual <= max).toBeTruthy();
   });
 
   it('should support providing a `floating`', () => {
     let actual = random(true);
-    expect(actual % 1 && actual >= 0 && actual <= 1);
+    expect(actual % 1 && actual >= 0 && actual <= 1).toBeTruthy();
 
     actual = random(2, true);
-    expect(actual % 1 && actual >= 0 && actual <= 2);
+    expect(actual % 1 && actual >= 0 && actual <= 2).toBeTruthy();
 
     actual = random(2, 4, true);
-    expect(actual % 1 && actual >= 2 && actual <= 4);
+    expect(actual % 1 && actual >= 2 && actual <= 4).toBeTruthy();
   });
 
   it('should work as an iteratee for methods like `_.map`', () => {

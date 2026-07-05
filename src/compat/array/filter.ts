@@ -11,7 +11,7 @@ import { iteratee } from '../util/iteratee.ts';
  * Filters characters in a string based on the predicate function.
  *
  * @param collection - The string to filter
- * @param predicate - The function to test each character
+ * @param [predicate] - The function to test each character
  * @returns An array of characters that pass the predicate test
  *
  * @example
@@ -23,6 +23,7 @@ export function filter(collection: string | null | undefined, predicate?: String
 /**
  * Filters elements in an array-like object using a type guard predicate.
  *
+ * @template T, U
  * @param collection - The array-like object to filter
  * @param predicate - The type guard function to test each element
  * @returns An array of elements that are of type U
@@ -39,8 +40,9 @@ export function filter<T, U extends T>(
 /**
  * Filters elements in an array-like object based on the predicate.
  *
+ * @template T
  * @param collection - The array-like object to filter
- * @param predicate - The function or shorthand to test each element
+ * @param [predicate] - The function or shorthand to test each element
  * @returns An array of elements that pass the predicate test
  *
  * @example
@@ -55,6 +57,7 @@ export function filter<T>(collection: ArrayLike<T> | null | undefined, predicate
 /**
  * Filters values in an object using a type guard predicate.
  *
+ * @template T, U
  * @param collection - The object to filter
  * @param predicate - The type guard function to test each value
  * @returns An array of values that are of type U
@@ -71,8 +74,9 @@ export function filter<T extends object, U extends T[keyof T]>(
 /**
  * Filters values in an object based on the predicate.
  *
+ * @template T
  * @param collection - The object to filter
- * @param predicate - The function or shorthand to test each value
+ * @param [predicate] - The function or shorthand to test each value
  * @returns An array of values that pass the predicate test
  *
  * @example
@@ -92,9 +96,9 @@ export function filter<T extends object>(
  * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The array or object to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] - The function invoked per iteration.
- * @returns {T[]} - Returns a new array of filtered elements that satisfy the predicate.
+ * @param collection - The array or object to iterate over.
+ * @param [predicate=identity] - The function invoked per iteration.
+ * @returns Returns a new array of filtered elements that satisfy the predicate.
  *
  * @example
  * filter([{ a: 1 }, { a: 2 }, { b: 1 }], 'a');
@@ -110,25 +114,25 @@ export function filter<T extends object>(
  * // => [{ a: 2 }]
  */
 export function filter<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
   predicate: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey = identity
 ): T[] {
-  if (!source) {
+  if (!collection) {
     return [];
   }
 
   predicate = iteratee(predicate);
 
-  if (!Array.isArray(source)) {
+  if (!Array.isArray(collection)) {
     const result: T[] = [];
-    const keys = Object.keys(source) as Array<keyof T>;
-    const length = isArrayLike(source) ? source.length : keys.length;
+    const keys = Object.keys(collection) as Array<keyof T>;
+    const length = isArrayLike(collection) ? collection.length : keys.length;
 
     for (let i = 0; i < length; i++) {
       const key = keys[i];
-      const value = source[key] as T;
+      const value = collection[key] as T;
 
-      if (predicate(value, key as number, source)) {
+      if (predicate(value, key as number, collection)) {
         result.push(value);
       }
     }
@@ -137,11 +141,11 @@ export function filter<T>(
   }
 
   const result: T[] = [];
-  const length = source.length;
+  const length = collection.length;
 
   for (let i = 0; i < length; i++) {
-    const value = source[i];
-    if (predicate(value, i, source)) {
+    const value = collection[i];
+    if (predicate(value, i, collection)) {
       result.push(value);
     }
   }

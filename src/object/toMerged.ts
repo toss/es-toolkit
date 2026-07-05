@@ -1,4 +1,5 @@
 import { clone } from './clone.ts';
+import { cloneDeep } from './cloneDeep.ts';
 import { mergeWith } from './mergeWith.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -13,9 +14,9 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  *
  * Note that this function does not mutate the target object.
  *
- * @param {T} target - The target object to be cloned and merged into. This object is not modified directly.
- * @param {S} source - The source object whose properties will be merged into the cloned target object.
- * @returns {T & S} A new object with properties from the source object merged into a deep clone of the target object.
+ * @param target - The target object to be cloned and merged into. This object is not modified directly.
+ * @param source - The source object whose properties will be merged into the cloned target object.
+ * @returns A new object with properties from the source object merged into a deep clone of the target object.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
@@ -48,7 +49,7 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
   target: T,
   source: S
 ): T & S {
-  return mergeWith(clone(target), source, function mergeRecursively(targetValue, sourceValue) {
+  return mergeWith(cloneDeep(target), source, function mergeRecursively(targetValue, sourceValue) {
     if (Array.isArray(sourceValue)) {
       if (Array.isArray(targetValue)) {
         return mergeWith(clone(targetValue), sourceValue, mergeRecursively);

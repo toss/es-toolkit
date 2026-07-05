@@ -3,8 +3,8 @@ import { isDate as isDateToolkit } from '../../predicate/isDate.ts';
 /**
  * Checks if `value` is a Date object.
  *
- * @param {any} value The value to check.
- * @returns {value is Date} Returns `true` if `value` is a Date object, `false` otherwise.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is a Date object, `false` otherwise.
  *
  * @example
  * const value1 = new Date();

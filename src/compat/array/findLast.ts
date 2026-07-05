@@ -10,10 +10,10 @@ import { toInteger } from '../util/toInteger.ts';
  * Finds the last element in a collection that satisfies the predicate.
  *
  * @template T, S
- * @param {ArrayLike<T> | null | undefined} collection - The collection to search.
- * @param {ListIteratorTypeGuard<T, S>} predicate - The predicate function with type guard.
- * @param {number} [fromIndex] - The index to start searching from.
- * @returns {S | undefined} The last element that satisfies the predicate.
+ * @param collection - The collection to search.
+ * @param predicate - The predicate function with type guard.
+ * @param [fromIndex] - The index to start searching from.
+ * @returns The last element that satisfies the predicate.
  *
  * @example
  * const users = [{ user: 'barney', age: 36 }, { user: 'fred', age: 40 }, { user: 'pebbles', age: 18 }];
@@ -30,10 +30,10 @@ export function findLast<T, S extends T>(
  * Finds the last element in a collection that satisfies the predicate.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The collection to search.
- * @param {ListIterateeCustom<T, boolean>} [predicate] - The predicate function, partial object, property-value pair, or property name.
- * @param {number} [fromIndex] - The index to start searching from.
- * @returns {T | undefined} The last element that satisfies the predicate.
+ * @param collection - The collection to search.
+ * @param [predicate] - The predicate function, partial object, property-value pair, or property name.
+ * @param [fromIndex] - The index to start searching from.
+ * @returns The last element that satisfies the predicate.
  *
  * @example
  * const users = [{ user: 'barney', age: 36 }, { user: 'fred', age: 40 }, { user: 'pebbles', age: 18 }];
@@ -47,7 +47,7 @@ export function findLast<T, S extends T>(
  * // => { user: 'pebbles', age: 18 }
  *
  * findLast(users, 'age');
- * // => { user: 'fred', age: 40 }
+ * // => { user: 'pebbles', age: 18 }
  */
 export function findLast<T>(
   collection: ArrayLike<T> | null | undefined,
@@ -59,10 +59,10 @@ export function findLast<T>(
  * Finds the last element in an object that satisfies the predicate with type guard.
  *
  * @template T, S
- * @param {T | null | undefined} collection - The object to search.
- * @param {ObjectIteratorTypeGuard<T, S>} predicate - The predicate function with type guard.
- * @param {number} [fromIndex] - The index to start searching from.
- * @returns {S | undefined} The last element that satisfies the predicate.
+ * @param collection - The object to search.
+ * @param predicate - The predicate function with type guard.
+ * @param [fromIndex] - The index to start searching from.
+ * @returns The last element that satisfies the predicate.
  *
  * @example
  * const obj = { a: 1, b: 'hello', c: 3 };
@@ -79,10 +79,10 @@ export function findLast<T extends object, S extends T[keyof T]>(
  * Finds the last element in an object that satisfies the predicate.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to search.
- * @param {ObjectIterateeCustom<T, boolean>} [predicate] - The predicate function, partial object, property-value pair, or property name.
- * @param {number} [fromIndex] - The index to start searching from.
- * @returns {T[keyof T] | undefined} The last element that satisfies the predicate.
+ * @param collection - The object to search.
+ * @param [predicate] - The predicate function, partial object, property-value pair, or property name.
+ * @param [fromIndex] - The index to start searching from.
+ * @returns The last element that satisfies the predicate.
  *
  * @example
  * const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2 }, c: { id: 3, name: 'Bob' } };
@@ -105,10 +105,10 @@ export function findLast<T extends object>(
  * Finds the last item in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to search through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {number} [fromIndex] - The index to start the search from, defaults to source.length-1 for arrays or Object.keys(source).length-1 for objects.
- * @returns {T | undefined} - The last property value that has the specified property, or `undefined` if no match is found.
+ * @param collection - The array or object to search through.
+ * @param [predicate=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [fromIndex] - The index to start the search from, defaults to collection.length-1 for arrays or Object.keys(collection).length-1 for objects.
+ * @returns The last property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
  * // Using a property name
@@ -117,19 +117,15 @@ export function findLast<T extends object>(
  * console.log(result); // { id: 3, name: 'Bob' }
  */
 export function findLast<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
-  _doesMatch:
-    | ((item: T, index: number, arr: any) => unknown)
-    | Partial<T>
-    | [keyof T, unknown]
-    | PropertyKey = identity,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
+  predicate: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey = identity,
   fromIndex?: number
 ): T | undefined {
-  if (!source) {
+  if (!collection) {
     return undefined;
   }
 
-  const length = Array.isArray(source) ? source.length : Object.keys(source).length;
+  const length = Array.isArray(collection) ? collection.length : Object.keys(collection).length;
 
   fromIndex = toInteger(fromIndex ?? length - 1);
 
@@ -139,16 +135,16 @@ export function findLast<T>(
     fromIndex = Math.min(fromIndex, length - 1);
   }
 
-  const doesMatch = iteratee(_doesMatch);
+  const doesMatch = iteratee(predicate);
 
-  if (!Array.isArray(source)) {
-    const keys = Object.keys(source) as Array<keyof T>;
+  if (!Array.isArray(collection)) {
+    const keys = Object.keys(collection) as Array<keyof T>;
 
     for (let i = fromIndex; i >= 0; i--) {
       const key = keys[i];
-      const value = source[key] as T;
+      const value = collection[key] as T;
 
-      if (doesMatch(value, key as number, source)) {
+      if (doesMatch(value, key as number, collection)) {
         return value;
       }
     }
@@ -156,5 +152,5 @@ export function findLast<T>(
     return undefined;
   }
 
-  return source.slice(0, fromIndex + 1).findLast(doesMatch);
+  return collection.slice(0, fromIndex + 1).findLast(doesMatch);
 }

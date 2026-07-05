@@ -107,6 +107,13 @@ describe('findLastIndex', () => {
     expect(findLastIndex(array, x => x === 2, 4.2)).toBe(4);
   });
 
+  it(`\`findLastIndex\` with \`NaN\` \`fromIndex\` should start from 0`, () => {
+    // Lodash coerces `NaN` via `toInteger`, so `fromIndex` becomes `0` and the
+    // search still covers the first element. The existing falsey test uses a
+    // predicate that never matches index 0, so it does not catch this.
+    expect(findLastIndex(array, x => x === 1, NaN)).toBe(0);
+  });
+
   it('should return `-1` when provided `null` or `undefined`', () => {
     expect(findLastIndex(null, 'a')).toBe(-1);
     expect(findLastIndex(undefined, 'a')).toBe(-1);
@@ -125,5 +132,10 @@ describe('findLastIndex', () => {
 
   it('should match the type of lodash', () => {
     expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
+  });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findLastIndex([0, false, null, undefined, '', 1, 2, 3])).toBe(7);
+    expect(findLastIndex([0, false, null, undefined, ''])).toBe(-1);
   });
 });

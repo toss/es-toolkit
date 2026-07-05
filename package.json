@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.44.0",
+  "version": "1.49.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -10,12 +10,15 @@
   },
   "license": "MIT",
   "sideEffects": false,
+  "jsdelivr": "./dist/browser.global.js",
+  "unpkg": "./dist/browser.global.js",
   "packageManager": "yarn@4.12.0",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
+    "./fp": "./src/fp/index.ts",
     "./function": "./src/function/index.ts",
     "./map": "./src/map/index.ts",
     "./math": "./src/math/index.ts",
@@ -24,6 +27,7 @@
     "./promise": "./src/promise/index.ts",
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
+    "./server": "./src/server/index.ts",
     "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
@@ -34,6 +38,7 @@
     "array.js",
     "compat.js",
     "error.js",
+    "fp.js",
     "function.js",
     "map.js",
     "math.js",
@@ -42,6 +47,7 @@
     "promise.js",
     "set.js",
     "string.js",
+    "server.js",
     "util.js"
   ],
   "workspaces": [
@@ -50,8 +56,9 @@
   ],
   "scripts": {
     "bench": "vitest bench",
-    "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
+    "build": "tsdown && ./.scripts/postbuild.sh",
     "format": "prettier --write .",
+    "gen:benchmark": "node ./.scripts/generate-benchmark.mjs",
     "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
     "lint": "eslint --config eslint.config.mjs --concurrency=auto",
     "packlint": "packlint sort -R",
@@ -65,45 +72,42 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.39.2",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/broken-link-checker": "^0",
+    "@types/broken-link-checker": "0.7.3",
     "@types/jscodeshift": "^0.12.0",
-    "@types/lodash": "^4.17.20",
+    "@types/lodash": "4.17.20",
     "@types/node": "^24.10.9",
     "@types/tar": "^6.1.13",
     "@typescript-eslint/parser": "^8.26.1",
     "@vitest/coverage-istanbul": "^4.0.17",
     "@vitest/eslint-plugin": "^1.6.6",
     "@vue/compiler-sfc": "^3.5.10",
-    "broken-link-checker": "^0.7.8",
+    "broken-link-checker": "0.7.8",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
+    "fast-check": "4.8.0",
     "globals": "^15.9.0",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "20.9.0",
     "jscodeshift": "^17.0.0",
     "packlint": "^0.2.4",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
-    "rollup": "^4.19.0",
-    "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",
+    "tsdown": "^0.22.0",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.6.0",
-    "vercel": "^41.4.1",
+    "vercel": "^54.4.1",
     "vitest": "^4.0.17"
   },
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",
-    "browser": "./dist/browser.global.js",
     "module": "./dist/index.mjs",
     "exports": {
       ".": {
@@ -137,9 +141,23 @@
         }
       },
       "./compat/*": {
-        "default": {
+        "import": {
+          "types": "./compat/*.d.mts",
+          "default": "./compat/*.mjs"
+        },
+        "require": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
+        }
+      },
+      "./server": {
+        "import": {
+          "types": "./dist/server/index.d.mts",
+          "default": "./dist/server/index.mjs"
+        },
+        "require": {
+          "types": "./dist/server/index.d.ts",
+          "default": "./dist/server/index.js"
         }
       },
       "./error": {
@@ -152,6 +170,16 @@
           "default": "./dist/error/index.js"
         }
       },
+      "./fp": {
+        "import": {
+          "types": "./dist/fp/index.d.mts",
+          "default": "./dist/fp/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/index.d.ts",
+          "default": "./dist/fp/index.js"
+        }
+      },
       "./function": {
         "import": {
           "types": "./dist/function/index.d.mts",
@@ -160,6 +188,16 @@
         "require": {
           "types": "./dist/function/index.d.ts",
           "default": "./dist/function/index.js"
+        }
+      },
+      "./map": {
+        "import": {
+          "types": "./dist/map/index.d.mts",
+          "default": "./dist/map/index.mjs"
+        },
+        "require": {
+          "types": "./dist/map/index.d.ts",
+          "default": "./dist/map/index.js"
         }
       },
       "./math": {
@@ -202,6 +240,16 @@
           "default": "./dist/promise/index.js"
         }
       },
+      "./set": {
+        "import": {
+          "types": "./dist/set/index.d.mts",
+          "default": "./dist/set/index.mjs"
+        },
+        "require": {
+          "types": "./dist/set/index.d.ts",
+          "default": "./dist/set/index.js"
+        }
+      },
       "./string": {
         "import": {
           "types": "./dist/string/index.d.mts",
@@ -231,6 +279,9 @@
       "unplugged": true
     },
     "prettier-plugin-sort-re-exports@0.0.1": {
+      "unplugged": true
+    },
+    "vitepress-plugin-sandpack@1.1.4": {
       "unplugged": true
     }
   },

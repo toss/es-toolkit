@@ -37,9 +37,6 @@ ary(fn, 2)(1, 2, 3);
 ```typescript
 // parseInt 接收两个参数,但 map 会传递三个参数
 ['1', '2', '3'].map(parseInt);
-// Returns: [1, NaN, NaN]
-
-['1', '2', '3'].map(parseInt);
 // 结果: [1, NaN, NaN]
 // 因为会执行 parseInt('2', 1), parseInt('3', 2)。
 

@@ -11,9 +11,9 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  * Note: This function modifies the first argument, `object`.
  *
  * @template T - The type of the object being processed.
- * @param {any} target - The target object that will receive default values.
- * @param {any[]} sources - One or more source objects that specify default values to apply.
- * @returns {any} The `object` that has been updated with default values from all sources, recursively merging nested objects.
+ * @param target - The target object that will receive default values.
+ * @param sources - One or more source objects that specify default values to apply.
+ * @returns The `object` that has been updated with default values from all sources, recursively merging nested objects.
  *
  * @example
  * defaultsDeep({ a: { b: 2 } }, { a: { b: 3, c: 3 }, d: 4 }); // { a: { b: 2, c: 3 }, d: 4 }

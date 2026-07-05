@@ -51,7 +51,7 @@ pascalCase('user@email.com'); // 'UserEmailCom'
 
 (`string`): パスカルケースに変換された新しい文字列を返します。
 
-## デモ
+## 使用例
 
 ::: sandpack
 
