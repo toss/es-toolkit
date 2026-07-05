@@ -16,7 +16,7 @@ const result = find(collection, predicate, fromIndex);
 
 ## 用法
 
-### `find(collection, predicate, fromIndex?)`
+### `find(collection, predicate?, fromIndex?)`
 
 当您想在数组或对象中查找满足特定条件的第一个元素时,使用 `find`。条件可以以各种格式指定,如函数、部分对象、属性-值对、属性名称等。
 
@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要搜索的数组或对象。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 搜索条件。可以使用函数、部分对象、属性-值对或属性名称。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 搜索条件。可以使用函数、部分对象、属性-值对或属性名称。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。默认为 `0`。
 
 #### 返回值

@@ -56,6 +56,12 @@ describe('kebabCase', () => {
     expect(kebabCase({ toString: () => string })).toBe('foo-bar');
   });
 
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(kebabCase('foo1stPlace')).toBe('foo-1st-place');
+    expect(kebabCase('top10th')).toBe('top-10th');
+    expect(kebabCase('1st place 2nd 3rd 4th')).toBe('1st-place-2nd-3rd-4th');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(kebabCase).toEqualTypeOf<typeof kebabCaseLodash>();
   });

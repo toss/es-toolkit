@@ -16,7 +16,7 @@ const result = filter(collection, predicate);
 
 ## 用法
 
-### `filter(collection, predicate)`
+### `filter(collection, predicate?)`
 
 当您想从数组或对象中筛选出满足特定条件的元素时,使用 `filter`。条件可以以各种格式指定,如函数、部分对象、属性-值对、属性名称等。
 
@@ -71,7 +71,7 @@ filter(undefined, x => x > 0);
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要过滤的数组或对象。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 过滤条件。可以使用函数、部分对象、属性-值对或属性名称。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 过滤条件。可以使用函数、部分对象、属性-值对或属性名称。
 
 #### 返回值
 

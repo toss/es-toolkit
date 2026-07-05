@@ -126,6 +126,11 @@ export const flavors = [
     value: 'fp',
     label: 'es-toolkit/fp',
     description: 'Functional pipelines',
+    descriptions: {
+      ko: '함수형 파이프라인',
+      ja: '関数型パイプライン',
+      zh_hans: '函数式管道',
+    },
     prefix: 'fp',
     guideItems: [
       { labelKey: 'introduction', slug: 'intro' },

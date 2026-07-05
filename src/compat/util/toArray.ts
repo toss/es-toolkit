@@ -1,5 +1,6 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isMap } from '../predicate/isMap.ts';
+import { isSet } from '../predicate/isSet.ts';
 
 /**
  * Converts a record or null/undefined to an array of its values.
@@ -54,7 +55,7 @@ export function toArray(value?: unknown): any[] {
     return [];
   }
 
-  if (isArrayLike(value) || isMap(value)) {
+  if (isArrayLike(value) || isMap(value) || isSet(value)) {
     return Array.from(value);
   }
 

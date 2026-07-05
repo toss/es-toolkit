@@ -1,5 +1,6 @@
 import { deburr } from './deburr.ts';
-import { camelCase as camelCaseToolkit } from '../../string/camelCase.ts';
+import { words } from './words.ts';
+import { capitalize } from '../../string/capitalize.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -19,5 +20,13 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  */
 
 export function camelCase(str?: string): string {
-  return camelCaseToolkit(normalizeForCase(deburr(str)));
+  const splitWords = words(normalizeForCase(deburr(str)));
+
+  if (splitWords.length === 0) {
+    return '';
+  }
+
+  const [first, ...rest] = splitWords;
+
+  return `${first.toLowerCase()}${rest.map(word => capitalize(word)).join('')}`;
 }
