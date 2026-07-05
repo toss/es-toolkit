@@ -112,6 +112,6 @@ function omitDeepImpl<T>(object: T, paths: string[], currentPath = ''): any {
  * //   ]
  * // }
  */
-export function omitDeep<T, const P extends ReadonlyArray<Paths<T>>>(object: T, paths: P) {
+export function omitDeep<T, const P extends ReadonlyArray<Paths<T>>>(object: T, paths: P): OmitDeep<T, P> {
   return omitDeepImpl(object, paths as unknown as string[]) as OmitDeep<T, P>;
 }
