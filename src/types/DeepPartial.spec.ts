@@ -49,11 +49,6 @@ describe('DeepPartial', () => {
     expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
   });
 
-  it('recurses into Map and Set', () => {
-    expectTypeOf<DeepPartial<Map<string, { a: number }>>>().toEqualTypeOf<Map<string, { a?: number }>>();
-    expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
-  });
-
   it('makes Record values partial', () => {
     type T = Record<string, { a: number; b: string }>;
     expectTypeOf<DeepPartial<T>>().toEqualTypeOf<Partial<Record<string, { a?: number; b?: string }>>>();

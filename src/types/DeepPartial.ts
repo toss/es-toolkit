@@ -3,9 +3,8 @@
  * `Partial` which only affects the first level.
  *
  * Designed for nested object patches (config overrides, mock fixtures, partial
- * form state). Recurses into plain objects, arrays/tuples (element types only —
- * elements do not become sparse), `Map`, and `Set`. Functions, `Date`, and
- * `RegExp` pass through unchanged.
+ * form state). Arrays and tuples recurse into their elements without becoming
+ * sparse. Functions, `Date`, and `RegExp` pass through unchanged.
  *
  * @template T - The type to make deeply optional.
  *
@@ -16,20 +15,10 @@
  *
  * const patch: ConfigPatch = { server: { port: 8080 } }; // ok, host omitted
  */
-export type DeepPartial<T> = T extends (...args: any[]) => unknown
+export type DeepPartial<T> = T extends ((...args: any[]) => unknown) | Date | RegExp
   ? T
-  : T extends Date | RegExp
-    ? T
-    : T extends Map<infer K, infer V>
-      ? Map<DeepPartial<K>, DeepPartial<V>>
-      : T extends ReadonlyMap<infer K, infer V>
-        ? ReadonlyMap<DeepPartial<K>, DeepPartial<V>>
-        : T extends Set<infer U>
-          ? Set<DeepPartial<U>>
-          : T extends ReadonlySet<infer U>
-            ? ReadonlySet<DeepPartial<U>>
-            : T extends readonly unknown[]
-              ? { [K in keyof T]: DeepPartial<T[K]> }
-              : T extends object
-                ? { [K in keyof T]?: DeepPartial<T[K]> }
-                : T;
+  : T extends readonly unknown[]
+    ? { [K in keyof T]: DeepPartial<T[K]> }
+    : T extends object
+      ? { [K in keyof T]?: DeepPartial<T[K]> }
+      : T;
