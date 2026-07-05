@@ -49,6 +49,18 @@ describe('DeepPartial', () => {
     expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
   });
 
+  it('recurses into Map and Set contents', () => {
+    expectTypeOf<DeepPartial<Map<string, { a: number; b: string }>>>().toEqualTypeOf<
+      Map<string, { a?: number; b?: string }>
+    >();
+    expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
+
+    type Config = { routes: Map<string, { handler: string }> };
+    // @ts-expect-error a plain object must not pass as a Map
+    const bad: DeepPartial<Config> = { routes: {} };
+    expectTypeOf(bad).toEqualTypeOf<DeepPartial<Config>>();
+  });
+
   it('makes Record values partial', () => {
     type T = Record<string, { a: number; b: string }>;
     expectTypeOf<DeepPartial<T>>().toEqualTypeOf<Partial<Record<string, { a?: number; b?: string }>>>();

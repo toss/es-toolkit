@@ -38,6 +38,19 @@ describe('DeepReadonly', () => {
     expectTypeOf<DeepReadonly<RegExp>>().toEqualTypeOf<RegExp>();
   });
 
+  it('converts Map and Set to their readonly counterparts', () => {
+    expectTypeOf<DeepReadonly<Map<string, { a: number }>>>().toEqualTypeOf<
+      ReadonlyMap<string, { readonly a: number }>
+    >();
+    expectTypeOf<DeepReadonly<Set<{ a: number }>>>().toEqualTypeOf<ReadonlySet<{ readonly a: number }>>();
+
+    type State = { cache: Map<string, number> };
+    const state = { cache: new Map<string, number>() } as DeepReadonly<State>;
+    // @ts-expect-error mutation methods disappear on ReadonlyMap
+    state.cache.set('k', 1);
+    expectTypeOf(state).toEqualTypeOf<DeepReadonly<State>>();
+  });
+
   it('makes Record values readonly', () => {
     type T = Record<string, { a: number }>;
     expectTypeOf<DeepReadonly<T>>().toEqualTypeOf<Readonly<Record<string, { readonly a: number }>>>();
