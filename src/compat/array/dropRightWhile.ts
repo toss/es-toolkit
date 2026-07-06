@@ -59,14 +59,7 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * const result = dropRightWhile(array, (item, index, arr) => index >= 1);
  * // Returns: [3]
  */
-export function dropRightWhile<T>(
-  array: ArrayLike<T> | null | undefined,
-  predicate:
-    | ((item: T, index: number, array: readonly T[]) => unknown)
-    | Partial<T>
-    | [keyof T, unknown]
-    | PropertyKey = identity
-): T[] {
+export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate: ListIteratee<T> = identity): T[] {
   if (!isArrayLike(array)) {
     return [];
   }
@@ -74,10 +67,7 @@ export function dropRightWhile<T>(
   return dropRightWhileImpl(toArray(array), predicate);
 }
 
-function dropRightWhileImpl<T>(
-  arr: readonly T[],
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
-): T[] {
+function dropRightWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {
   switch (typeof predicate) {
     case 'function': {
       return dropRightWhileToolkit(arr, (item, index, arr) => Boolean(predicate(item, index, arr)));
