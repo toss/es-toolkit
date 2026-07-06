@@ -16,7 +16,7 @@ const result = eachRight(collection, iteratee);
 
 ## 사용법
 
-### `eachRight(collection, iteratee)`
+### `eachRight(collection, iteratee?)`
 
 배열, 객체, 문자열의 각 요소를 오른쪽부터 왼쪽으로 순회하면서 주어진 함수를 실행해요. 배열의 경우 마지막 인덱스부터 역순으로, 객체의 경우 열거 가능한 속성들을 역순으로 순회해요.
 

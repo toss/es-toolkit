@@ -51,7 +51,7 @@ export function hasIn<T>(object: T, path: PropertyPath): boolean {
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && (object as any)[path] == null) {
+  } else if (typeof path === 'string' && isDeepKey(path) && !(path in Object(object))) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];

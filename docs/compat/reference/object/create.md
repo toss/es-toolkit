@@ -1,4 +1,4 @@
-# create (Lodash compatibility)
+# create (Lodash Compatibility)
 
 ::: warning Use `Object.create` instead
 

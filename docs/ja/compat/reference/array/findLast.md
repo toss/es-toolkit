@@ -1,4 +1,4 @@
-# findLast (Lodash互換性)
+# findLast (Lodash 互換性)
 
 ::: warning `Array.prototype.findLast`を使用してください
 

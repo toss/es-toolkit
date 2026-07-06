@@ -1,4 +1,4 @@
-# unzip (Lodash互換)
+# unzip (Lodash 互換性)
 
 ::: warning `es-toolkit`の[unzip](../../../reference/array/unzip.md)を使用してください
 

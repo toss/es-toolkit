@@ -1,4 +1,4 @@
-# uniqWith (Lodash互換)
+# uniqWith (Lodash 互換性)
 
 ::: warning `es-toolkit`の[uniqWith](../../../reference/array/uniqWith.md)を使用してください
 

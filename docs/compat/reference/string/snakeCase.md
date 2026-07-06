@@ -1,4 +1,4 @@
-# snakeCase (Lodash compatibility)
+# snakeCase (Lodash Compatibility)
 
 ::: warning Use `snakeCase` from `es-toolkit`
 

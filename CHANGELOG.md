@@ -1,5 +1,28 @@
 # es-toolkit Changelog
 
+## Version v1.49.0
+
+Released on June 26th, 2026.
+
+- Added the `es-toolkit/fp` entrypoint with data-last, pipeable utilities,
+  documentation, benchmarks, and bundle-size checks. ([#1781])
+- Added a broad set of array utilities to `es-toolkit/fp`, covering slicing,
+  grouping, set operations, ordering, zipping, and collection helpers. ([#1801])
+- Fixed `trimStart` to validate multi-character trim strings correctly before
+  it stops trimming. ([#1615])
+- Fixed `compat/pick` to prefer a literal key over a dot-notation path when the
+  picked value is `undefined`. ([#1775])
+- Fixed `compat/random` to better match Lodash behavior for coerced bounds and
+  floating-point options. ([#1767])
+- Fixed `compat/chunk` to handle `NaN` and `Infinity` size values consistently
+  with Lodash. ([#1797])
+- Improved documentation and JSDoc accuracy across array, function, and compat
+  references. ([#1785], [#1786], [#1788], [#1790], [#1791], [#1792], [#1793],
+  [#1795], [#1800])
+
+We sincerely thank @Antoliny0919, @D-Sketon, @eunwoo-levi, and @raon0211 for
+their contributions. We appreciate your great efforts!
+
 ## Version v1.48.1
 
 Released on June 21st, 2026.

@@ -1,5 +1,5 @@
 import { deburr } from './deburr.ts';
-import { words as getWords } from '../../string/words.ts';
+import { words as getWords } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**

@@ -16,7 +16,7 @@ const result = eachRight(collection, iteratee);
 
 ## 用法
 
-### `eachRight(collection, iteratee)`
+### `eachRight(collection, iteratee?)`
 
 从右到左遍历数组、对象或字符串的每个元素并执行给定的函数。对于数组,从最后一个索引开始逆序迭代;对于对象,以逆序遍历可枚举属性。
 

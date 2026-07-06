@@ -159,12 +159,12 @@ export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ...value
  * Computes the difference between an array and multiple arrays using an iteratee function.
  *
  * @template T
- * @param arr - The primary array from which to derive the difference.
+ * @param array - The primary array from which to derive the difference.
  * @param values - Multiple arrays containing elements to be excluded from the primary array.
  * @returns A new array containing the elements that are present in the primary array but not in the values arrays.
  */
-export function differenceBy<T>(arr: ArrayLike<T> | null | undefined, ..._values: any[]): T[] {
-  if (!isArrayLikeObject(arr)) {
+export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ..._values: any[]): T[] {
+  if (!isArrayLikeObject(array)) {
     return [];
   }
 
@@ -172,8 +172,8 @@ export function differenceBy<T>(arr: ArrayLike<T> | null | undefined, ..._values
   const values = flattenArrayLike<T>(_values);
 
   if (isArrayLikeObject(iteratee)) {
-    return differenceToolkit(Array.from(arr), values);
+    return differenceToolkit(Array.from(array), values);
   }
 
-  return differenceByToolkit(Array.from(arr), values, createIteratee(iteratee));
+  return differenceByToolkit(Array.from(array), values, createIteratee(iteratee));
 }

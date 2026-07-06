@@ -1,4 +1,4 @@
-# mergeWith (Lodash compatibility)
+# mergeWith (Lodash Compatibility)
 
 ::: warning Use `mergeWith` from `es-toolkit`
 

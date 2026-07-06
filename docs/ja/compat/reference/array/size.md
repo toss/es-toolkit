@@ -1,4 +1,4 @@
-# size（Lodash 互換性）
+# size(Lodash 互換性)
 
 ::: warning `.length` プロパティを使用してください
 

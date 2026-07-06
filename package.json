@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.48.1",
+  "version": "1.49.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -18,6 +18,7 @@
     "./array": "./src/array/index.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
+    "./fp": "./src/fp/index.ts",
     "./function": "./src/function/index.ts",
     "./map": "./src/map/index.ts",
     "./math": "./src/math/index.ts",
@@ -37,6 +38,7 @@
     "array.js",
     "compat.js",
     "error.js",
+    "fp.js",
     "function.js",
     "map.js",
     "math.js",
@@ -166,6 +168,16 @@
         "require": {
           "types": "./dist/error/index.d.ts",
           "default": "./dist/error/index.js"
+        }
+      },
+      "./fp": {
+        "import": {
+          "types": "./dist/fp/index.d.mts",
+          "default": "./dist/fp/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/index.d.ts",
+          "default": "./dist/fp/index.js"
         }
       },
       "./function": {

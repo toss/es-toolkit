@@ -56,6 +56,12 @@ describe('snakeCase', () => {
     expect(snakeCase({ toString: () => string })).toBe('foo_bar');
   });
 
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(snakeCase('foo1stPlace')).toBe('foo_1st_place');
+    expect(snakeCase('top10th')).toBe('top_10th');
+    expect(snakeCase('1st place 2nd 3rd 4th')).toBe('1st_place_2nd_3rd_4th');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(snakeCase).toEqualTypeOf<typeof snakeCaseLodash>();
   });

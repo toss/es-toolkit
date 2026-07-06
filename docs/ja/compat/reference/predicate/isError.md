@@ -1,4 +1,4 @@
-# isError (Lodash互換性)
+# isError (Lodash 互換性)
 
 ::: warning es-toolkitの[isError](../../../reference/predicate/isError.md)を使用してください
 この`isError`関数はLodash互換性のための複雑な処理により動作が遅くなります。

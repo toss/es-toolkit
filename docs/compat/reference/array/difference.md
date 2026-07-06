@@ -1,4 +1,4 @@
-# difference (Lodash compatible)
+# difference (Lodash Compatibility)
 
 ::: warning Use `difference` from `es-toolkit` instead
 

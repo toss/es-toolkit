@@ -55,6 +55,7 @@ const SERVER_ICON = [
   'M6 8h.01',
   'M6 16h.01',
 ];
+const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
 
 export const flavors = [
   {
@@ -120,6 +121,26 @@ export const flavors = [
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],
     icon: ARROW_LEFT_RIGHT_ICON,
     iconColor: 'var(--vp-c-warning-1)',
+  },
+  {
+    value: 'fp',
+    label: 'es-toolkit/fp',
+    description: 'Functional pipelines',
+    descriptions: {
+      ko: '함수형 파이프라인',
+      ja: '関数型パイプライン',
+      zh_hans: '函数式管道',
+    },
+    prefix: 'fp',
+    guideItems: [
+      { labelKey: 'introduction', slug: 'intro' },
+      { labelKey: 'bundleSize', slug: 'bundle-size' },
+      { labelKey: 'performance', slug: 'performance' },
+    ],
+    categories: [],
+    icon: CHEVRONS_RIGHT_ICON,
+    iconColor: 'var(--vp-c-green-1)',
+    badge: 'NEW',
   },
 ] as const satisfies readonly FlavorSpec[];
 

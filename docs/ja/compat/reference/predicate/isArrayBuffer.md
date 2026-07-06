@@ -1,4 +1,4 @@
-# isArrayBuffer (Lodash互換性)
+# isArrayBuffer (Lodash 互換性)
 
 ::: warning es-toolkitの[isArrayBuffer](../../../reference/predicate/isArrayBuffer.md)を使用してください
 この`isArrayBuffer`関数はLodash互換性のための複雑な処理により動作が遅くなります。

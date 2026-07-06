@@ -1,4 +1,4 @@
-# overEvery (Lodash互換性)
+# overEvery (Lodash 互換性)
 
 ::: warning `Array.every`を使用してください
 

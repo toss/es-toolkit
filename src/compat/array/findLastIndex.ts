@@ -61,6 +61,9 @@ export function findLastIndex<T>(
   if (!arr) {
     return -1;
   }
+  if (Number.isNaN(fromIndex)) {
+    fromIndex = 0;
+  }
   if (fromIndex < 0) {
     fromIndex = Math.max(arr.length + fromIndex, 0);
   } else {

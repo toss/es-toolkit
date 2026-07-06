@@ -16,7 +16,7 @@ const lastIndex = findLastIndex(array, predicate, fromIndex);
 
 ## Usage
 
-### `findLastIndex(array, predicate, fromIndex)`
+### `findLastIndex(array, predicate?, fromIndex?)`
 
 Use `findLastIndex` when you want to find the index of the first element that matches a given condition starting from the end of the array. Returns `-1` if no element satisfies the condition.
 

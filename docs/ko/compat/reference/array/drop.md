@@ -11,12 +11,12 @@
 배열의 앞에서부터 지정된 개수만큼 요소들을 제거해요.
 
 ```typescript
-const result = drop(array, n);
+const result = drop(array, itemsCount);
 ```
 
 ## 사용법
 
-### `drop(array, n?)`
+### `drop(array, itemsCount?)`
 
 배열의 처음 부분에서 몇 개의 요소를 제거하고 나머지를 얻고 싶을 때 `drop`을 사용하세요. 기본적으로 첫 번째 요소 하나를 제거해요.
 
@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
-- `n` (`number`, 선택): 제거할 요소의 개수예요. 기본값은 `1`이에요.
+- `itemsCount` (`number`, 선택): 제거할 요소의 개수예요. 기본값은 `1`이에요.
 
 #### 반환 값
 

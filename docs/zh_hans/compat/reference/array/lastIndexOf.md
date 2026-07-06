@@ -1,4 +1,4 @@
-# lastIndexOf (Lodash兼容性)
+# lastIndexOf (Lodash 兼容性)
 
 ::: warning 使用`Array.lastIndexOf`
 

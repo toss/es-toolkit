@@ -77,7 +77,9 @@ const hasEnvironment = computed(() => {
 });
 
 const cpuInfo = computed(() => {
-  if (!environment.cpu) return '';
+  if (!environment.cpu) {
+    return '';
+  }
   const cores = environment.cpuCores ? ` ${environment.cpuCores} ${text.value.cores}` : '';
   return `${environment.cpu}${cores}`;
 });

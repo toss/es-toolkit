@@ -16,7 +16,7 @@ const result = dropRightWhile(array, predicate);
 
 ## 使用法
 
-### `dropRightWhile(array, predicate)`
+### `dropRightWhile(array, predicate?)`
 
 配列の末尾から特定の条件を満たす要素を連続して削除したい場合に `dropRightWhile` を使用します。条件関数が `false` を返すと削除を中断します。
 

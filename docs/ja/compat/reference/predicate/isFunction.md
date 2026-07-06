@@ -1,4 +1,4 @@
-# isFunction (Lodash互換性)
+# isFunction (Lodash 互換性)
 
 ::: warning es-toolkitの[isFunction](../../../reference/predicate/isFunction.md)を使用してください
 この`isFunction`関数はLodash互換性のための複雑な処理により動作が遅くなります。

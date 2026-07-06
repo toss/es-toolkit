@@ -1,4 +1,4 @@
-# extendWith (Lodash compatibility)
+# extendWith (Lodash Compatibility)
 
 ::: warning Use `Object.assign()` with a custom function instead
 

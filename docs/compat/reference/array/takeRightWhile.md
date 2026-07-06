@@ -1,4 +1,4 @@
-# takeRightWhile (Lodash compatibility)
+# takeRightWhile (Lodash Compatibility)
 
 ::: warning Please use [takeRightWhile](../../../reference/array/takeRightWhile.md) from `es-toolkit`
 

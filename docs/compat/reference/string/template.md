@@ -1,4 +1,4 @@
-# template (Lodash compatibility)
+# template (Lodash Compatibility)
 
 ::: warning Use JavaScript template literals
 
