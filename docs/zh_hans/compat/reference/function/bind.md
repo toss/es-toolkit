@@ -204,7 +204,7 @@ const problematic = ['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 
 - `func` (`Function`): 要绑定的函数。
 - `thisObj` (`any`, 可选): 要绑定到函数的 `this` 值。
-- `partialArgs` (`...any[]`): 要预先提供的参数。可以使用 `bind.placeholder` 来指定稍后提供的位置。
+- `...partialArgs` (`Array<any>`): 要预先提供的参数。可以使用 `bind.placeholder` 来指定稍后提供的位置。
 
 #### 返回值
 

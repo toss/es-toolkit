@@ -157,7 +157,7 @@ window.addEventListener('beforeunload', () => {
 
 - `func` (`Function`): 지연 후 실행할 함수예요.
 - `wait` (`number`): 지연할 밀리초 수예요.
-- `args` (`...any[]`): 함수 실행 시 전달할 인수들이에요.
+- `...args` (`Array<any>`): 함수 실행 시 전달할 인수들이에요.
 
 #### 반환 값
 

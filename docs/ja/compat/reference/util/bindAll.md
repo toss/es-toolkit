@@ -71,7 +71,7 @@ obj['-0'](); // 'negative zero'
 #### パラメータ
 
 - `object` (`Object`): メソッドをバインドするオブジェクトです。
-- `methodNames` (`...(string | string[] | number | IArguments)`): バインドするメソッド名です。個別の文字列、配列、数値、Arguments オブジェクトで指定できます。
+- `...methodNames` (`Array<string | string[] | number | IArguments>`): バインドするメソッド名です。個別の文字列、配列、数値、Arguments オブジェクトで指定できます。
 
 #### 戻り値
 
