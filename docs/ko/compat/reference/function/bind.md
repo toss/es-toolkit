@@ -204,7 +204,7 @@ const problematic = ['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 
 - `func` (`Function`): 바인딩할 함수예요.
 - `thisObj` (`any`, 선택): 함수에 바인딩할 `this` 값이에요.
-- `partialArgs` (`...any[]`): 미리 제공할 인수들이에요. `bind.placeholder`를 사용해서 나중에 제공할 위치를 지정할 수 있어요.
+- `...partialArgs` (`Array<any>`): 미리 제공할 인수들이에요. `bind.placeholder`를 사용해서 나중에 제공할 위치를 지정할 수 있어요.
 
 #### 반환 값
 

@@ -157,7 +157,7 @@ window.addEventListener('beforeunload', () => {
 
 - `func` (`Function`): The function to execute after the delay.
 - `wait` (`number`): The number of milliseconds to delay.
-- `args` (`...any[]`): The arguments to pass to the function when it executes.
+- `...args` (`Array<any>`): The arguments to pass to the function when it executes.
 
 #### Returns
 

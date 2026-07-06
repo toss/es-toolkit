@@ -204,7 +204,7 @@ const problematic = ['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 
 - `func` (`Function`): バインドする関数。
 - `thisObj` (`any`, オプション): 関数にバインドする `this` 値。
-- `partialArgs` (`...any[]`): 事前に提供する引数。`bind.placeholder` を使用して後で提供する位置を指定できます。
+- `...partialArgs` (`Array<any>`): 事前に提供する引数。`bind.placeholder` を使用して後で提供する位置を指定できます。
 
 #### 戻り値
 

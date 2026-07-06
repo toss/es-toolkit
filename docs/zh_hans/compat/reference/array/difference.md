@@ -87,7 +87,7 @@ difference(arrayLike1, arrayLike2);
 #### 参数
 
 - `arr` (`ArrayLike<T> | null | undefined`): 求差集的基准数组。
-- `values` (`...ArrayLike<T>[]`): 包含要排除的值的数组。
+- `...values` (`Array<ArrayLike<T>>`): 包含要排除的值的数组。
 
 #### 返回值
 

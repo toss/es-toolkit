@@ -36,7 +36,7 @@ without([1, NaN, 3, NaN, 5], NaN);
 #### 参数
 
 - `arr` (`readonly T[]`): 要删除值的数组。
-- `values` (`...T[]`): 要从数组中删除的值。
+- `...values` (`Array<T>`): 要从数组中删除的值。
 
 #### 返回值
 
