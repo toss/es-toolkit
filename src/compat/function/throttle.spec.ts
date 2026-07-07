@@ -353,6 +353,30 @@ describe('throttle', () => {
     expectTypeOf(throttle).toEqualTypeOf<typeof throttleLodash>();
   });
 
+  it('should not invoke the function when both `leading` and `trailing` are `false`', async () => {
+    let callCount = 0;
+
+    const throttled = throttle(
+      () => {
+        callCount++;
+      },
+      64,
+      { leading: false, trailing: false }
+    );
+
+    throttled();
+    throttled();
+
+    await delay(96);
+
+    throttled();
+    throttled();
+
+    await delay(96);
+
+    expect(callCount).toBe(0);
+  });
+
   it('should not invoke the function even after flush is called if timer is going', async () => {
     let callCount = 0;
     const throttled = throttle(() => ++callCount, 32);

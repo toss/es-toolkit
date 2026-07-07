@@ -559,6 +559,30 @@ describe('debounce', () => {
     expect(callCount).toBe(0);
   });
 
+  it('should not invoke the function with `maxWait` when both `leading` and `trailing` are `false`', async () => {
+    let callCount = 0;
+
+    const debounced = debounce(
+      () => {
+        callCount++;
+      },
+      64,
+      { leading: false, trailing: false, maxWait: 64 }
+    );
+
+    debounced();
+    debounced();
+
+    await delay(96);
+
+    debounced();
+    debounced();
+
+    await delay(96);
+
+    expect(callCount).toBe(0);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(debounce).toEqualTypeOf<typeof debounceLodash>();
   });
