@@ -16,7 +16,7 @@ const flattened = flattenDepth(array, depth);
 
 ## 使用法
 
-### `flattenDepth(array, depth)`
+### `flattenDepth(array, depth?)`
 
 ネストされた配列を望む深さまで平坦化したい場合は`flattenDepth`を使用してください。深さを指定すると、その深さまでのみネストされた配列を平坦化します。
 
@@ -47,7 +47,7 @@ flattenDepth(undefined, 2); // []
 
 #### パラメータ
 
-- `array` (`ArrayLike<T> | null | undefined`): 平坦化する配列です。
+- `array` (`ListOfRecursiveArraysOrValues<T> | null | undefined`): 平坦化する配列です。
 - `depth` (`number`, オプション): 平坦化する最大深さです。デフォルトは`1`です。
 
 #### 戻り値

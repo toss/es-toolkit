@@ -11,14 +11,14 @@ Use the faster and more modern [flatten](../../../reference/array/flatten.md) fr
 Flattens an array by one level.
 
 ```typescript
-const result = flatten(array, depth);
+const result = flatten(array);
 ```
 
 ## Usage
 
-### `flatten(value, depth)`
+### `flatten(array)`
 
-Flattens a nested array by the specified depth. By default, it flattens only one level, and also supports Arguments objects and objects with Symbol.isConcatSpreadable.
+Flattens a nested array by one level.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -27,19 +27,20 @@ import { flatten } from 'es-toolkit/compat';
 flatten([1, [2, [3, [4]], 5]]);
 // Result: [1, 2, [3, [4]], 5]
 
-// Specify depth
-flatten([1, [2, [3, [4]], 5]], 2);
-// Result: [1, 2, 3, [4], 5]
-
 // Support for Arguments objects
 function example() {
   return flatten(arguments);
 }
 example(1, [2, 3], [[4]]);
 // Result: [1, 2, 3, [4]]
+
+// Support for objects with Symbol.isConcatSpreadable
+const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
+flatten([1, spreadable, 3]);
+// Result: [1, 'a', 'b', 3]
 ```
 
-Empty arrays, null, or undefined return empty arrays.
+`null` or `undefined` are treated as empty arrays.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -49,20 +50,9 @@ flatten(undefined); // []
 flatten([]); // []
 ```
 
-Objects with Symbol.isConcatSpreadable are also flattened like arrays.
-
-```typescript
-import { flatten } from 'es-toolkit/compat';
-
-const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
-flatten([1, spreadable, 3]);
-// Result: [1, 'a', 'b', 3]
-```
-
 #### Parameters
 
-- `value` (`ArrayLike<T> | null | undefined`): The array to flatten.
-- `depth` (`number`, optional): The maximum depth to flatten. Default is `1`.
+- `array` (`ArrayLike<T> | null | undefined`): The array to flatten.
 
 #### Returns
 

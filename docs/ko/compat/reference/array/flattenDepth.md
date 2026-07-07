@@ -16,7 +16,7 @@ const flattened = flattenDepth(array, depth);
 
 ## 사용법
 
-### `flattenDepth(array, depth)`
+### `flattenDepth(array, depth?)`
 
 중첩된 배열을 원하는 깊이까지 평탄화하고 싶을 때 `flattenDepth`를 사용하세요. 깊이를 지정하면 그 깊이까지만 중첩된 배열을 평탄화해요.
 
@@ -47,7 +47,7 @@ flattenDepth(undefined, 2); // []
 
 #### 파라미터
 
-- `array` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
+- `array` (`ListOfRecursiveArraysOrValues<T> | null | undefined`): 평탄화할 배열이에요.
 - `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
 
 #### 반환 값

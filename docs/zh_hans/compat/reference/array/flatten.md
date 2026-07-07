@@ -11,14 +11,14 @@
 将数组展平一层。
 
 ```typescript
-const result = flatten(array, depth);
+const result = flatten(array);
 ```
 
 ## 用法
 
-### `flatten(value, depth)`
+### `flatten(array)`
 
-按指定深度展平嵌套数组。默认情况下只展平一层,并且还支持 Arguments 对象和具有 Symbol.isConcatSpreadable 的对象。
+将嵌套数组展平一层。
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -27,19 +27,20 @@ import { flatten } from 'es-toolkit/compat';
 flatten([1, [2, [3, [4]], 5]]);
 // 结果: [1, 2, [3, [4]], 5]
 
-// 指定深度
-flatten([1, [2, [3, [4]], 5]], 2);
-// 结果: [1, 2, 3, [4], 5]
-
 // 支持 Arguments 对象
 function example() {
   return flatten(arguments);
 }
 example(1, [2, 3], [[4]]);
 // 结果: [1, 2, 3, [4]]
+
+// 支持具有 Symbol.isConcatSpreadable 的对象
+const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
+flatten([1, spreadable, 3]);
+// 结果: [1, 'a', 'b', 3]
 ```
 
-空数组、null 或 undefined 返回空数组。
+`null` 或 `undefined` 被视为空数组。
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -49,20 +50,9 @@ flatten(undefined); // []
 flatten([]); // []
 ```
 
-具有 Symbol.isConcatSpreadable 的对象也像数组一样被展平。
-
-```typescript
-import { flatten } from 'es-toolkit/compat';
-
-const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
-flatten([1, spreadable, 3]);
-// 结果: [1, 'a', 'b', 3]
-```
-
 #### 参数
 
-- `value` (`ArrayLike<T> | null | undefined`): 要展平的数组。
-- `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
+- `array` (`ArrayLike<T> | null | undefined`): 要展平的数组。
 
 #### 返回值
 

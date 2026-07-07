@@ -16,7 +16,7 @@ const flattened = flattenDepth(array, depth);
 
 ## 用法
 
-### `flattenDepth(array, depth)`
+### `flattenDepth(array, depth?)`
 
 当您想将嵌套数组展平到所需深度时使用 `flattenDepth`。指定深度后,它只会将嵌套数组展平到该深度。
 
@@ -47,7 +47,7 @@ flattenDepth(undefined, 2); // []
 
 #### 参数
 
-- `array` (`ArrayLike<T> | null | undefined`): 要展平的数组。
+- `array` (`ListOfRecursiveArraysOrValues<T> | null | undefined`): 要展平的数组。
 - `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
 
 #### 返回值
