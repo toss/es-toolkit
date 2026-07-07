@@ -36,7 +36,7 @@ without([1, NaN, 3, NaN, 5], NaN);
 #### Parameters
 
 - `arr` (`readonly T[]`): The array from which to remove values.
-- `values` (`...T[]`): The values to remove from the array.
+- `...values` (`Array<T>`): The values to remove from the array.
 
 #### Returns
 

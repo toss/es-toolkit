@@ -71,7 +71,7 @@ obj['-0'](); // 'negative zero'
 #### 파라미터
 
 - `object` (`Object`): 메서드를 바인딩할 객체예요.
-- `methodNames` (`...(string | string[] | number | IArguments)`): 바인딩할 메서드 이름들이에요. 개별 문자열, 배열, 숫자, Arguments 객체로 지정할 수 있어요.
+- `...methodNames` (`Array<string | string[] | number | IArguments>`): 바인딩할 메서드 이름들이에요. 개별 문자열, 배열, 숫자, Arguments 객체로 지정할 수 있어요.
 
 #### 반환 값
 
