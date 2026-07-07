@@ -1,6 +1,4 @@
-import { flattenDepth } from './flattenDepth.ts';
-import { map } from './map.ts';
-import { isNil } from '../../predicate/isNil.ts';
+import { flatMapDepth } from './flatMapDepth.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
 import { Many } from '../_internal/Many.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
@@ -114,13 +112,5 @@ export function flatMap(collection: object | null | undefined, iteratee: object)
  * // => [1, 2, 2, 4]
  */
 export function flatMap<R = any>(collection: object | null | undefined, iteratee?: any): R[] {
-  if (isNil(collection)) {
-    return [];
-  }
-
-  // eslint-disable-next-line
-  // @ts-ignore
-  const mapped = isNil(iteratee) ? map(collection) : map(collection, iteratee);
-
-  return flattenDepth(mapped, 1) as R[];
+  return flatMapDepth(collection, iteratee, 1);
 }
