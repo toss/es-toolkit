@@ -70,7 +70,7 @@ flatMap(users, { active: false });
 #### パラメータ
 
 - `collection` (`object | null | undefined`): 反復処理するコレクションです。配列、オブジェクト、文字列が可能です。
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, オプション): 各要素に適用するイテレータです。関数、プロパティ名、または部分オブジェクトが可能です。
+- `iteratee` (`ListIterator | ObjectIterator | string | object`, オプション): 各要素に適用するイテレータです。関数、プロパティ名、または部分オブジェクトが可能です。デフォルトは `identity` です。
 
 #### 戻り値
 
