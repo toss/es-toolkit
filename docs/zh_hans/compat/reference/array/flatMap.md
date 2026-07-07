@@ -11,12 +11,12 @@
 对每个元素应用函数并展平结果。
 
 ```typescript
-const result = flatMap(collection, iteratee);
+const result = flatMap(collection, iteratee?);
 ```
 
 ## 用法
 
-### `flatMap(collection, iteratee)`
+### `flatMap(collection, iteratee?)`
 
 对集合的每个元素应用迭代函数并返回展平一层的数组。支持数组、对象和字符串,可以使用各种形式的迭代器。
 

@@ -16,7 +16,7 @@ const result = flatMap(collection, iteratee);
 
 ## Usage
 
-### `flatMap(collection, iteratee)`
+### `flatMap(collection, iteratee?)`
 
 Applies an iteratee function to each element of a collection and returns an array flattened by one level. Supports arrays, objects, and strings, and can use various forms of iteratees.
 

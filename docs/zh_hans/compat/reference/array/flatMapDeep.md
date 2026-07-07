@@ -11,12 +11,12 @@
 对每个元素应用函数并递归展平结果。
 
 ```typescript
-const result = flatMapDeep(collection, iteratee);
+const result = flatMapDeep(collection, iteratee?);
 ```
 
 ## 用法
 
-### `flatMapDeep(collection, iteratee)`
+### `flatMapDeep(collection, iteratee?)`
 
 对集合的每个元素应用迭代函数并返回展平到无限深度的数组。所有嵌套的数组结构都将被展平为一维数组。
 

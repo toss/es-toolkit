@@ -11,12 +11,12 @@
 各要素に関数を適用した後、結果を平坦化します。
 
 ```typescript
-const result = flatMap(collection, iteratee);
+const result = flatMap(collection, iteratee?);
 ```
 
 ## 使用法
 
-### `flatMap(collection, iteratee)`
+### `flatMap(collection, iteratee?)`
 
 コレクションの各要素にイテレータ関数を適用した後、1段階平坦化した配列を返します。配列、オブジェクト、文字列をサポートし、様々な形式のイテレータを使用できます。
 
