@@ -1,9 +1,9 @@
 /**
  * Flattens an intersection or mapped type into a single, readable object type.
  *
- * Purely cosmetic: the resulting type is identical, but editors show the
- * resolved shape (`{ a: 1; b: 2 }`) instead of `A & B`. Handy for cleaning up
- * tooltips on composed types. Optional and readonly modifiers are preserved.
+ * The result is equivalent for plain object types, but editors show the
+ * resolved shape (`{ a: 1; b: 2 }`) instead of `A & B`. Optional and readonly
+ * modifiers are preserved.
  *
  * @template T - The type to flatten.
  *

@@ -2,10 +2,9 @@
  * Makes all properties of `T` readonly recursively, unlike the built-in
  * `Readonly` which only affects the first level.
  *
- * Designed for immutable state and function parameters that must not be
- * mutated. Arrays and tuples become readonly, and `Map`/`Set` become
- * `ReadonlyMap`/`ReadonlySet` so mutation methods like `set` and `add`
- * disappear. Functions, `Date`, and `RegExp` pass through unchanged.
+ * Arrays and tuples become readonly, and `Map`/`Set` become
+ * `ReadonlyMap`/`ReadonlySet`. Functions, `Date`, and `RegExp` pass through
+ * unchanged.
  *
  * @template T - The type to make deeply readonly.
  *

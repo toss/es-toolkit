@@ -2,11 +2,9 @@
  * Makes all properties of `T` optional recursively, unlike the built-in
  * `Partial` which only affects the first level.
  *
- * Designed for nested object patches (config overrides, mock fixtures, partial
- * form state). Recurses into plain objects, arrays/tuples (elements do not
- * become sparse), and `Map`/`Set` contents. Functions, `Date`, and `RegExp`
- * pass through unchanged. Note that `merge` replaces `Map`/`Set` wholesale at
- * runtime, so applying partial `Map`/`Set` contents needs a custom applier.
+ * Recurses into plain objects, arrays/tuples (elements do not become sparse),
+ * and `Map`/`Set` contents. Functions, `Date`, and `RegExp` pass through
+ * unchanged.
  *
  * @template T - The type to make deeply optional.
  *
