@@ -66,6 +66,11 @@ describe('size', () => {
     expect(size(str)).toBe(10);
   });
 
+  it('should count multi-byte characters in a string as single code points', () => {
+    expect(size('😀😁😂')).toBe(3);
+    expect(size('a😀b')).toBe(3);
+  });
+
   it('should return the `length` of array-like objects', () => {
     expect(size({ length: 3 })).toBe(3);
     expect(size({ 0: 'a', 1: 'b', length: 2 })).toBe(2);
