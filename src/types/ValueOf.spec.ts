@@ -8,4 +8,8 @@ describe('ValueOf', () => {
     type Status = { readonly IDLE: 'idle'; readonly LOADING: 'loading'; readonly ERROR: 'error' };
     expectTypeOf<ValueOf<Status>>().toEqualTypeOf<'idle' | 'loading' | 'error'>();
   });
+
+  it('resolves a Record to its value type', () => {
+    expectTypeOf<ValueOf<Record<string, number>>>().toEqualTypeOf<number>();
+  });
 });
