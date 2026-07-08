@@ -11,7 +11,7 @@ Use the faster and more modern [flatMap](../../../reference/array/flatMap.md) fr
 Transforms each element of an array with an iteratee function and flattens to the specified depth.
 
 ```typescript
-const result = flatMapDepth(collection, iteratee, depth);
+const result = flatMapDepth(collection, iteratee?, depth?);
 ```
 
 ## Usage

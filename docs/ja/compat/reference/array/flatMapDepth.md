@@ -11,12 +11,12 @@
 配列の各要素をイテレータ関数で変換した後、指定された深さまで平坦化します。
 
 ```typescript
-const result = flatMapDepth(collection, iteratee, depth);
+const result = flatMapDepth(collection, iteratee?, depth?);
 ```
 
 ## 使用法
 
-### `flatMapDepth(collection, iteratee, depth)`
+### `flatMapDepth(collection, iteratee?, depth?)`
 
 配列またはオブジェクトの各要素を与えられた関数で変換した後、結果を指定された深さまで平坦化して新しい配列として返します。ネストされた配列構造を望む深さまでのみ平坦化したいときに便利です。
 

@@ -104,13 +104,13 @@ export function flatMap(collection: object | null | undefined, iteratee: object)
  *
  * @template R
  * @param collection - The collection to iterate over.
- * @param [iteratee] - The function invoked per iteration.
+ * @param [iteratee=identity] - The function invoked per iteration.
  * @returns Returns the new flattened array.
  *
  * @example
  * flatMap([1, 2], n => [n, n * 2]);
  * // => [1, 2, 2, 4]
  */
-export function flatMap<R = any>(collection: object | null | undefined, iteratee?: any): R[] {
+export function flatMap<R = any>(collection: object | null | undefined, iteratee?: any = identity): R[] {
   return flatMapDepth(collection, iteratee, 1);
 }
