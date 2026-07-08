@@ -111,6 +111,6 @@ export function flatMap(collection: object | null | undefined, iteratee: object)
  * flatMap([1, 2], n => [n, n * 2]);
  * // => [1, 2, 2, 4]
  */
-export function flatMap<R = any>(collection: object | null | undefined, iteratee: any = identity): R[] {
+export function flatMap<R = any>(collection: object | null | undefined, iteratee? any): R[] {
   return flatMapDepth(collection, iteratee, 1);
 }
