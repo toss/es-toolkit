@@ -2,10 +2,7 @@ import type { Simplify } from './Simplify.ts';
 
 /**
  * Merges two object types, with the second type (`U`) overriding the first (`T`).
- *
- * Unlike a plain `T & U` intersection, overlapping keys are replaced instead of
- * intersected, so changing a property's type just works (e.g. `string` -> `Date`)
- * rather than collapsing to `never`.
+ * Unlike `T & U`, overlapping keys are replaced instead of intersected.
  *
  * @template T - The base object type.
  * @template U - The object type whose properties take precedence.

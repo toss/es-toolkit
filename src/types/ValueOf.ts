@@ -1,8 +1,5 @@
 /**
- * Creates a union of all value types in `T`.
- *
- * The value-side counterpart to `keyof`: `keyof T` gives the keys, `ValueOf<T>`
- * gives the values. Handy for deriving a union from a `const` object.
+ * Creates a union of all value types in `T`. The value-side counterpart to `keyof`.
  *
  * @template T - The object type to read values from.
  *

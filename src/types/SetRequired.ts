@@ -2,9 +2,7 @@ import type { Simplify } from './Simplify.ts';
 
 /**
  * Makes the given keys `K` of `T` required, leaving the rest unchanged.
- *
- * Like the built-in `Required`, but scoped to specific keys instead of the whole
- * object. Useful when a context guarantees some optional fields are present.
+ * Like the built-in `Required`, but scoped to specific keys.
  *
  * @template T - The object type to transform.
  * @template K - The keys to make required.

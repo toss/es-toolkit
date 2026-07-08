@@ -1,8 +1,6 @@
 /**
  * Removes the `readonly` modifier from all properties of `T`.
- *
- * The inverse of the built-in `Readonly`. Handy for turning a `readonly` shape
- * (e.g. from `as const`) back into a mutable one.
+ * The inverse of the built-in `Readonly`.
  *
  * @template T - The object type to make writable.
  *

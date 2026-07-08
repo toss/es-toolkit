@@ -2,9 +2,7 @@ import type { Simplify } from './Simplify.ts';
 
 /**
  * Makes the given keys `K` of `T` optional, leaving the rest unchanged.
- *
- * Like the built-in `Partial`, but scoped to specific keys instead of the whole
- * object. Useful for "create" inputs where a few fields have defaults.
+ * Like the built-in `Partial`, but scoped to specific keys.
  *
  * @template T - The object type to transform.
  * @template K - The keys to make optional.
