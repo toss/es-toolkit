@@ -16,7 +16,7 @@ const result = flatMapDeep(collection, iteratee);
 
 ## Usage
 
-### `flatMapDeep(collection, iteratee)`
+### `flatMapDeep(collection, iteratee?)`
 
 Applies an iteratee function to each element of a collection and returns an array flattened to infinite depth. All nested array structures are flattened into a one-dimensional array.
 
