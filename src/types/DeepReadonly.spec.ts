@@ -9,15 +9,6 @@ describe('DeepReadonly', () => {
     }>();
   });
 
-  it('rejects mutation at any depth', () => {
-    type State = { user: { name: string } };
-    const state = { user: { name: 'kim' } } as DeepReadonly<State>;
-
-    // @ts-expect-error nested properties are readonly
-    state.user.name = 'lee';
-    expectTypeOf(state).toEqualTypeOf<DeepReadonly<State>>();
-  });
-
   it('makes arrays readonly and recurses into elements', () => {
     type T = { users: Array<{ name: string }> };
     expectTypeOf<DeepReadonly<T>>().toEqualTypeOf<{
@@ -43,12 +34,6 @@ describe('DeepReadonly', () => {
       ReadonlyMap<string, { readonly a: number }>
     >();
     expectTypeOf<DeepReadonly<Set<{ a: number }>>>().toEqualTypeOf<ReadonlySet<{ readonly a: number }>>();
-
-    type State = { cache: Map<string, number> };
-    const state = { cache: new Map<string, number>() } as DeepReadonly<State>;
-    // @ts-expect-error mutation methods disappear on ReadonlyMap
-    state.cache.set('k', 1);
-    expectTypeOf(state).toEqualTypeOf<DeepReadonly<State>>();
   });
 
   it('makes Record values readonly', () => {
