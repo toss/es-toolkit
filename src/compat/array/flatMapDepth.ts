@@ -1,4 +1,4 @@
-import { flatten } from './flatten.ts';
+import { flattenDepth } from './flattenDepth.ts';
 import { map } from './map.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
@@ -140,5 +140,5 @@ export function flatMapDepth<T, R>(
   const iterateeFn = createIteratee(iteratee);
   const mapped = map(collection, iterateeFn);
 
-  return (flatten as any)(mapped, depth);
+  return flattenDepth(mapped, depth);
 }
