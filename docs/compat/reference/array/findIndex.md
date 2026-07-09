@@ -92,7 +92,7 @@ findIndex(undefined, 'active'); // -1
 #### Parameters
 
 - `arr` (`ArrayLike<T> | null | undefined`): The array to search.
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The matching condition. Can be a function, partial object, key-value pair, or property name.
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The matching condition. Can be a function, partial object, key-value pair, or property name. Default is the `identity` function.
 - `fromIndex` (`number`, optional): The index to start the search from. Default is `0`.
 
 #### Returns

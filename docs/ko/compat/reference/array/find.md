@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 검색할 배열이나 객체예요.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검색 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검색 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
 #### 반환 값
