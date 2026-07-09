@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to search.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The search condition. Can use a function, partial object, property-value pair, or property name.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The search condition. Can use a function, partial object, property-value pair, or property name. Default is the `identity` function.
 - `fromIndex` (`number`, optional): The index to start searching from. Defaults to `0`.
 
 #### Returns
