@@ -1,4 +1,5 @@
-import { pad as padToolkit } from '../../string/pad.ts';
+import { createPadding, stringSize } from '../_internal/createPadding.ts';
+import { toInteger } from '../util/toInteger.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -35,6 +36,17 @@ export function pad(str?: string, length?: number, chars?: string): string;
  * const result4 = pad('abc', 2);         // result will be 'abc'
  *
  */
-export function pad(str: any, length?: any, chars?: any): string {
-  return padToolkit(toString(str), length, chars);
+export function pad(str?: any, length: any = 0, chars: any = ' '): string {
+  const value = toString(str);
+  const targetLength = toInteger(length);
+  const strLength = stringSize(value);
+
+  if (targetLength <= strLength) {
+    return value;
+  }
+
+  const mid = (targetLength - strLength) / 2;
+  const padChars = `${chars}`;
+
+  return createPadding(Math.floor(mid), padChars) + value + createPadding(Math.ceil(mid), padChars);
 }
