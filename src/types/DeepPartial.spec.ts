@@ -26,9 +26,9 @@ describe('DeepPartial', () => {
     expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
   });
 
-  it('recurses into Map and Set contents', () => {
-    expectTypeOf<DeepPartial<Map<string, { a: number; b: string }>>>().toEqualTypeOf<
-      Map<string, { a?: number; b?: string }>
+  it('recurses into Map values and Set contents, leaving Map keys unchanged', () => {
+    expectTypeOf<DeepPartial<Map<{ id: number }, { a: number; b: string }>>>().toEqualTypeOf<
+      Map<{ id: number }, { a?: number; b?: string }>
     >();
     expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
   });
