@@ -32,7 +32,7 @@ export function flatMapDepth<T>(
  * @template T, R
  * @param collection - The collection to iterate over.
  * @param iteratee - The function invoked per iteration.
- * @param [depth=1] - The maximum recursion depth.
+ * @param [depth] - The maximum recursion depth.
  * @returns Returns the new flattened array.
  *
  * @example
@@ -55,7 +55,7 @@ export function flatMapDepth<T, R>(
  * @template T, R
  * @param collection - The object to iterate over.
  * @param iteratee - The function invoked per iteration.
- * @param [depth=1] - The maximum recursion depth.
+ * @param [depth] - The maximum recursion depth.
  * @returns Returns the new flattened array.
  *
  * @example
@@ -74,7 +74,7 @@ export function flatMapDepth<T extends object, R>(
  *
  * @param collection - The collection to iterate over.
  * @param iteratee - The property name to use as iteratee.
- * @param [depth=1] - The maximum recursion depth.
+ * @param [depth] - The maximum recursion depth.
  * @returns Returns the new flattened array.
  *
  * @example
@@ -92,7 +92,7 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: st
  *
  * @param collection - The collection to iterate over.
  * @param iteratee - The object properties to match.
- * @param [depth=1] - The maximum recursion depth.
+ * @param [depth] - The maximum recursion depth.
  * @returns Returns the new flattened array.
  *
  * @example
@@ -110,7 +110,7 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: ob
  *
  * @template T, R
  * @param collection - The array or object to iterate over.
- * @param [iteratee] - The function that produces the new array elements.
+ * @param [iteratee=identity] - The function that produces the new array elements.
  * @param [depth=1] - The maximum recursion depth.
  * @returns A new array that has been flattened up to the specified depth.
  *
