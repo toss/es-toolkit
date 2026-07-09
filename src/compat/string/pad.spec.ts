@@ -65,6 +65,11 @@ describe('pad', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should treat multi-byte characters as a single code point when padding', () => {
+    expect(pad('ab', 8, '😀')).toBe('😀😀😀ab😀😀😀');
+    expect(pad('😀😁😂', 8, '_')).toBe('__😀😁😂___');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(pad).toEqualTypeOf<typeof padLodash>();
   });

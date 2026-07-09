@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // Result: ['a', 'b', 'c', 'd']
 ```
 
-Empty arrays, null, or undefined return empty arrays.
+`null` or `undefined` are treated as empty arrays.
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

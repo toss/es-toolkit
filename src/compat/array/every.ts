@@ -78,11 +78,9 @@ export function every<T extends object>(
  * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param object - The object to check through.
  * @param source - The source array or object to check through.
- * @param doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param propertyToCheck - The property name to check.
- * @param guard - Enables use as an iteratee for methods like `_.map`.
+ * @param [doesMatch] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [guard] - Enables use as an iteratee for methods like `_.map`.
  * @returns `true` if every property value has the specified property, or `false` if at least one does not match.
  *
  * @example

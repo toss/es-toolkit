@@ -11,12 +11,12 @@
 각 요소에 함수를 적용한 후 결과를 재귀적으로 평탄화해요.
 
 ```typescript
-const result = flatMapDeep(collection, iteratee);
+const result = flatMapDeep(collection, iteratee?);
 ```
 
 ## 사용법
 
-### `flatMapDeep(collection, iteratee)`
+### `flatMapDeep(collection, iteratee?)`
 
 컬렉션의 각 요소에 반복자 함수를 적용한 후 무한 깊이로 평탄화한 배열을 반환해요. 중첩된 배열 구조가 모두 평탄화되어 1차원 배열이 됩니다.
 
