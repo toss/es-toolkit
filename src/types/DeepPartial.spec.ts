@@ -33,6 +33,14 @@ describe('DeepPartial', () => {
     expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
   });
 
+  it('keeps readonly arrays and readonly collections readonly', () => {
+    expectTypeOf<DeepPartial<ReadonlyArray<{ a: number }>>>().toEqualTypeOf<ReadonlyArray<{ a?: number }>>();
+    expectTypeOf<DeepPartial<ReadonlyMap<string, { a: number }>>>().toEqualTypeOf<
+      ReadonlyMap<string, { a?: number }>
+    >();
+    expectTypeOf<DeepPartial<ReadonlySet<{ a: number }>>>().toEqualTypeOf<ReadonlySet<{ a?: number }>>();
+  });
+
   it('makes Record values partial', () => {
     type T = Record<string, { a: number; b: string }>;
     expectTypeOf<DeepPartial<T>>().toEqualTypeOf<Partial<Record<string, { a?: number; b?: string }>>>();
