@@ -11,12 +11,12 @@
 检查数组或对象的所有值是否满足给定条件。
 
 ```typescript
-const result = every(collection, predicate);
+const result = every(collection, doesMatch);
 ```
 
 ## 用法
 
-### `every(collection, predicate?)`
+### `every(collection, doesMatch?)`
 
 当您想检查数组或对象的所有元素是否满足特定条件时,使用 `every`。条件可以以各种格式指定,如函数、部分对象、属性-值对、属性名称等。
 
@@ -70,7 +70,7 @@ every(undefined);
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 要检查的数组或对象。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 检查条件。可以使用函数、部分对象、属性-值对或属性名称。默认为 `identity` 函数。
+- `doesMatch` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 检查条件。可以使用函数、部分对象、属性-值对或属性名称。默认为 `identity` 函数。
 
 #### 返回值
 

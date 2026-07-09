@@ -11,12 +11,12 @@
 配列またはオブジェクトのすべての値が与えられた条件に合うかを返します。
 
 ```typescript
-const result = every(collection, predicate);
+const result = every(collection, doesMatch);
 ```
 
 ## 使用法
 
-### `every(collection, predicate?)`
+### `every(collection, doesMatch?)`
 
 配列またはオブジェクトのすべての要素が特定の条件を満たすか確認したい場合に `every` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
@@ -70,7 +70,7 @@ every(undefined);
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 検査する配列またはオブジェクトです。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検査条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。デフォルトは `identity` 関数です。
+- `doesMatch` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検査条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。デフォルトは `identity` 関数です。
 
 #### 戻り値
 
