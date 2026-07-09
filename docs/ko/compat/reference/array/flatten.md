@@ -11,14 +11,14 @@
 배열을 한 단계 평탄화해요.
 
 ```typescript
-const result = flatten(array, depth);
+const result = flatten(array);
 ```
 
 ## 사용법
 
-### `flatten(value, depth)`
+### `flatten(array)`
 
-중첩 배열을 지정된 깊이만큼 평탄화해요. 기본적으로 한 단계만 평탄화하며, Arguments 객체나 Symbol.isConcatSpreadable을 가진 객체도 지원해요.
+중첩 배열을 한 단계 평탄화해요.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -27,19 +27,20 @@ import { flatten } from 'es-toolkit/compat';
 flatten([1, [2, [3, [4]], 5]]);
 // 결과: [1, 2, [3, [4]], 5]
 
-// 깊이 지정
-flatten([1, [2, [3, [4]], 5]], 2);
-// 결과: [1, 2, 3, [4], 5]
-
 // Arguments 객체 지원
 function example() {
   return flatten(arguments);
 }
 example(1, [2, 3], [[4]]);
 // 결과: [1, 2, 3, [4]]
+
+// Symbol.isConcatSpreadable을 가진 객체 지원
+const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
+flatten([1, spreadable, 3]);
+// 결과: [1, 'a', 'b', 3]
 ```
 
-빈 배열이나 null, undefined는 빈 배열을 반환해요.
+`null`이나 `undefined`는 빈 배열로 처리해요.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -49,20 +50,9 @@ flatten(undefined); // []
 flatten([]); // []
 ```
 
-Symbol.isConcatSpreadable을 가진 객체도 배열처럼 평탄화돼요.
-
-```typescript
-import { flatten } from 'es-toolkit/compat';
-
-const spreadable = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };
-flatten([1, spreadable, 3]);
-// 결과: [1, 'a', 'b', 3]
-```
-
 #### 파라미터
 
-- `value` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
-- `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
+- `array` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
 
 #### 반환 값
 

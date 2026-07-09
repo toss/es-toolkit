@@ -16,7 +16,7 @@ const flattened = flattenDepth(array, depth);
 
 ## Usage
 
-### `flattenDepth(array, depth)`
+### `flattenDepth(array, depth?)`
 
 Use `flattenDepth` when you want to flatten a nested array to a desired depth. When you specify a depth, it flattens the nested array only to that depth.
 
@@ -47,7 +47,7 @@ flattenDepth(undefined, 2); // []
 
 #### Parameters
 
-- `array` (`ArrayLike<T> | null | undefined`): The array to flatten.
+- `array` (`ListOfRecursiveArraysOrValues<T> | null | undefined`): The array to flatten.
 - `depth` (`number`, optional): The maximum depth to flatten. Default is `1`.
 
 #### Returns

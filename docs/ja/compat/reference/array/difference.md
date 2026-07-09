@@ -87,7 +87,7 @@ difference(arrayLike1, arrayLike2);
 #### パラメータ
 
 - `arr` (`ArrayLike<T> | null | undefined`): 差集合を求める基準配列です。
-- `values` (`...ArrayLike<T>[]`): 除外する値を含む配列です。
+- `...values` (`Array<ArrayLike<T>>`): 除外する値を含む配列です。
 
 #### 戻り値
 

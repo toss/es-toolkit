@@ -11,12 +11,12 @@
 各要素に関数を適用した後、結果を平坦化します。
 
 ```typescript
-const result = flatMap(collection, iteratee);
+const result = flatMap(collection, iteratee?);
 ```
 
 ## 使用法
 
-### `flatMap(collection, iteratee)`
+### `flatMap(collection, iteratee?)`
 
 コレクションの各要素にイテレータ関数を適用した後、1段階平坦化した配列を返します。配列、オブジェクト、文字列をサポートし、様々な形式のイテレータを使用できます。
 
@@ -70,7 +70,7 @@ flatMap(users, { active: false });
 #### パラメータ
 
 - `collection` (`object | null | undefined`): 反復処理するコレクションです。配列、オブジェクト、文字列が可能です。
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, オプション): 各要素に適用するイテレータです。関数、プロパティ名、または部分オブジェクトが可能です。
+- `iteratee` (`ListIterator | ObjectIterator | string | object`, オプション): 各要素に適用するイテレータです。関数、プロパティ名、または部分オブジェクトが可能です。デフォルトは `identity` です。
 
 #### 戻り値
 

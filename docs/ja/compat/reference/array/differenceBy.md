@@ -80,7 +80,7 @@ differenceBy(undefined, [1, 2], x => x);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 差集合を求める基準配列です。
-- `values` (`...ArrayLike<T>[]`): 除外する値を含む配列です。
+- `...values` (`Array<ArrayLike<T>>`): 除外する値を含む配列です。
 - `iteratee` (`ValueIteratee<T>`): 各要素を比較する値に変換する関数です。関数、プロパティ名、または部分オブジェクトを使用できます。
 
 #### 戻り値
