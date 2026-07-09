@@ -66,7 +66,7 @@ concat();
 
 #### Parameters
 
-- `values` (`...(T | readonly T[])`): Values and arrays to concatenate. Each array is flattened one level.
+- `...values` (`Array<T | readonly T[]>`): Values and arrays to concatenate. Each array is flattened one level.
 
 #### Returns
 

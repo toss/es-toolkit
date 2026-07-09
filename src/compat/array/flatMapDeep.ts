@@ -3,8 +3,6 @@ import { ListIterator } from '../_internal/ListIterator.ts';
 import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
 
-type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
-
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
@@ -112,15 +110,15 @@ export function flatMapDeep(collection: object | null | undefined, iteratee: obj
  */
 export function flatMapDeep<T, R>(
   collection:
-    | Record<string, ArrayLike<T | RecursiveArray<T>> | T>
-    | Record<number, ArrayLike<T | RecursiveArray<T>> | T>
+    | Record<string, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T>
+    | Record<number, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T>
     | ArrayLike<T>
     | object
     | null
     | undefined,
   iteratee?:
-    | ((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R)
-    | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R)
+    | ((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | ListOfRecursiveArraysOrValues<R>> | R)
+    | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | ListOfRecursiveArraysOrValues<R>> | R)
     | string
     | object
 ): T[] | R[] | any[] | boolean[] {

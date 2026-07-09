@@ -157,7 +157,7 @@ window.addEventListener('beforeunload', () => {
 
 - `func` (`Function`): 延迟后要执行的函数。
 - `wait` (`number`): 要延迟的毫秒数。
-- `args` (`...any[]`): 执行函数时要传递的参数。
+- `...args` (`Array<any>`): 执行函数时要传递的参数。
 
 #### 返回值
 
