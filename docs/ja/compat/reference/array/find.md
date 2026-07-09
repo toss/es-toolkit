@@ -11,12 +11,12 @@
 配列またはオブジェクトから条件に合う最初の要素を探します。
 
 ```typescript
-const result = find(collection, predicate, fromIndex);
+const result = find(collection, doesMatch, fromIndex);
 ```
 
 ## 使用法
 
-### `find(collection, predicate?, fromIndex?)`
+### `find(collection, doesMatch?, fromIndex?)`
 
 配列またはオブジェクトから特定の条件を満たす最初の要素を探したい場合に `find` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 検索する配列またはオブジェクトです。
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検索条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
+- `doesMatch` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検索条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックスです。デフォルトは `0` です。
 
 #### 戻り値

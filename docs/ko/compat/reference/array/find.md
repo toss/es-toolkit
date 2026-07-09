@@ -11,12 +11,12 @@
 배열이나 객체에서 조건에 맞는 첫 번째 요소를 찾아요.
 
 ```typescript
-const result = find(collection, predicate, fromIndex);
+const result = find(collection, doesMatch, fromIndex);
 ```
 
 ## 사용법
 
-### `find(collection, predicate?, fromIndex?)`
+### `find(collection, doesMatch?, fromIndex?)`
 
 배열이나 객체에서 특정 조건을 만족하는 첫 번째 요소를 찾고 싶을 때 `find`를 사용하세요. 조건은 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름 등 다양한 형태로 지정할 수 있어요.
 
@@ -81,7 +81,7 @@ find(undefined, x => x > 0);
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 검색할 배열이나 객체예요.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검색 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
+- `doesMatch` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검색 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
 #### 반환 값

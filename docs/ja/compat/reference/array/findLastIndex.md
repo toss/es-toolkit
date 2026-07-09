@@ -11,12 +11,12 @@
 配列で条件を満たす最後の要素のインデックスを見つけます。
 
 ```typescript
-const lastIndex = findLastIndex(array, predicate, fromIndex);
+const lastIndex = findLastIndex(array, doesMatch, fromIndex);
 ```
 
 ## 使用法
 
-### `findLastIndex(array, predicate?, fromIndex?)`
+### `findLastIndex(array, doesMatch?, fromIndex?)`
 
 配列の末尾から開始して、与えられた条件に一致する最初の要素のインデックスを見つけたい場合は`findLastIndex`を使用してください。条件を満たす要素がない場合は`-1`を返します。
 
@@ -76,7 +76,7 @@ findLastIndex(undefined, n => n > 0); // -1
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値ペア、またはプロパティ名を使用できます。デフォルトは恒等関数です。
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値ペア、またはプロパティ名を使用できます。デフォルトは恒等関数です。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の場合は配列の末尾から計算します。デフォルトは`array.length - 1`です。
 
 #### 戻り値
