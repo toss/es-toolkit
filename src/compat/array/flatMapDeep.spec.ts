@@ -73,6 +73,20 @@ describe('flatMapDeep', () => {
     expect(flatMapDeep(object, value => value)).toEqual([1, 2]);
   });
 
+  it('should recursively flatten deeply nested arrays returned by the iteratee', () => {
+    function duplicateDeep(n: number) {
+      return [[[n, n]]];
+    }
+
+    const actual = flatMapDeep(array, duplicateDeep);
+    expect(actual).toEqual([1, 1, 2, 2, 3, 3, 4, 4]);
+  });
+
+  it('should recursively flatten deeply nested source arrays when iteratee is omitted', () => {
+    const nested = [[[1, 2]], [[3, [4, 5]]]];
+    expect(flatMapDeep(nested)).toEqual([1, 2, 3, 4, 5]);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(flatMapDeep).toEqualTypeOf<typeof flatMapDeepLodash>();
   });
