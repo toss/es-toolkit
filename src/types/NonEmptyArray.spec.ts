@@ -3,8 +3,8 @@ import type { NonEmptyArray } from './NonEmptyArray';
 
 describe('NonEmptyArray', () => {
   it('guarantees at least one element', () => {
-    const ok: NonEmptyArray<number> = [1];
-    expectTypeOf(ok).toEqualTypeOf<NonEmptyArray<number>>();
+    type SingleAssignable = [number] extends NonEmptyArray<number> ? true : false;
+    expectTypeOf<SingleAssignable>().toEqualTypeOf<true>();
 
     type EmptyAssignable = [] extends NonEmptyArray<number> ? true : false;
     expectTypeOf<EmptyAssignable>().toEqualTypeOf<false>();
