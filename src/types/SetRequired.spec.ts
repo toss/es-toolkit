@@ -12,4 +12,8 @@ describe('SetRequired', () => {
     // @ts-expect-error keys must exist on T
     expectTypeOf<SetRequired<User, 'nickname'>>().toBeObject();
   });
+
+  it('only removes the optional modifier, not undefined in a union', () => {
+    expectTypeOf<SetRequired<{ id: number | undefined }, 'id'>>().toEqualTypeOf<{ id: number | undefined }>();
+  });
 });
