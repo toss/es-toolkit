@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-misleading-character-class
-const regexMultiByte = /[\u200d\ud800-\udfff\u0300-\u036f\ufe20-\ufe2f\u20d0-\u20ff\ufe0e\ufe0f]/;
+import { regexMultiByte } from './regexMultiByte.ts';
 
 export function stringSize(str: string): number {
   return regexMultiByte.test(str) ? Array.from(str).length : str.length;
