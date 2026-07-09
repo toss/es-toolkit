@@ -1,9 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { flatMapDepth as flatMapDepthLodash } from 'lodash';
 import { flatMapDepth } from './flatMapDepth';
+import { identity } from '../../function';
 
 describe('flatMapDepth', () => {
   const array = [1, 2, 3, 4];
+  const nestedArray = [1, [2, [3, [4]], 5]];
 
   function duplicate(n: number) {
     return [n, n];
@@ -90,6 +92,20 @@ describe('flatMapDepth', () => {
       [1, 2],
       [3, 4],
     ]);
+  });
+
+  it('should use a default `depth` of `1`', () => {
+    expect(flatMapDepth(nestedArray, identity)).toEqual([1, 2, [3, [4]], 5]);
+  });
+
+  it('should treat a `depth` of < `1` as a shallow clone', () => {
+    [-1, 0].forEach(depth => {
+      expect(flatMapDepth(nestedArray, identity, depth)).toEqual([1, [2, [3, [4]], 5]]);
+    });
+  });
+
+  it('should coerce `depth` to an integer', () => {
+    expect(flatMapDepth(nestedArray, identity, 2.2)).toEqual([1, 2, 3, [4], 5]);
   });
 
   it('should match the type of lodash', () => {
