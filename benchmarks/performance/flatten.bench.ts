@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flatten as flattenToolkit_ } from 'es-toolkit';
-import { flatten as flattenCompatToolkit_ } from 'es-toolkit/compat';
-import { flattenDepth as flattenDepthLodash_ } from 'lodash';
+import { flatten as flattenToolkit } from 'es-toolkit';
+import { flatten as flattenCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const flattenToolkit = flattenToolkit_;
-const flattenCompatToolkit = flattenCompatToolkit_;
-const flattenDepthLodash = flattenDepthLodash_;
+const { flattenDepth: flattenDepthLodash } = lodash;
 
 const createNestedArray = (values: any[]): any[] => {
   if (values.length === 0) {

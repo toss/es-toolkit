@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { randomInt as randomIntToolkit_ } from 'es-toolkit';
-import { random as randomLodash_ } from 'lodash';
+import { randomInt as randomIntToolkit } from 'es-toolkit';
+import lodash from 'lodash';
 
-const randomIntToolkit = randomIntToolkit_;
-const randomLodash = randomLodash_;
+const { random: randomLodash } = lodash;
 
 describe('randomInt', () => {
   bench('es-toolkit/randomInt', () => {

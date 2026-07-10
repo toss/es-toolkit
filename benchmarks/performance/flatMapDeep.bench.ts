@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flatMapDeep as flatMapDeepToolkit_ } from 'es-toolkit';
-import { flatMapDeep as flatMapDeepToolkitCompat_ } from 'es-toolkit/compat';
-import { flatMapDeep as flatMapDeepLodash_ } from 'lodash';
+import { flatMapDeep as flatMapDeepToolkit } from 'es-toolkit';
+import { flatMapDeep as flatMapDeepToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const flatMapDeepToolkit = flatMapDeepToolkit_;
-const flatMapDeepToolkitCompat = flatMapDeepToolkitCompat_;
-const flatMapDeepLodash = flatMapDeepLodash_;
+const { flatMapDeep: flatMapDeepLodash } = lodash;
 
 function createNestedArray(arr: any[], depth: number) {
   let result = arr;

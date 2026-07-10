@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isSymbol as isSymbolToolkit_ } from 'es-toolkit';
-import { isSymbol as isSymbolToolkitCompat_ } from 'es-toolkit/compat';
-import { isSymbol as isSymbolLodash_ } from 'lodash';
+import { isSymbol as isSymbolToolkit } from 'es-toolkit';
+import { isSymbol as isSymbolToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isSymbolToolkit = isSymbolToolkit_;
-const isSymbolToolkitCompat = isSymbolToolkitCompat_;
-const isSymbolLodash = isSymbolLodash_;
+const { isSymbol: isSymbolLodash } = lodash;
 
 describe('isSymbol', () => {
   bench('es-toolkit/isSymbol', () => {

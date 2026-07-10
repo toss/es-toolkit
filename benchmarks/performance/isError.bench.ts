@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isError as isErrorToolkit_ } from 'es-toolkit';
-import { isError as isErrorCompatToolkit_ } from 'es-toolkit/compat';
-import { isError as isErrorLodash_ } from 'lodash';
+import { isError as isErrorToolkit } from 'es-toolkit';
+import { isError as isErrorCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isErrorToolkit = isErrorToolkit_;
-const isErrorCompatToolkit = isErrorCompatToolkit_;
-const isErrorLodash = isErrorLodash_;
+const { isError: isErrorLodash } = lodash;
 
 describe('isError', () => {
   bench('es-toolkit/isError', () => {

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { over as overToolkitCompat_ } from 'es-toolkit/compat';
-import { over as overLodash_ } from 'lodash';
+import { over as overToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const overToolkitCompat = overToolkitCompat_;
-const overLodash = overLodash_;
+const { over: overLodash } = lodash;
 
 describe('over - math functions', () => {
   const mathFunctions = [Math.max, Math.min];

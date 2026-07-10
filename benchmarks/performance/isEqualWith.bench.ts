@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isEqualWith as isEqualWithToolkit_ } from 'es-toolkit';
-import { isEqualWith as isEqualWithToolkitCompat_ } from 'es-toolkit/compat';
-import { isEqualWith as isEqualWithLodash_ } from 'lodash';
+import { isEqualWith as isEqualWithToolkit } from 'es-toolkit';
+import { isEqualWith as isEqualWithToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isEqualWithToolkit = isEqualWithToolkit_;
-const isEqualWithToolkitCompat = isEqualWithToolkitCompat_;
-const isEqualWithLodash = isEqualWithLodash_;
+const { isEqualWith: isEqualWithLodash } = lodash;
 
 describe('isEqualWith primitives', () => {
   const customizer = (a: unknown, b: unknown) => {

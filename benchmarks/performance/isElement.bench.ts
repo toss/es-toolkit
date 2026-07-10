@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { isElement as isElementCompatToolkit_ } from 'es-toolkit/compat';
-import { isElement as isElementLodash_ } from 'lodash';
+import { isElement as isElementToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isElementToolkit = isElementCompatToolkit_;
-const isElementLodash = isElementLodash_;
+const { isElement: isElementLodash } = lodash;
 
 class ElementLike {
   nodeType = 1;

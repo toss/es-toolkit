@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { nthArg as nthArgToolkitCompat_ } from 'es-toolkit/compat';
-import { nthArg as nthArgLodash_ } from 'lodash';
+import { nthArg as nthArgToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const nthArgToolkitCompat = nthArgToolkitCompat_;
-const nthArgLodash = nthArgLodash_;
+const { nthArg: nthArgLodash } = lodash;
 
 describe('nthArg', () => {
   const array = [1, 2, 3];

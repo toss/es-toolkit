@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { pad as padToolkit_ } from 'es-toolkit';
-import { pad as padToolkitCompat_ } from 'es-toolkit/compat';
-import { pad as padLodash_ } from 'lodash';
+import { pad as padToolkit } from 'es-toolkit';
+import { pad as padToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const padToolkit = padToolkit_;
-const padToolkitCompat = padToolkitCompat_;
-const padLodash = padLodash_;
+const { pad: padLodash } = lodash;
 
 describe('pad', () => {
   bench('es-toolkit/pad', () => {

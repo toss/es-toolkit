@@ -1,10 +1,9 @@
 import { bench, describe } from 'vitest';
-import { setWith as setWithToolkitCompat_ } from 'es-toolkit/compat';
+import { setWith as setWithToolkitCompat } from 'es-toolkit/compat';
 import { isObject } from 'es-toolkit/compat';
-import { setWith as setWithLodash_ } from 'lodash';
+import lodash from 'lodash';
 
-const setWithToolkitCompat = setWithToolkitCompat_;
-const setWithLodash = setWithLodash_;
+const { setWith: setWithLodash } = lodash;
 
 describe('setWith - simple path', () => {
   bench('es-toolkit/setWith', () => {

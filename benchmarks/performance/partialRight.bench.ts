@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { partialRight as partialRightToolkit_ } from 'es-toolkit';
-import { partialRight as partialRightToolkitCompat_ } from 'es-toolkit/compat';
-import { partialRight as partialRightLodash_ } from 'lodash';
+import { partialRight as partialRightToolkit } from 'es-toolkit';
+import { partialRight as partialRightToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const partialRightToolkit = partialRightToolkit_;
-const partialRightToolkitCompat = partialRightToolkitCompat_;
-const partialRightLodash = partialRightLodash_;
+const { partialRight: partialRightLodash } = lodash;
 
 const fn = function () {
   // eslint-disable-next-line prefer-rest-params

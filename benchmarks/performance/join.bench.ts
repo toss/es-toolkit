@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { join as joinToolkit_ } from 'es-toolkit/compat';
-import { join as joinLodash_ } from 'lodash';
+import { join as joinToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const joinToolkit = joinToolkit_;
-const joinLodash = joinLodash_;
+const { join: joinLodash } = lodash;
 
 describe('join', () => {
   bench('es-toolkit', () => {

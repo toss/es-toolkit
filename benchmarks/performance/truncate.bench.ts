@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { truncate as truncateCompatToolkit_ } from 'es-toolkit/compat';
-import { truncate as truncateLodash_ } from 'lodash';
+import { truncate as truncateCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const truncateCompatToolkit = truncateCompatToolkit_;
-const truncateLodash = truncateLodash_;
+const { truncate: truncateLodash } = lodash;
 
 const strAsciiShort = 'hi-diddly-ho there, neighborino';
 const strAsciiLong = strAsciiShort.padEnd(500, 'A').padEnd(1000, '5').padEnd(1500, ' ').padEnd(2000, ', ');

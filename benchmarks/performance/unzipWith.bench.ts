@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { unzipWith as unzipWithToolkit_ } from 'es-toolkit';
-import { unzipWith as unzipWithCompatToolkit_ } from 'es-toolkit/compat';
-import { unzipWith as unzipWithLodash_ } from 'lodash';
+import { unzipWith as unzipWithToolkit } from 'es-toolkit';
+import { unzipWith as unzipWithCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const unzipWithToolkit = unzipWithToolkit_;
-const unzipWithCompatToolkit = unzipWithCompatToolkit_;
-const unzipWithLodash = unzipWithLodash_;
+const { unzipWith: unzipWithLodash } = lodash;
 
 describe('unzipWith', () => {
   bench('es-toolkit/unzipWith', () => {

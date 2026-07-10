@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { template as templateToolkitCompat_ } from 'es-toolkit/compat';
-import { template as templateLodash_ } from 'lodash';
+import { template as templateToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const templateToolkit = templateToolkitCompat_;
-const templateLodash = templateLodash_;
+const { template: templateLodash } = lodash;
 
 describe('template (interpolate)', () => {
   bench('es-toolkit/template', () => {

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { isArrayLikeObject as isArrayLikeObjectToolkit_ } from 'es-toolkit/compat';
-import { isArrayLikeObject as isArrayLikeObjectLodash_ } from 'lodash';
+import { isArrayLikeObject as isArrayLikeObjectToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isArrayLikeObjectToolkit = isArrayLikeObjectToolkit_;
-const isArrayLikeObjectLodash = isArrayLikeObjectLodash_;
+const { isArrayLikeObject: isArrayLikeObjectLodash } = lodash;
 
 describe('isArrayLikeObject', () => {
   bench('es-toolkit/isArrayLikeObject', () => {

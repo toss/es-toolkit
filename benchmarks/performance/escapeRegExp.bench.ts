@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { escapeRegExp as escapeRegExpToolkit_ } from 'es-toolkit';
-import { escapeRegExp as escapeRegExpCompatToolkit_ } from 'es-toolkit/compat';
-import { escapeRegExp as escapeRegExpLodash_ } from 'lodash';
+import { escapeRegExp as escapeRegExpToolkit } from 'es-toolkit';
+import { escapeRegExp as escapeRegExpCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const escapeRegExpToolkit = escapeRegExpToolkit_;
-const escapeRegExpCompatToolkit = escapeRegExpCompatToolkit_;
-const escapeRegExpLodash = escapeRegExpLodash_;
+const { escapeRegExp: escapeRegExpLodash } = lodash;
 
 describe('escape', () => {
   const longString = '^$.*+?()[]{}|\\'.repeat(100);

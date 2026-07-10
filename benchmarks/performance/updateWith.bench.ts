@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { updateWith as updateWithToolkitCompat_ } from 'es-toolkit/compat';
-import { updateWith as lodashUpdateWith_ } from 'lodash';
+import { updateWith as updateWithToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const updateWithToolkitCompat = updateWithToolkitCompat_;
-const lodashUpdateWith = lodashUpdateWith_;
+const { updateWith: lodashUpdateWith } = lodash;
 
 function customizer(value: unknown) {
   if (value == null) {

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { defaultTo as defaultToToolkitCompat_ } from 'es-toolkit/compat';
-import { defaultTo as defaultToLodash_ } from 'lodash';
+import { defaultTo as defaultToToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const defaultToToolkitCompat = defaultToToolkitCompat_;
-const defaultToLodash = defaultToLodash_;
+const { defaultTo: defaultToLodash } = lodash;
 
 describe('defaultTo', () => {
   bench('es-toolkit/compat/defaultTo', () => {

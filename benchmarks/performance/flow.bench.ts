@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flow as flowToolkit_ } from 'es-toolkit';
-import { flow as flowToolkitCompat_ } from 'es-toolkit/compat';
-import { flow as flowLodash_ } from 'lodash';
+import { flow as flowToolkit } from 'es-toolkit';
+import { flow as flowCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const flowToolkit = flowToolkit_;
-const flowCompat = flowToolkitCompat_;
-const flowLodash = flowLodash_;
+const { flow: flowLodash } = lodash;
 
 describe('flow', () => {
   const add = (x: number, y: number) => x + y;

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toArray as toArrayToolkitCompat_ } from 'es-toolkit/compat';
-import { toArray as toArrayLodash_ } from 'lodash';
+import { toArray as toArrayToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toArrayToolkitCompat = toArrayToolkitCompat_;
-const toArrayLodash = toArrayLodash_;
+const { toArray: toArrayLodash } = lodash;
 
 describe('toArray', () => {
   bench('es-toolkit/compat/toArray', () => {

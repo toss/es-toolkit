@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { identity as identityToolkit_ } from 'es-toolkit';
-import { identity as identityLodash_ } from 'lodash';
+import { identity as identityToolkit } from 'es-toolkit';
+import lodash from 'lodash';
 
-const identityToolkit = identityToolkit_;
-const identityLodash = identityLodash_;
+const { identity: identityLodash } = lodash;
 
 describe('identity', () => {
   bench('es-toolkit/identity', () => {
