@@ -52,7 +52,7 @@ describe('differenceBy', () => {
 
     expect(actual).toEqual([[], []]);
 
-    expect(differenceBy([-0, 1], [1])).toEqual([-0]);
+    expect(differenceBy([-0, 1], [1])).toEqual([0]);
   });
 
   it(`should match \`NaN\``, () => {
@@ -85,7 +85,7 @@ describe('differenceBy', () => {
     expect(actual).toEqual([[], []]);
 
     const largeArray = Array.from({ length: LARGE_ARRAY_SIZE }).map(() => 1);
-    expect(differenceBy([-0, 1], largeArray)).toEqual([-0]);
+    expect(differenceBy([-0, 1], largeArray)).toEqual([0]);
   });
 
   it(`should work with large arrays of \`NaN\``, () => {

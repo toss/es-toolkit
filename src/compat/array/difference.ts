@@ -31,7 +31,7 @@ export function difference<T>(arr: ArrayLike<T> | undefined | null, ...values: A
     return [];
   }
 
-  const arr1 = Array.from(arr);
+  const arr1 = Array.from(arr, item => (Object.is(item, -0) ? (0 as T) : item));
   const arr2 = [];
 
   for (let i = 0; i < values.length; i++) {
