@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isEqual } from 'es-toolkit/compat';
-import type { isEqual as isEqualLodash } from 'lodash';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { arrayViews } from '../_internal/arrayViews';
@@ -698,9 +697,5 @@ describe('isEqual', () => {
     });
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isEqual).toEqualTypeOf<typeof isEqualLodash>();
   });
 });

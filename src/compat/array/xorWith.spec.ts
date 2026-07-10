@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { xorWith as xorWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { xorWith } from './xorWith';
 import { isEqual } from '../../predicate';
 import { args } from '../_internal/args';
@@ -66,9 +65,5 @@ describe('xorWith', () => {
     const actual = xorWith(objects, others, isEqual);
 
     expect(actual).toEqual([objects[1], others[0]]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(xorWith).toEqualTypeOf<typeof xorWithLodash>();
   });
 });

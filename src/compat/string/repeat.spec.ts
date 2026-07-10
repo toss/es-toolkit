@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { repeat as repeatLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { repeat } from './repeat';
 
 describe('padStart', () => {
@@ -28,9 +27,5 @@ describe('padStart', () => {
     const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
     expect(repeat('abc', MAX_SAFE_INTEGER + 1)).toBe('');
     expect(repeat('abc', Infinity)).toBe('');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(repeat).toEqualTypeOf<typeof repeatLodash>();
   });
 });

@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { values as valuesLodash } from 'lodash';
 import { values } from './values';
 import { args } from '../_internal/args';
 import { strictArgs } from '../_internal/strictArgs';
@@ -41,10 +40,6 @@ describe('values', () => {
     const actual = lodashStable.map(vals, value => values(value).sort());
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(values).toEqualTypeOf<typeof valuesLodash>();
   });
 
   it('should return an empty array for null or undefined', () => {

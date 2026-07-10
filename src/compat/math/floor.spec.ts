@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { floor as floorLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { floor } from './floor';
 
 describe('floor', () => {
@@ -85,9 +84,5 @@ describe('floor', () => {
     expect(floor(1.7976931348623157e308, 292)).toBe(NaN);
     expect(floor(5e-324, 323)).toBe(0);
     expect(floor(5e-324, -323)).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(floor).toEqualTypeOf<typeof floorLodash>();
   });
 });

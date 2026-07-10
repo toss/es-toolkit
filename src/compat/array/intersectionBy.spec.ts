@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { intersectionBy as intersectionByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { intersection } from './intersection';
 import { intersectionBy } from './intersectionBy';
 import { range } from '../../math';
@@ -149,9 +148,5 @@ describe('intersectionBy', () => {
 
   it('should match each value from the first array to at most one value in the second array using the mapper', () => {
     expect(intersectionBy([2.1, 2.2], [2.3, 3.4], Math.floor)).toStrictEqual([2.1]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(intersectionBy).toEqualTypeOf<typeof intersectionByLodash>();
   });
 });

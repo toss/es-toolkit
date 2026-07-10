@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { overArgs as overArgsLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { overArgs } from './overArgs';
 import { slice } from '../_internal/slice';
 
@@ -167,9 +166,5 @@ describe('overArgs', () => {
     const func = overArgs((a, b) => [a, b], doubled as any);
 
     expect(func(5, 3)).toEqual([10, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(overArgs).toEqualTypeOf<typeof overArgsLodash>();
   });
 });

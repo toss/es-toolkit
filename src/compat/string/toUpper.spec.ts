@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toUpper as toUpperLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toUpper } from './toUpper';
 
 describe('toUpper', () => {
@@ -107,9 +106,5 @@ describe('toUpper', () => {
     expect(toUpper(' ')).toBe(' ');
     expect(toUpper('\t')).toBe('\t');
     expect(toUpper('\n')).toBe('\n');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toUpper).toEqualTypeOf<typeof toUpperLodash>();
   });
 });

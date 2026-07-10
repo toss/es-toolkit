@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { property as propertyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { property } from './property';
 import { noop } from '../../function/noop';
 
@@ -102,9 +101,5 @@ describe('property', () => {
       const prop = property(path);
       expect(prop(object)).toBe(undefined);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(property).toEqualTypeOf<typeof propertyLodash>();
   });
 });

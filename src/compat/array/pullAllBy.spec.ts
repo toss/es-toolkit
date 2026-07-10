@@ -31,9 +31,4 @@ describe('pullAllBy', () => {
     expect(Object.hasOwn(actual, '0')).toEqual(true);
     expect(Object.hasOwn(actual, '1')).toEqual(false);
   });
-
-  // NOTE: TypeScript doesn't support matching conditional types
-  // it('should match the type of lodash', () => {
-  //   expectTypeOf(pullAllBy).toEqualTypeOf<typeof pullAllByLodash>();
-  // });
 });

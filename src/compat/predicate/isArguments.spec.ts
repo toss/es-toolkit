@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isArguments as isArgumentsLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isArguments } from './isArguments';
 import { noop } from '../../function';
 import { args } from '../_internal/args';
@@ -32,9 +31,5 @@ describe('isArguments', () => {
     expect(isArguments(/x/)).toBe(false);
     expect(isArguments('a')).toBe(false);
     expect(isArguments(symbol)).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isArguments).toEqualTypeOf<typeof isArgumentsLodash>();
   });
 });

@@ -158,9 +158,4 @@ describe('pullAt', () => {
     expect(actual).toEqual([3]);
     expect(array.a.b).toEqual({});
   });
-
-  // NOTE: TypeScript doesn't support matching conditional types
-  // it('should match the type of lodash', () => {
-  //   expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();
-  // });
 });

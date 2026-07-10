@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { every as everyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { every } from './every';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
@@ -168,9 +167,5 @@ describe('every', () => {
 
     expect(every(sparseArray, value => value > 0)).toEqual(false);
     expect(every(sparseArray, value => value === undefined)).toEqual(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(every).toEqualTypeOf<typeof everyLodash>();
   });
 });

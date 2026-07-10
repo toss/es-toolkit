@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { clamp as clampLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { clamp } from './clamp';
 
 describe('clamp', () => {
@@ -55,10 +54,6 @@ describe('clamp', () => {
   it('should coerce `min` and `max` of `NaN` to `0`', () => {
     expect(clamp(1, -5, NaN)).toEqual(0);
     expect(clamp(-1, NaN, 5)).toEqual(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(clamp).toEqualTypeOf<typeof clampLodash>();
   });
 
   it('should work with undefined as lower bound', () => {

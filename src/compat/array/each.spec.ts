@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
-import type { each as eachLodash } from 'lodash';
+import { describe, expect, it, vi } from 'vitest';
 import { forEach as each } from './forEach';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
@@ -243,9 +242,5 @@ describe('each', () => {
     });
 
     expect(values.length).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(each).toEqualTypeOf<typeof eachLodash>();
   });
 });

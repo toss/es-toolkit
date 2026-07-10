@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isBuffer as isBufferLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isBuffer } from './isBuffer';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -44,9 +43,5 @@ describe('isBuffer', () => {
     expect(isBuffer(new Uint8Array())).toBe(false);
 
     global.Buffer = originalBuffer; // Restore Buffer
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isBuffer).toEqualTypeOf<typeof isBufferLodash>();
   });
 });

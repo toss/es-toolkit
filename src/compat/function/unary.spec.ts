@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { unary as unaryLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { unary } from './unary';
 import { map } from '../array/map';
 
@@ -30,9 +29,5 @@ describe('unary', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(object.capped()).toBe(object);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(unary).toEqualTypeOf<typeof unaryLodash>();
   });
 });

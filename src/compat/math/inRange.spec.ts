@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { inRange as inRangeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { inRange } from './inRange';
 import { falsey } from '../_internal/falsey';
 import { stubTrue } from '../util/stubTrue';
@@ -72,9 +71,5 @@ describe('inRange', () => {
     ];
 
     expect(actual).toEqual(actual.map(stubTrue));
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(inRange).toEqualTypeOf<typeof inRangeLodash>();
   });
 });

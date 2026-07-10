@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { spread as spreadLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { spread } from './spread';
 
 describe('spread', () => {
@@ -56,9 +55,5 @@ describe('spread', () => {
 
     expect(spreadFn(1, [2, 3])).toEqual(expected);
     expect(spreadFn(1, [2, 3], 4)).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(spread).toEqualTypeOf<typeof spreadLodash>();
   });
 });

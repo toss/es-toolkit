@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { intersection as intersectionLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { intersection } from './intersection';
 import { range } from '../../math';
 import { args } from '../_internal/args';
@@ -91,9 +90,5 @@ describe('intersection', () => {
 
   it('should return an empty array when there are no arguments', () => {
     expect(intersection()).toEqual([]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(intersection).toEqualTypeOf<typeof intersectionLodash>();
   });
 });

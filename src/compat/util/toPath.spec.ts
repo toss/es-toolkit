@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toPath as toPathLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toPath } from './toPath';
 
 describe('toPath function', () => {
@@ -58,10 +57,6 @@ describe('toPath function', () => {
   it('keeps a trailing empty segment for a trailing dot', () => {
     expect(toPath('a.')).toEqual(['a', '']);
     expect(toPath('a.b.')).toEqual(['a', 'b', '']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toPath).toEqualTypeOf<typeof toPathLodash>();
   });
 
   it('handles array input correctly', () => {

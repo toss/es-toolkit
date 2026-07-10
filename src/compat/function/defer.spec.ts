@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { defer as deferLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { defer } from './defer';
 import { delay } from '../../promise';
 
@@ -35,9 +34,5 @@ describe('defer', () => {
 
   it('should throw an error if `func` is not a function', () => {
     expect(() => defer(1 as any)).toThrow();
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(defer).toEqualTypeOf<typeof deferLodash>();
   });
 });

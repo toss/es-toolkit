@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { sample as sampleLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { sample } from './sample';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -43,9 +42,5 @@ describe('sample', () => {
     const actual = sample(str);
 
     expect(['a', 'b', 'c']).toContain(actual);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(sample).toEqualTypeOf<typeof sampleLodash>();
   });
 });

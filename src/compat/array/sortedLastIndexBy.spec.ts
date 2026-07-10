@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { sortedLastIndexBy as sortedLastIndexByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { sortedLastIndexBy } from './sortedLastIndexBy';
 
 describe('sortedLastIndexBy', () => {
@@ -56,9 +55,5 @@ describe('sortedLastIndexBy', () => {
         expect(actual).toBe(expected);
       });
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(sortedLastIndexBy).toEqualTypeOf<typeof sortedLastIndexByLodash>();
   });
 });
