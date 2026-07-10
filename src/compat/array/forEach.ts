@@ -130,12 +130,8 @@ export function forEach<T extends object>(
  * Iterates over each element of the object invoking the provided callback function for each property.
  *
  * @template T - The type of object.
- * @param object - The object to iterate over.
- * @param [callback] - The function invoked for each property.
- * The callback function receives three arguments:
- *  - 'value': The current property being processed in the object.
- *  - 'key': The key of the current property being processed in the object.
- *  - 'object': The object 'forEach' was called upon.
+ * @param collection - The object to iterate over.
+ * @param [callback=identity] - The function invoked for each property.
  * @returns Returns the original object.
  *
  * @example
