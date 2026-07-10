@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/xor bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { xor } from "es-toolkit/fp"; console.log(xor)')).toBe(314);
+    expect(
+      await getBundleSizeFromScript('import { xor } from "es-toolkit/fp"; console.log(xor)')
+    ).toMatchInlineSnapshot(`314`);
   });
 });

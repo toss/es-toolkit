@@ -4,16 +4,16 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('isEqual bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'isEqual');
-    expect(bundleSize).toMatchInlineSnapshot(`12872`);
+    expect(bundleSize).toMatchInlineSnapshot(`12906`);
   });
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'isEqual');
-    expect(bundleSize).toMatchInlineSnapshot(`3171`);
+    expect(bundleSize).toMatchInlineSnapshot(`3357`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'isEqual');
-    expect(bundleSize).toMatchInlineSnapshot(`3171`);
+    expect(bundleSize).toMatchInlineSnapshot(`3357`);
   });
 });

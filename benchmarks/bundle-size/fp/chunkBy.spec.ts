@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/chunkBy bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { chunkBy } from "es-toolkit/fp"; console.log(chunkBy)')).toBe(210);
+    expect(
+      await getBundleSizeFromScript('import { chunkBy } from "es-toolkit/fp"; console.log(chunkBy)')
+    ).toMatchInlineSnapshot(`210`);
   });
 });

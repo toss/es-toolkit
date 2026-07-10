@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('escape bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'escape');
-    expect(bundleSize).toMatchInlineSnapshot(`1886`);
+    expect(bundleSize).toMatchInlineSnapshot(`1914`);
   });
 
   it('es-toolkit', async () => {

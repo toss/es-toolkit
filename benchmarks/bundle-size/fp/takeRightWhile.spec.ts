@@ -5,6 +5,6 @@ describe('fp/takeRightWhile bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { takeRightWhile } from "es-toolkit/fp"; console.log(takeRightWhile)')
-    ).toBe(174);
+    ).toMatchInlineSnapshot(`174`);
   });
 });

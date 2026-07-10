@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('difference bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'difference');
-    expect(bundleSize).toMatchInlineSnapshot(`7958`);
+    expect(bundleSize).toMatchInlineSnapshot(`7992`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('difference bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'difference');
-    expect(bundleSize).toMatchInlineSnapshot(`478`);
+    expect(bundleSize).toMatchInlineSnapshot(`433`);
   });
 });
