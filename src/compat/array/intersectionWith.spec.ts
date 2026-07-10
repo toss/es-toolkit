@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { intersectionWith as intersectionWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { intersectionWith } from './intersectionWith';
 import { map } from './map';
 import { isEqual } from '../../predicate/isEqual';
@@ -119,9 +118,5 @@ describe('intersectionWith', () => {
     const actual = map(others, other => map(intersectionWith(array, other, eq), toString));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(intersectionWith).toEqualTypeOf<typeof intersectionWithLodash>();
   });
 });

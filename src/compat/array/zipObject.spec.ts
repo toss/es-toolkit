@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { each } from '..';
-import type { zipObject as zipObjectLodash } from 'lodash';
 import { zipObject } from './zipObject';
 
 describe('zipObject', () => {
@@ -41,9 +40,5 @@ describe('zipObject', () => {
   it('should handle undefined parameters with default values', () => {
     expect(zipObject()).toEqual({});
     expect(zipObject(undefined)).toEqual({});
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(zipObject).toEqualTypeOf<typeof zipObjectLodash>();
   });
 });

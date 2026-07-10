@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { reduce as reduceLodash } from 'lodash';
 import { head } from './head';
 import { reduce } from './reduce';
 import { empties } from '../_internal/empties';
@@ -210,9 +209,5 @@ describe('reduce', () => {
     );
 
     expect(count).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(reduce).toEqualTypeOf<typeof reduceLodash>();
   });
 });

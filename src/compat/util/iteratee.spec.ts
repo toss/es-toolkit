@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { iteratee as iterateeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { iteratee } from './iteratee';
 import { stubFalse } from './stubFalse';
 import { slice } from '../_internal/slice';
@@ -166,9 +165,5 @@ describe('iteratee', () => {
     const actual = iteratees.map(iteratee => iteratee());
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(iteratee).toEqualTypeOf<typeof iterateeLodash>();
   });
 });

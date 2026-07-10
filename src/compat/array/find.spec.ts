@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { find as findLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { find } from './find';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -148,10 +147,6 @@ describe('find', () => {
     ];
 
     expect(find(array, { value: { missingKey: undefined } })).toBe(undefined);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });
 
   it('should work with no predicate (uses identity)', () => {

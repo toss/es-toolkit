@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { includes as includesLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { includes } from './includes';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -174,9 +173,5 @@ describe('includes', () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(includes).toEqualTypeOf<typeof includesLodash>();
   });
 });

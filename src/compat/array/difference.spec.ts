@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { difference as differenceLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { difference } from './difference';
 import { range } from '../../math/range';
 import { args } from '../_internal/args';
@@ -103,9 +102,5 @@ describe('difference', () => {
 
   it('should filter out values that are not arrays or array-like objects', () => {
     expect(difference(['2', '3'], '2', ['3'])).toEqual(['2']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(difference).toEqualTypeOf<typeof differenceLodash>();
   });
 });

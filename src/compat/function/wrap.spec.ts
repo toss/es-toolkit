@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { wrap as wrapLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { wrap } from './wrap';
 import { noop } from '../../function';
 import { slice } from '../_internal/slice';
@@ -59,9 +58,5 @@ describe('wrap', () => {
 
     const p = wrap(value, v => `<p>${v}</p>`);
     expect(p()).toBe(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(wrap).toEqualTypeOf<typeof wrapLodash>();
   });
 });

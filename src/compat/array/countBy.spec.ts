@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { countBy as countByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { countBy } from './countBy';
 
 describe('countBy', () => {
@@ -52,9 +51,5 @@ describe('countBy', () => {
   it('should return empty object when collection is nullish', () => {
     expect(countBy(null)).toEqual({});
     expect(countBy(undefined)).toEqual({});
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(countBy).toEqualTypeOf<typeof countByLodash>();
   });
 });

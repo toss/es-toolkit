@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isError as isErrorLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isError } from './isError';
 
 describe('isError', () => {
@@ -33,9 +32,5 @@ describe('isError', () => {
   it('should work with an error object from another realm', () => {
     const realm = { error: new Error() };
     expect(isError(realm.error)).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isError).toEqualTypeOf<typeof isErrorLodash>();
   });
 });

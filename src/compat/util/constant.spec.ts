@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { constant as constantLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { constant } from './constant';
 import { stubTrue } from './stubTrue';
 import { empties } from '../_internal/empties';
@@ -45,8 +44,4 @@ describe('constant', () => {
   //   const wrapped = _(true).constant();
   //   expect(wrapped instanceof _);
   // });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(constant).toEqualTypeOf<typeof constantLodash>();
-  });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { split as splitLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { split } from './split';
 
 describe('split', () => {
@@ -32,9 +31,5 @@ describe('split', () => {
   it('should allow mixed string and array prototype methods', () => {
     const result = split('abc', 'b').join(',');
     expect(result).toBe('a,c');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(split).toEqualTypeOf<typeof splitLodash>();
   });
 });

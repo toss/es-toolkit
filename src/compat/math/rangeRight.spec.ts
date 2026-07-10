@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { each, map } from '..';
-import type { rangeRight as rangeRightLodash } from 'lodash';
 import { rangeRight } from './rangeRight';
 import { falsey } from '../_internal/falsey';
 
@@ -69,9 +68,5 @@ describe('rangeRight methods', () => {
       const actual = map(collection, rangeRight);
       expect(actual).toEqual(expected);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(rangeRight).toEqualTypeOf<typeof rangeRightLodash>();
   });
 });

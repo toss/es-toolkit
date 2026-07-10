@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { round as roundLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { round } from './round';
 
 describe('round', () => {
@@ -91,9 +90,5 @@ describe('round', () => {
     expect(round(1.7976931348623157e308, 292)).toBe(NaN);
     expect(round(5e-324, 323)).toBe(0);
     expect(round(5e-324, -323)).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(round).toEqualTypeOf<typeof roundLodash>();
   });
 });

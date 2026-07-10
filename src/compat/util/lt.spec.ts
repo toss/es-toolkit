@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { lt as ltLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { lt } from './lt';
 
 describe('lt', () => {
@@ -13,9 +12,5 @@ describe('lt', () => {
     expect(lt(3, 3)).toBe(false);
     expect(lt('def', 'abc')).toBe(false);
     expect(lt('def', 'def')).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(lt).toEqualTypeOf<typeof ltLodash>();
   });
 });

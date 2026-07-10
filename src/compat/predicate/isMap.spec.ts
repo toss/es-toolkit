@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isMap as isMapLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isMap } from './isMap';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -40,9 +39,5 @@ describe('isMap', () => {
     const actual = falsey.map(value => isMap({ constructor: value }));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isMap).toEqualTypeOf<typeof isMapLodash>();
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { mapValues as mapValuesLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { mapValues } from './mapValues';
 import { isEqual } from '../../predicate/isEqual';
 
@@ -35,10 +34,6 @@ describe('mapValues', () => {
     });
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(mapValues).toEqualTypeOf<typeof mapValuesLodash>();
   });
 
   it('should return empty object when object is null', () => {

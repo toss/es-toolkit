@@ -1,7 +1,6 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { method as methodLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { constant } from './constant';
-import { method, method as methodToolkit } from './method';
+import { method as methodToolkit } from './method';
 import { times } from './times';
 import { noop } from '../../function/noop';
 import { stubOne } from '../_internal/stubOne';
@@ -150,9 +149,5 @@ describe('method', () => {
       const method = methodToolkit(path);
       expect(method(object)).toBe(1);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(method).toEqualTypeOf<typeof methodLodash>();
   });
 });

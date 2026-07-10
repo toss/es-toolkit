@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { takeRightWhile as takeRightWhileLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { takeRightWhile } from './takeRightWhile';
 import { slice } from '../_internal/slice';
 import { toArgs } from '../_internal/toArgs';
@@ -54,9 +53,5 @@ describe('takeRightWhile', () => {
   it('should work with array-like objects', () => {
     expect(takeRightWhile({ 0: 1, 1: 2, 2: 3, length: 3 }, value => value > 1)).toEqual([2, 3]);
     expect(takeRightWhile(toArgs([1, 2, 3]), value => value > 1)).toEqual([2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(takeRightWhile).toEqualTypeOf<typeof takeRightWhileLodash>();
   });
 });

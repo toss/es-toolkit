@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { escape as escapeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { escape, unescape } from '../index';
 
 describe('escape', () => {
@@ -29,9 +28,5 @@ describe('escape', () => {
     it(`should not escape the "${chr}" character`, () => {
       expect(escape(chr)).toBe(chr);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(escape).toEqualTypeOf<typeof escapeLodash>();
   });
 });

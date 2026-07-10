@@ -1,0 +1,13 @@
+{
+  "name": "type-tests",
+  "private": true,
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.17.20",
+    "es-toolkit": "workspace:^",
+    "typescript": "^5.8.2",
+    "vitest": "^4.0.17"
+  }
+}

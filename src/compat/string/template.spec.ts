@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { template as templateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import * as esToolkit from '../index';
@@ -475,9 +474,5 @@ describe('template', () => {
     const actual = compiles.map(compiled => compiled(data));
 
     expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(template).toEqualTypeOf<typeof templateLodash>();
   });
 });

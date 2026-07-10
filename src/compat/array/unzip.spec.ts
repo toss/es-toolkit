@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { unzip as unzipLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { unzip } from './unzip';
 import { zip } from '../../array/zip';
 
@@ -72,9 +71,5 @@ describe('unzip', () => {
       ['a', 'b'],
       [1, 2],
     ]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(unzip).toEqualTypeOf<typeof unzipLodash>();
   });
 });

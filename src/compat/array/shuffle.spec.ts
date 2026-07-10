@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { shuffle as shuffleLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { shuffle } from './shuffle.ts';
 import { sortBy } from './sortBy';
 import { uniqBy } from './uniqBy';
@@ -50,9 +49,5 @@ describe('shuffle', () => {
 
     expect(result).not.toBe(Array.from(arrayLike));
     expect(shuffle(arrayLike).sort()).toEqual(['a', 'b', 'c']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(shuffle).toEqualTypeOf<typeof shuffleLodash>();
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { meanBy as meanByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { meanBy } from './meanBy';
 import { slice } from '../_internal/slice';
 
@@ -38,9 +37,5 @@ describe('meanBy', () => {
     const numbers = [1, 2, 3];
 
     expect(meanBy(numbers)).toBe(2);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(meanBy).toEqualTypeOf<typeof meanByLodash>();
   });
 });

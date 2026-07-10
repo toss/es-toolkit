@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isObjectLike as isObjectLikeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isObjectLike } from './isObjectLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -27,9 +26,5 @@ describe('isObjectLike', () => {
     const actual = values.map(isObjectLike);
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isObjectLike).toEqualTypeOf<typeof isObjectLikeLodash>();
   });
 });

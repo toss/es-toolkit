@@ -6645,7 +6645,6 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@types/broken-link-checker": "npm:0.7.3"
     "@types/jscodeshift": "npm:^0.12.0"
-    "@types/lodash": "npm:4.17.20"
     "@types/node": "npm:^24.10.9"
     "@types/tar": "npm:^6.1.13"
     "@typescript-eslint/parser": "npm:^8.26.1"
@@ -12758,6 +12757,17 @@ __metadata:
   checksum: 10c0/dea9df45ea1f0aaa4e2d3bed3f9a0bfe9e5b2592bddb92eb1bf06e50bcf98dbb78189668cd8bc31a0511d3fc25539b4cd5c704497e53e93e2d40ca764b10bfc3
   languageName: node
   linkType: hard
+
+"type-tests@workspace:tests/types":
+  version: 0.0.0-use.local
+  resolution: "type-tests@workspace:tests/types"
+  dependencies:
+    "@types/lodash": "npm:4.17.20"
+    es-toolkit: "workspace:^"
+    typescript: "npm:^5.8.2"
+    vitest: "npm:^4.0.17"
+  languageName: unknown
+  linkType: soft
 
 "typedarray@npm:^0.0.6":
   version: 0.0.6

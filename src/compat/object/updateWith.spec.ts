@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { each, isObject, map, noop, toString, unset, updateWith } from '..';
-import type { updateWith as updateWithLodash } from 'lodash';
 import { stubFour } from '../_internal/stubFour';
 import { stubThree } from '../_internal/stubThree';
 import { symbol } from '../_internal/symbol';
@@ -222,10 +221,6 @@ describe('updateWith', () => {
 
     updateWith(object, 'a.b', updater, noop);
     expect(object.a.b).toBe(value);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(updateWith).toEqualTypeOf<typeof updateWithLodash>();
   });
 
   it('should correctly update the last level path when original object is modified by customizer', () => {

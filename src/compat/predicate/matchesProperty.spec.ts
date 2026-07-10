@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { matchesProperty as matchesPropertyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { matchesProperty } from './matchesProperty';
 import { noop } from '../../function/noop';
 import { range } from '../../math/range';
@@ -430,9 +429,5 @@ describe('matchesProperty', () => {
 
     expect(matches(truthy)).toBe(false);
     expect(matches(falsey)).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(matchesProperty).toEqualTypeOf<typeof matchesPropertyLodash>();
   });
 });

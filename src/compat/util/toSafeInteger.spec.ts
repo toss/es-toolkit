@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toSafeInteger as toSafeIntegerLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toSafeInteger } from './toSafeInteger';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 
@@ -18,9 +17,5 @@ describe('toSafeInteger methods', () => {
 
   it('should support `value` of `-0`', () => {
     expect(1 / toSafeInteger(-0)).toBe(-Infinity);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toSafeInteger).toEqualTypeOf<typeof toSafeIntegerLodash>();
   });
 });

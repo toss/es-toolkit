@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { maxBy as maxByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { maxBy } from './maxBy';
 
 describe('maxBy', () => {
@@ -52,9 +51,5 @@ describe('maxBy', () => {
     const numbers = [1, 2, 3];
 
     expect(maxBy(numbers)).toBe(3);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(maxBy).toEqualTypeOf<typeof maxByLodash>();
   });
 });

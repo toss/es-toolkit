@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toString as toStringLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { stubString } from './stubString';
 import { toString } from './toString';
 import { symbol } from '../_internal/symbol';
@@ -36,9 +35,5 @@ describe('toString', () => {
 
   it('should handle an array of symbols', () => {
     expect(toString([symbol])).toBe('Symbol(a)');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toString).toEqualTypeOf<typeof toStringLodash>();
   });
 });

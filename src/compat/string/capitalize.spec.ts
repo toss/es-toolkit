@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { capitalize as capitalizeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { capitalize } from './capitalize';
 
 describe('capitalize', () => {
@@ -17,11 +16,5 @@ describe('capitalize', () => {
 
   it('should return an empty string for an empty string', () => {
     expect(capitalize('')).toBe('');
-  });
-
-  it('should match the type of lodash', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    expectTypeOf(capitalize).toEqualTypeOf<typeof capitalizeLodash>();
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { mapKeys as mapKeysLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { mapKeys } from './mapKeys';
 
 describe('mapKeys', () => {
@@ -32,10 +31,6 @@ describe('mapKeys', () => {
     const actual = values.map((value, index) => (index ? mapKeys(object, value) : mapKeys(object)));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(mapKeys).toEqualTypeOf<typeof mapKeysLodash>();
   });
 
   it('should return empty object when object is null', () => {

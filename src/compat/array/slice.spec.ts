@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { slice as sliceLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { slice } from './slice';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -108,9 +107,5 @@ describe('slice', () => {
     expect(slice({ 0: 1, 1: 2, 2: 3, length: 3 })).toEqual([1, 2, 3]);
     expect(slice('123')).toEqual(['1', '2', '3']);
     expect(slice(args)).toEqual([1, 2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(slice).toEqualTypeOf<typeof sliceLodash>();
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { sumBy as sumByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { sumBy } from './sumBy';
 import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';
@@ -54,9 +53,5 @@ describe('sumBy', () => {
     const arrays = [[2], [3], [1]];
     expect(sumBy(arrays, 0 as any)).toBe(6);
     expect(sumBy(objects, 'a' as any)).toBe(6);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(sumBy).toEqualTypeOf<typeof sumByLodash>();
   });
 });

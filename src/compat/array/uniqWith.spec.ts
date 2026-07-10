@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { uniqWith as uniqWithLodash } from 'lodash';
 import { uniqWith } from './uniqWith';
 import { isEven } from '../_internal/isEven';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
@@ -199,9 +198,5 @@ describe('uniqWith', () => {
     };
 
     expect(uniqWith(['Big', 'Small'], isSubset)).toEqual(['Big']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(uniqWith).toEqualTypeOf<typeof uniqWithLodash>();
   });
 });

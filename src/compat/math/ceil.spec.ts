@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { ceil as ceilLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { ceil } from './ceil';
 
 describe('ceil', () => {
@@ -85,9 +84,5 @@ describe('ceil', () => {
     expect(ceil(1.7976931348623157e308, 292)).toBe(NaN);
     expect(ceil(5e-324, 323)).toBe(1e-292);
     expect(ceil(5e-324, -323)).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(ceil).toEqualTypeOf<typeof ceilLodash>();
   });
 });

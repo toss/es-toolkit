@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { truncate as truncateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { truncate } from './truncate.ts';
 import { forEach } from '../array/forEach.ts';
 import { map } from '../array/map.ts';
@@ -121,9 +120,5 @@ describe('truncate', () => {
 
   it('should return base string with omission when separator is not found in truncated string', () => {
     expect(truncate('hello world test', { length: 10, separator: 'xyz' })).toEqual('hello w...');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(truncate).toEqualTypeOf<typeof truncateLodash>();
   });
 });
