@@ -285,7 +285,5 @@
       "unplugged": true
     }
   },
-  "jsdelivr": "./dist/browser.global.js",
-  "react-native": "./dist/index.js",
-  "unpkg": "./dist/browser.global.js"
+  "react-native": "./dist/index.js"
 }
