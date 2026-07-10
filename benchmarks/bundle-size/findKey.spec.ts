@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('findKey bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'findKey');
-    expect(bundleSize).toMatchInlineSnapshot(`16489`);
+    expect(bundleSize).toMatchInlineSnapshot(`16523`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('findKey bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'findKey');
-    expect(bundleSize).toMatchInlineSnapshot(`7688`);
+    expect(bundleSize).toMatchInlineSnapshot(`8220`);
   });
 });

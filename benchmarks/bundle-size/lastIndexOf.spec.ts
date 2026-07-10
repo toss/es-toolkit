@@ -4,11 +4,11 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('lastIndexOf bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'lastIndexOf');
-    expect(bundleSize).toMatchInlineSnapshot(`1586`);
+    expect(bundleSize).toMatchInlineSnapshot(`2509`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'lastIndexOf');
-    expect(bundleSize).toMatchInlineSnapshot(`375`);
+    expect(bundleSize).toMatchInlineSnapshot(`636`);
   });
 });

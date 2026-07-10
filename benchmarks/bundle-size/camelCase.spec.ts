@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('camelCase bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'camelCase');
-    expect(bundleSize).toMatchInlineSnapshot(`7293`);
+    expect(bundleSize).toMatchInlineSnapshot(`7321`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('camelCase bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'camelCase');
-    expect(bundleSize).toMatchInlineSnapshot(`650`);
+    expect(bundleSize).toMatchInlineSnapshot(`1814`);
   });
 });

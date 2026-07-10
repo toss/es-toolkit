@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('mapKeys bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'mapKeys');
-    expect(bundleSize).toMatchInlineSnapshot(`16649`);
+    expect(bundleSize).toMatchInlineSnapshot(`16685`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('mapKeys bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'mapKeys');
-    expect(bundleSize).toMatchInlineSnapshot(`7701`);
+    expect(bundleSize).toMatchInlineSnapshot(`8233`);
   });
 });

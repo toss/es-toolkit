@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('chunk bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'chunk');
-    expect(bundleSize).toMatchInlineSnapshot(`3153`);
+    expect(bundleSize).toMatchInlineSnapshot(`3181`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('chunk bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'chunk');
-    expect(bundleSize).toMatchInlineSnapshot(`486`);
+    expect(bundleSize).toMatchInlineSnapshot(`536`);
   });
 });
