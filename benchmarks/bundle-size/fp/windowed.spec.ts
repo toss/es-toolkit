@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/windowed bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { windowed } from "es-toolkit/fp"; console.log(windowed)')).toBe(705);
+    expect(
+      await getBundleSizeFromScript('import { windowed } from "es-toolkit/fp"; console.log(windowed)')
+    ).toMatchInlineSnapshot(`705`);
   });
 });

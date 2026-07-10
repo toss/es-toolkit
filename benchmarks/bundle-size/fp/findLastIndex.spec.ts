@@ -5,6 +5,6 @@ describe('fp/findLastIndex bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { findLastIndex } from "es-toolkit/fp"; console.log(findLastIndex)')
-    ).toBe(124);
+    ).toMatchInlineSnapshot(`124`);
   });
 });

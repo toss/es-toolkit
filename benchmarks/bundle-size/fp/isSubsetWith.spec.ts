@@ -5,6 +5,6 @@ describe('fp/isSubsetWith bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { isSubsetWith } from "es-toolkit/fp"; console.log(isSubsetWith)')
-    ).toBe(182);
+    ).toMatchInlineSnapshot(`182`);
   });
 });

@@ -2,7 +2,7 @@
   "name": "benchmarks",
   "private": true,
   "scripts": {
-    "check-bundle-size": "vitest --update"
+    "check-bundle-size": "vitest run --update bundle-size"
   },
   "dependencies": {
     "es-toolkit": "workspace:^",

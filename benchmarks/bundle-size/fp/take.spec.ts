@@ -3,14 +3,20 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/take bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { take } from "es-toolkit/fp"; console.log(take)')).toBe(413);
+    expect(
+      await getBundleSizeFromScript('import { take } from "es-toolkit/fp"; console.log(take)')
+    ).toMatchInlineSnapshot(`413`);
   });
 
   it('lodash/fp/take', async () => {
-    expect(await getBundleSizeFromScript('import take from "lodash/fp/take"; console.log(take)')).toBe(51388);
+    expect(await getBundleSizeFromScript('import take from "lodash/fp/take"; console.log(take)')).toMatchInlineSnapshot(
+      `51388`
+    );
   });
 
   it('remeda', async () => {
-    expect(await getBundleSizeFromScript('import { take } from "remeda"; console.log(take)')).toBe(443);
+    expect(await getBundleSizeFromScript('import { take } from "remeda"; console.log(take)')).toMatchInlineSnapshot(
+      `443`
+    );
   });
 });

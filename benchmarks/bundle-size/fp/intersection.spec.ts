@@ -5,6 +5,6 @@ describe('fp/intersection bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { intersection } from "es-toolkit/fp"; console.log(intersection)')
-    ).toBe(396);
+    ).toMatchInlineSnapshot(`396`);
   });
 });
