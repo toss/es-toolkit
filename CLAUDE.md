@@ -22,6 +22,7 @@ tsc --noEmit                      # Typecheck
 src/{category}/{fn}.ts            # Implementation (array, function, math, object, predicate, promise, set, string, util, error, map)
 src/{category}/{fn}.spec.ts       # Tests (vitest)
 src/compat/{category}/{fn}.ts     # Lodash-compatible variant
+tests/types/compat.spec-d.ts      # Type tests against @types/lodash (yarn workspace type-tests test)
 docs/reference/{category}/{fn}.md           # English
 docs/ko/reference/{category}/{fn}.md        # Korean
 docs/ja/reference/{category}/{fn}.md        # Japanese

@@ -52,7 +52,8 @@
   ],
   "workspaces": [
     "docs",
-    "benchmarks"
+    "benchmarks",
+    "tests/types"
   ],
   "scripts": {
     "bench": "vitest bench",
@@ -63,7 +64,7 @@
     "lint": "eslint --config eslint.config.mjs --concurrency=auto",
     "packlint": "packlint sort -R",
     "prepack": "yarn build",
-    "test": "vitest --coverage --typecheck",
+    "test": "vitest --coverage",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
     "typecheck": "tsc --noEmit"
   },
@@ -75,7 +76,6 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/broken-link-checker": "0.7.3",
     "@types/jscodeshift": "^0.12.0",
-    "@types/lodash": "4.17.20",
     "@types/node": "^24.10.9",
     "@types/tar": "^6.1.13",
     "@typescript-eslint/parser": "^8.26.1",
@@ -285,5 +285,7 @@
       "unplugged": true
     }
   },
-  "react-native": "./dist/index.js"
+  "jsdelivr": "./dist/browser.global.js",
+  "react-native": "./dist/index.js",
+  "unpkg": "./dist/browser.global.js"
 }

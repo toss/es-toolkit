@@ -50,6 +50,7 @@ docs/
   ja/reference/{category}/{fn}.md       Japanese reference docs
   zh_hans/reference/{category}/{fn}.md  Simplified Chinese reference docs
 benchmarks/                   Vitest benchmark suite
+tests/types/                  Type tests comparing `es-toolkit/compat` with `@types/lodash` (run with `yarn workspace type-tests test`)
 .github/CONTRIBUTING.md       Contribution guide (English / Korean / Simplified Chinese)
 CHANGELOG.md                  User-facing changelog
 ```
