@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { filter as filterToolkit_ } from 'es-toolkit/compat';
-import { filter as filterLodash_ } from 'lodash';
+import { filter as filterToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const filterToolkit = filterToolkit_;
-const filterLodash = filterLodash_;
+const { filter: filterLodash } = lodash;
 
 const arr = [
   { a: 0, b: true },

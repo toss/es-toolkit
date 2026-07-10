@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { kebabCase as kebabCaseToolkit_ } from 'es-toolkit';
-import { kebabCase as kebabCaseToolkitCompat_ } from 'es-toolkit/compat';
-import { kebabCase as kebabCaseLodash_ } from 'lodash';
+import { kebabCase as kebabCaseToolkit } from 'es-toolkit';
+import { kebabCase as kebabCaseToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const kebabCaseToolkit = kebabCaseToolkit_;
-const kebabCaseToolkitCompat = kebabCaseToolkitCompat_;
-const kebabCaseLodash = kebabCaseLodash_;
+const { kebabCase: kebabCaseLodash } = lodash;
 
 describe('kebabCase', () => {
   bench('es-toolkit/kebabCase', () => {

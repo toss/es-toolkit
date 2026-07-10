@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { initial as initialToolkit_ } from 'es-toolkit';
-import { initial as initialToolkitCompat_ } from 'es-toolkit/compat';
-import { initial as initialLodash_ } from 'lodash';
+import { initial as initialToolkit } from 'es-toolkit';
+import { initial as initialToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const initialLodash = initialLodash_;
-const initialToolkitCompat = initialToolkitCompat_;
-const initialToolkit = initialToolkit_;
+const { initial: initialLodash } = lodash;
 
 // Helper function to generate a large array
 function generateLargeArray(size: number) {

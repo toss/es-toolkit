@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toNumber as toNumberToolkitCompat_ } from 'es-toolkit/compat';
-import { toNumber as toNumberLodash_ } from 'lodash';
+import { toNumber as toNumberToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toNumberToolkitCompat = toNumberToolkitCompat_;
-const toNumberLodash = toNumberLodash_;
+const { toNumber: toNumberLodash } = lodash;
 
 describe('toNumber', () => {
   bench('es-toolkit/compat/toNumber', () => {

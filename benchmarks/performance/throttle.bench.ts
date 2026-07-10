@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { throttle as throttleToolkit_ } from 'es-toolkit';
-import { throttle as throttleCompatToolkit_ } from 'es-toolkit/compat';
-import { throttle as throttleLodash_ } from 'lodash';
+import { throttle as throttleToolkit } from 'es-toolkit';
+import { throttle as throttleCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const throttleToolkit = throttleToolkit_;
-const throttleCompatToolkit = throttleCompatToolkit_;
-const throttleLodash = throttleLodash_;
+const { throttle: throttleLodash } = lodash;
 
 describe('throttle', () => {
   bench('es-toolkit/throttle', () => {

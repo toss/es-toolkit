@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { bind as bindToolkit_ } from 'es-toolkit/compat';
-import { bind as bindLodash_ } from 'lodash';
+import { bind as bindToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const bindToolkit = bindToolkit_;
-const bindLodash = bindLodash_;
+const { bind: bindLodash } = lodash;
 
 function fn(this: any) {
   const result = [this];

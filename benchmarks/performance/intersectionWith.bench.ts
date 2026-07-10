@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { intersectionWith as intersectionWithToolkit_ } from 'es-toolkit';
-import { intersectionWith as intersectionWithCompat_ } from 'es-toolkit/compat';
-import { intersectionWith as intersectionWithLodash_ } from 'lodash';
+import { intersectionWith as intersectionWithToolkit } from 'es-toolkit';
+import { intersectionWith as intersectionWithCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const intersectionWithToolkit = intersectionWithToolkit_;
-const intersectionWithCompat = intersectionWithCompat_;
-const intersectionWithLodash = intersectionWithLodash_;
+const { intersectionWith: intersectionWithLodash } = lodash;
 
 describe('intersectionWith', () => {
   bench('es-toolkit/intersectionWith', () => {

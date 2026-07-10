@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { delay as delayToolkitCompat_ } from 'es-toolkit/compat';
-import { delay as delayLodash_ } from 'lodash';
+import { delay as delayToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const delayToolkitCompat = delayToolkitCompat_;
-const delayLodash = delayLodash_;
+const { delay: delayLodash } = lodash;
 
 describe('delay', () => {
   bench('es-toolkit/compat/delay', () => {

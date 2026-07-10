@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { isInteger as isIntegerToolkit_ } from 'es-toolkit/compat';
-import { isInteger as isIntegerLodash_ } from 'lodash';
+import { isInteger as isIntegerToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isIntegerToolkit = isIntegerToolkit_;
-const isIntegerLodash = isIntegerLodash_;
+const { isInteger: isIntegerLodash } = lodash;
 
 describe('isInteger', () => {
   bench('es-toolkit/isInteger', () => {

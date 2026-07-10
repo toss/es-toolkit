@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { reject as rejectToolkit_ } from 'es-toolkit/compat';
-import { reject as rejectLodash_ } from 'lodash';
+import { reject as rejectToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const rejectToolkit = rejectToolkit_;
-const rejectLodash = rejectLodash_;
+const { reject: rejectLodash } = lodash;
 
 const arr = [
   { a: 0, b: true },

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { map as mapToolkit_ } from 'es-toolkit/compat';
-import { map as mapLodash_ } from 'lodash';
+import { map as mapToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const mapToolkit = mapToolkit_;
-const mapLodash = mapLodash_;
+const { map: mapLodash } = lodash;
 
 const generateArray = (length: number) => Array.from({ length }, (_, i) => i);
 const generateObject = (length: number) => Object.fromEntries(generateArray(length).map(i => [`key${i}`, i]));

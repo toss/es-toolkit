@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { keys as keysToolkit_ } from 'es-toolkit/compat';
-import { keys as keysLodash_ } from 'lodash';
+import { keys as keysToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const keysToolkit = keysToolkit_;
-const keysLodash = keysLodash_;
+const { keys: keysLodash } = lodash;
 
 class Foo {
   a = 1;

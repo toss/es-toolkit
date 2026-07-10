@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { pullAt as pullAtToolkit_ } from 'es-toolkit';
-import { pullAt as pullAtToolkitCompat_ } from 'es-toolkit/compat';
-import { pullAt as pullAtLodash_ } from 'lodash';
+import { pullAt as pullAtToolkit } from 'es-toolkit';
+import { pullAt as pullAtToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const pullAtToolkit = pullAtToolkit_;
-const pullAtToolkitCompat = pullAtToolkitCompat_;
-const pullAtLodash = pullAtLodash_;
+const { pullAt: pullAtLodash } = lodash;
 
 describe('pullAt', () => {
   bench('es-toolkit/pullAt', () => {

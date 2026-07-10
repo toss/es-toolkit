@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { min as minToolkit_ } from 'es-toolkit/compat';
-import { min as minLodash_ } from 'lodash';
+import { min as minToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const minToolkit = minToolkit_;
-const minLodash = minLodash_;
+const { min: minLodash } = lodash;
 
 describe('min', () => {
   bench('es-toolkit/min', () => {

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { debounce as debounceToolkit_ } from 'es-toolkit';
-import { debounce as debounceCompatToolkit_ } from 'es-toolkit/compat';
-import { debounce as debounceLodash_ } from 'lodash';
+import { debounce as debounceToolkit } from 'es-toolkit';
+import { debounce as debounceCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const debounceToolkit = debounceToolkit_;
-const debounceCompatToolkit = debounceCompatToolkit_;
-const debounceLodash = debounceLodash_;
+const { debounce: debounceLodash } = lodash;
 
 describe('debounce', () => {
   bench('es-toolkit/debounce', () => {

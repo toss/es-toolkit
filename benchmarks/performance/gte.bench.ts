@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { gte as gteToolkitCompat_ } from 'es-toolkit/compat';
-import { gte as gteLodash_ } from 'lodash';
+import { gte as gteToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const gteToolkitCompat = gteToolkitCompat_;
-const gteLodash = gteLodash_;
+const { gte: gteLodash } = lodash;
 
 describe('gte', () => {
   bench('es-toolkit/compat/gte', () => {

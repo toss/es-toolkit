@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { sumBy as sumByToolkit_ } from 'es-toolkit';
-import { sumBy as sumByToolkitCompat_ } from 'es-toolkit/compat';
-import { sumBy as sumByLodash_ } from 'lodash';
+import { sumBy as sumByToolkit } from 'es-toolkit';
+import { sumBy as sumByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const sumByToolkit = sumByToolkit_;
-const sumByToolkitCompat = sumByToolkitCompat_;
-const sumByLodash = sumByLodash_;
+const { sumBy: sumByLodash } = lodash;
 
 describe('sumBy', () => {
   bench('es-toolkit/sumBy', () => {

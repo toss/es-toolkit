@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { endsWith as endsWithToolkit_ } from 'es-toolkit/compat';
-import { endsWith as endsWithLodash_ } from 'lodash';
+import { endsWith as endsWithToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const endsWithToolkit = endsWithToolkit_;
-const endsWithLodash = endsWithLodash_;
+const { endsWith: endsWithLodash } = lodash;
 
 describe('endsWith', () => {
   bench('es-toolkit/endsWith', () => {

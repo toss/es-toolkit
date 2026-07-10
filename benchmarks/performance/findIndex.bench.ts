@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { findIndex as findIndexToolkit_ } from 'es-toolkit/compat';
-import { findIndex as findIndexLodash_ } from 'lodash';
+import { findIndex as findIndexToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const findIndexToolkit = findIndexToolkit_;
-const findIndexLodash = findIndexLodash_;
+const { findIndex: findIndexLodash } = lodash;
 
 const items = [
   { id: 1, name: 'Alice' },

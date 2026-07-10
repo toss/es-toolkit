@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { negate as negateToolkit_ } from 'es-toolkit';
-import { negate as negateCompatToolkit_ } from 'es-toolkit/compat';
-import { negate as negateLodash_ } from 'lodash';
+import { negate as negateToolkit } from 'es-toolkit';
+import { negate as negateCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const negateToolkit = negateToolkit_;
-const negateCompatToolkit = negateCompatToolkit_;
-const negateLodash = negateLodash_;
+const { negate: negateLodash } = lodash;
 
 describe('compact', () => {
   bench('es-toolkit', () => {

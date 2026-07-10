@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { unescape as unescapeToolkit_ } from 'es-toolkit';
-import { unescape as unescapeCompatToolkit_ } from 'es-toolkit/compat';
-import { unescape as unescapeLodash_ } from 'lodash';
+import { unescape as unescapeToolkit } from 'es-toolkit';
+import { unescape as unescapeCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const unescapeToolkit = unescapeToolkit_;
-const unescapeCompatToolkit = unescapeCompatToolkit_;
-const unescapeLodash = unescapeLodash_;
+const { unescape: unescapeLodash } = lodash;
 
 const longString = 'fred, barney, &amp; pebbles'.repeat(50);
 

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { unset as unsetToolkitCompat_ } from 'es-toolkit/compat';
-import { unset as unsetLodash_ } from 'lodash';
+import { unset as unsetToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const unsetToolkitCompat = unsetToolkitCompat_;
-const unsetLodash = unsetLodash_;
+const { unset: unsetLodash } = lodash;
 
 describe('unset', () => {
   bench('es-toolkit/unset', () => {

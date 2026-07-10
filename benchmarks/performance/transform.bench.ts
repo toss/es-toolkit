@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { transform as transformToolkitCompat_ } from 'es-toolkit/compat';
-import { transform as transformLodash_ } from 'lodash';
+import { transform as transformToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const transformToolkitCompat = transformToolkitCompat_;
-const transformLodash = transformLodash_;
+const { transform: transformLodash } = lodash;
 
 const bigObject = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => [i, i]));
 const bigArray = Array.from({ length: 1000 }, (_, i) => i);

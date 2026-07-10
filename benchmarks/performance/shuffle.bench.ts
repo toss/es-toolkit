@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { shuffle as shuffleToolkit_ } from 'es-toolkit';
-import { shuffle as shuffleToolkitCompat_ } from 'es-toolkit/compat';
-import { shuffle as shuffleLodash_ } from 'lodash';
+import { shuffle as shuffleToolkit } from 'es-toolkit';
+import { shuffle as shuffleToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const shuffleToolkit = shuffleToolkit_;
-const shuffleToolkitCompat = shuffleToolkitCompat_;
-const shuffleLodash = shuffleLodash_;
+const { shuffle: shuffleLodash } = lodash;
 
 describe('shuffle', () => {
   bench('es-toolkit/shuffle', () => {
