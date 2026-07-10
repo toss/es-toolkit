@@ -16,7 +16,7 @@ forEachRight(collection, callback);
 
 ## 使用法
 
-### `forEachRight(collection, callback)`
+### `forEachRight(collection, callback?)`
 
 配列、オブジェクト、文字列を右から左の順序で走査し、各要素に対してコールバック関数を実行します。コールバックが`false`を返すと走査を中断します。
 

@@ -16,7 +16,7 @@ forEachRight(collection, callback);
 
 ## 用法
 
-### `forEachRight(collection, callback)`
+### `forEachRight(collection, callback?)`
 
 从右到左顺序遍历数组、对象或字符串，并对每个元素执行回调函数。如果回调返回 `false`，则停止遍历。
 

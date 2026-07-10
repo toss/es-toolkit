@@ -16,7 +16,7 @@ forEach(collection, callback);
 
 ## 사용법
 
-### `forEach(collection, callback)`
+### `forEach(collection, callback?)`
 
 배열이나 객체의 모든 요소를 순회하면서 각 요소에 대해 콜백 함수를 실행하고 싶을 때 `forEach`를 사용하세요. 콜백이 `false`를 반환하면 순회를 중단해요.
 
@@ -79,7 +79,7 @@ forEach(undefined, value => {
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 순회할 배열이나 객체예요.
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요.
+- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 선택): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 

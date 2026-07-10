@@ -16,7 +16,7 @@ forEach(collection, callback);
 
 ## 使用法
 
-### `forEach(collection, callback)`
+### `forEach(collection, callback?)`
 
 配列またはオブジェクトのすべての要素を走査し、各要素に対してコールバック関数を実行したい場合は`forEach`を使用してください。コールバックが`false`を返すと走査を中断します。
 
@@ -79,7 +79,7 @@ forEach(undefined, value => {
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 走査する配列またはオブジェクトです。
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 各要素に対して実行する関数です。`false`を返すと走査を中断します。
+- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 選択): 各要素に対して実行する関数です。`false`を返すと走査を中断します。デフォルトは`identity`関数です。
 
 #### 戻り値
 
