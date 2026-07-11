@@ -52,12 +52,8 @@ export function groupBy<T extends object>(
  *
  * @template T - The type of elements in the array or values in the object.
  * @template K - The type of keys.
- * @param source - The collection to group.
- * @param [_getKeyFromItem] - The iteratee to transform keys.
- *   - If a function is provided, it's invoked for each element in the collection.
- *   - If a property name (string) is provided, that property of each element is used as the key.
- *   - If a property-value pair (array) is provided, elements with matching property values are used.
- *   - If a partial object is provided, elements with matching properties are used.
+ * @param collection - The collection to group.
+ * @param [iteratee] - The iteratee to transform keys.
  * @returns An object where each key is associated with an array of elements that
  * share that key.
  *
@@ -74,20 +70,15 @@ export function groupBy<T extends object>(
  * // => { 3: ['one', 'two'], 5: ['three'] }
  */
 export function groupBy<T, K extends PropertyKey>(
-  source: ArrayLike<T> | Record<any, T> | null | undefined,
-  _getKeyFromItem?:
-    | ((item: T, index: number, arr: any) => unknown)
-    | Partial<T>
-    | [keyof T, unknown]
-    | PropertyKey
-    | null
+  collection: ArrayLike<T> | Record<any, T> | null | undefined,
+  iteratee?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey | null
 ): Record<K, T[]> {
-  if (source == null) {
+  if (collection == null) {
     return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
-  const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
+  const items = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
+  const getKeyFromItem = createIteratee(iteratee ?? identity);
 
   return groupByToolkit<T, K>(items, getKeyFromItem);
 }
