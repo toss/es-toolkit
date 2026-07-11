@@ -16,7 +16,7 @@ const grouped = groupBy(collection, iteratee);
 
 ## 사용법
 
-### `groupBy(collection, iteratee)`
+### `groupBy(collection, iteratee?)`
 
 배열이나 객체의 각 요소를 주어진 조건 함수에 따라 그룹으로 나누고, 그룹별로 분류된 객체를 반환해요. 조건은 함수, 프로퍼티 이름, 부분 객체 등 다양한 형태로 제공할 수 있어요.
 
