@@ -1,8 +1,6 @@
 import { bench, describe } from 'vitest';
-import { toCamelCaseKeys as toCamelCaseKeysToolkit_ } from 'es-toolkit';
+import { toCamelCaseKeys as toCamelCaseKeysToolkit } from 'es-toolkit';
 import lodashFp from 'lodash/fp';
-
-const toCamelCaseKeysToolkit = toCamelCaseKeysToolkit_;
 
 const toCamelCaseKeysWithLodashFp = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.camelCase)(obj);

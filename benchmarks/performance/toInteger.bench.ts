@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toInteger as toIntegerToolkitCompat_ } from 'es-toolkit/compat';
-import { toInteger as toIntegerLodash_ } from 'lodash';
+import { toInteger as toIntegerToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toIntegerToolkitCompat = toIntegerToolkitCompat_;
-const toIntegerLodash = toIntegerLodash_;
+const { toInteger: toIntegerLodash } = lodash;
 
 describe('toInteger', () => {
   bench('es-toolkit/compat/toInteger', () => {

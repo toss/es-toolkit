@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { reverse as reverseCompat_ } from 'es-toolkit/compat';
-import { reverse as reverseLodash_ } from 'lodash';
+import { reverse as reverseCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const reverseCompat = reverseCompat_;
-const reverseLodash = reverseLodash_;
+const { reverse: reverseLodash } = lodash;
 
 const testArray = Array.from({ length: 1000 }, (_, i) => i);
 

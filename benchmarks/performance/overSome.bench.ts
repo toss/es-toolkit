@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { overSome as overSomeToolkit_ } from 'es-toolkit/compat';
-import { overSome as overSomeLodash_ } from 'lodash';
+import { overSome as overSomeToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const overSomeToolkit = overSomeToolkit_;
-const overSomeLodash = overSomeLodash_;
+const { overSome: overSomeLodash } = lodash;
 
 describe('overSome', () => {
   bench('es-toolkit/overSome', () => {

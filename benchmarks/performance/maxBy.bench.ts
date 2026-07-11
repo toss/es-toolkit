@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { maxBy as maxByToolkit_ } from 'es-toolkit';
-import { maxBy as maxByCompat_ } from 'es-toolkit/compat';
-import { maxBy as maxByLodash_ } from 'lodash';
+import { maxBy as maxByToolkit } from 'es-toolkit';
+import { maxBy as maxByCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const maxByToolkit = maxByToolkit_;
-const maxByCompat = maxByCompat_;
-const maxByLodash = maxByLodash_;
+const { maxBy: maxByLodash } = lodash;
 
 describe('maxBy', () => {
   bench('es-toolkit/maxBy', () => {

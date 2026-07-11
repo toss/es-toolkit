@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { result as resultToolkit_ } from 'es-toolkit/compat';
-import { result as resultLodash_ } from 'lodash';
+import { result as resultToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const resultToolkit = resultToolkit_;
-const resultLodash = resultLodash_;
+const { result: resultLodash } = lodash;
 
 describe('result', () => {
   const object = {

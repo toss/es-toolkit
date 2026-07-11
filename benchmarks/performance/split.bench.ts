@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { split as splitToolkitCompat_ } from 'es-toolkit/compat';
-import { split as splitLodash_ } from 'lodash';
+import { split as splitToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const splitToolkitCompat = splitToolkitCompat_;
-const splitLodash = splitLodash_;
+const { split: splitLodash } = lodash;
 
 describe('split', () => {
   const str = 'a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z';

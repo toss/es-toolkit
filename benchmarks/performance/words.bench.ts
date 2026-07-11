@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { words as wordsToolkit_ } from 'es-toolkit';
-import { words as wordsToolkitCompat_ } from 'es-toolkit/compat';
-import { words as wordLodash_ } from 'lodash';
+import { words as wordsToolkit } from 'es-toolkit';
+import { words as wordsToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const wordsToolkit = wordsToolkit_;
-const wordsToolkitCompat = wordsToolkitCompat_;
-const wordLodash = wordLodash_;
+const { words: wordLodash } = lodash;
 
 describe('Performance Comparison: es-toolkit words vs lodash words', () => {
   const testString = 'This is a test string with different_cases and UPPERCASE words 🚀 and more symbols';

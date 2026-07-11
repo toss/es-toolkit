@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toPairsIn as toPairsInToolkit_ } from 'es-toolkit/compat';
-import { toPairsIn as toPairsInLodash_ } from 'lodash';
+import { toPairsIn as toPairsInToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toPairsInToolkit = toPairsInToolkit_;
-const toPairsInLodash = toPairsInLodash_;
+const { toPairsIn: toPairsInLodash } = lodash;
 
 describe('toPairsIn with object', () => {
   bench('es-toolkit/toPairsIn', () => {

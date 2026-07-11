@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { replace as replaceToolkitCompat_ } from 'es-toolkit/compat';
-import { replace as replaceLodash_ } from 'lodash';
+import { replace as replaceToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const replaceToolkitCompat = replaceToolkitCompat_;
-const replaceLodash = replaceLodash_;
+const { replace: replaceLodash } = lodash;
 
 describe('replace', () => {
   bench('es-toolkit/compat/replace', () => {

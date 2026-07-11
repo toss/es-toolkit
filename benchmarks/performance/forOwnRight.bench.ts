@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { forOwnRight as forOwnRightToolkitCompat_ } from 'es-toolkit/compat';
-import { forOwnRight as forOwnRightLodash_ } from 'lodash';
+import { forOwnRight as forOwnRightToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const forOwnRightToolkitCompat = forOwnRightToolkitCompat_;
-const forOwnRightLodash = forOwnRightLodash_;
+const { forOwnRight: forOwnRightLodash } = lodash;
 
 describe('forOwnRight', () => {
   const obj = { a: 1, b: 2, c: 3 };

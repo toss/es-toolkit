@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { times as timesCompatToolkit_ } from 'es-toolkit/compat';
-import { times as timesLodash_ } from 'lodash';
+import { times as timesCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const timesCompatToolkit = timesCompatToolkit_;
-const timesLodash = timesLodash_;
+const { times: timesLodash } = lodash;
 
 describe('times', () => {
   bench('es-toolkit/compat/times', () => {

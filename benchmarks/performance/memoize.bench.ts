@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { memoize as memoizeToolkit_ } from 'es-toolkit';
-import { memoize as memoizeToolkitCompat_ } from 'es-toolkit/compat';
-import { memoize as memoizeLodash_ } from 'lodash';
+import { memoize as memoizeToolkit } from 'es-toolkit';
+import { memoize as memoizeToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const memoizeToolkit = memoizeToolkit_;
-const memoizeToolkitCompat = memoizeToolkitCompat_;
-const memoizeLodash = memoizeLodash_;
+const { memoize: memoizeLodash } = lodash;
 
 describe('memoize', () => {
   const object = { a: 1, b: 2, c: 3 };

@@ -1,16 +1,14 @@
 import { bench, describe } from 'vitest';
-import { cloneDeep as cloneDeepToolkit_ } from 'es-toolkit';
-import { cloneDeep as cloneDeepCompatToolkit_ } from 'es-toolkit/compat';
-import { cloneDeep as cloneDeepLodash_ } from 'lodash';
-import rfdc_ from 'rfdc';
+import { cloneDeep as cloneDeepToolkit } from 'es-toolkit';
+import { cloneDeep as cloneDeepCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
+import createRfdc from 'rfdc';
 
-const cloneDeepToolkit = cloneDeepToolkit_;
-const cloneDeepCompatToolkit = cloneDeepCompatToolkit_;
-const cloneDeepLodash = cloneDeepLodash_;
-const rfdcWithCircle = rfdc_({
+const { cloneDeep: cloneDeepLodash } = lodash;
+const rfdcWithCircle = createRfdc({
   circles: true,
 });
-const rfdc = rfdc_();
+const rfdc = createRfdc();
 
 const obj = {
   number: 29,

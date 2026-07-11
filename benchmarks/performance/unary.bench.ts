@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { unary as unaryToolkit_ } from 'es-toolkit';
-import { unary as unaryLodash_ } from 'lodash';
+import { unary as unaryToolkit } from 'es-toolkit';
+import lodash from 'lodash';
 
-const unaryToolkit = unaryToolkit_;
-const unaryLodash = unaryLodash_;
+const { unary: unaryLodash } = lodash;
 
 describe('ary', () => {
   bench('es-toolkit/unary', () => {

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { curryRight as curryRightToolkit_ } from 'es-toolkit';
-import { curryRight as curryRightToolkitCompat_ } from 'es-toolkit/compat';
-import { curryRight as curryRightLodash_ } from 'lodash';
+import { curryRight as curryRightToolkit } from 'es-toolkit';
+import { curryRight as curryRightToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const curryRightToolkit = curryRightToolkit_;
-const curryRightToolkitCompat = curryRightToolkitCompat_;
-const curryRightLodash = curryRightLodash_;
+const { curryRight: curryRightLodash } = lodash;
 
 describe('curryRight', () => {
   const fn = (a: number, b: string, c: boolean) => ({ a, b, c });

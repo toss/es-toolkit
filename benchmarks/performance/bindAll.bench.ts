@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { bindAll as bindAllToolkit_ } from 'es-toolkit/compat';
-import { bindAll as bindAllLodash_ } from 'lodash';
+import { bindAll as bindAllToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const bindAllToolkit = bindAllToolkit_;
-const bindAllLodash = bindAllLodash_;
+const { bindAll: bindAllLodash } = lodash;
 
 const object = {
   greet() {

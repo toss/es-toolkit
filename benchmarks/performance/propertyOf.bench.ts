@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { propertyOf as propertyOfToolkit_ } from 'es-toolkit/compat';
-import { propertyOf as propertyOfLodash_ } from 'lodash';
+import { propertyOf as propertyOfToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const propertyOfToolkit = propertyOfToolkit_;
-const propertyOfLodash = propertyOfLodash_;
+const { propertyOf: propertyOfLodash } = lodash;
 
 describe('propertyOf', () => {
   bench('es-toolkit/propertyOf', () => {

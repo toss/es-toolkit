@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { multiply as multiplyToolkitCompat_ } from 'es-toolkit/compat';
-import { multiply as multiplyLodash_ } from 'lodash';
+import { multiply as multiplyToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const multiplyToolkitCompat = multiplyToolkitCompat_;
-const multiplyLodash = multiplyLodash_;
+const { multiply: multiplyLodash } = lodash;
 
 describe('multiply function benchmark', () => {
   bench('es-toolkit/compat/multiply', () => {

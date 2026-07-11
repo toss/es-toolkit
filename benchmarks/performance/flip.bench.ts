@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { flip as flipToolkit_ } from 'es-toolkit/compat';
-import { flip as flipLodash_ } from 'lodash';
+import { flip as flipToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const flipToolkit = flipToolkit_;
-const flipLodash = flipLodash_;
+const { flip: flipLodash } = lodash;
 
 describe('flip', () => {
   function fn(a: any, b: any, c: any, d: any) {

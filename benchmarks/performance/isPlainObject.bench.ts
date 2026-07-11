@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isPlainObject as isPlainObjectToolkit_ } from 'es-toolkit';
-import { isPlainObject as isPlainObjectCompatToolkit_ } from 'es-toolkit/compat';
-import { isPlainObject as isPlainObjectLodash_ } from 'lodash';
+import { isPlainObject as isPlainObjectToolkit } from 'es-toolkit';
+import { isPlainObject as isPlainObjectCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isPlainObjectToolkit = isPlainObjectToolkit_;
-const isPlainObjectCompatToolkit = isPlainObjectCompatToolkit_;
-const isPlainObjectLodash = isPlainObjectLodash_;
+const { isPlainObject: isPlainObjectLodash } = lodash;
 
 const object = Object.create(null);
 const buffer = Buffer.from('hello, world');

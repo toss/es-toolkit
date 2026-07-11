@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { isSubset as isSubsetToolkit_ } from 'es-toolkit';
-import { difference as differenceLodash_ } from 'lodash';
+import { isSubset as isSubsetToolkit } from 'es-toolkit';
+import lodash from 'lodash';
 
-const isSubsetToolkit = isSubsetToolkit_;
-const differenceLodash = differenceLodash_;
+const { difference: differenceLodash } = lodash;
 
 const isSubsetLodash = (array: any[], subset: any[]) => {
   return differenceLodash(array, subset).length === 0;

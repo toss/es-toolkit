@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { overArgs as overArgsToolkitCompat_ } from 'es-toolkit/compat';
-import { overArgs as overArgsLodash_ } from 'lodash';
+import { overArgs as overArgsToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const overArgsToolkitCompat = overArgsToolkitCompat_;
-const overArgsLodash = overArgsLodash_;
+const { overArgs: overArgsLodash } = lodash;
 
 function doubled(n: number) {
   return n * 2;
