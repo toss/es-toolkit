@@ -10,7 +10,7 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  *
  * @template T - The type of elements in the array-like collection
  * @param collection - The collection to iterate over
- * @param [iteratee=identity] - The iteratee to transform keys
+ * @param [iteratee] - The iteratee to transform keys
  * @returns Returns the composed aggregate object
  *
  * @example
@@ -31,7 +31,7 @@ export function groupBy<T>(
  *
  * @template T - The type of the object
  * @param collection - The object to iterate over
- * @param [iteratee=identity] - The iteratee to transform keys
+ * @param [iteratee] - The iteratee to transform keys
  * @returns Returns the composed aggregate object
  *
  * @example
