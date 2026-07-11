@@ -16,7 +16,7 @@ const grouped = groupBy(collection, iteratee);
 
 ## 使用法
 
-### `groupBy(collection, iteratee)`
+### `groupBy(collection, iteratee?)`
 
 配列またはオブジェクトの各要素を与えられた条件関数に従ってグループ化し、グループ別に分類されたオブジェクトを返します。条件は関数、プロパティ名、部分オブジェクトなど、さまざまな形式で提供できます。
 
