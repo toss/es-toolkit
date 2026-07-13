@@ -204,10 +204,23 @@ function areObjectsEqual(
           return false;
         }
 
-        for (const [key, value] of a.entries()) {
-          if (!b.has(key) || !isEqualWithImpl(value, b.get(key), key, a, b, stack, areValuesEqual)) {
+        const aEntries = Array.from(a.entries()) as Array<[any, any]>;
+        const bEntries = Array.from(b.entries()) as Array<[any, any]>;
+
+        for (let i = 0; i < aEntries.length; i++) {
+          const [aKey, aValue] = aEntries[i];
+
+          const index = bEntries.findIndex(
+            ([bKey, bValue]: [any, any]) =>
+              isEqualWithImpl(aKey, bKey, undefined, a, b, stack, areValuesEqual) &&
+              isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
+          );
+
+          if (index === -1) {
             return false;
           }
+
+          bEntries.splice(index, 1);
         }
 
         return true;
