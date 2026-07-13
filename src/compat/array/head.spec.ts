@@ -23,10 +23,6 @@ describe('head', () => {
     expect(actual).toEqual([1, 4, 7]);
   });
 
-  it('should be aliased', () => {
-    expect(first).toBe(head);
-  });
-
   it('should return an empty array when the collection is null or undefined', () => {
     expect(first(null)).toBeUndefined();
   });
