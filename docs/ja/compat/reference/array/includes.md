@@ -16,7 +16,7 @@ const hasValue = includes(collection, target, fromIndex);
 
 ## 使用法
 
-### `includes(collection, target, fromIndex)`
+### `includes(collection, target?, fromIndex?)`
 
 配列、オブジェクト、文字列に特定の値が存在するかを確認したい場合は`includes`を使用してください。SameValueZero方式で値を比較します。
 
@@ -88,7 +88,7 @@ includes({ a: 1, b: NaN }, NaN);
 #### パラメータ
 
 - `collection` (`Array | Record<string, any> | string | null | undefined`): 検索する配列、オブジェクト、または文字列です。
-- `target` (`any`): 見つける値です。
+- `target` (`any`, 任意): 見つける値です。
 - `fromIndex` (`number`, 選択): 検索を開始するインデックスです。負の値は末尾から計算します。デフォルトは`0`です。
 
 #### 戻り値
