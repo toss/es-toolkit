@@ -12,6 +12,13 @@ describe('includes', () => {
     expect(includes(obj, 'value')).toBe(false);
   });
 
+  it(`should not match arrayLike 'length' property value`, () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+    expect(includes(arrayLike, 2)).toBeFalsy();
+    expect(includes(arrayLike, 'a')).toBeTruthy();
+    expect(includes(arrayLike, 'b')).toBeTruthy();
+  });
+
   Object.entries({
     'an `arguments` object': toArgs([1, 2, 3, 4]),
     'an array': [1, 2, 3, 4],
