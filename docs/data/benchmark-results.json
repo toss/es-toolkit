@@ -1,7 +1,7 @@
 {
   "labels": {
-    "esToolkit": "es-toolkit@1.43.0",
-    "lodash": "lodash@4.17.21"
+    "esToolkit": "es-toolkit@1.49.0",
+    "lodash": "lodash@4.18.1"
   },
   "environment": {
     "node": "v24.11.1",
@@ -12,44 +12,44 @@
   },
   "data": {
     "omit": {
-      "esToolkit": 4706415,
-      "lodash": 1417299
+      "esToolkit": 5022632,
+      "lodash": 1402566
     },
     "pick": {
-      "esToolkit": 10746586,
-      "lodash": 2789742
+      "esToolkit": 11335718,
+      "lodash": 2876787
     },
     "differenceWith": {
-      "esToolkit": 18522078,
-      "lodash": 5651942
+      "esToolkit": 16930604,
+      "lodash": 5811529
     },
     "difference": {
-      "esToolkit": 12202488,
-      "lodash": 6828896
+      "esToolkit": 12373746,
+      "lodash": 7004902
     },
     "intersectionWith": {
-      "esToolkit": 16926995,
-      "lodash": 4958866
+      "esToolkit": 17384852,
+      "lodash": 5031392
     },
     "intersection": {
-      "esToolkit": 11263848,
-      "lodash": 5819145
+      "esToolkit": 11338214,
+      "lodash": 5550564
     },
     "unionBy": {
-      "esToolkit": 5052919,
-      "lodash": 5307449
+      "esToolkit": 5068515,
+      "lodash": 5342267
     },
     "union": {
-      "esToolkit": 4664881,
-      "lodash": 6287776
+      "esToolkit": 4849245,
+      "lodash": 6209626
     },
     "dropRightWhile": {
-      "esToolkit": 17841876,
-      "lodash": 12320166
+      "esToolkit": 18381692,
+      "lodash": 12726057
     },
     "groupBy": {
-      "esToolkit": 6039742,
-      "lodash": 6797503
+      "esToolkit": 6507297,
+      "lodash": 6540958
     }
   }
 }

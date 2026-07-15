@@ -34,10 +34,9 @@ async function main() {
 
   let lodashVersion = 'unknown';
   try {
-    const lodashPkgPath = path.join(ROOT, 'node_modules', 'lodash', 'package.json');
-    const lodashContent = await fs.readFile(lodashPkgPath, 'utf8');
-    const lodashJson = JSON.parse(lodashContent);
-    lodashVersion = lodashJson.version;
+    const { stdout } = await execAsync('yarn info lodash version --json', { cwd: path.join(ROOT, 'benchmarks') });
+    const info = JSON.parse(stdout);
+    lodashVersion = info.children.Version;
   } catch {
     console.warn('Could not detect lodash version, using "unknown"');
   }
