@@ -52,4 +52,10 @@ describe('maxBy', () => {
 
     expect(maxBy(numbers)).toBe(3);
   });
+
+  it('should work with string values returned by iteratee', () => {
+    const items = [{ v: 'a' }, { v: 'b' }];
+    const result = maxBy(items, item => item.v);
+    expect(result).toEqual({ v: 'b' });
+  });
 });

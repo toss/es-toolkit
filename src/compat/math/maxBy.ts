@@ -1,5 +1,5 @@
-import { maxBy as maxByToolkit } from '../../array/maxBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -36,5 +36,34 @@ export function maxBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Valu
     return undefined;
   }
 
-  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
+  const array = toArray(items);
+
+  if (array.length === 0) {
+    return undefined;
+  }
+
+  const getValue = iterateeToolkit(iteratee ?? identity);
+
+  let maxElement = array[0];
+  let max = getValue(maxElement, 0, array);
+
+  if (Number.isNaN(max)) {
+    return maxElement;
+  }
+
+  for (let i = 1; i < array.length; i++) {
+    const element = array[i];
+    const current = getValue(element, i, array);
+
+    if (Number.isNaN(current)) {
+      return element;
+    }
+
+    if (current > max) {
+      max = current;
+      maxElement = element;
+    }
+  }
+
+  return maxElement;
 }

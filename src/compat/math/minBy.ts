@@ -1,5 +1,5 @@
-import { minBy as minByToolkit } from '../../array/minBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -36,5 +36,34 @@ export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Valu
     return undefined;
   }
 
-  return minByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
+  const array = toArray(items);
+
+  if (array.length === 0) {
+    return undefined;
+  }
+
+  const getValue = iterateeToolkit(iteratee ?? identity);
+
+  let minElement = array[0];
+  let min = getValue(minElement, 0, array);
+
+  if (Number.isNaN(min)) {
+    return minElement;
+  }
+
+  for (let i = 1; i < array.length; i++) {
+    const element = array[i];
+    const current = getValue(element, i, array);
+
+    if (Number.isNaN(current)) {
+      return element;
+    }
+
+    if (current < min) {
+      min = current;
+      minElement = element;
+    }
+  }
+
+  return minElement;
 }
