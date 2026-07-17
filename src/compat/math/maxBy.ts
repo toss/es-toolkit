@@ -44,22 +44,18 @@ export function maxBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Valu
 
   const getValue = iterateeToolkit(iteratee ?? identity);
 
-  let maxElement = array[0];
-  let max = getValue(maxElement, 0, array);
+  let maxElement: T | undefined;
+  let max: unknown;
 
-  if (Number.isNaN(max)) {
-    return maxElement;
-  }
-
-  for (let i = 1; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     const element = array[i];
     const current = getValue(element, i, array);
 
     if (Number.isNaN(current)) {
-      return element;
+      continue;
     }
 
-    if (current > max) {
+    if (max === undefined || current > (max as number)) {
       max = current;
       maxElement = element;
     }

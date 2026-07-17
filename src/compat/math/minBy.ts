@@ -44,22 +44,18 @@ export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Valu
 
   const getValue = iterateeToolkit(iteratee ?? identity);
 
-  let minElement = array[0];
-  let min = getValue(minElement, 0, array);
+  let minElement: T | undefined;
+  let min: unknown;
 
-  if (Number.isNaN(min)) {
-    return minElement;
-  }
-
-  for (let i = 1; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     const element = array[i];
     const current = getValue(element, i, array);
 
     if (Number.isNaN(current)) {
-      return element;
+      continue;
     }
 
-    if (current < min) {
+    if (min === undefined || current < (min as number)) {
       min = current;
       minElement = element;
     }
