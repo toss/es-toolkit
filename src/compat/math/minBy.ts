@@ -9,7 +9,7 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  *
  * @template T - The type of elements in the array.
  * @param items The array of elements to search.
- * @param iteratee
+ * @param [iteratee=identity]
  * The criteria used to determine the minimum value.
  *  - If a **function** is provided, it extracts a numeric value from each element.
  *  - If a **string** is provided, it is treated as a key to extract values from the objects.
@@ -31,7 +31,7 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * minBy([{ a: 1 }, { a: 2 }], ['a', 1]); // Returns: { a: 2 }
  * minBy([{ a: 1 }, { a: 2 }], { a: 1 }); // Returns: { a: 2 }
  */
-export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T | undefined {
+export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee: ValueIteratee<T> = identity): T | undefined {
   if (items == null) {
     return undefined;
   }
@@ -42,7 +42,7 @@ export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Valu
     return undefined;
   }
 
-  const getValue = iterateeToolkit(iteratee ?? identity);
+  const getValue = iterateeToolkit(iteratee);
 
   let minElement: T | undefined;
   let min: unknown;
