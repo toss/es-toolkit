@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { keys } from './keys';
 import { values } from './values';
 import { args } from '../_internal/args';
 import { strictArgs } from '../_internal/strictArgs';
@@ -45,5 +46,14 @@ describe('values', () => {
   it('should return an empty array for null or undefined', () => {
     expect(values(null)).toEqual([]);
     expect(values(undefined)).toEqual([]);
+  });
+
+  it(`should treat sparse array holes as \`undefined\``, () => {
+    // eslint-disable-next-line
+    const array = [10, , 30];
+
+    expect(values(array)).toEqual([10, undefined, 30]);
+    // `keys` materializes every index, so the two must stay the same length
+    expect(values(array).length).toBe(keys(array).length);
   });
 });
