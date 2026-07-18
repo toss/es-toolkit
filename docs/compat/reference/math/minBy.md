@@ -16,7 +16,7 @@ const minItem = minBy(array, iteratee);
 
 ## Usage
 
-### `minBy(array, iteratee)`
+### `minBy(array, iteratee?)`
 
 Finds the element in an array that has the smallest value when computed by a function.
 
@@ -107,7 +107,7 @@ minBy(undefined);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to search.
-- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element.
+- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element. Default is `identity`.
 
 #### Returns
 

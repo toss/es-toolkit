@@ -1,5 +1,5 @@
-import { maxBy as maxByToolkit } from '../../array/maxBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -9,7 +9,7 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  *
  * @template T - The type of elements in the array.
  * @param items The array of elements to search.
- * @param iteratee
+ * @param [iteratee=identity]
  * The criteria used to determine the maximum value.
  *  - If a **function** is provided, it extracts a numeric value from each element.
  *  - If a **string** is provided, it is treated as a key to extract values from the objects.
@@ -31,10 +31,35 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * maxBy([{ a: 1 }, { a: 2 }], ['a', 1]); // Returns: { a: 1 }
  * maxBy([{ a: 1 }, { a: 2 }], { a: 1 }); // Returns: { a: 1 }
  */
-export function maxBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T | undefined {
+export function maxBy<T>(items: ArrayLike<T> | null | undefined, iteratee: ValueIteratee<T> = identity): T | undefined {
   if (items == null) {
     return undefined;
   }
 
-  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
+  const array = toArray(items);
+
+  if (array.length === 0) {
+    return undefined;
+  }
+
+  const getValue = iterateeToolkit(iteratee);
+
+  let maxElement: T | undefined;
+  let max: unknown;
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    const current = getValue(element, i, array);
+
+    if (Number.isNaN(current)) {
+      continue;
+    }
+
+    if (max === undefined || current > (max as number)) {
+      max = current;
+      maxElement = element;
+    }
+  }
+
+  return maxElement;
 }

@@ -52,4 +52,19 @@ describe('maxBy', () => {
 
     expect(maxBy(numbers)).toBe(3);
   });
+
+  it('should work with string values returned by iteratee', () => {
+    const items = [{ v: 'a' }, { v: 'b' }];
+    const result = maxBy(items, item => item.v);
+    expect(result).toEqual({ v: 'b' });
+  });
+
+  it('should skip NaN values, matching lodash', () => {
+    expect(maxBy([NaN, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, NaN, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is NaN', () => {
+    expect(maxBy([NaN, NaN], x => x)).toBeUndefined();
+  });
 });

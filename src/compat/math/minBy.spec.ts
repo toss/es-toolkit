@@ -52,4 +52,19 @@ describe('minBy', () => {
 
     expect(minBy(numbers)).toBe(1);
   });
+
+  it('should work with string values returned by iteratee', () => {
+    const items = [{ v: 'b' }, { v: 'a' }];
+    const result = minBy(items, item => item.v);
+    expect(result).toEqual({ v: 'a' });
+  });
+
+  it('should skip NaN values, matching lodash', () => {
+    expect(minBy([NaN, 3, 1, 2], x => x)).toBe(1);
+    expect(minBy([3, NaN, 1, 2], x => x)).toBe(1);
+  });
+
+  it('should return undefined when every value is NaN', () => {
+    expect(minBy([NaN, NaN], x => x)).toBeUndefined();
+  });
 });
