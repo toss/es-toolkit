@@ -1,3 +1,7 @@
+// Imports every generated `compat/<name>` entry point in both ESM and CJS, and fails the
+// build if any of them cannot be loaded or resolves to `undefined`. The CJS entry files
+// break silently (`module.exports = require('...').<name>` just becomes `undefined`), so
+// postbuild runs this right after generating them.
 import { readdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 
