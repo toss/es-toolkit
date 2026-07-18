@@ -107,3 +107,6 @@ create_compat_alias "array" "forEachRight" "eachRight"
 create_compat_alias "array" "head" "first"
 create_compat_alias "object" "assignIn" "extend"
 create_compat_alias "object" "assignInWith" "extendWith"
+
+# Verify that every generated compat entry point is actually importable
+node ./.scripts/verify-compat-exports.mjs
