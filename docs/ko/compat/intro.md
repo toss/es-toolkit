@@ -23,6 +23,20 @@ chunk([1, 2, 3, 4], 0);
 1. `lodash` / `lodash-es`의 import 경로를 `es-toolkit/compat`으로 바꿔주세요. 호출하는 코드는 그대로 두면 돼요.
 2. 시간을 두고 호출하는 부분을 정리해 가며 import를 [`es-toolkit`](/ko/intro)으로 바꿔주세요. 다 옮기고 나면 번들이 더 작고 더 빨라져요.
 
+## 함수를 하나씩 불러오기
+
+`lodash/merge`처럼, compat의 모든 함수는 함수별 경로로도 불러올 수 있어요. `es-toolkit/compat` 전체 대신 그 함수에 필요한 파일만 로드해요.
+
+```ts
+import merge from 'es-toolkit/compat/merge';
+```
+
+CommonJS의 `require()`, React Native처럼 트리 셰이킹을 쓸 수 없는 환경이나, 번들러 없이 Node.js에서 바로 실행하는 코드에서 특히 유용해요.
+
+```ts
+const merge = require('es-toolkit/compat/merge');
+```
+
 ## `es-toolkit`과의 차이점
 
 - **API 모양**: Lodash와 1:1로 일치해요. 자동 타입 변환, 여러 가지 인자 형태, 더 이상 권장되지 않는 함수까지 그대로 들어 있어요. [`es-toolkit`](/ko/intro)은 타입이 안전하고 깔끔한 형태만 제공해요.

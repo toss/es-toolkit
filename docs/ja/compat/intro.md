@@ -23,6 +23,20 @@ chunk([1, 2, 3, 4], 0);
 1. `lodash` / `lodash-es`のimportパスを`es-toolkit/compat`に変えてください。呼び出し側のコードはそのままで大丈夫です。
 2. 時間をかけて呼び出し側を整理しつつ、importを[`es-toolkit`](/ja/intro)に切り替えてください。すべて移行できれば、バンドルがより小さく、より高速になります。
 
+## 関数を個別にインポートする
+
+`lodash/merge`と同じように、compatのすべての関数は関数ごとのエントリーポイントからもインポートできます。`es-toolkit/compat`全体ではなく、その関数に必要なファイルだけが読み込まれます。
+
+```ts
+import merge from 'es-toolkit/compat/merge';
+```
+
+CommonJSの`require()`やReact Nativeのようにツリーシェイキングが使えない環境や、バンドラーなしでNode.js上で直接実行するコードで特に役立ちます。
+
+```ts
+const merge = require('es-toolkit/compat/merge');
+```
+
 ## `es-toolkit`との違い
 
 - **APIの形**: Lodashと1:1で一致しています。暗黙的な型変換、さまざまな引数の形、非推奨のヘルパーまでそのまま含まれます。[`es-toolkit`](/ja/intro)は型安全で整理された形だけを提供します。
