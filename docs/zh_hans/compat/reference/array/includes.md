@@ -16,7 +16,7 @@ const hasValue = includes(collection, target, fromIndex);
 
 ## 用法
 
-### `includes(collection, target, fromIndex)`
+### `includes(collection, target?, fromIndex?)`
 
 当您想检查数组、对象或字符串中是否存在特定值时，请使用 `includes`。它使用 SameValueZero 方式比较值。
 
@@ -88,7 +88,7 @@ includes({ a: 1, b: NaN }, NaN);
 #### 参数
 
 - `collection` (`Array | Record<string, any> | string | null | undefined`): 要搜索的数组、对象或字符串。
-- `target` (`any`): 要查找的值。
+- `target` (`any`, 可选): 要查找的值。
 - `fromIndex` (`number`, 选择): 开始搜索的索引。负值从末尾计算。默认值为 `0`。
 
 #### 返回值
