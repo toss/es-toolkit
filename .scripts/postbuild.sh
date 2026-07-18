@@ -109,4 +109,4 @@ create_compat_alias "object" "assignIn" "extend"
 create_compat_alias "object" "assignInWith" "extendWith"
 
 # Verify that every generated compat entry point is actually importable
-node ./.scripts/check-compat-entrypoints.mjs
+node ./.scripts/check-compat-entrypoints-loadable.mjs
