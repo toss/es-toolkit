@@ -50,12 +50,14 @@ const deburrMap = new Map<string, string>([
  * deburr('Crème brûlée') // returns 'Creme brulee'
  */
 export function deburr(str: string): string {
-  str = str.normalize('NFD');
+  const nfd = str.normalize('NFD');
+  // Pure NFD input stays NFD; NFC (and mixed) input is recomposed to NFC.
+  const form = str === nfd ? 'NFD' : 'NFC';
 
   let result = '';
 
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
+  for (let i = 0; i < nfd.length; i++) {
+    const char = nfd[i];
 
     if (
       (char >= '\u0300' && char <= '\u036f') ||
@@ -68,5 +70,5 @@ export function deburr(str: string): string {
     result += deburrMap.get(char) ?? char;
   }
 
-  return result;
+  return result.normalize(form);
 }

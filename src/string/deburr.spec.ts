@@ -60,4 +60,21 @@ describe('deburr', () => {
     expect(deburr('a\u0301\u0327\u20d1')).toBe('a');
     expect(deburr('\u00c6\u20dd')).toBe('Ae');
   });
+
+  it('should preserve the input NFC/NFD form for characters that are not deburred', () => {
+    // Hangul is a convenient probe: NFC and NFD differ, and deburr leaves it unchanged.
+    const nfc = '한글';
+    const nfd = nfc.normalize('NFD');
+    expect(nfc).not.toBe(nfd);
+
+    expect(deburr(nfc)).toBe(nfc);
+    expect(deburr(nfd)).toBe(nfd);
+
+    expect(deburr(`${nfc}café`)).toBe(`${nfc}cafe`);
+    expect(deburr(`${nfc} + Æthelred`)).toBe(`${nfc} + Aethelred`);
+
+    // Mixed NFC + NFD is treated as non-NFD and recomposed to NFC.
+    const mixed = nfd + '가';
+    expect(deburr(mixed)).toBe(`${nfc}가`);
+  });
 });
