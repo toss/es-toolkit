@@ -157,6 +157,8 @@ export { cloneWith } from './object/cloneWith.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { defaultsDeep } from './object/defaultsDeep.ts';
+export { entries } from './object/entries.ts';
+export { entriesIn } from './object/entriesIn.ts';
 export { extend } from './object/extend.ts';
 export { extendWith } from './object/extendWith.ts';
 export { findKey } from './object/findKey.ts';
