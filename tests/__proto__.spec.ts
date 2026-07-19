@@ -85,3 +85,23 @@ describe('__proto__', () => {
     expect(get(object, ['a', '__proto__'])).toBeUndefined();
   });
 });
+
+describe('constructor.prototype', () => {
+  it('should not be polluted in compat/set', () => {
+    set({}, 'constructor.prototype.polluted', 'yes');
+    set({}, 'a.constructor.prototype.polluted', 'yes');
+    set({}, ['constructor', 'prototype', 'polluted'], 'yes');
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect({}.polluted).toBeUndefined();
+  });
+
+  it('should not be polluted in compat/zipObjectDeep', () => {
+    zipObjectDeep(['constructor.prototype.polluted'], ['yes']);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect({}.polluted).toBeUndefined();
+  });
+});
