@@ -1,4 +1,4 @@
-import { isEqualsSameValueZero } from '../_internal/isEqualsSameValueZero';
+import { eq } from '../compat/util/eq.ts';
 
 /**
  * Checks if a Map contains a specific value.
@@ -27,7 +27,7 @@ import { isEqualsSameValueZero } from '../_internal/isEqualsSameValueZero';
  */
 export function hasValue<K, V>(map: Map<K, V>, searchElement: V): boolean {
   for (const value of map.values()) {
-    if (isEqualsSameValueZero(value, searchElement)) {
+    if (eq(value, searchElement)) {
       return true;
     }
   }
