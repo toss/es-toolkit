@@ -202,6 +202,8 @@ describe('orderBy', () => {
   });
 
   it('should work as an iteratee for methods like `_.map`', () => {
+    // `map` passes the index as `iteratees` and the array as `orders`, so the index is used as a
+    // criterion. Numbers have no such property, so the collections are returned in their original order.
     expect(
       [
         [2, 1, 3],
@@ -209,8 +211,8 @@ describe('orderBy', () => {
         // @ts-expect-error - type mismatch
       ].map(orderBy)
     ).toEqual([
-      [1, 2, 3],
-      [1, 2, 3],
+      [2, 1, 3],
+      [3, 2, 1],
     ]);
   });
 
@@ -238,5 +240,16 @@ describe('orderBy', () => {
 
     expect(orderBy(['A', 'a'])).toEqual(['A', 'a']);
     expect(orderBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
+
+  it('should read the property of primitive values', () => {
+    expect(orderBy(['b', 'aa'], 'length')).toEqual(['b', 'aa']);
+    expect(orderBy(['b', 'aa'], 'length', 'desc')).toEqual(['aa', 'b']);
+    expect(orderBy(['ba', 'ab', 'b'], 0)).toEqual(['ab', 'ba', 'b']);
+  });
+
+  it('should keep the original order when primitive values lack the property', () => {
+    expect(orderBy([3, 1, 2], 'b')).toEqual([3, 1, 2]);
+    expect(orderBy(['c', 'a', 'b'], 'x')).toEqual(['c', 'a', 'b']);
   });
 });
