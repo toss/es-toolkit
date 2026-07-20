@@ -3,6 +3,7 @@ export { inRange } from './inRange.ts';
 export { mean } from './mean.ts';
 export { meanBy } from './meanBy.ts';
 export { median } from './median.ts';
+export { medianBigint } from './medianBigint.ts';
 export { medianBy } from './medianBy.ts';
 export { percentile } from './percentile.ts';
 export { random } from './random.ts';
