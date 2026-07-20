@@ -18,4 +18,5 @@ export { rest } from './rest.ts';
 export { retry } from './retry.ts';
 export { spread } from './spread.ts';
 export { throttle, type ThrottledFunction, type ThrottleOptions } from './throttle.ts';
+export { throttleAsync } from './throttleAsync.ts';
 export { unary } from './unary.ts';
