@@ -1,5 +1,6 @@
 export { at } from './at.ts';
 export { cartesianProduct } from './cartesianProduct.ts';
+export { chain } from './chain.ts';
 export { chunk } from './chunk.ts';
 export { chunkBy } from './chunkBy.ts';
 export { combinations } from './combinations.ts';
