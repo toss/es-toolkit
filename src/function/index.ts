@@ -9,6 +9,7 @@ export { flow } from './flow.ts';
 export { flowRight } from './flowRight.ts';
 export { identity } from './identity.ts';
 export { memoize, type MemoizeCache } from './memoize.ts';
+export { memoizePromise } from './memoizePromise.ts';
 export { negate } from './negate.ts';
 export { noop } from './noop.ts';
 export { once } from './once.ts';
