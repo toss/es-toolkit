@@ -126,7 +126,7 @@ describe('isEqual', () => {
     expect(isEqual(map1, map2)).toBe(true);
   });
 
-  it('should return true for equal Maps with duplicate-shaped keys but differing values per pairing', () => {
+  it('should return true for equal Maps with duplicate-shaped elements in different order', () => {
     const map1 = new Map<object, number>([
       [{}, 1],
       [{}, 2],
