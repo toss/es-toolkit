@@ -6,6 +6,11 @@ interface FlattenObjectOptions {
    * @default '.'
    */
   delimiter?: string;
+  /**
+   * When `true`, return a `Map<string, any>` instead of a plain object. See issue #1388.
+   * @default false
+   */
+  map?: boolean;
 }
 
 /**
@@ -34,8 +39,14 @@ interface FlattenObjectOptions {
  * //   'd.1': 3
  * // }
  */
-export function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any> {
-  return flattenObjectImpl(object, '', delimiter);
+export function flattenObject(object: object, options?: { delimiter?: string; map?: false }): Record<string, any>;
+export function flattenObject(object: object, options: { delimiter?: string; map: true }): Map<string, any>;
+export function flattenObject(
+  object: object,
+  { delimiter = '.', map = false }: FlattenObjectOptions = {}
+): Record<string, any> | Map<string, any> {
+  const flat = flattenObjectImpl(object, '', delimiter);
+  return map ? new Map(Object.keys(flat).map(key => [key, flat[key]] as [string, any])) : flat;
 }
 
 function flattenObjectImpl(object: object, prefix: string, delimiter: string): Record<string, any> {
