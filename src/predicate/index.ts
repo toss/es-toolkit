@@ -27,6 +27,7 @@ export { isRegExp } from './isRegExp.ts';
 export { isSet } from './isSet.ts';
 export { isString } from './isString.ts';
 export { isSymbol } from './isSymbol.ts';
+export { isTreeData } from './isTreeData.ts';
 export { isTypedArray } from './isTypedArray.ts';
 export { isUndefined } from './isUndefined.ts';
 export { isWeakMap } from './isWeakMap.ts';
