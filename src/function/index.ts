@@ -1,6 +1,7 @@
 export { after } from './after.ts';
 export { ary } from './ary.ts';
 export { asyncNoop } from './asyncNoop.ts';
+export { exponentialBackoff, withJitter, withEqualJitter, withDecorrelatedJitter } from './backoff.ts';
 export { before } from './before.ts';
 export { curry } from './curry.ts';
 export { curryRight } from './curryRight.ts';
