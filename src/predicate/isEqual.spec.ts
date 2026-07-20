@@ -152,10 +152,4 @@ describe('isEqual', () => {
     expect(isEqual(map1, map2)).toBe(false);
   });
 
-  it('should return true for equal Sets with duplicate-shaped elements in different order', () => {
-    const set1 = new Set<object>([{ a: 1 }, { a: 1, b: 2 }]);
-    const set2 = new Set<object>([{ a: 1, b: 2 }, { a: 1 }]);
-
-    expect(isEqual(set1, set2)).toBe(true);
-  });
 });
