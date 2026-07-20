@@ -67,4 +67,16 @@ describe('maxBy', () => {
   it('should return undefined when every value is NaN', () => {
     expect(maxBy([NaN, NaN], x => x)).toBeUndefined();
   });
+
+  it('should skip null and undefined values, matching lodash', () => {
+    expect(maxBy([{ a: undefined }, { a: 5 }, { a: null }], 'a')).toEqual({ a: 5 });
+    expect(maxBy([5, undefined, 3, null], x => x)).toBe(5);
+  });
+
+  it('should return undefined when the iteratee yields no comparable value', () => {
+    // A missing key makes the iteratee return `undefined` for every element.
+    expect(maxBy([{ a: 1 }, { a: 2 }], 'b')).toBeUndefined();
+    expect(maxBy([{ a: undefined }, { a: undefined }], 'a')).toBeUndefined();
+    expect(maxBy([{ a: null }, { a: null }], 'a')).toBeUndefined();
+  });
 });
