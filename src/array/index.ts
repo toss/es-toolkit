@@ -14,6 +14,7 @@ export { dropRightWhile } from './dropRightWhile.ts';
 export { dropWhile } from './dropWhile.ts';
 export { fill } from './fill.ts';
 export { filterAsync } from './filterAsync.ts';
+export { firstValue } from './firstValue.ts';
 export { flatMap } from './flatMap.ts';
 export { flatMapAsync } from './flatMapAsync.ts';
 export { flatMapDeep } from './flatMapDeep.ts';
