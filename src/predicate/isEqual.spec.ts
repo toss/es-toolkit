@@ -151,5 +151,4 @@ describe('isEqual', () => {
 
     expect(isEqual(map1, map2)).toBe(false);
   });
-
 });
