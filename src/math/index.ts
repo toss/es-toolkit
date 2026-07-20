@@ -4,6 +4,7 @@ export { mean } from './mean.ts';
 export { meanBy } from './meanBy.ts';
 export { median } from './median.ts';
 export { medianBy } from './medianBy.ts';
+export { normalize } from './normalize.ts';
 export { percentile } from './percentile.ts';
 export { random } from './random.ts';
 export { randomInt } from './randomInt.ts';
