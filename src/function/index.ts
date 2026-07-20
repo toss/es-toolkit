@@ -2,6 +2,7 @@ export { after } from './after.ts';
 export { ary } from './ary.ts';
 export { asyncNoop } from './asyncNoop.ts';
 export { before } from './before.ts';
+export { call, callAsync } from './call.ts';
 export { curry } from './curry.ts';
 export { curryRight } from './curryRight.ts';
 export { debounce, type DebouncedFunction, type DebounceOptions } from './debounce.ts';
