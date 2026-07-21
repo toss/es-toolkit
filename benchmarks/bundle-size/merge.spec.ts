@@ -14,6 +14,6 @@ describe('merge bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'merge');
-    expect(bundleSize).toMatchInlineSnapshot(`6377`);
+    expect(bundleSize).toMatchInlineSnapshot(`6381`);
   });
 });
