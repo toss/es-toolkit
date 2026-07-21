@@ -27,6 +27,13 @@ describe('mergeWith', () => {
     expect(actual).toEqual([undefined]);
   });
 
+  it('should assign `null` values in array sources when `customizer` returns `undefined`', () => {
+    expect(mergeWith([1, 2], [null], noop)).toEqual([null, 2]);
+    expect(mergeWith({ a: [1, 2] }, { a: [null, 3] }, noop)).toEqual({
+      a: [null, 3],
+    });
+  });
+
   it('should clone sources when `customizer` returns `undefined`', () => {
     const source1 = { a: { b: { c: 1 } } };
     const source2 = { a: { b: { d: 2 } } };
