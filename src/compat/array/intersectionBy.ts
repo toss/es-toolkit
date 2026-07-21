@@ -1,6 +1,6 @@
 import { intersectionBy as intersectionByToolkit } from '../../array/intersectionBy.ts';
 import { last } from '../../array/last.ts';
-import { uniq } from '../../array/uniq.ts';
+import { uniqBy } from '../../array/uniqBy.ts';
 import { identity } from '../../function/identity.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
@@ -129,12 +129,14 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
   }
 
   const lastValue = last(values);
-  let result = uniq(toArray(array)) as T[];
-  if (lastValue === undefined) {
-    return result;
+  const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
+  const iteratee = getIteratee(lastValue);
+
+  if (count <= 0) {
+    return uniqBy(toArray(array), iteratee ?? identity);
   }
 
-  const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
+  let result = toArray(array) as T[];
 
   for (let i = 0; i < count; ++i) {
     const value = values[i];
@@ -143,14 +145,23 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
       return [];
     }
 
-    if (isArrayLikeObject(lastValue)) {
-      result = intersectionByToolkit(result, toArray(value), identity);
-    } else if (typeof lastValue === 'function') {
-      result = intersectionByToolkit(result, toArray(value), value => lastValue(value));
-    } else if (typeof lastValue === 'string') {
-      result = intersectionByToolkit(result, toArray(value), property(lastValue));
+    if (iteratee) {
+      result = intersectionByToolkit(result, toArray(value), iteratee);
     }
   }
 
-  return result as T[];
+  return result;
+}
+
+function getIteratee(value: unknown) {
+  if (isArrayLikeObject(value)) {
+    return identity;
+  }
+  if (typeof value === 'function') {
+    return (item: unknown) => (value as (item: unknown) => unknown)(item);
+  }
+  if (typeof value === 'string') {
+    return property(value);
+  }
+  return null;
 }
