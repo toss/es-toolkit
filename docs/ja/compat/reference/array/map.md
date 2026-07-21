@@ -16,7 +16,7 @@ const mapped = map(collection, iteratee);
 
 ## 使用法
 
-### `map(collection, iteratee)`
+### `map(collection, iteratee?)`
 
 配列、オブジェクト、または配列風オブジェクトの各要素を変換したいときに`map`を使用してください。各要素に対して反復関数を実行し、結果を新しい配列として返します。
 
@@ -75,9 +75,9 @@ map(users, { age: 30 });
 
 #### パラメータ
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 反復処理する配列またはオブジェクトです。
-- `iteratee` (`function | string | object`, オプション): 各要素に対して実行する関数、プロパティパス、または一致させるオブジェクトです。提供しない場合、各要素をそのまま返します。
-  - 関数の場合、`(value, key, collection)`の形式で呼び出されます。
+- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): 反復処理する配列またはオブジェクトです。
+- `iteratee` (`function | PropertyKey | object`, オプション): 各要素に対して実行する関数、プロパティパス、または一致させるオブジェクトです。提供しない場合、各要素をそのまま返します。
+  - 関数の場合、`(value, key, collection)`の形式で呼び出されます。デフォルトは`identity`関数です。
   - 文字列の場合、そのプロパティを抽出します。
   - オブジェクトの場合、各要素がオブジェクトと一致するかを確認します。
 
