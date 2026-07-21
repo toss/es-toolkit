@@ -135,8 +135,7 @@ export function map(
     return [];
   }
 
-  const keys: PropertyKey[] =
-    isArrayLike(collection) || Array.isArray(collection) ? range(0, collection.length) : Object.keys(collection);
+  const keys: PropertyKey[] = isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
 
   const iteratee = iterateeToolkit(_iteratee);
 
