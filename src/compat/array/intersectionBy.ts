@@ -2,6 +2,7 @@ import { intersectionBy as intersectionByToolkit } from '../../array/intersectio
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
@@ -129,10 +130,10 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
 
   const lastValue = last(values);
   if (lastValue === undefined) {
-    return Array.from(array) as T[];
+    return toArray(array) as T[];
   }
 
-  let result = uniq(Array.from(array));
+  let result = uniq(toArray(array));
 
   const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
 
@@ -144,11 +145,11 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
     }
 
     if (isArrayLikeObject(lastValue)) {
-      result = intersectionByToolkit(result, Array.from(value), identity);
+      result = intersectionByToolkit(result, toArray(value), identity);
     } else if (typeof lastValue === 'function') {
-      result = intersectionByToolkit(result, Array.from(value), value => lastValue(value));
+      result = intersectionByToolkit(result, toArray(value), value => lastValue(value));
     } else if (typeof lastValue === 'string') {
-      result = intersectionByToolkit(result, Array.from(value), property(lastValue));
+      result = intersectionByToolkit(result, toArray(value), property(lastValue));
     }
   }
 
