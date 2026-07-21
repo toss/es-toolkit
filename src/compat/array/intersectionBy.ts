@@ -129,11 +129,10 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
   }
 
   const lastValue = last(values);
+  let result = uniq(toArray(array)) as T[];
   if (lastValue === undefined) {
-    return toArray(array) as T[];
+    return result;
   }
-
-  let result = uniq(toArray(array));
 
   const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
 
