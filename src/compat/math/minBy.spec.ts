@@ -68,7 +68,18 @@ describe('minBy', () => {
     expect(minBy([NaN, NaN], x => x)).toBeUndefined();
   });
 
+  it('should skip symbol values', () => {
+    const sym = Symbol('a');
+    expect(minBy([sym, 3, 1, 2], x => x)).toBe(1);
+    expect(minBy([3, sym, 1, 2], x => x)).toBe(1);
+  });
+
+  it('should return undefined when every value is a symbol', () => {
+    expect(minBy([Symbol('a'), Symbol('b')], x => x)).toBeUndefined();
+  });
+
   it('should skip null and undefined values, matching lodash', () => {
+    // Positive values so `null` (coerced to 0) would wrongly win as the min on the old code.
     expect(minBy([{ a: undefined }, { a: 5 }, { a: null }], 'a')).toEqual({ a: 5 });
     expect(minBy([5, undefined, 3, null], x => x)).toBe(3);
   });

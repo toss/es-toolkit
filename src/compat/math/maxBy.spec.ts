@@ -68,9 +68,20 @@ describe('maxBy', () => {
     expect(maxBy([NaN, NaN], x => x)).toBeUndefined();
   });
 
+  it('should skip symbol values', () => {
+    const sym = Symbol('a');
+    expect(maxBy([sym, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, sym, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is a symbol', () => {
+    expect(maxBy([Symbol('a'), Symbol('b')], x => x)).toBeUndefined();
+  });
+
   it('should skip null and undefined values, matching lodash', () => {
-    expect(maxBy([{ a: undefined }, { a: 5 }, { a: null }], 'a')).toEqual({ a: 5 });
-    expect(maxBy([5, undefined, 3, null], x => x)).toBe(5);
+    // Negative values so `null` (coerced to 0) would wrongly win as the max on the old code.
+    expect(maxBy([{ a: undefined }, { a: -5 }, { a: null }], 'a')).toEqual({ a: -5 });
+    expect(maxBy([-5, undefined, -3, null], x => x)).toBe(-3);
   });
 
   it('should return undefined when the iteratee yields no comparable value', () => {
