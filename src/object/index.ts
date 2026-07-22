@@ -10,6 +10,7 @@ export { merge } from './merge.ts';
 export { mergeWith } from './mergeWith.ts';
 export { omit } from './omit.ts';
 export { omitBy } from './omitBy.ts';
+export { omitDeep, type OmitDeep } from './omitDeep.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { sortKeys } from './sortKeys.ts';
