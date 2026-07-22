@@ -50,3 +50,7 @@ trim('  __hello__  ', ['_', ' ']); // 'hello'
 #### Returns
 
 (`string`): Returns a new string with the specified characters removed from the beginning and end.
+
+#### Errors
+
+Throws an error if `chars` is a string with a length other than 1.
