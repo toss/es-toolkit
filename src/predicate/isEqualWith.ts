@@ -204,43 +204,34 @@ function areObjectsEqual(
           return false;
         }
 
-        const aEntries = Array.from(a.entries()) as Array<[any, any]>;
-        const bEntries = Array.from(b.entries()) as Array<[any, any]>;
-        const bKeyToIndex = new Map<any, number>();
-        const matchedBIndexes = new Set<number>();
+        const remainingBEntries = new Map(b);
         const remainingAEntries: Array<[any, any]> = [];
 
-        for (let i = 0; i < bEntries.length; i++) {
-          bKeyToIndex.set(bEntries[i][0], i);
-        }
-
-        for (let i = 0; i < aEntries.length; i++) {
-          const [aKey, aValue] = aEntries[i];
-          const bIndex = bKeyToIndex.get(aKey);
+        for (const [aKey, aValue] of a) {
+          const bValue = remainingBEntries.get(aKey);
 
           if (
-            bIndex !== undefined &&
-            !matchedBIndexes.has(bIndex) &&
-            isEqualWithImpl(aKey, bEntries[bIndex][0], undefined, a, b, stack, areValuesEqual) &&
-            isEqualWithImpl(aValue, bEntries[bIndex][1], aKey, a, b, stack, areValuesEqual)
+            remainingBEntries.has(aKey) &&
+            isEqualWithImpl(aKey, aKey, undefined, a, b, stack, areValuesEqual) &&
+            isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
           ) {
-            matchedBIndexes.add(bIndex);
+            remainingBEntries.delete(aKey);
             continue;
           }
 
-          remainingAEntries.push(aEntries[i]);
+          remainingAEntries.push([aKey, aValue]);
         }
 
         if (remainingAEntries.length === 0) {
           return true;
         }
 
-        const remainingBEntries = bEntries.filter((_, index) => !matchedBIndexes.has(index));
+        const remainingBEntriesArray = Array.from(remainingBEntries.entries()) as Array<[any, any]>;
 
         for (let i = 0; i < remainingAEntries.length; i++) {
           const [aKey, aValue] = remainingAEntries[i];
 
-          const index = remainingBEntries.findIndex(
+          const index = remainingBEntriesArray.findIndex(
             ([bKey, bValue]: [any, any]) =>
               isEqualWithImpl(aKey, bKey, undefined, a, b, stack, areValuesEqual) &&
               isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
@@ -250,7 +241,7 @@ function areObjectsEqual(
             return false;
           }
 
-          remainingBEntries.splice(index, 1);
+          remainingBEntriesArray.splice(index, 1);
         }
 
         return true;
@@ -261,26 +252,12 @@ function areObjectsEqual(
           return false;
         }
 
-        const aValues = Array.from(a.values());
-        const bValues = Array.from(b.values());
-        const bValueToIndex = new Map<any, number>();
-        const matchedBIndexes = new Set<number>();
+        const remainingBValues = new Set(b);
         const remainingAValues: any[] = [];
 
-        for (let i = 0; i < bValues.length; i++) {
-          bValueToIndex.set(bValues[i], i);
-        }
-
-        for (let i = 0; i < aValues.length; i++) {
-          const aValue = aValues[i];
-          const bIndex = bValueToIndex.get(aValue);
-
-          if (
-            bIndex !== undefined &&
-            !matchedBIndexes.has(bIndex) &&
-            isEqualWithImpl(aValue, bValues[bIndex], undefined, a, b, stack, areValuesEqual)
-          ) {
-            matchedBIndexes.add(bIndex);
+        for (const aValue of a) {
+          if (remainingBValues.has(aValue) && isEqualWithImpl(aValue, aValue, undefined, a, b, stack, areValuesEqual)) {
+            remainingBValues.delete(aValue);
             continue;
           }
 
@@ -291,11 +268,11 @@ function areObjectsEqual(
           return true;
         }
 
-        const remainingBValues = bValues.filter((_, index) => !matchedBIndexes.has(index));
+        const remainingBValuesArray = Array.from(remainingBValues.values());
 
         for (let i = 0; i < remainingAValues.length; i++) {
           const aValue = remainingAValues[i];
-          const index = remainingBValues.findIndex(bValue => {
+          const index = remainingBValuesArray.findIndex(bValue => {
             return isEqualWithImpl(aValue, bValue, undefined, a, b, stack, areValuesEqual);
           });
 
@@ -303,7 +280,7 @@ function areObjectsEqual(
             return false;
           }
 
-          remainingBValues.splice(index, 1);
+          remainingBValuesArray.splice(index, 1);
         }
 
         return true;
