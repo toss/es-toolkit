@@ -206,11 +206,41 @@ function areObjectsEqual(
 
         const aEntries = Array.from(a.entries()) as Array<[any, any]>;
         const bEntries = Array.from(b.entries()) as Array<[any, any]>;
+        const bKeyToIndex = new Map<any, number>();
+        const matchedBIndexes = new Set<number>();
+        const remainingAEntries: Array<[any, any]> = [];
+
+        for (let i = 0; i < bEntries.length; i++) {
+          bKeyToIndex.set(bEntries[i][0], i);
+        }
 
         for (let i = 0; i < aEntries.length; i++) {
           const [aKey, aValue] = aEntries[i];
+          const bIndex = bKeyToIndex.get(aKey);
 
-          const index = bEntries.findIndex(
+          if (
+            bIndex !== undefined &&
+            !matchedBIndexes.has(bIndex) &&
+            isEqualWithImpl(aKey, bEntries[bIndex][0], undefined, a, b, stack, areValuesEqual) &&
+            isEqualWithImpl(aValue, bEntries[bIndex][1], aKey, a, b, stack, areValuesEqual)
+          ) {
+            matchedBIndexes.add(bIndex);
+            continue;
+          }
+
+          remainingAEntries.push(aEntries[i]);
+        }
+
+        if (remainingAEntries.length === 0) {
+          return true;
+        }
+
+        const remainingBEntries = bEntries.filter((_, index) => !matchedBIndexes.has(index));
+
+        for (let i = 0; i < remainingAEntries.length; i++) {
+          const [aKey, aValue] = remainingAEntries[i];
+
+          const index = remainingBEntries.findIndex(
             ([bKey, bValue]: [any, any]) =>
               isEqualWithImpl(aKey, bKey, undefined, a, b, stack, areValuesEqual) &&
               isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
@@ -220,7 +250,7 @@ function areObjectsEqual(
             return false;
           }
 
-          bEntries.splice(index, 1);
+          remainingBEntries.splice(index, 1);
         }
 
         return true;
@@ -233,10 +263,39 @@ function areObjectsEqual(
 
         const aValues = Array.from(a.values());
         const bValues = Array.from(b.values());
+        const bValueToIndex = new Map<any, number>();
+        const matchedBIndexes = new Set<number>();
+        const remainingAValues: any[] = [];
+
+        for (let i = 0; i < bValues.length; i++) {
+          bValueToIndex.set(bValues[i], i);
+        }
 
         for (let i = 0; i < aValues.length; i++) {
           const aValue = aValues[i];
-          const index = bValues.findIndex(bValue => {
+          const bIndex = bValueToIndex.get(aValue);
+
+          if (
+            bIndex !== undefined &&
+            !matchedBIndexes.has(bIndex) &&
+            isEqualWithImpl(aValue, bValues[bIndex], undefined, a, b, stack, areValuesEqual)
+          ) {
+            matchedBIndexes.add(bIndex);
+            continue;
+          }
+
+          remainingAValues.push(aValue);
+        }
+
+        if (remainingAValues.length === 0) {
+          return true;
+        }
+
+        const remainingBValues = bValues.filter((_, index) => !matchedBIndexes.has(index));
+
+        for (let i = 0; i < remainingAValues.length; i++) {
+          const aValue = remainingAValues[i];
+          const index = remainingBValues.findIndex(bValue => {
             return isEqualWithImpl(aValue, bValue, undefined, a, b, stack, areValuesEqual);
           });
 
@@ -244,7 +303,7 @@ function areObjectsEqual(
             return false;
           }
 
-          bValues.splice(index, 1);
+          remainingBValues.splice(index, 1);
         }
 
         return true;
