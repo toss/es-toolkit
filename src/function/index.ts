@@ -5,6 +5,7 @@ export { before } from './before.ts';
 export { curry } from './curry.ts';
 export { curryRight } from './curryRight.ts';
 export { debounce, type DebouncedFunction, type DebounceOptions } from './debounce.ts';
+export { debounceAsync, type DebouncedAsyncFunction } from './debounceAsync.ts';
 export { flow } from './flow.ts';
 export { flowRight } from './flowRight.ts';
 export { identity } from './identity.ts';
