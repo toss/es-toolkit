@@ -109,4 +109,15 @@ describe('retry', () => {
     expect(shouldRetry).toHaveBeenCalledWith(error, 1);
     expect(shouldRetry).toHaveBeenCalledWith(error, 2);
   });
+
+  it('should throw the error from the last attempt without applying a delay', async () => {
+    const func = vi.fn().mockRejectedValue(new Error('failure'));
+    const retries = 3;
+    const delay = vi.fn((attempt: number) => attempt);
+
+    await expect(retry(func, { delay, retries })).rejects.toThrow('failure');
+
+    expect(func).toHaveBeenCalledTimes(retries + 1);
+    expect(delay).toHaveBeenCalledTimes(retries);
+  });
 });
