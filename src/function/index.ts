@@ -6,6 +6,7 @@ export { curry } from './curry.ts';
 export { curryRight } from './curryRight.ts';
 export { debounce, type DebouncedFunction, type DebounceOptions } from './debounce.ts';
 export { flow } from './flow.ts';
+export { flowAsync } from './flowAsync.ts';
 export { flowRight } from './flowRight.ts';
 export { identity } from './identity.ts';
 export { memoize, type MemoizeCache } from './memoize.ts';
