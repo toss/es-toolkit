@@ -120,9 +120,11 @@ describe('iteratee', () => {
   it('should return an iteratee created by `_.property` when `func` is a boolean', () => {
     const object = { true: 'yes', false: 'no' };
 
+    // @ts-expect-error - `boolean` isn't part of `iteratee`'s public type, matching `@types/lodash`
     let prop = iteratee(true);
     expect(prop(object)).toBe('yes');
 
+    // @ts-expect-error - `boolean` isn't part of `iteratee`'s public type, matching `@types/lodash`
     prop = iteratee(false);
     expect(prop(object)).toBe('no');
   });
