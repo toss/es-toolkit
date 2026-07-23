@@ -85,7 +85,7 @@ export function iteratee(
       return matches(value);
     }
     default: {
-      return property(value as PropertyKey);
+      return property(value);
     }
   }
 }
