@@ -84,10 +84,8 @@ export function iteratee(
 
       return matches(value);
     }
-    case 'string':
-    case 'symbol':
-    case 'number': {
-      return property(value);
+    default: {
+      return property(value as PropertyKey);
     }
   }
 }
