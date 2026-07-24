@@ -37,7 +37,7 @@ type A = DeepReadonly<number[]>; // readonly number[]
 
 // Map/Set 会变为其只读版本。
 type B = DeepReadonly<Map<string, number>>; // ReadonlyMap<string, number>
-type C = DeepReadonly<Set<number>>;         // ReadonlySet<number>
+type C = DeepReadonly<Set<number>>; // ReadonlySet<number>
 ```
 
 #### 类型参数

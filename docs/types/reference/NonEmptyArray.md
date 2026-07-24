@@ -16,8 +16,8 @@ Use it when you want to express an array that can't be empty at the type level. 
 import type { NonEmptyArray } from 'es-toolkit/types';
 
 const a: NonEmptyArray<number> = [1, 2, 3]; // ok
-const b: NonEmptyArray<number> = [1];       // ok
-const c: NonEmptyArray<number> = [];        // error: an empty array is not allowed.
+const b: NonEmptyArray<number> = [1]; // ok
+const c: NonEmptyArray<number> = []; // error: an empty array is not allowed.
 
 function first<T>(arr: NonEmptyArray<T>): T {
   // The first element resolves to T, so no undefined check is needed.

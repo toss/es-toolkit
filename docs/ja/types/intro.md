@@ -10,14 +10,14 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 TypeScript に用意されていないために毎回自分で書いていた型だけを厳選して収録しました。
 
-| 型 | 説明 |
-| --- | --- |
-| [`ValueOf<T>`](./reference/ValueOf.md) | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。 |
-| [`Simplify<T>`](./reference/Simplify.md) | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。 |
-| [`Writable<T>`](./reference/Writable.md) | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。 |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 少なくとも 1 つ以上の要素を持つ配列です。 |
-| [`DeepPartial<T>`](./reference/DeepPartial.md) | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。 |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md) | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。 |
+| 型                                                 | 説明                                                                           |
+| -------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`ValueOf<T>`](./reference/ValueOf.md)             | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。                 |
+| [`Simplify<T>`](./reference/Simplify.md)           | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。              |
+| [`Writable<T>`](./reference/Writable.md)           | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。 |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 少なくとも 1 つ以上の要素を持つ配列です。                                      |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)     | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。               |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。           |
 
 ## 選定基準
 

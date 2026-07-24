@@ -16,8 +16,8 @@ type Arr = NonEmptyArray<T>;
 import type { NonEmptyArray } from 'es-toolkit/types';
 
 const a: NonEmptyArray<number> = [1, 2, 3]; // ok
-const b: NonEmptyArray<number> = [1];       // ok
-const c: NonEmptyArray<number> = [];        // エラー: 空配列は許可されません。
+const b: NonEmptyArray<number> = [1]; // ok
+const c: NonEmptyArray<number> = []; // エラー: 空配列は許可されません。
 
 function first<T>(arr: NonEmptyArray<T>): T {
   // 最初の要素は T に絞られるため、undefined チェックは不要です。

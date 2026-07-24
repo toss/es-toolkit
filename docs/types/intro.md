@@ -10,14 +10,14 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 We picked only the types you'd otherwise have to write by hand because TypeScript doesn't ship them.
 
-| Type | Description |
-| --- | --- |
-| [`ValueOf<T>`](./reference/ValueOf.md) | Creates a union of an object's value types. The value-side counterpart to `keyof`. |
-| [`Simplify<T>`](./reference/Simplify.md) | Flattens an intersection or mapped type into a single, readable object type. |
-| [`Writable<T>`](./reference/Writable.md) | Removes `readonly` from all properties. The inverse of the built-in `Readonly`. |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | An array with at least one element. |
-| [`DeepPartial<T>`](./reference/DeepPartial.md) | Makes every property optional recursively, including nested objects. |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md) | Makes every property `readonly` recursively, including nested objects. |
+| Type                                               | Description                                                                        |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/ValueOf.md)             | Creates a union of an object's value types. The value-side counterpart to `keyof`. |
+| [`Simplify<T>`](./reference/Simplify.md)           | Flattens an intersection or mapped type into a single, readable object type.       |
+| [`Writable<T>`](./reference/Writable.md)           | Removes `readonly` from all properties. The inverse of the built-in `Readonly`.    |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | An array with at least one element.                                                |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)     | Makes every property optional recursively, including nested objects.               |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | Makes every property `readonly` recursively, including nested objects.             |
 
 ## Selection criteria
 

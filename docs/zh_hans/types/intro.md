@@ -10,14 +10,14 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 我们只挑选了那些因为 TypeScript 没有内置、你不得不每次手写的类型。
 
-| 类型 | 说明 |
-| --- | --- |
-| [`ValueOf<T>`](./reference/ValueOf.md) | 创建对象所有值类型的联合。`keyof` 的值版本。 |
-| [`Simplify<T>`](./reference/Simplify.md) | 将交叉类型或映射类型展开为单个易读的对象类型。 |
-| [`Writable<T>`](./reference/Writable.md) | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。 |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 至少包含一个元素的数组。 |
-| [`DeepPartial<T>`](./reference/DeepPartial.md) | 递归地将包括嵌套对象在内的所有属性变为可选。 |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md) | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。 |
+| 类型                                               | 说明                                                    |
+| -------------------------------------------------- | ------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/ValueOf.md)             | 创建对象所有值类型的联合。`keyof` 的值版本。            |
+| [`Simplify<T>`](./reference/Simplify.md)           | 将交叉类型或映射类型展开为单个易读的对象类型。          |
+| [`Writable<T>`](./reference/Writable.md)           | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。 |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 至少包含一个元素的数组。                                |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)     | 递归地将包括嵌套对象在内的所有属性变为可选。            |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。     |
 
 ## 选定标准
 

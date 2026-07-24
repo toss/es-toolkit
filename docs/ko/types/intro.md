@@ -10,14 +10,14 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 타입스크립트에 없어서 매번 직접 만들어 쓰던 타입들만 골라 담았어요.
 
-| 타입 | 설명 |
-| --- | --- |
-| [`ValueOf<T>`](./reference/ValueOf.md) | 객체의 값 타입들을 유니온으로 만들어요. `keyof`의 값 버전이에요. |
-| [`Simplify<T>`](./reference/Simplify.md) | 교차 타입이나 매핑된 타입을 하나의 읽기 쉬운 객체 타입으로 펼쳐요. |
-| [`Writable<T>`](./reference/Writable.md) | 모든 프로퍼티에서 `readonly`를 없애요. 기본 `Readonly`의 반대예요. |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 최소 한 개 이상의 요소를 가지는 배열이에요. |
-| [`DeepPartial<T>`](./reference/DeepPartial.md) | 중첩된 객체까지 재귀적으로 모두 선택적으로 만들어요. |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md) | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요. |
+| 타입                                               | 설명                                                               |
+| -------------------------------------------------- | ------------------------------------------------------------------ |
+| [`ValueOf<T>`](./reference/ValueOf.md)             | 객체의 값 타입들을 유니온으로 만들어요. `keyof`의 값 버전이에요.   |
+| [`Simplify<T>`](./reference/Simplify.md)           | 교차 타입이나 매핑된 타입을 하나의 읽기 쉬운 객체 타입으로 펼쳐요. |
+| [`Writable<T>`](./reference/Writable.md)           | 모든 프로퍼티에서 `readonly`를 없애요. 기본 `Readonly`의 반대예요. |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 최소 한 개 이상의 요소를 가지는 배열이에요.                        |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)     | 중첩된 객체까지 재귀적으로 모두 선택적으로 만들어요.               |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요.             |
 
 ## 선정 기준
 
