@@ -56,6 +56,10 @@ const SERVER_ICON = [
   'M6 16h.01',
 ];
 const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
+const BRACES_ICON = [
+  'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1',
+  'M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1',
+];
 
 export const flavors = [
   {
@@ -140,6 +144,22 @@ export const flavors = [
     categories: [],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',
+    badge: 'NEW',
+  },
+  {
+    value: 'types',
+    label: 'es-toolkit/types',
+    description: 'Type utilities',
+    descriptions: {
+      ko: '타입 유틸리티',
+      ja: '型ユーティリティ',
+      zh_hans: '类型工具集',
+    },
+    prefix: 'types',
+    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    categories: [],
+    icon: BRACES_ICON,
+    iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',
   },
 ] as const satisfies readonly FlavorSpec[];
