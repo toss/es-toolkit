@@ -78,7 +78,7 @@ export function every<T extends object>(
  * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param source - The source array or object to check through.
+ * @param collection - The source array or object to check through.
  * @param [doesMatch] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param [guard] - Enables use as an iteratee for methods like `_.map`.
  * @returns `true` if every property value has the specified property, or `false` if at least one does not match.
@@ -90,15 +90,15 @@ export function every<T extends object>(
  * console.log(result); // true
  */
 export function every<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
   doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   guard?: unknown
 ): boolean {
-  if (!source) {
+  if (!collection) {
     return true;
   }
 
-  if (guard && isIterateeCall(source, doesMatch, guard)) {
+  if (guard && isIterateeCall(collection, doesMatch, guard)) {
     doesMatch = undefined;
   }
 
@@ -130,14 +130,14 @@ export function every<T>(
     }
   }
 
-  if (!isArrayLike(source)) {
-    const keys = Object.keys(source) as Array<keyof typeof source>;
+  if (!isArrayLike(collection)) {
+    const keys = Object.keys(collection) as Array<keyof typeof collection>;
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
-      const value = source[key];
+      const value = collection[key];
 
-      if (!predicate(value, key, source)) {
+      if (!predicate(value, key, collection)) {
         return false;
       }
     }
@@ -145,8 +145,8 @@ export function every<T>(
     return true;
   }
 
-  for (let i = 0; i < source.length; i++) {
-    if (!predicate((source as ArrayLike<T>)[i], i, source)) {
+  for (let i = 0; i < collection.length; i++) {
+    if (!predicate((collection as ArrayLike<T>)[i], i, collection)) {
       return false;
     }
   }
