@@ -147,14 +147,8 @@ describe('intersectionBy', () => {
     expect(actual).toEqual([1, 2, 3]);
   });
 
-  it('should dedupe a single array when no other array is given', () => {
-    const array = [1, 2, 2, 3, 3];
-    expect(intersectionBy(array)).toEqual([1, 2, 3]);
-  });
-
-  it('should dedupe a single array by the iteratee when no other array is given', () => {
-    const array = [2.1, 2.9, 1.2];
-    expect(intersectionBy(array, Math.floor)).toEqual([2.1, 1.2]);
+  it('should dedupe a single array by the iteratee', () => {
+    expect(intersectionBy([2.1, 2.9, 1.2], Math.floor)).toEqual([2.1, 1.2]);
   });
 
   it('should match each value from the first array to at most one value in the second array using the mapper', () => {

@@ -1,5 +1,6 @@
 import { intersectionBy as intersectionByToolkit } from '../../array/intersectionBy.ts';
 import { last } from '../../array/last.ts';
+import { uniq } from '../../array/uniq.ts';
 import { uniqBy } from '../../array/uniqBy.ts';
 import { identity } from '../../function/identity.ts';
 import { toArray } from '../_internal/toArray.ts';
@@ -136,7 +137,8 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
     return uniqBy(toArray(array), iteratee ?? identity);
   }
 
-  let result = toArray(array) as T[];
+  // uniq normalizes `-0` to `0` to match Lodash; toArray alone would keep `-0`
+  let result = uniq(toArray(array)) as T[];
 
   for (let i = 0; i < count; ++i) {
     const value = values[i];
