@@ -16,7 +16,7 @@ const mapped = map(collection, iteratee);
 
 ## 사용법
 
-### `map(collection, iteratee)`
+### `map(collection, iteratee?)`
 
 배열, 객체, 또는 배열 형태의 객체의 각 요소를 변환하고 싶을 때 `map`을 사용하세요. 각 요소에 대해 반복 함수를 실행하고 결과를 새 배열로 반환해요.
 
@@ -75,9 +75,9 @@ map(users, { age: 30 });
 
 #### 파라미터
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
-- `iteratee` (`function | string | object`, 선택): 각 요소에 대해 실행할 함수나 속성 경로, 또는 일치시킬 객체예요. 제공하지 않으면 각 요소를 그대로 반환해요.
-  - 함수인 경우 `(value, key, collection)` 형태로 호출돼요.
+- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): 순회할 배열이나 객체예요.
+- `iteratee` (`function | PropertyKey | object`, 선택): 각 요소에 대해 실행할 함수나 속성 경로, 또는 일치시킬 객체예요. 제공하지 않으면 각 요소를 그대로 반환해요.
+  - 함수인 경우 `(value, key, collection)` 형태로 호출돼요. 기본값은 `identity` 함수예요.
   - 문자열인 경우 해당 속성을 추출해요.
   - 객체인 경우 각 요소가 객체와 일치하는지 확인해요.
 

@@ -16,7 +16,7 @@ const mapped = map(collection, iteratee);
 
 ## Usage
 
-### `map(collection, iteratee)`
+### `map(collection, iteratee?)`
 
 Use `map` when you want to transform each element of an array, object, or array-like object. It executes an iteratee function on each element and returns the results as a new array.
 
@@ -75,9 +75,9 @@ map(users, { age: 30 });
 
 #### Parameters
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to iterate over.
-- `iteratee` (`function | string | object`, optional): The function to execute on each element, a property path, or an object to match. If not provided, returns each element as is.
-  - When it's a function, it's called in the form `(value, key, collection)`.
+- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): The array or object to iterate over.
+- `iteratee` (`function | PropertyKey | object`, optional): The function to execute on each element, a property path, or an object to match. If not provided, returns each element as is.
+  - When it's a function, it's called in the form `(value, key, collection)`. Defaults to the `identity` function.
   - When it's a string, it extracts that property.
   - When it's an object, it checks if each element matches the object.
 

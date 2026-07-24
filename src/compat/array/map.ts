@@ -129,16 +129,15 @@ export function map<T>(
 
 export function map(
   collection: any[] | ArrayLike<any> | Record<any, any> | null | undefined,
-  _iteratee?: ((value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object | null
+  _iteratee: ((value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object = identity
 ): any[] {
   if (!collection) {
     return [];
   }
 
-  const keys: PropertyKey[] =
-    isArrayLike(collection) || Array.isArray(collection) ? range(0, collection.length) : Object.keys(collection);
+  const keys: PropertyKey[] = isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
 
-  const iteratee = iterateeToolkit(_iteratee ?? identity);
+  const iteratee = iterateeToolkit(_iteratee);
 
   const result: any[] = new Array(keys.length);
 
