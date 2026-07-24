@@ -1,4 +1,5 @@
 export { camelCase } from './camelCase.ts';
+export { capitalCase } from './capitalCase.ts';
 export { capitalize } from './capitalize.ts';
 export { constantCase } from './constantCase.ts';
 export { deburr } from './deburr.ts';
