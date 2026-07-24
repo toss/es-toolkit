@@ -16,7 +16,7 @@ forEachRight(collection, callback);
 
 ## Usage
 
-### `forEachRight(collection, callback)`
+### `forEachRight(collection, callback?)`
 
 Iterates through each element of an array, object, or string from right to left and executes the given callback function. The iteration stops if the callback returns `false`.
 
