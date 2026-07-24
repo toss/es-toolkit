@@ -1,5 +1,51 @@
 # es-toolkit Changelog
 
+## Version v1.50.0
+
+Released on July 24th, 2026.
+
+- Added the `es-toolkit/types` entrypoint: a declaration-only module of compile-time
+  type utilities TypeScript lacks natively — `ValueOf`, `Simplify`, `Writable`,
+  `NonEmptyArray`, `DeepPartial`, and `DeepReadonly`. ([#1818])
+- Added `flow` to `es-toolkit/fp`, a reusable data-last composition built on `pipe`. ([#1812])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/intersectionBy` to dedupe a single array (including by the iteratee)
+  and to keep results consistent with Lodash. ([#1935])
+- Fixed `compat/findIndex` and `compat/findLastIndex` to coerce a `NaN` `fromIndex`
+  to `0` and to convert `fromIndex` to an integer. ([#1828], [#1834], [#1938])
+- Fixed `compat/lastIndexOf` to coerce `fromIndex` like Lodash. ([#1832])
+- Fixed `compat/every` to treat a falsy, non-nullish `doesMatch` as a `_.property`
+  shorthand instead of identity. ([#1940])
+- Fixed `compat/nth` to support string inputs. ([#1833])
+- Fixed `compat/inRange` to not throw on a lone negative bound. ([#1835])
+- Fixed `compat/toArray` to convert `Set`s to arrays like Lodash. ([#1840])
+- Fixed `compat/values` to treat sparse array holes as `undefined`. ([#1894])
+- Fixed `compat/maxBy` and `compat/minBy` to restore Lodash-compatible comparison. ([#1893])
+- Fixed `compat/includes` to exclude the `length` property when matching array-like values. ([#1886])
+- Fixed the case functions to split ordinal numbers like Lodash, and to count string
+  size and padding by code points for multi-byte characters. ([#1836], [#1852], [#1853])
+- Fixed `compat/unset` to not treat an own literal dotted key as a deep path. ([#1808])
+- Moved `compat/flattenDepth`'s flattening logic out of `flatten`. ([#1847])
+- Restored the standalone `eq` and `templateSettings` entry points. ([#1895])
+
+- Fixed `deburr` to remove all combining diacritical marks, matching Lodash. ([#1807])
+- Fixed `partition` to accept any predicate return value, like `Array.prototype.filter`. ([#1937])
+- Fixed `has` and `hasIn` to prioritize nullish literal keys over paths. ([#1810])
+- Fixed `invokeMap` to normalize a string path via `toPath` for `this` binding. ([#1814])
+- Fixed `isDeepKey` to detect deep keys with stricter patterns. ([#1621])
+- Fixed `unzipWith` to return an empty array instead of throwing on empty input. ([#1816])
+
+- Improved documentation, JSDoc accuracy, and internal refactoring across `compat`
+  and `fp`. ([#1817], [#1820], [#1822], [#1823], [#1825], [#1829], [#1830], [#1842],
+  [#1845], [#1851], [#1858], [#1867], [#1879])
+
+We sincerely thank @Antoliny0919, @raon0211, @dayongkr, @spokodev, @sarathfrancis90,
+@mayur-shenoy, @mahirhir, @kojesung, @Hprogram, @BangDori, and everyone else who
+contributed. We appreciate your great efforts!
+
 ## Version v1.49.0
 
 Released on June 26th, 2026.
