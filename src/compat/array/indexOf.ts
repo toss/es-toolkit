@@ -1,4 +1,5 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Finds the index of the first occurrence of a value in an array.
@@ -24,7 +25,7 @@ export function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement
 
   // `Array.prototype.indexOf` doesn't find `NaN` values, so we need to handle that case separately.
   if (Number.isNaN(searchElement)) {
-    fromIndex = fromIndex ?? 0;
+    fromIndex = toInteger(fromIndex ?? 0);
 
     if (fromIndex < 0) {
       fromIndex = Math.max(0, array.length + fromIndex);
