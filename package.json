@@ -19,7 +19,9 @@
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
     "./fp": "./src/fp/index.ts",
+    "./fp/iterator": "./src/fp/iterator/index.ts",
     "./function": "./src/function/index.ts",
+    "./iterator": "./src/iterator/index.ts",
     "./map": "./src/map/index.ts",
     "./math": "./src/math/index.ts",
     "./object": "./src/object/index.ts",
@@ -39,7 +41,10 @@
     "compat.js",
     "error.js",
     "fp.js",
+    "fp/iterator.js",
+    "fp/iterator.d.ts",
     "function.js",
+    "iterator.js",
     "map.js",
     "math.js",
     "object.js",
@@ -180,6 +185,16 @@
           "default": "./dist/fp/index.js"
         }
       },
+      "./fp/iterator": {
+        "import": {
+          "types": "./dist/fp/iterator/index.d.mts",
+          "default": "./dist/fp/iterator/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/iterator/index.d.ts",
+          "default": "./dist/fp/iterator/index.js"
+        }
+      },
       "./function": {
         "import": {
           "types": "./dist/function/index.d.mts",
@@ -188,6 +203,16 @@
         "require": {
           "types": "./dist/function/index.d.ts",
           "default": "./dist/function/index.js"
+        }
+      },
+      "./iterator": {
+        "import": {
+          "types": "./dist/iterator/index.d.mts",
+          "default": "./dist/iterator/index.mjs"
+        },
+        "require": {
+          "types": "./dist/iterator/index.d.ts",
+          "default": "./dist/iterator/index.js"
         }
       },
       "./map": {
