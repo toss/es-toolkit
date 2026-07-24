@@ -36,6 +36,7 @@ const ENTRYPOINTS = [
   './promise',
   './set',
   './string',
+  './types',
   './util',
 ];
 
