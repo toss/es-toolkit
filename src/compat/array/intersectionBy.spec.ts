@@ -147,6 +147,10 @@ describe('intersectionBy', () => {
     expect(actual).toEqual([1, 2, 3]);
   });
 
+  it('should dedupe a single array by the iteratee', () => {
+    expect(intersectionBy([2.1, 2.9, 1.2], Math.floor)).toEqual([2.1, 1.2]);
+  });
+
   it('should match each value from the first array to at most one value in the second array using the mapper', () => {
     expect(intersectionBy([2.1, 2.2], [2.3, 3.4], Math.floor)).toStrictEqual([2.1]);
   });
