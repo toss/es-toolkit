@@ -1,0 +1,48 @@
+import { describe, expectTypeOf, it } from 'vitest';
+import type { DeepPartial } from './DeepPartial';
+
+describe('DeepPartial', () => {
+  it('makes nested object properties optional recursively', () => {
+    type Config = { server: { host: string; port: number }; debug: boolean };
+    expectTypeOf<DeepPartial<Config>>().toEqualTypeOf<{
+      server?: { host?: string; port?: number };
+      debug?: boolean;
+    }>();
+  });
+
+  it('recurses into array elements without making them sparse', () => {
+    type T = { users: Array<{ name: string; age: number }> };
+    expectTypeOf<DeepPartial<T>>().toEqualTypeOf<{ users?: Array<{ name?: string; age?: number }> }>();
+  });
+
+  it('preserves tuple shape and arity', () => {
+    type T = { pair: [number, { x: string }] };
+    expectTypeOf<DeepPartial<T>>().toEqualTypeOf<{ pair?: [number, { x?: string }] }>();
+  });
+
+  it('keeps functions, Date, and RegExp unchanged', () => {
+    expectTypeOf<DeepPartial<() => void>>().toEqualTypeOf<() => void>();
+    expectTypeOf<DeepPartial<Date>>().toEqualTypeOf<Date>();
+    expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
+  });
+
+  it('recurses into Map keys and values and Set contents', () => {
+    expectTypeOf<DeepPartial<Map<{ id: number }, { a: number; b: string }>>>().toEqualTypeOf<
+      Map<{ id?: number }, { a?: number; b?: string }>
+    >();
+    expectTypeOf<DeepPartial<Set<{ a: number }>>>().toEqualTypeOf<Set<{ a?: number }>>();
+  });
+
+  it('keeps readonly arrays and readonly collections readonly', () => {
+    expectTypeOf<DeepPartial<ReadonlyArray<{ a: number }>>>().toEqualTypeOf<ReadonlyArray<{ a?: number }>>();
+    expectTypeOf<DeepPartial<ReadonlyMap<string, { a: number }>>>().toEqualTypeOf<
+      ReadonlyMap<string, { a?: number }>
+    >();
+    expectTypeOf<DeepPartial<ReadonlySet<{ a: number }>>>().toEqualTypeOf<ReadonlySet<{ a?: number }>>();
+  });
+
+  it('makes Record values partial', () => {
+    type T = Record<string, { a: number; b: string }>;
+    expectTypeOf<DeepPartial<T>>().toEqualTypeOf<Partial<Record<string, { a?: number; b?: string }>>>();
+  });
+});
