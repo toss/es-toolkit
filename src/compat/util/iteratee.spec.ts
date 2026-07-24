@@ -117,6 +117,18 @@ describe('iteratee', () => {
     expect(prop(array)).toBe('a');
   });
 
+  it('should return an iteratee created by `_.property` when `func` is a boolean', () => {
+    const object = { true: 'yes', false: 'no' };
+
+    // @ts-expect-error - `boolean` isn't part of `iteratee`'s public type, matching `@types/lodash`
+    let prop = iteratee(true);
+    expect(prop(object)).toBe('yes');
+
+    // @ts-expect-error - `boolean` isn't part of `iteratee`'s public type, matching `@types/lodash`
+    prop = iteratee(false);
+    expect(prop(object)).toBe('no');
+  });
+
   it('should support deep paths for `_.property` shorthands', () => {
     const object = { a: { b: 2 } };
     const prop = iteratee('a.b');
