@@ -152,8 +152,7 @@ export function forEach<T>(
     return collection;
   }
 
-  const keys: PropertyKey[] =
-    isArrayLike(collection) || Array.isArray(collection) ? range(0, collection.length) : Object.keys(collection);
+  const keys: PropertyKey[] = isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
