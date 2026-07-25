@@ -128,6 +128,13 @@ describe('fill', () => {
     ]);
   });
 
+  it('should work as an iteratee for methods like `_.map` with single-element sub-arrays', () => {
+    const array = [[5]];
+    const actual = array.map(fill);
+
+    expect(actual).toEqual([[0]]);
+  });
+
   it('should return an empty array when provided `null` or `undefined`', () => {
     expect(fill(null, 'a')).toEqual([]);
     expect(fill(undefined, 'a')).toEqual([]);
