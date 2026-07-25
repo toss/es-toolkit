@@ -1,4 +1,5 @@
 import { fill as fillToolkit } from '../../array/fill.ts';
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
@@ -104,6 +105,12 @@ export function fill<T, U>(
     // prevent TypeError: Cannot assign to read only property of string
     return array;
   }
+
+  if (start && typeof start !== 'number' && isIterateeCall(array, value, start)) {
+    start = 0;
+    end = array.length;
+  }
+
   start = Math.floor(start);
   end = Math.floor(end);
 
