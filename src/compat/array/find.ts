@@ -1,8 +1,10 @@
 import { identity } from '../../function/identity.ts';
+import { range } from '../../math/range.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -114,25 +116,23 @@ export function find<T>(
   if (!source) {
     return undefined;
   }
-  if (fromIndex < 0) {
-    fromIndex = Math.max(source.length + fromIndex, 0);
-  }
 
   const doesMatch = iteratee(_doesMatch);
-  if (!Array.isArray(source)) {
-    const keys = Object.keys(source) as Array<keyof T>;
 
-    for (let i = fromIndex; i < keys.length; i++) {
-      const key = keys[i];
-      const value = source[key] as T;
+  const keys: PropertyKey[] = isArrayLike(source) ? range(0, source.length) : (Object.keys(source) as Array<keyof T>);
 
-      if (doesMatch(value, key as number, source)) {
-        return value;
-      }
-    }
-
-    return undefined;
+  if (fromIndex < 0) {
+    fromIndex = Math.max(keys.length + fromIndex, 0);
   }
 
-  return source.slice(fromIndex).find(doesMatch);
+  for (let i = fromIndex; i < keys.length; i++) {
+    const key = keys[i];
+    const value = (source as any)[key] as T;
+
+    if (doesMatch(value, key, source)) {
+      return value;
+    }
+  }
+
+  return undefined;
 }
