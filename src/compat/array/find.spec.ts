@@ -112,6 +112,12 @@ describe('find', () => {
     expect(find(args, i => i === 3)).toBe(3);
   });
 
+  it('should not treat the `length` property of a plain array-like object as an element', () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+
+    expect(find(arrayLike, value => value === 2)).toBe(undefined);
+  });
+
   it('should use identity when no _doesMatch is provided', () => {
     expect(find([0, 1, 2])).toBe(1);
     expect(find([false, true, false])).toBe(true);
