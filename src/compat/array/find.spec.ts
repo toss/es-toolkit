@@ -136,8 +136,8 @@ describe('find', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
-    expect(() => find([1, 2, 3], true)).toThrow('undefined is not a function');
-    expect(() => find([1, 2, 3], false)).toThrow('undefined is not a function');
+    expect(() => find([1, 2, 3], true)).toThrow('doesMatch is not a function');
+    expect(() => find([1, 2, 3], false)).toThrow('doesMatch is not a function');
   });
 
   it('should return undefined when object matcher has only undefined values for keys', () => {
