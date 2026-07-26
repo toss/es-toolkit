@@ -115,7 +115,7 @@ describe('find', () => {
   it('should not treat the `length` property of a plain array-like object as an element', () => {
     const arrayLike = { 0: 'a', 1: 'b', length: 2 };
 
-    expect(find(arrayLike, value => value === 2)).toBe(undefined);
+    expect(find(arrayLike, (value: unknown) => value === 2)).toBe(undefined);
   });
 
   it('should use identity when no _doesMatch is provided', () => {
