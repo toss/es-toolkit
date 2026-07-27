@@ -16,7 +16,7 @@ const index = findIndex(arr, doesMatch, fromIndex);
 
 ## Usage
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, doesMatch?, fromIndex?)`
 
 Use `findIndex` when you want to find the position of the first element in an array that matches a specific condition. You can specify the condition in various ways. If no element matches the condition, it returns `-1`.
 
