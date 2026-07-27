@@ -121,6 +121,11 @@ export function find<T>(
 
   const keys: PropertyKey[] = isArrayLike(source) ? range(0, source.length) : (Object.keys(source) as Array<keyof T>);
 
+  fromIndex = Math.trunc(fromIndex);
+  if (!fromIndex) {
+    fromIndex = 0;
+  }
+
   if (fromIndex < 0) {
     fromIndex = Math.max(keys.length + fromIndex, 0);
   }
