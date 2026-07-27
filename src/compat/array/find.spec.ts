@@ -92,6 +92,14 @@ describe('find', () => {
     expect(find(objects, { b: 2 }, 4)).toBe(undefined);
   });
 
+  it('should truncate non-integer `fromIndex` values like lodash', () => {
+    const array = [10, 20, 30, 40];
+
+    expect(find(array, value => value > 0, 1.5)).toBe(20);
+    expect(find(array, value => value > 0, -1.5)).toBe(40);
+    expect(find(array, value => value > 0, NaN)).toBe(10);
+  });
+
   it('should return `undefined` when provided `null` or `undefined`', () => {
     expect(find(null, 'a')).toBe(undefined);
     expect(find(undefined, 'a')).toBe(undefined);
