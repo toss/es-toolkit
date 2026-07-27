@@ -3,6 +3,7 @@ import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Fills an array with a value.
@@ -104,8 +105,8 @@ export function fill<T, U>(
     // prevent TypeError: Cannot assign to read only property of string
     return array;
   }
-  start = Math.floor(start);
-  end = Math.floor(end);
+  start = toInteger(start);
+  end = toInteger(end);
 
   if (!start) {
     start = 0;
