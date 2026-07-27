@@ -46,4 +46,11 @@ describe('last', () => {
     expect(last('123')).toBe('3');
     expect(last(args)).toBe(3);
   });
+
+  it('should ignore negative index properties when the array is empty', () => {
+    const array: number[] = [];
+    array['-1'] = 1;
+
+    expect(last(array)).toBe(undefined);
+  });
 });
