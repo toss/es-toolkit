@@ -121,7 +121,7 @@ export function find<T>(
 
   const keys: PropertyKey[] = isArrayLike(source) ? range(0, source.length) : (Object.keys(source) as Array<keyof T>);
 
-  fromIndex = Math.trunc(fromIndex);
+  fromIndex = typeof fromIndex === 'symbol' ? 0 : Math.trunc(fromIndex);
   if (!fromIndex) {
     fromIndex = 0;
   }
