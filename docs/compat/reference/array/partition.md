@@ -16,7 +16,7 @@ const [truthy, falsy] = partition(collection, predicate);
 
 ## Usage
 
-### `partition(collection, predicate)`
+### `partition(collection, predicate?)`
 
 Splits the elements of an array or object into two groups based on a given predicate function. The first group contains elements where the predicate is true, and the second group contains elements where the predicate is false.
 
