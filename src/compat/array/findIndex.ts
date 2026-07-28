@@ -1,8 +1,6 @@
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import { iteratee as iterateeToolkit } from '../compat.ts';
 import { identity } from '../function/identity.ts';
-import { property } from '../object/property.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
@@ -33,28 +31,9 @@ export function findIndex<T>(
     fromIndex = Math.max(arr.length + fromIndex, 0);
   }
   const subArray = Array.from(arr).slice(fromIndex);
-  let index = -1;
-  switch (typeof doesMatch) {
-    case 'function': {
-      index = subArray.findIndex(doesMatch);
-      break;
-    }
-    case 'object': {
-      if (Array.isArray(doesMatch) && doesMatch.length === 2) {
-        const key = doesMatch[0];
-        const value = doesMatch[1];
 
-        index = subArray.findIndex(matchesProperty(key, value));
-      } else {
-        index = subArray.findIndex(matches(doesMatch));
-      }
-      break;
-    }
-    case 'number':
-    case 'symbol':
-    case 'string': {
-      index = subArray.findIndex(property(doesMatch));
-    }
-  }
+  const iteratee = iterateeToolkit(doesMatch);
+  const index = subArray.findIndex(iteratee);
+
   return index === -1 ? -1 : index + fromIndex;
 }
