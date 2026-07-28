@@ -92,6 +92,14 @@ describe('find', () => {
     expect(find(objects, { b: 2 }, 4)).toBe(undefined);
   });
 
+  it('find should coerce `fromIndex` to an integer', () => {
+    const array = [1, 2, 3, 1, 2, 3];
+
+    expect(find(array, x => x === 1, 2.7)).toBe(1);
+    expect(find(array, x => x === 1, -2.7)).toBe(undefined);
+    expect(find(array, x => x === 1, -0.5)).toBe(1);
+  });
+
   it('should return `undefined` when provided `null` or `undefined`', () => {
     expect(find(null, 'a')).toBe(undefined);
     expect(find(undefined, 'a')).toBe(undefined);

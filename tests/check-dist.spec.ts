@@ -36,6 +36,7 @@ const ENTRYPOINTS = [
   './promise',
   './set',
   './string',
+  './types',
   './util',
 ];
 
@@ -66,7 +67,8 @@ describe(`es-toolkit's package tarball`, () => {
     await execa('npm', ['install'], { cwd: tmpdir });
 
     for (const entrypoint of ENTRYPOINTS) {
-      if (entrypoint.includes('*')) {
+      // `./types` is declaration-only (no runtime export), so it can't be required or imported.
+      if (entrypoint.includes('*') || entrypoint === './types') {
         continue;
       }
 

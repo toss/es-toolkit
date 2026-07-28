@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { lastIndexOf } from './lastIndexOf';
+import { falsey } from '../_internal/falsey';
 
 /**
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/findLastIndex-and-lastIndexOf.spec.js
@@ -41,6 +42,14 @@ describe('lastIndexOf', () => {
     const expected = values.map(() => 0);
 
     const actual = values.map(fromIndex => lastIndexOf(array, 1, fromIndex));
+
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should treat falsey \`fromIndex\` values correctly`, () => {
+    const expected = falsey.map(value => (value === undefined ? 5 : -1));
+
+    const actual = falsey.map((fromIndex: any) => lastIndexOf(array, 3, fromIndex));
 
     expect(actual).toEqual(expected);
   });
