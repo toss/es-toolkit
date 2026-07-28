@@ -1,4 +1,5 @@
 import { pull as pullToolkit } from '../../array/pull.ts';
+import { isNil } from '../../predicate/isNil.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
@@ -57,5 +58,9 @@ export function pullAll<L extends MutableList<any>>(array: RejectReadonly<L>, va
  * console.log(numbers); // [1, 3, 5]
  */
 export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
+  if (isNil(valuesToRemove)) {
+    return arr;
+  }
+
   return pullToolkit(arr, Array.from(valuesToRemove));
 }
