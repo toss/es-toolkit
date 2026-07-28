@@ -4,6 +4,7 @@ import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
 import { iteratee } from '../util/iteratee.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Finds the first element in an array-like object that matches a type guard predicate.
@@ -114,6 +115,8 @@ export function find<T>(
   if (!source) {
     return undefined;
   }
+
+  fromIndex = toInteger(fromIndex);
   if (fromIndex < 0) {
     fromIndex = Math.max(source.length + fromIndex, 0);
   }

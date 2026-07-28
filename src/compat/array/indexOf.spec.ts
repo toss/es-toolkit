@@ -45,6 +45,13 @@ describe('indexOf', () => {
     expect(indexOf([1, NaN, 3, NaN], NaN, -32)).toBe(1);
   });
 
+  it('should convert fromIndex to an integer when searching for NaN', () => {
+    expect(indexOf([1, NaN, 2], NaN, 1.5)).toBe(1);
+    expect(indexOf([1, NaN, 2], NaN, 2.9)).toBe(-1);
+    expect(indexOf([NaN, 1, NaN, 2], NaN, 1.9)).toBe(2);
+    expect(indexOf([1, NaN, 3, NaN], NaN, -1.2)).toBe(3);
+  });
+
   it('should work with a negative `fromIndex` <= `-length`', () => {
     const values = [-6, -8, -Infinity];
     const expected = values.map(stubZero);

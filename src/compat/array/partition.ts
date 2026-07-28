@@ -64,7 +64,7 @@ export function partition<T extends object>(
  * `predicate` returns falsy for. The predicate is invoked with one argument: (value).
  *
  * @template T
- * @param source - The array or object to iterate over.
+ * @param collection - The array or object to iterate over.
  * @param [predicate=identity] - The function invoked per iteration.
  * @returns Returns the array of grouped elements.
  *
@@ -82,22 +82,22 @@ export function partition<T extends object>(
  * // => [[{ a: 2 }], [{ a: 1 }, { a: 3 }]]
  */
 export function partition<T>(
-  source: ArrayLike<T> | T | null | undefined,
+  collection: ArrayLike<T> | T | null | undefined,
   predicate: ((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey = identity
 ): [T[], T[]] {
-  if (!source) {
+  if (!collection) {
     return [[], []];
   }
 
-  const collection = isArrayLike(source) ? source : Object.values(source);
+  const values = isArrayLike(collection) ? collection : Object.values(collection);
 
   predicate = iteratee(predicate);
 
   const matched: T[] = [];
   const unmatched: T[] = [];
 
-  for (let i = 0; i < collection.length; i++) {
-    const value = collection[i] as T;
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i] as T;
 
     if (predicate(value)) {
       matched.push(value);

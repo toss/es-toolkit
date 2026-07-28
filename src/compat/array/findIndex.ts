@@ -3,6 +3,7 @@ import { identity } from '../function/identity.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a PropertyKey.
@@ -27,9 +28,7 @@ export function findIndex<T>(
   if (!arr) {
     return -1;
   }
-  if (Number.isNaN(fromIndex)) {
-    fromIndex = 0;
-  }
+  fromIndex = toInteger(fromIndex);
   if (fromIndex < 0) {
     fromIndex = Math.max(arr.length + fromIndex, 0);
   }

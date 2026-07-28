@@ -1,10 +1,10 @@
 # lastIndexOf (Lodash 호환성)
 
-::: warning `Array.lastIndexOf`를 사용하세요
+::: warning `Array.prototype.lastIndexOf`를 사용하세요
 
 이 `lastIndexOf` 함수는 `null`이나 `undefined` 처리, `NaN` 값 탐색 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.lastIndexOf`를 사용하세요.
+대신 더 빠르고 현대적인 `Array.prototype.lastIndexOf`를 사용하세요.
 
 :::
 
@@ -16,9 +16,9 @@ const index = lastIndexOf(array, searchElement, fromIndex);
 
 ## 사용법
 
-### `lastIndexOf(array, searchElement, fromIndex)`
+### `lastIndexOf(array, searchElement, fromIndex?)`
 
-배열에서 지정한 요소가 마지막으로 나타나는 인덱스를 반환해요. 네이티브 `Array.lastIndexOf`와 비슷하지만 `NaN` 값도 찾을 수 있어요.
+배열에서 지정한 요소가 마지막으로 나타나는 인덱스를 반환해요. 네이티브 `Array.prototype.lastIndexOf`와 비슷하지만 `NaN` 값도 찾을 수 있어요.
 
 ```typescript
 import { lastIndexOf } from 'es-toolkit/compat';

@@ -16,7 +16,7 @@ const [truthy, falsy] = partition(collection, predicate);
 
 ## 사용법
 
-### `partition(collection, predicate)`
+### `partition(collection, predicate?)`
 
 배열이나 객체의 요소들을 주어진 조건 함수에 따라 두 그룹으로 나누어요. 첫 번째 그룹은 조건이 참인 요소들이고, 두 번째 그룹은 조건이 거짓인 요소들이에요.
 
