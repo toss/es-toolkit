@@ -55,7 +55,7 @@ tests/types/                  Type tests comparing `es-toolkit/compat` with `@ty
 CHANGELOG.md                  User-facing changelog
 ```
 
-Categories include `array`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, and `map`.
+Categories include `array`, `bigint`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, and `map`.
 
 ## Principles
 
