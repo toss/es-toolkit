@@ -16,7 +16,7 @@ const element = nth(array, index);
 
 ## 사용법
 
-### `nth(array, index)`
+### `nth(array, index?)`
 
 배열에서 지정한 인덱스의 요소를 반환해요. 음수 인덱스를 사용하면 배열 끝에서부터 계산해요. 인덱스가 범위를 벗어나면 `undefined`를 반환해요.
 

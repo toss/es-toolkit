@@ -16,7 +16,7 @@ const element = nth(array, index);
 
 ## 使用法
 
-### `nth(array, index)`
+### `nth(array, index?)`
 
 配列の指定されたインデックスにある要素を返します。負のインデックスを使用すると、配列の末尾から計算します。インデックスが範囲外の場合は `undefined` を返します。
 
