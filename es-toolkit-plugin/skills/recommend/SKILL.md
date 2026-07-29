@@ -14,7 +14,9 @@ Never recommend from memory. Two failures are common and both produce code that 
 - recommending a function that does not exist
 - recommending a real function from the wrong entry point
 
-es-toolkit ships three entry points: `es-toolkit` (strict, 190 functions), `es-toolkit/compat` (lodash-compatible, 298 — of which 158 are absent from strict), and `es-toolkit/fp` (data-last with `pipe`, 74).
+Measured with Claude Haiku 4.5, the second one hit 7 of 15 lodash-equivalent functions and reproduced 21/21 across repeated runs. Verifying costs one command, so do it regardless of which model you are.
+
+es-toolkit ships five entry points: `es-toolkit` (strict, 190 functions), `es-toolkit/fp` (data-last with `pipe`, 74), `es-toolkit/server` (Node-only), `es-toolkit/types` (type-only), and `es-toolkit/compat` (lodash-compatible, 298 — of which 158 are absent from strict).
 
 ## Step 1 — Find candidates and where they live
 

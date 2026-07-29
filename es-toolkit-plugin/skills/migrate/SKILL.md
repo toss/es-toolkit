@@ -9,13 +9,15 @@ allowed-tools: Read, Grep, Glob, Edit, Bash
 
 ## The one mistake to avoid
 
-Every es-toolkit function lives in exactly one of three entry points, and **guessing which one is wrong about half the time**. Measured: a small model got 7 of 15 wrong, reproducing 21/21 across repeated runs. Every wrong guess compiles fine and becomes `undefined` at runtime.
+Guessing which entry point a function belongs to **is wrong about half the time**. Measured with Claude Haiku 4.5 against a real project: 7 of 15 lodash functions produced an import from the wrong entry point, reproducing 21/21 across repeated runs. Every one of them type-checks and then resolves to `undefined` at runtime.
 
-Never guess. Resolve it by running the check in step 1.
+Resolving it costs a single command, so run it whatever model you are — the check in step 1 is authoritative and takes about a second.
 
 - `es-toolkit` — the strict API (190 functions)
-- `es-toolkit/compat` — lodash-compatible (298 functions; 158 of these do **not** exist in strict)
 - `es-toolkit/fp` — data-last, `pipe`-based (74 functions)
+- `es-toolkit/server` — Node-only helpers (`exec`, `colors`)
+- `es-toolkit/types` — type utilities (type-only)
+- `es-toolkit/compat` — lodash-compatible (298 functions; 158 of these do **not** exist in strict)
 
 Commonly mis-assigned: `get`, `set`, `has`, `castArray`, `defaultsDeep`, `toArray`, `assign`, `defaults` are **compat-only**. `pipe` and `flow` are **fp-only**. `chain`, `tap`, `thru`, `mixin`, `sortedUniq` exist **nowhere**.
 
@@ -110,7 +112,13 @@ console.log(
 );
 ```
 
-Bundling with no `external` entries is what makes the number honest — it measures what actually ships, unlike `npm pack` or `node_modules` size.
+Bundling with no `external` entries is what makes the number honest — it measures what actually ships, unlike `npm pack` or summing file sizes on disk. (Summing files understates the gain badly: on one migration it reported 77% where the bundled measurement showed 97%, because it counts unminified bytes and ignores tree shaking.)
+
+### This is an estimate — the real number comes from the project's own build
+
+The script above measures an isolated entry point containing only the migrated functions. A real app shares dependencies across modules and splits chunks, so tell the user to **re-run their own production build and compare output sizes** for the number that actually matters.
+
+**Warn them about `external` before they do.** If the project treats dependencies as external — library builds, SSR/server bundles, or an explicit `external`/`rollupOptions.external` entry — then neither lodash nor es-toolkit code lands in the output. The comparison then shows no difference, or even a larger bundle, and it means nothing. Have them drop the external setting for the test build so the dependency is actually inlined, then compare.
 
 **Always state the baseline**, because it changes the headline: the same migration measured −97% against CJS `lodash` but −75% against `lodash-es`. If the project imports from `lodash`, report both — most of the first jump comes from leaving CJS, not from es-toolkit.
 
