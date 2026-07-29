@@ -89,7 +89,7 @@ await exec('sleep', ['10'], {
 - `stderr` (`string`): 捕获的 stderr。
 - `exitCode` (`number | null`): 进程的退出码。
 
-#### 异常
+#### 错误
 
 当 `throwOnNonZeroExitCode` 为 `true` 且进程以非零退出码退出时,抛出 `ExecError`。
 

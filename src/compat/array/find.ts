@@ -6,6 +6,7 @@ import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Finds the first element in an array-like object that matches a type guard predicate.
@@ -121,7 +122,7 @@ export function find<T>(
 
   const keys: PropertyKey[] = isArrayLike(source) ? range(0, source.length) : (Object.keys(source) as Array<keyof T>);
 
-  fromIndex = typeof fromIndex === 'symbol' ? 0 : Math.trunc(fromIndex);
+  fromIndex = toInteger(fromIndex);
   if (!fromIndex) {
     fromIndex = 0;
   }
