@@ -16,7 +16,7 @@ const element = nth(array, index);
 
 ## 用法
 
-### `nth(array, index)`
+### `nth(array, index?)`
 
 返回数组指定索引处的元素。如果索引为负数,则从数组末尾开始计算。如果索引超出范围,则返回 `undefined`。
 

@@ -23,6 +23,7 @@ async function getPackageJsonOfTarball(tarballPath: string) {
 const ENTRYPOINTS = [
   '.',
   './array',
+  './bigint',
   './compat',
   './compat/*',
   './server',

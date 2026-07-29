@@ -81,6 +81,7 @@ export const flavors = [
     ],
     categories: [
       'array',
+      'bigint',
       'function',
       'map',
       'math',

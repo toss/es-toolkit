@@ -31,6 +31,6 @@ const values = pipe([1, 2, 3, 4], sampleSize(2));
 
 (`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为随机值数组的函数。
 
-#### 异常
+#### 错误
 
 如果 `size` 大于管道中数组的长度,则抛出错误。
