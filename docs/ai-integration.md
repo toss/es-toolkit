@@ -25,14 +25,12 @@ npx skills add toss/es-toolkit
 
 | Skill         | Description                                          |
 | ------------- | ---------------------------------------------------- |
-| **guide**     | Installation, import patterns, and runtime setup     |
 | **recommend** | Find the right es-toolkit function for your use case |
 | **migrate**   | Migrate lodash code to es-toolkit                    |
 
 ### Usage Examples
 
 ```
-/es-toolkit:guide How do I use es-toolkit in Deno?
 /es-toolkit:recommend I need to deeply merge two objects
 /es-toolkit:migrate _.chunk(users, 10)
 ```

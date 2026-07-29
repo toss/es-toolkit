@@ -1,120 +1,127 @@
 ---
 name: migrate
-description: Guide migrating lodash code to es-toolkit. Use when the user wants to migrate from lodash, replace lodash imports, reduce bundle size by switching to es-toolkit, or understand the difference between es-toolkit and es-toolkit/compat.
-argument-hint: '<paste lodash code, function names, or ask about strict vs compat>'
-allowed-tools: Read, Grep, Glob
+description: Migrate lodash code to es-toolkit. Use when the user wants to replace lodash imports, reduce bundle size by switching to es-toolkit, or decide between es-toolkit and es-toolkit/compat.
+argument-hint: '<paste lodash code, a file path, or a function name>'
+allowed-tools: Read, Grep, Glob, Edit, Bash
 ---
 
-# Lodash Migration & Compat Guide
+# Lodash → es-toolkit Migration
 
-Guide users through migrating lodash to es-toolkit and understanding the strict vs compat APIs, grounded in actual source code.
+## The one mistake to avoid
 
-## Input
+Every es-toolkit function lives in exactly one of three entry points, and **guessing which one is wrong about half the time**. Measured: a small model got 7 of 15 wrong, reproducing 21/21 across repeated runs. Every wrong guess compiles fine and becomes `undefined` at runtime.
 
-$ARGUMENTS — Lodash code to migrate, specific function names, or a question about strict vs compat.
+Never guess. Resolve it by running the check in step 1.
 
-## Core Concepts
+- `es-toolkit` — the strict API (190 functions)
+- `es-toolkit/compat` — lodash-compatible (298 functions; 158 of these do **not** exist in strict)
+- `es-toolkit/fp` — data-last, `pipe`-based (74 functions)
 
-**es-toolkit (strict)**: Opinionated, simplified API for the 85% use case. Smaller bundle, may differ from lodash in edge cases by design. New functions are added here.
+Commonly mis-assigned: `get`, `set`, `has`, `castArray`, `defaultsDeep`, `toArray`, `assign`, `defaults` are **compat-only**. `pipe` and `flow` are **fp-only**. `chain`, `tap`, `thru`, `mixin`, `sortedUniq` exist **nowhere**.
 
-**es-toolkit/compat**: Aims for full lodash test compatibility within a defined scope. See `docs/compatibility.md` for out-of-scope behaviors (e.g., implicit type conversions, prototype modifications).
+## Step 1 — Resolve every entry point (required, do this first)
 
-## Why source-first matters
+Collect the lodash functions in the input, then run this **from the project root** (it resolves through the project's own `node_modules`; running it from `/tmp` fails):
 
-The only reliable way to know the difference between strict and compat is to read the actual implementation. Never guess — always verify from source.
+```bash
+node --input-type=module -e "
+const names = ['get','chunk','map','chain'];
+const entries = ['es-toolkit','es-toolkit/fp','es-toolkit/server','es-toolkit/compat'];
+const mods = await Promise.all(entries.map(e => import(e)));
+for (const n of names) {
+  const found = entries.filter((_, i) => n in mods[i]);
+  console.log(n.padEnd(16), found.join(', ') || 'NOT AVAILABLE');
+}
+"
+```
 
-## Workflow
+Replace `names` with the actual function names. The output is authoritative — it reflects the version the user actually installed, so it never goes stale.
 
-### If a specific function or lodash code is given
+**A function can appear in more than one entry point**, so read the whole list rather than the first hit. For example `map` and `filter` are in both `fp` and `compat` but not in strict, `sum` is in strict and `compat` but not `fp`, and `chunk` is in all three.
 
-#### 1. Identify lodash functions from input
+### Which entry point to pick
 
-Extract which lodash functions are used and how they're imported.
+`es-toolkit`, `es-toolkit/fp`, `es-toolkit/server`, and `es-toolkit/types` are all first-class — recommend whichever fits:
 
-#### 2. Verify availability in source code
+- `es-toolkit` — the default
+- `es-toolkit/fp` — data-last functions for `pipe` composition
+- `es-toolkit/server` — Node-only helpers (`exec`, `colors`)
+- `es-toolkit/types` — type utilities; **type-only, so the script above cannot see it** (`import('es-toolkit/types')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`). Use `import type` and check `./node_modules/es-toolkit/types.d.ts` directly.
 
-For each function, search both APIs:
+**Use `es-toolkit/compat` only when there is a specific reason** — the function exists nowhere else, or the call site depends on lodash-exact behavior (see step 2). compat is a migration layer, not the destination: it is feature-complete and receives no new functions, so anything you route through it stays there. When you do choose compat, say why.
 
-- `src/{category}/{fn}.ts` — strict API
-- `src/compat/{category}/{fn}.ts` — compat API
+If a function reports `NOT AVAILABLE`, do not invent a replacement. Say it is unavailable and either keep lodash for that call or propose a rewrite. `chain`/`tap`/`thru` in particular mean the code uses lodash's chaining style, which has no drop-in equivalent — migrating it is a restructure into plain calls or `es-toolkit/fp`'s `pipe`, so flag that as its own decision rather than a mechanical swap.
 
-Read the implementation to understand the exact signature and any behavioral differences.
+## Step 2 — Check behavior before choosing strict over compat
 
-#### 3. Determine the right migration path
+When a function exists in **both** strict and compat, they are not interchangeable. Read the signature and JSDoc from the installed package:
 
-| Scenario                                    | Recommendation                               |
-| ------------------------------------------- | -------------------------------------------- |
-| Function exists in both, same behavior      | Use `es-toolkit` (smaller bundle)            |
-| Function exists in both, different behavior | Explain the difference, let user choose      |
-| Only in compat                              | Use `es-toolkit/compat`                      |
-| Not available at all                        | Keep lodash or suggest modern JS alternative |
+- `./node_modules/es-toolkit/dist/{category}/{fn}.d.ts` — strict
+- `./node_modules/es-toolkit/dist/compat/{category}/{fn}.d.ts` — compat
 
-If the function only exists in compat (like `get`, `set`, `has`), explain why — es-toolkit doesn't implement functions replaceable by modern JS (optional chaining `?.`, `Object.hasOwn()`, etc.).
+Both carry full JSDoc with `@example`. Compare against how the user actually calls the function, and report any option or edge case that differs. Real examples:
 
-#### 4. Generate before/after migration
+- `chunk` — strict throws on `null` input and on a non-positive or fractional `size`; lodash and compat return `[]` or coerce
+- `debounce` — strict has no `maxWait` and returns `void`; compat supports both
+- `merge` — strict takes exactly 2 arguments; lodash and compat are variadic
+- `get` — returns the default only when the resolved value is `undefined`, so `?.` with `??` is **not** an equivalent rewrite when the value can be `null`
 
-For each function, provide:
+Prefer strict when the call site is safe, compat when inputs are uncertain. State the assumption you relied on.
 
-- Availability: es-toolkit and/or es-toolkit/compat
-- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}` (strict) or `https://es-toolkit.dev/reference/compat/{category}/{fn}` (compat)
-- Before (lodash) and After (es-toolkit) code examples
-- Any behavioral differences found in source code
-- **Feature comparison table**: Compare API capabilities side-by-side (e.g., cancel support, flush, maxWait, return values, AbortSignal, callback arguments). Read both implementations to identify all supported options and present them in a table like:
+## Step 3 — Apply the migration
 
-| Feature                       | lodash | es-toolkit | es-toolkit/compat |
-| ----------------------------- | ------ | ---------- | ----------------- |
-| (list each option/capability) | ✅/❌  | ✅/❌      | ✅/❌             |
+Rewrite the imports, grouping by entry point:
 
-- **"When to use which"**: Based on the feature comparison, provide scenario-based guidance — e.g., "Use es-toolkit if you only need basic debounce; use compat if you rely on cancel/flush; keep lodash if you need X."
+```js
+import { chunk, debounce } from 'es-toolkit';
+import { get } from 'es-toolkit/compat';
+```
 
-For migrations involving many functions, use a summary table instead of repeating the full template for each one.
+Edit the actual files when the user pointed at code. Afterwards, verify: run the project's typecheck or tests if they exist, and confirm no lodash imports remain (`Grep` for `'lodash'`).
 
-#### 5. Provide consolidated import rewrite
+For a large migration, mention that a bundler alias (`resolve.alias: { lodash: 'es-toolkit/compat' }`) switches everything at once with no source changes, and that ESLint's `no-restricted-imports` then surfaces whatever is left.
 
-Show the final import transformation as a single block.
+## Step 4 — Offer to measure the result (only if the user asks)
 
-#### 5a. Suggest automation patterns for large-scale migrations
+Do not run this automatically; it installs esbuild and costs a build. Offer it, and run it on request.
 
-When migrating many files, mention practical automation approaches:
+Write this to a file **inside the project** and run it, listing the real before/after imports:
 
-- **Bundler alias**: Configure `resolve.alias` in webpack or Vite to redirect lodash imports at build time without changing source files:
-  ```js
-  // vite.config.js or webpack.config.js
-  resolve: { alias: { 'lodash': 'es-toolkit/compat' } }
-  ```
-- **ESLint rule**: Use `no-restricted-imports` to warn or error on remaining lodash imports after migration.
-- **Codemod**: For systematic AST-based transforms, mention tools like jscodeshift if the migration pattern is complex.
+```js
+import esbuild from 'esbuild';
+import { gzipSync } from 'node:zlib';
 
-#### 6. Note bundle size impact
+const build = async script => {
+  const out = await esbuild.build({
+    stdin: { contents: script, resolveDir: process.cwd(), sourcefile: 'entry.js', loader: 'js' },
+    write: false,
+    minify: true,
+    bundle: true,
+    format: 'esm',
+  });
+  const raw = Buffer.from(out.outputFiles[0].contents);
+  return { min: raw.byteLength, gzip: gzipSync(raw).byteLength };
+};
 
-es-toolkit is up to 97% smaller than lodash and 2-3x faster. Bundle size numbers come from `benchmarks/bundle-size/` and runtime performance numbers from `benchmarks/performance/` and `docs/performance.md` — reference them for specific function comparisons if the user asks.
+console.log('before', await build(`import { chunk, get } from 'lodash'; console.log(chunk, get)`));
+console.log(
+  'after',
+  await build(`import { chunk } from 'es-toolkit'; import { get } from 'es-toolkit/compat'; console.log(chunk, get)`)
+);
+```
 
-### If no specific function (migration strategy overview)
+Bundling with no `external` entries is what makes the number honest — it measures what actually ships, unlike `npm pack` or `node_modules` size.
 
-Provide a strategic overview with three migration options:
+**Always state the baseline**, because it changes the headline: the same migration measured −97% against CJS `lodash` but −75% against `lodash-es`. If the project imports from `lodash`, report both — most of the first jump comes from leaving CJS, not from es-toolkit.
 
-- **Option A: Direct to es-toolkit** — new/small projects
-- **Option B: Gradual via compat** — large codebases (recommended for legacy)
-- **Option C: Mixed** — pragmatic approach
+Runtime benchmarks are usually not worth it: for typical call volumes the difference is unmeasurable in a real app, and microbenchmarks mislead. Only run one if the user explicitly asks.
 
-For each option, include a **trade-off matrix**:
+## Linking to docs
 
-| Factor                | Option A (strict)       | Option B (compat)        | Option C (mixed)  |
-| --------------------- | ----------------------- | ------------------------ | ----------------- |
-| Code change volume    | High                    | Low                      | Medium            |
-| Bundle size reduction | Maximum                 | Moderate                 | Varies            |
-| Risk level            | Higher (behavior diffs) | Low (lodash-compatible)  | Medium            |
-| Maintenance effort    | Low (clean API)         | Medium (compat tracking) | Higher (two APIs) |
+Function pages need the `.html` suffix or the site 404s:
 
-**Compat-exclusive functions**: Search `src/compat/` for functions that don't exist in `src/` (strict). List representative examples so users know what can only come from compat (e.g., `get`, `set`, `has`).
+- strict: `https://es-toolkit.dev/reference/{category}/{fn}.html`
+- compat: `https://es-toolkit.dev/compat/reference/{category}/{fn}.html`
+- fp: `https://es-toolkit.dev/fp/reference/{fn}.html` (flat, no category)
 
-For concrete behavioral differences, read a few representative function pairs from source (e.g., `chunk`, `debounce`) to give real examples rather than abstract descriptions.
-
-## Search local docs for discovery
-
-If you need to check whether a lodash function has an es-toolkit equivalent:
-
-- **By name**: Read `docs/reference/{category}/{functionName}.md` directly
-- **By keyword**: `Grep` for the function name across `docs/reference/**/*.md`
-- **Compat-only functions**: `Glob docs/reference/compat/{category}/*.md` — then check if the same file exists in `docs/reference/{category}/`
-- **Available categories**: array, compat, error, function, map, math, object, predicate, promise, set, string, util
+If you are unsure a page exists, omit the link rather than guessing one.

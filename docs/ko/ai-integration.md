@@ -25,14 +25,12 @@ npx skills add toss/es-toolkit
 
 | 스킬          | 설명                                           |
 | ------------- | ---------------------------------------------- |
-| **guide**     | 설치, import 패턴, 런타임별 설정 안내          |
 | **recommend** | 상황에 맞는 es-toolkit 함수 추천               |
 | **migrate**   | lodash 코드를 es-toolkit으로 마이그레이션 안내 |
 
 ### 사용 예시
 
 ```
-/es-toolkit:guide Deno에서 es-toolkit을 어떻게 사용하나요?
 /es-toolkit:recommend 두 객체를 깊게 병합하고 싶어요
 /es-toolkit:migrate _.chunk(users, 10)
 ```

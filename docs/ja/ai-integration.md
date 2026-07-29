@@ -23,16 +23,14 @@ npx skills add toss/es-toolkit
 
 ### 利用可能なスキル
 
-| スキル        | 説明                                                   |
-| ------------- | ------------------------------------------------------ |
-| **guide**     | インストール、インポートパターン、ランタイム設定ガイド |
-| **recommend** | ユースケースに最適なes-toolkit関数を提案               |
-| **migrate**   | lodashコードをes-toolkitに移行                         |
+| スキル        | 説明                                     |
+| ------------- | ---------------------------------------- |
+| **recommend** | ユースケースに最適なes-toolkit関数を提案 |
+| **migrate**   | lodashコードをes-toolkitに移行           |
 
 ### 使用例
 
 ```
-/es-toolkit:guide Denoでes-toolkitを使うには？
 /es-toolkit:recommend 2つのオブジェクトをディープマージしたい
 /es-toolkit:migrate _.chunk(users, 10)
 ```

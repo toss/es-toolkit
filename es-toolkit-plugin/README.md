@@ -27,23 +27,14 @@ After installing, run `/reload-plugins` to load the skills.
 
 ## Skills
 
-| Skill         | Command                 | Description                                                                    |
-| ------------- | ----------------------- | ------------------------------------------------------------------------------ |
-| **Guide**     | `/es-toolkit:guide`     | Installation, import patterns, setup for Node.js/Bun/Deno/browser              |
-| **Recommend** | `/es-toolkit:recommend` | Find the right es-toolkit function for your use case                           |
-| **Migrate**   | `/es-toolkit:migrate`   | Guide migrating lodash code to es-toolkit, and understand strict vs compat API |
+| Skill         | Command                 | Description                                                             |
+| ------------- | ----------------------- | ----------------------------------------------------------------------- |
+| **Recommend** | `/es-toolkit:recommend` | Find the right es-toolkit function for your use case                    |
+| **Migrate**   | `/es-toolkit:migrate`   | Migrate lodash code to es-toolkit, and choose between strict and compat |
 
-All skills verify information from the local source code and bundled documentation — no network requests needed.
+Both skills resolve every function against the es-toolkit version installed in your project, so their answers match what you actually have.
 
 ## Usage Examples
-
-### Get started
-
-```
-/es-toolkit:guide install
-/es-toolkit:guide How do I use es-toolkit in Deno?
-/es-toolkit:guide What import style is best for tree shaking?
-```
 
 ### Find the right function
 
@@ -68,7 +59,9 @@ All skills verify information from the local source code and bundled documentati
 
 ## How It Works
 
-Each skill reads the local source code and bundled reference documentation to ensure accuracy — no network requests needed. All recommendations are grounded in the actual codebase — not generic JavaScript advice.
+es-toolkit exposes three entry points — `es-toolkit` (strict), `es-toolkit/compat` (lodash-compatible), and `es-toolkit/fp` — and 158 functions available in `compat` do not exist in the strict API. Guessing which entry point a function belongs to is the single most common way generated code breaks: it type-checks, then resolves to `undefined` at runtime.
+
+So instead of relying on recall, each skill resolves entry points against the copy of es-toolkit installed in your project, and reads signatures from its bundled type definitions. Answers therefore track your installed version rather than going stale.
 
 ## Links
 
