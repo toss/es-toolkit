@@ -9,6 +9,6 @@ describe('lastIndexOf bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'lastIndexOf');
-    expect(bundleSize).toMatchInlineSnapshot(`636`);
+    expect(bundleSize).toMatchInlineSnapshot(`681`);
   });
 });

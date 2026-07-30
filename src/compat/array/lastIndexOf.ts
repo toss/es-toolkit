@@ -1,3 +1,4 @@
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -51,5 +52,5 @@ export function lastIndexOf<T>(
     }
   }
 
-  return Array.from(array).lastIndexOf(searchElement, index);
+  return toArray(array).lastIndexOf(searchElement, index);
 }
