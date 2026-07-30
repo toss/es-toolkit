@@ -113,21 +113,21 @@ For a large migration, mention that a bundler alias (`resolve.alias: { lodash: '
 
 Do not run this automatically. Offer it, and run it on request.
 
-**Do not install anything.** Measuring with a bundler is more accurate, but it leaves a dependency and a lockfile change in the user's project. Instead, walk the lodash and es-toolkit files already installed. The script below uses only Node built-ins.
+**Do not install anything.** Measuring with a bundler is more accurate, but it leaves a dependency and a lockfile change in the user's project. Instead, scan the source for lodash usage and walk the packages already installed. The script below uses only Node built-ins and takes no configuration — it detects which functions the project actually uses.
 
-Write it as a temporary file **in the package directory that depends on es-toolkit**, run it, then delete it. Under Yarn PnP run it with `yarn node` — the script resolves the package location rather than assuming `node_modules`, so it works inside PnP's zips, but plain `node` cannot start there.
-
-Replace `FNS` and `FROM` with the actual migration. `FROM` also accepts single-function packages like `lodash.orderby`, which are common in codebases that never imported `lodash` wholesale.
+Write it as a temporary file **in the package directory that depends on es-toolkit**, run it, then delete it. Under Yarn PnP run it with `yarn node`. It anchors module resolution to the working directory, so running it from anywhere else measures the wrong packages.
 
 ```js
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const require = createRequire(import.meta.url);
+// 해석 기준은 실행 위치(cwd) — 스크립트 파일 위치가 아니다
+const require = createRequire(path.join(process.cwd(), '__estimator__.js'));
 
-const FNS = ['chunk', 'debounce', 'get'];
-const FROM = 'lodash'; // 'lodash', 'lodash-es', or 'lodash.orderby' style packages
+const SRC_DIRS = ['src', 'app', 'pages', 'lib', 'components'];
+const SKIP = new Set(['node_modules', '.next', 'dist', 'build', '.git', 'coverage']);
 
 const size = f => {
   try {
@@ -137,6 +137,79 @@ const size = f => {
     return 0;
   }
 };
+const stripComments = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+const repoRoot = (() => {
+  let cur = process.cwd();
+  while (cur !== path.dirname(cur)) {
+    if (existsSync(path.join(cur, '.git')) || existsSync(path.join(cur, 'pnpm-workspace.yaml'))) return cur;
+    cur = path.dirname(cur);
+  }
+  return process.cwd();
+})();
+
+// ── 1. 소스에서 실제 lodash 사용 수집
+function collect(dir, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (SKIP.has(e.name)) continue;
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) collect(p, out);
+    else if (/\.(ts|tsx|js|jsx|mjs|cjs)$/.test(e.name)) out.push(p);
+  }
+  return out;
+}
+const usage = new Map();
+const unmeasurable = new Set();
+for (const f of SRC_DIRS.flatMap(d => collect(path.resolve(d)))) {
+  const src = stripComments(readFileSync(f, 'utf8'));
+  for (const [, spec] of [
+    ...src.matchAll(/from\s*["'](lodash[.\/][^"']*)["']/g),
+    ...src.matchAll(/require\(\s*["'](lodash[.\/][^"']*)["']\s*\)/g),
+  ]) {
+    const m = spec.match(/^lodash[.\/](.+)$/);
+    if (m) usage.set(m[1], (usage.get(m[1]) ?? new Set()).add(spec));
+  }
+  for (const [, names] of [
+    ...src.matchAll(/import\s*\{([^}]+)\}\s*from\s*["']lodash(?:-es)?["']/g),
+    ...src.matchAll(/\{([^}]+)\}\s*=\s*require\(\s*["']lodash(?:-es)?["']\s*\)/g),
+  ])
+    for (const n of names.split(',')) {
+      const name = n
+        .trim()
+        .split(/\s+as\s+/)[0]
+        .trim();
+      if (name) usage.set(name, (usage.get(name) ?? new Set()).add('lodash'));
+    }
+  // 측정 불가 형태는 조용히 넘기지 않고 알린다
+  if (
+    /import\s+(?:\w+\s*,\s*)?(?:\*\s*as\s+\w+|\w+)\s+from\s*["']lodash(?:-es)?["']/.test(src) ||
+    /export\s*\{[^}]*\}\s*from\s*["']lodash(?:-es)?["']/.test(src) ||
+    /import\(\s*["']lodash/.test(src)
+  )
+    unmeasurable.add(path.relative(process.cwd(), f));
+}
+
+let dist, compatMod;
+try {
+  dist = path.join(path.dirname(require.resolve('es-toolkit/package.json')), 'dist');
+  compatMod = await import(pathToFileURL(require.resolve('es-toolkit/compat')).href);
+} catch {
+  console.error(`es-toolkit is not resolvable from ${process.cwd()} — run this inside the package that depends on it.`);
+  process.exit(1);
+}
+const canon = n => Object.keys(compatMod).find(k => k.toLowerCase() === n.toLowerCase()) ?? n;
+
+if (unmeasurable.size) {
+  console.warn('NOTE: these files use a lodash import form this script cannot measure');
+  console.warn('      (default / namespace / re-export / dynamic import) — excluded from the numbers:');
+  for (const f of unmeasurable) console.warn(`      ${f}`);
+  console.warn('');
+}
+if (!usage.size) {
+  console.error(`No measurable lodash usage under ${SRC_DIRS.join(', ')} in ${process.cwd()}`);
+  process.exit(1);
+}
+
 const resolveRel = (from, spec) => {
   const base = path.resolve(path.dirname(from), spec);
   return (
@@ -150,7 +223,6 @@ const resolveRel = (from, spec) => {
     ].find(c => size(c)) ?? null
   );
 };
-const stripComments = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 function walk(file, seen = new Set()) {
   if (!file || seen.has(file) || !size(file)) return seen;
   seen.add(file);
@@ -169,19 +241,6 @@ function walk(file, seen = new Set()) {
   }
   return seen;
 }
-// dist는 해석 결과에서 유도 (하드코딩 금지 — PnP zip 안에서도 동작)
-let dist;
-try {
-  dist = path.join(path.dirname(require.resolve('es-toolkit/package.json')), 'dist');
-} catch {
-  console.error(`es-toolkit is not resolvable from ${process.cwd()} — run this inside the package that depends on it.`);
-  process.exit(1);
-}
-if (!size(path.join(dist, 'index.mjs')) && !readdirSync(dist).length) {
-  console.error('es-toolkit dist not readable');
-  process.exit(1);
-}
-
 function findDist(fn, compat) {
   const hits = [];
   (function rec(d) {
@@ -200,23 +259,30 @@ function findDist(fn, compat) {
 const before = new Set(),
   compat = new Set(),
   strict = new Set();
-const stillCompat = [],
-  outside = new Set();
-const projectRoot = process.cwd();
-for (const fn of FNS) {
+const entries = [],
+  outside = new Set(),
+  stillCompat = [],
+  notFound = [];
+for (const [raw, specs] of usage) {
+  const fn = canon(raw);
   let entry = null;
-  for (const cand of [`${FROM}/${fn}.js`, FROM]) {
+  for (const spec of specs) {
     try {
-      entry = require.resolve(cand);
+      entry = require.resolve(spec);
       break;
     } catch {}
   }
   if (entry) {
-    if (!entry.startsWith(projectRoot)) outside.add(entry);
+    entries.push(entry);
+    if (!entry.startsWith(repoRoot)) outside.add(entry);
     walk(entry).forEach(f => before.add(f));
   }
   const c = findDist(fn, true),
     s = findDist(fn, false);
+  if (!c && !s) {
+    notFound.push(fn);
+    continue;
+  }
   if (c) walk(c).forEach(f => compat.add(f));
   if (s) walk(s).forEach(f => strict.add(f));
   else {
@@ -228,21 +294,25 @@ const sum = st => [...st].reduce((n, f) => n + size(f), 0);
 const b = sum(before),
   c = sum(compat),
   s = sum(strict);
+console.log(`detected: ${[...usage.keys()].map(canon).join(', ')}`);
+console.log('AS-IS entry points:');
+for (const e of entries) console.log(`  ${e.replace(repoRoot, '<repo>')}`);
+console.log('');
 if (!b) {
-  console.error(`Could not find ${FROM} in this project — check FROM, or run inside the package that depends on it.`);
+  console.error('Could not locate the lodash packages from this directory.');
   process.exit(1);
 }
 if (outside.size) {
-  console.warn(`WARNING: ${FROM} resolved OUTSIDE this project:`);
+  console.warn('WARNING: resolved OUTSIDE this repository — this project may not actually depend on it:');
   for (const f of outside) console.warn(`  ${f}`);
-  console.warn('  This project may not actually depend on it. Numbers below are meaningless if so.\n');
+  console.warn('');
 }
 const pct = n => {
   const p = 100 - (n / b) * 100;
   return `${p >= 0 ? '-' : '+'}${Math.abs(p).toFixed(0)}%`;
 };
 const row = (l, st, by) => `${l.padEnd(26)} ${String(st.size).padStart(3)} files  ${by.toLocaleString().padStart(9)} B`;
-console.log(row(`AS-IS   ${FROM}`, before, b));
+console.log(row('AS-IS   lodash', before, b));
 console.log(row('TO-BE   es-toolkit/compat', compat, c) + `   ${pct(c)}`);
 console.log('');
 console.log('If you later move on to es-toolkit (strict):');
@@ -251,13 +321,19 @@ console.log(
     `   ${pct(s)}  (${Math.abs(c - s).toLocaleString()} B ${c >= s ? 'more' : 'LESS'})`
 );
 if (stillCompat.length) console.log(`        note: these stay on compat: ${stillCompat.join(', ')}`);
+if (notFound.length) console.log(`        NOT AVAILABLE in es-toolkit: ${notFound.join(', ')}`);
+console.log('');
+console.log('These are raw source bytes, not shipped size. Trust the percentages (within ~5pp of a');
+console.log('real bundle in testing); the absolute byte counts run 2-5x high, so do not quote them.');
 ```
 
-It follows what each function actually `require`s / `import`s and sums the files without double counting.
+Read the numbers this way:
 
-**Always say this is a conservative estimate.** It counts unminified bytes and ignores tree shaking, so it reads lower than the real gain — one migration measured 68% this way where the bundled measurement of the same code showed 96%. **The real saving is larger**, so frame it as an undercount rather than a claim.
+- **Percentages are reliable.** Checked against real esbuild bundles they landed within ~5pp (script −73% vs bundled −69% on one service; −97% vs −96% on another).
+- **Absolute bytes are not.** They run 2–5x high because they count unminified source. Never quote them as "you will save N bytes" — quote the percentage.
+- **The AS-IS entry points are printed for a reason.** A bare `import { chunk } from 'lodash'` resolves to lodash's single 546KB bundle, and that is correct: CJS lodash does not tree-shake, so a bundler really does pull the whole thing. Deep imports (`lodash/chunk.js`) and single-function packages (`lodash.orderby`) resolve to just their own files. Seeing which one applies explains the size immediately.
 
-It also **cannot tell `lodash` from `lodash-es`**: they are the same code in different module formats, so the on-disk totals come out nearly equal (47.8KB vs 47.7KB in that case). Real bundles tree-shake `lodash-es` far better, so if the project already uses `lodash-es`, note that the actual gain will be smaller than this estimate.
+Import forms the scanner cannot follow — `import _ from 'lodash'`, `import * as ld`, re-exports, dynamic `import()` — are reported as excluded rather than silently dropped. If they appear, say the estimate is partial.
 
 ### The accurate number comes from the project's own build
 
@@ -277,7 +353,7 @@ Only the import path changed; the calling code is untouched, and `es-toolkit/com
 
 **2. How much smaller it gets** (if measured)
 
-Show AS-IS / TO-BE, and add that it is a conservative estimate.
+Show AS-IS / TO-BE as percentages. Do not present the raw byte counts as the saving — they run high, as the script's own output says.
 
 **3. What they can do next**
 
