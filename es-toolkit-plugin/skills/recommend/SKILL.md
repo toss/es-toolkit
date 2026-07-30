@@ -20,20 +20,26 @@ The entry points are `es-toolkit` (strict), `es-toolkit/fp` (data-last with `pip
 
 ## Step 1 — Find candidates and where they live
 
-Search what the installed version actually exports, **running from the project root** (from `/tmp` the import fails):
+Search what the installed version actually exports, **running from the package directory that depends on es-toolkit** — in a monorepo that is the workspace package, not the repo root. If the repo has a `.pnp.cjs` (Yarn PnP), run `yarn node` instead of `node`.
 
 ```bash
 node --input-type=module -e "
 const pattern = /merge|assign/i;
 const entries = ['es-toolkit','es-toolkit/fp','es-toolkit/server','es-toolkit/compat'];
-const mods = await Promise.all(entries.map(e => import(e)));
+const mods = await Promise.all(entries.map(e => import(e).then(m => m, () => null)));
+if (!mods[0]) {
+  console.error('es-toolkit is not resolvable from ' + process.cwd() + ' — run this inside the package that depends on it.');
+  process.exit(1);
+}
 const hits = new Map();
-mods.forEach((m, i) => Object.keys(m).filter(n => pattern.test(n)).forEach(n => hits.set(n, [...(hits.get(n) ?? []), entries[i]])));
+mods.forEach((m, i) => m && Object.keys(m).filter(n => pattern.test(n)).forEach(n => hits.set(n, [...(hits.get(n) ?? []), entries[i]])));
 for (const [n, where] of [...hits].sort()) console.log(n.padEnd(20), where.join(', '));
 "
 ```
 
 Adjust `pattern` to the task. The output is authoritative — it reflects the version the user installed, so it never goes stale.
+
+Each import is tolerated individually because entry points were added over time (`server` in 1.47.0, `fp` in 1.49.0); a bare `Promise.all` throws `ERR_PACKAGE_PATH_NOT_EXPORTED` on older installs and takes the whole search down.
 
 If nothing matches, say so plainly and suggest a plain-JavaScript approach. Do not invent a function name.
 
@@ -46,13 +52,13 @@ Note that **a function can live in several entry points at once** — `map` and 
 - `es-toolkit` — the default
 - `es-toolkit/fp` — data-last functions for `pipe` composition
 - `es-toolkit/server` — Node-only helpers (`exec`, `colors`)
-- `es-toolkit/types` — type utilities; **type-only, so the search above cannot see it** (`import('es-toolkit/types')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`). Use `import type` and read `./node_modules/es-toolkit/types.d.ts` directly.
+- `es-toolkit/types` — type utilities; **type-only, so the search above cannot see it** (`import('es-toolkit/types')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`). Use `import type` and read `types.d.ts` inside the package directory.
 
 **Recommend `es-toolkit/compat` only when there is a specific reason** — the function exists nowhere else, or the user explicitly needs lodash-exact behavior. compat is a migration layer, not the destination: it is feature-complete and receives no new functions. When you do recommend it, say why, and mention the strict alternative if one exists.
 
 ## Step 3 — Read the real signature
 
-Read `./node_modules/es-toolkit/dist/{category}/{fn}.d.ts` (or `dist/compat/...`, `dist/fp/...`). It carries the full JSDoc, parameter docs, and `@example`. Take the signature and example from there rather than recalling them.
+Locate the package with `node -e "console.log(require.resolve('es-toolkit/package.json'))"` — do not assume `node_modules`, which does not exist under Yarn PnP — then read `<pkg>/dist/{category}/{fn}.d.ts` (or `dist/compat/...`, `dist/fp/...`). It carries the full JSDoc, parameter docs, and `@example`. Take the signature and example from there rather than recalling them.
 
 Watch for arity and mutation, which are the details most often gotten wrong — for instance `merge(target, source)` takes exactly two arguments and mutates `target`, while `toMerged` returns a new object.
 

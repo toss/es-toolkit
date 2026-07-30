@@ -19,23 +19,33 @@ Resolving it costs a single command, so run it whatever model you are — the ch
 
 Most lodash functions exist in compat, but `chain`, `tap`, `thru`, `mixin`, and `sortedUniq` exist **nowhere**. When later moving to strict, remember that `get`, `set`, `has`, `castArray`, `defaultsDeep`, `toArray`, `assign`, and `defaults` have to stay on compat.
 
+Single-function packages count too. A codebase that imports `lodash.orderby`, `lodash.omit`, or `lodash.throttle` — rather than `lodash` itself — is doing the same thing under a different specifier, and migrates the same way. Grep for `lodash` in `package.json`, not just for `from 'lodash'` in source.
+
 ## Step 1 — Resolve every entry point (required, do this first)
 
-Collect the lodash functions in the input, then run this **from the project root** (it resolves through the project's own `node_modules`; running it from `/tmp` fails):
+Collect the lodash functions in the input, then run this **from the package directory that depends on es-toolkit** — in a monorepo that is the workspace package, not the repo root, where nothing resolves. If the repo has a `.pnp.cjs` (Yarn PnP), run `yarn node` instead of `node`; plain `node` cannot resolve anything there.
 
 ```bash
 node --input-type=module -e "
 const names = ['get','chunk','map','chain'];
 const entries = ['es-toolkit','es-toolkit/fp','es-toolkit/server','es-toolkit/compat'];
-const mods = await Promise.all(entries.map(e => import(e)));
+const mods = await Promise.all(entries.map(e => import(e).then(m => m, () => null)));
+if (!mods[0]) {
+  console.error('es-toolkit is not resolvable from ' + process.cwd() + ' — run this inside the package that depends on it.');
+  process.exit(1);
+}
 for (const n of names) {
-  const found = entries.filter((_, i) => n in mods[i]);
+  const found = entries.filter((_, i) => mods[i] && n in mods[i]);
   console.log(n.padEnd(16), found.join(', ') || 'NOT AVAILABLE');
 }
+const missing = entries.filter((_, i) => !mods[i]);
+if (missing.length) console.log('(not in this version: ' + missing.join(', ') + ')');
 "
 ```
 
 Replace `names` with the actual function names. The output is authoritative — it reflects the version the user installed, so it never goes stale.
+
+Entry points were added over time (`server` in 1.47.0, `fp` in 1.49.0), so older installs legitimately lack some of them — that is why each import is tolerated individually rather than through a bare `Promise.all`, which throws `ERR_PACKAGE_PATH_NOT_EXPORTED` and takes the whole check down.
 
 **A function can appear in more than one entry point**, so read the whole list rather than the first hit. For example `map` and `filter` are in both `fp` and `compat` but not in strict, `sum` is in strict and `compat` but not `fp`, and `chunk` is in all three.
 
@@ -67,10 +77,10 @@ If a function reports `NOT AVAILABLE`, do not invent a replacement. Say it is un
 
 While moving onto compat, behavior is unchanged, so this step can be skipped. Do it when the user wants to move a specific call site to strict.
 
-A function present in **both** strict and compat is not interchangeable between them. Read the signature and JSDoc from the installed package:
+A function present in **both** strict and compat is not interchangeable between them. Read the signature and JSDoc from the installed package — locate it with `node -e "console.log(require.resolve('es-toolkit/package.json'))"` rather than assuming `node_modules`, which does not exist under Yarn PnP:
 
-- `./node_modules/es-toolkit/dist/{category}/{fn}.d.ts` — strict
-- `./node_modules/es-toolkit/dist/compat/{category}/{fn}.d.ts` — compat
+- `<pkg>/dist/{category}/{fn}.d.ts` — strict
+- `<pkg>/dist/compat/{category}/{fn}.d.ts` — compat
 
 Both carry full JSDoc with `@example`. Compare against how the user actually calls the function, and report any option or edge case that differs. Real examples:
 
@@ -105,7 +115,9 @@ Do not run this automatically. Offer it, and run it on request.
 
 **Do not install anything.** Measuring with a bundler is more accurate, but it leaves a dependency and a lockfile change in the user's project. Instead, walk the lodash and es-toolkit files already installed. The script below uses only Node built-ins.
 
-Write it as a temporary file **in the project root**, run it, then delete it. Replace `FNS` and `FROM` with the actual migration.
+Write it as a temporary file **in the package directory that depends on es-toolkit**, run it, then delete it. Under Yarn PnP run it with `yarn node` — the script resolves the package location rather than assuming `node_modules`, so it works inside PnP's zips, but plain `node` cannot start there.
+
+Replace `FNS` and `FROM` with the actual migration. `FROM` also accepts single-function packages like `lodash.orderby`, which are common in codebases that never imported `lodash` wholesale.
 
 ```js
 import { readdirSync, readFileSync, statSync } from 'node:fs';
@@ -115,7 +127,7 @@ import path from 'node:path';
 const require = createRequire(import.meta.url);
 
 const FNS = ['chunk', 'debounce', 'get'];
-const FROM = 'lodash';
+const FROM = 'lodash'; // 'lodash', 'lodash-es', or 'lodash.orderby' style packages
 
 const size = f => {
   try {
@@ -138,10 +150,11 @@ const resolveRel = (from, spec) => {
     ].find(c => size(c)) ?? null
   );
 };
+const stripComments = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 function walk(file, seen = new Set()) {
   if (!file || seen.has(file) || !size(file)) return seen;
   seen.add(file);
-  const src = readFileSync(file, 'utf8');
+  const src = stripComments(readFileSync(file, 'utf8'));
   for (const [, spec] of [
     ...src.matchAll(/from\s*["']([^"']+)["']/g),
     ...src.matchAll(/require\(\s*["']([^"']+)["']\s*\)/g),
@@ -156,30 +169,54 @@ function walk(file, seen = new Set()) {
   }
   return seen;
 }
-function findDist(root, fn, compat) {
+// dist는 해석 결과에서 유도 (하드코딩 금지 — PnP zip 안에서도 동작)
+let dist;
+try {
+  dist = path.join(path.dirname(require.resolve('es-toolkit/package.json')), 'dist');
+} catch {
+  console.error(`es-toolkit is not resolvable from ${process.cwd()} — run this inside the package that depends on it.`);
+  process.exit(1);
+}
+if (!size(path.join(dist, 'index.mjs')) && !readdirSync(dist).length) {
+  console.error('es-toolkit dist not readable');
+  process.exit(1);
+}
+
+function findDist(fn, compat) {
   const hits = [];
   (function rec(d) {
     for (const e of readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, e.name);
       if (e.isDirectory()) rec(p);
-      else if (e.name === `${fn}.mjs`) hits.push(p);
+      else if (e.name === `${fn}.mjs`) hits.push(path.relative(dist, p));
     }
-  })(root);
-  return compat ? hits.find(h => h.includes('/compat/')) : hits.find(h => !h.includes('/compat/'));
+  })(dist);
+  const pick = compat
+    ? hits.find(h => h.startsWith('compat' + path.sep))
+    : hits.find(h => !h.startsWith('compat' + path.sep) && !h.startsWith('fp' + path.sep));
+  return pick ? path.join(dist, pick) : null;
 }
-const sum = s => [...s].reduce((n, f) => n + size(f), 0);
-const dist = path.resolve('node_modules/es-toolkit/dist');
 
 const before = new Set(),
   compat = new Set(),
   strict = new Set();
-const stillCompat = [];
+const stillCompat = [],
+  outside = new Set();
+const projectRoot = process.cwd();
 for (const fn of FNS) {
-  try {
-    walk(require.resolve(`${FROM}/${fn}.js`)).forEach(f => before.add(f));
-  } catch {}
-  const c = findDist(dist, fn, true),
-    s = findDist(dist, fn, false);
+  let entry = null;
+  for (const cand of [`${FROM}/${fn}.js`, FROM]) {
+    try {
+      entry = require.resolve(cand);
+      break;
+    } catch {}
+  }
+  if (entry) {
+    if (!entry.startsWith(projectRoot)) outside.add(entry);
+    walk(entry).forEach(f => before.add(f));
+  }
+  const c = findDist(fn, true),
+    s = findDist(fn, false);
   if (c) walk(c).forEach(f => compat.add(f));
   if (s) walk(s).forEach(f => strict.add(f));
   else {
@@ -187,17 +224,32 @@ for (const fn of FNS) {
     if (c) walk(c).forEach(f => strict.add(f));
   }
 }
+const sum = st => [...st].reduce((n, f) => n + size(f), 0);
 const b = sum(before),
   c = sum(compat),
   s = sum(strict);
-const pct = n => (100 - (n / b) * 100).toFixed(0);
-const row = (label, set, bytes) =>
-  `${label.padEnd(26)} ${String(set.size).padStart(3)} files  ${bytes.toLocaleString().padStart(9)} B`;
+if (!b) {
+  console.error(`Could not find ${FROM} in this project — check FROM, or run inside the package that depends on it.`);
+  process.exit(1);
+}
+if (outside.size) {
+  console.warn(`WARNING: ${FROM} resolved OUTSIDE this project:`);
+  for (const f of outside) console.warn(`  ${f}`);
+  console.warn('  This project may not actually depend on it. Numbers below are meaningless if so.\n');
+}
+const pct = n => {
+  const p = 100 - (n / b) * 100;
+  return `${p >= 0 ? '-' : '+'}${Math.abs(p).toFixed(0)}%`;
+};
+const row = (l, st, by) => `${l.padEnd(26)} ${String(st.size).padStart(3)} files  ${by.toLocaleString().padStart(9)} B`;
 console.log(row(`AS-IS   ${FROM}`, before, b));
-console.log(row('TO-BE   es-toolkit/compat', compat, c) + `   -${pct(c)}%`);
+console.log(row('TO-BE   es-toolkit/compat', compat, c) + `   ${pct(c)}`);
 console.log('');
 console.log('If you later move on to es-toolkit (strict):');
-console.log(row('        es-toolkit', strict, s) + `   -${pct(s)}%  (${(c - s).toLocaleString()} B more)`);
+console.log(
+  row('        es-toolkit', strict, s) +
+    `   ${pct(s)}  (${Math.abs(c - s).toLocaleString()} B ${c >= s ? 'more' : 'LESS'})`
+);
 if (stillCompat.length) console.log(`        note: these stay on compat: ${stillCompat.join(', ')}`);
 ```
 
