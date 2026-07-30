@@ -1,5 +1,5 @@
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
-import { iteratee as iterateeToolkit } from '../compat.ts';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 import { identity } from '../function/identity.ts';
 import { toInteger } from '../util/toInteger.ts';
 
