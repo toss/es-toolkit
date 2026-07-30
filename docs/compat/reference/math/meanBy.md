@@ -78,6 +78,18 @@ meanBy(users, { active: true });
 // Returns: 0.6666666 (2 out of 3 users are active)
 ```
 
+`undefined` values are ignored when summing, but they are still counted in the divisor.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([{ a: 1 }, {}], 'a');
+// Returns: 0.5 ((1) / 2, undefined ignored)
+
+meanBy([{}, {}], 'a');
+// Returns: NaN
+```
+
 Empty arrays return NaN.
 
 ```typescript
