@@ -4,6 +4,9 @@
 
 Released on June 26th, 2026.
 
+- Added `memoizePromise` for sharing in-flight Promise calls and caching their
+  resolved values without retaining settled Promise objects.
+  ([#1910](https://github.com/toss/es-toolkit/pull/1910))
 - Added the `es-toolkit/fp` entrypoint with data-last, pipeable utilities,
   documentation, benchmarks, and bundle-size checks. ([#1781])
 - Added a broad set of array utilities to `es-toolkit/fp`, covering slicing,
@@ -20,8 +23,8 @@ Released on June 26th, 2026.
   references. ([#1785], [#1786], [#1788], [#1790], [#1791], [#1792], [#1793],
   [#1795], [#1800])
 
-We sincerely thank @Antoliny0919, @D-Sketon, @eunwoo-levi, and @raon0211 for
-their contributions. We appreciate your great efforts!
+We sincerely thank @Antoliny0919, @D-Sketon, @eunwoo-levi, @hazrid93, and
+@raon0211 for their contributions. We appreciate your great efforts!
 
 ## Version v1.48.1
 
