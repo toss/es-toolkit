@@ -109,11 +109,11 @@ Edit the actual files when the user pointed at code. Afterwards, verify: run the
 
 For a large migration, mention that a bundler alias (`resolve.alias: { lodash: 'es-toolkit/compat' }`) switches everything at once with no source changes, and that ESLint's `no-restricted-imports` then surfaces whatever is left.
 
-## Step 4 — Estimate the size saving (only if the user asks)
+## Step 4 — Measure the size saving (only if the user asks)
 
 Do not run this automatically. Offer it, and run it on request.
 
-**Do not install anything.** Measuring with a bundler is more accurate, but it leaves a dependency and a lockfile change in the user's project. Instead, scan the source for lodash usage and walk the packages already installed. The script below uses only Node built-ins and takes no configuration — it detects which functions the project actually uses.
+**Install nothing.** The script below detects which lodash functions the project actually uses, then measures with the esbuild **already present** in the project — most app projects have one as a transitive dependency of Vite, Vitest, or similar. That gives real minified and gzipped numbers in well under a second. If no esbuild is resolvable it falls back to summing source bytes and says so.
 
 Write it as a temporary file **in the package directory that depends on es-toolkit**, run it, then delete it. Under Yarn PnP run it with `yarn node`. It anchors module resolution to the working directory, so running it from anywhere else measures the wrong packages.
 
@@ -122,30 +122,13 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { gzipSync } from 'node:zlib';
 
 // 해석 기준은 실행 위치(cwd) — 스크립트 파일 위치가 아니다
 const require = createRequire(path.join(process.cwd(), '__estimator__.js'));
-
 const SRC_DIRS = ['src', 'app', 'pages', 'lib', 'components'];
 const SKIP = new Set(['node_modules', '.next', 'dist', 'build', '.git', 'coverage']);
-
-const size = f => {
-  try {
-    const s = statSync(f);
-    return s.isFile() ? s.size : 0;
-  } catch {
-    return 0;
-  }
-};
-const stripComments = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-const repoRoot = (() => {
-  let cur = process.cwd();
-  while (cur !== path.dirname(cur)) {
-    if (existsSync(path.join(cur, '.git')) || existsSync(path.join(cur, 'pnpm-workspace.yaml'))) return cur;
-    cur = path.dirname(cur);
-  }
-  return process.cwd();
-})();
+const strip = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 
 // ── 1. 소스에서 실제 lodash 사용 수집
 function collect(dir, out = []) {
@@ -158,29 +141,28 @@ function collect(dir, out = []) {
   }
   return out;
 }
-const usage = new Map();
+const usage = new Map(); // fn -> specifier
 const unmeasurable = new Set();
 for (const f of SRC_DIRS.flatMap(d => collect(path.resolve(d)))) {
-  const src = stripComments(readFileSync(f, 'utf8'));
+  const src = strip(readFileSync(f, 'utf8'));
   for (const [, spec] of [
     ...src.matchAll(/from\s*["'](lodash[.\/][^"']*)["']/g),
     ...src.matchAll(/require\(\s*["'](lodash[.\/][^"']*)["']\s*\)/g),
   ]) {
     const m = spec.match(/^lodash[.\/](.+)$/);
-    if (m) usage.set(m[1], (usage.get(m[1]) ?? new Set()).add(spec));
+    if (m) usage.set(m[1], spec);
   }
   for (const [, names] of [
-    ...src.matchAll(/import\s*\{([^}]+)\}\s*from\s*["']lodash(?:-es)?["']/g),
-    ...src.matchAll(/\{([^}]+)\}\s*=\s*require\(\s*["']lodash(?:-es)?["']\s*\)/g),
+    ...src.matchAll(/import\s*\{([^}]+)\}\s*from\s*["'](lodash(?:-es)?)["']/g),
+    ...src.matchAll(/\{([^}]+)\}\s*=\s*require\(\s*["'](lodash(?:-es)?)["']\s*\)/g),
   ])
     for (const n of names.split(',')) {
       const name = n
         .trim()
         .split(/\s+as\s+/)[0]
         .trim();
-      if (name) usage.set(name, (usage.get(name) ?? new Set()).add('lodash'));
+      if (name) usage.set(name, src.includes("'lodash-es'") ? 'lodash-es' : 'lodash');
     }
-  // 측정 불가 형태는 조용히 넘기지 않고 알린다
   if (
     /import\s+(?:\w+\s*,\s*)?(?:\*\s*as\s+\w+|\w+)\s+from\s*["']lodash(?:-es)?["']/.test(src) ||
     /export\s*\{[^}]*\}\s*from\s*["']lodash(?:-es)?["']/.test(src) ||
@@ -188,20 +170,9 @@ for (const f of SRC_DIRS.flatMap(d => collect(path.resolve(d)))) {
   )
     unmeasurable.add(path.relative(process.cwd(), f));
 }
-
-let dist, compatMod;
-try {
-  dist = path.join(path.dirname(require.resolve('es-toolkit/package.json')), 'dist');
-  compatMod = await import(pathToFileURL(require.resolve('es-toolkit/compat')).href);
-} catch {
-  console.error(`es-toolkit is not resolvable from ${process.cwd()} — run this inside the package that depends on it.`);
-  process.exit(1);
-}
-const canon = n => Object.keys(compatMod).find(k => k.toLowerCase() === n.toLowerCase()) ?? n;
-
 if (unmeasurable.size) {
-  console.warn('NOTE: these files use a lodash import form this script cannot measure');
-  console.warn('      (default / namespace / re-export / dynamic import) — excluded from the numbers:');
+  console.warn('NOTE: import forms this script cannot follow (default / namespace / re-export /');
+  console.warn('      dynamic) — excluded from the numbers, so the estimate is partial:');
   for (const f of unmeasurable) console.warn(`      ${f}`);
   console.warn('');
 }
@@ -210,136 +181,171 @@ if (!usage.size) {
   process.exit(1);
 }
 
-const resolveRel = (from, spec) => {
-  const base = path.resolve(path.dirname(from), spec);
-  return (
-    [
-      base,
-      base + '.mjs',
-      base + '.js',
-      base.replace(/\.js$/, '.mjs'),
-      path.join(base, 'index.mjs'),
-      path.join(base, 'index.js'),
-    ].find(c => size(c)) ?? null
-  );
-};
-function walk(file, seen = new Set()) {
-  if (!file || seen.has(file) || !size(file)) return seen;
-  seen.add(file);
-  const src = stripComments(readFileSync(file, 'utf8'));
-  for (const [, spec] of [
-    ...src.matchAll(/from\s*["']([^"']+)["']/g),
-    ...src.matchAll(/require\(\s*["']([^"']+)["']\s*\)/g),
-    ...src.matchAll(/import\s*["']([^"']+)["']/g),
-  ]) {
-    if (spec.startsWith('.')) walk(resolveRel(file, spec), seen);
-    else {
-      try {
-        walk(require.resolve(spec), seen);
-      } catch {}
-    }
-  }
-  return seen;
-}
-function findDist(fn, compat) {
-  const hits = [];
-  (function rec(d) {
-    for (const e of readdirSync(d, { withFileTypes: true })) {
-      const p = path.join(d, e.name);
-      if (e.isDirectory()) rec(p);
-      else if (e.name === `${fn}.mjs`) hits.push(path.relative(dist, p));
-    }
-  })(dist);
-  const pick = compat
-    ? hits.find(h => h.startsWith('compat' + path.sep))
-    : hits.find(h => !h.startsWith('compat' + path.sep) && !h.startsWith('fp' + path.sep));
-  return pick ? path.join(dist, pick) : null;
-}
-
-const before = new Set(),
-  compat = new Set(),
-  strict = new Set();
-const entries = [],
-  outside = new Set(),
-  stillCompat = [],
-  notFound = [];
-for (const [raw, specs] of usage) {
-  const fn = canon(raw);
-  let entry = null;
-  for (const spec of specs) {
-    try {
-      entry = require.resolve(spec);
-      break;
-    } catch {}
-  }
-  if (entry) {
-    entries.push(entry);
-    if (!entry.startsWith(repoRoot)) outside.add(entry);
-    walk(entry).forEach(f => before.add(f));
-  }
-  const c = findDist(fn, true),
-    s = findDist(fn, false);
-  if (!c && !s) {
-    notFound.push(fn);
-    continue;
-  }
-  if (c) walk(c).forEach(f => compat.add(f));
-  if (s) walk(s).forEach(f => strict.add(f));
-  else {
-    stillCompat.push(fn);
-    if (c) walk(c).forEach(f => strict.add(f));
-  }
-}
-const sum = st => [...st].reduce((n, f) => n + size(f), 0);
-const b = sum(before),
-  c = sum(compat),
-  s = sum(strict);
-console.log(`detected: ${[...usage.keys()].map(canon).join(', ')}`);
-console.log('AS-IS entry points:');
-for (const e of entries) console.log(`  ${e.replace(repoRoot, '<repo>')}`);
-console.log('');
-if (!b) {
-  console.error('Could not locate the lodash packages from this directory.');
+// ── 2. es-toolkit 진입점 확인
+let compatMod, strictMod;
+try {
+  compatMod = await import(pathToFileURL(require.resolve('es-toolkit/compat')).href);
+  strictMod = await import(pathToFileURL(require.resolve('es-toolkit')).href);
+} catch {
+  console.error(`es-toolkit is not resolvable from ${process.cwd()} — run this inside the package that depends on it.`);
   process.exit(1);
 }
-if (outside.size) {
-  console.warn('WARNING: resolved OUTSIDE this repository — this project may not actually depend on it:');
-  for (const f of outside) console.warn(`  ${f}`);
-  console.warn('');
+const canon = n => Object.keys(compatMod).find(k => k.toLowerCase() === n.toLowerCase()) ?? n;
+const fns = [...usage.keys()].map(canon);
+const missing = fns.filter(f => !(f in compatMod));
+const inStrict = fns.filter(f => f in strictMod);
+const onlyCompat = fns.filter(f => f in compatMod && !(f in strictMod));
+
+console.log(`detected: ${fns.join(', ')}`);
+if (missing.length) console.log(`NOT AVAILABLE in es-toolkit: ${missing.join(', ')} (keep lodash or rewrite)`);
+const usable = fns.filter(f => f in compatMod);
+if (!usable.length) process.exit(0);
+
+// ── 3. 측정: 이미 설치된 esbuild가 있으면 정확히, 없으면 파일 크기로 근사
+let esbuild = null;
+try {
+  esbuild = await import(pathToFileURL(require.resolve('esbuild')).href);
+} catch {}
+
+const importsFor = (mod, names) =>
+  names.map(n => `import { ${n} } from '${mod}';`).join('') + `console.log(${names.join(',')})`;
+const asIsScript =
+  [...usage]
+    .filter(([k]) => usable.includes(canon(k)))
+    .map(([k, spec]) =>
+      spec.startsWith('lodash.') || spec.includes('/')
+        ? `import _${canon(k)} from '${spec}';`
+        : `import { ${canon(k)} } from '${spec}';`
+    )
+    .join('') +
+  `console.log(${[...usage]
+    .filter(([k]) => usable.includes(canon(k)))
+    .map(([k, spec]) => (spec.startsWith('lodash.') || spec.includes('/') ? '_' : '') + canon(k))
+    .join(',')})`;
+
+if (esbuild) {
+  const build = async script => {
+    const out = await esbuild.build({
+      stdin: { contents: script, resolveDir: process.cwd(), sourcefile: 'entry.js', loader: 'js' },
+      write: false,
+      minify: true,
+      bundle: true,
+      format: 'esm',
+      logLevel: 'silent',
+    });
+    const raw = Buffer.from(out.outputFiles[0].contents);
+    return { min: raw.byteLength, gz: gzipSync(raw).byteLength };
+  };
+  const rows = [];
+  try {
+    rows.push(['AS-IS   lodash', await build(asIsScript)]);
+  } catch (e) {
+    console.error('could not bundle the lodash side:', String(e).split('\n')[0]);
+    process.exit(1);
+  }
+  rows.push(['TO-BE   es-toolkit/compat', await build(importsFor('es-toolkit/compat', usable))]);
+  if (inStrict.length === usable.length)
+    rows.push(['        es-toolkit', await build(importsFor('es-toolkit', usable))]);
+  const base = rows[0][1].min,
+    baseGz = rows[0][1].gz;
+  console.log('');
+  for (const [label, r] of rows) {
+    const pct = label.startsWith('AS-IS')
+      ? ''
+      : `   -${(100 - (r.min / base) * 100).toFixed(0)}% min / -${(100 - (r.gz / baseGz) * 100).toFixed(0)}% gzip`;
+    console.log(`${label.padEnd(26)} ${String(r.min).padStart(8)} B min   ${String(r.gz).padStart(7)} B gzip${pct}`);
+  }
+  if (onlyCompat.length) console.log(`        these stay on compat: ${onlyCompat.join(', ')}`);
+  console.log('\nBundled with the esbuild already present in this project (nothing installed).');
+  console.log('Real numbers, though for an isolated entry point — a full app shares deps and splits chunks.');
+} else {
+  const size = f => {
+    try {
+      const s = statSync(f);
+      return s.isFile() ? s.size : 0;
+    } catch {
+      return 0;
+    }
+  };
+  const rel = (from, spec) => {
+    const b = path.resolve(path.dirname(from), spec);
+    return (
+      [b, b + '.mjs', b + '.js', b.replace(/\.js$/, '.mjs'), path.join(b, 'index.mjs'), path.join(b, 'index.js')].find(
+        c => size(c)
+      ) ?? null
+    );
+  };
+  const walk = (f, seen = new Set()) => {
+    if (!f || seen.has(f) || !size(f)) return seen;
+    seen.add(f);
+    const src = strip(readFileSync(f, 'utf8'));
+    for (const [, s] of [
+      ...src.matchAll(/from\s*["']([^"']+)["']/g),
+      ...src.matchAll(/require\(\s*["']([^"']+)["']\s*\)/g),
+    ]) {
+      if (s.startsWith('.')) walk(rel(f, s), seen);
+      else {
+        try {
+          walk(require.resolve(s), seen);
+        } catch {}
+      }
+    }
+    return seen;
+  };
+  const dist = path.join(path.dirname(require.resolve('es-toolkit/package.json')), 'dist');
+  const find = (fn, compat) => {
+    const hits = [];
+    (function rec(d) {
+      for (const e of readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) rec(p);
+        else if (e.name === `${fn}.mjs`) hits.push(path.relative(dist, p));
+      }
+    })(dist);
+    const pick = compat
+      ? hits.find(h => h.startsWith('compat' + path.sep))
+      : hits.find(h => !h.startsWith('compat' + path.sep) && !h.startsWith('fp' + path.sep));
+    return pick ? path.join(dist, pick) : null;
+  };
+  const sum = s => [...s].reduce((n, f) => n + size(f), 0);
+  const before = new Set(),
+    compat = new Set(),
+    strict = new Set();
+  for (const [k, spec] of usage) {
+    const fn = canon(k);
+    if (!usable.includes(fn)) continue;
+    try {
+      walk(require.resolve(spec)).forEach(f => before.add(f));
+    } catch {}
+    const c = find(fn, true),
+      s = find(fn, false);
+    if (c) walk(c).forEach(f => compat.add(f));
+    walk(s ?? c).forEach(f => strict.add(f));
+  }
+  const b = sum(before),
+    c = sum(compat),
+    s = sum(strict);
+  if (!b) {
+    console.error('Could not locate the lodash packages from this directory.');
+    process.exit(1);
+  }
+  console.log('');
+  console.log(`AS-IS   lodash              ${String(b).padStart(8)} B`);
+  console.log(`TO-BE   es-toolkit/compat   ${String(c).padStart(8)} B   -${(100 - (c / b) * 100).toFixed(0)}%`);
+  console.log(`        es-toolkit          ${String(s).padStart(8)} B   -${(100 - (s / b) * 100).toFixed(0)}%`);
+  if (onlyCompat.length) console.log(`        these stay on compat: ${onlyCompat.join(', ')}`);
+  console.log('\nesbuild is not installed here, so these are raw source bytes, not shipped size.');
+  console.log('Quote the percentages (within ~5pp of a real bundle in testing), never the byte counts.');
 }
-const pct = n => {
-  const p = 100 - (n / b) * 100;
-  return `${p >= 0 ? '-' : '+'}${Math.abs(p).toFixed(0)}%`;
-};
-const row = (l, st, by) => `${l.padEnd(26)} ${String(st.size).padStart(3)} files  ${by.toLocaleString().padStart(9)} B`;
-console.log(row('AS-IS   lodash', before, b));
-console.log(row('TO-BE   es-toolkit/compat', compat, c) + `   ${pct(c)}`);
-console.log('');
-console.log('If you later move on to es-toolkit (strict):');
-console.log(
-  row('        es-toolkit', strict, s) +
-    `   ${pct(s)}  (${Math.abs(c - s).toLocaleString()} B ${c >= s ? 'more' : 'LESS'})`
-);
-if (stillCompat.length) console.log(`        note: these stay on compat: ${stillCompat.join(', ')}`);
-if (notFound.length) console.log(`        NOT AVAILABLE in es-toolkit: ${notFound.join(', ')}`);
-console.log('');
-console.log('These are raw source bytes, not shipped size. Trust the percentages (within ~5pp of a');
-console.log('real bundle in testing); the absolute byte counts run 2-5x high, so do not quote them.');
 ```
 
-Read the numbers this way:
+Reading the output:
 
-- **Percentages are reliable.** Checked against real esbuild bundles they landed within ~5pp (script −73% vs bundled −69% on one service; −97% vs −96% on another).
-- **Absolute bytes are not.** They run 2–5x high because they count unminified source. Never quote them as "you will save N bytes" — quote the percentage.
-- **The AS-IS entry points are printed for a reason.** A bare `import { chunk } from 'lodash'` resolves to lodash's single 546KB bundle, and that is correct: CJS lodash does not tree-shake, so a bundler really does pull the whole thing. Deep imports (`lodash/chunk.js`) and single-function packages (`lodash.orderby`) resolve to just their own files. Seeing which one applies explains the size immediately.
+- **With esbuild** the byte counts are real shipped sizes; report the gzip figure, since that is what users download. It measures an isolated entry point, so a full app — sharing dependencies across modules and splitting chunks — will differ, but the ratio holds.
+- **Without esbuild** only the percentages are trustworthy (they landed within ~5pp of a bundled measurement in testing: −73% vs −69% on one service). The absolute bytes run several times high, so do not quote them.
+- Functions absent from es-toolkit are named rather than silently skipped, as are import forms the scanner cannot follow (`import _ from 'lodash'`, namespace imports, re-exports, dynamic `import()`). If those appear, say the estimate is partial.
 
-Import forms the scanner cannot follow — `import _ from 'lodash'`, `import * as ld`, re-exports, dynamic `import()` — are reported as excluded rather than silently dropped. If they appear, say the estimate is partial.
-
-### The accurate number comes from the project's own build
-
-The script counts only the files those functions pull in. A real app shares dependencies across modules and splits chunks, so tell the user to **re-run their own production build and compare output sizes** for the number that actually matters.
-
-**Warn them about `external` first.** If the project treats dependencies as external — library builds, SSR/server bundles, or an explicit `external`/`rollupOptions.external` entry — then neither lodash nor es-toolkit lands in the output. The comparison then shows no difference, or even a larger bundle, and it means nothing. Have them drop the external setting for the test build so the dependency is actually inlined, then compare.
+Do not ask the user to run their own production build for a better number. It takes far longer and is rarely worth it — but if they do compare builds themselves, warn them first that **dependencies marked external never land in the output**, so a before/after comparison of a library build, an SSR bundle, or anything with `rollupOptions.external` will show no difference or an apparent regression until that setting is dropped.
 
 Runtime benchmarks are usually not worth it: for typical call volumes the difference is unmeasurable in a real app, and microbenchmarks mislead. Only run one if the user explicitly asks.
 
@@ -353,7 +359,7 @@ Only the import path changed; the calling code is untouched, and `es-toolkit/com
 
 **2. How much smaller it gets** (if measured)
 
-Show AS-IS / TO-BE as percentages. Do not present the raw byte counts as the saving — they run high, as the script's own output says.
+Show AS-IS / TO-BE. If esbuild measured it, the gzip figure is the one worth quoting — that is what users download. If it fell back to source bytes, give the percentage only.
 
 **3. What they can do next**
 
