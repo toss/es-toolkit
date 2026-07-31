@@ -92,12 +92,12 @@ describe('find', () => {
     expect(find(objects, { b: 2 }, 4)).toBe(undefined);
   });
 
-  it('find should coerce `fromIndex` to an integer', () => {
-    const array = [1, 2, 3, 1, 2, 3];
+  it('should truncate non-integer `fromIndex` values like lodash', () => {
+    const array = [10, 20, 30, 40];
 
-    expect(find(array, x => x === 1, 2.7)).toBe(1);
-    expect(find(array, x => x === 1, -2.7)).toBe(undefined);
-    expect(find(array, x => x === 1, -0.5)).toBe(1);
+    expect(find(array, value => value > 0, 1.5)).toBe(20);
+    expect(find(array, value => value > 0, -1.5)).toBe(40);
+    expect(find(array, value => value > 0, NaN)).toBe(10);
   });
 
   it('should return `undefined` when provided `null` or `undefined`', () => {
@@ -120,6 +120,12 @@ describe('find', () => {
     expect(find(args, i => i === 3)).toBe(3);
   });
 
+  it('should not treat the `length` property of a plain array-like object as an element', () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+
+    expect(find(arrayLike, (value: unknown) => value === 2)).toBe(undefined);
+  });
+
   it('should use identity when no _doesMatch is provided', () => {
     expect(find([0, 1, 2])).toBe(1);
     expect(find([false, true, false])).toBe(true);
@@ -137,12 +143,9 @@ describe('find', () => {
     expect(find({ a: 1, b: 2, c: 3 }, true)).toBe(undefined);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    expect(find({ a: 1, b: 2, c: 3 }, false)).toBe(undefined);
-    expect(find([1, 2, 3], true)).toBe(undefined);
-    expect(find([1, 2, 3], false)).toBe(undefined);
-
-    const objects = [{ true: 'a' }, { true: 'b' }];
-    expect(find(objects, true)).toBe(objects[0]);
+    expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
+    expect(() => find([1, 2, 3], true)).toThrow('doesMatch is not a function');
+    expect(() => find([1, 2, 3], false)).toThrow('doesMatch is not a function');
   });
 
   it('should return undefined when object matcher has only undefined values for keys', () => {
