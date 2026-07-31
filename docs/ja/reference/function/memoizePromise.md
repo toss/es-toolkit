@@ -62,9 +62,9 @@ await memoizedFetch({ id: 1, name: 'Grace' }); // キャッシュされた結果
 
 - `func` (`F`): メモ化する Promise を返す関数です。引数を取らないか、1つの引数だけを取る必要があります。
 - `options` (`object`, オプション): メモ化のオプションです。
-  - `cache` (`MemoizeCache<any, Awaited<ReturnType<F>>>`, オプション): 解決された値を保存するキャッシュです。デフォルトは新しい `Map` です。
+  - `cache` (`MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>`, オプション): 処理中の `Promise` と解決された値を保存するキャッシュです。デフォルトは新しい `Map` です。
   - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, オプション): 引数からキャッシュキーを生成する関数です。デフォルトでは引数自体をキーとして使用します。
 
 #### 戻り値
 
-(`F & { cache: MemoizeCache<any, Awaited<ReturnType<F>>> }`): 解決された値を保持する `cache` プロパティが追加されたメモ化関数です。
+(`F & { cache: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>> }`): 処理中の `Promise` または解決された値を保持する `cache` プロパティが追加されたメモ化関数です。

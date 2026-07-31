@@ -62,9 +62,9 @@ await memoizedFetch({ id: 1, name: 'Grace' }); // 使用缓存的结果
 
 - `func` (`F`): 要记忆化的 Promise 返回函数。必须不接收参数或只接收一个参数。
 - `options` (`object`, 可选): 记忆化选项。
-  - `cache` (`MemoizeCache<any, Awaited<ReturnType<F>>>`, 可选): 用于保存解决后值的缓存。默认为新的 `Map`。
+  - `cache` (`MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>`, 可选): 用于保存进行中的 `Promise` 和解决后值的缓存。默认为新的 `Map`。
   - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, 可选): 从参数生成缓存键的函数。默认使用参数本身作为键。
 
 #### 返回值
 
-(`F & { cache: MemoizeCache<any, Awaited<ReturnType<F>>> }`): 返回带有 `cache` 属性的记忆化函数,其中包含解决后的值。
+(`F & { cache: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>> }`): 返回带有 `cache` 属性的记忆化函数,其中包含进行中的 `Promise` 或解决后的值。

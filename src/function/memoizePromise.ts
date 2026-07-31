@@ -1,7 +1,7 @@
 import type { MemoizeCache } from './memoize.ts';
 
 type MemoizedPromise<F extends (arg: any) => Promise<any>> = F & {
-  cache: MemoizeCache<any, Awaited<ReturnType<F>>>;
+  cache: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>;
 };
 
 /**
@@ -18,9 +18,9 @@ type MemoizedPromise<F extends (arg: any) => Promise<any>> = F & {
  * @template F - The async function to memoize.
  * @param fn - The async function to memoize.
  * @param [options={}] - Optional configuration.
- * @param [options.cache] - The cache object used to store resolved values. Defaults to a new `Map`.
+ * @param [options.cache] - The cache used to store in-flight Promises and resolved values. Defaults to a new `Map`.
  * @param [options.getCacheKey] - An optional function to generate a unique cache key for each argument.
- * @returns The memoized async function with an additional `cache` property that exposes the cache of resolved values.
+ * @returns The memoized async function with an additional `cache` property that exposes its cache.
  *
  * @example
  * const fetchUser = async (id: number) => api.load(id);
@@ -43,36 +43,32 @@ type MemoizedPromise<F extends (arg: any) => Promise<any>> = F & {
 export function memoizePromise<F extends (arg: any) => Promise<any>>(
   fn: F,
   options: {
-    cache?: MemoizeCache<any, Awaited<ReturnType<F>>>;
+    cache?: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>;
     getCacheKey?: (arg: Parameters<F>[0]) => unknown;
   } = {}
 ): MemoizedPromise<F> {
-  const cache: MemoizeCache<any, Awaited<ReturnType<F>>> = options.cache ?? new Map<unknown, Awaited<ReturnType<F>>>();
+  const cache = options.cache ?? new Map<unknown, ReturnType<F> | Awaited<ReturnType<F>>>();
   const { getCacheKey } = options;
-  const promiseCache = new Map<unknown, ReturnType<F>>();
 
   const memoizedFn = function (this: unknown, arg: Parameters<F>[0]): ReturnType<F> {
     const key = getCacheKey ? getCacheKey(arg) : arg;
-
-    if (promiseCache.has(key)) {
-      return promiseCache.get(key)!;
-    }
 
     if (cache.has(key)) {
       return Promise.resolve(cache.get(key)) as ReturnType<F>;
     }
 
-    const promise = fn
-      .call(this, arg)
-      .then(value => {
+    const promise = fn.call(this, arg).then(
+      value => {
         cache.set(key, value);
         return value;
-      })
-      .finally(() => {
-        promiseCache.delete(key);
-      }) as ReturnType<F>;
+      },
+      error => {
+        cache.delete(key);
+        throw error;
+      }
+    ) as ReturnType<F>;
 
-    promiseCache.set(key, promise);
+    cache.set(key, promise);
 
     return promise;
   };

@@ -7,6 +7,8 @@ describe('memoizePromise', () => {
     const memoized = memoizePromise(fn);
 
     const first = memoized(1);
+    expect(memoized.cache.get(1)).toBe(first);
+
     const second = memoized(1);
 
     expect(second).toBe(first);
@@ -45,7 +47,7 @@ describe('memoizePromise', () => {
   });
 
   it('uses a custom cache', async () => {
-    const cache = new Map<number, string>();
+    const cache = new Map<number, string | Promise<string>>();
     const fn = vi.fn(async (id: number) => `user-${id}`);
     const memoized = memoizePromise(fn, { cache });
 

@@ -62,9 +62,9 @@ await memoizedFetch({ id: 1, name: 'Grace' }); // 캐시된 결과를 사용해�
 
 - `func` (`F`): 메모이제이션할 Promise 반환 함수예요. 인수를 받지 않거나 하나의 인수만 받아야 해요.
 - `options` (`object`, 선택): 메모이제이션 옵션이에요.
-  - `cache` (`MemoizeCache<any, Awaited<ReturnType<F>>>`, 선택): 해결된 값을 저장할 캐시예요. 기본값은 새로운 `Map`이에요.
+  - `cache` (`MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>`, 선택): 진행 중인 `Promise`와 해결된 값을 저장할 캐시예요. 기본값은 새로운 `Map`이에요.
   - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, 선택): 인수에서 캐시 키를 만드는 함수예요. 기본값은 인수 자체를 키로 사용해요.
 
 #### 반환 값
 
-(`F & { cache: MemoizeCache<any, Awaited<ReturnType<F>>> }`): 해결된 값을 포함하는 `cache` 속성이 추가된 메모이제이션 함수예요.
+(`F & { cache: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>> }`): 진행 중인 `Promise` 또는 해결된 값을 포함하는 `cache` 속성이 추가된 메모이제이션 함수예요.

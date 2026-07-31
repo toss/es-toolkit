@@ -62,9 +62,9 @@ await memoizedFetch({ id: 1, name: 'Grace' }); // Uses the cached result
 
 - `func` (`F`): The Promise-returning function to memoize. It must accept zero or one argument.
 - `options` (`object`, optional): Options for configuring memoization.
-  - `cache` (`MemoizeCache<any, Awaited<ReturnType<F>>>`, optional): The cache used to store resolved values. Defaults to a new `Map`.
+  - `cache` (`MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>>`, optional): The cache used to store in-flight Promises and resolved values. Defaults to a new `Map`.
   - `getCacheKey` (`(arg: Parameters<F>[0]) => unknown`, optional): A function that generates a cache key from the argument. By default, the argument itself is used as the key.
 
 #### Returns
 
-(`F & { cache: MemoizeCache<any, Awaited<ReturnType<F>>> }`): The memoized function with a `cache` property containing resolved values.
+(`F & { cache: MemoizeCache<any, ReturnType<F> | Awaited<ReturnType<F>>> }`): The memoized function with a `cache` property containing in-flight Promises or resolved values.
