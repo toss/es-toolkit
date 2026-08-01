@@ -70,6 +70,8 @@ bun add es-toolkit
 
 You can find es-toolkit on CDNs such as [jsdelivr](https://www.jsdelivr.com), [unpkg](https://unpkg.com). We define `_` to include all functions, similar to Lodash.
 
+es-toolkit supports browsers with ES2015 (ES6) support. If you need to support older browsers, transpile your application bundle and include any required polyfills for the JavaScript APIs used by the functions you import.
+
 ::: code-group
 
 ```html [jsdelivr]

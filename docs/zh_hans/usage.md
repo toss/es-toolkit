@@ -70,6 +70,8 @@ bun add es-toolkit
 
 你可以在诸如 [jsdelivr](https://www.jsdelivr.com) 或 [unpkg](https://unpkg.com) 等CDN上找到 es-toolkit。我们将 `_` 定义为包含所有函数，类似于 Lodash。
 
+es-toolkit 支持兼容 ES2015（ES6）的浏览器。如果需要支持更旧的浏览器，请转译你的应用程序包，并为你导入的函数所使用的 JavaScript API 添加必要的 polyfill。
+
 ::: code-group
 
 ```html [jsdelivr]
