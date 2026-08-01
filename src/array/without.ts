@@ -6,9 +6,10 @@ import { difference } from './difference.ts';
  * It correctly excludes `NaN`, as it compares values using [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero).
  *
  * @template T The type of elements in the array.
+ * @template V The values to exclude.
  * @param array - The array to filter.
  * @param values - The values to exclude.
- * @returns A new array without the specified values.
+ * @returns A new array without the specified values. Literal values are also excluded from the return type.
  *
  * @example
  * // Removes the specified values from the array
@@ -20,6 +21,10 @@ import { difference } from './difference.ts';
  * without(['a', 'b', 'c', 'a'], 'a');
  * // Returns: ['b', 'c']
  */
+export function without<T, const V extends readonly unknown[]>(
+  array: readonly T[],
+  ...values: V
+): Array<number extends V['length'] ? T : Exclude<T, V[number]>>;
 export function without<T>(array: readonly T[], ...values: T[]): T[] {
   return difference(array, values);
 }

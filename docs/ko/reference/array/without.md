@@ -33,6 +33,16 @@ without([1, NaN, 3, NaN, 5], NaN);
 // Returns: [1, 3, 5]
 ```
 
+입력이 읽기 전용 리터럴 배열이면 TypeScript는 반환되는 요소 타입에서도 지정한 리터럴 값을 제외해요.
+
+```typescript
+import { without } from 'es-toolkit/array';
+
+const letters = ['a', 'b', 'c'] as const;
+const filtered = without(letters, 'a');
+// Type: Array<'b' | 'c'>
+```
+
 #### 파라미터
 
 - `arr` (`readonly T[]`): 값들을 제거할 배열이에요.

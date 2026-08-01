@@ -33,6 +33,16 @@ without([1, NaN, 3, NaN, 5], NaN);
 // Returns: [1, 3, 5]
 ```
 
+When the input is a readonly literal array, TypeScript also excludes the specified literal values from the returned element type.
+
+```typescript
+import { without } from 'es-toolkit/array';
+
+const letters = ['a', 'b', 'c'] as const;
+const filtered = without(letters, 'a');
+// Type: Array<'b' | 'c'>
+```
+
 #### Parameters
 
 - `arr` (`readonly T[]`): The array from which to remove values.

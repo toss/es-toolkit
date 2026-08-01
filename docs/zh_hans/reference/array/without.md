@@ -33,6 +33,16 @@ without([1, NaN, 3, NaN, 5], NaN);
 // Returns: [1, 3, 5]
 ```
 
+当输入是只读字面量数组时，TypeScript 也会从返回数组的元素类型中排除指定的字面量值。
+
+```typescript
+import { without } from 'es-toolkit/array';
+
+const letters = ['a', 'b', 'c'] as const;
+const filtered = without(letters, 'a');
+// Type: Array<'b' | 'c'>
+```
+
 #### 参数
 
 - `arr` (`readonly T[]`): 要删除值的数组。

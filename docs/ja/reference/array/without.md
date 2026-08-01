@@ -33,6 +33,16 @@ without([1, NaN, 3, NaN, 5], NaN);
 // Returns: [1, 3, 5]
 ```
 
+入力が読み取り専用のリテラル配列の場合、TypeScript は戻り値の要素型からも指定したリテラル値を除外します。
+
+```typescript
+import { without } from 'es-toolkit/array';
+
+const letters = ['a', 'b', 'c'] as const;
+const filtered = without(letters, 'a');
+// Type: Array<'b' | 'c'>
+```
+
 #### パラメータ
 
 - `arr` (`readonly T[]`): 値を削除する配列です。

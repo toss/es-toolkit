@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { without } from './without';
 
 describe('without', () => {
@@ -13,6 +13,25 @@ describe('without', () => {
   it('should return a new array excluding the specified values', () => {
     expect(without([1, 2, 3, 4, 5], 2, 4)).toEqual([1, 3, 5]);
     expect(without(['a', 'b', 'c', 'a'], 'a')).toEqual(['b', 'c']);
+  });
+
+  it('should exclude literal values from the return type', () => {
+    const result = without(['a', 'b', 'c'] as const, 'a');
+
+    expectTypeOf(result).toEqualTypeOf<Array<'b' | 'c'>>();
+  });
+
+  it('should preserve the input type when no values are excluded', () => {
+    const result = without(['a', 'b', 'c'] as const);
+
+    expectTypeOf(result).toEqualTypeOf<Array<'a' | 'b' | 'c'>>();
+  });
+
+  it('should preserve the input type for a dynamic exclusion list', () => {
+    const values: Array<'a' | 'b'> = ['a'];
+    const result = without(['a', 'b', 'c'] as const, ...values);
+
+    expectTypeOf(result).toEqualTypeOf<Array<'a' | 'b' | 'c'>>();
   });
 
   it('should handle cases where none of the specified values are in the array', () => {
