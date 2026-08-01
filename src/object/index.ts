@@ -16,4 +16,5 @@ export { sortKeys } from './sortKeys.ts';
 export { toCamelCaseKeys } from './toCamelCaseKeys.ts';
 export { toConstantCaseKeys } from './toConstantCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
+export { toPascalCaseKeys } from './toPascalCaseKeys.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';
