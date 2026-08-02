@@ -98,7 +98,7 @@ export function updateWith<T extends object, R>(
   for (let i = 0; i < resolvedPath.length && current != null; i++) {
     const key = toKey(resolvedPath[i]);
 
-    if (isUnsafeProperty(key)) {
+    if (isUnsafeProperty(key) || key === 'constructor' || key === 'prototype') {
       continue;
     }
 

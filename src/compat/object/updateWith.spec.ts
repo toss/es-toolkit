@@ -27,6 +27,16 @@ describe('updateWith', () => {
     expect(object.a[0]['__proto__'].b).toBe(3);
   });
 
+  it('should prevent prototype pollution by skipping `constructor` and `prototype` in path', () => {
+    const object = {};
+    const result = updateWith(object, 'constructor.prototype.polluted', constant('yes'));
+    expect(result).toBe(object);
+    expect(({} as Record<string, unknown>).polluted).toBe(undefined);
+
+    updateWith({}, 'a.constructor.prototype.polluted', constant('yes'));
+    expect(({} as Record<string, unknown>).polluted).toBe(undefined);
+  });
+
   it('should preserve the sign of `0`', () => {
     const props = [-0, Object(-0), 0, Object(0)];
     const expected = map(props, constant(value));
