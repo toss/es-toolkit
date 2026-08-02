@@ -35,6 +35,7 @@ docs/zh_hans/reference/{category}/{fn}.md   # Chinese
 - **Simplicity**: Simplest interface for the 85% use case. No complex options.
 - **Don't implement**: Functions replaceable by modern JS (`Array.isArray`, `Number.isNaN`, `Math.min`), or TC39 Stage 3+ proposals.
 - **es-toolkit vs compat**: `es-toolkit` is the strict, opinionated API. `es-toolkit/compat` matches lodash behavior exactly for migration. Compat is feature-complete — no new functions are being added. Only behavior inconsistency fixes against lodash are accepted.
+- **What we accept**: New functions need an accepted [discussion](https://github.com/toss/es-toolkit/discussions/new?category=ideas) first, performance work needs benchmark results, and refactoring-only changes are not accepted. See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md#41-what-we-accept).
 
 ## Coding Conventions
 
