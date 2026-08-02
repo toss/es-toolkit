@@ -123,10 +123,12 @@ Use the following template for the PR body:
 
 {Concise explanation of the code changes, in bullet points}
 
-## Test results
+## Benchmark results
 
-{Output of `yarn vitest run`, in simplified form}
+{Only for performance changes: benchmark output for `main` and for this branch. Remove this section otherwise.}
 ```
+
+Do not paste test output into the PR body. CI runs the test suite on every pull request, so the results are already visible there. Benchmarks are the exception—nothing in CI runs them, so a performance change has to bring its own numbers.
 
 ## Adding dependencies
 

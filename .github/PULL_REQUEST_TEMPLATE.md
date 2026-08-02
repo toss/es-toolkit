@@ -19,7 +19,7 @@ Find your change below and go through its checklist. These are the only categori
 
 ### Improving performance
 
-- [ ] Benchmark results for `main` and for this branch are pasted under "Test results". We cannot tell a real speedup from reading code, so a claim without numbers gets closed.
+- [ ] Benchmark results for `main` and for this branch are pasted under "Benchmark results". We cannot tell a real speedup from reading code, so a claim without numbers gets closed.
 
 ### Fixing behavior that differs from Lodash (es-toolkit/compat)
 
@@ -44,6 +44,10 @@ Now fill in the sections below.
 
 <!-- What you changed, in bullet points. -->
 
-## Test results
+## Benchmark results
 
-<!-- Output of `yarn vitest run`. Add benchmark results if this is a performance change. -->
+<!--
+Only for performance changes: paste the benchmark output for `main` and for this branch. Delete this section otherwise.
+
+No need to paste test output — CI runs the test suite on every pull request. Benchmarks are the exception, since nothing in CI runs them.
+-->

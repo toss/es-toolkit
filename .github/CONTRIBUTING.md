@@ -58,7 +58,7 @@ All functions es-toolkit provides should be more performant than or similar with
 
 We measure the performance of our library every time our code is edited. We are using [Vitest's benchmark feature](https://vitest.dev/api/#bench). For our benchmark code, please refer to our [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
 
-When a new functionality is added, a benchmark code should be added. Please add screenshots of the benchmarks when opening a pull request for easy reference and history tracking.
+When a new function is added, benchmark code should be added along with it. See [4.1 What we accept](#41-what-we-accept) for what to attach when you open a pull request.
 
 ### 1.3 Simplicity
 
