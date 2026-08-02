@@ -1,0 +1,25 @@
+name: Documentation issue
+description: Report something wrong or missing in the documentation.
+labels: ['p1: docs bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You can use AI to help you research the problem, but **issue descriptions from external contributors must be written by a human**.
+
+        Reporting behavior that does not match the docs? Use the bug report template instead.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link to the page on https://es-toolkit.dev.
+      placeholder: https://es-toolkit.dev/reference/array/chunk.html
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Tell us what the page says now and what it should say instead. If you know which of the four languages are affected (English, Korean, Japanese, Simplified Chinese), mention them.
+    validations:
+      required: true
