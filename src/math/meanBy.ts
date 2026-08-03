@@ -15,6 +15,6 @@ import { sumBy } from './sumBy';
  * meanBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: 2
  * meanBy([], x => x.a); // Returns: NaN
  */
-export function meanBy<T>(items: readonly T[], getValue: (element: T) => number): number {
+export function meanBy<T>(items: ArrayLike<T>, getValue: (element: T) => number): number {
   return sumBy(items, item => getValue(item)) / items.length;
 }

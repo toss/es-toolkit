@@ -23,4 +23,10 @@ describe('sum function', () => {
 
     expect(sum(array1) + sum(array2)).toBe(sum([...array1, ...array2]));
   });
+
+  it('works with TypedArrays', () => {
+    const typedArray = new Float32Array([1.5, 2.5]);
+    const result = sum(typedArray);
+    expect(result).toBe(4.0);
+  });
 });

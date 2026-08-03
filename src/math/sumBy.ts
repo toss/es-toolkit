@@ -14,7 +14,7 @@
  * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x, i) => x.a * i); // Returns: 8
  * sumBy([], () => 1); // Returns: 0
  */
-export function sumBy<T>(items: readonly T[], getValue: (element: T, index: number) => number): number {
+export function sumBy<T>(items: ArrayLike<T>, getValue: (element: T, index: number) => number): number {
   let result = 0;
 
   for (let i = 0; i < items.length; i++) {

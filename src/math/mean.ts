@@ -13,6 +13,6 @@ import { sum } from './sum.ts';
  * const result = mean(numbers);
  * // result will be 3
  */
-export function mean(nums: readonly number[]): number {
+export function mean(nums: ArrayLike<number>): number {
   return sum(nums) / nums.length;
 }

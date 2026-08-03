@@ -9,4 +9,10 @@ describe('mean', () => {
   it('returns NaN for empty arrays', () => {
     expect(mean([])).toEqual(NaN);
   });
+
+  it('works with TypedArrays', () => {
+    const typedArray = new Float32Array([1.5, 2.5]);
+    const result = mean(typedArray);
+    expect(result).toBe(2.0);
+  });
 });
