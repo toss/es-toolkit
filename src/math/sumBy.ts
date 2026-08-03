@@ -5,7 +5,7 @@
  * If the array is empty, this function returns `0`.
  *
  * @template T - The type of elements in the array.
- * @param items - An array to calculate the sum.
+ * @param items - An array-like to calculate the sum.
  * @param getValue - A function that selects a numeric value from each element.
  *   It receives the element and its zero‑based index in the array.
  * @returns The sum of all the numbers as determined by the `getValue` function.

@@ -3,7 +3,7 @@
  *
  * This function takes an array of numbers and returns the sum of all the elements in the array.
  *
- * @param nums - An array of numbers to be summed.
+ * @param nums - An array-like of numbers to be summed.
  * @returns The sum of all the numbers in the array.
  *
  * @example

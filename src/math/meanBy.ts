@@ -7,8 +7,8 @@ import { sumBy } from './sumBy';
  * If the array is empty, this function returns `NaN`.
  *
  * @template T - The type of elements in the array.
- * @param items An array to calculate the average.
- * @param getValue A function that selects a numeric value from each element.
+ * @param items - An array-like to calculate the average.
+ * @param getValue - A function that selects a numeric value from each element.
  * @returns The average of all the numbers as determined by the `getValue` function.
  *
  * @example

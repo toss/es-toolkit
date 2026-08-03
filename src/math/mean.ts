@@ -5,7 +5,7 @@ import { sum } from './sum.ts';
  *
  * If the array is empty, this function returns `NaN`.
  *
- * @param nums - An array of numbers to calculate the average.
+ * @param nums - An array-like of numbers to calculate the average.
  * @returns The average of all the numbers in the array.
  *
  * @example
