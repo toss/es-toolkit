@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { omit } from './omit';
 
 describe('omit', () => {
@@ -25,5 +25,29 @@ describe('omit', () => {
     const result = omit(obj, ['b']);
     expect(result).toEqual({ a: 1, c: 3 });
     expect(obj).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it('should work with type unions', () => {
+    type A = { type: 'a'; a: number };
+    type B = { type: 'b'; b: string };
+    type Union = A | B;
+
+    const obj = { type: 'a', a: 1 } as Union;
+    const result = omit(obj, ['b']);
+
+    expectTypeOf(result).toEqualTypeOf<A | Omit<B, 'b'>>();
+    expect(result).toEqual({ type: 'a', a: 1 });
+  });
+
+  it('should keep the discriminant of a type union', () => {
+    type A = { type: 'a'; a: number };
+    type B = { type: 'b'; b: string };
+    type Union = A | B;
+
+    const obj = { type: 'b', b: 'hello' } as Union;
+    const result = omit(obj, ['a', 'b']);
+
+    expectTypeOf(result).toEqualTypeOf<Omit<A, 'a' | 'b'> | Omit<B, 'a' | 'b'>>();
+    expect(result).toEqual({ type: 'b' });
   });
 });

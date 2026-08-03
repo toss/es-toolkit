@@ -1,4 +1,5 @@
-import { omit as omitToolkit } from '../../object/omit.ts';
+import type { KeysOfUnion } from '../../_internal/KeysOfUnion.ts';
+import { type DistributedOmit, omit as omitToolkit } from '../../object/omit.ts';
 
 /**
  * Creates a function that builds a new object with the given `keys` removed from
@@ -14,8 +15,10 @@ import { omit as omitToolkit } from '../../object/omit.ts';
  *
  * pipe({ a: 1, b: 2, c: 3 }, omit(['b', 'c'])); // => { a: 1 }
  */
-export function omit<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Omit<T, K> {
-  return function (obj: T): Omit<T, K> {
+export function omit<T extends Record<string, any>, K extends KeysOfUnion<T>>(
+  keys: readonly K[]
+): (obj: T) => DistributedOmit<T, K> {
+  return function (obj: T): DistributedOmit<T, K> {
     return omitToolkit(obj, keys);
   };
 }

@@ -1,4 +1,5 @@
-import { pick as pickToolkit } from '../../object/pick.ts';
+import type { KeysOfUnion } from '../../_internal/KeysOfUnion.ts';
+import { type DistributedPick, pick as pickToolkit } from '../../object/pick.ts';
 
 /**
  * Creates a function that builds a new object containing only the given `keys`
@@ -15,8 +16,10 @@ import { pick as pickToolkit } from '../../object/pick.ts';
  *
  * pipe({ a: 1, b: 2, c: 3 }, pick(['a', 'c'])); // => { a: 1, c: 3 }
  */
-export function pick<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Pick<T, K> {
-  return function (obj: T): Pick<T, K> {
+export function pick<T extends Record<string, any>, K extends KeysOfUnion<T>>(
+  keys: readonly K[]
+): (obj: T) => DistributedPick<T, K> {
+  return function (obj: T): DistributedPick<T, K> {
     return pickToolkit(obj, keys);
   };
 }

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { pick } from './pick';
 
 describe('pick', () => {
@@ -31,5 +31,29 @@ describe('pick', () => {
     const result = pick(obj, ['a']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
+  });
+
+  it('should work with type unions', () => {
+    type A = { type: 'a'; a: number };
+    type B = { type: 'b'; b: string };
+    type Union = A | B;
+
+    const obj = { type: 'a', a: 1 } as Union;
+    const result = pick(obj, ['b']);
+
+    expectTypeOf(result).toEqualTypeOf<Pick<A, never> | Pick<B, 'b'>>();
+    expect(result).toEqual({});
+  });
+
+  it('should pick each member of a type union separately', () => {
+    type A = { type: 'a'; a: number };
+    type B = { type: 'b'; b: string };
+    type Union = A | B;
+
+    const obj = { type: 'b', b: 'hello' } as Union;
+    const result = pick(obj, ['type', 'b']);
+
+    expectTypeOf(result).toEqualTypeOf<Pick<A, 'type'> | Pick<B, 'type' | 'b'>>();
+    expect(result).toEqual({ type: 'b', b: 'hello' });
   });
 });

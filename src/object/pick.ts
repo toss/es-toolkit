@@ -1,3 +1,12 @@
+import type { KeysOfUnion } from '../_internal/KeysOfUnion.ts';
+
+/**
+ * `Pick` applied to each member of a union separately, so that the members are preserved.
+ *
+ * Keys that do not exist on a member are ignored for that member instead of being an error.
+ */
+export type DistributedPick<T, K extends PropertyKey> = T extends unknown ? Pick<T, Extract<K, keyof T>> : never;
+
 /**
  * Creates a new object composed of the picked object properties.
  *
@@ -15,16 +24,19 @@
  * const result = pick(obj, ['a', 'c']);
  * // result will be { a: 1, c: 3 }
  */
-export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K> {
-  const result = {} as Pick<T, K>;
+export function pick<T extends Record<string, any>, K extends KeysOfUnion<T>>(
+  obj: T,
+  keys: readonly K[]
+): DistributedPick<T, K> {
+  const result: Record<PropertyKey, unknown> = {};
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
 
     if (Object.hasOwn(obj, key)) {
-      result[key] = obj[key];
+      result[key] = obj[key as keyof T];
     }
   }
 
-  return result;
+  return result as DistributedPick<T, K>;
 }
