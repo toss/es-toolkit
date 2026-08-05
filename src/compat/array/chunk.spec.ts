@@ -65,4 +65,9 @@ describe('chunk', () => {
   it('should return an full elements array when the size is Infinity', () => {
     expect(chunk([1, 2, 3], Infinity)).toEqual([[1, 2, 3]]);
   });
+
+  it('should return an empty array for an empty collection when the size is Infinity', () => {
+    expect(chunk([], Infinity)).toEqual([]);
+    expect(chunk({ length: 0 }, Infinity)).toEqual([]);
+  });
 });
