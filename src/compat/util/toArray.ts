@@ -60,6 +60,10 @@ export function toArray(value?: unknown): any[] {
   }
 
   if (typeof value === 'object') {
+    if (typeof (value as Record<symbol, unknown>)[Symbol.iterator] === 'function') {
+      return Array.from(value as Iterable<unknown>);
+    }
+
     return Object.values(value);
   }
 
