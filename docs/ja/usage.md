@@ -70,6 +70,8 @@ bun add es-toolkit
 
 [jsdelivr](https://www.jsdelivr.com)や[unpkg](https://unpkg.com)などのCDNからes-toolkitを使用できます。Lodashと同様に、`_`変数にすべての関数が含まれています。
 
+es-toolkitはES2015（ES6）をサポートするブラウザで利用できます。より古いブラウザをサポートする必要がある場合は、アプリケーションのバンドルをトランスパイルし、インポートした関数が利用するJavaScript APIに必要なポリフィルを含めてください。
+
 ::: code-group
 
 ```html [jsdelivr]

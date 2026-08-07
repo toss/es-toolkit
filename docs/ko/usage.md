@@ -70,6 +70,8 @@ bun add es-toolkit
 
 [jsdelivr](https://www.jsdelivr.com) 또는 [unpkg](https://unpkg.com) 같은 CDN에서 es-toolkit을 쓸 수 있어요. Lodash와 같이 `_` 변수에 모든 함수가 포함돼요.
 
+es-toolkit은 ES2015(ES6)를 지원하는 브라우저에서 사용할 수 있어요. 더 오래된 브라우저를 지원해야 한다면 애플리케이션 번들을 트랜스파일하고, 가져와서 사용하는 함수가 필요로 하는 JavaScript API의 폴리필을 함께 포함하세요.
+
 ::: code-group
 
 ```html [jsdelivr]
