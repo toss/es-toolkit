@@ -1,76 +1,83 @@
 ---
 name: recommend
-description: Analyze code or requirements and recommend the best es-toolkit functions. Use when the user asks which es-toolkit function to use, needs help finding a utility, or wants alternatives to manual implementations.
-argument-hint: '<description of what you need or paste your code>'
-allowed-tools: Read, Grep, Glob
+description: Find the right es-toolkit function for a task. Use when the user asks which es-toolkit function to use, needs a utility for something, or wants to replace a hand-written helper.
+argument-hint: '<what you need, or paste your code>'
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # Function Recommendation
 
-Recommend the most suitable es-toolkit function for the user's needs, grounded in source code and official documentation.
+## Verify before you recommend
 
-## Input
+Never recommend from memory. Two failures are common and both produce code that compiles and then breaks at runtime:
 
-$ARGUMENTS — A description of what the user needs, or a code snippet to analyze.
+- recommending a function that does not exist
+- recommending a real function from the wrong entry point
 
-## Why grounding matters
+Measured with Claude Haiku 4.5, the second one hit 7 of 15 lodash-equivalent functions and reproduced 21/21 across repeated runs. Verifying costs one command, so do it regardless of which model you are.
 
-es-toolkit evolves faster than any training data can track. Always verify function existence and behavior from the actual source code in this repository, rather than relying on memorized knowledge. This prevents recommending functions that don't exist or have changed signatures.
+The entry points are `es-toolkit` (strict), `es-toolkit/fp` (data-last with `pipe`), `es-toolkit/server` (Node-only), `es-toolkit/types` (type-only), and `es-toolkit/compat` (lodash-compatible). Counts and contents shift between versions, so resolve them with the script below rather than from memory.
 
-## Workflow
+## Step 1 — Find candidates and where they live
 
-### 1. Understand the requirement
+Search what the installed version actually exports, **running from the package directory that depends on es-toolkit** — in a monorepo that is the workspace package, not the repo root. If the repo has a `.pnp.cjs` (Yarn PnP), run `yarn node` instead of `node`.
 
-Parse $ARGUMENTS to identify:
-
-- What operation the user wants to perform
-- What data types are involved (array, object, string, etc.)
-- Whether they might need lodash migration help (if so, suggest `/es-toolkit:migrate`)
-
-### 2. Search the local source code first
-
-This is the fastest and most accurate way to find functions. Search across es-toolkit's categories:
-
+```bash
+node --input-type=module -e "
+const pattern = /merge|assign/i;
+const entries = ['es-toolkit','es-toolkit/fp','es-toolkit/server','es-toolkit/compat'];
+const mods = await Promise.all(entries.map(e => import(e).then(m => m, () => null)));
+if (!mods[0]) {
+  console.error('es-toolkit is not resolvable from ' + process.cwd() + ' — run this inside the package that depends on it.');
+  process.exit(1);
+}
+const hits = new Map();
+mods.forEach((m, i) => m && Object.keys(m).filter(n => pattern.test(n)).forEach(n => hits.set(n, [...(hits.get(n) ?? []), entries[i]])));
+for (const [n, where] of [...hits].sort()) console.log(n.padEnd(20), where.join(', '));
+"
 ```
-# Search in src/ for matching function names or descriptions
-Grep for keywords in src/{category}/*.ts
-```
 
-List subdirectories under `src/` (excluding `_internal` and `compat`) to discover the current categories dynamically. You can also browse `docs/reference/` to discover the full function index — each subdirectory is a category, and each `.md` file is a function.
+Adjust `pattern` to the task. The output is authoritative — it reflects the version the user installed, so it never goes stale.
 
-Read the implementation file to get the exact signature, and the spec file for real usage examples.
+Each import is tolerated individually because entry points were added over time (`server` in 1.47.0, `fp` in 1.49.0); a bare `Promise.all` throws `ERR_PACKAGE_PATH_NOT_EXPORTED` on older installs and takes the whole search down.
 
-### 3. Construct the official doc URL
+If nothing matches, say so plainly and suggest a plain-JavaScript approach. Do not invent a function name.
 
-es-toolkit's documentation URLs follow a predictable pattern — construct them directly instead of fetching:
+Note that **a function can live in several entry points at once** — `map` and `filter` are in both `fp` and `compat` but not in strict, while `chunk` is in all three. Read the whole list, not the first hit.
 
-- `https://es-toolkit.dev/reference/{category}/{functionName}`
+## Step 2 — Choose the entry point
 
-### 4. Search local docs when you're unsure
+`es-toolkit`, `es-toolkit/fp`, `es-toolkit/server`, and `es-toolkit/types` are all first-class — recommend whichever fits the task:
 
-If you can't find a matching function locally or want to discover functions you might be missing:
+- `es-toolkit` — the default
+- `es-toolkit/fp` — data-last functions for `pipe` composition
+- `es-toolkit/server` — Node-only helpers (`exec`, `colors`)
+- `es-toolkit/types` — type utilities; **type-only, so the search above cannot see it** (`import('es-toolkit/types')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`). Use `import type` and read `types.d.ts` inside the package directory.
 
-- **Browse by category**: `Glob docs/reference/{category}/*.md` to list all functions in a category
-- **Search by keyword**: `Grep` for the keyword across `docs/reference/**/*.md`
-- **Available categories**: array, error, function, map, math, object, predicate, promise, set, string, util
+**Recommend `es-toolkit/compat` only when there is a specific reason** — the function exists nowhere else, or the user explicitly needs lodash-exact behavior. compat is a migration layer, not the destination: it is feature-complete and receives no new functions. When you do recommend it, say why, and mention the strict alternative if one exists.
 
-### 5. Respond with this structure
+## Step 3 — Read the real signature
 
-For each recommended function, include:
+Locate the package with `node -e "console.log(require.resolve('es-toolkit/package.json'))"` — do not assume `node_modules`, which does not exist under Yarn PnP — then read `<pkg>/dist/{category}/{fn}.d.ts` (or `dist/compat/...`, `dist/fp/...`). It carries the full JSDoc, parameter docs, and `@example`. Take the signature and example from there rather than recalling them.
 
-- Function name and category
-- Import path: `import { fn } from 'es-toolkit';`
-- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}`
-- What it does (from JSDoc in source)
-- A code example (from spec file or official docs)
-- Why it fits the user's need
+Watch for arity and mutation, which are the details most often gotten wrong — for instance `merge(target, source)` takes exactly two arguments and mutates `target`, while `toMerged` returns a new object.
 
-When recommending multiple functions, **always include a comparison table**:
+## Step 4 — Answer
 
-| Function         | Input type | Behavior | Performance | Return type |
-| ---------------- | ---------- | -------- | ----------- | ----------- |
-| (each candidate) | ...        | ...      | ...         | ...         |
+For each recommendation give: the function name, the exact import line, what it does (from its JSDoc), and a short example.
 
-Add a **"When to choose which"** section with clear decision criteria — e.g., "Use `groupBy` for categorizing, `countBy` for tallying, `keyBy` for lookup maps."
+When several functions could fit, add a small table contrasting them on the axis that actually decides the choice — mutation vs. copy, arity, input type — and a one-line "use X when…" for each. Skip the table when there is only one sensible answer.
 
-If no match exists, say so clearly and suggest modern JS alternatives. For lodash-compatible replacements, point users to the `/es-toolkit:migrate` skill.
+Mention edge cases you saw in the source that would surprise the caller (for example: deep merge combines arrays index by index, so `['a','b']` merged with `['c']` yields `['c','b']`).
+
+If the user is porting existing lodash code, point them to `/es-toolkit:migrate`.
+
+## Linking to docs
+
+Function pages need the `.html` suffix or the site 404s:
+
+- strict: `https://es-toolkit.dev/reference/{category}/{fn}.html`
+- compat: `https://es-toolkit.dev/compat/reference/{category}/{fn}.html`
+- fp: `https://es-toolkit.dev/fp/reference/{fn}.html` (flat, no category)
+
+If you are unsure a page exists, omit the link rather than guessing one.
