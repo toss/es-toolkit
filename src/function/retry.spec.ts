@@ -98,6 +98,16 @@ describe('retry', () => {
     expect(shouldRetry).toHaveBeenCalledWith(error, 0);
   });
 
+  it('should pass error to delay function', async () => {
+    const error = new Error('Server Error');
+    const func = vi.fn().mockRejectedValueOnce(error).mockResolvedValue('success');
+    const delayFn = vi.fn(() => 0);
+
+    await retry(func, { delay: delayFn, retries: 1 });
+
+    expect(delayFn).toHaveBeenCalledWith(0, error);
+  });
+
   it('should pass attempt number to shouldRetry', async () => {
     const error = new Error('failure');
     const func = vi.fn().mockRejectedValue(error);
