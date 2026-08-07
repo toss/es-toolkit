@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { merge } from './merge';
 
 describe('merge', () => {
@@ -140,5 +140,42 @@ describe('merge', () => {
     expect(Array.isArray(nestedArray.x)).toBe(true);
     expect(nestedArray.x[0]).toBe('1');
     expect((nestedArray.x as any).a).toBe(2);
+  });
+
+  it('should type nested objects as a deep merge, not a shallow intersection', () => {
+    const target = { a: 1, b: { x: 1, y: 2 } };
+    const source = { b: { y: 3, z: 4 }, c: 5 };
+    const result = merge(target, source);
+
+    expectTypeOf(result).toEqualTypeOf<{
+      a: number;
+      b: { x: number; y: number; z: number };
+      c: number;
+    }>();
+  });
+
+  it('should use the source type when a defined source property overwrites the target', () => {
+    const target = { a: 1 as const };
+    const source = { a: 2 as const };
+    const result = merge(target, source);
+
+    expectTypeOf(result.a).toEqualTypeOf<2>();
+  });
+
+  it('does not collapse to never when an optional source property may be skipped', () => {
+    const target: { b: string | undefined } = { b: undefined };
+    const source: { b?: string } = {};
+    const result = merge(target, source);
+
+    expectTypeOf(result.b).not.toBeNever();
+    expectTypeOf(result.b).toEqualTypeOf<string | undefined>();
+  });
+
+  it('keeps a plain intersection for keys present on only one side', () => {
+    const target = { a: 1 };
+    const source = { b: 'x' };
+    const result = merge(target, source);
+
+    expectTypeOf(result).toEqualTypeOf<{ a: number; b: string }>();
   });
 });
