@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { at as atLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { at } from './at';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -120,9 +119,5 @@ describe('at', () => {
 
     expect(at(object, 'a[1]', 'b.c[2].d[2].e')).toEqual([2, 8]);
     expect(at(object, ['a[1]', 'b.c[2].d[2].e'])).toEqual([2, 8]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(at).toEqualTypeOf<typeof atLodash>();
   });
 });

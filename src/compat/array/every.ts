@@ -2,10 +2,8 @@ import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
-import { property } from '../object/property.ts';
+import { iteratee } from '../compat.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Checks if all elements in a collection pass the predicate check.
@@ -102,33 +100,7 @@ export function every<T>(
     doesMatch = undefined;
   }
 
-  if (!doesMatch) {
-    doesMatch = identity;
-  }
-
-  let predicate: (value: any, index: number, collection: any) => boolean;
-
-  switch (typeof doesMatch) {
-    case 'function': {
-      predicate = doesMatch as any;
-      break;
-    }
-    case 'object': {
-      if (Array.isArray(doesMatch) && doesMatch.length === 2) {
-        const key = doesMatch[0];
-        const value = doesMatch[1];
-        predicate = matchesProperty(key, value);
-      } else {
-        predicate = matches(doesMatch);
-      }
-      break;
-    }
-    case 'symbol':
-    case 'number':
-    case 'string': {
-      predicate = property(doesMatch);
-    }
-  }
+  const predicate = iteratee(doesMatch ?? identity);
 
   if (!isArrayLike(source)) {
     const keys = Object.keys(source) as Array<keyof typeof source>;

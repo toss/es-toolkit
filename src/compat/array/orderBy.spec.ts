@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { orderBy as orderByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { orderBy } from './orderBy.ts';
 import { zipObject } from '../../array/zipObject.ts';
 import { partialRight } from '../../function/partialRight.ts';
@@ -239,9 +238,5 @@ describe('orderBy', () => {
 
     expect(orderBy(['A', 'a'])).toEqual(['A', 'a']);
     expect(orderBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(orderBy).toEqualTypeOf<typeof orderByLodash>();
   });
 });

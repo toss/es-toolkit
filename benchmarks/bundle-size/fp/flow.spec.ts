@@ -5,7 +5,7 @@ describe('fp/flow bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { flow } from "es-toolkit/fp"; console.log(flow)')
-    ).toMatchInlineSnapshot(`969`);
+    ).toMatchInlineSnapshot(`873`);
   });
 
   it('lodash/fp/flow', async () => {

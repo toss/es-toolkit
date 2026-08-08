@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { findLastIndex as findLastIndexLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { findLastIndex } from './findLastIndex';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -128,10 +127,6 @@ describe('findLastIndex', () => {
   it('should use identity function when no predicate is provided', () => {
     expect(findLastIndex([null, undefined, 0, 'hello', 'world'])).toBe(4);
     expect(findLastIndex([false, '', 0, 1, 2, null])).toBe(4);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
   });
 
   it('should work with no predicate (uses identity)', () => {

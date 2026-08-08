@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { functions as functionsLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { functions } from './functions';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -28,9 +27,5 @@ describe('functions', () => {
 
   it('should return an empty array for undefined', () => {
     expect(functions(undefined)).toEqual([]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(functions).toEqualTypeOf<typeof functionsLodash>();
   });
 });

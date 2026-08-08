@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toLength as toLengthToolkitCompat_ } from 'es-toolkit/compat';
-import { toLength as toLengthLodash_ } from 'lodash';
+import { toLength as toLengthToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toLengthToolkitCompat = toLengthToolkitCompat_;
-const toLengthLodash = toLengthLodash_;
+const { toLength: toLengthLodash } = lodash;
 
 describe('toLength', () => {
   bench('es-toolkit/compat/toLength', () => {

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flowRight as flowRightToolkit_ } from 'es-toolkit';
-import { flowRight as flowRightToolkitCompat_ } from 'es-toolkit/compat';
-import { flowRight as flowRightLodash_ } from 'lodash';
+import { flowRight as flowRightToolkit } from 'es-toolkit';
+import { flowRight as flowRightCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const flowRightToolkit = flowRightToolkit_;
-const flowRightCompat = flowRightToolkitCompat_;
-const flowRightLodash = flowRightLodash_;
+const { flowRight: flowRightLodash } = lodash;
 
 describe('flowRight', () => {
   const add = (x: number, y: number) => x + y;

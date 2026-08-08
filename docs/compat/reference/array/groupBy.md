@@ -16,7 +16,7 @@ const grouped = groupBy(collection, iteratee);
 
 ## Usage
 
-### `groupBy(collection, iteratee)`
+### `groupBy(collection, iteratee?)`
 
 Groups each element of an array or object based on a given condition function and returns an object with groups. The condition can be provided in various forms such as a function, property name, partial object, etc.
 

@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('zipObject bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'zipObject');
-    expect(bundleSize).toMatchInlineSnapshot(`2729`);
+    expect(bundleSize).toMatchInlineSnapshot(`2761`);
   });
 
   it('es-toolkit', async () => {

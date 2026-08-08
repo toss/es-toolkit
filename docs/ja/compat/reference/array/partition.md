@@ -16,7 +16,7 @@ const [truthy, falsy] = partition(collection, predicate);
 
 ## 使用法
 
-### `partition(collection, predicate)`
+### `partition(collection, predicate?)`
 
 与えられた条件関数に基づいて、配列またはオブジェクトの要素を2つのグループに分けます。最初のグループには条件が真である要素が含まれ、2番目のグループには条件が偽である要素が含まれます。
 

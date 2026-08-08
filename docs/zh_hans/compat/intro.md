@@ -23,6 +23,20 @@ chunk([1, 2, 3, 4], 0);
 1. 将 `lodash` / `lodash-es` 的 import 路径替换为 `es-toolkit/compat`。调用代码可以保持不变。
 2. 慢慢整理调用代码，并将 import 切换为 [`es-toolkit`](/zh_hans/intro)。完成迁移后，你将获得更小的包体积和更快的运行速度。
 
+## 单独导入函数
+
+与 `lodash/merge` 类似，compat 的每个函数也可以通过独立的入口点导入。这样只会加载该函数所需的文件，而不是整个 `es-toolkit/compat` 模块。
+
+```ts
+import merge from 'es-toolkit/compat/merge';
+```
+
+这在无法使用 tree-shaking 的环境中特别有用，例如 CommonJS 的 `require()`、React Native，或不经打包直接在 Node.js 上运行的代码。
+
+```ts
+const merge = require('es-toolkit/compat/merge');
+```
+
 ## 与 `es-toolkit` 的区别
 
 - **API 形态**：与 Lodash 1:1 一致，包括隐式类型转换、多种参数形态以及已弃用的辅助函数。[`es-toolkit`](/zh_hans/intro) 只暴露类型安全的现代形态。

@@ -37,7 +37,7 @@ console.log(ages); // [30, 25, 35]
 console.log(roles); // ['engineer', 'designer', 'manager']
 ```
 
-길이가 다른 배열들도 처리할 수 있어요. 짧은 배열의 경우 `undefined`로 채워져요.
+반환되는 배열의 길이는 가장 긴 내부 배열의 길이에 맞춰지고, 더 짧은 내부 배열에서 빠진 위치는 `undefined`로 채워져요.
 
 ```typescript
 import { unzip } from 'es-toolkit/array';

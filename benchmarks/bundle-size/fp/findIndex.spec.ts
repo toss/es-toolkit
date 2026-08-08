@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/findIndex bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { findIndex } from "es-toolkit/fp"; console.log(findIndex)')).toBe(83);
+    expect(
+      await getBundleSizeFromScript('import { findIndex } from "es-toolkit/fp"; console.log(findIndex)')
+    ).toMatchInlineSnapshot(`83`);
   });
 });

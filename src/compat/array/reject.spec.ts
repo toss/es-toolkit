@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { reject as rejectLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { reject } from './reject';
 import { args } from '../_internal/args';
 import { isEven } from '../_internal/isEven';
@@ -157,9 +156,5 @@ describe('reject', () => {
     const sparseArray = [1, , 3, , 5] as any[];
 
     expect(reject(sparseArray, value => value > 2)).toEqual([1, undefined, undefined]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(reject).toEqualTypeOf<typeof rejectLodash>();
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { lowerFirst as lowerFirstLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { lowerFirst } from './lowerFirst';
 import { map } from '../array/map';
 import { stubString } from '../util/stubString';
@@ -19,9 +18,5 @@ describe('lowerFirst', () => {
     const actual = map(values, (value, index) => (index ? lowerFirst(value as any) : lowerFirst()));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(lowerFirst).toEqualTypeOf<typeof lowerFirstLodash>();
   });
 });

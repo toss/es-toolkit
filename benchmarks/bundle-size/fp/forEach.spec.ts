@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/forEach bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { forEach } from "es-toolkit/fp"; console.log(forEach)')).toBe(322);
+    expect(
+      await getBundleSizeFromScript('import { forEach } from "es-toolkit/fp"; console.log(forEach)')
+    ).toMatchInlineSnapshot(`322`);
   });
 });

@@ -1,3 +1,4 @@
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
 import { eq } from '../util/eq.ts';
 import { toInteger } from '../util/toInteger.ts';
@@ -73,6 +74,19 @@ export function includes(
 
   if (Array.isArray(source)) {
     return source.includes(target, fromIndex);
+  }
+
+  if (isArrayLike(source)) {
+    if (fromIndex < 0) {
+      fromIndex = Math.max(0, source.length + fromIndex);
+    }
+
+    for (let i = fromIndex; i < source.length; i++) {
+      if (eq((source as unknown[])[i], target)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   const keys = Object.keys(source);

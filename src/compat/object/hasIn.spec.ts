@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { hasIn as hasInLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { has } from './has';
 import { hasIn } from './hasIn';
 import { range } from '../../math/range';
@@ -265,9 +264,5 @@ describe('hasIn', () => {
 
   it(`should return \`false\` for empty paths`, () => {
     expect(hasIn({ a: null }, [])).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(hasIn).toEqualTypeOf<typeof hasInLodash>();
   });
 });

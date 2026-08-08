@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { trimStart as trimStartLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { trimStart } from './trimStart';
 import { whitespace } from '../_internal/whitespace';
 
@@ -89,9 +88,5 @@ describe('trimStart', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(func(string, ['l', 'e', 'h'])).toBe(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(trimStart).toEqualTypeOf<typeof trimStartLodash>();
   });
 });

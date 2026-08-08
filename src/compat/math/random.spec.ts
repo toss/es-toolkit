@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import { random as randomLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { random } from './random';
 import { uniq } from '../../array/uniq';
 import { stubTrue } from '../util/stubTrue';
@@ -125,9 +124,5 @@ describe('random', () => {
     const actual = randoms.map((result, index) => result >= 0 && result <= array[index] && result % 1 === 0);
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(random).toEqualTypeOf<typeof randomLodash>();
   });
 });

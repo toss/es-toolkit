@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { cond as condLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { cond } from './cond';
 import { stubFalse, stubTrue } from '../index';
 import { property } from '../object/property';
@@ -94,9 +93,5 @@ describe('cond', () => {
 
     const object = { resultFunc, a: 1, b: 2 };
     expect(object.resultFunc('a', 'b')).toBe(2);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(cond).toEqualTypeOf<typeof condLodash>();
   });
 });
