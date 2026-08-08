@@ -1,3 +1,4 @@
+import { isIterable } from '../../predicate/isIterable.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isMap } from '../predicate/isMap.ts';
 import { isSet } from '../predicate/isSet.ts';
@@ -60,8 +61,8 @@ export function toArray(value?: unknown): any[] {
   }
 
   if (typeof value === 'object') {
-    if (typeof (value as Record<symbol, unknown>)[Symbol.iterator] === 'function') {
-      return Array.from(value as Iterable<unknown>);
+    if (isIterable(value)) {
+      return Array.from(value);
     }
 
     return Object.values(value);
