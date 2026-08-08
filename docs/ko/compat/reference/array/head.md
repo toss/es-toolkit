@@ -52,6 +52,10 @@ head(null); // undefined
 head(undefined); // undefined
 ```
 
+#### 별칭
+
+`first`
+
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 첫 번째 요소를 가져올 배열이나 배열 형태 객체예요.

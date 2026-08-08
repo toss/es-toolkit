@@ -60,6 +60,10 @@ assignInWith(target3, child, (objValue, srcValue, key) => {
 
 If the customizer function returns `undefined`, the default assignment behavior is used. Unlike `assignIn`, this function allows you to apply custom logic to each property.
 
+#### Alias
+
+`extendWith`
+
 #### Parameters
 
 - `target` (`any`): The target object to which properties will be copied.

@@ -52,6 +52,10 @@ head(null); // undefined
 head(undefined); // undefined
 ```
 
+#### 别名
+
+`first`
+
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要获取第一个元素的数组或类数组对象。
