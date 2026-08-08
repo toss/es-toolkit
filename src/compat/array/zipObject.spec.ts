@@ -41,4 +41,15 @@ describe('zipObject', () => {
     expect(zipObject()).toEqual({});
     expect(zipObject(undefined)).toEqual({});
   });
+
+  it('should treat null keys and values as empty arrays', () => {
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null)).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null, null)).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null, [1, 2])).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(['a', 'b'], null)).toEqual({ a: undefined, b: undefined });
+  });
 });
