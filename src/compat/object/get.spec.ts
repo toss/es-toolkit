@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { get as getLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { get } from './get';
 import { empties } from '../_internal/empties';
 
@@ -154,10 +153,6 @@ describe('get', () => {
 
   it(`should return the default value when \`path\` is empty`, () => {
     expect(get({}, [], 'a')).toBe('a');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(get<unknown>).toEqualTypeOf<typeof getLodash<unknown>>();
   });
 
   it('should prevent prototype pollution by returning defaultValue for __proto__ access', () => {

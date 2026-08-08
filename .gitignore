@@ -25,6 +25,7 @@ umd
 .vercel
 /compat
 /array.js
+/bigint.js
 /compat.js
 /error.js
 /fp.js

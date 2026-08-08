@@ -5,6 +5,6 @@ describe('fp/combinations bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { combinations } from "es-toolkit/fp"; console.log(combinations)')
-    ).toBe(440);
+    ).toMatchInlineSnapshot(`440`);
   });
 });

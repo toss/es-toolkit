@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { divide as divideToolkitCompat_ } from 'es-toolkit/compat';
-import { divide as divideLodash_ } from 'lodash';
+import { divide as divideToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const divideToolkitCompat = divideToolkitCompat_;
-const divideLodash = divideLodash_;
+const { divide: divideLodash } = lodash;
 
 describe('divide function benchmark', () => {
   bench('es-toolkit/compat/divide', () => {

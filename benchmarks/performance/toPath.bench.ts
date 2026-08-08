@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toPath as toPathToolkit_ } from 'es-toolkit/compat';
-import { toPath as toPathLodash_ } from 'lodash';
+import { toPath as toPathToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toPathToolkit = toPathToolkit_;
-const toPathLodash = toPathLodash_;
+const { toPath: toPathLodash } = lodash;
 
 describe('toPath: super simple', () => {
   bench('es-toolkit/toPath', () => {

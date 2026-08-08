@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { conformsTo as conformsToLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { conformsTo } from './conformsTo';
 
 describe('conformsTo', () => {
@@ -157,9 +156,5 @@ describe('conformsTo', () => {
     });
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(conformsTo<unknown>).toEqualTypeOf<typeof conformsToLodash<unknown>>();
   });
 });

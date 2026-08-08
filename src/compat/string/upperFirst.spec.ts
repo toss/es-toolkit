@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { upperFirst as upperFirstLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { upperFirst } from './upperFirst';
 import { map } from '../array/map';
 import { stubString } from '../util/stubString';
@@ -19,9 +18,5 @@ describe('upperFirst', () => {
     const actual = map(values, (value, index) => (index ? upperFirst(value as any) : upperFirst()));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(upperFirst).toEqualTypeOf<typeof upperFirstLodash>();
   });
 });

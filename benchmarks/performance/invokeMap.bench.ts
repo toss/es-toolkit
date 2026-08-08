@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { invokeMap as invokeMapToolkitCompat_ } from 'es-toolkit/compat';
-import { invokeMap as invokeMapLodash_ } from 'lodash';
+import { invokeMap as invokeMapToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const invokeMapToolkitCompat = invokeMapToolkitCompat_;
-const invokeMapLodash = invokeMapLodash_;
+const { invokeMap: invokeMapLodash } = lodash;
 
 describe('invokeMap', () => {
   const stringArray = ['a', 'b', 'c'];

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { fill as fillToolkit_ } from 'es-toolkit';
-import { fill as fillCompatToolkit_ } from 'es-toolkit/compat';
-import { fill as fillLodash_ } from 'lodash';
+import { fill as fillToolkit } from 'es-toolkit';
+import { fill as fillCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const fillToolkit = fillToolkit_;
-const fillCompatToolkit = fillCompatToolkit_;
-const fillLodash = fillLodash_;
+const { fill: fillLodash } = lodash;
 
 describe('fill function performance comparison', () => {
   bench('es-toolkit/fill', () => {

@@ -20,6 +20,8 @@ const result = unzip(array);
 
 Collects elements at the same index in nested arrays and returns them as a new array. Performs the opposite operation of the `zip` function. This is useful when transposing matrices or reorganizing structured data.
 
+The returned array's length matches the longest nested array, and missing positions from shorter arrays are filled with `undefined`.
+
 ```typescript
 import { unzip } from 'es-toolkit/compat';
 

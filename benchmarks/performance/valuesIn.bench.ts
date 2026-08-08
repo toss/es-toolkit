@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { valuesIn as valuesInToolkitCompat_ } from 'es-toolkit/compat';
-import { valuesIn as valuesInLodash_ } from 'lodash';
+import { valuesIn as valuesInToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const valuesInToolkitCompat = valuesInToolkitCompat_;
-const valuesInLodash = valuesInLodash_;
+const { valuesIn: valuesInLodash } = lodash;
 
 const object = { a: 1, b: 2, c: 3 };
 

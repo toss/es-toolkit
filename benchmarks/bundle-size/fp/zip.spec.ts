@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/zip bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { zip } from "es-toolkit/fp"; console.log(zip)')).toBe(275);
+    expect(
+      await getBundleSizeFromScript('import { zip } from "es-toolkit/fp"; console.log(zip)')
+    ).toMatchInlineSnapshot(`275`);
   });
 });

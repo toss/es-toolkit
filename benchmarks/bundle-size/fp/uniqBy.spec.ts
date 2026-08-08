@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/uniqBy bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { uniqBy } from "es-toolkit/fp"; console.log(uniqBy)')).toBe(393);
+    expect(
+      await getBundleSizeFromScript('import { uniqBy } from "es-toolkit/fp"; console.log(uniqBy)')
+    ).toMatchInlineSnapshot(`393`);
   });
 });

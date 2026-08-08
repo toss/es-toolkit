@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { invertBy as invertByWithCompatToolkit_ } from 'es-toolkit/compat';
-import { invertBy as invertByWithLodash_ } from 'lodash';
+import { invertBy as invertByWithCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const invertByWithCompatToolkit = invertByWithCompatToolkit_;
-const invertByWithLodash = invertByWithLodash_;
+const { invertBy: invertByWithLodash } = lodash;
 
 const object = { a: 1, b: 2, c: 1, d: 4 };
 

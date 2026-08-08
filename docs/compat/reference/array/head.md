@@ -18,7 +18,7 @@ const firstElement = head(array);
 
 ### `head(array)`
 
-Returns the first element of an array or array-like object. Returns `undefined` if the array is empty or invalid.
+Returns the first element of an array or array-like object.
 
 ```typescript
 import { head } from 'es-toolkit/compat';

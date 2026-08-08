@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('escapeRegExp bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'escapeRegExp');
-    expect(bundleSize).toMatchInlineSnapshot(`1768`);
+    expect(bundleSize).toMatchInlineSnapshot(`1796`);
   });
 
   it('es-toolkit', async () => {
@@ -14,6 +14,6 @@ describe('escapeRegExp bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'escapeRegExp');
-    expect(bundleSize).toMatchInlineSnapshot(`291`);
+    expect(bundleSize).toMatchInlineSnapshot(`308`);
   });
 });

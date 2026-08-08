@@ -18,7 +18,7 @@ const firstElement = head(array);
 
 ### `head(array)`
 
-返回数组或类数组对象的第一个元素。如果数组为空或无效，则返回 `undefined`。
+返回数组或类数组对象的第一个元素。
 
 ```typescript
 import { head } from 'es-toolkit/compat';

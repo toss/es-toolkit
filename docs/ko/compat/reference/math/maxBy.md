@@ -16,7 +16,7 @@ const maxItem = maxBy(array, iteratee);
 
 ## 사용법
 
-### `maxBy(array, iteratee)`
+### `maxBy(array, iteratee?)`
 
 배열에서 함수로 계산한 값이 가장 큰 요소를 찾아요.
 
@@ -107,7 +107,7 @@ maxBy(undefined);
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 함수, 속성명, 또는 조건이에요.
+- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 함수, 속성명, 또는 조건이에요. 기본값은 `identity`예요.
 
 #### 반환 값
 

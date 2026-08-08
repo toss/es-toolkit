@@ -32,6 +32,10 @@ export function chunk<T>(arr: ArrayLike<T> | null | undefined, size = 1): T[][] 
 
   const array = toArray(arr);
 
+  if (array.length === 0) {
+    return [];
+  }
+
   if (!isFinite(size)) {
     return [array];
   }

@@ -16,7 +16,7 @@ const [truthy, falsy] = partition(collection, predicate);
 
 ## 用法
 
-### `partition(collection, predicate)`
+### `partition(collection, predicate?)`
 
 根据给定的条件函数将数组或对象的元素分成两组。第一组包含条件为真的元素,第二组包含条件为假的元素。
 

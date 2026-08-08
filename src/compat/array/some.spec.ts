@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { some as someLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { some } from './some';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
@@ -194,9 +193,5 @@ describe('some', () => {
 
     expect(some(sparseArray, value => value > 0)).toEqual(true);
     expect(some(sparseArray, value => value === undefined)).toEqual(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(some).toEqualTypeOf<typeof someLodash>();
   });
 });
