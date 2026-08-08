@@ -5,6 +5,7 @@ import { ListIterator } from '../_internal/ListIterator.ts';
 import { Many } from '../_internal/Many.ts';
 import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
@@ -144,7 +145,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
   orders = guard ? undefined : orders;
 
   if (!Array.isArray(collection)) {
-    collection = Object.values(collection);
+    collection = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
   }
 
   if (!Array.isArray(criteria)) {
