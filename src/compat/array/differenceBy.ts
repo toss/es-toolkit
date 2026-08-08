@@ -170,10 +170,11 @@ export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ..._valu
 
   const iteratee = last(_values);
   const values = flattenArrayLike<T>(_values);
+  const normalizedArray = Array.from(array, item => (Object.is(item, -0) ? (0 as T) : item));
 
   if (isArrayLikeObject(iteratee)) {
-    return differenceToolkit(Array.from(array), values);
+    return differenceToolkit(normalizedArray, values);
   }
 
-  return differenceByToolkit(Array.from(array), values, createIteratee(iteratee));
+  return differenceByToolkit(normalizedArray, values, createIteratee(iteratee));
 }
