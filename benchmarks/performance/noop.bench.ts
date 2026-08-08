@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { noop as noopToolkit_ } from 'es-toolkit';
-import { noop as noopLodash_ } from 'lodash';
+import { noop as noopToolkit } from 'es-toolkit';
+import lodash from 'lodash';
 
-const noopToolkit = noopToolkit_;
-const noopLodash = noopLodash_;
+const { noop: noopLodash } = lodash;
 
 describe('noop', () => {
   bench('es-toolkit/noop', () => {

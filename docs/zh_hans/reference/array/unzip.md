@@ -37,7 +37,7 @@ console.log(ages); // [30, 25, 35]
 console.log(roles); // ['engineer', 'designer', 'manager']
 ```
 
-也可以处理长度不同的数组。较短数组的空位会用 `undefined` 填充。
+返回数组的长度与最长的内部数组一致，较短内部数组中缺少的位置会用 `undefined` 填充。
 
 ```typescript
 import { unzip } from 'es-toolkit/array';

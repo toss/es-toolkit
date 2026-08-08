@@ -18,7 +18,7 @@ const firstElement = head(array);
 
 ### `head(array)`
 
-배열이나 배열 형태 객체의 첫 번째 요소를 반환해요. 배열이 비어있거나 유효하지 않으면 `undefined`를 반환해요.
+배열이나 배열 형태 객체의 첫 번째 요소를 반환해요.
 
 ```typescript
 import { head } from 'es-toolkit/compat';

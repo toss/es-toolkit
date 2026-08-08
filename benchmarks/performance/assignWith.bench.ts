@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { assignWith as assignWithCompatToolkit_ } from 'es-toolkit/compat';
-import { assignWith as assignWithLodash_ } from 'lodash';
+import { assignWith as assignWithToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const assignWithToolkit = assignWithCompatToolkit_;
-const assignWithLodash = assignWithLodash_;
+const { assignWith: assignWithLodash } = lodash;
 
 describe('assignWith', () => {
   bench('es-toolkit/assignWith', () => {

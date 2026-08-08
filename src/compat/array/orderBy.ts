@@ -192,11 +192,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
       return getValueByNestedPath(object, criterion);
     }
 
-    if (typeof object === 'object') {
-      return object[criterion as keyof typeof object];
-    }
-
-    return object;
+    return object[criterion as keyof typeof object];
   };
 
   // Prepare all cases for criteria

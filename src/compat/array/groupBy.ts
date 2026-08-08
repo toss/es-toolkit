@@ -1,5 +1,6 @@
 import { groupBy as groupByToolkit } from '../../array/groupBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
@@ -53,7 +54,7 @@ export function groupBy<T extends object>(
  * @template T - The type of elements in the array or values in the object.
  * @template K - The type of keys.
  * @param source - The collection to group.
- * @param [_getKeyFromItem] - The iteratee to transform keys.
+ * @param [_getKeyFromItem=identity] - The iteratee to transform keys.
  *   - If a function is provided, it's invoked for each element in the collection.
  *   - If a property name (string) is provided, that property of each element is used as the key.
  *   - If a property-value pair (array) is provided, elements with matching property values are used.
@@ -75,19 +76,18 @@ export function groupBy<T extends object>(
  */
 export function groupBy<T, K extends PropertyKey>(
   source: ArrayLike<T> | Record<any, T> | null | undefined,
-  _getKeyFromItem?:
+  _getKeyFromItem:
     | ((item: T, index: number, arr: any) => unknown)
     | Partial<T>
     | [keyof T, unknown]
-    | PropertyKey
-    | null
+    | PropertyKey = identity
 ): Record<K, T[]> {
   if (source == null) {
     return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
-  const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
+  const items = isArrayLike(source) ? toArray(source) : Object.values(source);
+  const getKeyFromItem = createIteratee(_getKeyFromItem);
 
   return groupByToolkit<T, K>(items, getKeyFromItem);
 }

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { get as getToolkit_ } from 'es-toolkit/compat';
-import { get as getLodash_ } from 'lodash';
+import { get as getToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const getToolkit = getToolkit_;
-const getLodash = getLodash_;
+const { get: getLodash } = lodash;
 
 describe('get with simple string', () => {
   bench('es-toolkit/get', () => {

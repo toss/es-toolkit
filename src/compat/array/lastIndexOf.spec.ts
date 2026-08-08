@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { lastIndexOf } from './lastIndexOf';
+import { falsey } from '../_internal/falsey';
 
 /**
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/findLastIndex-and-lastIndexOf.spec.js
@@ -45,6 +46,14 @@ describe('lastIndexOf', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`should treat falsey \`fromIndex\` values correctly`, () => {
+    const expected = falsey.map(value => (value === undefined ? 5 : -1));
+
+    const actual = falsey.map((fromIndex: any) => lastIndexOf(array, 3, fromIndex));
+
+    expect(actual).toEqual(expected);
+  });
+
   it(`should coerce \`fromIndex\` to an integer`, () => {
     expect(lastIndexOf(array, 2, 4.2)).toBe(4);
     expect(lastIndexOf(array, 1, '-1' as any)).toBe(3);
@@ -61,5 +70,35 @@ describe('lastIndexOf', () => {
     expect(lastIndexOf([], 1)).toBe(-1);
     expect(lastIndexOf(null, 1)).toBe(-1);
     expect(lastIndexOf(undefined, 1)).toBe(-1);
+  });
+
+  it(`should treat holes in a sparse array as \`undefined\``, () => {
+    const sparse = [1];
+    sparse[2] = 1;
+
+    expect(lastIndexOf(sparse, undefined, 2)).toBe(1);
+
+    const allHoles: number[] = [];
+    allHoles.length = 2;
+
+    expect(lastIndexOf(allHoles, undefined, 1)).toBe(1);
+  });
+
+  it(`should find values in a sparse array`, () => {
+    const sparse = [1];
+    sparse[2] = 1;
+
+    expect(lastIndexOf(sparse, 1)).toBe(2);
+    expect(lastIndexOf(sparse, 1, 1)).toBe(0);
+
+    const withNaN = [1];
+    withNaN[2] = NaN;
+
+    expect(lastIndexOf(withNaN, NaN)).toBe(2);
+  });
+
+  it(`should work with array-like values`, () => {
+    expect(lastIndexOf({ 0: 1, 1: 2, 2: 3, 3: 2, length: 4 }, 2)).toBe(3);
+    expect(lastIndexOf('abcb', 'b')).toBe(3);
   });
 });

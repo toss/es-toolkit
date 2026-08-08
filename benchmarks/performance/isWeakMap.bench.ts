@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isWeakMap as isWeakMapToolkit_ } from 'es-toolkit';
-import { isWeakMap as isWeakMapToolkitCompat_ } from 'es-toolkit/compat';
-import { isWeakMap as isWeakMapLodash_ } from 'lodash';
+import { isWeakMap as isWeakMapToolkit } from 'es-toolkit';
+import { isWeakMap as isWeakMapToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isWeakMapToolkit = isWeakMapToolkit_;
-const isWeakMapToolkitCompat = isWeakMapToolkitCompat_;
-const isWeakMapLodash = isWeakMapLodash_;
+const { isWeakMap: isWeakMapLodash } = lodash;
 
 describe('isWeakMap', () => {
   bench('es-toolkit/isWeakMap', () => {

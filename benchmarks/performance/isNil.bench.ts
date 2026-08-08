@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isNil as isNilToolkit_ } from 'es-toolkit';
-import { isNil as isNilCompatToolkit_ } from 'es-toolkit/compat';
-import { isNil as isNilLodash_ } from 'lodash';
+import { isNil as isNilToolkit } from 'es-toolkit';
+import { isNil as isNilCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isNilToolkit = isNilToolkit_;
-const isNilCompatToolkit = isNilCompatToolkit_;
-const isNilLodash = isNilLodash_;
+const { isNil: isNilLodash } = lodash;
 
 describe('isNil', () => {
   bench('es-toolkit/isNil', () => {

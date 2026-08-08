@@ -18,12 +18,15 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.dropRightWhile).toEqualTypeOf<typeof lodash.dropRightWhile>();
     expectTypeOf(compat.dropWhile).toEqualTypeOf<typeof lodash.dropWhile>();
     expectTypeOf(compat.each).toEqualTypeOf<typeof lodash.each>();
+    expectTypeOf(compat.eachRight).toEqualTypeOf<typeof lodash.eachRight>();
     expectTypeOf(compat.every).toEqualTypeOf<typeof lodash.every>();
+    expectTypeOf(compat.fill).toEqualTypeOf<typeof lodash.fill>();
     expectTypeOf(compat.filter).toEqualTypeOf<typeof lodash.filter>();
     expectTypeOf(compat.find).toEqualTypeOf<typeof lodash.find>();
     expectTypeOf(compat.findIndex).toEqualTypeOf<typeof lodash.findIndex>();
     expectTypeOf(compat.findLast).toEqualTypeOf<typeof lodash.findLast>();
     expectTypeOf(compat.findLastIndex).toEqualTypeOf<typeof lodash.findLastIndex>();
+    expectTypeOf(compat.first).toEqualTypeOf<typeof lodash.first>();
     expectTypeOf(compat.flatMap).toEqualTypeOf<typeof lodash.flatMap>();
     expectTypeOf(compat.flatMapDeep).toEqualTypeOf<typeof lodash.flatMapDeep>();
     expectTypeOf(compat.flatMapDepth).toEqualTypeOf<typeof lodash.flatMapDepth>();
@@ -45,9 +48,13 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.keyBy).toEqualTypeOf<typeof lodash.keyBy>();
     expectTypeOf(compat.last).toEqualTypeOf<typeof lodash.last>();
     expectTypeOf(compat.lastIndexOf).toEqualTypeOf<typeof lodash.lastIndexOf>();
+    // NOTE: expectTypeOf does not support checking complex overloaded map types
+    // expectTypeOf(compat.map).toEqualTypeOf<typeof lodash.map>();
     expectTypeOf(compat.nth).toEqualTypeOf<typeof lodash.nth>();
     expectTypeOf(compat.orderBy).toEqualTypeOf<typeof lodash.orderBy>();
     expectTypeOf(compat.partition).toEqualTypeOf<typeof lodash.partition>();
+    // NOTE: TypeScript doesn't support matching conditional types
+    // expectTypeOf(compat.pull).toEqualTypeOf<typeof lodash.pull>();
     expectTypeOf(compat.pullAll).toEqualTypeOf<typeof lodash.pullAll>();
     // NOTE: TypeScript doesn't support matching conditional types
     // expectTypeOf(compat.pullAllBy).toEqualTypeOf<typeof lodash.pullAllBy>();
@@ -56,6 +63,8 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.reduce).toEqualTypeOf<typeof lodash.reduce>();
     expectTypeOf(compat.reduceRight).toEqualTypeOf<typeof lodash.reduceRight>();
     expectTypeOf(compat.reject).toEqualTypeOf<typeof lodash.reject>();
+    expectTypeOf(compat.remove).toEqualTypeOf<typeof lodash.remove>();
+    expectTypeOf(compat.reverse).toEqualTypeOf<typeof lodash.reverse>();
     expectTypeOf(compat.sample).toEqualTypeOf<typeof lodash.sample>();
     expectTypeOf(compat.sampleSize).toEqualTypeOf<typeof lodash.sampleSize>();
     expectTypeOf(compat.shuffle).toEqualTypeOf<typeof lodash.shuffle>();
@@ -96,6 +105,11 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.ary).toEqualTypeOf<typeof lodash.ary>();
     expectTypeOf(compat.attempt).toEqualTypeOf<typeof lodash.attempt>();
     expectTypeOf(compat.before).toEqualTypeOf<typeof lodash.before>();
+    // NOTE: expectTypeOf does not support checking custom FunctionBind/Curry types
+    // expectTypeOf(compat.bind).toEqualTypeOf<typeof lodash.bind>();
+    // expectTypeOf(compat.bindKey).toEqualTypeOf<typeof lodash.bindKey>();
+    // expectTypeOf(compat.curry).toEqualTypeOf<typeof lodash.curry>();
+    // expectTypeOf(compat.curryRight).toEqualTypeOf<typeof lodash.curryRight>();
     expectTypeOf(compat.debounce).toEqualTypeOf<typeof lodash.debounce>();
     expectTypeOf(compat.defer).toEqualTypeOf<typeof lodash.defer>();
     expectTypeOf(compat.delay).toEqualTypeOf<typeof lodash.delay>();
@@ -109,6 +123,9 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.nthArg).toEqualTypeOf<typeof lodash.nthArg>();
     expectTypeOf(compat.once).toEqualTypeOf<typeof lodash.once>();
     expectTypeOf(compat.overArgs).toEqualTypeOf<typeof lodash.overArgs>();
+    // NOTE: expectTypeOf does not support checking custom Partial types
+    // expectTypeOf(compat.partial).toEqualTypeOf<typeof lodash.partial>();
+    // expectTypeOf(compat.partialRight).toEqualTypeOf<typeof lodash.partialRight>();
     expectTypeOf(compat.rearg).toEqualTypeOf<typeof lodash.rearg>();
     expectTypeOf(compat.rest).toEqualTypeOf<typeof lodash.rest>();
     expectTypeOf(compat.spread).toEqualTypeOf<typeof lodash.spread>();
@@ -152,6 +169,8 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.create).toEqualTypeOf<typeof lodash.create>();
     expectTypeOf(compat.defaults).toEqualTypeOf<typeof lodash.defaults>();
     expectTypeOf(compat.defaultsDeep).toEqualTypeOf<typeof lodash.defaultsDeep>();
+    expectTypeOf(compat.extend).toEqualTypeOf<typeof lodash.extend>();
+    expectTypeOf(compat.extendWith).toEqualTypeOf<typeof lodash.extendWith>();
     expectTypeOf(compat.findKey).toEqualTypeOf<typeof lodash.findKey>();
     expectTypeOf(compat.findLastKey).toEqualTypeOf<typeof lodash.findLastKey>();
     expectTypeOf(compat.forIn).toEqualTypeOf<typeof lodash.forIn>();
@@ -255,6 +274,8 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.startCase).toEqualTypeOf<typeof lodash.startCase>();
     expectTypeOf(compat.startsWith).toEqualTypeOf<typeof lodash.startsWith>();
     expectTypeOf(compat.template).toEqualTypeOf<typeof lodash.template>();
+    // NOTE: expectTypeOf does not support checking custom TemplateSettings types
+    // expectTypeOf(compat.templateSettings).toEqualTypeOf<typeof lodash.templateSettings>();
     expectTypeOf(compat.toLower).toEqualTypeOf<typeof lodash.toLower>();
     expectTypeOf(compat.toUpper).toEqualTypeOf<typeof lodash.toUpper>();
     expectTypeOf(compat.trim).toEqualTypeOf<typeof lodash.trim>();

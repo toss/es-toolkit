@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isNull as isNullToolkit_ } from 'es-toolkit';
-import { isNull as isNullToolkitCompat_ } from 'es-toolkit/compat';
-import { isNull as isNullLodash_ } from 'lodash';
+import { isNull as isNullToolkit } from 'es-toolkit';
+import { isNull as isNullToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isNullToolkit = isNullToolkit_;
-const isNullToolkitCompat = isNullToolkitCompat_;
-const isNullLodash = isNullLodash_;
+const { isNull: isNullLodash } = lodash;
 
 describe('isNull', () => {
   bench('es-toolkit/isNull', () => {

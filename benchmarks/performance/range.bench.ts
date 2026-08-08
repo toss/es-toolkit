@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { range as rangeToolkit_ } from 'es-toolkit';
-import { range as rangeCompatToolkit_ } from 'es-toolkit/compat';
-import { range as rangeLodash_ } from 'lodash';
+import { range as rangeToolkit } from 'es-toolkit';
+import { range as rangeCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const rangeToolkit = rangeToolkit_;
-const rangeCompatToolkit = rangeCompatToolkit_;
-const rangeLodash = rangeLodash_;
+const { range: rangeLodash } = lodash;
 
 describe('range', () => {
   bench('es-toolkit/range', () => {

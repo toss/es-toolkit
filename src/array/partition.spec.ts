@@ -75,4 +75,21 @@ describe('partition', () => {
       expect(array).toBe(arr);
     });
   });
+
+  it('should accept a predicate that returns any truthy or falsy value, like Array.prototype.filter', () => {
+    interface Value {
+      name: string;
+      good?: boolean;
+    }
+
+    const values: Value[] = [{ name: 'a', good: true }, { name: 'b', good: false }, { name: 'c' }];
+
+    const [good, bad] = partition(values, i => i.good);
+
+    expect(good).toEqual([{ name: 'a', good: true }]);
+    expect(bad).toEqual([{ name: 'b', good: false }, { name: 'c' }]);
+
+    expectTypeOf(good).toEqualTypeOf<Value[]>();
+    expectTypeOf(bad).toEqualTypeOf<Value[]>();
+  });
 });

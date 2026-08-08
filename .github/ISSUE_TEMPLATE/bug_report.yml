@@ -1,0 +1,56 @@
+name: Bug report
+description: Report behavior that does not match the documentation.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We encourage you to use AI to assist you in researching and reviewing bug reports. However, you must review and deeply understand the issues you are reporting. For this reason, **issue descriptions from external contributors must be written and created by a human**. You can use AI to help create a reproduction.
+
+        Proposing a new function? Open a [discussion](https://github.com/toss/es-toolkit/discussions/new?category=ideas) instead — we agree on the design before anyone writes code.
+
+        Before opening an issue, please [search the existing ones](https://github.com/toss/es-toolkit/issues). If you find the same report, upvote it instead of opening a new one.
+  - type: input
+    id: version
+    attributes:
+      label: es-toolkit version
+      placeholder: 1.50.0
+    validations:
+      required: true
+  - type: dropdown
+    id: entry-point
+    attributes:
+      label: Entry point
+      options:
+        - es-toolkit
+        - es-toolkit/compat
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: |
+        The smallest piece of code that reproduces the issue. A link to StackBlitz or a public repository works too.
+
+        **Skipping this or providing a reproduction we cannot run will result in the issue being closed.**
+      render: typescript
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Current vs. expected behavior
+      description: What happened, and what you expected instead. For `es-toolkit/compat`, include what Lodash returns for the same input.
+    validations:
+      required: true
+  - type: checkboxes
+    id: validations
+    attributes:
+      label: Validations
+      options:
+        - label: I searched the existing issues and discussions.
+          required: true
+        - label: I read the [Contributing Guidelines](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING.md).
+          required: true
+        - label: I wrote this description myself.
+          required: true
