@@ -16,7 +16,7 @@ forEachRight(collection, callback);
 
 ## 사용법
 
-### `forEachRight(collection, callback)`
+### `forEachRight(collection, callback?)`
 
 배열, 객체, 문자열을 오른쪽에서 왼쪽 순서로 순회하면서 각 요소에 대해 콜백 함수를 실행해요. 콜백이 `false`를 반환하면 순회를 중단해요.
 

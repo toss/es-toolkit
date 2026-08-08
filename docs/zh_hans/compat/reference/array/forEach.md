@@ -16,7 +16,7 @@ forEach(collection, callback);
 
 ## 用法
 
-### `forEach(collection, callback)`
+### `forEach(collection, callback?)`
 
 当您想遍历数组或对象的所有元素并对每个元素执行回调函数时，请使用 `forEach`。如果回调返回 `false`，则停止遍历。
 
@@ -79,7 +79,7 @@ forEach(undefined, value => {
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要遍历的数组或对象。
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 对每个元素执行的函数。返回 `false` 以停止遍历。
+- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 可选): 对每个元素执行的函数。返回 `false` 以停止遍历。默认值是 `identity` 函数。
 
 #### 返回值
 
