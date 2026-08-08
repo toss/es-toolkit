@@ -59,6 +59,16 @@ describe('sampleSize', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should return an empty array for nullish collections when `size` is not provided', () => {
+    expect(sampleSize(null)).toEqual([]);
+    expect(sampleSize(undefined)).toEqual([]);
+    expect(sampleSize([])).toEqual([]);
+    // @ts-expect-error - type mismatch
+    expect(sampleSize(1)).toEqual([]);
+    // @ts-expect-error - type mismatch
+    expect(sampleSize(true)).toEqual([]);
+  });
+
   it('should sample an object', () => {
     const object = { a: 1, b: 2, c: 3 };
     const actual = sampleSize(object, 2);
