@@ -78,6 +78,18 @@ meanBy(users, { active: true });
 // Returns: 0.6666666 (active 가 true 인 사람의 비율)
 ```
 
+`undefined` 값은 합에서 무시되지만, 나누는 개수에는 그대로 포함돼요.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([{ a: 1 }, {}], 'a');
+// Returns: 0.5 ((1) / 2, undefined 무시)
+
+meanBy([{}, {}], 'a');
+// Returns: NaN
+```
+
 빈 배열은 NaN을 반환해요.
 
 ```typescript

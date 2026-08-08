@@ -78,6 +78,18 @@ meanBy(users, { active: true });
 // Returns: 0.6666666 (active が true の人の割合)
 ```
 
+`undefined` の値は合計では無視されますが、割る個数にはそのまま含まれます。
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([{ a: 1 }, {}], 'a');
+// Returns: 0.5 ((1) / 2, undefinedを無視)
+
+meanBy([{}, {}], 'a');
+// Returns: NaN
+```
+
 空の配列はNaNを返します。
 
 ```typescript

@@ -78,6 +78,18 @@ meanBy(users, { active: true });
 // Returns: 0.6666666 (active 为 true 的人占总人数的比例)
 ```
 
+求和时会忽略 `undefined` 值，但它们仍会计入除数。
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([{ a: 1 }, {}], 'a');
+// Returns: 0.5 ((1) / 2，忽略 undefined)
+
+meanBy([{}, {}], 'a');
+// Returns: NaN
+```
+
 空数组返回 NaN。
 
 ```typescript
