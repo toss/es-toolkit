@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### 别名
+
+`each`
+
 #### 参数
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要遍历的数组或对象。
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 可选): 对每个元素执行的函数。返回 `false` 以停止遍历。默认值是 `identity` 函数。
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 要遍历的数组或对象。
+- `callback` (`(item: any, index: any, collection: any) => unknown`, 可选): 对每个元素执行的函数。默认为 `identity` 函数。
 
 #### 返回值
 
-(`T`): 返回遍历的原始集合。
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 返回原始集合。

@@ -65,6 +65,10 @@ forEachRight([1, 2, 3, 4], value => {
 // Output: 4, 3, 2
 ```
 
+#### Alias
+
+`eachRight`
+
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The collection to iterate over. Can be an array, object, string, or null/undefined.

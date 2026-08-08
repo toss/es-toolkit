@@ -29,6 +29,26 @@
       "source": "/zh_hans/reference/compat/:path*.html",
       "destination": "/zh_hans/compat/reference/:path*.html",
       "permanent": false
-    }
+    },
+    { "source": "/compat/reference/array/each.html", "destination": "/compat/reference/array/forEach.html", "permanent": false },
+    { "source": "/ko/compat/reference/array/each.html", "destination": "/ko/compat/reference/array/forEach.html", "permanent": false },
+    { "source": "/ja/compat/reference/array/each.html", "destination": "/ja/compat/reference/array/forEach.html", "permanent": false },
+    { "source": "/zh_hans/compat/reference/array/each.html", "destination": "/zh_hans/compat/reference/array/forEach.html", "permanent": false },
+    { "source": "/compat/reference/array/eachRight.html", "destination": "/compat/reference/array/forEachRight.html", "permanent": false },
+    { "source": "/ko/compat/reference/array/eachRight.html", "destination": "/ko/compat/reference/array/forEachRight.html", "permanent": false },
+    { "source": "/ja/compat/reference/array/eachRight.html", "destination": "/ja/compat/reference/array/forEachRight.html", "permanent": false },
+    { "source": "/zh_hans/compat/reference/array/eachRight.html", "destination": "/zh_hans/compat/reference/array/forEachRight.html", "permanent": false },
+    { "source": "/compat/reference/array/first.html", "destination": "/compat/reference/array/head.html", "permanent": false },
+    { "source": "/ko/compat/reference/array/first.html", "destination": "/ko/compat/reference/array/head.html", "permanent": false },
+    { "source": "/ja/compat/reference/array/first.html", "destination": "/ja/compat/reference/array/head.html", "permanent": false },
+    { "source": "/zh_hans/compat/reference/array/first.html", "destination": "/zh_hans/compat/reference/array/head.html", "permanent": false },
+    { "source": "/compat/reference/object/extend.html", "destination": "/compat/reference/object/assignIn.html", "permanent": false },
+    { "source": "/ko/compat/reference/object/extend.html", "destination": "/ko/compat/reference/object/assignIn.html", "permanent": false },
+    { "source": "/ja/compat/reference/object/extend.html", "destination": "/ja/compat/reference/object/assignIn.html", "permanent": false },
+    { "source": "/zh_hans/compat/reference/object/extend.html", "destination": "/zh_hans/compat/reference/object/assignIn.html", "permanent": false },
+    { "source": "/compat/reference/object/extendWith.html", "destination": "/compat/reference/object/assignInWith.html", "permanent": false },
+    { "source": "/ko/compat/reference/object/extendWith.html", "destination": "/ko/compat/reference/object/assignInWith.html", "permanent": false },
+    { "source": "/ja/compat/reference/object/extendWith.html", "destination": "/ja/compat/reference/object/assignInWith.html", "permanent": false },
+    { "source": "/zh_hans/compat/reference/object/extendWith.html", "destination": "/zh_hans/compat/reference/object/assignInWith.html", "permanent": false }
   ]
 }

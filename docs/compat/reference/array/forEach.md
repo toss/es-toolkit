@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### Alias
+
+`each`
+
 #### Parameters
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to iterate over.
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`, optional): The function to execute for each element. Returns `false` to stop iteration. Default is the `identity` function.
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The array or object to iterate over.
+- `callback` (`(item: any, index: any, collection: any) => unknown`, optional): The function to execute for each element. Default is the `identity` function.
 
 #### Returns
 
-(`T`): Returns the original collection that was iterated over.
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): Returns the original collection.
