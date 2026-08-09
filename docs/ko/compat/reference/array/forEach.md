@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### 별칭
+
+`each`
+
 #### 파라미터
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 순회할 배열이나 객체예요.
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 선택): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 배열이나 객체예요.
+- `callback` (`(item: any, index: any, collection: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. 기본값은 `identity` 함수예요.
 
 #### 반환 값
 
-(`T`): 순회한 원본 컬렉션을 반환해요.
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 반환해요.

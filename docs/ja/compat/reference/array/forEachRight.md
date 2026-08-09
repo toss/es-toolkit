@@ -65,6 +65,10 @@ forEachRight([1, 2, 3, 4], value => {
 // 出力: 4, 3, 2
 ```
 
+#### エイリアス
+
+`eachRight`
+
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 走査するコレクションです。配列、オブジェクト、文字列、またはnull/undefinedを指定できます。

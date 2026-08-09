@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### エイリアス
+
+`each`
+
 #### パラメータ
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 走査する配列またはオブジェクトです。
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`, 選択): 各要素に対して実行する関数です。`false`を返すと走査を中断します。デフォルトは`identity`関数です。
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 走査する配列またはオブジェクトです。
+- `callback` (`(item: any, index: any, collection: any) => unknown`, オプション): 各要素に対して実行する関数です。デフォルトは `identity` 関数です。
 
 #### 戻り値
 
-(`T`): 走査した元のコレクションを返します。
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 元のコレクションを返します。

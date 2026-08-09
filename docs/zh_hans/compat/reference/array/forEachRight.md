@@ -65,6 +65,10 @@ forEachRight([1, 2, 3, 4], value => {
 // 输出: 4, 3, 2
 ```
 
+#### 别名
+
+`eachRight`
+
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 要遍历的集合。可以是数组、对象、字符串或 null/undefined。

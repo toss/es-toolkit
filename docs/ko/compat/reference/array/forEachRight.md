@@ -65,6 +65,10 @@ forEachRight([1, 2, 3, 4], value => {
 // 출력: 4, 3, 2
 ```
 
+#### 별칭
+
+`eachRight`
+
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열, 또는 null/undefined일 수 있어요.
