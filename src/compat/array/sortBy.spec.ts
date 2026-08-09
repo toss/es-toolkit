@@ -141,6 +141,12 @@ describe('sortBy', () => {
     expect(sortBy({ a: 1, b: 2, c: 3 }, Math.sin)).toEqual([3, 1, 2]);
   });
 
+  it('should not include the `length` property for array-like objects', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(sortBy({ 0: 3, 1: 1, 2: 2, length: 3 }, [null])).toEqual([1, 2, 3]);
+  });
+
   it('should move `NaN`, nullish, and symbol values to the end', () => {
     const symbol1 = Symbol ? Symbol('a') : null;
     const symbol2 = Symbol ? Symbol('b') : null;
