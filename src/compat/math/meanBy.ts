@@ -9,8 +9,8 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  *
  * If the array is empty, this function returns `NaN`.
  *
- * Values of `undefined` are skipped when summing, but they are still counted
- * in the divisor, which is the length of `items`.
+ * If the key is missing or the value is `undefined`, it is treated as `0`.
+ * However, if every value is `undefined`, the result is `NaN`.
  *
  * @template T - The type of elements in the array.
  * @param items An array to calculate the average.
