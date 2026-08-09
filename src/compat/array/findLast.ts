@@ -106,7 +106,7 @@ export function findLast<T extends object>(
  *
  * @template T
  * @param collection - The array or object to search through.
- * @param [predicate=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [_doesMatch=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param [fromIndex] - The index to start the search from, defaults to collection.length-1 for arrays or Object.keys(collection).length-1 for objects.
  * @returns The last property value that has the specified property, or `undefined` if no match is found.
  *
@@ -118,7 +118,11 @@ export function findLast<T extends object>(
  */
 export function findLast<T>(
   collection: ArrayLike<T> | Record<any, any> | null | undefined,
-  predicate: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey = identity,
+  _doesMatch:
+    | ((item: T, index: number, arr: any) => unknown)
+    | Partial<T>
+    | [keyof T, unknown]
+    | PropertyKey = identity,
   fromIndex?: number
 ): T | undefined {
   if (!collection) {
@@ -135,7 +139,7 @@ export function findLast<T>(
     fromIndex = Math.min(fromIndex, length - 1);
   }
 
-  const doesMatch = iteratee(predicate);
+  const doesMatch = iteratee(_doesMatch);
 
   if (!Array.isArray(collection)) {
     const keys = Object.keys(collection) as Array<keyof T>;

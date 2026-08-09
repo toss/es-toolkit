@@ -20,6 +20,8 @@ const result = unzip(array);
 
 ネストした配列の同じインデックスにある要素を集めて新しい配列として返します。`zip`関数の逆の操作を実行します。行列を転置したり構造化データを再編成するときに便利です。
 
+返される配列の長さは最も長い内部配列の長さに合わせられ、短い内部配列で足りない位置は `undefined` で埋められます。
+
 ```typescript
 import { unzip } from 'es-toolkit/compat';
 

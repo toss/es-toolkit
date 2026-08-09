@@ -37,7 +37,7 @@ console.log(ages); // [30, 25, 35]
 console.log(roles); // ['engineer', 'designer', 'manager']
 ```
 
-It can also handle arrays of different lengths. For shorter arrays, empty positions are filled with `undefined`.
+The returned array's length matches the longest nested array, and missing positions from shorter arrays are filled with `undefined`.
 
 ```typescript
 import { unzip } from 'es-toolkit/array';

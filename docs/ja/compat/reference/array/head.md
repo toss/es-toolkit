@@ -52,6 +52,10 @@ head(null); // undefined
 head(undefined); // undefined
 ```
 
+#### エイリアス
+
+`first`
+
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 最初の要素を取得する配列または配列のようなオブジェクトです。

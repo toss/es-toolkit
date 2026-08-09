@@ -54,4 +54,9 @@ describe('takeWhile', () => {
     expect(takeWhile({ 0: 3, 1: 2, 2: 1, length: 3 }, value => value > 1)).toEqual([3, 2]);
     expect(takeWhile(toArgs([3, 2, 1]), value => value > 1)).toEqual([3, 2]);
   });
+
+  it('should treat strings as arrays of characters', () => {
+    expect(takeWhile('hello', char => char !== 'o')).toEqual(['h', 'e', 'l', 'l']);
+    expect(takeWhile('hello')).toEqual(['h', 'e', 'l', 'l', 'o']);
+  });
 });

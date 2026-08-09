@@ -16,7 +16,7 @@ forEach(collection, callback);
 
 ## 使用法
 
-### `forEach(collection, callback)`
+### `forEach(collection, callback?)`
 
 配列またはオブジェクトのすべての要素を走査し、各要素に対してコールバック関数を実行したい場合は`forEach`を使用してください。コールバックが`false`を返すと走査を中断します。
 
@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### エイリアス
+
+`each`
+
 #### パラメータ
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 走査する配列またはオブジェクトです。
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 各要素に対して実行する関数です。`false`を返すと走査を中断します。
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 走査する配列またはオブジェクトです。
+- `callback` (`(item: any, index: any, collection: any) => unknown`, オプション): 各要素に対して実行する関数です。デフォルトは `identity` 関数です。
 
 #### 戻り値
 
-(`T`): 走査した元のコレクションを返します。
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 元のコレクションを返します。

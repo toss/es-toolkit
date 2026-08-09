@@ -20,6 +20,8 @@ const result = unzip(array);
 
 收集嵌套数组中相同索引处的元素并将它们作为新数组返回。执行与 `zip` 函数相反的操作。这在转置矩阵或重组结构化数据时很有用。
 
+返回数组的长度与最长的内部数组一致，较短内部数组中缺少的位置会用 `undefined` 填充。
+
 ```typescript
 import { unzip } from 'es-toolkit/compat';
 
