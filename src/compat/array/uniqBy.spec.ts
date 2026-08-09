@@ -98,4 +98,11 @@ describe('uniqBy', () => {
     // @ts-expect-error
     expect(uniqBy([1, 2, 3, 4, 1, 2, 3])).toEqual([1, 2, 3, 4]);
   });
+
+  it('should normalize `-0` to `0` like lodash', () => {
+    expect(uniqBy([-0, 0], value => value)).toEqual([0]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(uniqBy([-0])).toEqual([0]);
+  });
 });

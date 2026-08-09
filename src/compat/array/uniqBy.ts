@@ -1,6 +1,7 @@
 import { uniqBy as uniqByToolkit } from '../../array/uniqBy.ts';
 import { ary } from '../../function/ary.ts';
 import { identity } from '../../function/identity.ts';
+import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
@@ -26,5 +27,5 @@ export function uniqBy<T>(
     return [];
   }
 
-  return uniqByToolkit(Array.from(array), ary(createIteratee(iteratee), 1));
+  return uniqByToolkit(Array.from(array), ary(createIteratee(iteratee), 1)).map(normalizeZero);
 }
