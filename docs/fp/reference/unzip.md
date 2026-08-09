@@ -16,6 +16,8 @@ Prefer the original es-toolkit [`unzip`](../../reference/array/unzip.md) in ordi
 
 `unzip` takes an array of grouped values and returns arrays that collect the values at each position.
 
+The returned array's length matches the longest nested array, and missing positions from shorter arrays are filled with `undefined`.
+
 ```typescript
 import { pipe, unzip } from 'es-toolkit/fp';
 

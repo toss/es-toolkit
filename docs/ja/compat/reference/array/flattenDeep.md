@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // 結果: ['a', 'b', 'c', 'd']
 ```
 
-空の配列やnull、undefinedは空の配列を返します。
+`null`や`undefined`は空の配列として処理されます。
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

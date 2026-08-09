@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { reduce as reduceToolkitCompat_ } from 'es-toolkit/compat';
-import { reduce as reduceLodash_ } from 'lodash';
+import { reduce as reduceToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const reduceToolkitCompat = reduceToolkitCompat_;
-const reduceLodash = reduceLodash_;
+const { reduce: reduceLodash } = lodash;
 
 const array = [1, 2, 3, 4, 5];
 

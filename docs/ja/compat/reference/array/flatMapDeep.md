@@ -11,12 +11,12 @@
 各要素に関数を適用した後、結果を再帰的に平坦化します。
 
 ```typescript
-const result = flatMapDeep(collection, iteratee);
+const result = flatMapDeep(collection, iteratee?);
 ```
 
 ## 使用法
 
-### `flatMapDeep(collection, iteratee)`
+### `flatMapDeep(collection, iteratee?)`
 
 コレクションの各要素にイテレータ関数を適用した後、無限の深さまで平坦化した配列を返します。ネストされた配列構造がすべて平坦化されて1次元配列になります。
 

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { size as sizeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { size } from './size';
 import { falsey } from '../_internal/falsey';
 import { toArgs } from '../_internal/toArgs';
@@ -66,6 +65,11 @@ describe('size', () => {
     expect(size(str)).toBe(10);
   });
 
+  it('should count multi-byte characters in a string as single code points', () => {
+    expect(size('😀😁😂')).toBe(3);
+    expect(size('a😀b')).toBe(3);
+  });
+
   it('should return the `length` of array-like objects', () => {
     expect(size({ length: 3 })).toBe(3);
     expect(size({ 0: 'a', 1: 'b', length: 2 })).toBe(2);
@@ -86,9 +90,5 @@ describe('size', () => {
 
   it('should not treat objects with non-number lengths as array-like', () => {
     expect(size({ length: '0' })).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(size).toEqualTypeOf<typeof sizeLodash>();
   });
 });

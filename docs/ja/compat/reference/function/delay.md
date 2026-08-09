@@ -157,7 +157,7 @@ window.addEventListener('beforeunload', () => {
 
 - `func` (`Function`): 遅延後に実行する関数です。
 - `wait` (`number`): 遅延するミリ秒数です。
-- `args` (`...any[]`): 関数実行時に渡す引数です。
+- `...args` (`Array<any>`): 関数実行時に渡す引数です。
 
 #### 戻り値
 

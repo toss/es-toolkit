@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { trimStart as trimStartToolkit_ } from 'es-toolkit/compat';
-import { trimStart as trimStartLodash_ } from 'lodash';
+import { trimStart as trimStartToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const trimStartToolkit = trimStartToolkit_;
-const trimStartLodash = trimStartLodash_;
+const { trimStart: trimStartLodash } = lodash;
 
 describe('trimStart', () => {
   bench('es-toolkit/trimStart', () => {

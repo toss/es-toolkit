@@ -18,7 +18,7 @@ const firstElement = head(array);
 
 ### `head(array)`
 
-配列または配列のようなオブジェクトの最初の要素を返します。配列が空または無効な場合は`undefined`を返します。
+配列または配列のようなオブジェクトの最初の要素を返します。
 
 ```typescript
 import { head } from 'es-toolkit/compat';
@@ -51,6 +51,10 @@ const noElement = head(emptyArray);
 head(null); // undefined
 head(undefined); // undefined
 ```
+
+#### エイリアス
+
+`first`
 
 #### パラメータ
 

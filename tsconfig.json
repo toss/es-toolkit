@@ -12,5 +12,5 @@
     "skipLibCheck": true
   },
   "include": ["src", ".scripts/**/*", "**/*.spec.ts"],
-  "exclude": [".scripts/docs/**/*"]
+  "exclude": [".scripts/docs/**/*", "tests/types/**/*"]
 }

@@ -71,7 +71,7 @@ obj['-0'](); // 'negative zero'
 #### Parameters
 
 - `object` (`Object`): The object to bind methods to.
-- `methodNames` (`...(string | string[] | number | IArguments)`): The method names to bind. Can be specified as individual strings, arrays, numbers, or Arguments objects.
+- `...methodNames` (`Array<string | string[] | number | IArguments>`): The method names to bind. Can be specified as individual strings, arrays, numbers, or Arguments objects.
 
 #### Returns
 

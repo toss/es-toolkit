@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { over as overLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { over } from './over';
 import { slice } from '../_internal/slice';
 
@@ -80,9 +79,5 @@ describe('over', () => {
       ['c', 'd'],
     ]);
     expect(func({ a: 1, b: 2, c: 3, d: 4 })).toEqual([false, false]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(over).toEqualTypeOf<typeof overLodash>();
   });
 });

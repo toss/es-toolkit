@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { lastIndexOf as lastIndexOfToolkitCompat_ } from 'es-toolkit/compat';
-import { lastIndexOf as lastIndexOfLodash_ } from 'lodash';
+import { lastIndexOf as indexOfToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const indexOfToolkitCompat = lastIndexOfToolkitCompat_;
-const indexOfLodash = lastIndexOfLodash_;
+const { lastIndexOf: indexOfLodash } = lodash;
 
 describe('lastIndexOf', () => {
   const largeArray = Array(1_000_000)

@@ -1,4 +1,4 @@
-import { flatten } from './flatten.ts';
+import { flattenDepth } from './flattenDepth.ts';
 import { map } from './map.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
@@ -110,7 +110,7 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: ob
  *
  * @template T, R
  * @param collection - The array or object to iterate over.
- * @param [iteratee] - The function that produces the new array elements.
+ * @param [iteratee=identity] - The function that produces the new array elements.
  * @param [depth=1] - The maximum recursion depth.
  * @returns A new array that has been flattened up to the specified depth.
  *
@@ -140,5 +140,5 @@ export function flatMapDepth<T, R>(
   const iterateeFn = createIteratee(iteratee);
   const mapped = map(collection, iterateeFn);
 
-  return (flatten as any)(mapped, depth);
+  return flattenDepth(mapped, depth);
 }

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { functionsIn as functionsInLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { functionsIn } from './functionsIn';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -85,9 +84,5 @@ describe('functionsIn', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(functionsIn(new Foo())).toEqual(['a', 'c']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(functionsIn).toEqualTypeOf<typeof functionsInLodash>();
   });
 });

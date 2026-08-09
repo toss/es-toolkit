@@ -80,7 +80,7 @@ differenceBy(undefined, [1, 2], x => x);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 求差集的基准数组。
-- `values` (`...ArrayLike<T>[]`): 包含要排除的值的数组。
+- `...values` (`Array<ArrayLike<T>>`): 包含要排除的值的数组。
 - `iteratee` (`ValueIteratee<T>`): 将每个元素转换为比较值的函数。可以使用函数、属性名或部分对象。
 
 #### 返回值

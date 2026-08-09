@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { forEachRight as forEachRightToolkit_ } from 'es-toolkit';
-import { forEachRight as forEachRightToolkitCompat_ } from 'es-toolkit/compat';
-import { forEachRight as forEachRightLodash_ } from 'lodash';
+import { forEachRight as forEachRightToolkit } from 'es-toolkit';
+import { forEachRight as forEachRightToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const forEachRightToolkit = forEachRightToolkit_;
-const forEachRightToolkitCompat = forEachRightToolkitCompat_;
-const forEachRightLodash = forEachRightLodash_;
+const { forEachRight: forEachRightLodash } = lodash;
 
 describe('forEachRight', () => {
   bench('es-toolkit/forEachRight', () => {

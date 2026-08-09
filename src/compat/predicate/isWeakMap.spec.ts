@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isWeakMap as isWeakMapLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isWeakMap } from './isWeakMap';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -32,9 +31,5 @@ describe('isWeakMap', () => {
   it('should work for objects with a non-function `constructor` (test in IE 11)', () => {
     expect(isWeakMap({ constructor: false })).toBe(false);
     expect(isWeakMap({ constructor: true })).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isWeakMap).toEqualTypeOf<typeof isWeakMapLodash>();
   });
 });

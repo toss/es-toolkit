@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { forInRight as forInToolkitCompat_, times } from 'es-toolkit/compat';
-import { forInRight as forInLodash_ } from 'lodash';
+import { forInRight as forInToolkitCompat, times } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const forInToolkitCompat = forInToolkitCompat_;
-const forInLodash = forInLodash_;
+const { forInRight: forInLodash } = lodash;
 
 describe('forInRight', () => {
   const bigObject = Object.fromEntries(times(1000, i => [i, i]));

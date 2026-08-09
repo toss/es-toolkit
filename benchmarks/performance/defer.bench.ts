@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { defer as deferToolkit_ } from 'es-toolkit/compat';
-import { defer as deferLodash_ } from 'lodash';
+import { defer as deferToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const deferToolkit = deferToolkit_;
-const deferLodash = deferLodash_;
+const { defer: deferLodash } = lodash;
 
 describe('defer', () => {
   bench('es-toolkit/defer', () => {

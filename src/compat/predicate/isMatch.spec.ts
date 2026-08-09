@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isMatch as isMatchLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -387,9 +386,5 @@ describe('isMatch', () => {
         { value: { missingKey: undefined } }
       )
     ).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isMatch).toEqualTypeOf<typeof isMatchLodash>();
   });
 });

@@ -1,3 +1,5 @@
+import { keys } from './keys.ts';
+
 /**
  * Creates an array of the own enumerable property values of `object`.
  *
@@ -50,5 +52,14 @@ export function values(object: any): any[] {
     return [];
   }
 
-  return Object.values(object);
+  // Read through `keys` rather than `Object.values`: the built-in skips array
+  // holes, which would make `values` shorter than `keys` for a sparse array.
+  const objectKeys = keys(object);
+  const result = new Array(objectKeys.length);
+
+  for (let i = 0; i < objectKeys.length; i++) {
+    result[i] = object[objectKeys[i]];
+  }
+
+  return result;
 }

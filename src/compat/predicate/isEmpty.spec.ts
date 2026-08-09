@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isEmpty as isEmptyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isEmpty } from './isEmpty';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -116,9 +115,5 @@ describe('isEmpty', () => {
     function Foo() {}
     Foo.prototype = { constructor: Foo, [Symbol('a')]: 1 };
     expect(isEmpty(Foo.prototype)).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isEmpty).toEqualTypeOf<typeof isEmptyLodash>();
   });
 });

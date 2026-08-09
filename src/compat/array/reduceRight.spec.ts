@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { reduceRight as reduceRightLodash } from 'lodash';
 import { reduceRight } from './reduceRight';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
@@ -211,9 +210,5 @@ describe('reduceRight', () => {
     );
 
     expect(count).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(reduceRight).toEqualTypeOf<typeof reduceRightLodash>();
   });
 });

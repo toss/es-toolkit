@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('isPlainObject bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'isPlainObject');
-    expect(bundleSize).toMatchInlineSnapshot(`1586`);
+    expect(bundleSize).toMatchInlineSnapshot(`1614`);
   });
 
   it('es-toolkit', async () => {

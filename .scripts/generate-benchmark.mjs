@@ -34,10 +34,9 @@ async function main() {
 
   let lodashVersion = 'unknown';
   try {
-    const lodashPkgPath = path.join(ROOT, 'node_modules', 'lodash', 'package.json');
-    const lodashContent = await fs.readFile(lodashPkgPath, 'utf8');
-    const lodashJson = JSON.parse(lodashContent);
-    lodashVersion = lodashJson.version;
+    const { stdout } = await execAsync('yarn info lodash version --json', { cwd: path.join(ROOT, 'benchmarks') });
+    const info = JSON.parse(stdout);
+    lodashVersion = info.children.Version;
   } catch {
     console.warn('Could not detect lodash version, using "unknown"');
   }
@@ -60,16 +59,19 @@ async function main() {
   };
 
   for (const funcName of funcNames) {
-    const benchFile = `benchmarks/performance/${funcName}.bench.ts`;
+    const benchFile = `${funcName}.bench.ts`;
     const tempJsonPath = path.join(TEMP_DIR, `${funcName}.json`);
 
     console.log(`Running benchmark: ${funcName}`);
 
     try {
-      await execAsync(`yarn vitest bench ${benchFile} --run --reporter=default --outputJson=${tempJsonPath}`, {
-        cwd: ROOT,
-        maxBuffer: 1024 * 1024 * 10,
-      });
+      await execAsync(
+        `yarn workspace benchmarks bench ${benchFile} --run --reporter=default --outputJson=${tempJsonPath}`,
+        {
+          cwd: ROOT,
+          maxBuffer: 1024 * 1024 * 10,
+        }
+      );
 
       const rawData = await fs.readFile(tempJsonPath, 'utf8');
       const benchData = JSON.parse(rawData);

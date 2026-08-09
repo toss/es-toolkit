@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { forEachRight as forEachRightLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { forEachRight } from './forEachRight';
 import { includes } from './includes';
 import { map } from './map';
@@ -170,10 +169,6 @@ describe('forEachRight', () => {
     const objectResult = forEachRight(object);
 
     expect(objectResult).toBe(object);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(forEachRight).toEqualTypeOf<typeof forEachRightLodash>();
   });
 
   it('should use identity function as the callback if no callback is provided', () => {

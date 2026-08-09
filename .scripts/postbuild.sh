@@ -39,9 +39,19 @@ create_compat_alias() {
 }
 
 # Create root exports
-for module in array server error compat fp function math map object predicate promise set string util; do
+for module in array bigint server error compat fp function math map object predicate promise set string util; do
     create_root_export $module
 done
+
+# The types module is declaration-only. Drop the empty JS the build emits so the
+# package ships only .d.ts/.d.mts (exposed via the "types" condition in publishConfig).
+if [ -d dist/types ]; then
+    find dist/types -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) -delete
+fi
+
+# node10 moduleResolution ignores "exports", so it needs a root shim like the other
+# modules. Declaration-only, so only the .d.ts is created (no types.js counterpart).
+echo "export * from './dist/types';" > types.d.ts
 
 # Create compat directory
 mkdir -p compat
@@ -107,3 +117,6 @@ create_compat_alias "array" "forEachRight" "eachRight"
 create_compat_alias "array" "head" "first"
 create_compat_alias "object" "assignIn" "extend"
 create_compat_alias "object" "assignInWith" "extendWith"
+
+# Verify that every generated compat entry point is actually importable
+node ./.scripts/check-compat-entrypoints-loadable.mjs

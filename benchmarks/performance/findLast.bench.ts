@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { findLast as findLastToolkitCompat_ } from 'es-toolkit/compat';
-import { findLast as findLastLodash_ } from 'lodash';
+import { findLast as findLastToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const findLastToolkitCompat = findLastToolkitCompat_;
-const findLastLodash = findLastLodash_;
+const { findLast: findLastLodash } = lodash;
 
 const items = [
   { id: 1, name: 'Alice' },

@@ -4,12 +4,12 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('throttle bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'throttle');
-    expect(bundleSize).toMatchInlineSnapshot(`3111`);
+    expect(bundleSize).toMatchInlineSnapshot(`3139`);
   });
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'throttle');
-    expect(bundleSize).toMatchInlineSnapshot(`764`);
+    expect(bundleSize).toMatchInlineSnapshot(`855`);
   });
 
   it('es-toolkit/compat', async () => {

@@ -1,4 +1,5 @@
 import { isNil } from '../../predicate/isNil.ts';
+import { regexMultiByte } from '../_internal/regexMultiByte.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -46,6 +47,10 @@ export function size(collection: object | string | null | undefined): number;
 export function size(target: any): number {
   if (isNil(target)) {
     return 0;
+  }
+
+  if (typeof target === 'string') {
+    return regexMultiByte.test(target) ? Array.from(target).length : target.length;
   }
 
   if (isArrayLike(target)) {

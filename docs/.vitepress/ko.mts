@@ -13,6 +13,7 @@ const labels: SidebarLabels = {
   },
   categories: {
     array: '배열',
+    bigint: 'BigInt',
     function: '함수',
     map: 'Map',
     math: '숫자',

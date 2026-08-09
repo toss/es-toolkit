@@ -13,7 +13,7 @@ import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArray
  * // => [1, 2, 3, 4, 5]
  */
 export function flattenDeep<T>(
-  value: ListOfRecursiveArraysOrValues<T> | null | undefined
+  array: ListOfRecursiveArraysOrValues<T> | null | undefined
 ): Array<T extends string ? T : T extends ArrayLike<any> ? never : T> {
-  return flattenDepth(value, Infinity) as any;
+  return flattenDepth(array, Infinity) as any;
 }

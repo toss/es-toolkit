@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { indexOf as indexOfToolkitCompat_ } from 'es-toolkit/compat';
-import { indexOf as indexOfLodash_ } from 'lodash';
+import { indexOf as indexOfToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const indexOfToolkitCompat = indexOfToolkitCompat_;
-const indexOfLodash = indexOfLodash_;
+const { indexOf: indexOfLodash } = lodash;
 
 describe('indexOf', () => {
   const array = [1, 2, 3, 4, NaN, '1', '2', '3', '4', 'NaN'];
