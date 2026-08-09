@@ -254,8 +254,16 @@ describe('orderBy', () => {
   });
 
   it('should not include the `length` property for array-like objects', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error - type mismatch
     expect(orderBy({ 0: 3, 1: 1, 2: 2, length: 3 }, [null], ['asc'])).toEqual([1, 2, 3]);
+  });
+
+  it('should treat unresolved deep paths and nullish elements as `undefined` like lodash', () => {
+    expect(orderBy([{ a: {} }, { a: null }, null, { a: { b: 1 } }], ['a.b.c'], ['asc'])).toEqual([
+      { a: {} },
+      { a: null },
+      null,
+      { a: { b: 1 } },
+    ]);
   });
 });

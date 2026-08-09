@@ -164,17 +164,22 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
 
   const getValueByNestedPath = (object: object, path: PropertyKey[]) => {
     let target: object = object;
+    let index = 0;
 
-    for (let i = 0; i < path.length && target != null; ++i) {
-      target = target[path[i] as keyof typeof target];
+    for (; index < path.length && target != null; ++index) {
+      target = target[path[index] as keyof typeof target];
     }
 
-    return target;
+    return index === path.length ? target : undefined;
   };
 
   const getValueByCriterion = (criterion: Criterion<T> | { key: PropertyKey; path: string[] }, object: T) => {
-    if (object == null || criterion == null) {
+    if (criterion == null) {
       return object;
+    }
+
+    if (object == null) {
+      return undefined;
     }
 
     if (typeof criterion === 'object' && 'key' in criterion) {
