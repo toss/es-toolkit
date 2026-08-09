@@ -252,4 +252,10 @@ describe('orderBy', () => {
     expect(orderBy([3, 1, 2], 'b')).toEqual([3, 1, 2]);
     expect(orderBy(['c', 'a', 'b'], 'x')).toEqual(['c', 'a', 'b']);
   });
+
+  it('should not include the `length` property for array-like objects', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error - type mismatch
+    expect(orderBy({ 0: 3, 1: 1, 2: 2, length: 3 }, [null], ['asc'])).toEqual([1, 2, 3]);
+  });
 });

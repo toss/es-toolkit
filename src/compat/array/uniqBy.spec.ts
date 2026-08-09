@@ -105,4 +105,10 @@ describe('uniqBy', () => {
     // @ts-expect-error
     expect(uniqBy([-0])).toEqual([0]);
   });
+
+  it('should treat strings as arrays of characters', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(uniqBy('hello')).toEqual(['h', 'e', 'l', 'o']);
+  });
 });

@@ -3,7 +3,7 @@ import { ary } from '../../function/ary.ts';
 import { identity } from '../../function/identity.ts';
 import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
@@ -23,7 +23,7 @@ export function uniqBy<T>(
   array: ArrayLike<T> | null | undefined,
   iteratee: ((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T> = identity
 ): T[] {
-  if (!isArrayLikeObject(array)) {
+  if (!isArrayLike(array)) {
     return [];
   }
 
