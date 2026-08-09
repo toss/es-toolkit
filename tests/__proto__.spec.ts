@@ -99,6 +99,7 @@ describe('constructor.prototype', () => {
 
   it('should not be polluted in compat/zipObjectDeep', () => {
     zipObjectDeep(['constructor.prototype.polluted'], ['yes']);
+    zipObjectDeep(['a.constructor.prototype.polluted'], ['yes']);
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error

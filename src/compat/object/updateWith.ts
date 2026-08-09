@@ -1,5 +1,5 @@
 import { get } from './get.ts';
-import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
+import { isUnsafeToWriteProperty } from '../../_internal/isUnsafeToWriteProperty.ts';
 import { assignValue } from '../_internal/assignValue.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
@@ -98,8 +98,8 @@ export function updateWith<T extends object, R>(
   for (let i = 0; i < resolvedPath.length && current != null; i++) {
     const key = toKey(resolvedPath[i]);
 
-    if (isUnsafeProperty(key) || key === 'constructor' || key === 'prototype') {
-      continue;
+    if (isUnsafeToWriteProperty(key)) {
+      return obj;
     }
 
     let newValue: unknown;

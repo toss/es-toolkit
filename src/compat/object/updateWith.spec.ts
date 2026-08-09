@@ -20,21 +20,30 @@ describe('updateWith', () => {
     });
   });
 
-  it('should prevent prototype pollution by skipping __proto__ in path', () => {
+  it('should prevent prototype pollution by aborting when __proto__ appears in path', () => {
     const object = { a: [{ ['__proto__']: { b: 3 } }] };
     const result = updateWith(object, 'a[0][__proto__].b', n => n * n);
     expect(result).toBe(object);
     expect(object.a[0]['__proto__'].b).toBe(3);
+    expect('b' in object.a[0]).toBe(false);
   });
 
-  it('should prevent prototype pollution by skipping `constructor` and `prototype` in path', () => {
+  it('should prevent prototype pollution by aborting when constructor or prototype appears in path', () => {
     const object = {};
     const result = updateWith(object, 'constructor.prototype.polluted', constant('yes'));
     expect(result).toBe(object);
-    expect(({} as Record<string, unknown>).polluted).toBe(undefined);
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
 
-    updateWith({}, 'a.constructor.prototype.polluted', constant('yes'));
-    expect(({} as Record<string, unknown>).polluted).toBe(undefined);
+    const nested: Record<string, unknown> = {};
+    updateWith(nested, 'a.constructor.prototype.polluted', constant('yes'));
+    expect(nested).toEqual({ a: {} });
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+
+    const aborted: Record<string, unknown> = {};
+    updateWith(aborted, 'a.constructor.b', constant(1));
+    expect(aborted).toEqual({ a: {} });
+
+    expect(updateWith({}, 'prototype.x', constant(1))).toEqual({});
   });
 
   it('should preserve the sign of `0`', () => {
