@@ -170,7 +170,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
       target = target[path[index] as keyof typeof target];
     }
 
-    return index === path.length ? target : undefined;
+    return index > 0 && index === path.length ? target : undefined;
   };
 
   const getValueByCriterion = (criterion: Criterion<T> | { key: PropertyKey; path: string[] }, object: T) => {

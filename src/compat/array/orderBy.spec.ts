@@ -266,4 +266,22 @@ describe('orderBy', () => {
       { a: { b: 1 } },
     ]);
   });
+
+  it('should keep the order of nullish elements for empty or identity criteria', () => {
+    // empty path resolves to `undefined` like lodash's `baseGet`
+    expect(orderBy([null, { a: 1 }], [[]], ['asc'])).toEqual([null, { a: 1 }]);
+    // identity criterion keeps `null` before `undefined`
+    expect(orderBy([3, null, 1, undefined, 2])).toEqual([1, 2, 3, null, undefined]);
+  });
+
+  it('should distinguish a fully resolved `null` value from an unresolved path', () => {
+    // `{ a: { b: null } }` resolves `a.b` to `null`; the others are unresolved → `undefined`
+    expect(orderBy([{ a: { b: null } }, { a: null }, { a: {} }], ['a.b'], ['asc'])).toEqual([
+      { a: { b: null } },
+      { a: null },
+      { a: {} },
+    ]);
+    // `desc` reverses the priority order: `undefined` (higher priority) comes first
+    expect(orderBy([{ a: null }, { a: { b: null } }], ['a.b'], ['desc'])).toEqual([{ a: null }, { a: { b: null } }]);
+  });
 });
