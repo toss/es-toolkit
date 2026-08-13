@@ -104,6 +104,8 @@ jobs:
             yarn workspace browser-compat-tests run-browsers --fixture ${{ matrix.fixture }} --browser docker-chromium
 
       - name: Run in WebKit
+        # Run even when the Chromium lane failed, so one CI round reports both.
+        if: ${{ !cancelled() }}
         run: |
           DOCKER_IMAGE=${{ env[matrix.webkit-image-var] }} PLAYWRIGHT_VERSION=${{ matrix.playwright-version }} \
             yarn workspace browser-compat-tests run-browsers --fixture ${{ matrix.fixture }} --browser docker-webkit

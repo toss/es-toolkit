@@ -108,6 +108,11 @@ async function runChrome() {
     process.env.CHROME_PATH,
     [
       '--headless',
+      // Old-style headless exits right after page load unless a debugging
+      // server keeps it alive.
+      '--remote-debugging-port=0',
+      // Surface in-page console output (including uncaught errors) on stderr.
+      '--enable-logging=stderr',
       '--disable-gpu',
       '--no-sandbox',
       '--no-first-run',
