@@ -30,6 +30,7 @@ es-toolkit ships modern JavaScript without transpilation, keeping the bundle sma
 | `AggregateError`                             | `clone`                                                    | 85     | 14     |
 | `Object.hasOwn`                              | `pick`, `groupBy`, `get`, and other object/array utilities | 93     | 15.4   |
 | `Error` `cause` option                       | `clone`                                                    | 93     | 15     |
+| `Array.prototype.at`                         | `nthArg`                                                   | 92     | 15.4   |
 | `Array.prototype.findLast` / `findLastIndex` | `findLast`, `findLastKey`, `takeRightWhile`                | 97     | 15.4   |
 | `structuredClone`                            | `cloneDeepWith`                                            | 98     | 15.4   |
 
@@ -40,7 +41,7 @@ ESLint rules in this repository fail the build if a change introduces syntax or 
 To run es-toolkit on Chrome 80 / Safari 14.1, you need two things:
 
 1. **Transpilation** of your bundle (including es-toolkit) down to your targets.
-2. **Five polyfills** for the runtime APIs listed above.
+2. **Six polyfills** for the runtime APIs listed above.
 
 The polyfill set is small — a full `core-js/stable` import is not necessary:
 

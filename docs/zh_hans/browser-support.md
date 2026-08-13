@@ -30,6 +30,7 @@ es-toolkit 发布未经转译的现代 JavaScript,以保持包体积小、运行
 | `AggregateError`                             | `clone`                                     | 85     | 14     |
 | `Object.hasOwn`                              | `pick`、`groupBy`、`get` 等对象/数组工具    | 93     | 15.4   |
 | `Error` 的 `cause` 选项                      | `clone`                                     | 93     | 15     |
+| `Array.prototype.at`                         | `nthArg`                                    | 92     | 15.4   |
 | `Array.prototype.findLast` / `findLastIndex` | `findLast`、`findLastKey`、`takeRightWhile` | 97     | 15.4   |
 | `structuredClone`                            | `cloneDeepWith`                             | 98     | 15.4   |
 
@@ -40,7 +41,7 @@ es-toolkit 发布未经转译的现代 JavaScript,以保持包体积小、运行
 要在 Chrome 80 / Safari 14.1 上运行 es-toolkit,需要两件事:
 
 1. 对包括 es-toolkit 在内的整个包进行**转译**
-2. 为上表中的运行时 API 提供 **5 个 polyfill**
+2. 为上表中的运行时 API 提供 **6 个 polyfill**
 
 所需的 polyfill 非常少——不需要引入完整的 `core-js/stable`:
 

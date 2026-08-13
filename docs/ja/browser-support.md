@@ -30,6 +30,7 @@ es-toolkit はバンドルを小さく高速に保つため、トランスパイ
 | `AggregateError`                             | `clone`                                                        | 85     | 14     |
 | `Object.hasOwn`                              | `pick`、`groupBy`、`get` などのオブジェクト/配列ユーティリティ | 93     | 15.4   |
 | `Error` の `cause` オプション                | `clone`                                                        | 93     | 15     |
+| `Array.prototype.at`                         | `nthArg`                                                       | 92     | 15.4   |
 | `Array.prototype.findLast` / `findLastIndex` | `findLast`、`findLastKey`、`takeRightWhile`                    | 97     | 15.4   |
 | `structuredClone`                            | `cloneDeepWith`                                                | 98     | 15.4   |
 
@@ -40,7 +41,7 @@ es-toolkit はバンドルを小さく高速に保つため、トランスパイ
 Chrome 80 / Safari 14.1 で es-toolkit を実行するには、2つのことが必要です。
 
 1. es-toolkit を含むバンドル全体の**トランスパイル**
-2. 上の表にあるランタイム API のための**5つのポリフィル**
+2. 上の表にあるランタイム API のための**6つのポリフィル**
 
 必要なポリフィルはごくわずかで、`core-js/stable` 全体をインポートする必要はありません。
 

@@ -6,6 +6,7 @@
  * recommended setup, verified in CI against real Chrome 80 and WebKit 14.1.
  */
 import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
 import 'core-js/actual/array/find-last';
 import 'core-js/actual/array/find-last-index';
 import 'core-js/actual/object/has-own';

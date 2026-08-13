@@ -30,6 +30,7 @@ es-toolkit은 번들을 작고 빠르게 유지하기 위해 트랜스파일하�
 | `AggregateError`                             | `clone`                                        | 85     | 14     |
 | `Object.hasOwn`                              | `pick`, `groupBy`, `get` 등 객체/배열 유틸리티 | 93     | 15.4   |
 | `Error`의 `cause` 옵션                       | `clone`                                        | 93     | 15     |
+| `Array.prototype.at`                         | `nthArg`                                       | 92     | 15.4   |
 | `Array.prototype.findLast` / `findLastIndex` | `findLast`, `findLastKey`, `takeRightWhile`    | 97     | 15.4   |
 | `structuredClone`                            | `cloneDeepWith`                                | 98     | 15.4   |
 
@@ -40,7 +41,7 @@ es-toolkit은 번들을 작고 빠르게 유지하기 위해 트랜스파일하�
 Chrome 80 / Safari 14.1에서 es-toolkit을 실행하려면 두 가지가 필요해요.
 
 1. es-toolkit을 포함한 번들 전체의 **트랜스파일**
-2. 위 표에 있는 런타임 API를 위한 **폴리필 5개**
+2. 위 표에 있는 런타임 API를 위한 **폴리필 6개**
 
 필요한 폴리필은 아주 적어서, `core-js/stable` 전체를 불러올 필요는 없어요.
 
