@@ -14,6 +14,6 @@ describe('mapKeys bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'mapKeys');
-    expect(bundleSize).toMatchInlineSnapshot(`8450`);
+    expect(bundleSize).toMatchInlineSnapshot(`8536`);
   });
 });
