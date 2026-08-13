@@ -1,0 +1,87 @@
+---
+description: es-toolkit이 기본으로 지원하는 브라우저 범위와, 더 오래된 브라우저를 지원하는 방법
+---
+
+# 브라우저 지원
+
+es-toolkit은 2022년 초 이후 출시된 모든 브라우저에서 별도 설정 없이 동작해요.
+
+| 환경       | 최소 버전 |
+| ---------- | --------- |
+| Chrome     | 98+       |
+| Edge       | 98+       |
+| Firefox    | 94+       |
+| Safari     | 15.4+     |
+| iOS Safari | 15.4+     |
+| Node.js    | 18+       |
+
+이 범위는 전 세계 브라우저 트래픽의 약 96%를 커버해요. 약간의 빌드 설정과 몇 개의 폴리필을 추가하면 **Chrome 80 / Safari 14.1**(2020년 무렵 브라우저)까지 지원 범위를 넓힐 수 있어요. 아래 [오래된 브라우저 지원하기](#오래된-브라우저-지원하기)를 참고하세요.
+
+두 지원 범위 모두 지속적으로 검증돼요. 모든 변경 사항은 정적 분석([`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x), [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat))으로 검사되고, 문서에 있는 모든 코드 예제로 구성된 전체 테스트 스위트가 실제 Chrome 98, Chrome 80, WebKit 15.4, WebKit 14.1에서 CI로 실행돼요.
+
+## 왜 이 버전인가요?
+
+es-toolkit은 번들을 작고 빠르게 유지하기 위해 트랜스파일하지 않은 모던 JavaScript를 배포해요. 최소 지원 버전은 내부에서 사용하는 가장 새로운 런타임 API가 결정해요.
+
+| 기능                                         | 사용하는 함수                                  | Chrome | Safari |
+| -------------------------------------------- | ---------------------------------------------- | ------ | ------ |
+| `??`, `?.`, `BigInt`                         | 전체                                           | 80     | 14     |
+| 클래스 필드                                  | `Semaphore`, `Mutex`                           | 72     | 14.1   |
+| `AggregateError`                             | `clone`                                        | 85     | 14     |
+| `Object.hasOwn`                              | `pick`, `groupBy`, `get` 등 객체/배열 유틸리티 | 93     | 15.4   |
+| `Error`의 `cause` 옵션                       | `clone`                                        | 93     | 15     |
+| `Array.prototype.findLast` / `findLastIndex` | `findLast`, `findLastKey`, `takeRightWhile`    | 97     | 15.4   |
+| `structuredClone`                            | `cloneDeepWith`                                | 98     | 15.4   |
+
+저장소의 ESLint 규칙이 Chrome 98 / Safari 15.4보다 새로운 문법이나 API가 추가되면 빌드를 실패시키기 때문에, 이 표는 조용히 어긋날 수 없어요.
+
+## 오래된 브라우저 지원하기
+
+Chrome 80 / Safari 14.1에서 es-toolkit을 실행하려면 두 가지가 필요해요.
+
+1. es-toolkit을 포함한 번들 전체의 **트랜스파일**
+2. 위 표에 있는 런타임 API를 위한 **폴리필 5개**
+
+필요한 폴리필은 아주 적어서, `core-js/stable` 전체를 불러올 필요는 없어요.
+
+<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+
+이 파일을 애플리케이션 진입점에서 es-toolkit을 불러오기 **전에** 한 번 불러오세요.
+
+::: warning es-toolkit을 트랜스파일 대상에서 제외하면 안 돼요
+빌드 도구는 보통 `node_modules`를 트랜스파일하지 않아요. es-toolkit은 모던 문법으로 배포되므로 반드시 트랜스파일에 **포함**되어야 해요. 아래 Vite 설정은 번들에 포함된 모든 코드를 변환하므로 자동으로 처리되고, webpack + Babel에서는 es-toolkit이 포함되도록 `exclude` 범위를 조정해야 해요.
+:::
+
+### Vite
+
+[`build.target`](https://vite.dev/config/build-options.html#build-target)을 지원하려는 가장 오래된 브라우저로 설정하세요.
+
+<<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
+
+Vite는 `build.target`을 es-toolkit을 포함한 번들의 모든 모듈에 적용하므로 추가 설정이 필요 없어요.
+
+### webpack + Babel
+
+`babel-loader`에 `@babel/preset-env`를 설정하고, `exclude` 패턴이 es-toolkit을 제외하지 않도록 하세요.
+
+<<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
+
+::: danger `useBuiltIns: 'usage'`는 기본 설정으로는 es-toolkit에 폴리필을 넣지 않아요
+`@babel/preset-env`의 `useBuiltIns: 'usage'`는 Babel이 직접 처리한 파일에만 폴리필을 주입해요. 일반적인 `exclude: /node_modules/` 설정에서는 Babel이 es-toolkit의 `Object.hasOwn` 호출을 보지 못해서 폴리필이 주입되지 않아요. 위의 폴리필 파일을 진입점에서 불러오거나(권장), es-toolkit을 `babel-loader` 범위에 포함하세요.
+:::
+
+### 오래된 브라우저에서 알려진 동작 차이
+
+- **Chrome 80–92 / Safari 14.1에서는 `clone`이 `Error`의 `cause`를 보존하지 못해요**: 이 엔진들은 `Error` 생성자의 `cause` 옵션을 조용히 무시하는데, 이를 폴리필하려면 전역 `Error` 생성자를 교체해야 해요. 이 브라우저들에서는 복제된 에러에 `cause`가 없어요.
+
+## 어떻게 검증되나요?
+
+[`tests/browser-compat`](https://github.com/toss/es-toolkit/tree/main/tests/browser-compat) 스위트는 모든 함수의 JSDoc에서 모든 `@example`을 추출해(1,300개 이상의 케이스) 배포되는 `dist` 파일을 위의 각 설정으로 번들링하고, CI에서 실제 브라우저로 실행해요.
+
+| 설정                         | 브라우저               |
+| ---------------------------- | ---------------------- |
+| 트랜스파일 없음, 폴리필 없음 | Chrome 98, WebKit 15.4 |
+| 위의 Vite 설정               | Chrome 80, WebKit 14.1 |
+| 위의 webpack 설정            | Chrome 80, WebKit 14.1 |
+
+이 페이지에 실린 설정 파일은 CI 스위트가 사용하는 파일 그 자체라서, 문서가 실제 테스트와 어긋날 수 없어요.

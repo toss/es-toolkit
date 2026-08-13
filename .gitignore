@@ -46,3 +46,7 @@ umd
 *.log
 
 /CHOICES.md
+
+# browser-compat test artifacts
+/tests/browser-compat/generated
+/tests/browser-compat/dist-fixtures

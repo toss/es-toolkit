@@ -34,22 +34,26 @@ export function remove<L extends MutableList<any>>(
  * @example
  * // Using a predicate function
  * const numbers = [1, 2, 3, 4, 5];
- * remove(numbers, value => value % 2 === 0); // => [1, 3, 5]
+ * remove(numbers, value => value % 2 === 0); // => [2, 4]
+ * console.log(numbers); // => [1, 3, 5]
  *
  * @example
  * // Using a partial object
  * const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
- * remove(objects, { a: 1 }); // => [{ a: 2 }, { a: 3 }]
+ * remove(objects, { a: 1 }); // => [{ a: 1 }]
+ * console.log(objects); // => [{ a: 2 }, { a: 3 }]
  *
  * @example
  * // Using a property-value pair
  * const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
- * remove(objects, ['a', 1]); // => [{ a: 2 }, { a: 3 }]
+ * remove(objects, ['a', 1]); // => [{ a: 1 }]
+ * console.log(objects); // => [{ a: 2 }, { a: 3 }]
  *
  * @example
  * // Using a property key
  * const objects = [{ a: 0 }, { a: 1 }];
- * remove(objects, 'a'); // => [{ a: 0 }]
+ * remove(objects, 'a'); // => [{ a: 1 }]
+ * console.log(objects); // => [{ a: 0 }]
  */
 export function remove<T>(
   arr: ArrayLike<T>,
