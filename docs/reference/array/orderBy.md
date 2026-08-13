@@ -60,9 +60,9 @@ orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
 
 #### Parameters
 
-- `arr` (`T[]`): The array of objects to sort.
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): The criteria to sort by. You can use property names of objects or functions that return values.
-- `orders` (`Array<'asc' | 'desc'>`): An array of sort directions for each criterion. `'asc'` means ascending order, `'desc'` means descending order.
+- `arr` (`readonly T[]`): The array of objects to sort.
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): The criteria to sort by. You can use property names of objects or functions that return values.
+- `orders` (`ReadonlyArray<'asc' | 'desc'>`): An array of sort directions for each criterion. `'asc'` means ascending order, `'desc'` means descending order.
 
 #### Returns
 
