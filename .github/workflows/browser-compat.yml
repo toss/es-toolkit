@@ -70,11 +70,10 @@ jobs:
             # Chrome 51 predates headless mode; run it headed under Xvfb.
             chrome-xvfb: '1'
             # Chrome 51 links against GConf and GTK2, which the Playwright
-            # image does not ship. Ubuntu 18.04 is EOL, so its apt sources
-            # must be pointed at old-releases first.
+            # image does not ship (bionic packages are still served from
+            # archive.ubuntu.com while 18.04 is in ESM).
             container-prelaunch: >-
-              sed -i 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
-              && apt-get update -qq
+              apt-get update -qq
               && apt-get install -y -qq libgconf-2-4 libgtk2.0-0 > /dev/null
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
