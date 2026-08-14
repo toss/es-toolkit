@@ -86,6 +86,8 @@ Vite는 `build.target`을 es-toolkit을 포함한 번들의 모든 모듈에 적
 
 진입점에서 [최소 폴리필 파일](#오래된-브라우저-지원하기)은 계속 불러와야 해요. `structuredClone`은 core-js에 없어서 `plugin-legacy`가 제공하지 않아요.
 
+`es-toolkit/bigint` 외에 한 그룹의 함수는 더 높은 하한을 유지해요. `es-toolkit/compat`의 단어 분리 함수들(`words`, `camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`)은 유니코드 property 정규식을 호출 시점에 문자열로 조립하기 때문에 어떤 트랜스파일러도 변환할 수 없어서, 호출하려면 Chrome 64+ / Safari 11.1+가 필요해요. 불러오는 것 자체는 안전하고, 메인 `es-toolkit` 모듈의 동명 함수들은 Babel이 변환할 수 있는 정규식 리터럴을 쓰기 때문에 끝까지 잘 동작해요.
+
 ::: warning 이 티어에서는 `es-toolkit/bigint`가 제외돼요
 `BigInt`는 ES2015로 표현할 수 없어요. 리터럴은 트랜스파일이 불가능하고 런타임은 폴리필이 불가능해요. 애플리케이션이 `es-toolkit/bigint`를 불러오지 않는 한(그리고 `sum` 같은 함수에 `BigInt` 값을 넘기지 않는 한) bigint 코드는 번들에 들어가지 않아서 레거시 빌드가 잘 동작해요. 그 외 전부 — `es-toolkit`, `es-toolkit/compat`, `es-toolkit/fp` — 는 지원돼요.
 :::

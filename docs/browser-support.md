@@ -86,6 +86,8 @@ To reach roughly 99.4% of global traffic, use [`@vitejs/plugin-legacy`](https://
 
 Keep importing the [minimal polyfill file](#supporting-older-browsers) at your entrypoint: `structuredClone` is not part of core-js, so `plugin-legacy` does not provide it.
 
+Besides `es-toolkit/bigint`, one group of functions keeps a higher floor: the word-splitting functions of `es-toolkit/compat` (`words`, `camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) build their Unicode-property regex at call time, which no transpiler can rewrite — calling them requires Chrome 64+ / Safari 11.1+. Importing them is safe, and the same-named functions of the main `es-toolkit` module use a regex literal that Babel rewrites, so they work all the way down.
+
 ::: warning `es-toolkit/bigint` is excluded from this tier
 `BigInt` has no ES2015 equivalent — its literals cannot be transpiled and its runtime cannot be polyfilled. As long as your app does not import `es-toolkit/bigint` (or pass `BigInt` values to functions like `sum`), the bigint code never enters your bundle and the legacy build works. Everything else — including `es-toolkit`, `es-toolkit/compat`, and `es-toolkit/fp` — is covered.
 :::

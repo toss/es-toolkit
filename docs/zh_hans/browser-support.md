@@ -86,6 +86,8 @@ Vite 会将 `build.target` 应用到包中的每个模块(包括 es-toolkit),因
 
 请继续在入口处导入[最小 polyfill 文件](#支持更旧的浏览器):`structuredClone` 不属于 core-js,`plugin-legacy` 不会提供它。
 
+除 `es-toolkit/bigint` 外,还有一组函数保持较高的下限:`es-toolkit/compat` 的分词函数(`words`、`camelCase`、`kebabCase`、`lowerCase`、`snakeCase`、`startCase`、`upperCase`)在调用时用字符串拼接 Unicode 属性正则表达式,任何转译器都无法改写,因此调用它们需要 Chrome 64+ / Safari 11.1+。导入本身是安全的;主模块 `es-toolkit` 中的同名函数使用 Babel 可以改写的正则字面量,因此可以一直向下兼容。
+
 ::: warning 此层级不包含 `es-toolkit/bigint`
 `BigInt` 无法用 ES2015 表达 —— 其字面量无法转译,其运行时无法 polyfill。只要你的应用不导入 `es-toolkit/bigint`(也不向 `sum` 等函数传入 `BigInt` 值),bigint 代码就不会进入你的包,legacy 构建可以正常工作。其余全部 —— 包括 `es-toolkit`、`es-toolkit/compat` 和 `es-toolkit/fp` —— 均受支持。
 :::

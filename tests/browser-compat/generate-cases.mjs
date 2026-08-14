@@ -450,9 +450,33 @@ async function main() {
   emit('cases.mjs', CATEGORIES, cases);
   // Legacy variant for the ES2015 tier: BigInt literals cannot be transpiled,
   // so the bigint category and any example that passes BigInt values are left
-  // out (they would be a parse error in ES2015-era browsers).
+  // out (they would be a parse error in ES2015-era browsers). compat's
+  // word-splitting functions build their Unicode-property regex from strings
+  // at call time, which transpilers cannot rewrite either, so their cases are
+  // excluded as well (documented in docs/browser-support.md).
   const usesBigIntLiteral = source => /[^\w$."'`]\d+n\b/.test(source);
-  const legacyCases = cases.filter(c => !c.id.startsWith('bigint:') && !usesBigIntLiteral(c.source));
+  const COMPAT_UNICODE_FNS = new Set([
+    'words',
+    'camelCase',
+    'kebabCase',
+    'lowerCase',
+    'snakeCase',
+    'startCase',
+    'upperCase',
+  ]);
+  const usesCompatUnicodeFn = source => {
+    for (const match of source.matchAll(/const \{ ([^}]+) \} = __ns\.compat;/g)) {
+      for (const name of match[1].split(',').map(s => s.trim())) {
+        if (COMPAT_UNICODE_FNS.has(name)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  const legacyCases = cases.filter(
+    c => !c.id.startsWith('bigint:') && !usesBigIntLiteral(c.source) && !usesCompatUnicodeFn(c.source)
+  );
   emit(
     'cases-legacy.mjs',
     CATEGORIES.filter(c => c !== 'bigint'),
