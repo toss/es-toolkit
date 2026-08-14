@@ -77,6 +77,7 @@ export const flavors = [
       { labelKey: 'installation', slug: 'usage' },
       { labelKey: 'bundleSize', slug: 'bundle-size' },
       { labelKey: 'performance', slug: 'performance' },
+      { labelKey: 'browserSupport', slug: 'browser-support' },
       { labelKey: 'aiIntegration', slug: 'ai-integration' },
     ],
     categories: [
