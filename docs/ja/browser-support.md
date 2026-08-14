@@ -15,9 +15,12 @@ es-toolkit は、2022年初頭以降にリリースされたすべてのブラ�
 | iOS Safari | 15.4+          |
 | Node.js    | 18+            |
 
-この範囲は世界のブラウザトラフィックの約96%をカバーします。少しのビルド設定といくつかのポリフィルを追加すれば、サポート範囲を **Chrome 80 / Safari 14.1**(2020年頃のブラウザ)まで広げられます。下記の[古いブラウザをサポートする](#古いブラウザをサポートする)を参照してください。
+この範囲は世界のブラウザトラフィックの約98.7%をカバーします。ビルド設定を追加すれば、さらに下まで広げられます。
 
-どちらのサポート範囲も継続的に検証されています。すべての変更は静的解析([`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x)、[`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat))でチェックされ、ドキュメント内のすべてのコード例からなるテストスイートが、実際の Chrome 98、Chrome 80、WebKit 15.4、WebKit 14.1 上で CI により実行されます。
+- **Chrome 80 / Safari 14.1**(2020年頃、約98.8%カバー): トランスパイル + 6つのポリフィル。[古いブラウザをサポートする](#古いブラウザをサポートする)を参照してください。
+- **Chrome 51 / Safari 10**(ES2015世代、約99.4%カバー): [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使用、`es-toolkit/bigint` は除外。[ES2015世代のブラウザ](#es2015世代のブラウザ-chrome-51-safari-10)を参照してください。
+
+これらのサポート範囲は継続的に検証されています。すべての変更は静的解析([`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x)、[`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat))でチェックされ、ドキュメント内のすべてのコード例からなるテストスイートが、実際の Chrome 98、Chrome 80、Chrome 51、WebKit 15.4、WebKit 14.1 上で CI により実行されます。
 
 ## なぜこのバージョンなのか
 
@@ -75,6 +78,22 @@ Vite は `build.target` を es-toolkit を含むバンドル内のすべての�
 
 - **Chrome 80–92 / Safari 14.1 では `clone` が `Error` の `cause` を保持できません**: これらのエンジンは `Error` コンストラクタの `cause` オプションを黙って無視し、これをポリフィルするにはグローバルの `Error` コンストラクタを置き換える必要があります。これらのブラウザでは、複製されたエラーに `cause` がありません。
 
+## ES2015世代のブラウザ (Chrome 51+ / Safari 10+)
+
+世界のトラフィックの約99.4%までカバーするには、[`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使用してください。Babel でトランスパイルするため — esbuild と異なり — `words` や `camelCase` などの文字列ユーティリティが使う Unicode プロパティ正規表現も変換でき、必要な core-js ポリフィルを自動的に注入します。
+
+<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+
+エントリーポイントでは[最小ポリフィルファイル](#古いブラウザをサポートする)を引き続きインポートしてください。`structuredClone` は core-js に含まれないため、`plugin-legacy` は提供しません。
+
+::: warning このティアでは `es-toolkit/bigint` が除外されます
+`BigInt` は ES2015 では表現できません。リテラルはトランスパイルできず、ランタイムはポリフィルできません。アプリケーションが `es-toolkit/bigint` をインポートしない限り(そして `sum` などの関数に `BigInt` 値を渡さない限り)、bigint のコードはバンドルに入らず、レガシービルドは正しく動作します。それ以外のすべて — `es-toolkit`、`es-toolkit/compat`、`es-toolkit/fp` — はサポートされます。
+:::
+
+::: info このティアの検証範囲
+CI はこの設定をそのまま実際の Chrome 51 で実行します。Safari 10–13 は Linux CI では自動化できないため、このティアの Safari 側は直接のテスト実行ではなく Babel/core-js の変換保証に基づいています。WebKit 14.1 レーンがデュアルバンドルのモダン側を検証します。
+:::
+
 ## どのように検証されているか
 
 [`tests/browser-compat`](https://github.com/toss/es-toolkit/tree/main/tests/browser-compat) スイートは、すべての関数の JSDoc からすべての `@example` を抽出し(1,300以上のケース)、配布される `dist` ファイルを上記の各設定でバンドルして、CI で実際のブラウザ上で実行します。
@@ -84,5 +103,6 @@ Vite は `build.target` を es-toolkit を含むバンドル内のすべての�
 | トランスパイルなし、ポリフィルなし | Chrome 98、WebKit 15.4 |
 | 上記の Vite 設定                   | Chrome 80、WebKit 14.1 |
 | 上記の webpack 設定                | Chrome 80、WebKit 14.1 |
+| 上記の `plugin-legacy` 設定        | Chrome 51、WebKit 14.1 |
 
 このページに掲載されている設定ファイルは CI スイートが使用しているファイルそのものなので、ドキュメントが実際のテストとずれることはありません。

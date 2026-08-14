@@ -6,7 +6,6 @@
  * can always be attributed to es-toolkit, not the harness itself.
  */
 import { assertEq } from './assert.mjs';
-import { cases as generatedCases, namespaces } from '../generated/cases.mjs';
 import { manualCases } from '../manual-cases.mjs';
 
 var TIMEOUT_MS = 10000;
@@ -22,7 +21,7 @@ function post(payload) {
   });
 }
 
-function runCase(testCase) {
+function runCase(testCase, namespaces) {
   return new Promise(function (resolve) {
     var settled = false;
     var timer = setTimeout(function () {
@@ -58,8 +57,9 @@ function runCase(testCase) {
   });
 }
 
-export function start() {
-  var allCases = generatedCases.concat(manualCases);
+export function start(suite) {
+  var namespaces = suite.namespaces;
+  var allCases = suite.cases.concat(manualCases);
   var results = [];
   var index = 0;
 
@@ -77,7 +77,7 @@ export function start() {
       });
     }
     var testCase = allCases[index++];
-    return runCase(testCase).then(function (result) {
+    return runCase(testCase, namespaces).then(function (result) {
       results.push(result);
       // Yield to the event loop periodically to keep old browsers responsive.
       if (index % 50 === 0) {

@@ -104,24 +104,28 @@ async function runWebkit() {
 async function runChrome() {
   // Chrome/Chromium binary mounted into the container at $CHROME_PATH.
   const childProcess = require('child_process');
-  const child = childProcess.spawn(
-    process.env.CHROME_PATH,
-    [
-      '--headless',
-      // Old-style headless exits right after page load unless a debugging
-      // server keeps it alive.
-      '--remote-debugging-port=0',
-      // Surface in-page console output (including uncaught errors) on stderr.
-      '--enable-logging=stderr',
-      '--disable-gpu',
-      '--no-sandbox',
-      '--no-first-run',
-      '--disable-dev-shm-usage',
-      '--user-data-dir=/tmp/browser-compat-profile',
-      url,
-    ],
-    { stdio: 'inherit' }
-  );
+  const commonArgs = [
+    // Surface in-page console output (including uncaught errors) on stderr.
+    '--enable-logging=stderr',
+    '--disable-gpu',
+    '--no-sandbox',
+    '--no-first-run',
+    '--disable-dev-shm-usage',
+    '--user-data-dir=/tmp/browser-compat-profile',
+    url,
+  ];
+  let command = process.env.CHROME_PATH;
+  let args;
+  if (process.env.CHROME_XVFB === '1') {
+    // Pre-59 Chrome has no headless mode; run it headed under Xvfb.
+    args = ['-a', command].concat(commonArgs);
+    command = 'xvfb-run';
+  } else {
+    // Old-style headless exits right after page load unless a debugging
+    // server keeps it alive.
+    args = ['--headless', '--remote-debugging-port=0'].concat(commonArgs);
+  }
+  const child = childProcess.spawn(command, args, { stdio: 'inherit' });
   const done = await waitForDone();
   child.kill('SIGKILL');
   return done;

@@ -34,7 +34,9 @@ env:
   IMAGE_WEBKIT_15_4: mcr.microsoft.com/playwright@sha256:9b3f813c7f76c0f562244b3c99423755405cd43b413941f04d99f20ff604286c
   # mcr.microsoft.com/playwright:v1.9.2-focal (WebKit 14.1)
   IMAGE_WEBKIT_14_1: mcr.microsoft.com/playwright@sha256:1e82d38d8f6a2a05f1e02dfd24de14adac78f90ac302a26385bcd1c84ff8bb92
-  # chromium-browser-snapshots positions (Chrome 80.0.3987 / 98.0.4758 branch points)
+  # chromium-browser-snapshots positions (nearest archived builds to the
+  # Chrome 51 / 80.0.3987 / 98.0.4758 branch points)
+  CHROME_51_POSITION: '386290'
   CHROME_80_POSITION: '722276'
   CHROME_98_POSITION: '950363'
 
@@ -57,6 +59,12 @@ jobs:
             chrome-position-var: CHROME_80_POSITION
             webkit-image-var: IMAGE_WEBKIT_14_1
             playwright-version: 1.9.2
+          - fixture: vite-legacy
+            chrome-position-var: CHROME_51_POSITION
+            webkit-image-var: IMAGE_WEBKIT_14_1
+            playwright-version: 1.9.2
+            # Chrome 51 predates headless mode; run it headed under Xvfb.
+            chrome-xvfb: '1'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: corepack enable
@@ -100,7 +108,7 @@ jobs:
 
       - name: Run in Chromium
         run: |
-          CHROME_DIR="$PWD/chrome-linux" DOCKER_IMAGE=${{ env[matrix.webkit-image-var] }} \
+          CHROME_DIR="$PWD/chrome-linux" CHROME_XVFB=${{ matrix.chrome-xvfb || '' }} DOCKER_IMAGE=${{ env[matrix.webkit-image-var] }} \
             yarn workspace browser-compat-tests run-browsers --fixture ${{ matrix.fixture }} --browser docker-chromium
 
       - name: Run in WebKit

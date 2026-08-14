@@ -140,6 +140,8 @@ function launchDocker(url, mode) {
       'BROWSER=chrome',
       '-e',
       'CHROME_PATH=/chrome-linux/chrome',
+      '-e',
+      `CHROME_XVFB=${process.env.CHROME_XVFB ?? ''}`,
       '-v',
       `${chromeDir}:/chrome-linux:ro`
     );

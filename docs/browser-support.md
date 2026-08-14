@@ -15,9 +15,12 @@ es-toolkit works out of the box in all browsers released since early 2022:
 | iOS Safari  | 15.4+           |
 | Node.js     | 18+             |
 
-This range covers about 96% of global browser traffic. With a small amount of build configuration and a handful of polyfills, you can extend support down to **Chrome 80 / Safari 14.1** (2020-era browsers) — see [Supporting older browsers](#supporting-older-browsers) below.
+This range covers about 98.7% of global browser traffic. With build configuration you can go further down:
 
-Both ranges are continuously verified: every change is checked against these targets with static analysis ([`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) and [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat)), and the full test suite — every code example in the documentation — runs in real Chrome 98, Chrome 80, WebKit 15.4, and WebKit 14.1 builds in CI.
+- **Chrome 80 / Safari 14.1** (2020-era, ≈98.8% coverage): transpilation plus six polyfills. See [Supporting older browsers](#supporting-older-browsers).
+- **Chrome 51 / Safari 10** (ES2015-era, ≈99.4% coverage): [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), excluding `es-toolkit/bigint`. See [ES2015-era browsers](#es2015-era-browsers-chrome-51-safari-10).
+
+These ranges are continuously verified. Every change is checked against these targets with static analysis with [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) and [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat). Every code example in the documentation runs in real Chrome 98, Chrome 80, Chrome 51, WebKit 15.4, and WebKit 14.1 builds in CI.
 
 ## Why these versions?
 
@@ -75,6 +78,22 @@ Configure `babel-loader` with `@babel/preset-env` and make sure the `exclude` pa
 
 - **`Error` `cause` is not preserved by `clone` in Chrome 80–92 / Safari 14.1**: the `cause` option of the `Error` constructor is silently ignored by these engines, and polyfilling it would require replacing the global `Error` constructor. Cloned errors simply lack `cause` there.
 
+## ES2015-era browsers (Chrome 51+ / Safari 10+)
+
+To reach roughly 99.4% of global traffic, use [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). It transpiles with Babel — which, unlike esbuild, can also rewrite the Unicode-property regexes used by string utilities like `words` and `camelCase` — and injects the required core-js polyfills automatically:
+
+<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+
+Keep importing the [minimal polyfill file](#supporting-older-browsers) at your entrypoint: `structuredClone` is not part of core-js, so `plugin-legacy` does not provide it.
+
+::: warning `es-toolkit/bigint` is excluded from this tier
+`BigInt` has no ES2015 equivalent — its literals cannot be transpiled and its runtime cannot be polyfilled. As long as your app does not import `es-toolkit/bigint` (or pass `BigInt` values to functions like `sum`), the bigint code never enters your bundle and the legacy build works. Everything else — including `es-toolkit`, `es-toolkit/compat`, and `es-toolkit/fp` — is covered.
+:::
+
+::: info How far this tier is verified
+CI runs this exact setup in real Chrome 51. Safari 10–13 cannot be automated on Linux CI, so the Safari side of this tier rests on Babel/core-js transpilation guarantees rather than on direct test runs. The WebKit 14.1 lane verifies the modern half of the dual bundle.
+:::
+
 ## How this is verified
 
 The [`tests/browser-compat`](https://github.com/toss/es-toolkit/tree/main/tests/browser-compat) suite extracts every `@example` from the JSDoc of every function (1,300+ cases), bundles the published `dist` files with each of the setups above, and runs them in real browsers in CI:
@@ -84,5 +103,6 @@ The [`tests/browser-compat`](https://github.com/toss/es-toolkit/tree/main/tests/
 | No transpilation, no polyfills | Chrome 98, WebKit 15.4 |
 | Vite setup above               | Chrome 80, WebKit 14.1 |
 | webpack setup above            | Chrome 80, WebKit 14.1 |
+| `plugin-legacy` setup above    | Chrome 51, WebKit 14.1 |
 
 The configuration files shown on this page are the exact files used by the CI suite, so the documentation cannot drift from what is actually tested.
