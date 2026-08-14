@@ -13,7 +13,7 @@
  * const result = at(numbers, [1, 3, 4]);
  * console.log(result); // [20, 40, 50]
  */
-export function at<T>(arr: readonly T[], indices: number[]): T[] {
+export function at<T>(arr: readonly T[], indices: readonly number[]): T[] {
   const result = new Array<T>(indices.length);
   const length = arr.length;
 
