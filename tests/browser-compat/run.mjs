@@ -146,7 +146,14 @@ function launchDocker(url, mode) {
       `${chromeDir}:/chrome-linux:ro`
     );
   }
-  dockerArgs.push(image, 'node', '/launch.cjs');
+  // Optional shell snippet run inside the container before the launcher —
+  // used to install extra system libraries that very old Chrome builds need.
+  const prelaunch = process.env.CONTAINER_PRELAUNCH;
+  if (prelaunch) {
+    dockerArgs.push(image, 'bash', '-c', `${prelaunch} && node /launch.cjs`);
+  } else {
+    dockerArgs.push(image, 'node', '/launch.cjs');
+  }
   const child = spawn('docker', dockerArgs, { stdio: 'inherit' });
   return () => child.kill('SIGKILL');
 }

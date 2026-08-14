@@ -104,6 +104,18 @@ async function runWebkit() {
 async function runChrome() {
   // Chrome/Chromium binary mounted into the container at $CHROME_PATH.
   const childProcess = require('child_process');
+  // Diagnostic: surface any missing shared libraries up front.
+  try {
+    const ldd = childProcess.spawnSync('bash', ['-c', 'ldd "$CHROME_PATH" | grep "not found" || true'], {
+      env: process.env,
+      encoding: 'utf8',
+    });
+    if (ldd.stdout && ldd.stdout.trim()) {
+      console.error('[missing libraries]\n' + ldd.stdout.trim());
+    }
+  } catch (e) {
+    // best-effort only
+  }
   const commonArgs = [
     // Surface in-page console output (including uncaught errors) on stderr.
     '--enable-logging=stderr',
