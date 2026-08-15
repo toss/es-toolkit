@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
+import { delay } from './delay';
 import { limitAsync } from './limitAsync';
-import { delay } from '../promise/delay';
 
 describe('limitAsync', () => {
   it('limits concurrency of async callbacks', async () => {

@@ -13,7 +13,7 @@ const limitedFunc = limitAsync(asyncFunc, concurrency);
 여러 번 호출되는 비동기 함수의 동시 실행 수를 제한하고 싶을 때 `limitAsync`를 사용하세요. 지정한 수만큼만 동시에 실행되고, 추가 호출은 실행 중인 작업이 완료될 때까지 대기해요.
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 최대 3개의 요청만 동시에 실행되도록 제한해요.
 const limitedFetch = limitAsync(async url => {
@@ -28,7 +28,7 @@ await Promise.all(urls.map(url => limitedFetch(url)));
 외부 API 호출이나 데이터베이스 쿼리처럼 리소스를 많이 사용하는 작업의 부하를 조절할 때 유용해요. 속도 제한이 있는 API를 사용하거나 서버 부하를 관리해야 할 때 특히 효과적이에요.
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 무거운 연산을 최대 2개씩만 처리해요.
 const processItem = async item => {
