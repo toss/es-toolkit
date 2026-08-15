@@ -1,14 +1,9 @@
 import { isArguments } from './isArguments.ts';
 import { isArrayLike } from './isArrayLike.ts';
 import { isTypedArray } from './isTypedArray.ts';
+import { isBuffer } from '../../predicate/isBuffer.ts';
 import type { EmptyObjectOf } from '../_internal/EmptyObjectOf.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
-
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
 
 export function isEmpty<T extends { __trapAny: any }>(value?: T): boolean;
 export function isEmpty(value: string): value is '';
@@ -26,8 +21,8 @@ export function isEmpty(value?: any): boolean;
  * - If the given value is an object, checks if it is an empty object with no properties.
  * - Primitive values (booleans, numbers, or bigints) are considered empty.
  *
- * @param {unknown} [value] - The value to check.
- * @returns {boolean} `true` if the value is empty, `false` otherwise.
+ * @param [value] - The value to check.
+ * @returns `true` if the value is empty, `false` otherwise.
  *
  * @example
  * isEmpty(); // true
@@ -53,7 +48,7 @@ export function isEmpty(value?: unknown): boolean {
     if (
       typeof (value as any).splice !== 'function' &&
       typeof value !== 'string' &&
-      (typeof Buffer === 'undefined' || !Buffer.isBuffer(value)) &&
+      !isBuffer(value) &&
       !isTypedArray(value) &&
       !isArguments(value)
     ) {
@@ -63,7 +58,7 @@ export function isEmpty(value?: unknown): boolean {
     return value.length === 0;
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === 'object' || typeof value === 'function') {
     if (value instanceof Map || value instanceof Set) {
       return value.size === 0;
     }

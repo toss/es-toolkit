@@ -11,8 +11,8 @@ export function propertyOf<T extends {}>(object: T): (path: PropertyPath) => any
  * `propertyOf` creates a function bound to a specific object and allows you to query different paths within that object.
  *
  * @template T - The type of object.
- * @param {T} object - The object to query.
- * @returns {(path: PropertyPath) => any} - Returns a new function that takes a path and retrieves the value from the object at the specified path.
+ * @param object - The object to query.
+ * @returns Returns a new function that takes a path and retrieves the value from the object at the specified path.
  *
  * @example
  * const getValue = propertyOf({ a: { b: { c: 3 } } });

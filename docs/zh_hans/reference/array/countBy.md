@@ -39,7 +39,7 @@ countBy(users, user => user.age);
 #### 参数
 
 - `arr` (`T[]`): 要统计元素数量的数组。
-- `mapper` (`(item: T) => K`): 返回用于分类元素的值的函数。
+- `mapper` (`(item: T, index: number, array: T[]) => K`): 返回用于分类元素的值的函数,会传入每个元素、索引和数组。
 
 #### 返回值
 

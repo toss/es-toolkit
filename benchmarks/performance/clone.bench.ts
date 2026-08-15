@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { clone as cloneToolkit_ } from 'es-toolkit';
-import { clone as cloneToolkitCompat_ } from 'es-toolkit/compat';
-import { clone as cloneLodash_ } from 'lodash';
+import { clone as cloneToolkit } from 'es-toolkit';
+import { clone as cloneToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const cloneToolkit = cloneToolkit_;
-const cloneToolkitCompat = cloneToolkitCompat_;
-const cloneLodash = cloneLodash_;
+const { clone: cloneLodash } = lodash;
 
 const obj = {
   number: 29,

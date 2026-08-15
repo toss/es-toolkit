@@ -3,12 +3,12 @@
 지정된 시간 후에 `TimeoutError`를 발생시키는 `Promise`를 반환해요.
 
 ```typescript
-await timeout(ms);
+await timeout(ms, options?);
 ```
 
 ## 사용법
 
-### `timeout(ms)`
+### `timeout(ms, options?)`
 
 특정 시간이 지난 후 타임아웃 에러를 발생시키고 싶을 때 `timeout`을 사용하세요. 다른 Promise와 `Promise.race()`를 함께 사용해서 작업에 시간 제한을 걸 때 유용해요.
 
@@ -59,14 +59,30 @@ async function multipleOperationsWithTimeout() {
 }
 ```
 
+`AbortSignal`을 넘겨서 타임아웃을 취소할 수 있어요. `delay`와 달리, 중단해도 Promise를 거부하지 않아요. `timeout`은 `Promise.race()`에서 지기 위해서만 존재하기 때문에, 취소하면 Promise가 대기 상태로 남아서 타임아웃이 감싸던 작업이 시간 제한 없이 끝까지 진행될 수 있어요.
+
+```typescript
+const controller = new AbortController();
+
+// 사용자가 계속 기다리기를 선택하면 1초 제한을 해제해요.
+keepWaitingButton.onclick = () => controller.abort();
+
+const result = await Promise.race([
+  doWork(),
+  timeout(1000, { signal: controller.signal }), // 중단된 후에는 거부되지 않아요
+]);
+```
+
 #### 파라미터
 
 - `ms` (`number`): `TimeoutError`가 발생하기까지의 밀리초 단위 시간이에요.
+- `options` (`TimeoutOptions`, 선택): 타임아웃 옵션이에요.
+  - `signal` (`AbortSignal`, 선택): 타임아웃을 취소할 수 있는 AbortSignal이에요. 중단되면 반환된 Promise는 대기 상태로 남고 거부되지 않아요.
 
 #### 반환 값
 
-(`Promise<never>`): 지정된 시간 후에 `TimeoutError`로 거부되는 Promise를 반환해요.
+(`Promise<never>`): 지정된 시간 후에 `TimeoutError`로 거부되는 Promise를 반환해요. `AbortSignal`이 먼저 중단되면 Promise는 완료되지 않아요.
 
 #### 에러
 
-지정된 시간이 지나면 `TimeoutError`를 던져요.
+지정된 시간이 지나면 `TimeoutError`를 던져요. `AbortSignal`을 중단해도 에러를 던지지 않고, 타임아웃이 취소되어 Promise가 대기 상태로 남아요.

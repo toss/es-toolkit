@@ -5,11 +5,11 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * Creates a shallow clone of the given object.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @returns {T} - A shallow clone of the given object.
+ * @param obj - The object to clone.
+ * @returns A shallow clone of the given object.
  *
  * @example
- * // Clone a primitive values
+ * // Clone a primitive value
  * const num = 29;
  * const clonedNum = clone(num);
  * console.log(clonedNum); // 29
@@ -44,6 +44,11 @@ export function clone<T>(obj: T): T {
   }
 
   const prototype = Object.getPrototypeOf(obj);
+
+  if (prototype == null) {
+    return Object.assign(Object.create(prototype), obj);
+  }
+
   const Constructor = prototype.constructor;
 
   if (obj instanceof Date || obj instanceof Map || obj instanceof Set) {
@@ -62,11 +67,15 @@ export function clone<T>(obj: T): T {
   }
 
   if (obj instanceof Error) {
-    const newError = new Constructor(obj.message);
+    let newError;
+    if (obj instanceof AggregateError) {
+      newError = new Constructor(obj.errors, obj.message, { cause: obj.cause });
+    } else {
+      newError = new Constructor(obj.message, { cause: obj.cause });
+    }
 
     newError.stack = obj.stack;
-    newError.name = obj.name;
-    newError.cause = obj.cause;
+    Object.assign(newError, obj);
 
     return newError;
   }

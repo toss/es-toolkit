@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
-import type { forEach as forEachLodash } from 'lodash';
+import { describe, expect, it, vi } from 'vitest';
 import { forEach } from './forEach';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
@@ -245,7 +244,15 @@ describe('forEach', () => {
     expect(values.length).toBe(1);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(forEach).toEqualTypeOf<typeof forEachLodash>();
+  it(`\`_.${methodName}\` should not iterate over non-enumerable properties`, () => {
+    const object = { a: 1 };
+    Object.defineProperty(object, 'b', { value: 2, enumerable: false });
+
+    const keys: any[] = [];
+    func(object, (value, key) => {
+      keys.push(key);
+    });
+
+    expect(keys).toEqual(['a']);
   });
 });

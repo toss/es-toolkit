@@ -2,8 +2,8 @@
  * Reverses the order of arguments for a given function.
  *
  * @template T - The type of the function being flipped.
- * @param {T} func - The function whose arguments will be reversed.
- * @returns {T} A new function that takes the reversed arguments and returns the result of calling `func`.
+ * @param func - The function whose arguments will be reversed.
+ * @returns A new function that takes the reversed arguments and returns the result of calling `func`.
  *
  * @example
  * var flipped = flip(function() {
@@ -19,8 +19,8 @@ export function flip<T extends (...args: any) => any>(func: T): T;
  * Reverses the order of arguments for a given function.
  *
  * @template F - The type of the function being flipped.
- * @param {F} func - The function whose arguments will be reversed.
- * @returns {(...args: Reversed<Parameters<F>>) => ReturnType<F>} A new function that takes the
+ * @param func - The function whose arguments will be reversed.
+ * @returns A new function that takes the
  * reversed arguments and returns the result of calling `func`.
  *
  * @example

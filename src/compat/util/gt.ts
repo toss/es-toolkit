@@ -3,9 +3,9 @@ import { toNumber } from './toNumber.ts';
 /**
  * Checks if value is greater than other.
  *
- * @param {any} value The value to compare.
- * @param {any} other The other value to compare.
- * @returns {boolean} Returns `true` if value is greater than other, else `false`.
+ * @param value The value to compare.
+ * @param other The other value to compare.
+ * @returns Returns `true` if value is greater than other, else `false`.
  *
  * @example
  * gt(3, 1); // true

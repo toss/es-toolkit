@@ -1,8 +1,6 @@
 import { bench, describe } from 'vitest';
-import { toSnakeCaseKeys as toSnakeCaseKeysToolkit_ } from 'es-toolkit';
+import { toSnakeCaseKeys as toSnakeCaseKeysToolkit } from 'es-toolkit';
 import lodashFp from 'lodash/fp';
-
-const toSnakeCaseKeysToolkit = toSnakeCaseKeysToolkit_;
 
 const toSnakeCaseKeysLodash = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.snakeCase)(obj);

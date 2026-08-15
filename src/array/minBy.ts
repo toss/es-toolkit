@@ -3,12 +3,13 @@
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {[T, ...T[]]} items The nonempty array of elements to search.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T} The element with the minimum value as determined by the `getValue` function.
+ * @param items The nonempty array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.min)
  * minBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -18,19 +19,23 @@
  *   x => x.age
  * ); // Returns: { name: 'joe', age: 26 }
  */
-export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => number): T;
+export function minBy<T>(
+  items: readonly [T, ...T[]],
+  getValue: (element: T, index: number, array: readonly T[]) => number
+): T;
 /**
  * Finds the element in an array that has the minimum value when applying
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * @param items The array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function,
  * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.min)
  * minBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -40,19 +45,23 @@ export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => 
  *   x => x.age
  * ); // Returns: { name: 'joe', age: 26 }
  */
-export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined;
+export function minBy<T>(
+  items: readonly T[],
+  getValue: (element: T, index: number, array: readonly T[]) => number
+): T | undefined;
 /**
  * Finds the element in an array that has the minimum value when applying
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * @param items The array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function,
  * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.min)
  * minBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -62,17 +71,25 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
  *   x => x.age
  * ); // Returns: { name: 'joe', age: 26 }
  */
-export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
+export function minBy<T>(
+  items: readonly T[],
+  getValue: (element: T, index: number, array: readonly T[]) => number
+): T | undefined {
   if (items.length === 0) {
     return undefined;
   }
 
   let minElement = items[0];
-  let min = getValue(minElement);
+  let min = Infinity;
 
-  for (let i = 1; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const element = items[i];
-    const value = getValue(element);
+    const value = getValue(element, i, items);
+
+    if (Number.isNaN(value)) {
+      return element;
+    }
+
     if (value < min) {
       min = value;
       minElement = element;

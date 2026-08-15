@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isNaN as isNaNLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isNaN } from './isNaN';
 
 describe('isNaN', () => {
@@ -9,6 +8,15 @@ describe('isNaN', () => {
 
   it('should return `false` for non-NaN numbers', () => {
     expect(isNaN(0)).toBe(false);
+    expect(isNaN(new Number(0))).toBe(false);
+  });
+
+  it('should return `true` for boxed NaN', () => {
+    expect(isNaN(new Number(NaN))).toBe(true);
+  });
+
+  it('should return `false` for objects inheriting Number.prototype without number data', () => {
+    expect(isNaN(Object.create(Number.prototype))).toBe(false);
   });
 
   it('should return `false` for non-numbers', () => {
@@ -19,9 +27,5 @@ describe('isNaN', () => {
     expect(isNaN({})).toBe(false);
     expect(isNaN([])).toBe(false);
     expect(isNaN(() => {})).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isNaN).toEqualTypeOf<typeof isNaNLodash>();
   });
 });

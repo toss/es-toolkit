@@ -3,8 +3,8 @@ import { getTag } from '../_internal/getTag.ts';
 /**
  * Checks if `value` is an Error object.
  *
- * @param {any} value The value to check.
- * @returns {value is Error} Returns `true` if `value` is an Error object, `false` otherwise.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is an Error object, `false` otherwise.
  *
  * @example
  * ```typescript

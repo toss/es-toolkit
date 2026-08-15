@@ -8,10 +8,10 @@ import { differenceWith } from './differenceWith.ts';
  * custom equality function.
  *
  * @template T - The type of elements contained in the arrays.
- * @param {T[]} superset - The array that may contain all elements of the subset.
- * @param {T[]} subset - The array to check against the superset.
- * @param {(x: T, y: T) => boolean} areItemsEqual - A function to determine if two items are equal.
- * @returns {boolean} - Returns `true` if all elements of the subset are present in the superset
+ * @param superset - The array that may contain all elements of the subset.
+ * @param subset - The array to check against the superset.
+ * @param areItemsEqual - A function to determine if two items are equal.
+ * @returns Returns `true` if all elements of the subset are present in the superset
  * according to the custom equality function, otherwise returns `false`.
  *
  * @example

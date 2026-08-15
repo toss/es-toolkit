@@ -3,9 +3,9 @@
  * based on the values returned by the comparator function.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to process.
- * @param {(item1: T, item2: T) => boolean} areItemsEqual - The function used to compare the array elements.
- * @returns {T[]} A new array containing only the unique elements from the original array, based on the values returned by the comparator function.
+ * @param arr - The array to process.
+ * @param areItemsEqual - The function used to compare the array elements.
+ * @returns A new array containing only the unique elements from the original array, based on the values returned by the comparator function.
  *
  * @example
  * ```ts

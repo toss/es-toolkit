@@ -2,6 +2,7 @@ import { createRequire } from 'module';
 import path from 'path';
 import { defineConfig } from 'vitepress';
 import llmstxt from 'vitepress-plugin-llms';
+import { search as jaSearch } from './ja.mts';
 import { search as koSearch } from './ko.mts';
 import { search as zh_hansSearch } from './zh_hans.mts';
 
@@ -12,6 +13,8 @@ export const shared = defineConfig({
 
   lastUpdated: true,
   metaChunk: true,
+
+  srcExclude: ['**/CLAUDE.md'],
 
   /* prettier-ignore */
   head: [
@@ -89,10 +92,20 @@ export const shared = defineConfig({
     ],
   ],
 
+  transformPageData(pageData) {
+    const canonicalUrl = `https://es-toolkit.dev/${pageData.relativePath}`
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '.html');
+
+    pageData.frontmatter.head ??= [];
+    pageData.frontmatter.head.push(['link', { rel: 'canonical', href: canonicalUrl }]);
+  },
+
   themeConfig: {
     logo: {
       dark: '/logo_white.png',
       light: '/logo_black.png',
+      alt: 'es-toolkit',
     },
 
     siteTitle: false,
@@ -107,6 +120,7 @@ export const shared = defineConfig({
         locales: {
           ...koSearch,
           ...zh_hansSearch,
+          ...jaSearch,
         },
       },
     },
@@ -142,7 +156,19 @@ export const shared = defineConfig({
             paths: [require.resolve('vitepress')],
           })
         ),
+        '@vue/server-renderer': path.dirname(
+          require.resolve('@vue/server-renderer/package.json', {
+            paths: [
+              require.resolve('vue', {
+                paths: [require.resolve('vitepress')],
+              }),
+            ],
+          })
+        ),
       },
+    },
+    ssr: {
+      noExternal: ['vue', '@vue/server-renderer'],
     },
     plugins: [
       llmstxt({

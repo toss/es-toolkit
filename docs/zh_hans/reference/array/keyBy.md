@@ -63,7 +63,7 @@ keyBy(orders, order => `${order.date}-${order.customerId}`);
 #### 参数
 
 - `arr` (`readonly T[]`): 要转换为对象的数组。
-- `getKeyFromItem` (`(item: T) => K`): 从每个元素生成键的函数。
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): 从每个元素、索引和数组生成键的函数。
 
 #### 返回值
 

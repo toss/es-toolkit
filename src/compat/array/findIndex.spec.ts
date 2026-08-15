@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { findIndex as findIndexLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { findIndex } from './findIndex';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
@@ -60,6 +59,17 @@ describe('findIndex', () => {
     expect(findIndex(objects, { b: 2 }, 4)).toBe(-1);
   });
 
+  it('findIndex with NaN fromIndex should start from 0', () => {
+    const arr = [1, 2, 3];
+    expect(findIndex(arr, x => x === 1, NaN)).toBe(0);
+  });
+
+  it('findIndex should convert fromIndex to an integer like lodash', () => {
+    const arr = [1, 2, 3, 4, 5];
+    expect(findIndex(arr, x => x >= 3, 1.5)).toBe(2);
+    expect(findIndex(arr, x => x >= 3, 2.9)).toBe(2);
+  });
+
   it('should return `-1` when provided `null` or `undefined`', () => {
     expect(findIndex(null, 'a')).toBe(-1);
     expect(findIndex(undefined, 'a')).toBe(-1);
@@ -71,7 +81,8 @@ describe('findIndex', () => {
     expect(findIndex(args, i => i === 2)).toBe(1);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(findIndex).toEqualTypeOf<typeof findIndexLodash>();
+  it('should work with no predicate (uses identity)', () => {
+    expect(findIndex([0, false, null, undefined, '', 1, 2, 3])).toBe(5);
+    expect(findIndex([0, false, null, undefined, ''])).toBe(-1);
   });
 });

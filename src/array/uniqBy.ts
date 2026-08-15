@@ -6,9 +6,9 @@
  *
  * @template T - The type of elements in the array.
  * @template U - The type of mapped elements.
- * @param {T[]} arr - The array to process.
- * @param {(item: T) => U} mapper - The function used to convert the array elements.
- * @returns {T[]} A new array containing only the unique elements from the original array, based on the values returned by the mapper function.
+ * @param arr - The array to process.
+ * @param mapper - The function used to convert the array elements.
+ * @returns A new array containing only the unique elements from the original array, based on the values returned by the mapper function.
  *
  * @example
  * ```ts
@@ -26,12 +26,12 @@
  * // 2
  * ```
  */
-export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T) => U): T[] {
+export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T, index: number, array: readonly T[]) => U): T[] {
   const map = new Map<U, T>();
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
-    const key = mapper(item);
+    const key = mapper(item, i, arr);
 
     if (!map.has(key)) {
       map.set(key, item);

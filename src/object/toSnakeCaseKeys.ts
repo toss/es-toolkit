@@ -51,8 +51,8 @@ export type ToSnakeCaseKeys<T> = T extends NonPlainObject
  * but with all keys converted to snake_case format.
  *
  * @template T - The type of object.
- * @param {T} obj - The object to convert keys from.
- * @returns {ToSnakeCaseKeys<T>} A new object with all keys converted to snake_case.
+ * @param obj - The object to convert keys from.
+ * @returns A new object with all keys converted to snake_case.
  *
  * @example
  * // Example with objects

@@ -1,10 +1,12 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Converts `string` to an integer of the specified radix. If `radix` is undefined or 0, a `radix` of 10 is used unless `string` is a hexadecimal, in which case a `radix` of 16 is used.
  *
- * @param {string} string The string to convert to an integer.
- * @param {number} radix The radix to use when converting the string to an integer. Defaults to `0`.
- * @param {unknown} guard Enables use as an iteratee for methods like `Array#map`.
- * @returns {number} Returns the converted integer.
+ * @param string The string to convert to an integer.
+ * @param radix The radix to use when converting the string to an integer. Defaults to `0`.
+ * @param guard Enables use as an iteratee for methods like `Array#map`.
+ * @returns Returns the converted integer.
  *
  * @example
  * parseInt('08'); // => 8
@@ -20,10 +22,10 @@ export function parseInt(string: string, radix?: number): number;
 /**
  * Converts `string` to an integer of the specified radix. If `radix` is undefined or 0, a `radix` of 10 is used unless `string` is a hexadecimal, in which case a `radix` of 16 is used.
  *
- * @param {string} string The string to convert to an integer.
- * @param {number} radix The radix to use when converting the string to an integer. Defaults to `0`.
- * @param {unknown} guard Enables use as an iteratee for methods like `Array#map`.
- * @returns {number} Returns the converted integer.
+ * @param string The string to convert to an integer.
+ * @param radix The radix to use when converting the string to an integer. Defaults to `0`.
+ * @param guard Enables use as an iteratee for methods like `Array#map`.
+ * @returns Returns the converted integer.
  *
  * @example
  * parseInt('08'); // => 8
@@ -39,5 +41,5 @@ export function parseInt(string: string, radix = 0, guard?: unknown): number {
     radix = 0;
   }
 
-  return Number.parseInt(string, radix);
+  return Number.parseInt(toString(string), radix);
 }

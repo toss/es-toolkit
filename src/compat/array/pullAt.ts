@@ -17,9 +17,9 @@ import { toPath } from '../util/toPath.ts';
  * **Note:** Unlike `_.at`, this method mutates `array`.
  *
  * @template T
- * @param {T[]} array - The array to modify.
- * @param {...Array<number | number[]>} indexes - The indexes of elements to remove, specified as individual indexes or arrays of indexes.
- * @returns {T[]} Returns the new array of removed elements.
+ * @param array - The array to modify.
+ * @param indexes - The indexes of elements to remove, specified as individual indexes or arrays of indexes.
+ * @returns Returns the new array of removed elements.
  *
  * @example
  * var array = [5, 10, 15, 20];
@@ -40,9 +40,9 @@ export function pullAt<T>(array: T[], ...indexes: Array<Many<number>>): T[];
  * **Note:** Unlike `_.at`, this method mutates `array`.
  *
  * @template L
- * @param {L} array - The array to modify.
- * @param {...Array<number | number[]>} indexes - The indexes of elements to remove, specified as individual indexes or arrays of indexes.
- * @returns {L} Returns the new array of removed elements.
+ * @param array - The array to modify.
+ * @param indexes - The indexes of elements to remove, specified as individual indexes or arrays of indexes.
+ * @returns Returns the new array of removed elements.
  *
  * @example
  * var array = [5, 10, 15, 20];
@@ -60,9 +60,9 @@ export function pullAt<L extends MutableList<any>>(array: RejectReadonly<L>, ...
  * Removes elements from an array at specified indices and returns the removed elements.
  *
  * @template T
- * @param {ArrayLike<T>} array - The array from which elements will be removed.
- * @param {Array<number | readonly number[] | string | readonly string[]>} _indices - An array of indices specifying the positions of elements to remove.
- * @returns {ArrayLike<T>} An array containing the elements that were removed from the original array.
+ * @param array - The array from which elements will be removed.
+ * @param _indices - An array of indices specifying the positions of elements to remove.
+ * @returns An array containing the elements that were removed from the original array.
  *
  * @example
  * const numbers = [10, 20, 30, 40, 50];

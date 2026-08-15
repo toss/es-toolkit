@@ -7,8 +7,8 @@
  * with undefined values for missing elements.
  *
  * @template T
- * @param {T[]} arr1 - The first array to zip.
- * @returns {Array<[T]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -26,9 +26,9 @@ export function zip<T>(arr1: readonly T[]): Array<[T]>;
  * with undefined values for missing elements.
  *
  * @template T, U
- * @param {T[]} arr1 - The first array to zip.
- * @param {U[]} arr2 - The second array to zip.
- * @returns {Array<[T, U]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -47,10 +47,10 @@ export function zip<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>
  * with undefined values for missing elements.
  *
  * @template T, U, V
- * @param {T[]} arr1 - The first array to zip.
- * @param {U[]} arr2 - The second array to zip.
- * @param {V[]} arr3 - The third array to zip.
- * @returns {Array<[T, U, V]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -70,11 +70,11 @@ export function zip<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: reado
  * with undefined values for missing elements.
  *
  * @template T, U, V, W
- * @param {T[]} arr1 - The first array to zip.
- * @param {U[]} arr2 - The second array to zip.
- * @param {V[]} arr3 - The third array to zip.
- * @param {W[]} arr4 - The fourth array to zip.
- * @returns {Array<[T, U, V, W]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @param arr4 - The fourth array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -100,8 +100,8 @@ export function zip<T, U, V, W>(
  * with undefined values for missing elements.
  *
  * @template T
- * @param {...Array<readonly T[]>} arrs - The arrays to zip together.
- * @returns {T[][]} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arrs - The arrays to zip together.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -121,8 +121,8 @@ export function zip<T>(...arrs: Array<readonly T[]>): T[][];
  * with undefined values for missing elements.
  *
  * @template T
- * @param {...Array<readonly T[]>} arrs - The arrays to zip together.
- * @returns {T[][]} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arrs - The arrays to zip together.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];

@@ -93,7 +93,7 @@ const result = mergeWith(target, source, (objValue, srcValue) => {
 // 返回值: { a: [1, 3], b: [2, 4] })
 ```
 
-## 演示
+## 试一试
 
 ::: sandpack
 

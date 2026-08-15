@@ -3,8 +3,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `string`.
  *
- * @param {unknown} value The value to check if it is string.
- * @returns {value is string} Returns `true` if `value` is a string, else `false`.
+ * @param value The value to check if it is string.
+ * @returns Returns `true` if `value` is a string, else `false`.
  *
  * @example
  * const value1 = 'abc';

@@ -37,9 +37,6 @@ ary(fn, 2)(1, 2, 3);
 ```typescript
 // parseIntは2つの引数を受け取りますが、mapは3つを渡します
 ['1', '2', '3'].map(parseInt);
-// Returns: [1, NaN, NaN]
-
-['1', '2', '3'].map(parseInt);
 // 結果: [1, NaN, NaN]
 // なぜならparseInt('2', 1)、parseInt('3', 2)が実行されるからです。
 

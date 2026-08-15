@@ -107,10 +107,12 @@ const emptyCase = {
 const result = flattenObject(emptyCase);
 console.log(result);
 // {
+//   'empty': {},
+//   'emptyArray: [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// 空のオブジェクトや空の配列はキーとして表示されません
+// 空のオブジェクトや空の配列もキーとして表示されます
 ```
 
 #### パラメータ

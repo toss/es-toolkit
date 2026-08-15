@@ -51,7 +51,7 @@ pascalCase('user@email.com'); // 'UserEmailCom'
 
 (`string`): 返回转换为帕斯卡命名法的新字符串。
 
-## 演示
+## 试一试
 
 ::: sandpack
 

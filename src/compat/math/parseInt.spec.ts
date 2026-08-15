@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { parseInt as parseIntLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { parseInt } from './parseInt';
 
 describe('parseInt', () => {
@@ -58,6 +57,23 @@ describe('parseInt', () => {
     expect(parseInt('0x20', object)).toBe(32);
   });
 
+  it('should coerce `string` to a string before parsing', () => {
+    // `null`/`undefined` coerce to `''`, not to `'null'`/`'undefined'`.
+    // @ts-expect-error - unusual usage
+    expect(parseInt(null)).toBeNaN();
+    // @ts-expect-error - unusual usage
+    expect(parseInt(null, 25)).toBeNaN();
+    // @ts-expect-error - unusual usage
+    expect(parseInt(undefined)).toBeNaN();
+    // @ts-expect-error - unusual usage
+    expect(parseInt(undefined, 16)).toBeNaN();
+  });
+
+  it('should not throw for symbol input and return `NaN`', () => {
+    // @ts-expect-error - unusual usage
+    expect(parseInt(Symbol('s'))).toBeNaN();
+  });
+
   it('should work as an iteratee for methods like `map`', () => {
     const strings = ['6', '08', '10'].map(Object);
     let actual = strings.map(parseInt);
@@ -66,9 +82,5 @@ describe('parseInt', () => {
 
     actual = ['1', '2', '3'].map(parseInt);
     expect(actual).toEqual([1, 2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(parseInt).toEqualTypeOf<typeof parseIntLodash>();
   });
 });

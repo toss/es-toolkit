@@ -40,7 +40,7 @@ type NonPlainObject =
   | ((...args: any[]) => any)
   | typeof globalThis;
 
-type ToCamelCaseKeys<T> = T extends NonPlainObject
+export type ToCamelCaseKeys<T> = T extends NonPlainObject
   ? T
   : T extends any[]
     ? Array<ToCamelCaseKeys<T[number]>>
@@ -55,8 +55,8 @@ type ToCamelCaseKeys<T> = T extends NonPlainObject
  * but with all keys converted to camelCase format.
  *
  * @template T - The type of object.
- * @param {T} obj - The object to convert keys from.
- * @returns {ToCamelCaseKeys<T>} A new object with all keys converted to camelCase.
+ * @param obj - The object to convert keys from.
+ * @returns A new object with all keys converted to camelCase.
  *
  * @example
  * // Example with objects

@@ -71,7 +71,7 @@ const byLength = sortBy(
 #### Parameters
 
 - `arr` (`readonly T[]`): The array of objects to sort.
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): Sorting criteria. An array of object property names or transformation functions, with earlier criteria having higher priority.
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): Sorting criteria. An array of object property names or transformation functions, with earlier criteria having higher priority.
 
 #### Returns
 

@@ -10,10 +10,10 @@ import { unionBy } from './unionBy.ts';
  * @template T - Type of elements in the input arrays.
  * @template U - Type of the values returned by the mapping function.
  *
- * @param {T[]} arr1 - The first array.
- * @param {T[]} arr2 - The second array.
- * @param {(item: T) => U} mapper - The function to map array elements to comparison values.
- * @returns {T[]} An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @param mapper - The function to map array elements to comparison values.
+ * @returns An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
  *
  * @example
  * // Custom mapping function for objects with an 'id' property

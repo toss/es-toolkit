@@ -4,8 +4,8 @@
  * This function tests whether the provided value is an instance of `Blob`.
  * It returns `true` if the value is an instance of `Blob`, and `false` otherwise.
  *
- * @param {unknown} x - The value to test if it is a Blob.
- * @returns {x is Blob} True if the value is a Blob, false otherwise.
+ * @param x - The value to test if it is a Blob.
+ * @returns True if the value is a Blob, false otherwise.
  *
  * @example
  * const value1 = new Blob();

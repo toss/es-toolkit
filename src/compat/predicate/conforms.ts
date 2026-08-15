@@ -7,8 +7,8 @@ import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts
  *
  * Note: The created function is equivalent to `conformsTo` with source partially applied.
  *
- * @param {Record<PropertyKey, (value: any) => boolean>} source The object of property predicates to conform to.
- * @returns {(object: Record<PropertyKey, any>) => boolean} Returns the new spec function.
+ * @param source The object of property predicates to conform to.
+ * @returns Returns the new spec function.
  *
  * @example
  * const isPositive = (n) => n > 0;

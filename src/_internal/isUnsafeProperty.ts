@@ -1,11 +1,14 @@
 /**
- * Checks if a property key is unsafe to modify directly.
+ * Checks if a property key is unsafe to access or copy directly.
  *
- * This function is used in functions like `merge` to prevent prototype pollution attacks
- * by identifying property keys that could modify the object's prototype chain or constructor.
+ * This function is used in functions like `get`, `unset`, and `merge` to prevent
+ * prototype pollution attacks by identifying `__proto__`, which modifies the object's
+ * prototype chain. `constructor` and `prototype` stay accessible here because lodash
+ * keeps reads of them unrestricted; write paths use `isUnsafeToWriteProperty` instead,
+ * which also blocks those keys.
  *
  * @param key - The property key to check
- * @returns `true` if the property is unsafe to modify directly, `false` otherwise
+ * @returns `true` if the property is unsafe to access directly, `false` otherwise
  * @internal
  */
 export function isUnsafeProperty(key: PropertyKey) {

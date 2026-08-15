@@ -138,5 +138,5 @@ const customCache = new CustomCache<string, number>();
 const memoizedSumWithCustomCache = memoize(sum, { cache: customCache });
 console.log(memoizedSumWithCustomCache([1, 2])); // 3
 console.log(memoizedSumWithCustomCache([1, 2])); // 3 (キャッシュされた結果)
-console.log(memoizedAddWithCustomCache.cache.size); // 1
+console.log(memoizedSumWithCustomCache.cache.size); // 1
 ```

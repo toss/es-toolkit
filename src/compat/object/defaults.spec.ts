@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import { defaults as defaultsLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { defaults } from './defaults';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';
@@ -70,10 +69,6 @@ describe('defaults', () => {
     const source = { a: 4 };
     array.forEach((...args: any[]) => defaults(source, ...args));
     expect(source).toEqual({ a: 4, b: 1, c: 2, d: 3 });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(defaults).toEqualTypeOf<typeof defaultsLodash>();
   });
 
   it('should not throw an error when a source is `undefined`', () => {

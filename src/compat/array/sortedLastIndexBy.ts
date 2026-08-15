@@ -12,10 +12,10 @@ type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | P
  * sort ranking. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The sorted array to inspect.
- * @param {T} value - The value to evaluate.
- * @param {ValueIteratee<T>} iteratee - The iteratee invoked per element.
- * @returns {number} Returns the index at which `value` should be inserted into `array`.
+ * @param array - The sorted array to inspect.
+ * @param value - The value to evaluate.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns the index at which `value` should be inserted into `array`.
  *
  * @example
  * sortedLastIndexBy([{ 'x': 4 }, { 'x': 5 }], { 'x': 4 }, 'x');
@@ -32,10 +32,10 @@ export function sortedLastIndexBy<T>(
  * which is invoked for `value` and each element of `array` to compute their
  * sort ranking. The iteratee is invoked with one argument: (value).
  *
- * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
- * @param {T} value The value to evaluate.
- * @param {(value: T) => R | PropertyName | [PropertyName, any] | Partial<T>} iteratee The iteratee invoked per element.
- * @returns {number} Returns the highest index at which `value` should be inserted
+ * @param array The sorted array to inspect.
+ * @param value The value to evaluate.
+ * @param iteratee The iteratee invoked per element.
+ * @returns Returns the highest index at which `value` should be inserted
  *  into `array`.
  * @example
  * const objects = [{ 'n': 4 }, { 'n': 5 }]

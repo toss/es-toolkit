@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { subtract as subtractToolkitCompat_ } from 'es-toolkit/compat';
-import { subtract as subtractLodash_ } from 'lodash';
+import { subtract as subtractToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const subtractToolkitCompat = subtractToolkitCompat_;
-const subtractLodash = subtractLodash_;
+const { subtract: subtractLodash } = lodash;
 
 describe('subtract function benchmark', () => {
   bench('es-toolkit/compat/subtract', () => {

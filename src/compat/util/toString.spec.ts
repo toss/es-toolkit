@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toString as toStringLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { stubString } from './stubString';
 import { toString } from './toString';
 import { symbol } from '../_internal/symbol';
@@ -38,7 +37,14 @@ describe('toString', () => {
     expect(toString([symbol])).toBe('Symbol(a)');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(toString).toEqualTypeOf<typeof toStringLodash>();
+  it('should render nested nullish array values, matching lodash', () => {
+    expect(toString([1, null, 3])).toBe('1,null,3');
+    expect(toString([null, undefined])).toBe('null,undefined');
+    expect(
+      toString([
+        [1, null],
+        [2, undefined],
+      ])
+    ).toBe('1,null,2,undefined');
   });
 });

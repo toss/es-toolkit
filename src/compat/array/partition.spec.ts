@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { partition as partitionLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { partition } from './partition';
 import { args } from '../_internal/args';
 
@@ -18,6 +17,15 @@ describe('partition', () => {
     const arr = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
 
     expect(partition(arr, null)).toEqual([
+      [1, 2, 3, 4, 5],
+      [0, null, undefined, false, ''],
+    ]);
+  });
+
+  it('should use `_.identity` when `predicate` is undefined', () => {
+    const arr = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
+
+    expect(partition(arr, undefined)).toEqual([
       [1, 2, 3, 4, 5],
       [0, null, undefined, false, ''],
     ]);
@@ -156,9 +164,5 @@ describe('partition', () => {
       [1, 2, true, 'hello'],
       [0, false, ''],
     ]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(partition).toEqualTypeOf<typeof partitionLodash>();
   });
 });

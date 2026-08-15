@@ -31,11 +31,11 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * Creates a shallow clone of the given object.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @returns {T} - A shallow clone of the given object.
+ * @param obj - The object to clone.
+ * @returns A shallow clone of the given object.
  *
  * @example
- * // Clone a primitive objs
+ * // Clone a primitive object
  * const num = 29;
  * const clonedNum = clone(num);
  * console.log(clonedNum); // 29

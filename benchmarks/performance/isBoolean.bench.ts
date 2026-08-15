@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isBoolean as isBooleanToolkit_ } from 'es-toolkit';
-import { isBoolean as isBooleanToolkitCompat_ } from 'es-toolkit/compat';
-import { isBoolean as isBooleanLodash_ } from 'lodash';
+import { isBoolean as isBooleanToolkit } from 'es-toolkit';
+import { isBoolean as isBooleanToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isBooleanToolkit = isBooleanToolkit_;
-const isBooleanToolkitCompat = isBooleanToolkitCompat_;
-const isBooleanLodash = isBooleanLodash_;
+const { isBoolean: isBooleanLodash } = lodash;
 
 describe('isBoolean', () => {
   bench('es-toolkit/isBoolean', () => {

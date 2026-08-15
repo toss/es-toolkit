@@ -14,4 +14,9 @@ describe('zipWith', () => {
       `3-c-false`,
     ]);
   });
+
+  it('should provide index parameter to combine function', () => {
+    const result = zipWith([10, 20, 30], [1, 2, 3], (a, b, index) => a + b + index);
+    expect(result).toEqual([11, 23, 35]);
+  });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { some as someLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { some } from './some';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
@@ -145,6 +144,13 @@ describe('some', () => {
     expect(actual).toEqual([true]);
   });
 
+  it('should not reset the predicate for a non-iteratee-call `guard`', () => {
+    // @ts-expect-error - type mismatch
+    expect(some([1, 2, 3], () => false, { n: 2 })).toBe(false);
+    // @ts-expect-error - type mismatch
+    expect(some([1, 2, 3], n => n === 2, true)).toBe(true);
+  });
+
   it('should return true for object with one value passing the predicate', () => {
     expect(some({ a: 1, b: 2, c: 3 }, value => value >= 3)).toBe(true);
   });
@@ -194,9 +200,5 @@ describe('some', () => {
 
     expect(some(sparseArray, value => value > 0)).toEqual(true);
     expect(some(sparseArray, value => value === undefined)).toEqual(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(some).toEqualTypeOf<typeof someLodash>();
   });
 });

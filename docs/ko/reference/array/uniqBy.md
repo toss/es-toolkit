@@ -59,7 +59,7 @@ console.log(uniqueByCategory);
 #### 파라미터
 
 - `arr` (`readonly T[]`): 중복을 제거할 배열이에요.
-- `mapper` (`(item: T) => U`): 각 요소를 비교할 값으로 변환하는 함수예요.
+- `mapper` (`(item: T, index: number, array: readonly T[]) => U`): 각 요소를 비교할 값으로 변환하는 함수예요. 요소, 인덱스, 배열을 인자로 받아요.
 
 #### 반환 값
 

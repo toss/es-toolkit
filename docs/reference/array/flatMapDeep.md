@@ -37,8 +37,21 @@ const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
 #### Parameters
 
 - `arr` (`T[]`): The array to transform.
-- `iteratee` (`(item: T) => U`): The function that transforms each array element.
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): The function that transforms each array element. It receives the element, its index, and the array.
 
 #### Returns
 
 (`Array<ExtractNestedArrayType<U>>`): Returns a new array where each element is transformed and all depths are flattened.
+
+## Examples
+
+```typescript
+// Using index parameter
+const arr = [1, 2, 3];
+flatMapDeep(arr, (item, index) => [[item + index]]);
+// Returns: [1, 3, 5]
+
+// Using array parameter
+flatMapDeep(arr, (item, _index, array) => [[item * array.length]]);
+// Returns: [3, 6, 9]
+```

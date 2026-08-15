@@ -8,10 +8,10 @@
  *
  * @template T - The type of elements in the first array.
  * @template U - The type of elements in the second array.
- * @param {T[]} firstArr - The first array to compare.
- * @param {U[]} secondArr - The second array to compare.
- * @param {(item: T | U) => unknown} mapper - A function to map the elements of both arrays for comparison.
- * @returns {T[]} A new array containing the elements from the first array that have corresponding mapped values in the second array.
+ * @param firstArr - The first array to compare.
+ * @param secondArr - The second array to compare.
+ * @param mapper - A function to map the elements of both arrays for comparison.
+ * @returns A new array containing the elements from the first array that have corresponding mapped values in the second array.
  *
  * @example
  * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];

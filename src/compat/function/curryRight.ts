@@ -100,10 +100,10 @@ export function curryRight(func: (...args: any[]) => any, arity?: number): (...a
  *
  * Note: This method doesn't set the `length` property of curried functions.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @param {unknown} guard - Enables use as an iteratee for methods like `Array#map`.
- * @returns {((...args: any[]) => any) & { placeholder: typeof curryRight.placeholder }} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @param guard - Enables use as an iteratee for methods like `Array#map`.
+ * @returns} - Returns the new curried function.
  *
  * @example
  * const abc = function(a, b, c) {

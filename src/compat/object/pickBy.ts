@@ -13,9 +13,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  *
  * @template T - The type of object values.
  * @template S - The type of filtered values.
- * @param {Record<string, T> | null | undefined} object - The source object.
- * @param {ValueKeyIterateeTypeGuard<T, S>} predicate - The function invoked per property.
- * @returns {Record<string, S>} Returns the new filtered object.
+ * @param object - The source object.
+ * @param predicate - The function invoked per property.
+ * @returns Returns the new filtered object.
  *
  * @example
  * const users = {
@@ -35,9 +35,9 @@ export function pickBy<T, S extends T>(
  *
  * @template T - The type of object values.
  * @template S - The type of filtered values.
- * @param {Record<number, T> | null | undefined} object - The source object.
- * @param {ValueKeyIterateeTypeGuard<T, S>} predicate - The function invoked per property.
- * @returns {Record<number, S>} Returns the new filtered object.
+ * @param object - The source object.
+ * @param predicate - The function invoked per property.
+ * @returns Returns the new filtered object.
  *
  * @example
  * const array = [1, 2, 3, 4];
@@ -53,9 +53,9 @@ export function pickBy<T, S extends T>(
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
  * @template T - The type of object values.
- * @param {Record<string, T> | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T>} [predicate] - The function invoked per property.
- * @returns {Record<string, T>} Returns the new filtered object.
+ * @param object - The source object.
+ * @param [predicate] - The function invoked per property.
+ * @returns Returns the new filtered object.
  *
  * @example
  * const object = { 'a': 1, 'b': '2', 'c': 3 };
@@ -71,9 +71,9 @@ export function pickBy<T>(
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
  * @template T - The type of object values.
- * @param {Record<number, T> | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T>} [predicate] - The function invoked per property.
- * @returns {Record<number, T>} Returns the new filtered object.
+ * @param object - The source object.
+ * @param [predicate] - The function invoked per property.
+ * @returns Returns the new filtered object.
  *
  * @example
  * const array = [1, 2, 3, 4];
@@ -89,9 +89,9 @@ export function pickBy<T>(
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
  * @template T - The type of object.
- * @param {T | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T[keyof T]>} [predicate] - The function invoked per property.
- * @returns {Partial<T>} Returns the new filtered object.
+ * @param object - The source object.
+ * @param [predicate] - The function invoked per property.
+ * @returns Returns the new filtered object.
  *
  * @example
  * const object = { 'a': 1, 'b': '2', 'c': 3 };
@@ -110,11 +110,11 @@ export function pickBy<T extends object>(
  * includes only the properties for which the predicate function returns true.
  *
  * @template T - The type of object.
- * @param {Record<string, T> | Record<number, T> | object | null | undefined} obj - The object to pick properties from.
- * @param {ValueKeyIterateeTypeGuard<T, S> | ValueKeyIteratee<T[keyof T]> | ValueKeyIteratee<T>} [shouldPick] - A predicate function that determines
+ * @param obj - The object to pick properties from.
+ * @param [shouldPick] - A predicate function that determines
  * whether a property should be picked. It takes the property's key and value as arguments and returns `true`
  * if the property should be picked, and `false` otherwise.
- * @returns {Record<string, S> | Record<number, S> | Partial<T>} A new object with the properties that satisfy the predicate function.
+ * @returns A new object with the properties that satisfy the predicate function.
  *
  * @example
  * const obj = { a: 1, b: 'pick', c: 3 };

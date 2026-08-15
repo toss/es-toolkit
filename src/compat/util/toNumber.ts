@@ -5,8 +5,8 @@ import { isSymbol } from '../predicate/isSymbol.ts';
  *
  * Unlike `Number()`, this function returns `NaN` for symbols.
  *
- * @param {unknown} value - The value to convert.
- * @returns {number} Returns the number.
+ * @param value - The value to convert.
+ * @returns Returns the number.
  *
  * @example
  * toNumber(3.2); // => 3.2

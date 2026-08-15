@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { iteratee as iterateeToolkit_ } from 'es-toolkit/compat';
-import { iteratee as iterateeLodash_ } from 'lodash';
+import { iteratee as iterateeToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const iterateeToolkit = iterateeToolkit_;
-const iterateeLodash = iterateeLodash_;
+const { iteratee: iterateeLodash } = lodash;
 
 describe('iteratee', () => {
   bench('es-toolkit/compat/iteratee', () => {

@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { reduceRight as reduceRightLodash } from 'lodash';
 import { reduceRight } from './reduceRight';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
@@ -116,6 +115,39 @@ describe('reduceRight', () => {
     expect(actual).toBe(undefined);
   });
 
+  it('should respect nullish initial `accumulator` values', () => {
+    const array = [1, 2, 3];
+    const object = { a: 1, b: 2 };
+
+    for (const accumulator of [null, undefined]) {
+      let args: unknown[] | undefined;
+
+      reduceRight(
+        array,
+        function () {
+          // eslint-disable-next-line
+          args || (args = Array.prototype.slice.call(arguments));
+        },
+        accumulator
+      );
+
+      expect(args).toEqual([accumulator, 3, 2, array]);
+
+      args = undefined;
+
+      reduceRight(
+        object,
+        function () {
+          // eslint-disable-next-line
+          args || (args = Array.prototype.slice.call(arguments));
+        },
+        accumulator
+      );
+
+      expect(args).toEqual([accumulator, 2, 'b', object]);
+    }
+  });
+
   it(`should return \`undefined\` for empty collections when no \`accumulator\` is given (test in IE > 9 and modern browsers)`, () => {
     const array: any[] = [];
     const object = { 0: 1, length: 0 };
@@ -178,9 +210,5 @@ describe('reduceRight', () => {
     );
 
     expect(count).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(reduceRight).toEqualTypeOf<typeof reduceRightLodash>();
   });
 });

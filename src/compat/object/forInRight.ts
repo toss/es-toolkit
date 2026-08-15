@@ -8,9 +8,9 @@ import { identity } from '../../function/identity.ts';
  * The iteration is terminated early if the `iteratee` function returns `false`.
  *
  * @template T - The type of the object
- * @param {T} object - The object to iterate over
- * @param {(value: T[keyof T], key: string, collection: T) => any} iteratee - The function invoked per iteration
- * @returns {T} Returns the object
+ * @param object - The object to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the object
  *
  * @example
  * // Iterate over all properties including inherited ones
@@ -37,9 +37,9 @@ export function forInRight<T>(object: T, iteratee?: (value: T[keyof T], key: str
  * The iteration is terminated early if the `iteratee` function returns `false`.
  *
  * @template T - The type of the object
- * @param {T | null | undefined} object - The object to iterate over
- * @param {(value: T[keyof T], key: string, obj: T) => any} iteratee - The function invoked per iteration
- * @returns {T | null | undefined} Returns the object
+ * @param object - The object to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the object
  *
  * @example
  * // Iterate over all properties including inherited ones
@@ -69,9 +69,9 @@ export function forInRight<T>(
  * The iteration is terminated early if the `iteratee` function returns `false`.
  *
  * @template T - The type of the object
- * @param {T | null | undefined} object - The object to iterate over
- * @param {(value: T[keyof T], key: string, obj: T) => any} iteratee - The function invoked per iteration
- * @returns {T | null | undefined} Returns the object
+ * @param object - The object to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the object
  *
  * @example
  * // Iterate over all properties including inherited ones

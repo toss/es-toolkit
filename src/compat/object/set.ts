@@ -5,10 +5,10 @@ import { PropertyPath } from '../_internal/PropertyPath.ts';
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @returns {T} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @returns The modified object.
  *
  * @example
  * // Set a value in a nested object
@@ -34,10 +34,10 @@ export function set<T extends object>(object: T, path: PropertyPath, value: any)
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
  * @template R - The return type.
- * @param {object} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @returns {R} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @returns The modified object.
  *
  * @example
  * // Set a value in a nested object
@@ -63,10 +63,10 @@ export function set<R>(object: object, path: PropertyPath, value: any): R;
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @returns {T} - The modified object.
+ * @param obj - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @returns The modified object.
  *
  * @example
  * // Set a value in a nested object
