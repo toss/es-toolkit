@@ -1,6 +1,8 @@
 import { last } from './last.ts';
 import { intersectionWith as intersectionWithToolkit } from '../../array/intersectionWith.ts';
-import { uniq as uniqToolkit } from '../array/uniq.ts';
+import { uniq as uniqToolkit } from '../../array/uniq.ts';
+import { uniqWith } from '../../array/uniqWith.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { eq } from '../util/eq.ts';
 
 /**
@@ -115,11 +117,11 @@ export function intersectionWith<T>(firstArr: ArrayLike<T> | null | undefined, .
 
   if (typeof _comparator === 'function') {
     comparator = _comparator;
-    uniq = uniqPreserve0;
+    uniq = arr => uniqWith(arr, comparator);
     otherArrs.pop();
   }
 
-  let result = uniq(Array.from(firstArr));
+  let result = uniq(toArray(firstArr));
 
   for (let i = 0; i < otherArrs.length; ++i) {
     const otherArr = otherArrs[i] as ArrayLike<T>;
@@ -128,28 +130,7 @@ export function intersectionWith<T>(firstArr: ArrayLike<T> | null | undefined, .
       return [];
     }
 
-    result = intersectionWithToolkit(result, Array.from(otherArr), comparator);
-  }
-
-  return result;
-}
-
-/**
- * This function is to preserve the sign of `-0`, which is a behavior in lodash.
- */
-function uniqPreserve0<T>(arr: T[]): T[] {
-  const result = [];
-  const added = new Set();
-
-  for (let i = 0; i < arr.length; i++) {
-    const item = arr[i];
-
-    if (added.has(item)) {
-      continue;
-    }
-
-    result.push(item);
-    added.add(item);
+    result = intersectionWithToolkit(result, toArray(otherArr), comparator);
   }
 
   return result;

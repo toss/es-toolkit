@@ -20,6 +20,8 @@ const result = unzip(array);
 
 중첩된 배열에서 같은 인덱스에 있는 요소들을 모아서 새로운 배열로 반환해요. `zip` 함수의 반대 동작을 수행해요. 행렬을 전치하거나 구조화된 데이터를 재정렬할 때 유용해요.
 
+반환되는 배열의 길이는 가장 긴 내부 배열의 길이에 맞춰지고, 더 짧은 내부 배열에서 빠진 위치는 `undefined`로 채워져요.
+
 ```typescript
 import { unzip } from 'es-toolkit/compat';
 

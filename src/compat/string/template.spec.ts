@@ -475,4 +475,11 @@ describe('template', () => {
 
     expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
   });
+
+  it('should not reset options for a non-iteratee-call `guard`', () => {
+    // @ts-expect-error - type mismatch
+    const compiled = template('a{{x}}b', { interpolate: /\{\{([\s\S]+?)\}\}/g }, { g: 1 });
+
+    expect(compiled({ x: '?' })).toBe('a?b');
+  });
 });

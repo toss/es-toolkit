@@ -11,12 +11,12 @@ Use the faster and more modern `Array.prototype.findLastIndex` instead.
 Finds the index of the last element in an array that satisfies a condition.
 
 ```typescript
-const lastIndex = findLastIndex(array, predicate, fromIndex);
+const lastIndex = findLastIndex(array, doesMatch, fromIndex);
 ```
 
 ## Usage
 
-### `findLastIndex(array, predicate?, fromIndex?)`
+### `findLastIndex(array, doesMatch?, fromIndex?)`
 
 Use `findLastIndex` when you want to find the index of the first element that matches a given condition starting from the end of the array. Returns `-1` if no element satisfies the condition.
 
@@ -76,7 +76,7 @@ findLastIndex(undefined, n => n > 0); // -1
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to search.
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to test each element. Can be a function, partial object, property-value pair, or property name. Default is the identity function.
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to test each element. Can be a function, partial object, property-value pair, or property name. Default is the identity function.
 - `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end of the array. Default is `array.length - 1`.
 
 #### Returns
