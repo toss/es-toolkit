@@ -65,7 +65,7 @@ import { round } from 'es-toolkit/math';
 // 数学計算結果を整理
 const result = Math.PI * 2;
 const cleanResult = round(result, 5);
-console.log(cleanResult); // 6.28318
+console.log(cleanResult); // 6.28319
 
 // 測定値を四捨五入
 const measurement = 15.789123;

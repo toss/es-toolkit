@@ -129,6 +129,42 @@ describe('toMerged', () => {
     `);
   });
 
+  it('should not mutate the target through nested values that the source does not touch', () => {
+    const target = { nested: { flag: true } };
+    const result = toMerged(target, {});
+
+    expect(result.nested).not.toBe(target.nested);
+
+    result.nested.flag = false;
+
+    expect(target.nested.flag).toBe(true);
+    expect(target).toEqual({ nested: { flag: true } });
+  });
+
+  it('should deeply clone untouched nested subtrees even when a sibling key is merged', () => {
+    const target = { nested: { flag: true, untouched: { deep: 1 } } };
+    const result = toMerged(target, { nested: { flag: false } });
+
+    expect(result).toEqual({ nested: { flag: false, untouched: { deep: 1 } } });
+    expect(result.nested.untouched).not.toBe(target.nested.untouched);
+
+    result.nested.untouched.deep = 999;
+
+    expect(target.nested.untouched.deep).toBe(1);
+  });
+
+  it('should deeply clone untouched array elements from the target', () => {
+    const target = { list: [{ a: 1 }, { b: 2 }] };
+    const result = toMerged(target, {});
+
+    expect(result.list).not.toBe(target.list);
+    expect(result.list[0]).not.toBe(target.list[0]);
+
+    result.list[0].a = 999;
+
+    expect(target.list[0].a).toBe(1);
+  });
+
   it('should merge arrays deeply', () => {
     const target = { a: [1, 2] };
     const source = { a: [3, 4] };

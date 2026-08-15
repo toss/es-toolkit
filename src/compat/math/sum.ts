@@ -5,8 +5,8 @@ import { sumBy } from './sumBy.ts';
  *
  * It does not coerce values to `number`.
  *
- * @param {ArrayLike<any> | null | undefined} array - The array to iterate over.
- * @returns {number} Returns the sum.
+ * @param array - The array to iterate over.
+ * @returns Returns the sum.
  *
  * @example
  * sum([1, 2, 3]); // => 6

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { intersection as intersectionToolkit_ } from 'es-toolkit';
-import { intersection as intersectionCompatToolkit_ } from 'es-toolkit/compat';
-import { intersection as intersectionLodash_ } from 'lodash';
+import { intersection as intersectionToolkit } from 'es-toolkit';
+import { intersection as intersectionCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const intersectionToolkit = intersectionToolkit_;
-const intersectionCompatToolkit = intersectionCompatToolkit_;
-const intersectionLodash = intersectionLodash_;
+const { intersection: intersectionLodash } = lodash;
 
 describe('intersection, small arrays', () => {
   const array1 = [1, 2, 3];

@@ -1,6 +1,7 @@
 export { at } from './at.ts';
 export { cartesianProduct } from './cartesianProduct.ts';
 export { chunk } from './chunk.ts';
+export { chunkBy } from './chunkBy.ts';
 export { combinations } from './combinations.ts';
 export { compact } from './compact.ts';
 export { countBy } from './countBy.ts';

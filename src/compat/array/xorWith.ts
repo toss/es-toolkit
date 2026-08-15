@@ -11,9 +11,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The arrays to inspect.
- * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The arrays to inspect.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -29,10 +29,10 @@ export function xorWith<T>(arrays: ArrayLike<T> | null | undefined, comparator?:
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * xorWith([1, 2], [2, 3], (a, b) => a === b);
@@ -50,11 +50,11 @@ export function xorWith<T>(
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {...Array<(a: T, b: T) => boolean | ArrayLike<T> | null | undefined>} comparator - The comparator invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * xorWith([1], [2], [3], (a, b) => a === b);
@@ -75,8 +75,8 @@ export function xorWith<T>(
  *
  * @template T - Type of elements in the input arrays.
  *
- * @param {...(ArrayLike<T> | null | undefined | ((a: T, b: T) => boolean))} values - The arrays to inspect, or the comparator function.
- * @returns {T[]} An array containing the elements that are present in exactly one of the arrays
+ * @param values - The arrays to inspect, or the comparator function.
+ * @returns An array containing the elements that are present in exactly one of the arrays
  *  as determined by the comparator.
  *
  * @example

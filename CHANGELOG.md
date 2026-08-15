@@ -1,5 +1,131 @@
 # es-toolkit Changelog
 
+## Version v1.50.0
+
+Released on July 24th, 2026.
+
+- Added the `es-toolkit/types` entrypoint: a declaration-only module of compile-time
+  type utilities TypeScript lacks natively — `ValueOf`, `Simplify`, `Writable`,
+  `NonEmptyArray`, `DeepPartial`, and `DeepReadonly`. ([#1818])
+- Added `flow` to `es-toolkit/fp`, a reusable data-last composition built on `pipe`. ([#1812])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/intersectionBy` to dedupe a single array (including by the iteratee)
+  and to keep results consistent with Lodash. ([#1935])
+- Fixed `compat/findIndex` and `compat/findLastIndex` to coerce a `NaN` `fromIndex`
+  to `0` and to convert `fromIndex` to an integer. ([#1828], [#1834], [#1938])
+- Fixed `compat/lastIndexOf` to coerce `fromIndex` like Lodash. ([#1832])
+- Fixed `compat/every` to treat a falsy, non-nullish `doesMatch` as a `_.property`
+  shorthand instead of identity. ([#1940])
+- Fixed `compat/nth` to support string inputs. ([#1833])
+- Fixed `compat/inRange` to not throw on a lone negative bound. ([#1835])
+- Fixed `compat/toArray` to convert `Set`s to arrays like Lodash. ([#1840])
+- Fixed `compat/values` to treat sparse array holes as `undefined`. ([#1894])
+- Fixed `compat/maxBy` and `compat/minBy` to restore Lodash-compatible comparison. ([#1893])
+- Fixed `compat/includes` to exclude the `length` property when matching array-like values. ([#1886])
+- Fixed the case functions to split ordinal numbers like Lodash, and to count string
+  size and padding by code points for multi-byte characters. ([#1836], [#1852], [#1853])
+- Fixed `compat/unset` to not treat an own literal dotted key as a deep path. ([#1808])
+- Moved `compat/flattenDepth`'s flattening logic out of `flatten`. ([#1847])
+- Restored the standalone `eq` and `templateSettings` entry points. ([#1895])
+
+- Fixed `deburr` to remove all combining diacritical marks, matching Lodash. ([#1807])
+- Fixed `partition` to accept any predicate return value, like `Array.prototype.filter`. ([#1937])
+- Fixed `has` and `hasIn` to prioritize nullish literal keys over paths. ([#1810])
+- Fixed `invokeMap` to normalize a string path via `toPath` for `this` binding. ([#1814])
+- Fixed `isDeepKey` to detect deep keys with stricter patterns. ([#1621])
+- Fixed `unzipWith` to return an empty array instead of throwing on empty input. ([#1816])
+
+- Improved documentation, JSDoc accuracy, and internal refactoring across `compat`
+  and `fp`. ([#1817], [#1820], [#1822], [#1823], [#1825], [#1829], [#1830], [#1842],
+  [#1845], [#1851], [#1858], [#1867], [#1879])
+
+We sincerely thank @Antoliny0919, @raon0211, @dayongkr, @spokodev, @sarathfrancis90,
+@mayur-shenoy, @mahirhir, @kojesung, @Hprogram, @BangDori, and everyone else who
+contributed. We appreciate your great efforts!
+
+## Version v1.49.0
+
+Released on June 26th, 2026.
+
+- Added the `es-toolkit/fp` entrypoint with data-last, pipeable utilities,
+  documentation, benchmarks, and bundle-size checks. ([#1781])
+- Added a broad set of array utilities to `es-toolkit/fp`, covering slicing,
+  grouping, set operations, ordering, zipping, and collection helpers. ([#1801])
+- Fixed `trimStart` to validate multi-character trim strings correctly before
+  it stops trimming. ([#1615])
+- Fixed `compat/pick` to prefer a literal key over a dot-notation path when the
+  picked value is `undefined`. ([#1775])
+- Fixed `compat/random` to better match Lodash behavior for coerced bounds and
+  floating-point options. ([#1767])
+- Fixed `compat/chunk` to handle `NaN` and `Infinity` size values consistently
+  with Lodash. ([#1797])
+- Improved documentation and JSDoc accuracy across array, function, and compat
+  references. ([#1785], [#1786], [#1788], [#1790], [#1791], [#1792], [#1793],
+  [#1795], [#1800])
+
+We sincerely thank @Antoliny0919, @D-Sketon, @eunwoo-levi, and @raon0211 for
+their contributions. We appreciate your great efforts!
+
+## Version v1.48.1
+
+Released on June 21st, 2026.
+
+- Fixed the `jsdelivr` and `unpkg` CDN `<script>` entry that regressed in v1.48.0. The fields are now declared at the package root so `yarn pack` preserves them, since `publishConfig` only carries standard fields and dropped them. Both CDNs now serve the UMD bundle again.
+
+## Version v1.48.0
+
+Released on June 21st, 2026.
+
+- Added `AbortSignal` support to `timeout` and `withTimeout`. ([#1617])
+- Fixed CDN `<script>` resolution by pointing `jsdelivr`/`unpkg` to the UMD bundle and dropping the misused `browser` field. ([#1395])
+- Fixed `toMerged` to deep clone the target so untouched nested values stay independent. ([#1780])
+- Fixed `compat/toPath` to keep empty segments for consecutive and trailing dots. ([#1778])
+- Fixed `compat/difference` to treat sparse array holes as `undefined`. ([#1773])
+- Fixed `compat/parseInt` to coerce input to a string before parsing. ([#1771])
+- Fixed `compat/isNaN` to improve checks for boxed values and non-numbers. ([#1646])
+- Fixed `compat/isMatchWith` to align nested primitive matching with lodash. ([#1647])
+
+We sincerely thank @aidant, @Antoliny0919, @D-Sketon, @miinhho, @MyraxByte, @raon0211, @sarathfrancis90, and @ssi02014 for their contributions. We appreciate your great efforts!
+
+## Version v1.47.1
+
+Released on June 12th, 2026.
+
+- Fixed `maxBy` and `minBy` to propagate `NaN`, matching `Math.max`/`Math.min` behavior. ([#1749])
+- Fixed `orderBy` and `sortBy` to place `null` and `undefined` values last when sorting. ([#1681])
+- Fixed `isNumber` to no longer treat boxed `Number` objects as numbers. ([#1726])
+- Fixed `reduce` and `reduceRight` to respect explicitly passed nullish accumulators. ([#1742])
+- Fixed `isEmpty` to handle functions with own enumerable properties. ([#1645])
+- Fixed the `globalThis` polyfill to avoid `Function(...)`, supporting CSP environments without `unsafe-eval`.
+- Fixed ESM resolution for `./compat/*` subpaths in package exports. ([#1757])
+- Fixed `compat/size` to count array-like objects by their `length`. ([#1766])
+- Fixed `compat/round`, `compat/ceil`, and `compat/floor` to return `Infinity` for infinite values with precision. ([#1764])
+- Fixed `compat/random` to coerce the upper bound for non-number `max`. ([#1751])
+- Fixed `compat/toLength` to coerce non-numeric values to 0. ([#1758])
+- Removed unused generic type parameters from `pull`. ([#1746])
+
+We sincerely thank @Amund211, @Antoliny0919, @chatman-media, @D-Sketon, @dayongkr, @JetProc, @parkhojeong, @pbk95120, @raon0211, @sarathfrancis90, @shaked-shlomo, and @sukvvon for their contributions. We appreciate your great efforts!
+
+## Version v1.47.0
+
+Released on May 25th, 2026.
+
+- Added `es-toolkit/server` entrypoint with `colors` namespace for ANSI terminal color utilities. ([#1683])
+- Added `exec` function. ([#1689])
+- Added `sortKeys` to the `object` entrypoint. ([#1674])
+- Added `cartesianProduct` and `combinations` to the `array` entrypoint. ([#1713])
+- Added `allKeyed` to the `promise` entrypoint. ([#1672])
+- Added `percentile` to the `math` entrypoint. ([#1710])
+- Added an interactive playground page to docs. ([#1720])
+- Reorganized docs to introduce a flavor switcher and co-locate `compat` under `/compat/`. ([#1699])
+- Fixed `uniqWith` in `compat` to match lodash's comparator argument order. ([#1729])
+- Fixed `compat/omitBy` to not treat plain objects with numeric `length` as array-like. ([#1709])
+
+We sincerely thank @Antoliny0919, @ATOM00blue, @dayongkr, @guesung, @myeong-jae-hwi, @raon0211, @seungrodotlee, and @Xiaohang0316 for their contributions. We appreciate your great efforts!
+
 ## Version v1.46.1
 
 Released on April 29th, 2026.

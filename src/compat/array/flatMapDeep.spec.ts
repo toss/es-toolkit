@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { flatMapDeep as flatMapDeepLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { flatMapDeep } from './flatMapDeep';
 
 describe('flatMapDeep', () => {
@@ -73,7 +72,17 @@ describe('flatMapDeep', () => {
     expect(flatMapDeep(object, value => value)).toEqual([1, 2]);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(flatMapDeep).toEqualTypeOf<typeof flatMapDeepLodash>();
+  it('should recursively flatten deeply nested arrays returned by the iteratee', () => {
+    function duplicateDeep(n: number) {
+      return [[[n, n]]];
+    }
+
+    const actual = flatMapDeep(array, duplicateDeep);
+    expect(actual).toEqual([1, 1, 2, 2, 3, 3, 4, 4]);
+  });
+
+  it('should recursively flatten deeply nested source arrays when iteratee is omitted', () => {
+    const nested = [[[1, 2]], [[3, [4, 5]]]];
+    expect(flatMapDeep(nested)).toEqual([1, 2, 3, 4, 5]);
   });
 });

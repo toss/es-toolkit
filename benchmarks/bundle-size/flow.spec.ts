@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('flow bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'flow');
-    expect(bundleSize).toMatchInlineSnapshot(`6174`);
+    expect(bundleSize).toMatchInlineSnapshot(`6210`);
   });
 
   it('es-toolkit', async () => {

@@ -8,10 +8,10 @@
  *
  * @template T - The type of elements in the array.
  * @template U - The type of the accumulated result.
- * @param {readonly T[]} array The array to reduce.
- * @param {(accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>} reducer An async function that processes each element.
- * @param {U} initialValue The initial value of the accumulator.
- * @returns {Promise<U>} A promise that resolves to the final accumulated value.
+ * @param array The array to reduce.
+ * @param reducer An async function that processes each element.
+ * @param initialValue The initial value of the accumulator.
+ * @returns A promise that resolves to the final accumulated value.
  * @example
  * const numbers = [1, 2, 3, 4, 5];
  * const sum = await reduceAsync(
@@ -52,9 +52,9 @@ export async function reduceAsync<T, U>(
  * the initial value and the reduction starts from the second element.
  *
  * @template T - The type of elements in the array.
- * @param {readonly T[]} array The array to reduce.
- * @param {(accumulator: T, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<T>} reducer An async function that processes each element.
- * @returns {Promise<T | undefined>} A promise that resolves to the final accumulated value, or undefined if the array is empty.
+ * @param array The array to reduce.
+ * @param reducer An async function that processes each element.
+ * @returns A promise that resolves to the final accumulated value, or undefined if the array is empty.
  * @example
  * const numbers = [1, 2, 3, 4, 5];
  * const sum = await reduceAsync(

@@ -4,8 +4,8 @@ import { toString } from '../util/toString.ts';
 /**
  * Converts the first character of string to upper case and the remaining to lower case.
  *
- * @param {string} string - The string to capitalize.
- * @returns {string} - The capitalized string.
+ * @param string - The string to capitalize.
+ * @returns The capitalized string.
  *
  * @example
  * const convertedStr1 = capitalize('fred') // returns 'Fred'

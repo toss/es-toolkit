@@ -51,7 +51,7 @@ pascalCase('user@email.com'); // 'UserEmailCom'
 
 (`string`): Returns a new string converted to pascal case.
 
-## Demo
+## Try It
 
 ::: sandpack
 

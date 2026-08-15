@@ -48,7 +48,7 @@ reverseString('a-b-c'); // 'c-b-a'
 
 (`string`): 返回一个字符顺序反转的新字符串。
 
-## 演示
+## 试一试
 
 ::: sandpack
 

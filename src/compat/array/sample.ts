@@ -6,8 +6,8 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * Gets a random element from collection.
  *
  * @template T
- * @param {readonly [T, ...T[]]} collection - The collection to sample.
- * @returns {T} Returns the random element.
+ * @param collection - The collection to sample.
+ * @returns Returns the random element.
  *
  * @example
  * sample([1, 2, 3, 4]);
@@ -19,8 +19,8 @@ export function sample<T>(collection: readonly [T, ...T[]]): T;
  * Gets a random element from collection.
  *
  * @template T
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The collection to sample.
- * @returns {T | undefined} Returns the random element.
+ * @param collection - The collection to sample.
+ * @returns Returns the random element.
  *
  * @example
  * sample({ 'a': 1, 'b': 2, 'c': 3 });
@@ -32,8 +32,8 @@ export function sample<T>(collection: Record<string, T> | Record<number, T> | nu
  * Gets a random element from collection.
  *
  * @template T
- * @param {T | null | undefined} collection - The collection to sample.
- * @returns {T[keyof T] | undefined} Returns the random element.
+ * @param collection - The collection to sample.
+ * @returns Returns the random element.
  *
  * @example
  * sample({ 'a': 1, 'b': 2, 'c': 3 });
@@ -48,8 +48,8 @@ export function sample<T extends object>(collection: T | null | undefined): T[ke
  * If the input is empty, or if it's null or undefined, the function returns `undefined`.
  *
  * @template T - The type of elements in the collection.
- * @param {ArrayLike<T> | Record<string, T>} collection - The collection to sample from.
- * @returns {T | string | undefined} A random element from the collection, or `undefined` if the collection is empty or invalid.
+ * @param collection - The collection to sample from.
+ * @returns A random element from the collection, or `undefined` if the collection is empty or invalid.
  */
 export function sample<T>(collection: ArrayLike<T> | Record<string, T> | null | undefined): T | string | undefined {
   if (collection == null) {

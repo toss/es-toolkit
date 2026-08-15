@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { pad as padLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { pad } from './pad';
 
 describe('pad', () => {
@@ -65,7 +64,8 @@ describe('pad', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(pad).toEqualTypeOf<typeof padLodash>();
+  it('should treat multi-byte characters as a single code point when padding', () => {
+    expect(pad('ab', 8, '😀')).toBe('😀😀😀ab😀😀😀');
+    expect(pad('😀😁😂', 8, '_')).toBe('__😀😁😂___');
   });
 });

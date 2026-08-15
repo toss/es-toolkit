@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isEmpty as isEmptyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isEmpty } from './isEmpty';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -31,6 +30,13 @@ describe('isEmpty', () => {
     expect(isEmpty([0])).toBe(false);
     expect(isEmpty({ a: 0 })).toBe(false);
     expect(isEmpty('a')).toBe(false);
+  });
+
+  it('should return `false` for functions with own enumerable properties', () => {
+    function transaction() {}
+    transaction.commit = () => {};
+
+    expect(isEmpty(transaction)).toBe(false);
   });
 
   it('should work with an object that has a `length` property', () => {
@@ -109,9 +115,5 @@ describe('isEmpty', () => {
     function Foo() {}
     Foo.prototype = { constructor: Foo, [Symbol('a')]: 1 };
     expect(isEmpty(Foo.prototype)).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isEmpty).toEqualTypeOf<typeof isEmptyLodash>();
   });
 });

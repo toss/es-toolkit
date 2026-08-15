@@ -8,9 +8,9 @@
  * The number of combinations is `n! / r! / (n - r)!` when `0 <= r <= n`, and zero when `r > n`.
  *
  * @template T
- * @param {readonly T[]} arr - The input array.
- * @param {number} r - The length of each combination. Must be a non-negative integer.
- * @returns {T[][]} An array of `r`-length combinations.
+ * @param arr - The input array.
+ * @param r - The length of each combination. Must be a non-negative integer.
+ * @returns An array of `r`-length combinations.
  * @throws {Error} If `r` is not a non-negative integer.
  *
  * @example

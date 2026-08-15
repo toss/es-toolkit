@@ -6,8 +6,8 @@ import { isBlob } from './isBlob.ts';
  * This function tests whether the provided value is an instance of `File`.
  * It returns `true` if the value is an instance of `File`, and `false` otherwise.
  *
- * @param {unknown} x - The value to test if it is a File.
- * @returns {x is File} True if the value is a File, false otherwise.
+ * @param x - The value to test if it is a File.
+ * @returns True if the value is a File, false otherwise.
  *
  * @example
  * const value1 = new File(["content"], "example.txt");

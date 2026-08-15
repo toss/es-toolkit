@@ -39,7 +39,7 @@ export class Semaphore {
 
   /**
    * Creates an instance of Semaphore.
-   * @param {number} capacity - The maximum number of concurrent operations allowed.
+   * @param capacity - The maximum number of concurrent operations allowed.
    *
    * @example
    * const sema = new Semaphore(3); // Allows up to 3 concurrent operations.
@@ -51,7 +51,7 @@ export class Semaphore {
 
   /**
    * Acquires a semaphore, blocking if necessary until one is available.
-   * @returns {Promise<void>} A promise that resolves when the semaphore is acquired.
+   * @returns A promise that resolves when the semaphore is acquired.
    *
    * @example
    * const sema = new Semaphore(1);

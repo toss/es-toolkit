@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { escape as escapeToolkit_ } from 'es-toolkit';
-import { escape as escapeToolkitCompat_ } from 'es-toolkit/compat';
-import { escape as escapeLodash_ } from 'lodash';
+import { escape as escapeToolkit } from 'es-toolkit';
+import { escape as escapeToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const escapeToolkit = escapeToolkit_;
-const escapeToolkitCompat = escapeToolkitCompat_;
-const escapeLodash = escapeLodash_;
+const { escape: escapeLodash } = lodash;
 
 describe('escape', () => {
   bench('es-toolkit/escape', () => {

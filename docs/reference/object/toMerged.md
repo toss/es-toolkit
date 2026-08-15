@@ -54,7 +54,7 @@ const result = toMerged(target, source);
 
 (`T & S`): Returns a new object with the target and source objects merged.
 
-## Demo
+## Try It
 
 ::: sandpack
 

@@ -3,8 +3,8 @@ import { keys } from './keys.ts';
 /**
  * Creates an array of property names from an object where the property values are functions.
  *
- * @param {any} object - The object to inspect.
- * @returns {string[]} - An array of function property names.
+ * @param object - The object to inspect.
+ * @returns An array of function property names.
  *
  * @example
  * function Foo() {
@@ -25,8 +25,8 @@ export function functions(object: any): string[];
  * Only checks for own properties with string keys. Inherited properties or
  * properties with Symbol keys are not included.
  *
- * @param {unknown} object The object to inspect.
- * @returns {string[]} An array of function property names.
+ * @param object The object to inspect.
+ * @returns An array of function property names.
  *
  * @example
  *

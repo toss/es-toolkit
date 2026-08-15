@@ -4,8 +4,8 @@ import { toString } from '../util/toString.ts';
 /**
  * Converts the first character of string to lower case.
  *
- * @param {string} str - The string that is to be changed
- * @returns {string} - The converted string.
+ * @param str - The string that is to be changed
+ * @returns The converted string.
  *
  * @example
  * const convertedStr1 = lowerCase('fred') // returns 'fred'

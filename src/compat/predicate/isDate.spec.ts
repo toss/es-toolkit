@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isDate as isDateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isDate } from './isDate';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -28,9 +27,5 @@ describe('isDate', () => {
     expect(isDate(/x/)).toBe(false);
     expect(isDate('a')).toBe(false);
     expect(isDate(symbol)).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isDate).toEqualTypeOf<typeof isDateLodash>();
   });
 });

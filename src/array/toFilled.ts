@@ -4,9 +4,9 @@
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the new array with.
- * @param {Array<T>} arr - The array to base the new array on.
- * @param {U} value - The value to fill the new array with.
- * @returns {Array<T | U>} The new array with the filled values.
+ * @param arr - The array to base the new array on.
+ * @param value - The value to fill the new array with.
+ * @returns The new array with the filled values.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];
@@ -34,10 +34,10 @@ export function toFilled<T, U>(arr: readonly T[], value: U): Array<T | U>;
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the new array with.
- * @param {Array<T>} arr - The array to base the new array on.
- * @param {U} value - The value to fill the new array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @returns {Array<T | U>} The new array with the filled values.
+ * @param arr - The array to base the new array on.
+ * @param value - The value to fill the new array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @returns The new array with the filled values.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];
@@ -65,11 +65,11 @@ export function toFilled<T, U>(arr: readonly T[], value: U, start: number): Arra
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the new array with.
- * @param {Array<T>} arr - The array to base the new array on.
- * @param {U} value - The value to fill the new array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {Array<T | U>} The new array with the filled values.
+ * @param arr - The array to base the new array on.
+ * @param value - The value to fill the new array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The new array with the filled values.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];
@@ -97,11 +97,11 @@ export function toFilled<T, U>(arr: readonly T[], value: U, start: number, end: 
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the new array with.
- * @param {Array<T>} arr - The array to base the new array on.
- * @param {U} value - The value to fill the new array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {Array<T | U>} The new array with the filled values.
+ * @param arr - The array to base the new array on.
+ * @param value - The value to fill the new array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The new array with the filled values.
  */
 export function toFilled<T, U>(arr: readonly T[], value: U, start = 0, end = arr.length): Array<T | U> {
   const length = arr.length;

@@ -1,7 +1,7 @@
 /**
  * Returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
  *
- * @returns {number} The current time in milliseconds.
+ * @returns The current time in milliseconds.
  *
  * @example
  * const currentTime = now();

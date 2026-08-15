@@ -4,8 +4,8 @@
  * An empty string is returned for `null` and `undefined` values.
  * The sign of `-0` is preserved.
  *
- * @param {any} value - The value to convert.
- * @returns {string} Returns the converted string.
+ * @param value - The value to convert.
+ * @returns Returns the converted string.
  *
  * @example
  * toString(null) // returns ''
@@ -19,12 +19,16 @@ export function toString(value: any): string {
     return '';
   }
 
+  return baseToString(value);
+}
+
+function baseToString(value: any): string {
   if (typeof value === 'string') {
     return value;
   }
 
   if (Array.isArray(value)) {
-    return value.map(toString).join(',');
+    return value.map(baseToString).join(',');
   }
 
   const result = String(value);

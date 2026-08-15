@@ -19,10 +19,10 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
  * sort ranking. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The sorted array to inspect.
- * @param {T} value - The value to evaluate.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {number} Returns the index at which `value` should be inserted into `array`.
+ * @param array - The sorted array to inspect.
+ * @param value - The value to evaluate.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the index at which `value` should be inserted into `array`.
  *
  * @example
  * const dict = { 'thirty': 30, 'forty': 40, 'fifty': 50 };
@@ -40,10 +40,10 @@ export function sortedIndexBy<T>(array: ArrayLike<T> | null | undefined, value: 
  * which is invoked for `value` and each element of `array` to compute their
  * sort ranking. The iteratee is invoked with one argument: (value).
  *
- * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
- * @param {T} value The value to evaluate.
- * @param {(value: T) => R | PropertyName | [PropertyName, any] | Partial<T>} iteratee The iteratee invoked per element.
- * @returns {number} Returns the index at which `value` should be inserted
+ * @param array The sorted array to inspect.
+ * @param value The value to evaluate.
+ * @param iteratee The iteratee invoked per element.
+ * @returns Returns the index at which `value` should be inserted
  *  into `array`.
  * @example
  * const objects = [{ 'n': 4 }, { 'n': 5 }]

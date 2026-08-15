@@ -11,9 +11,9 @@ interface FlattenObjectOptions {
 /**
  * Flattens a nested object into a single level object with delimiter-separated keys.
  *
- * @param {object} object - The object to flatten.
- * @param {string} [options.delimiter='.'] - The delimiter to use between nested keys.
- * @returns {Record<string, any>} - The flattened object.
+ * @param object - The object to flatten.
+ * @param [options.delimiter='.'] - The delimiter to use between nested keys.
+ * @returns The flattened object.
  *
  * @example
  * const nestedObject = {

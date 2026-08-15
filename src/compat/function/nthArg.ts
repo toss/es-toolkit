@@ -3,8 +3,8 @@ import { toInteger } from '../util/toInteger.ts';
 /**
  * Creates a function that gets the argument at index `n`. If `n` is negative, the nth argument from the end is returned.
  *
- * @param {number} [n=0] - The index of the argument to return.
- * @returns {(...args: any[]) => any} Returns the new function.
+ * @param [n=0] - The index of the argument to return.
+ * @returns Returns the new function.
  *
  * @example
  * var func = nthArg(1);
@@ -22,9 +22,9 @@ export function nthArg(n?: number): (...args: any[]) => any;
  *
  * If `n` is negative, the nth argument from the end is returned.
  *
- * @param {number} [n=0] - The index of the argument to retrieve.
+ * @param [n=0] - The index of the argument to retrieve.
  *   If negative, counts from the end of the arguments list.
- * @returns {(args: any[]) => unknown} A new function that returns the argument at the specified index.
+ * @returns A new function that returns the argument at the specified index.
  *
  * @example
  * const getSecondArg = nthArg(1);

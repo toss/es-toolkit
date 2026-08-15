@@ -7,9 +7,9 @@
  *
  * @template T - The type of elements in the Set.
  * @template K - The type of keys produced by the transformation function.
- * @param {Set<T>} set - The Set to count occurrences from.
- * @param {(value: T, value2: T, set: Set<T>) => K} mapper - The function to produce a key for counting.
- * @returns {Map<K, number>} A Map containing the mapped keys and their counts.
+ * @param set - The Set to count occurrences from.
+ * @param mapper - The function to produce a key for counting.
+ * @returns A Map containing the mapped keys and their counts.
  *
  * @example
  * const set = new Set([1, 2, 3, 4, 5]);

@@ -60,9 +60,9 @@ orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
 
 #### パラメータ
 
-- `arr` (`T[]`): ソートするオブジェクト配列です。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): ソートする基準です。オブジェクトのプロパティ名または値を返す関数を使用できます。
-- `orders` (`Array<'asc' | 'desc'>`): 各基準に対する並び順の配列です。`'asc'`は昇順、`'desc'`は降順を意味します。
+- `arr` (`readonly T[]`): ソートするオブジェクト配列です。
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): ソートする基準です。オブジェクトのプロパティ名または値を返す関数を使用できます。
+- `orders` (`ReadonlyArray<'asc' | 'desc'>`): 各基準に対する並び順の配列です。`'asc'`は昇順、`'desc'`は降順を意味します。
 
 #### 戻り値
 

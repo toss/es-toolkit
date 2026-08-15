@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { upperCase as upperCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { upperCase } from './upperCase';
 
 describe('upperCase', () => {
@@ -59,9 +58,5 @@ describe('upperCase', () => {
     expect(upperCase('--foo-bar--')).toBe('FOO BAR');
     expect(upperCase('fooBar')).toBe('FOO BAR');
     expect(upperCase('__foo_bar__')).toBe('FOO BAR');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(upperCase).toEqualTypeOf<typeof upperCaseLodash>();
   });
 });

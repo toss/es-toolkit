@@ -10,10 +10,10 @@ import { iteratee } from '../util/iteratee.ts';
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template T
- * @param {T[]} array - The array to modify.
- * @param {ArrayLike<T>} [values] - The values to remove.
- * @param {((value: T) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
@@ -31,10 +31,10 @@ export function pullAllBy<T>(array: T[], values?: ArrayLike<T>, iteratee?: Value
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template L
- * @param {RejectReadonly<L>} array - The array to modify.
- * @param {ArrayLike<L[0]>} [values] - The values to remove.
- * @param {ValueIteratee<L[0]>} [iteratee] - The iteratee invoked per element.
- * @returns {L} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
@@ -56,10 +56,10 @@ export function pullAllBy<L extends MutableList<any>>(
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template T, U
- * @param {T[]} array - The array to modify.
- * @param {ArrayLike<U>} values - The values to remove.
- * @param {((value: T | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T | U>} iteratee - The iteratee invoked per element.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
@@ -77,10 +77,10 @@ export function pullAllBy<T, U>(array: T[], values: ArrayLike<U>, iteratee: Valu
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template L, U
- * @param {L} array - The array to modify.
- * @param {ArrayLike<U>} values - The values to remove.
- * @param {((value: L[0] | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0] | U>} iteratee - The iteratee invoked per element.
- * @returns {L} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
@@ -102,10 +102,10 @@ export function pullAllBy<L extends ArrayLike<any>, U>(
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @param {keyof T} getValue - The key of the property to match against each element.
- * @returns {T[]} The modified array with the specified values removed.
+ * @param arr - The array to modify.
+ * @param valuesToRemove - The values to remove from the array.
+ * @param getValue - The key of the property to match against each element.
+ * @returns The modified array with the specified values removed.
  *
  * @example
  * // Using a iteratee function

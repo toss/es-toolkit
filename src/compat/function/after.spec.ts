@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { after as afterLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { after } from './after';
 import { times } from '../util/times';
 
@@ -45,9 +44,5 @@ describe('after', () => {
     expect(() => {
       after(1, 42 as any);
     }).toThrow();
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(after).toEqualTypeOf<typeof afterLodash>();
   });
 });

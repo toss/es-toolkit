@@ -4,6 +4,14 @@ We welcome contribution from everyone in the community. All communications in th
 
 > Every contributor to es-toolkit should adhere to our Code of Conduct. Please read the [full text](./CODE_OF_CONDUCT.md) to understand what actions will and will not be tolerated.
 
+## AI Usage Policy
+
+We encourage you to use AI to assist you in researching, creating, and reviewing contributions. Used well it is a good tool, and we use it ourselves.
+
+However, you must review and deeply understand what you submit. For this reason, **issue and pull request descriptions from external contributors must be written by a human**. You can still use AI to help you build a reproduction or find your way around the codebase—the rule is about the description, because that is what a maintainer reads first when deciding whether a report makes sense.
+
+You are responsible for everything you send under your name, including code that an AI wrote for you. When a contribution has clearly not been read by the person sending it—a description that does not match the diff, a reproduction that was never run, a fix for a problem that does not exist—we will close it without a detailed review.
+
 ## Package Manager
 
 This project uses **Yarn 4** as its package manager. The correct version is automatically installed via Corepack when you run `yarn install`.
@@ -40,7 +48,9 @@ We may consider adding functions from earlier proposals (Stage 2.7 or below) if 
 
 #### `es-toolkit/compat`
 
-To help projects using [`Lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `Lodash`.
+To help projects using [`Lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, `es-toolkit/compat` mirrors the functions provided by `Lodash`.
+
+`es-toolkit/compat` is feature-complete. We no longer add functions to it—we only fix behavior that differs from Lodash.
 
 ### 1.2 Performance
 
@@ -48,7 +58,7 @@ All functions es-toolkit provides should be more performant than or similar with
 
 We measure the performance of our library every time our code is edited. We are using [Vitest's benchmark feature](https://vitest.dev/api/#bench). For our benchmark code, please refer to our [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
 
-When a new functionality is added, a benchmark code should be added. Please add screenshots of the benchmarks when opening a pull request for easy reference and history tracking.
+When a new function is added, benchmark code should be added along with it. See [4.1 What we accept](#41-what-we-accept) for what to attach when you open a pull request.
 
 ### 1.3 Simplicity
 
@@ -132,7 +142,7 @@ You can contribute to es-toolkit via:
 
 - Improving our [docs](https://es-toolkit.dev)
 - [Reporting a bug in our issues tab](https://github.com/toss/es-toolkit/issues/new/choose)
-- [Requesting a new feature or package](https://github.com/toss/es-toolkit/issues/new/choose)
+- [Proposing a new function in discussions](https://github.com/toss/es-toolkit/discussions/new?category=ideas)
 - [Having a look at our issue list](https://github.com/toss/es-toolkit/issues) to see what's to be fixed
 
 ## 4. Pull Requests
@@ -148,7 +158,51 @@ You can raise your own pull request. The title of your pull request should match
 > We do not care about the number, or style of commits in your history, because we squash merge every PR into main. <br/>
 > Feel free to commit in whatever style you feel comfortable with.
 
-### 4.1 Type
+### 4.1 What we accept
+
+Anything we merge has to be maintained for as long as the library exists, and we already have a long queue of open pull requests waiting for review. So we accept a narrow set of changes, and we would rather tell you which ones up front than let you find out after the work is done.
+
+Please read the section that matches your change before you start writing code.
+
+#### Adding a new function
+
+**Open a [discussion](https://github.com/toss/es-toolkit/discussions/new?category=ideas) first and wait until it is accepted.** A pull request that adds a function without one will be closed, even when the implementation itself is good.
+
+This is not because we dislike new functions. It is because adding one is a long-term promise: it has to be documented in four languages, it has to stay at least as fast as the alternatives, and once people depend on it we cannot take it back. There may also be a reason the function is not here yet—it might be replaceable with a built-in, or it might be on its way into JavaScript itself through a TC39 proposal (see [1.1 Development Scope](#11-development-scope)). A discussion settles all of that before you spend an evening on an implementation.
+
+Once the discussion is accepted, your pull request should include the implementation, tests, a benchmark, and documentation in all four languages.
+
+`es-toolkit/compat` is a special case. It exists to mirror Lodash so that projects can migrate, and it already covers everything Lodash provides, so we do not add new functions to it at all.
+
+#### Improving performance
+
+**Welcome, as long as you attach benchmark results.** Please run the benchmark on `main` and on your branch, and paste both results into the pull request.
+
+We ask for this because we cannot tell an actual improvement from a change that only looks faster by reading the code. Modern JavaScript engines optimize in ways that are hard to predict, and a rewrite that seems tighter often measures the same or slower. If a pull request claims a speedup without numbers, we have no way to check it, so we close it.
+
+Our benchmarks use [Vitest's benchmark feature](https://vitest.dev/api/#bench) and live in the [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
+
+#### Fixing behavior that differs from Lodash
+
+**Welcome.** This applies to `es-toolkit/compat`, where matching Lodash exactly is the entire point—if we return something different, migrating projects break in ways that are hard to trace.
+
+Show the difference as code instead of describing it: the exact input, what Lodash returns for it, and what `es-toolkit/compat` returns today. Add a test that fails before your change and passes after it, so the behavior stays fixed. If the function you are touching runs in a hot path, attach benchmark results as well—these fixes tend to add branches to code that runs very often.
+
+#### Fixing documentation
+
+**Always welcome, with none of the requirements above.** Just keep the four language versions in sync, and see [5. Writing Documentation](#5-writing-documentation) for the template.
+
+One request: if you spot several small things—a typo here, a missing parameter there—please collect them into a single pull request instead of opening one for each. A stream of one-line pull requests costs more review time in total than the same fixes bundled together, and it pushes everyone else's work further down the queue.
+
+#### Refactoring on its own
+
+**We do not accept these.** That means renaming variables, splitting a function into smaller pieces, or rewriting an implementation that already works, when nothing about the behavior changes.
+
+We understand why this is tempting, and the code is not always as clean as we would like. But a refactoring pull request costs a reviewer just as much attention as any other change while giving users nothing, and rewrites quietly break edge cases more often than you would expect—especially in `es-toolkit/compat`, where odd-looking code is usually there to match an odd Lodash behavior.
+
+If you did find something worth cleaning up, the way in is to bundle it with a bug fix or with a performance improvement we can measure. Then the cleanup comes with a reason to review it.
+
+### 4.2 Type
 
 **Type must be one of those**
 
@@ -166,12 +220,12 @@ other :
 
 - chore - anything else
 
-### 4.2 Function Names
+### 4.3 Function Names
 
 The name of function that you made changes. (ex: debounce, throttle)<br/>
 If you made changes across multiple packages, writing package scope is optional.
 
-### 4.3 Description
+### 4.4 Description
 
 A clear and concise description of what the pr is about.
 
@@ -228,7 +282,7 @@ import { {function name} } from 'es-toolkit/{category}';
 - **Short example code**: use descriptive variable names (`arr`, `numbers`, `obj`) over concrete values so the interface is obvious at a glance.
 - **`### \`signature\``**: one heading per overload. Merge overloads when possible; split only when the behavior is genuinely different (e.g. arrays vs. objects).
 - **Body prose**: lead with "when to use it", then describe behavior in flowing sentences — never the "Description: …" colon style. Open each example block with `import { ... } from 'es-toolkit/{category}'` and put a one-line comment above each call.
-- **Parameters**: `` - `name` (`type`): description. ``. For optionals, append `optional` to the type and include the default.
+- **Parameters**: ``- `name` (`type`): description.``. For optionals, append `optional` to the type and include the default.
 - **Returns**: type in parentheses first, then the description.
 
 ### 5.3 Style

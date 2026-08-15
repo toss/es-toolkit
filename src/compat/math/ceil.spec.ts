@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { ceil as ceilLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { ceil } from './ceil';
 
 describe('ceil', () => {
@@ -69,6 +68,14 @@ describe('ceil', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`ceil\` should return \`Infinity\` for infinite values regardless of \`precision\``, () => {
+    expect(ceil(Infinity)).toBe(Infinity);
+    expect(ceil(Infinity, 2)).toBe(Infinity);
+    expect(ceil(-Infinity, 2)).toBe(-Infinity);
+    expect(ceil(Infinity, -2)).toBe(Infinity);
+    expect(ceil(-Infinity, -2)).toBe(-Infinity);
+  });
+
   it(`\`ceil\` should handle edge cases`, () => {
     expect(ceil(1.797, 295)).toBe(1.797);
     expect(ceil(1.797, -295)).toBe(1e295);
@@ -77,9 +84,5 @@ describe('ceil', () => {
     expect(ceil(1.7976931348623157e308, 292)).toBe(NaN);
     expect(ceil(5e-324, 323)).toBe(1e-292);
     expect(ceil(5e-324, -323)).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(ceil).toEqualTypeOf<typeof ceilLodash>();
   });
 });

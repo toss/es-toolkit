@@ -3,8 +3,8 @@ import { isRegExp as isRegExpToolkit } from '../../predicate/isRegExp.ts';
 /**
  * Checks if `value` is a RegExp.
  *
- * @param {any} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a RegExp, `false` otherwise.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is a RegExp, `false` otherwise.
  *
  * @example
  * const value1 = /abc/;

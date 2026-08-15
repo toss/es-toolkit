@@ -53,7 +53,7 @@ callAPI(5); // Waits until one of the previous tasks completes
 
 #### Parameters
 
-- `capacity` (`number`): The maximum number of tasks that can execute concurrently. Must be an integer greater than 1.
+- `capacity` (`number`): The maximum number of tasks that can execute concurrently. Must be a positive integer.
 
 #### Properties
 

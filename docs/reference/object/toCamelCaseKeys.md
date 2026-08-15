@@ -18,7 +18,7 @@ For example, object keys are converted as follows:
 
 - `snake_case` → `camelCase` (e.g. `user_id` → `userId`)
 - `PascalCase` → `camelCase` (e.g. `UserId` → `userId`)
-- `uppercase keys` → `camelCase` (e.g. `FIRST_NAME` → `firstName`, `LAST` → `last`)
+- `UPPERCASE_KEYS` → `camelCase` (e.g. `FIRST_NAME` → `firstName`, `LAST` → `last`)
 
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';

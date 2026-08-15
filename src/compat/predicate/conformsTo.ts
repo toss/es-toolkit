@@ -6,9 +6,9 @@ import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts
  * Note: This method is equivalent to `conforms` when source is partially applied.
  *
  * @template T - The type of the target object.
- * @param {T} target The object to inspect.
- * @param {ConformsPredicateObject<T>} source The object of property predicates to conform to.
- * @returns {boolean} Returns `true` if `object` conforms, else `false`.
+ * @param target The object to inspect.
+ * @param source The object of property predicates to conform to.
+ * @returns Returns `true` if `object` conforms, else `false`.
  *
  * @example
  *

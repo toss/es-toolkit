@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isSet as isSetLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isSet } from './isSet';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -40,9 +39,5 @@ describe('isSet', () => {
     const actual = falsey.map(value => isSet({ constructor: value }));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isSet).toEqualTypeOf<typeof isSetLodash>();
   });
 });

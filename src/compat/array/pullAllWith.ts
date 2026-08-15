@@ -11,10 +11,10 @@ import { eq } from '../util/eq.ts';
  * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
  *
  * @template T
- * @param {T[]} array - The array to modify.
- * @param {ArrayLike<T>} [values] - The values to remove.
- * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
@@ -33,10 +33,10 @@ export function pullAllWith<T>(array: T[], values?: ArrayLike<T>, comparator?: (
  * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
  *
  * @template L
- * @param {RejectReadonly<L>} array - The array to modify.
- * @param {List<L[0]>} [values] - The values to remove.
- * @param {Comparator<L[0]>} [comparator] - The comparator invoked per element.
- * @returns {L} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
@@ -59,10 +59,10 @@ export function pullAllWith<L extends MutableList<any>>(
  * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
  *
  * @template T, U
- * @param {T[]} array - The array to modify.
- * @param {ArrayLike<U>} values - The values to remove.
- * @param {(a: T, b: U) => boolean} comparator - The comparator invoked per element.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
@@ -81,10 +81,10 @@ export function pullAllWith<T, U>(array: T[], values: ArrayLike<U>, comparator: 
  * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
  *
  * @template L1, L2
- * @param {RejectReadonly<L1>} array - The array to modify.
- * @param {List<L2>} values - The values to remove.
- * @param {Comparator2<L1[0], L2>} comparator - The comparator invoked per element.
- * @returns {L1} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
@@ -103,10 +103,10 @@ export function pullAllWith<L1 extends MutableList<any>, L2>(
  * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.
  *
  * @template T
- * @param {T[] | ArrayLike<T>} array - The array to modify.
- * @param {T[] | ArrayLike<T>} values - The values to remove from the array.
- * @param {(a: T, b: T) => boolean} comparator - The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
- * @returns {T[] | ArrayLike<T>} - The array with specified values removed.
+ * @param array - The array to modify.
+ * @param values - The values to remove from the array.
+ * @param comparator - The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
+ * @returns The array with specified values removed.
  *
  * @example
  * import pullAllWith from './pullAllWith';

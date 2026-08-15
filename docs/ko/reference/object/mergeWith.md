@@ -93,7 +93,7 @@ const result = mergeWith(target, source, (objValue, srcValue) => {
 // 반환 값: { a: [1, 3], b: [2, 4] })
 ```
 
-## 데모
+## 사용해보기
 
 ::: sandpack
 

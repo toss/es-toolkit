@@ -115,8 +115,8 @@ interface MemoizedFunction {
  * the this binding of the memoized function.
  *
  * @template T - The type of the original function being memoized
- * @param {T} func The function to have its output memoized.
- * @param {Function} [resolver] The function to resolve the cache key.
+ * @param func The function to have its output memoized.
+ * @param [resolver] The function to resolve the cache key.
  * @return {MemoizedFunction<T>} Returns the new memoizing function.
  */
 export function memoize<T extends (...args: any) => any>(

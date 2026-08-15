@@ -7,11 +7,11 @@ import { uniqWith } from './uniqWith.ts';
  * a new array containing only the unique values as determined by the custom equality function.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr1 - The first array to merge and filter for unique values.
- * @param {T[]} arr2 - The second array to merge and filter for unique values.
- * @param {(item1: T, item2: T) => boolean} areItemsEqual - A custom function to determine if two elements are equal.
+ * @param arr1 - The first array to merge and filter for unique values.
+ * @param arr2 - The second array to merge and filter for unique values.
+ * @param areItemsEqual - A custom function to determine if two elements are equal.
  * It takes two arguments and returns `true` if the elements are considered equal, and `false` otherwise.
- * @returns {T[]} A new array of unique values based on the custom equality function.
+ * @returns A new array of unique values based on the custom equality function.
  *
  * @example
  * const array1 = [{ id: 1 }, { id: 2 }];

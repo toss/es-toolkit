@@ -5,9 +5,9 @@
  * If you want to remove elements without modifying the original array, use `filter`.
  *
  * @template T
- * @param {T[]} arr - The array to modify.
- * @param {(value: T, index: number, array: T[]) => boolean} shouldRemoveElement - The function invoked per iteration to determine if an element should be removed.
- * @returns {T[]} The modified array with the specified elements removed.
+ * @param arr - The array to modify.
+ * @param shouldRemoveElement - The function invoked per iteration to determine if an element should be removed.
+ * @returns The modified array with the specified elements removed.
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5];

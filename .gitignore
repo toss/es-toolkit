@@ -25,8 +25,10 @@ umd
 .vercel
 /compat
 /array.js
+/bigint.js
 /compat.js
 /error.js
+/fp.js
 /function.js
 /math.js
 /map.js
@@ -42,3 +44,5 @@ umd
 
 .omc
 *.log
+
+/CHOICES.md

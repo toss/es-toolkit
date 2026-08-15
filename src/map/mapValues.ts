@@ -7,9 +7,9 @@
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to transform.
- * @param {(value: V, key: K, object: Map<K, V>) => V} getNewValue - A function that generates a new value from a value-key pair.
- * @returns {Map<K, V>} A new Map with the same keys and transformed values.
+ * @param map - The Map to transform.
+ * @param getNewValue - A function that generates a new value from a value-key pair.
+ * @returns A new Map with the same keys and transformed values.
  *
  * @example
  * const map = new Map([

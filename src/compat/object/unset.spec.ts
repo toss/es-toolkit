@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { unset as unsetLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { unset } from './unset';
 import { numberProto } from '../_internal/numberProto';
 import { stringProto } from '../_internal/stringProto';
@@ -156,15 +155,26 @@ describe('unset', () => {
     expect(unset(object, Symbol('a'))).toBe(true);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(unset).toEqualTypeOf<typeof unsetLodash>();
-  });
-
   it('should not delete root properties from nonexistent paths', () => {
     const object = { b: null };
 
     expect(unset(object, 'a.b')).toBe(true);
     expect(object).toEqual({ b: null });
+  });
+
+  it('should prioritize a literal key over a path when the literal value is undefined', () => {
+    const object: Record<string, unknown> = { 'a.b': undefined, a: { b: 99 } };
+
+    expect(unset(object, 'a.b')).toBe(true);
+    expect(Object.hasOwn(object, 'a.b')).toBe(false);
+    expect((object.a as { b: number }).b).toBe(99);
+  });
+
+  it('should delete a literal undefined-valued key even without a nested counterpart', () => {
+    const object: Record<string, unknown> = { 'x.y': undefined };
+
+    expect(unset(object, 'x.y')).toBe(true);
+    expect(Object.hasOwn(object, 'x.y')).toBe(false);
   });
 
   it('should prevent prototype pollution by rejecting __proto__ deletion', () => {

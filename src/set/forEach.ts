@@ -6,9 +6,8 @@
  * and the Set itself as arguments.
  *
  * @template T - The type of elements in the Set.
- * @param {Set<T>} set - The Set to iterate over.
- * @param {(value: T, value2: T, set: Set<T>) => void} callback - A function to execute for each element.
- * @returns {void}
+ * @param set - The Set to iterate over.
+ * @param callback - A function to execute for each element.
  *
  * @example
  * const set = new Set([1, 2, 3]);

@@ -4,8 +4,8 @@ import { flatten } from '../../array/flatten.ts';
  * Concatenates multiple arrays and values into a single array.
  *
  * @template T The type of elements in the array.
- * @param {...(T | T[])} values - The values and/or arrays to concatenate.
- * @returns {T[]} A new array containing all the input values.
+ * @param values - The values and/or arrays to concatenate.
+ * @returns A new array containing all the input values.
  *
  * @example
  * // Concatenate individual values

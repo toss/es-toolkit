@@ -8,7 +8,7 @@ export function decimalAdjust(
     number = '-0';
   }
   precision = Math.min(Number.parseInt(precision as string, 10), 292);
-  if (precision) {
+  if (precision && Number.isFinite(Number(number))) {
     const [magnitude, exponent = 0] = number.toString().split('e');
     let adjustedValue: string | number = Math[type](Number(`${magnitude}e${Number(exponent) + precision}`));
     if (Object.is(adjustedValue, -0)) {

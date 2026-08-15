@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { snakeCase as snakeCaseToolkit_ } from 'es-toolkit';
-import { snakeCase as snakeCaseToolkitCompat_ } from 'es-toolkit/compat';
-import { snakeCase as snakeCaseLodash_ } from 'lodash';
+import { snakeCase as snakeCaseToolkit } from 'es-toolkit';
+import { snakeCase as snakeCaseToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const snakeCaseToolkit = snakeCaseToolkit_;
-const snakeCaseToolkitCompat = snakeCaseToolkitCompat_;
-const snakeCaseLodash = snakeCaseLodash_;
+const { snakeCase: snakeCaseLodash } = lodash;
 
 describe('snakeCase', () => {
   bench('es-toolkit/snakeCase', () => {

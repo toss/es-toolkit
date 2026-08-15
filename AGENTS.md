@@ -50,11 +50,12 @@ docs/
   ja/reference/{category}/{fn}.md       Japanese reference docs
   zh_hans/reference/{category}/{fn}.md  Simplified Chinese reference docs
 benchmarks/                   Vitest benchmark suite
+tests/types/                  Type tests comparing `es-toolkit/compat` with `@types/lodash` (run with `yarn workspace type-tests test`)
 .github/CONTRIBUTING.md       Contribution guide (English / Korean / Simplified Chinese)
 CHANGELOG.md                  User-facing changelog
 ```
 
-Categories include `array`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, and `map`.
+Categories include `array`, `bigint`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, and `map`.
 
 ## Principles
 
@@ -90,6 +91,7 @@ When adding or changing a function, follow this order:
    ```
    Then run the full suite (`yarn vitest run`), `yarn lint`, and `tsc --noEmit` before opening the PR.
 4. **Add documentation in all four languages** under `docs/`:
+
    - `docs/reference/{category}/{fn}.md` (English)
    - `docs/ko/reference/{category}/{fn}.md` (Korean, 해요체)
    - `docs/ja/reference/{category}/{fn}.md` (Japanese)
@@ -105,6 +107,8 @@ When adding or changing a function, follow this order:
 
 ## Pull request standards
 
+Before opening a pull request, check [what we accept](./.github/CONTRIBUTING.md#41-what-we-accept). New functions need an accepted discussion first, performance work needs benchmark results, Lodash behavior fixes need a test that fails without the change, and refactoring-only changes are not accepted.
+
 PR titles follow `<type>[function names]: <description>`. See [Section 4 of CONTRIBUTING.md](./.github/CONTRIBUTING.md#4-pull-requests) for the type list.
 
 Use the following template for the PR body:
@@ -119,10 +123,12 @@ Use the following template for the PR body:
 
 {Concise explanation of the code changes, in bullet points}
 
-## Test results
+## Benchmark results
 
-{Output of `yarn vitest run`, in simplified form}
+{Only for performance changes: benchmark output for `main` and for this branch. Remove this section otherwise.}
 ```
+
+Do not paste test output into the PR body. CI runs the test suite on every pull request, so the results are already visible there. Benchmarks are the exception—nothing in CI runs them, so a performance change has to bring its own numbers.
 
 ## Adding dependencies
 

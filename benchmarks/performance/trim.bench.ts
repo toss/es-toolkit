@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { trim as trimToolkit_ } from 'es-toolkit';
-import { trim as trimCompatToolkit_ } from 'es-toolkit/compat';
-import { trim as trimLodash_ } from 'lodash';
+import { trim as trimToolkit } from 'es-toolkit';
+import { trim as trimCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const trimToolkit = trimToolkit_;
-const trimCompatToolkit = trimCompatToolkit_;
-const trimLodash = trimLodash_;
+const { trim: trimLodash } = lodash;
 
 describe('trim', () => {
   bench('es-toolkit/trim', () => {

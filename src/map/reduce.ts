@@ -7,10 +7,10 @@
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to reduce.
- * @param {(accumulator: V, value: V, key: K, map: Map<K, V>) => V} callback - A function that processes each entry and updates the accumulator.
- * @param {V} [initialValue] - The initial value for the accumulator. If not provided, the first value in the Map is used.
- * @returns {V} The final accumulated value.
+ * @param map - The Map to reduce.
+ * @param callback - A function that processes each entry and updates the accumulator.
+ * @param [initialValue] - The initial value for the accumulator. If not provided, the first value in the Map is used.
+ * @returns The final accumulated value.
  * @throws {TypeError} If the Map is empty and no initial value is provided.
  *
  * @example

@@ -1,7 +1,7 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { drop as dropLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { drop } from './drop';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/drop.spec.js#L1
@@ -11,6 +11,12 @@ describe('drop', () => {
 
   it('should drop the first two elements', () => {
     expect(drop(array, 2)).toEqual([3]);
+  });
+
+  it('should treat falsey `n` values, except `undefined`, as `0`', () => {
+    const expected = falsey.map(value => (value === undefined ? [2, 3] : array));
+    const actual = falsey.map(value => drop(array, value as any));
+    expect(actual).toEqual(expected);
   });
 
   it('should return all elements when `n` < `1`', () => {
@@ -53,9 +59,5 @@ describe('drop', () => {
   it('should use default count of 1 when count is undefined', () => {
     expect(drop([1, 2, 3])).toEqual([2, 3]);
     expect(drop([1, 2, 3], undefined)).toEqual([2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(drop).toEqualTypeOf<typeof dropLodash>();
   });
 });

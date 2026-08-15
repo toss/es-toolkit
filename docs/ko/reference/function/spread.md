@@ -64,23 +64,3 @@ console.log(spreadMultiply.call(calculator, [2, 3, 4])); // 24
 #### 반환 값
 
 (`(args: Parameters<F>) => ReturnType<F>`): 파라미터 배열을 받아서 펼쳐진 형태로 원래 함수에 전달하는 새로운 함수를 반환해요.
-
-## Lodash와의 호환성
-
-`es-toolkit/compat`에서 `spread`를 가져오면 lodash와 호환돼요.
-
-- `spread`는 `argsIndex`라고 하는 숫자 인자를 추가로 받아요. 이 인자는 펼칠 인자 배열이 주어진 인덱스를 나타내요.
-  - 만약 `argsIndex`이 음수이거나 `NaN`이라면, 기본값 `0`으로 취급돼요. 소수라면, 가까운 정수로 내림해요.
-
-```typescript
-import { spread } from 'es-toolkit/compat';
-
-function fn(a: unknown, b: unknown, c: unknown) {
-  return Array.from(arguments);
-}
-
-spread(fn, -1)([1, 2]); // Returns [1, 2]
-spread(fn, NaN)([1, 2]); // Returns [1, 2]
-spread(fn, 'a')([1, 2]); // Returns [1, 2]
-spread(fn, 1.6)(1, [2, 3]); // Returns [1, 2, 3]
-```

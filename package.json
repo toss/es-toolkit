@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.46.1",
+  "version": "1.50.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -10,12 +10,16 @@
   },
   "license": "MIT",
   "sideEffects": false,
+  "jsdelivr": "./dist/browser.global.js",
+  "unpkg": "./dist/browser.global.js",
   "packageManager": "yarn@4.12.0",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
+    "./bigint": "./src/bigint/index.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
+    "./fp": "./src/fp/index.ts",
     "./function": "./src/function/index.ts",
     "./map": "./src/map/index.ts",
     "./math": "./src/math/index.ts",
@@ -25,16 +29,20 @@
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
     "./server": "./src/server/index.ts",
+    "./types": "./src/types/index.ts",
     "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
   "files": [
+    "NOTICE",
     "dist",
     "compat",
     "*.d.ts",
     "array.js",
+    "bigint.js",
     "compat.js",
     "error.js",
+    "fp.js",
     "function.js",
     "map.js",
     "math.js",
@@ -48,17 +56,19 @@
   ],
   "workspaces": [
     "docs",
-    "benchmarks"
+    "benchmarks",
+    "tests/types"
   ],
   "scripts": {
-    "bench": "vitest bench",
+    "bench": "yarn workspace benchmarks bench",
     "build": "tsdown && ./.scripts/postbuild.sh",
     "format": "prettier --write .",
+    "gen:benchmark": "node ./.scripts/generate-benchmark.mjs",
     "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
     "lint": "eslint --config eslint.config.mjs --concurrency=auto",
     "packlint": "packlint sort -R",
     "prepack": "yarn build",
-    "test": "vitest --coverage --typecheck",
+    "test": "vitest --coverage",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
     "typecheck": "tsc --noEmit"
   },
@@ -68,24 +78,24 @@
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.39.2",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/broken-link-checker": "^0",
+    "@types/broken-link-checker": "0.7.3",
     "@types/jscodeshift": "^0.12.0",
-    "@types/lodash": "^4.17.20",
     "@types/node": "^24.10.9",
     "@types/tar": "^6.1.13",
     "@typescript-eslint/parser": "^8.26.1",
-    "@vitest/coverage-istanbul": "^4.0.17",
+    "@vitest/coverage-istanbul": "^4.1.10",
     "@vitest/eslint-plugin": "^1.6.6",
     "@vue/compiler-sfc": "^3.5.10",
-    "broken-link-checker": "^0.7.8",
+    "broken-link-checker": "0.7.8",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
+    "fast-check": "4.8.0",
     "globals": "^15.9.0",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "20.9.0",
     "jscodeshift": "^17.0.0",
     "packlint": "^0.2.4",
     "prettier": "^3.2.5",
@@ -96,13 +106,12 @@
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.6.0",
-    "vercel": "^41.4.1",
-    "vitest": "^4.0.17"
+    "vercel": "^54.4.1",
+    "vitest": "^4.1.10"
   },
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",
-    "browser": "./dist/browser.global.js",
     "module": "./dist/index.mjs",
     "exports": {
       ".": {
@@ -125,6 +134,16 @@
           "default": "./dist/array/index.js"
         }
       },
+      "./bigint": {
+        "import": {
+          "types": "./dist/bigint/index.d.mts",
+          "default": "./dist/bigint/index.mjs"
+        },
+        "require": {
+          "types": "./dist/bigint/index.d.ts",
+          "default": "./dist/bigint/index.js"
+        }
+      },
       "./compat": {
         "import": {
           "types": "./dist/compat/index.d.mts",
@@ -136,7 +155,11 @@
         }
       },
       "./compat/*": {
-        "default": {
+        "import": {
+          "types": "./compat/*.d.mts",
+          "default": "./compat/*.mjs"
+        },
+        "require": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
         }
@@ -159,6 +182,16 @@
         "require": {
           "types": "./dist/error/index.d.ts",
           "default": "./dist/error/index.js"
+        }
+      },
+      "./fp": {
+        "import": {
+          "types": "./dist/fp/index.d.mts",
+          "default": "./dist/fp/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/index.d.ts",
+          "default": "./dist/fp/index.js"
         }
       },
       "./function": {
@@ -241,6 +274,14 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./types": {
+        "import": {
+          "types": "./dist/types/index.d.mts"
+        },
+        "require": {
+          "types": "./dist/types/index.d.ts"
+        }
+      },
       "./util": {
         "import": {
           "types": "./dist/util/index.d.mts",
@@ -260,6 +301,9 @@
       "unplugged": true
     },
     "prettier-plugin-sort-re-exports@0.0.1": {
+      "unplugged": true
+    },
+    "vitepress-plugin-sandpack@1.1.4": {
       "unplugged": true
     }
   },

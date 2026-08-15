@@ -6,9 +6,8 @@
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to iterate over.
- * @param {(value: V, key: K, map: Map<K, V>) => void} callback - A function to execute for each entry.
- * @returns {void}
+ * @param map - The Map to iterate over.
+ * @param callback - A function to execute for each entry.
  *
  * @example
  * const map = new Map([

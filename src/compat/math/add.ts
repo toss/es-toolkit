@@ -7,9 +7,9 @@ import { toString } from '../util/toString.ts';
  * This function takes two numbers and returns their sum. If either of the numbers is `NaN`,
  * the function returns `NaN`.
  *
- * @param {number} value - The first number to add.
- * @param {number} other - The second number to add.
- * @returns {number} The sum of the two numbers, or `NaN` if any input is `NaN`.
+ * @param value - The first number to add.
+ * @param other - The second number to add.
+ * @returns The sum of the two numbers, or `NaN` if any input is `NaN`.
  *
  * @example
  * const result1 = add(2, 3);    // result1 will be 5

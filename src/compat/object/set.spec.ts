@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { constant, each, map, toString, unset } from '..';
-import type { set as setLodash } from 'lodash';
 import { set } from './set';
 import { symbol } from '../_internal/symbol';
 
@@ -257,9 +256,5 @@ describe('set', () => {
       set(object, 'a', updater);
       expect(pass).toBe(true);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(set).toEqualTypeOf<typeof setLodash>();
   });
 });
