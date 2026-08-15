@@ -19,4 +19,3 @@ export { toKebabCaseKeys } from './toKebabCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
 export { toPascalCaseKeys } from './toPascalCaseKeys.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';
-export type { ToSnakeCaseKeys } from './toSnakeCaseKeys.ts';

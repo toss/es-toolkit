@@ -10,14 +10,19 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 TypeScript に用意されていないために毎回自分で書いていた型だけを厳選して収録しました。
 
-| 型                                                 | 説明                                                                           |
-| -------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [`ValueOf<T>`](./reference/ValueOf.md)             | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。                 |
-| [`Simplify<T>`](./reference/Simplify.md)           | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。              |
-| [`Writable<T>`](./reference/Writable.md)           | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。 |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 少なくとも 1 つ以上の要素を持つ配列です。                                      |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)     | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。               |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。           |
+| 型                                                           | 説明                                                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| [`ValueOf<T>`](./reference/ValueOf.md)                       | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。                             |
+| [`Simplify<T>`](./reference/Simplify.md)                     | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。                          |
+| [`Writable<T>`](./reference/Writable.md)                     | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。             |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 少なくとも 1 つ以上の要素を持つ配列です。                                                  |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)               | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。                           |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。                       |
+| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | すべてのキーを再帰的に camelCase に変換します。`toCamelCaseKeys` の戻り値の型です。        |
+| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | すべてのキーを再帰的に snake_case に変換します。`toSnakeCaseKeys` の戻り値の型です。       |
+| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | すべてのキーを再帰的に PascalCase に変換します。`toPascalCaseKeys` の戻り値の型です。      |
+| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | すべてのキーを再帰的に kebab-case に変換します。`toKebabCaseKeys` の戻り値の型です。       |
+| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | すべてのキーを再帰的に CONSTANT_CASE に変換します。`toConstantCaseKeys` の戻り値の型です。 |
 
 ## 選定基準
 

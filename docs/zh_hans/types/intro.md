@@ -10,14 +10,19 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 我们只挑选了那些因为 TypeScript 没有内置、你不得不每次手写的类型。
 
-| 类型                                               | 说明                                                    |
-| -------------------------------------------------- | ------------------------------------------------------- |
-| [`ValueOf<T>`](./reference/ValueOf.md)             | 创建对象所有值类型的联合。`keyof` 的值版本。            |
-| [`Simplify<T>`](./reference/Simplify.md)           | 将交叉类型或映射类型展开为单个易读的对象类型。          |
-| [`Writable<T>`](./reference/Writable.md)           | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。 |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md) | 至少包含一个元素的数组。                                |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)     | 递归地将包括嵌套对象在内的所有属性变为可选。            |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)   | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。     |
+| 类型                                                         | 说明                                                                  |
+| ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/ValueOf.md)                       | 创建对象所有值类型的联合。`keyof` 的值版本。                          |
+| [`Simplify<T>`](./reference/Simplify.md)                     | 将交叉类型或映射类型展开为单个易读的对象类型。                        |
+| [`Writable<T>`](./reference/Writable.md)                     | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。               |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 至少包含一个元素的数组。                                              |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)               | 递归地将包括嵌套对象在内的所有属性变为可选。                          |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。                   |
+| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为 camelCase。`toCamelCaseKeys` 的返回类型。        |
+| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为 snake_case。`toSnakeCaseKeys` 的返回类型。       |
+| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为 PascalCase。`toPascalCaseKeys` 的返回类型。      |
+| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | 递归地将所有键转换为 kebab-case。`toKebabCaseKeys` 的返回类型。       |
+| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | 递归地将所有键转换为 CONSTANT_CASE。`toConstantCaseKeys` 的返回类型。 |
 
 ## 选定标准
 
