@@ -84,7 +84,9 @@ Vite 会将 `build.target` 应用到包中的每个模块(包括 es-toolkit),因
 
 <<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
 
-请继续在入口处导入[最小 polyfill 文件](#支持更旧的浏览器):`structuredClone` 不属于 core-js,`plugin-legacy` 不会提供它。
+有两个 Web API 不在 core-js 范围内,`plugin-legacy` 不会提供:`structuredClone`,以及 `debounce`、`delay` 使用的 `AbortController`。请在入口处导入这个文件(代替上面的最小 polyfill 集):
+
+<<< @/../tests/browser-compat/polyfills/legacy.mjs{js}
 
 除 `es-toolkit/bigint` 外,还有一组函数保持较高的下限:`es-toolkit/compat` 的分词函数(`words`、`camelCase`、`kebabCase`、`lowerCase`、`snakeCase`、`startCase`、`upperCase`)在调用时用字符串拼接 Unicode 属性正则表达式,任何转译器都无法改写,因此调用它们需要 Chrome 64+ / Safari 11.1+。导入本身是安全的;主模块 `es-toolkit` 中的同名函数使用 Babel 可以改写的正则字面量,因此可以一直向下兼容。
 

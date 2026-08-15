@@ -84,7 +84,9 @@ Vite는 `build.target`을 es-toolkit을 포함한 번들의 모든 모듈에 적
 
 <<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
 
-진입점에서 [최소 폴리필 파일](#오래된-브라우저-지원하기)은 계속 불러와야 해요. `structuredClone`은 core-js에 없어서 `plugin-legacy`가 제공하지 않아요.
+두 개의 Web API는 core-js 밖에 있어서 `plugin-legacy`가 제공하지 않아요. `structuredClone`과, `debounce`·`delay`가 사용하는 `AbortController`예요. 위의 최소 폴리필 대신 이 파일을 진입점에서 한 번 불러오세요.
+
+<<< @/../tests/browser-compat/polyfills/legacy.mjs{js}
 
 `es-toolkit/bigint` 외에 한 그룹의 함수는 더 높은 하한을 유지해요. `es-toolkit/compat`의 단어 분리 함수들(`words`, `camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`)은 유니코드 property 정규식을 호출 시점에 문자열로 조립하기 때문에 어떤 트랜스파일러도 변환할 수 없어서, 호출하려면 Chrome 64+ / Safari 11.1+가 필요해요. 불러오는 것 자체는 안전하고, 메인 `es-toolkit` 모듈의 동명 함수들은 Babel이 변환할 수 있는 정규식 리터럴을 쓰기 때문에 끝까지 잘 동작해요.
 

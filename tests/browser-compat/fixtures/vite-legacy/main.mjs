@@ -8,6 +8,6 @@
 // still imported for it.
 import { cases, namespaces } from '../../generated/cases-legacy.mjs';
 import { start } from '../../harness/entry.mjs';
-import '../../polyfills/minimal.mjs';
+import '../../polyfills/legacy.mjs';
 
 start({ cases, namespaces });

@@ -6739,6 +6739,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abortcontroller-polyfill@npm:^1.7.8":
+  version: 1.7.8
+  resolution: "abortcontroller-polyfill@npm:1.7.8"
+  checksum: 10c0/604f01d78f1749e03b43fbdcbabd16466dee50404eb41920884187f993a1a6d96669424807f1ca1e1a4f3073261d7fd6c3f68452ad3c2d66be5c012d0f9e4eb3
+  languageName: node
+  linkType: hard
+
 "acorn-import-attributes@npm:^1.9.5":
   version: 1.9.5
   resolution: "acorn-import-attributes@npm:1.9.5"
@@ -7497,6 +7504,7 @@ __metadata:
     "@types/ungap__structured-clone": "npm:^1"
     "@ungap/structured-clone": "npm:^1.3.3"
     "@vitejs/plugin-legacy": "npm:^7.2.1"
+    abortcontroller-polyfill: "npm:^1.7.8"
     babel-loader: "npm:^9.2.1"
     core-js: "npm:^3.50.0"
     terser: "npm:^5.49.2"

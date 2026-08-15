@@ -84,7 +84,9 @@ To reach roughly 99.4% of global traffic, use [`@vitejs/plugin-legacy`](https://
 
 <<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
 
-Keep importing the [minimal polyfill file](#supporting-older-browsers) at your entrypoint: `structuredClone` is not part of core-js, so `plugin-legacy` does not provide it.
+Two Web APIs live outside core-js, so `plugin-legacy` does not provide them: `structuredClone` and `AbortController` (used by `debounce` and `delay`). Import this file once at your entrypoint instead of the minimal set above:
+
+<<< @/../tests/browser-compat/polyfills/legacy.mjs{js}
 
 Besides `es-toolkit/bigint`, one group of functions keeps a higher floor: the word-splitting functions of `es-toolkit/compat` (`words`, `camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) build their Unicode-property regex at call time, which no transpiler can rewrite — calling them requires Chrome 64+ / Safari 11.1+. Importing them is safe, and the same-named functions of the main `es-toolkit` module use a regex literal that Babel rewrites, so they work all the way down.
 

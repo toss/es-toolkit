@@ -84,7 +84,9 @@ Vite は `build.target` を es-toolkit を含むバンドル内のすべての�
 
 <<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
 
-エントリーポイントでは[最小ポリフィルファイル](#古いブラウザをサポートする)を引き続きインポートしてください。`structuredClone` は core-js に含まれないため、`plugin-legacy` は提供しません。
+2つの Web API は core-js の範囲外のため、`plugin-legacy` は提供しません。`structuredClone` と、`debounce`・`delay` が使用する `AbortController` です。上記の最小ポリフィルの代わりに、このファイルをエントリーポイントで一度インポートしてください。
+
+<<< @/../tests/browser-compat/polyfills/legacy.mjs{js}
 
 `es-toolkit/bigint` のほかに、1つのグループの関数はより高い下限を保ちます。`es-toolkit/compat` の単語分割関数(`words`、`camelCase`、`kebabCase`、`lowerCase`、`snakeCase`、`startCase`、`upperCase`)は Unicode プロパティ正規表現を呼び出し時に文字列から組み立てるため、どのトランスパイラも変換できず、呼び出すには Chrome 64+ / Safari 11.1+ が必要です。インポート自体は安全で、メインの `es-toolkit` モジュールの同名関数は Babel が変換できる正規表現リテラルを使っているため、最後まで動作します。
 
