@@ -243,4 +243,16 @@ describe('forEach', () => {
 
     expect(values.length).toBe(1);
   });
+
+  it(`\`_.${methodName}\` should not iterate over non-enumerable properties`, () => {
+    const object = { a: 1 };
+    Object.defineProperty(object, 'b', { value: 2, enumerable: false });
+
+    const keys: any[] = [];
+    func(object, (value, key) => {
+      keys.push(key);
+    });
+
+    expect(keys).toEqual(['a']);
+  });
 });

@@ -26,7 +26,7 @@ Use these terms consistently across translations:
 | Usage      | 사용법          | 使用法     | 用法    |
 | Parameters | 파라미터        | パラメータ | 参数    |
 | Returns    | 반환 값         | 戻り値     | 返回值  |
-| Throws     | 에러            | エラー     | 异常    |
+| Throws     | 에러            | エラー     | 错误    |
 | Examples   | 예시            | 例         | 示例    |
 
 ## Korean style

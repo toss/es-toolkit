@@ -37,7 +37,7 @@ console.log(ages); // [30, 25, 35]
 console.log(roles); // ['engineer', 'designer', 'manager']
 ```
 
-長さが異なる配列も処理できます。短い配列の場合は `undefined` で埋められます。
+返される配列の長さは最も長い内部配列の長さに合わせられ、短い内部配列で足りない位置は `undefined` で埋められます。
 
 ```typescript
 import { unzip } from 'es-toolkit/array';

@@ -576,6 +576,7 @@ function resetCode() {
 .playground-sandpack {
   padding: 0;
   flex: 1;
+  height: 0;
   display: flex;
   flex-direction: column;
 }

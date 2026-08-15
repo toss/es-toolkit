@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Propose a new function
+    url: https://github.com/toss/es-toolkit/discussions/new?category=ideas
+    about: New functions are agreed on in a discussion before anyone writes code. Open a discussion instead of an issue.
+  - name: Ask a question
+    url: https://github.com/toss/es-toolkit/discussions/new?category=q-a
+    about: Ask questions and discuss with other es-toolkit users.

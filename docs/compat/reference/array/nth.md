@@ -14,7 +14,7 @@ const element = nth(array, index);
 
 ## Usage
 
-### `nth(array, index)`
+### `nth(array, index?)`
 
 Returns the element at the specified index of an array. If the index is negative, it counts from the end of the array. If the index is out of range, it returns `undefined`.
 

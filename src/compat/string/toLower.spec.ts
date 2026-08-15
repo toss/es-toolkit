@@ -80,7 +80,7 @@ describe('toLower', () => {
 
   it('should handle mixed types in arrays', () => {
     const sym = Symbol('test');
-    expect((toLower as any)([1, 'b', sym, null, undefined])).toBe('1,b,symbol(test),,');
+    expect((toLower as any)([1, 'b', sym, null, undefined])).toBe('1,b,symbol(test),null,undefined');
   });
 
   it('should maintain proper TypeScript types', () => {

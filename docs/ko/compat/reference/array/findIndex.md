@@ -16,7 +16,7 @@ const index = findIndex(arr, doesMatch, fromIndex);
 
 ## 사용법
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, doesMatch?, fromIndex?)`
 
 배열에서 특정 조건에 맞는 첫 번째 요소의 위치를 찾고 싶을 때 `findIndex`를 사용하세요. 다양한 방식으로 조건을 지정할 수 있어요. 조건에 맞는 요소가 없으면 `-1`을 반환해요.
 

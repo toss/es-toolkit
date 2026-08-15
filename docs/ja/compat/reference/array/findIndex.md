@@ -16,7 +16,7 @@ const index = findIndex(arr, doesMatch, fromIndex);
 
 ## 使用法
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, doesMatch?, fromIndex?)`
 
 配列内で特定の条件に一致する最初の要素の位置を見つけたい場合は `findIndex` を使用してください。さまざまな方法で条件を指定できます。条件に一致する要素がない場合は `-1` を返します。
 

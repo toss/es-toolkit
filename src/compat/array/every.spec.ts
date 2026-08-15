@@ -126,6 +126,17 @@ describe('every', () => {
     expect(every(objects, Symbol.for('c'))).toBe(true);
   });
 
+  it('should treat falsy, non-nullish `doesMatch` values as `_.property` shorthands', () => {
+    expect(every([{ 0: '' }, { 0: 'x' }], 0)).toBe(false);
+    expect(every([{ 0: 'a' }, { 0: 'b' }], 0)).toBe(true);
+
+    expect(every([{ '': '' }, { '': 'x' }], '')).toBe(false);
+    expect(every([{ '': 'a' }, { '': 'b' }], '')).toBe(true);
+
+    expect(every([{ NaN: '' }, { NaN: 'x' }], NaN)).toBe(false);
+    expect(every([{ NaN: 'a' }, { NaN: 'b' }], NaN)).toBe(true);
+  });
+
   it('should work with `_.matches` shorthands', () => {
     const objects = [
       { a: 0, b: 0 },
