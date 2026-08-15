@@ -1,4 +1,4 @@
-import { limitAsync } from '../array/limitAsync.ts';
+import { limitAsync } from '../promise/limitAsync.ts';
 
 interface MapValuesAsyncOptions {
   concurrency?: number;
