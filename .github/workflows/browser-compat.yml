@@ -1,17 +1,25 @@
 name: Browser Compat
 
-# Runs the built dist against the oldest supported browsers:
+# Runs every JSDoc @example (tests/browser-compat) against the built dist in
+# the oldest browsers of each support tier from docs/browser-support.md:
 #
-#   - native lane:     Chrome 98 + WebKit 15.4 (Playwright 1.22.2) — es-toolkit
-#                      as published, no transpilation, no polyfills.
-#   - downlevel lanes: Chrome 80 + WebKit 14.1 (Playwright 1.9.2) — the Vite
-#                      and webpack setups documented in docs/browser-support.md.
+#   - native lane:      Chrome 98 + WebKit 15.4 (Playwright 1.22.2) —
+#                       es-toolkit as published, no transpilation, no
+#                       polyfills.
+#   - downlevel lanes:  Chrome 80 + WebKit 14.1 (Playwright 1.9.2) — the Vite
+#                       and webpack setups documented for that tier.
+#   - vite-legacy lane: Chrome 51 + WebKit 14.1 — the @vitejs/plugin-legacy
+#                       setup for the ES2015 tier, with the bigint-free case
+#                       set. Chrome 51 predates headless mode, so it runs
+#                       headed under Xvfb, on the bionic image with its
+#                       GConf/GTK2 dependencies installed via apt.
 #
 # Old WebKit builds are no longer downloadable from the Playwright CDN
-# (revisions <= 1440 were purged), so both WebKit lanes run inside the
-# browser-bundled mcr.microsoft.com/playwright images. Old Chrome builds come
-# from the chromium-browser-snapshots archive and run inside the same
-# containers, whose Ubuntu 20.04 userland matches those binaries.
+# (revisions <= 1440 were purged), so all WebKit lanes run inside the
+# browser-bundled, digest-pinned mcr.microsoft.com/playwright images. Old
+# Chrome builds come from the chromium-browser-snapshots archive and run
+# inside the same containers, whose Ubuntu 18.04/20.04 userland matches those
+# binaries.
 
 on:
   push:
