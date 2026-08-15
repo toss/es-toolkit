@@ -75,7 +75,7 @@ map(users, { age: 30 });
 
 #### パラメータ
 
-- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): 反復処理する配列またはオブジェクトです。
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 反復処理する配列またはオブジェクトです。
 - `iteratee` (`function | PropertyKey | object`, オプション): 各要素に対して実行する関数、プロパティパス、または一致させるオブジェクトです。提供しない場合、各要素をそのまま返します。
   - 関数の場合、`(value, key, collection)`の形式で呼び出されます。デフォルトは`identity`関数です。
   - 文字列の場合、そのプロパティを抽出します。

@@ -75,7 +75,7 @@ map(users, { age: 30 });
 
 #### 参数
 
-- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): 要遍历的数组或对象。
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 要遍历的数组或对象。
 - `iteratee` (`function | PropertyKey | object`, 可选): 对每个元素执行的函数、属性路径或要匹配的对象。如果不提供，则按原样返回每个元素。
   - 当它是函数时，以`(value, key, collection)`的形式调用。默认为`identity`函数。
   - 当它是字符串时，提取该属性。

@@ -75,7 +75,7 @@ map(users, { age: 30 });
 
 #### 파라미터
 
-- `collection` (`any[] | ArrayLike<any> | Record<any, any> | null | undefined`): 순회할 배열이나 객체예요.
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
 - `iteratee` (`function | PropertyKey | object`, 선택): 각 요소에 대해 실행할 함수나 속성 경로, 또는 일치시킬 객체예요. 제공하지 않으면 각 요소를 그대로 반환해요.
   - 함수인 경우 `(value, key, collection)` 형태로 호출돼요. 기본값은 `identity` 함수예요.
   - 문자열인 경우 해당 속성을 추출해요.
