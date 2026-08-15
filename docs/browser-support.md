@@ -46,7 +46,7 @@ Configure `babel-loader` with `@babel/preset-env`, and make sure the `exclude` p
 
 <<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
 
-### 2. Adding modern runtime JavaScript APIs
+### 2. Filling in modern runtime JavaScript APIs (polyfills)
 
 es-toolkit makes use of modern JavaScript APIs available in recent browsers and runtimes, such as `Array#at` and `structuredClone`. Older browsers do not implement these functions, so to use es-toolkit you need to fill in the implementations.
 

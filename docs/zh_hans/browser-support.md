@@ -46,7 +46,7 @@ Vite 会将 `build.target` 应用到包中的每个模块(包括 es-toolkit),因
 
 <<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
 
-### 2. 补充现代运行时 JavaScript API
+### 2. 补充现代运行时 JavaScript API(polyfill)
 
 es-toolkit 使用了 `Array#at`、`structuredClone` 等现代浏览器和运行时支持的现代 JavaScript API。旧浏览器没有这些函数的实现,因此要使用 es-toolkit,需要补充这些函数的实现。
 

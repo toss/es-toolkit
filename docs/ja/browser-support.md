@@ -46,7 +46,7 @@ Vite は `build.target` を es-toolkit を含むバンドル内のすべての�
 
 <<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
 
-### 2. 最新のランタイム JavaScript API を追加する
+### 2. 最新のランタイム JavaScript API を補う(ポリフィル)
 
 es-toolkit は `Array#at` や `structuredClone` のような、最新のブラウザやランタイムでサポートされるモダンな JavaScript API を活用しています。古いブラウザにはこれらの関数の実装がないため、es-toolkit を使うには関数の実装を補う必要があります。
 
