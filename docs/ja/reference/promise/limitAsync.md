@@ -13,7 +13,7 @@ const limitedFunc = limitAsync(asyncFunc, concurrency);
 複数回呼び出される非同期関数の並行実行数を制限したい場合は、`limitAsync`を使用してください。指定された数だけ同時に実行され、追加の呼び出しは実行中の操作が完了するまで待機します。
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 最大3つのリクエストのみを同時に実行するように制限します。
 const limitedFetch = limitAsync(async url => {
@@ -28,7 +28,7 @@ await Promise.all(urls.map(url => limitedFetch(url)));
 外部API呼び出しやデータベースクエリなど、リソースを大量に使用する操作の負荷を制御するのに便利です。レート制限のあるAPIを使用する場合やサーバー負荷を管理する必要がある場合に特に効果的です。
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 重い計算を最大2つずつ処理します。
 const processItem = async item => {

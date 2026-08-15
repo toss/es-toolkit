@@ -13,7 +13,7 @@ const limitedFunc = limitAsync(asyncFunc, concurrency);
 当您想限制多次调用的异步函数的并发执行数时，使用 `limitAsync`。只有指定数量的执行会并发运行，额外的调用会等待正在运行的操作完成。
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 限制最多 3 个并发请求。
 const limitedFetch = limitAsync(async url => {
@@ -28,7 +28,7 @@ await Promise.all(urls.map(url => limitedFetch(url)));
 它对控制资源密集型操作（如外部 API 调用或数据库查询）的负载很有用。当使用有速率限制的 API 或管理服务器负载时特别有效。
 
 ```typescript
-import { limitAsync } from 'es-toolkit/array';
+import { limitAsync } from 'es-toolkit/promise';
 
 // 一次最多处理 2 个重计算。
 const processItem = async item => {
