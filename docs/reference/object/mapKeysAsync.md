@@ -10,27 +10,27 @@ const newObj = await mapKeysAsync(object, getNewKey);
 
 ### `mapKeysAsync(object, getNewKey, options?)`
 
-Use `mapKeysAsync` when you want to create a new object by asynchronously transforming each key. Values remain the same, and only the keys are changed to the resolved results of the `getNewKey` function.
+Use `mapKeysAsync` when you want to create a new object by asynchronously transforming each key. Values remain the same, and each key is replaced with the value inside the Promise returned by the `getNewKey` function.
 
 ```typescript
 import { mapKeysAsync } from 'es-toolkit/object';
 
 // Add prefix to keys
 const obj = { a: 1, b: 2 };
-const prefixed = await mapKeysAsync(obj, (value, key) => `prefix_${key}`);
+const prefixed = await mapKeysAsync(obj, async (value, key) => `prefix_${key}`);
 // prefixed becomes { prefix_a: 1, prefix_b: 2 }
 
 // Combine key and value to create new keys
-const combined = await mapKeysAsync(obj, (value, key) => `${key}${value}`);
+const combined = await mapKeysAsync(obj, async (value, key) => `${key}${value}`);
 // combined becomes { a1: 1, b2: 2 }
 
 // Convert keys to uppercase
-const uppercased = await mapKeysAsync(obj, (value, key) => key.toString().toUpperCase());
+const uppercased = await mapKeysAsync(obj, async (value, key) => key.toString().toUpperCase());
 // uppercased becomes { A: 1, B: 2 }
 
-// Limit concurrency.
+// Limit concurrency
 await mapKeysAsync(obj, async (value, key) => await processKey(key, value), { concurrency: 2 });
-// Only 2 keys are processed concurrently at most.
+// Only 2 keys are processed concurrently at most
 ```
 
 #### Parameters
@@ -42,4 +42,4 @@ await mapKeysAsync(obj, async (value, key) => await processKey(key, value), { co
 
 #### Returns
 
-(`Promise<Record<K, T[keyof T]>>`): A promise that resolves to a new object with transformed keys.
+(`Promise<Record<K, T[keyof T]>>`): Returns a promise that resolves to a new object with transformed keys.

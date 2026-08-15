@@ -6,40 +6,40 @@
 const newObj = await mapKeysAsync(object, getNewKey);
 ```
 
-## 使用方法
+## 使用法
 
 ### `mapKeysAsync(object, getNewKey, options?)`
 
-各キーを非同期に変換して新しいオブジェクトを作成する場合に`mapKeysAsync`を使用します。値はそのまま保持され、キーのみが`getNewKey`関数の解決結果に変更されます。
+各キーを非同期に変換して新しいオブジェクトを作りたい時に`mapKeysAsync`を使用してください。値はそのまま維持され、キーのみが`getNewKey`関数が返すPromiseの中の値に変更されます。
 
 ```typescript
 import { mapKeysAsync } from 'es-toolkit/object';
 
 // キーにプレフィックスを追加
 const obj = { a: 1, b: 2 };
-const prefixed = await mapKeysAsync(obj, (value, key) => `prefix_${key}`);
-// prefixed は { prefix_a: 1, prefix_b: 2 } になる
+const prefixed = await mapKeysAsync(obj, async (value, key) => `prefix_${key}`);
+// prefixedは{ prefix_a: 1, prefix_b: 2 }になります
 
 // キーと値を組み合わせて新しいキーを作成
-const combined = await mapKeysAsync(obj, (value, key) => `${key}${value}`);
-// combined は { a1: 1, b2: 2 } になる
+const combined = await mapKeysAsync(obj, async (value, key) => `${key}${value}`);
+// combinedは{ a1: 1, b2: 2 }になります
 
 // キーを大文字に変換
-const uppercased = await mapKeysAsync(obj, (value, key) => key.toString().toUpperCase());
-// uppercased は { A: 1, B: 2 } になる
+const uppercased = await mapKeysAsync(obj, async (value, key) => key.toString().toUpperCase());
+// uppercasedは{ A: 1, B: 2 }になります
 
-// 並行処理数を制限
+// 同時に実行される操作の数を制限
 await mapKeysAsync(obj, async (value, key) => await processKey(key, value), { concurrency: 2 });
-// 最大2つのキーが同時に処理される
+// 最大2つのキーのみが同時に処理されます
 ```
 
 #### パラメータ
 
-- `object` (`T extends Record<PropertyKey, any>`): キーを変換する元のオブジェクト。
-- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => Promise<K>`): 新しいキーを生成する非同期関数。値、キー、オブジェクト全体をパラメータとして受け取る。
-- `options` (`MapKeysAsyncOptions`, 省略可): 並行処理数を制御するオプション。
-  - `concurrency` (`number`, 省略可): 並行処理の最大数。指定しない場合、すべての操作が同時に実行される。
+- `object` (`T extends Record<PropertyKey, any>`): キーを変換するオブジェクトです。
+- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => Promise<K>`): 新しいキーを生成する非同期関数です。値、キー、全体のオブジェクトをパラメータとして受け取ります。
+- `options` (`MapKeysAsyncOptions`, オプション): 同時に実行される操作の数を制御するオプションです。
+  - `concurrency` (`number`, オプション): 同時に実行できる操作の最大数です。指定しない場合、すべての操作が同時に実行されます。
 
 #### 戻り値
 
-(`Promise<Record<K, T[keyof T]>>`): 変換されたキーを持つ新しいオブジェクトに解決されるプロミス。
+(`Promise<Record<K, T[keyof T]>>`): キーが変換された新しいオブジェクトを持つPromiseを返します。

@@ -10,7 +10,7 @@ const newObj = await mapValuesAsync(object, getNewValue);
 
 ### `mapValuesAsync(object, getNewValue, options?)`
 
-Use `mapValuesAsync` when you want to create a new object by asynchronously transforming each value. Keys remain the same, and only the values are changed to the resolved results of the `getNewValue` function.
+Use `mapValuesAsync` when you want to create a new object by asynchronously transforming each value. Keys remain the same, and each value is replaced with the value inside the Promise returned by the `getNewValue` function.
 
 ```typescript
 import { mapValuesAsync } from 'es-toolkit/object';
@@ -30,10 +30,10 @@ const scores = { alice: 85, bob: 90, charlie: 95 };
 const grades = await mapValuesAsync(scores, async (value, key) => `${key}: ${value >= 90 ? 'A' : 'B'}`);
 // grades becomes { alice: 'alice: B', bob: 'bob: A', charlie: 'charlie: A' }
 
-// Limit concurrency.
+// Limit concurrency
 const items = { a: 1, b: 2, c: 3 };
 await mapValuesAsync(items, async item => await processItem(item), { concurrency: 2 });
-// Only 2 values are processed concurrently at most.
+// Only 2 values are processed concurrently at most
 ```
 
 #### Parameters
@@ -45,4 +45,4 @@ await mapValuesAsync(items, async item => await processItem(item), { concurrency
 
 #### Returns
 
-(`Promise<Record<K, V>>`): A promise that resolves to a new object with transformed values.
+(`Promise<Record<K, V>>`): Returns a promise that resolves to a new object with transformed values.
