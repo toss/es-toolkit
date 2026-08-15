@@ -15,98 +15,56 @@ es-toolkit works out of the box in all browsers released since early 2022:
 | iOS Safari  | 15.4+           |
 | Node.js     | 18+             |
 
-This range covers about 98.7% of global browser traffic. With build configuration you can go further down:
+es-toolkit makes full use of modern JavaScript to keep its codebase small and efficient.
+To support browsers older than the ones above, you can add build configuration. This makes es-toolkit work correctly even in much older browsers that only support ES2015, such as Chrome 51 or Safari 10. See [Supporting older browsers](#supporting-older-browsers) below.
 
-- **Chrome 80 / Safari 14.1** (2020-era, ≈98.8% coverage): transpilation plus six polyfills. See [Supporting older browsers](#supporting-older-browsers).
-- **Chrome 51 / Safari 10** (ES2015-era, ≈99.4% coverage): [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), excluding `es-toolkit/bigint`. See [ES2015-era browsers](#es2015-era-browsers-chrome-51-safari-10).
-
-These ranges are continuously verified. Every change is checked against these targets with static analysis with [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) and [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat). Every code example in the documentation runs in real Chrome 98, Chrome 80, Chrome 51, WebKit 15.4, and WebKit 14.1 builds in CI.
-
-## Why these versions?
-
-es-toolkit ships modern JavaScript without transpilation, keeping the bundle small and fast. The minimum versions are determined by the newest runtime APIs it uses:
-
-| Feature                                      | Used by                                                    | Chrome | Safari |
-| -------------------------------------------- | ---------------------------------------------------------- | ------ | ------ |
-| `??`, `?.`, `BigInt`                         | everywhere                                                 | 80     | 14     |
-| Class fields                                 | `Semaphore`, `Mutex`                                       | 72     | 14.1   |
-| `AggregateError`                             | `clone`                                                    | 85     | 14     |
-| `Object.hasOwn`                              | `pick`, `groupBy`, `get`, and other object/array utilities | 93     | 15.4   |
-| `Error` `cause` option                       | `clone`                                                    | 93     | 15     |
-| `Array.prototype.at`                         | `nthArg`                                                   | 92     | 15.4   |
-| `Array.prototype.findLast` / `findLastIndex` | `findLast`, `findLastKey`, `takeRightWhile`                | 97     | 15.4   |
-| `structuredClone`                            | `cloneDeepWith`                                            | 98     | 15.4   |
-
-ESLint rules in this repository fail the build if a change introduces syntax or APIs newer than Chrome 98 / Safari 15.4, so this table cannot silently drift.
+Every es-toolkit release is verified to work correctly in the supported browsers: once statically with ESLint plugins like [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x), and again with real Playwright-based E2E tests.
 
 ## Supporting older browsers
 
-To run es-toolkit on Chrome 80 / Safari 14.1, you need two things:
+With the right bundler configuration, es-toolkit works correctly even in browsers as old as Chrome 51 or Safari 10.
+This requires two pieces of configuration.
 
-1. **Transpilation** of your bundle (including es-toolkit) down to your targets.
-2. **Six polyfills** for the runtime APIs listed above.
+### 1. Converting modern syntax to older syntax (transpilation)
 
-The polyfill set is small — a full `core-js/stable` import is not necessary:
+es-toolkit is published using modern syntax such as optional chaining (`foo?.bar`) and class fields.
 
-<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+Bundlers generally do not transpile dependencies (`node_modules`).
+Add the following configuration so that the modern syntax es-toolkit uses is converted to syntax that older browsers also support.
 
-Import this file once at your application entrypoint, **before** any es-toolkit import.
+#### Vite
 
-::: warning es-toolkit must not be excluded from transpilation
-Build tools often skip `node_modules` when transpiling. es-toolkit ships modern syntax, so it must be **included**. The Vite setup below handles this automatically (Vite transforms all bundled code); for webpack + Babel, scope your `exclude` so es-toolkit stays included.
-:::
-
-### Vite
-
-Set [`build.target`](https://vite.dev/config/build-options.html#build-target) to your oldest browsers:
+Set [`build.target`](https://vite.dev/config/build-options.html#build-target) to the oldest browsers you want to support:
 
 <<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
 
-Vite applies `build.target` to every bundled module, including es-toolkit, so no further configuration is needed.
+Vite applies `build.target` to every module in the bundle, including es-toolkit, so no further configuration is needed.
 
-### webpack + Babel
+#### webpack + Babel
 
-Configure `babel-loader` with `@babel/preset-env` and make sure the `exclude` pattern does not exclude es-toolkit:
+Configure `babel-loader` with `@babel/preset-env`, and make sure the `exclude` pattern does not exclude es-toolkit:
 
 <<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
 
-::: danger `useBuiltIns: 'usage'` does not polyfill es-toolkit by default
-`@babel/preset-env`'s `useBuiltIns: 'usage'` only injects polyfills into files that Babel itself processed. With the usual `exclude: /node_modules/`, Babel never sees es-toolkit's `Object.hasOwn` call, and no polyfill is injected. Either import the polyfill file above at your entrypoint (recommended), or include es-toolkit in your `babel-loader` scope.
-:::
+### 2. Adding modern runtime JavaScript APIs
 
-### Known behavior differences in older browsers
+es-toolkit makes use of modern JavaScript APIs available in recent browsers and runtimes, such as `Array#at` and `structuredClone`. Older browsers do not implement these functions, so to use es-toolkit you need to fill in the implementations.
 
-- **`Error` `cause` is not preserved by `clone` in Chrome 80–92 / Safari 14.1**: the `cause` option of the `Error` constructor is silently ignored by these engines, and polyfilling it would require replacing the global `Error` constructor. Cloned errors simply lack `cause` there.
+Add the polyfills provided by `core-js` as follows:
 
-## ES2015-era browsers (Chrome 51+ / Safari 10+)
+<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
 
-To reach roughly 99.4% of global traffic, use [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). It transpiles with Babel — which, unlike esbuild, can also rewrite the Unicode-property regexes used by string utilities like `words` and `camelCase` — and injects the required core-js polyfills automatically:
+This code must be loaded at your application entrypoint, before es-toolkit is imported.
+
+### Caveats
+
+#### 1. Supporting very old browsers like Chrome 51 or Safari 10 in Vite requires an extra plugin
+
+Vite uses esbuild by default, which does not support very old browsers.
+To support them, transpile your source code with Babel using the [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) plugin:
 
 <<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
 
-Two Web APIs live outside core-js, so `plugin-legacy` does not provide them: `structuredClone` and `AbortController` (used by `debounce` and `delay`). Import this file once at your entrypoint instead of the minimal set above:
+#### 2. `es-toolkit/bigint` is only available in browsers that support BigInt
 
-<<< @/../tests/browser-compat/polyfills/legacy.mjs{js}
-
-Besides `es-toolkit/bigint`, one group of functions keeps a higher floor: the word-splitting functions of `es-toolkit/compat` (`words`, `camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) build their Unicode-property regex at call time, which no transpiler can rewrite — calling them requires Chrome 64+ / Safari 11.1+. Importing them is safe, and the same-named functions of the main `es-toolkit` module use a regex literal that Babel rewrites, so they work all the way down.
-
-::: warning `es-toolkit/bigint` is excluded from this tier
-`BigInt` has no ES2015 equivalent — its literals cannot be transpiled and its runtime cannot be polyfilled. As long as your app does not import `es-toolkit/bigint` (or pass `BigInt` values to functions like `sum`), the bigint code never enters your bundle and the legacy build works. Everything else — including `es-toolkit`, `es-toolkit/compat`, and `es-toolkit/fp` — is covered.
-:::
-
-::: info How far this tier is verified
-CI runs this exact setup in real Chrome 51. Safari 10–13 cannot be automated on Linux CI, so the Safari side of this tier rests on Babel/core-js transpilation guarantees rather than on direct test runs. The WebKit 14.1 lane verifies the modern half of the dual bundle.
-:::
-
-## How this is verified
-
-The [`tests/browser-compat`](https://github.com/toss/es-toolkit/tree/main/tests/browser-compat) suite extracts every `@example` from the JSDoc of every function (1,300+ cases), bundles the published `dist` files with each of the setups above, and runs them in real browsers in CI:
-
-| Setup                          | Browsers               |
-| ------------------------------ | ---------------------- |
-| No transpilation, no polyfills | Chrome 98, WebKit 15.4 |
-| Vite setup above               | Chrome 80, WebKit 14.1 |
-| webpack setup above            | Chrome 80, WebKit 14.1 |
-| `plugin-legacy` setup above    | Chrome 51, WebKit 14.1 |
-
-The configuration files shown on this page are the exact files used by the CI suite, so the documentation cannot drift from what is actually tested.
+JavaScript's BigInt is a newly added value type, so it can be neither transpiled nor polyfilled. If you use `es-toolkit/bigint`, you can only support Chrome 67+ and Safari 14+.
