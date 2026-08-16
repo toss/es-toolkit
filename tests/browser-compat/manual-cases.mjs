@@ -15,6 +15,16 @@ export const manualCases = [
     },
   },
   {
+    id: 'manual:main/deepFreeze',
+    async: false,
+    run: function (__ns, __assertEq) {
+      const { deepFreeze } = __ns.main;
+      const frozen = deepFreeze({ user: { name: 'Alex', age: 20 } });
+      __assertEq(Object.isFrozen(frozen), true);
+      __assertEq(Object.isFrozen(frozen.user), true);
+    },
+  },
+  {
     id: 'manual:main/round',
     async: false,
     run: function (__ns, __assertEq) {

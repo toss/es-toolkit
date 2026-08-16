@@ -7,6 +7,7 @@
     "math:math/randomInt#1": "example intentionally demonstrates a thrown error",
     "math:math/randomInt#2": "example intentionally demonstrates a thrown error",
     "math:math/round#0": "example intentionally demonstrates a thrown error",
+    "object:object/deepFreeze#0": "example intentionally demonstrates a thrown error",
     "util:util/invariant#0": "example intentionally demonstrates a thrown error",
     "util:util/invariant#1": "example intentionally demonstrates a thrown error",
     "util:util/invariant#2": "example intentionally demonstrates a thrown error",
