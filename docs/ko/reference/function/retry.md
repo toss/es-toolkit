@@ -52,18 +52,23 @@ const data4 = await retry(
 );
 
 // 에러 기반 재시도 간격 (예: Retry-After 헤더 활용)
+class RateLimitError extends Error {
+  constructor(public retryAfter: number) {
+    super('Rate limited');
+  }
+}
+
 const data5 = await retry(
   async () => {
-    return await fetchData();
+    const response = await fetch('/api/data');
+    if (response.status === 429) {
+      throw new RateLimitError(Number(response.headers.get('Retry-After') ?? 1));
+    }
+    return response.json();
   },
   {
     retries: 3,
-    delay: (_attempts, error) => {
-      if ((error as { status?: number }).status === 429) {
-        return (error as { retryAfter: number }).retryAfter * 1000;
-      }
-      return 1000;
-    },
+    delay: (_attempts, error) => (error instanceof RateLimitError ? error.retryAfter * 1000 : 1000),
   }
 );
 ```
