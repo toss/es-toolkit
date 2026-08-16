@@ -389,7 +389,7 @@ export function partial<T1, T2, T3, T4, R>(
  * @returns A new function that takes the first and third arguments and returns the result of the original function.
  *
  * @example
- * const multiply = (x: number, y: number, z: number, w: number) => x * y * z * w;
+ * const multiply = (x: number, y: number, z: number) => x * y * z;
  * const multiplyWithPlaceholder = partial(multiply, partial.placeholder, 2, 3);
  * console.log(multiplyWithPlaceholder(4)); // => 24
  */
@@ -654,7 +654,7 @@ export function partial<TS extends any[], T1, R>(func: (arg1: T1, ...args: TS) =
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
- * const greetWithHello = partial(greet, 'Hello', '!');
+ * const greetWithHello = partial(greet, 'Hello', partial.placeholder, '!');
  * console.log(greetWithHello('John')); // => 'Hello, John!'
  */
 export function partial<TS extends any[], T1, T2, R>(

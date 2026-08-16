@@ -57,7 +57,8 @@
   "workspaces": [
     "docs",
     "benchmarks",
-    "tests/types"
+    "tests/types",
+    "tests/browser-compat"
   ],
   "scripts": {
     "bench": "yarn workspace benchmarks bench",
@@ -89,6 +90,8 @@
     "broken-link-checker": "0.7.8",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-compat": "^7.0.2",
+    "eslint-plugin-es-x": "^10.0.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",

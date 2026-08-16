@@ -1,0 +1,139 @@
+name: Browser Compat
+
+# Runs every JSDoc @example (tests/browser-compat) against the built dist in
+# the oldest browsers of each support tier from docs/browser-support.md:
+#
+#   - native lane:      Chrome 98 + WebKit 15.4 (Playwright 1.22.2) —
+#                       es-toolkit as published, no transpilation, no
+#                       polyfills.
+#   - downlevel lanes:  Chrome 80 + WebKit 14.1 (Playwright 1.9.2) — the Vite
+#                       and Webpack setups documented for that tier.
+#   - vite-legacy lane: Chrome 51 + WebKit 14.1 — the @vitejs/plugin-legacy
+#                       setup for the ES2015 tier, with the bigint-free case
+#                       set. Chrome 51 predates headless mode, so it runs
+#                       headed under Xvfb, on the bionic image with its
+#                       GConf/GTK2 dependencies installed via apt.
+#
+# Old WebKit builds are no longer downloadable from the Playwright CDN
+# (revisions <= 1440 were purged), so all WebKit lanes run inside the
+# browser-bundled, digest-pinned mcr.microsoft.com/playwright images. Old
+# Chrome builds come from the chromium-browser-snapshots archive and run
+# inside the same containers, whose Ubuntu 18.04/20.04 userland matches those
+# binaries.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/browser-compat/**'
+      - '.github/workflows/browser-compat.yml'
+  workflow_dispatch:
+
+permissions: read-all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # mcr.microsoft.com/playwright:v1.22.2-focal (WebKit 15.4)
+  IMAGE_WEBKIT_15_4: mcr.microsoft.com/playwright@sha256:9b3f813c7f76c0f562244b3c99423755405cd43b413941f04d99f20ff604286c
+  # mcr.microsoft.com/playwright:v1.9.2-focal (WebKit 14.1)
+  IMAGE_WEBKIT_14_1: mcr.microsoft.com/playwright@sha256:1e82d38d8f6a2a05f1e02dfd24de14adac78f90ac302a26385bcd1c84ff8bb92
+  # mcr.microsoft.com/playwright:v1.9.2-bionic (WebKit 14.1) — the vite-legacy
+  # lane needs Ubuntu 18.04 because Chrome 51 links against libgconf, which
+  # was dropped from Ubuntu 20.04.
+  IMAGE_WEBKIT_14_1_BIONIC: mcr.microsoft.com/playwright@sha256:fce001fb98807ad8060cc3e5f34423a023e52ce71f4142186f70f81d321d00db
+  # chromium-browser-snapshots positions (nearest archived builds to the
+  # Chrome 51 / 80.0.3987 / 98.0.4758 branch points)
+  CHROME_51_POSITION: '386290'
+  CHROME_80_POSITION: '722276'
+  CHROME_98_POSITION: '950363'
+
+jobs:
+  browser-compat:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - fixture: native
+            chrome-position-var: CHROME_98_POSITION
+            webkit-image-var: IMAGE_WEBKIT_15_4
+            playwright-version: 1.22.2
+          - fixture: vite-polyfill
+            chrome-position-var: CHROME_80_POSITION
+            webkit-image-var: IMAGE_WEBKIT_14_1
+            playwright-version: 1.9.2
+          - fixture: webpack
+            chrome-position-var: CHROME_80_POSITION
+            webkit-image-var: IMAGE_WEBKIT_14_1
+            playwright-version: 1.9.2
+          - fixture: vite-legacy
+            chrome-position-var: CHROME_51_POSITION
+            webkit-image-var: IMAGE_WEBKIT_14_1_BIONIC
+            playwright-version: 1.9.2
+            # Chrome 51 predates headless mode; run it headed under Xvfb.
+            chrome-xvfb: '1'
+            # Chrome 51 links against GConf and GTK2, which the Playwright
+            # image does not ship (bionic packages are still served from
+            # archive.ubuntu.com while 18.04 is in ESM).
+            container-prelaunch: >-
+              apt-get update -qq
+              && apt-get install -y -qq libgconf-2-4 libgtk2.0-0 > /dev/null
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: corepack enable
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+      - run: yarn install
+
+      - name: Build dist
+        run: yarn build
+
+      - name: Generate cases and validate in Node
+        run: |
+          yarn workspace browser-compat-tests generate
+          yarn workspace browser-compat-tests node-check
+
+      - name: Build fixture
+        run: |
+          yarn workspace browser-compat-tests build:${{ matrix.fixture }}
+          if [ "${{ matrix.fixture }}" = "webpack" ]; then
+            cp tests/browser-compat/fixtures/webpack/index.html tests/browser-compat/dist-fixtures/webpack/index.html
+          fi
+
+      - name: Cache Chromium snapshot
+        id: chromium-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: chrome-linux
+          key: chromium-${{ env[matrix.chrome-position-var] }}
+
+      - name: Download Chromium snapshot
+        if: steps.chromium-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL -o chrome.zip "https://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/${{ env[matrix.chrome-position-var] }}/chrome-linux.zip"
+          unzip -q chrome.zip
+          rm chrome.zip
+
+      - name: Pull WebKit container image
+        run: docker pull ${{ env[matrix.webkit-image-var] }}
+
+      - name: Run in Chromium
+        env:
+          CONTAINER_PRELAUNCH: ${{ matrix.container-prelaunch || '' }}
+        run: |
+          CHROME_DIR="$PWD/chrome-linux" CHROME_XVFB=${{ matrix.chrome-xvfb || '' }} DOCKER_IMAGE=${{ env[matrix.webkit-image-var] }} \
+            yarn workspace browser-compat-tests run-browsers --fixture ${{ matrix.fixture }} --browser docker-chromium
+
+      - name: Run in WebKit
+        # Run even when the Chromium lane failed, so one CI round reports both.
+        if: ${{ !cancelled() }}
+        run: |
+          DOCKER_IMAGE=${{ env[matrix.webkit-image-var] }} PLAYWRIGHT_VERSION=${{ matrix.playwright-version }} \
+            yarn workspace browser-compat-tests run-browsers --fixture ${{ matrix.fixture }} --browser docker-webkit

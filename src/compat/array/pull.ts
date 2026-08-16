@@ -51,7 +51,7 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5, 2, 4];
- * pull(numbers, [2, 4]);
+ * pull(numbers, 2, 4);
  * console.log(numbers); // [1, 3, 5]
  */
 export function pull<T>(arr: T[], ...valuesToRemove: readonly unknown[]): T[] {
