@@ -9,8 +9,8 @@ import { times } from '../util/times.ts';
  *
  * Non-object values are coerced to objects.
  *
- * @param {object} object The object to query.
- * @returns {string[]} Returns the array of property names.
+ * @param object The object to query.
+ * @returns Returns the array of property names.
  * @example
  * function Foo() {
  *   this.a = 1;

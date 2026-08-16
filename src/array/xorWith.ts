@@ -9,10 +9,10 @@ import { unionWith } from './unionWith.ts';
  *
  * @template T - Type of elements in the input arrays.
  *
- * @param {T[]} arr1 - The first array.
- * @param {T[]} arr2 - The second array.
- * @param {(item1: T, item2: T) => boolean} areElementsEqual - The custom equality function to compare elements.
- * @returns {T[]} An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the custom equality function.
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @param areElementsEqual - The custom equality function to compare elements.
+ * @returns An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the custom equality function.
  *
  * @example
  * // Custom equality function for objects with an 'id' property

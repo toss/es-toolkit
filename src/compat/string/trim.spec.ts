@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { trim as trimLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { trim } from './trim';
 import { whitespace } from '../_internal/whitespace';
 
@@ -82,9 +81,5 @@ describe('trim', () => {
     expect(func(string, ['rl', 'd', 'he', 'l'])).toBe(expected);
     expect(func(string, ['he', 'd', 'lr'])).toBe(expected);
     expect(func(string, ['d', 'l', 'r', 'e', 'h'])).toBe(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(trim).toEqualTypeOf<typeof trimLodash>();
   });
 });

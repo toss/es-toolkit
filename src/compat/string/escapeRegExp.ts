@@ -4,8 +4,8 @@ import { toString } from '../util/toString.ts';
 /**
  * Escapes the RegExp special characters "^", "$", "\\", ".", "*", "+", "?", "(", ")", "[", "]", "{", "}", and "|" in `str`.
  *
- * @param {string} str The string to escape.
- * @returns {string} Returns the escaped string.
+ * @param str The string to escape.
+ * @returns Returns the escaped string.
  *
  * @example
  * import { escapeRegExp } from 'es-toolkit/string';

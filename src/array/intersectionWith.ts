@@ -8,11 +8,11 @@
  *
  * @template T - The type of elements in the first array.
  * @template U - The type of elements in the second array.
- * @param {T[]} firstArr - The first array to compare.
- * @param {U[]} secondArr - The second array to compare.
- * @param {(x: T, y: U) => boolean} areItemsEqual - A custom function to determine if two elements are equal.
+ * @param firstArr - The first array to compare.
+ * @param secondArr - The second array to compare.
+ * @param areItemsEqual - A custom function to determine if two elements are equal.
  * This function takes two arguments, one from each array, and returns `true` if the elements are considered equal, and `false` otherwise.
- * @returns {T[]} A new array containing the elements from the first array that have corresponding matches in the second array according to the custom equality function.
+ * @returns A new array containing the elements from the first array that have corresponding matches in the second array according to the custom equality function.
  *
  * @example
  * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];

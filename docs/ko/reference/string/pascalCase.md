@@ -51,7 +51,7 @@ pascalCase('user@email.com'); // 'UserEmailCom'
 
 (`string`): 파스칼 표기법으로 변환된 새로운 문자열을 반환해요.
 
-## 데모
+## 사용해보기
 
 ::: sandpack
 

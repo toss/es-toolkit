@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { pick as pickLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { pick } from './pick';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
@@ -102,6 +101,11 @@ describe('compat/pick', () => {
     });
   });
 
+  it('should pick a key with undefined value over a path', () => {
+    const object = { 'a.b': undefined, a: { b: 2 } };
+    expect(pick(object, 'a.b')).toEqual({ 'a.b': undefined });
+  });
+
   it('should coerce `paths` to strings', () => {
     expect(pick({ 0: 'a', 1: 'b' }, 0)).toEqual({ 0: 'a' });
   });
@@ -138,9 +142,5 @@ describe('compat/pick', () => {
     const result = pick(obj, ['a', 'b']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(pick).toEqualTypeOf<typeof pickLodash>();
   });
 });

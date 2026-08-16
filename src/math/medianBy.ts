@@ -11,9 +11,9 @@ import { median } from './median.ts';
  * If the array is empty, this function returns `NaN`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items An array to calculate the median.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {number} The median of all the numbers as determined by the `getValue` function.
+ * @param items An array to calculate the median.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The median of all the numbers as determined by the `getValue` function.
  *
  * @example
  * medianBy([{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }], x => x.a); // Returns: 3

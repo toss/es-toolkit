@@ -24,7 +24,7 @@ export class Mutex {
 
   /**
    * Checks if the mutex is currently locked.
-   * @returns {boolean} True if the mutex is locked, false otherwise.
+   * @returns True if the mutex is locked, false otherwise.
    *
    * @example
    * const mutex = new Mutex();
@@ -40,7 +40,7 @@ export class Mutex {
 
   /**
    * Acquires the mutex, blocking if necessary until it is available.
-   * @returns {Promise<void>} A promise that resolves when the mutex is acquired.
+   * @returns A promise that resolves when the mutex is acquired.
    *
    * @example
    * const mutex = new Mutex();

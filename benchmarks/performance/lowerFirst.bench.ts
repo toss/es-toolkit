@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { lowerFirst as lowerFirstToolkit_ } from 'es-toolkit';
-import { lowerFirst as lowerFirstCompatToolkit_ } from 'es-toolkit/compat';
-import { lowerFirst as lowerFirstLodash_ } from 'lodash';
+import { lowerFirst as lowerFirstToolkit } from 'es-toolkit';
+import { lowerFirst as lowerFirstCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const lowerFirstToolkit = lowerFirstToolkit_;
-const lowerFirstCompatToolkit = lowerFirstCompatToolkit_;
-const lowerFirstLodash = lowerFirstLodash_;
+const { lowerFirst: lowerFirstLodash } = lodash;
 
 describe('lowerFirst', () => {
   describe('short string', () => {

@@ -6,9 +6,9 @@
  *
  * @template T - The type of elements in the input Set.
  * @template U - The type of elements in the output Set.
- * @param {Set<T>} set - The Set to transform.
- * @param {(value: T, value2: T, set: Set<T>) => U} getNewValue - A function that generates a new value from an element.
- * @returns {Set<U>} A new Set with transformed elements.
+ * @param set - The Set to transform.
+ * @param getNewValue - A function that generates a new value from an element.
+ * @returns A new Set with transformed elements.
  *
  * @example
  * const set = new Set([1, 2, 3]);

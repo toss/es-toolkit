@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { omit as omitLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { omit } from './omit';
 import { objectProto } from '../_internal/objectProto';
 import { stringProto } from '../_internal/stringProto';
@@ -35,6 +34,14 @@ describe('omit', () => {
     const actual = omit(object, [['a.b']]);
 
     expect(actual).toEqual({ a: { b: 2 } });
+  });
+
+  it('should treat a key array as a single deep path', () => {
+    const object = { a: { b: 1, c: 2 }, d: 3 };
+    // @ts-expect-error - path is a string
+    expect(omit(object, [['a', 'b']])).toEqual({ a: { c: 2 }, d: 3 });
+    // @ts-expect-error - path is a string
+    expect(omit(object, [['a', 'b'], 'd'])).toEqual({ a: { c: 2 } });
   });
 
   it('should omit a key over a path', () => {
@@ -109,9 +116,5 @@ describe('omit', () => {
     expect('2' in result).toBe(false);
     expect('3' in result).toBe(false);
     expect('4' in result).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(omit).toEqualTypeOf<typeof omitLodash>();
   });
 });

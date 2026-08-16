@@ -21,13 +21,13 @@ type ThrottleSettingsLeading = (ThrottleSettings & { leading: true }) | Omit<Thr
  * within the wait time will not trigger the execution of the original function.
  *
  * @template F - The type of function.
- * @param {F} func - The function to throttle.
- * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @param {ThrottleOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the throttled function.
- * @param {boolean} options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
- * @param {boolean} options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
- * @returns {(...args: Parameters<F>) => void} A new throttled function that accepts the same parameters as the original function.
+ * @param func - The function to throttle.
+ * @param throttleMs - The number of milliseconds to throttle executions to.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the throttled function.
+ * @param options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
+ * @param options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
+ * @returns A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {
@@ -57,13 +57,13 @@ export function throttle<T extends (...args: any) => any>(
  * within the wait time will not trigger the execution of the original function.
  *
  * @template F - The type of function.
- * @param {F} func - The function to throttle.
- * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @param {ThrottleOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the throttled function.
- * @param {boolean} options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
- * @param {boolean} options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
- * @returns {(...args: Parameters<F>) => void} A new throttled function that accepts the same parameters as the original function.
+ * @param func - The function to throttle.
+ * @param throttleMs - The number of milliseconds to throttle executions to.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the throttled function.
+ * @param options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
+ * @param options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
+ * @returns A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {
@@ -93,13 +93,13 @@ export function throttle<T extends (...args: any) => any>(
  * within the wait time will not trigger the execution of the original function.
  *
  * @template F - The type of function.
- * @param {F} func - The function to throttle.
- * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @param {ThrottleOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the throttled function.
- * @param {boolean} options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
- * @param {boolean} options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
- * @returns {(...args: Parameters<F>) => void} A new throttled function that accepts the same parameters as the original function.
+ * @param func - The function to throttle.
+ * @param throttleMs - The number of milliseconds to throttle executions to.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the throttled function.
+ * @param options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
+ * @param options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
+ * @returns A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {

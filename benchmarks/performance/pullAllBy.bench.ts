@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { pullAllBy as pullAllByToolkitCompat_ } from 'es-toolkit/compat';
-import { pullAllBy as pullAllByLodash_ } from 'lodash';
+import { pullAllBy as pullAllByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const pullAllByToolkitCompat = pullAllByToolkitCompat_;
-const pullAllByLodash = pullAllByLodash_;
+const { pullAllBy: pullAllByLodash } = lodash;
 
 const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }, { x: 2 }, { x: 3 }];
 

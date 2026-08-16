@@ -7,11 +7,11 @@
  *
  * @template T - The type of elements in the array.
  * @template {T} U - The type being filtered for.
- * @param {T[]} arr - The array to partition.
- * @param {(value: T, index: number, array: readonly T[]) => value is U} isInTruthy - A type guard that determines whether an
+ * @param arr - The array to partition.
+ * @param isInTruthy - A type guard that determines whether an
  * element should be placed in the truthy array. The function is called with each element
  * of the array and its index.
- * @returns {[U[], Exclude<T, U>[]]} A tuple containing two arrays: the first array contains elements for
+ * @returns A tuple containing two arrays: the first array contains elements for
  * which the predicate returned true, and the second array contains elements for which the
  * predicate returned false.
  *
@@ -34,13 +34,14 @@ export function partition<T, U extends T>(
  * the second array contains elements for which the predicate function returns false.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to partition.
- * @param {(value: T, index: number) => boolean} isInTruthy - A predicate function that determines
- * whether an element should be placed in the truthy array. The function is called with each
+ * @param arr - The array to partition.
+ * @param isInTruthy - A predicate function that determines
+ * whether an element should be placed in the truthy array. An element is placed in the truthy
+ * array when the function returns a truthy value. The function is called with each
  * element of the array and its index.
- * @returns {[T[], T[]]} A tuple containing two arrays: the first array contains elements for
- * which the predicate returned true, and the second array contains elements for which the
- * predicate returned false.
+ * @returns A tuple containing two arrays: the first array contains elements for
+ * which the predicate returned a truthy value, and the second array contains elements for which the
+ * predicate returned a falsy value.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];
@@ -50,11 +51,11 @@ export function partition<T, U extends T>(
  */
 export function partition<T>(
   arr: readonly T[],
-  isInTruthy: (value: T, index: number, array: readonly T[]) => boolean
+  isInTruthy: (value: T, index: number, array: readonly T[]) => unknown
 ): [truthy: T[], falsy: T[]];
 export function partition<T>(
   arr: readonly T[],
-  isInTruthy: (value: T, index: number, array: readonly T[]) => boolean
+  isInTruthy: (value: T, index: number, array: readonly T[]) => unknown
 ): [truthy: T[], falsy: T[]] {
   const truthy: T[] = [];
   const falsy: T[] = [];

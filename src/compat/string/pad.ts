@@ -1,14 +1,15 @@
-import { pad as padToolkit } from '../../string/pad.ts';
+import { createPadding, stringSize } from '../_internal/createPadding.ts';
+import { toInteger } from '../util/toInteger.ts';
 import { toString } from '../util/toString.ts';
 
 /**
  * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
  * If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.
  *
- * @param {string} str - The string to pad.
- * @param {number} [length] - The length of the resulting string once padded.
- * @param {string} [chars] - The character(s) to use for padding.
- * @returns {string} - The padded string, or the original string if padding is not required.
+ * @param str - The string to pad.
+ * @param [length] - The length of the resulting string once padded.
+ * @param [chars] - The character(s) to use for padding.
+ * @returns The padded string, or the original string if padding is not required.
  *
  * @example
  * const result1 = pad('abc', 8);         // result will be '  abc   '
@@ -23,10 +24,10 @@ export function pad(str?: string, length?: number, chars?: string): string;
  * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
  * If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.
  *
- * @param {string} str - The string to pad.
- * @param {number} [length] - The length of the resulting string once padded.
- * @param {string} [chars] - The character(s) to use for padding.
- * @returns {string} - The padded string, or the original string if padding is not required.
+ * @param str - The string to pad.
+ * @param [length] - The length of the resulting string once padded.
+ * @param [chars] - The character(s) to use for padding.
+ * @returns The padded string, or the original string if padding is not required.
  *
  * @example
  * const result1 = pad('abc', 8);         // result will be '  abc   '
@@ -35,6 +36,17 @@ export function pad(str?: string, length?: number, chars?: string): string;
  * const result4 = pad('abc', 2);         // result will be 'abc'
  *
  */
-export function pad(str: any, length?: any, chars?: any): string {
-  return padToolkit(toString(str), length, chars);
+export function pad(str?: any, length: any = 0, chars: any = ' '): string {
+  const value = toString(str);
+  const targetLength = toInteger(length);
+  const strLength = stringSize(value);
+
+  if (targetLength <= strLength) {
+    return value;
+  }
+
+  const mid = (targetLength - strLength) / 2;
+  const padChars = `${chars}`;
+
+  return createPadding(Math.floor(mid), padChars) + value + createPadding(Math.ceil(mid), padChars);
 }

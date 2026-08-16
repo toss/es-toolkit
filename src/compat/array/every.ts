@@ -2,19 +2,17 @@ import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
-import { property } from '../object/property.ts';
+import { iteratee } from '../compat.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Checks if all elements in a collection pass the predicate check.
  * The predicate is invoked with three arguments: (value, index|key, collection).
  *
  * @template T - The type of elements in the collection
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over
- * @param {ListIterateeCustom<T, boolean>} [predicate=identity] - The function invoked per iteration
- * @returns {boolean} Returns true if all elements pass the predicate check, else false
+ * @param collection - The collection to iterate over
+ * @param [predicate=identity] - The function invoked per iteration
+ * @returns Returns true if all elements pass the predicate check, else false
  *
  * @example
  * // Using a function predicate
@@ -44,9 +42,9 @@ export function every<T>(
  * The predicate is invoked with three arguments: (value, key, object).
  *
  * @template T - The type of the object
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {ObjectIterateeCustom<T, boolean>} [predicate=identity] - The function invoked per iteration
- * @returns {boolean} Returns true if all elements pass the predicate check, else false
+ * @param collection - The object to iterate over
+ * @param [predicate=identity] - The function invoked per iteration
+ * @returns Returns true if all elements pass the predicate check, else false
  *
  * @example
  * // Using a function predicate
@@ -78,12 +76,10 @@ export function every<T extends object>(
  * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to check through.
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to check through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {PropertyKey} propertyToCheck - The property name to check.
- * @param {unknown} guard - Enables use as an iteratee for methods like `_.map`.
- * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
+ * @param collection - The source array or object to check through.
+ * @param [doesMatch] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [guard] - Enables use as an iteratee for methods like `_.map`.
+ * @returns `true` if every property value has the specified property, or `false` if at least one does not match.
  *
  * @example
  * // Using a property name
@@ -92,54 +88,28 @@ export function every<T extends object>(
  * console.log(result); // true
  */
 export function every<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
   doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   guard?: unknown
 ): boolean {
-  if (!source) {
+  if (!collection) {
     return true;
   }
 
-  if (guard && isIterateeCall(source, doesMatch, guard)) {
+  if (guard && isIterateeCall(collection, doesMatch, guard)) {
     doesMatch = undefined;
   }
 
-  if (!doesMatch) {
-    doesMatch = identity;
-  }
+  const predicate = iteratee(doesMatch ?? identity);
 
-  let predicate: (value: any, index: number, collection: any) => boolean;
-
-  switch (typeof doesMatch) {
-    case 'function': {
-      predicate = doesMatch as any;
-      break;
-    }
-    case 'object': {
-      if (Array.isArray(doesMatch) && doesMatch.length === 2) {
-        const key = doesMatch[0];
-        const value = doesMatch[1];
-        predicate = matchesProperty(key, value);
-      } else {
-        predicate = matches(doesMatch);
-      }
-      break;
-    }
-    case 'symbol':
-    case 'number':
-    case 'string': {
-      predicate = property(doesMatch);
-    }
-  }
-
-  if (!isArrayLike(source)) {
-    const keys = Object.keys(source) as Array<keyof typeof source>;
+  if (!isArrayLike(collection)) {
+    const keys = Object.keys(collection) as Array<keyof typeof collection>;
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
-      const value = source[key];
+      const value = collection[key];
 
-      if (!predicate(value, key, source)) {
+      if (!predicate(value, key, collection)) {
         return false;
       }
     }
@@ -147,8 +117,8 @@ export function every<T>(
     return true;
   }
 
-  for (let i = 0; i < source.length; i++) {
-    if (!predicate((source as ArrayLike<T>)[i], i, source)) {
+  for (let i = 0; i < collection.length; i++) {
+    if (!predicate((collection as ArrayLike<T>)[i], i, collection)) {
       return false;
     }
   }

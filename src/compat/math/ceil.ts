@@ -3,9 +3,9 @@ import { decimalAdjust } from '../_internal/decimalAdjust.ts';
 /**
  * Computes number rounded up to precision.
  *
- * @param {number | string} number The number to round up.
- * @param {number | string} precision The precision to round up to.
- * @returns {number} Returns the rounded up number.
+ * @param number The number to round up.
+ * @param precision The precision to round up to.
+ * @returns Returns the rounded up number.
  *
  * @example
  * ceil(4.006); // => 5

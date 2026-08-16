@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { last as lastLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { args } from '../_internal/args';
 import { last } from '../index';
 
@@ -48,7 +47,10 @@ describe('last', () => {
     expect(last(args)).toBe(3);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(last).toEqualTypeOf<typeof lastLodash>();
+  it('should ignore negative index properties when the array is empty', () => {
+    const array: number[] = [];
+    array['-1'] = 1;
+
+    expect(last(array)).toBe(undefined);
   });
 });

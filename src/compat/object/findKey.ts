@@ -12,9 +12,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * arrays, or strings.
  *
  * @template T - The type of the object.
- * @param {T | null | undefined} obj - The object to inspect.
- * @param {ObjectIteratee<T>} predicate - The predicate to match.
- * @returns {string | undefined} Returns the key of the matched element, else `undefined`.
+ * @param obj - The object to inspect.
+ * @param predicate - The predicate to match.
+ * @returns Returns the key of the matched element, else `undefined`.
  */
 export function findKey<T>(obj: T | null | undefined, predicate?: ObjectIteratee<T>): string | undefined {
   if (!isObject(obj)) {

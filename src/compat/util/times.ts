@@ -4,9 +4,9 @@ import { toInteger } from './toInteger.ts';
  * Invokes the iteratee function n times, returning an array of the results.
  *
  * @template T The return type of the iteratee function.
- * @param {number} n - The number of times to invoke iteratee.
- * @param {(num: number) => T} iteratee - The function to invoke for each index.
- * @returns {T[]} An array containing the results of invoking iteratee n times.
+ * @param n - The number of times to invoke iteratee.
+ * @param iteratee - The function to invoke for each index.
+ * @returns An array containing the results of invoking iteratee n times.
  * @example
  * times(3, (i) => i * 2); // => [0, 2, 4]
  * times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']
@@ -16,8 +16,8 @@ export function times<T>(n: number, iteratee: (num: number) => T): T[];
 /**
  * Invokes the default iteratee function n times, returning an array of indices.
  *
- * @param {number} n - The number of times to invoke the default iteratee.
- * @returns {number[]} An array containing indices from 0 to n-1.
+ * @param n - The number of times to invoke the default iteratee.
+ * @returns An array containing indices from 0 to n-1.
  * @example
  * times(3); // => [0, 1, 2]
  */
@@ -27,9 +27,9 @@ export function times(n: number): number[];
  * Invokes the getValue function n times, returning an array of the results.
  *
  * @template R The return type of the getValue function.
- * @param {number} n - The number of times to invoke getValue.
- * @param {(index: number) => R} getValue - The function to invoke for each index.
- * @returns {R[]} An array containing the results of invoking getValue n times.
+ * @param n - The number of times to invoke getValue.
+ * @param getValue - The function to invoke for each index.
+ * @returns An array containing the results of invoking getValue n times.
  * @example
  * times(3, (i) => i * 2); // => [0, 2, 4]
  * times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']

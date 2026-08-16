@@ -1,11 +1,11 @@
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
  *
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @param {number} [n=0] - The index of the element to return.
+ * @param array - The array to query.
+ * @param [n=0] - The index of the element to return.
  * @return {T | undefined} Returns the nth element of `array`.
  *
  * @example
@@ -13,7 +13,7 @@ import { toInteger } from '../util/toInteger.ts';
  * nth([1, 2, 3], -1); // => 3
  */
 export function nth<T>(array: ArrayLike<T> | null | undefined, n = 0): T | undefined {
-  if (!isArrayLikeObject(array) || array.length === 0) {
+  if (!isArrayLike(array) || array.length === 0) {
     return undefined;
   }
 

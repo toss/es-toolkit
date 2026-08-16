@@ -10,9 +10,9 @@ import { iteratee } from '../util/iteratee.ts';
  * The predicate is invoked with one argument: (value).
  *
  * @template T, U
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {(value: T) => value is U} callback - The function invoked per iteration.
- * @returns {[U[], Array<Exclude<T, U>>]} Returns the array of grouped elements.
+ * @param collection - The collection to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the array of grouped elements.
  *
  * @example
  * partition([1, 2, 3, 4], n => n % 2 === 0);
@@ -29,9 +29,9 @@ export function partition<T, U extends T>(
  * The predicate is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {((value: T) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T>} callback - The function invoked per iteration.
- * @returns {[T[], T[]]} Returns the array of grouped elements.
+ * @param collection - The collection to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the array of grouped elements.
  *
  * @example
  * partition([1, 2, 3, 4], n => n % 2 === 0);
@@ -45,9 +45,9 @@ export function partition<T>(collection: ArrayLike<T> | null | undefined, callba
  * The predicate is invoked with one argument: (value).
  *
  * @template T
- * @param {T | null | undefined} collection - The collection to iterate over.
- * @param {((value: T[keyof T]) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T[keyof T]>} callback - The function invoked per iteration.
- * @returns {[Array<T[keyof T]>, Array<T[keyof T]>]} Returns the array of grouped elements.
+ * @param collection - The collection to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the array of grouped elements.
  *
  * @example
  * partition({ a: 1, b: 2, c: 3 }, n => n % 2 === 0);
@@ -64,9 +64,9 @@ export function partition<T extends object>(
  * `predicate` returns falsy for. The predicate is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | T | null | undefined} source - The array or object to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] - The function invoked per iteration.
- * @returns {[T[], T[]]} - Returns the array of grouped elements.
+ * @param collection - The array or object to iterate over.
+ * @param [predicate=identity] - The function invoked per iteration.
+ * @returns Returns the array of grouped elements.
  *
  * @example
  * partition([{ a: 1 }, { a: 2 }, { b: 1 }], 'a');
@@ -82,22 +82,22 @@ export function partition<T extends object>(
  * // => [[{ a: 2 }], [{ a: 1 }, { a: 3 }]]
  */
 export function partition<T>(
-  source: ArrayLike<T> | T | null | undefined,
+  collection: ArrayLike<T> | T | null | undefined,
   predicate: ((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey = identity
 ): [T[], T[]] {
-  if (!source) {
+  if (!collection) {
     return [[], []];
   }
 
-  const collection = isArrayLike(source) ? source : Object.values(source);
+  const values = isArrayLike(collection) ? collection : Object.values(collection);
 
   predicate = iteratee(predicate);
 
   const matched: T[] = [];
   const unmatched: T[] = [];
 
-  for (let i = 0; i < collection.length; i++) {
-    const value = collection[i] as T;
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i] as T;
 
     if (predicate(value)) {
       matched.push(value);

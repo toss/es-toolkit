@@ -7,9 +7,9 @@
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to search.
- * @param {(value: V, key: K, map: Map<K, V>) => boolean} doesMatch - A predicate function that tests each entry.
- * @returns {V | undefined} The value of the first entry that satisfies the predicate, or undefined if none found.
+ * @param map - The Map to search.
+ * @param doesMatch - A predicate function that tests each entry.
+ * @returns The value of the first entry that satisfies the predicate, or undefined if none found.
  *
  * @example
  * const map = new Map([

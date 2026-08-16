@@ -4,10 +4,10 @@ import { toString } from '../util/toString.ts';
  * Splits the input string by the specified `separator`
  * and returns a new array containing the split segments.
  *
- * @param {string | null | undefined} [string=''] The string to split.
- * @param {RegExp|string} [separator] The separator pattern to split by.
- * @param {number} [limit] The length to truncate results to.
- * @returns {Array} Returns the string segments.
+ * @param [string=''] The string to split.
+ * @param [separator] The separator pattern to split by.
+ * @param [limit] The length to truncate results to.
+ * @returns Returns the string segments.
  *
  * @example
  * split('a-b-c', '-');
@@ -22,10 +22,10 @@ export function split(string: string | null | undefined, separator?: RegExp | st
  * Splits the input string by the specified `separator`
  * and returns a new array containing the split segments.
  *
- * @param {string | null | undefined} [string=''] The string to split.
- * @param {RegExp|string} [separator] The separator pattern to split by.
- * @param {number} [limit] The length to truncate results to.
- * @returns {Array} Returns the string segments.
+ * @param [string=''] The string to split.
+ * @param [separator] The separator pattern to split by.
+ * @param [limit] The length to truncate results to.
+ * @returns Returns the string segments.
  *
  * @example
  * split('a-b-c', '-');

@@ -50,12 +50,12 @@ import { eq } from '../compat/util/eq.ts';
  * - `yParent`: The parent of the second value `y`.
  * - `stack`: An internal stack (Map) to handle circular references.
  *
- * @param {unknown} a - The first value to compare.
- * @param {unknown} b - The second value to compare.
- * @param {(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void} areValuesEqual - A function to customize the comparison.
+ * @param a - The first value to compare.
+ * @param b - The second value to compare.
+ * @param areValuesEqual - A function to customize the comparison.
  *   If it returns a boolean, that result will be used. If it returns undefined,
  *   the default equality comparison will be used.
- * @returns {boolean} `true` if the values are equal according to the customizer, otherwise `false`.
+ * @returns `true` if the values are equal according to the customizer, otherwise `false`.
  *
  * @example
  * const customizer = (a, b) => {

@@ -4,9 +4,9 @@
  * If `chars` is a string, it should be a single character. To trim a string with multiple characters,
  * provide an array instead.
  *
- * @param {string} str - The string from which trailing characters will be trimmed.
- * @param {string | string[]} chars - The character(s) to remove from the end of the string.
- * @returns {string} - The resulting string after the specified trailing character has been removed.
+ * @param str - The string from which trailing characters will be trimmed.
+ * @param chars - The character(s) to remove from the end of the string.
+ * @returns The resulting string after the specified trailing character has been removed.
  *
  * @example
  * const trimmedStr1 = trimEnd('hello---', '-') // returns 'hello'

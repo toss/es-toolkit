@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { maxBy as maxByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { maxBy } from './maxBy';
 
 describe('maxBy', () => {
@@ -54,7 +53,41 @@ describe('maxBy', () => {
     expect(maxBy(numbers)).toBe(3);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(maxBy).toEqualTypeOf<typeof maxByLodash>();
+  it('should work with string values returned by iteratee', () => {
+    const items = [{ v: 'a' }, { v: 'b' }];
+    const result = maxBy(items, item => item.v);
+    expect(result).toEqual({ v: 'b' });
+  });
+
+  it('should skip NaN values, matching lodash', () => {
+    expect(maxBy([NaN, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, NaN, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is NaN', () => {
+    expect(maxBy([NaN, NaN], x => x)).toBeUndefined();
+  });
+
+  it('should skip symbol values', () => {
+    const sym = Symbol('a');
+    expect(maxBy([sym, 1, 3, 2], x => x)).toBe(3);
+    expect(maxBy([1, sym, 3, 2], x => x)).toBe(3);
+  });
+
+  it('should return undefined when every value is a symbol', () => {
+    expect(maxBy([Symbol('a'), Symbol('b')], x => x)).toBeUndefined();
+  });
+
+  it('should skip null and undefined values, matching lodash', () => {
+    // Negative values so `null` (coerced to 0) would wrongly win as the max on the old code.
+    expect(maxBy([{ a: undefined }, { a: -5 }, { a: null }], 'a')).toEqual({ a: -5 });
+    expect(maxBy([-5, undefined, -3, null], x => x)).toBe(-3);
+  });
+
+  it('should return undefined when the iteratee yields no comparable value', () => {
+    // A missing key makes the iteratee return `undefined` for every element.
+    expect(maxBy([{ a: 1 }, { a: 2 }], 'b')).toBeUndefined();
+    expect(maxBy([{ a: undefined }, { a: undefined }], 'a')).toBeUndefined();
+    expect(maxBy([{ a: null }, { a: null }], 'a')).toBeUndefined();
   });
 });

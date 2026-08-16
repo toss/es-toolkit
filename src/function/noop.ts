@@ -5,6 +5,6 @@
  * @example
  * noop(); // Does nothing
  *
- * @returns {void} This function does not return anything.
+ * @returns This function does not return anything.
  */
 export function noop(): void {}

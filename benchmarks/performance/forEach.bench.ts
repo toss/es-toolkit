@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { forEach as forEachToolkit_ } from 'es-toolkit/compat';
-import { forEach as forEachLodash_ } from 'lodash';
+import { forEach as forEachToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const forEachToolkit = forEachToolkit_;
-const forEachLodash = forEachLodash_;
+const { forEach: forEachLodash } = lodash;
 
 describe('forEach', () => {
   bench('es-toolkit/compat/forEach', () => {

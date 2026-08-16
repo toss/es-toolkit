@@ -115,6 +115,11 @@ describe('fill', () => {
     ]);
   });
 
+  it('should truncate negative fractional `start` and `end` toward zero', () => {
+    expect(fill([1, 2, 3], 'a', -1.5)).toEqual([1, 2, 'a']);
+    expect(fill([1, 2, 3], 'a', 0, -1.5)).toEqual(['a', 'a', 3]);
+  });
+
   it('should work as an iteratee for methods like `_.map`', () => {
     const array = [
       [1, 2],
@@ -126,6 +131,13 @@ describe('fill', () => {
       [0, 0],
       [1, 1],
     ]);
+  });
+
+  it('should work as an iteratee for methods like `_.map` with single-element sub-arrays', () => {
+    const array = [[5]];
+    const actual = array.map(fill);
+
+    expect(actual).toEqual([[0]]);
   });
 
   it('should return an empty array when provided `null` or `undefined`', () => {

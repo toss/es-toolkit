@@ -13,9 +13,9 @@ import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
  * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | object | null | undefined} collection - The array of objects to be sorted.
- * @param {Array<Array<Criterion<T> | Criterion<T>>>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
- * @returns {T[]} - The ascending sorted array.
+ * @param collection - The array of objects to be sorted.
+ * @param criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
+ * @returns he ascending sorted array.
  *
  * @example
  * // Sort an array of objects by 'user' in ascending order and 'age' in descending order.
@@ -38,9 +38,9 @@ import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
  * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {...Array<T | readonly T[] | ListIteratee<T>>} iteratees - The iteratees to sort by.
- * @returns {T[]} Returns the new sorted array.
+ * @param collection - The collection to iterate over.
+ * @param iteratees - The iteratees to sort by.
+ * @returns Returns the new sorted array.
  *
  * @example
  * const users = [
@@ -59,9 +59,9 @@ export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iterat
  * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {...Array<T[keyof T] | readonly Array<T[keyof T]> | ObjectIteratee<T>>} iteratees - The iteratees to sort by.
- * @returns {Array<T[keyof T]>} Returns the new sorted array.
+ * @param collection - The object to iterate over.
+ * @param iteratees - The iteratees to sort by.
+ * @returns Returns the new sorted array.
  *
  * @example
  * const users = {

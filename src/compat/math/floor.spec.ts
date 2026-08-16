@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { floor as floorLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { floor } from './floor';
 
 describe('floor', () => {
@@ -69,6 +68,14 @@ describe('floor', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`floor\` should return \`Infinity\` for infinite values regardless of \`precision\``, () => {
+    expect(floor(Infinity)).toBe(Infinity);
+    expect(floor(Infinity, 2)).toBe(Infinity);
+    expect(floor(-Infinity, 2)).toBe(-Infinity);
+    expect(floor(Infinity, -2)).toBe(Infinity);
+    expect(floor(-Infinity, -2)).toBe(-Infinity);
+  });
+
   it(`\`floor\` should handle edge cases`, () => {
     expect(floor(1.797, 295)).toBe(1.797);
     expect(floor(1.797, -295)).toBe(0);
@@ -77,9 +84,5 @@ describe('floor', () => {
     expect(floor(1.7976931348623157e308, 292)).toBe(NaN);
     expect(floor(5e-324, 323)).toBe(0);
     expect(floor(5e-324, -323)).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(floor).toEqualTypeOf<typeof floorLodash>();
   });
 });

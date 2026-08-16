@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { replace as replaceLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { replace } from './replace';
 
 describe('replace', () => {
@@ -27,9 +26,5 @@ describe('replace', () => {
     // @ts-expect-error
     expect(replace(string)).toBe(string);
     expect(replace(string, 'de')).toBe(string);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(replace).toEqualTypeOf<typeof replaceLodash>();
   });
 });

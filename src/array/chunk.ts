@@ -6,9 +6,9 @@
  * the final sub-array will contain the remaining elements.
  *
  * @template T The type of elements in the array.
- * @param {T[]} arr - The array to be chunked into smaller arrays.
- * @param {number} size - The size of each smaller array. Must be a positive integer.
- * @returns {T[][]} A two-dimensional array where each sub-array has a maximum length of `size`.
+ * @param arr - The array to be chunked into smaller arrays.
+ * @param size - The size of each smaller array. Must be a positive integer.
+ * @returns A two-dimensional array where each sub-array has a maximum length of `size`.
  * @throws {Error} Throws an error if `size` is not a positive integer.
  *
  * @example

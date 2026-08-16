@@ -54,7 +54,7 @@ const result = toMerged(target, source);
 
 (`T & S`): 대상 객체와 소스 객체가 병합된 새로운 객체를 반환해요.
 
-## 데모
+## 사용해보기
 
 ::: sandpack
 

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { toUpper as toUpperToolkitCompat_ } from 'es-toolkit/compat';
-import { toUpper as toUpperLodash_ } from 'lodash';
+import { toUpper as toUpperToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const toUpperToolkitCompat = toUpperToolkitCompat_;
-const toUpperLodash = toUpperLodash_;
+const { toUpper: toUpperLodash } = lodash;
 
 describe('toUpper', () => {
   const basicStrings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

@@ -1,13 +1,14 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Gets the index at which the last occurrence of value is found in array.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
- * @param {T} value - The value to search for.
- * @param {true | number} [fromIndex] - The index to search from or true to search from the end.
- * @returns {number} Returns the index of the matched value, else -1.
+ * @param array - The array to inspect.
+ * @param value - The value to search for.
+ * @param [fromIndex] - The index to search from or true to search from the end.
+ * @returns Returns the index of the matched value, else -1.
  *
  * @example
  * lastIndexOf([1, 2, 1, 2], 2);
@@ -36,19 +37,28 @@ export function lastIndexOf<T>(
 
   const length = array.length;
 
-  let index = (fromIndex as number) ?? length - 1;
-  if (fromIndex != null) {
+  let index = fromIndex === undefined ? length - 1 : toInteger(fromIndex);
+  if (fromIndex !== undefined) {
     index = index < 0 ? Math.max(length + index, 0) : Math.min(index, length - 1);
   }
 
-  // `Array.prototype.lastIndexOf` doesn't find `NaN` values, so we need to handle that case separately.
+  // Not `Array.prototype.lastIndexOf`, which skips holes in sparse arrays. lodash reads a hole
+  // as `undefined`, and indexing does too.
   if (Number.isNaN(searchElement)) {
     for (let i = index; i >= 0; i--) {
       if (Number.isNaN(array[i])) {
         return i;
       }
     }
+
+    return -1;
   }
 
-  return Array.from(array).lastIndexOf(searchElement, index);
+  for (let i = index; i >= 0; i--) {
+    if (array[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
 }

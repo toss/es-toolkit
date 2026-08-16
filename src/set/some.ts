@@ -6,9 +6,9 @@
  * and false otherwise.
  *
  * @template T - The type of elements in the Set.
- * @param {Set<T>} set - The Set to test.
- * @param {(value: T, value2: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
- * @returns {boolean} true if at least one element satisfies the predicate, false otherwise.
+ * @param set - The Set to test.
+ * @param doesMatch - A predicate function that tests each element.
+ * @returns true if at least one element satisfies the predicate, false otherwise.
  *
  * @example
  * const set = new Set([1, 2, 3]);

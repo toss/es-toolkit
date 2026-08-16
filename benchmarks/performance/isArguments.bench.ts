@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { isArguments as isArgumentsToolkit_ } from 'es-toolkit/compat';
-import { isArguments as isArgumentsLodash_ } from 'lodash';
+import { isArguments as isArgumentsToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isArgumentsToolkit = isArgumentsToolkit_;
-const isArgumentsLodash = isArgumentsLodash_;
+const { isArguments: isArgumentsLodash } = lodash;
 
 describe('isArguments', () => {
   bench('es-toolkit/isArguments', () => {

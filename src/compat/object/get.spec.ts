@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { get as getLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { get } from './get';
 import { empties } from '../_internal/empties';
 
@@ -26,6 +25,12 @@ describe('get', () => {
   it('should return undefined if array index number is not provided', () => {
     const obj = { a: [{ b: 1 }] };
     expect(get(obj, 'a[].b')).toBe(undefined);
+  });
+
+  it('should prioritize literal key over path when value is undefined', () => {
+    const object = { 'a.b': undefined, a: { b: 99 } };
+    expect(get(object, 'a.b')).toBe(undefined);
+    expect(get(object, 'a.b', 'default')).toBe('default');
   });
 
   /**
@@ -150,10 +155,6 @@ describe('get', () => {
     expect(get({}, [], 'a')).toBe('a');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(get<unknown>).toEqualTypeOf<typeof getLodash<unknown>>();
-  });
-
   it('should prevent prototype pollution by returning defaultValue for __proto__ access', () => {
     expect(get({ ['__proto__']: {} }, '__proto__', 'defaultValue')).toBe('defaultValue');
     expect(get({ ['__proto__']: {} }, ['__proto__'], 'defaultValue')).toBe('defaultValue');
@@ -163,5 +164,9 @@ describe('get', () => {
   it('should return defaultValue when property value is undefined', () => {
     const object = { '-0': undefined };
     expect(get(object, Object(-0), 'defaultValue')).toBe('defaultValue');
+  });
+
+  it('should read empty-string keys produced by consecutive dots', () => {
+    expect(get({ a: { '': { b: 1 } } }, 'a..b')).toBe(1);
   });
 });

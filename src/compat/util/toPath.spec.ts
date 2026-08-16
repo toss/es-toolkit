@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toPath as toPathLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toPath } from './toPath';
 
 describe('toPath function', () => {
@@ -28,6 +27,15 @@ describe('toPath function', () => {
     expect(result).toEqual(['a', 'b.c', 'd']);
   });
 
+  it('splits unquoted, non-numeric dotted keys inside brackets, like lodash', () => {
+    expect(toPath('x[a.b.c]')).toEqual(['x', 'a', 'b', 'c']);
+    expect(toPath('metrics[cpu.usage]')).toEqual(['metrics', 'cpu', 'usage']);
+    expect(toPath('a.b[c.d].e')).toEqual(['a', 'b', 'c', 'd', 'e']);
+    // quoted content and numbers inside brackets are still kept whole
+    expect(toPath('a["b.c"]')).toEqual(['a', 'b.c']);
+    expect(toPath('a[-1.23]')).toEqual(['a', '-1.23']);
+  });
+
   it('handles empty input correctly', () => {
     const result = toPath('');
     expect(result).toEqual([]);
@@ -48,8 +56,16 @@ describe('toPath function', () => {
     expect(result).toEqual(['a', '', 'b']);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(toPath).toEqualTypeOf<typeof toPathLodash>();
+  it('keeps empty segments for consecutive dots', () => {
+    expect(toPath('a..b')).toEqual(['a', '', 'b']);
+    expect(toPath('a...b')).toEqual(['a', '', '', 'b']);
+    expect(toPath('..a')).toEqual(['', '', 'a']);
+    expect(toPath('a.b..c.d')).toEqual(['a', 'b', '', 'c', 'd']);
+  });
+
+  it('keeps a trailing empty segment for a trailing dot', () => {
+    expect(toPath('a.')).toEqual(['a', '']);
+    expect(toPath('a.b.')).toEqual(['a', 'b', '']);
   });
 
   it('handles array input correctly', () => {

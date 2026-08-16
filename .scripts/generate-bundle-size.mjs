@@ -1,12 +1,15 @@
-import esbuild from 'esbuild';
 import fs from 'fs/promises';
+import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const funcNames = ['sample', 'difference', 'sum', 'debounce', 'throttle', 'pick', 'zip'];
-
 const filename = fileURLToPath(import.meta.url);
 const ROOT = path.resolve(path.dirname(filename), '..');
+
+const require = createRequire(path.join(ROOT, 'benchmarks', 'package.json'));
+const esbuild = require('esbuild');
+
+const funcNames = ['sample', 'difference', 'sum', 'debounce', 'throttle', 'pick', 'zip'];
 const OUT_JSON = path.join(ROOT, 'docs', 'data', 'bundle-size.json');
 
 async function getSize(pkg, funcName) {
@@ -15,8 +18,8 @@ async function getSize(pkg, funcName) {
   const bundled = await esbuild.build({
     stdin: {
       contents: script,
-      resolveDir: ROOT,
-      sourcefile: path.resolve(ROOT, 'tmp', 'test.js'),
+      resolveDir: path.join(ROOT, 'benchmarks'),
+      sourcefile: path.resolve(ROOT, 'benchmarks', 'tmp', 'test.js'),
       loader: 'js',
     },
     write: false,
@@ -41,9 +44,9 @@ async function main() {
     result.labels['esToolkit'] = 'es-toolkit@unknown';
   }
 
-  // detect lodash-es version if installed in node_modules
+  // detect lodash-es version yarn berry PnP resolution
   try {
-    const lodashPkgPath = path.join(ROOT, 'node_modules', 'lodash-es', 'package.json');
+    const lodashPkgPath = require.resolve('lodash-es/package.json');
     const lodashContent = await fs.readFile(lodashPkgPath, 'utf8');
     const lodashJson = JSON.parse(lodashContent);
     result.labels['lodash'] = `lodash-es@${lodashJson.version}`;

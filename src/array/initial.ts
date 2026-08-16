@@ -2,8 +2,8 @@
  * Returns an empty array when the input is a tuple containing exactly one element.
  *
  * @template T The type of the single element.
- * @param {[T]} arr - A tuple containing exactly one element.
- * @returns {[]} An empty array since there is only one element.
+ * @param arr - A tuple containing exactly one element.
+ * @returns An empty array since there is only one element.
  *
  * @example
  * const array = [100] as const;
@@ -15,7 +15,7 @@ export function initial<T>(arr: readonly [T]): [];
 /**
  * Returns an empty array when the input array is empty.
  *
- * @returns {[]} Always returns an empty array for an empty input.
+ * @returns Always returns an empty array for an empty input.
  *
  * @example
  * const array = [] as const;
@@ -29,8 +29,8 @@ export function initial(arr: readonly []): [];
  *
  * @template T The types of the initial elements.
  * @template U The type of the last element in the tuple.
- * @param {[...T[], U]} arr - A tuple with one or more elements.
- * @returns {T[]} A new array containing all but the last element of the tuple.
+ * @param arr - A tuple with one or more elements.
+ * @returns A new array containing all but the last element of the tuple.
  *
  * @example
  * const array = ['apple', 'banana', 'cherry'] as const;
@@ -44,8 +44,8 @@ export function initial<T, U>(arr: readonly [...T[], U]): T[];
  * If the input array is empty or has only one element, the function returns an empty array.
  *
  * @template T The type of elements in the array.
- * @param {T[]} arr - The input array.
- * @returns {T[]} A new array containing all but the last element of the input array.
+ * @param arr - The input array.
+ * @returns A new array containing all but the last element of the input array.
  *
  * @example
  * const arr = [1, 2, 3, 4];
@@ -59,8 +59,8 @@ export function initial<T>(arr: readonly T[]): T[];
  * If the input array is empty or has only one element, the function returns an empty array.
  *
  * @template T The type of elements in the array.
- * @param {T[]} arr - The input array.
- * @returns {T[]} A new array containing all but the last element of the input array.
+ * @param arr - The input array.
+ * @returns A new array containing all but the last element of the input array.
  *
  * @example
  * const arr = [1, 2, 3, 4];

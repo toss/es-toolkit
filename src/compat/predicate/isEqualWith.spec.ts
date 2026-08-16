@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isEqualWith as isEqualWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isEqualWith } from './isEqualWith';
 import { isString } from './isString';
 import { without } from '../../array/without';
@@ -152,9 +151,5 @@ describe('isEqualWith', () => {
         expect(argsList).toEqual(expected);
       }
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isEqualWith).toEqualTypeOf<typeof isEqualWithLodash>();
   });
 });

@@ -11,8 +11,8 @@ export function isArrayLikeObject(value: any): value is object & { length: numbe
 /**
  * Checks if the given value is a non-primitive, array-like object.
  *
- * @param {any} value The value to check.
- * @returns {boolean} `true` if the value is a non-primitive, array-like object, `false` otherwise.
+ * @param value The value to check.
+ * @returns `true` if the value is a non-primitive, array-like object, `false` otherwise.
  *
  * @example
  * isArrayLikeObject([1, 2, 3]); // true

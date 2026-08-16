@@ -6,8 +6,8 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * Gets all but the first element of array.
  *
  * @template T
- * @param {readonly [unknown, ...T]} array - The array to query.
- * @returns {T} Returns the slice of array.
+ * @param array - The array to query.
+ * @returns Returns the slice of array.
  *
  * @example
  * tail([1, 2, 3]);
@@ -19,8 +19,8 @@ export function tail<T extends unknown[]>(array: readonly [unknown, ...T]): T;
  * Gets all but the first element of array.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @returns {T[]} Returns the slice of array.
+ * @param array - The array to query.
+ * @returns Returns the slice of array.
  *
  * @example
  * tail([1, 2, 3]);
@@ -36,8 +36,8 @@ export function tail<T>(array: ArrayLike<T> | null | undefined): T[];
  * an empty array is returned.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} arr - The array to get the tail of.
- * @returns {T[]} A new array containing all elements of the input array except for the first one.
+ * @param arr - The array to get the tail of.
+ * @returns A new array containing all elements of the input array except for the first one.
  *
  * @example
  * const arr1 = [1, 2, 3];

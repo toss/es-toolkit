@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { mean as meanLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { mean } from './mean';
 import { empties } from '../_internal/empties';
 import { stubNaN } from '../_internal/stubNaN';
@@ -16,9 +15,5 @@ describe('mean', () => {
     const actual = map(empties, mean);
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(mean).toEqualTypeOf<typeof meanLodash>();
   });
 });

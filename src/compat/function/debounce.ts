@@ -68,13 +68,13 @@ export interface DebouncedFuncLeading<T extends (...args: any[]) => any> extends
  * You can also set a `maxWait` time, which is the maximum time the function is allowed to be delayed before it is called.
  *
  * @template F - The type of function.
- * @param {F} func - The function to debounce.
- * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @param {boolean} options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
- * @param {boolean} options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
- * @param {number} options.maxWait - The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param func - The function to debounce.
+ * @param debounceMs - The number of milliseconds to delay.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the debounced function.
+ * @param options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
+ * @param options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
+ * @param options.maxWait - The maximum time `func` is allowed to be delayed before it's invoked.
  * @returns A new debounced function with a `cancel` method.
  *
  * @example
@@ -120,13 +120,13 @@ export function debounce<T extends (...args: any) => any>(
  * You can also set a `maxWait` time, which is the maximum time the function is allowed to be delayed before it is called.
  *
  * @template F - The type of function.
- * @param {F} func - The function to debounce.
- * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @param {boolean} options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
- * @param {boolean} options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
- * @param {number} options.maxWait - The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param func - The function to debounce.
+ * @param debounceMs - The number of milliseconds to delay.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the debounced function.
+ * @param options.leading - If `true`, the function will be invoked on the leading edge of the timeout.
+ * @param options.trailing - If `true`, the function will be invoked on the trailing edge of the timeout.
+ * @param options.maxWait - The maximum time `func` is allowed to be delayed before it's invoked.
  * @returns A new debounced function with a `cancel` method.
  *
  * @example

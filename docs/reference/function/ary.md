@@ -38,9 +38,6 @@ This is especially useful when used with array methods like `map`.
 // parseInt accepts two arguments, but map passes three
 ['1', '2', '3'].map(parseInt);
 // Returns: [1, NaN, NaN]
-
-['1', '2', '3'].map(parseInt);
-// Result: [1, NaN, NaN]
 // Because parseInt('2', 1), parseInt('3', 2) are executed.
 
 // Use ary to limit to only the first argument

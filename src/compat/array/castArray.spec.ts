@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { castArray as castArrayLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { castArray } from './castArray';
 
 /**
@@ -22,9 +21,5 @@ describe('castArray', () => {
 
   it('should return an empty array when no arguments are given', () => {
     expect(castArray()).toEqual([]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(castArray).toEqualTypeOf<typeof castArrayLodash>();
   });
 });

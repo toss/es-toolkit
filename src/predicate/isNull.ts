@@ -6,8 +6,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null`.
  *
- * @param {unknown} x - The value to test if it is null.
- * @returns {x is null} True if the value is null, false otherwise.
+ * @param x - The value to test if it is null.
+ * @returns True if the value is null, false otherwise.
  *
  * @example
  * const value1 = null;

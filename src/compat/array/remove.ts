@@ -9,9 +9,9 @@ import { iteratee } from '../util/iteratee.ts';
  * Removes all elements from array that predicate returns truthy for and returns an array of the removed elements.
  *
  * @template L
- * @param {RejectReadonly<L>} array - The array to modify.
- * @param {ListIteratee<L[0]>} [predicate] - The function invoked per iteration.
- * @returns {Array<L[0]>} Returns the new array of removed elements.
+ * @param array - The array to modify.
+ * @param [predicate] - The function invoked per iteration.
+ * @returns Returns the new array of removed elements.
  *
  * @example
  * const array = [1, 2, 3, 4];
@@ -27,9 +27,9 @@ export function remove<L extends MutableList<any>>(
 /**
  * Removes elements from an array based on various criteria.
  *
- * @param {ArrayLike<T>} arr - The array to iterate over.
- * @param {(value: T, index: number, arr: ArrayLike<T>) => boolean | Partial<T> | [keyof T, unknown] | keyof T} shouldRemoveElement - The function invoked per iteration, a partial object, a property-value pair, or a key to match against each element.
- * @returns {T[]} - Returns the modified array with the specified elements removed.
+ * @param arr - The array to iterate over.
+ * @param shouldRemoveElement - The function invoked per iteration, a partial object, a property-value pair, or a key to match against each element.
+ * @returns Returns the modified array with the specified elements removed.
  *
  * @example
  * // Using a predicate function

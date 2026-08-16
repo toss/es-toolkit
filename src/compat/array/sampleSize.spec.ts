@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { sampleSize as sampleSizeLodash } from 'lodash';
 import { sampleSize } from './sampleSize';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
@@ -60,6 +59,16 @@ describe('sampleSize', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should return an empty array for nullish collections when `size` is not provided', () => {
+    expect(sampleSize(null)).toEqual([]);
+    expect(sampleSize(undefined)).toEqual([]);
+    expect(sampleSize([])).toEqual([]);
+    // @ts-expect-error - type mismatch
+    expect(sampleSize(1)).toEqual([]);
+    // @ts-expect-error - type mismatch
+    expect(sampleSize(true)).toEqual([]);
+  });
+
   it('should sample an object', () => {
     const object = { a: 1, b: 2, c: 3 };
     const actual = sampleSize(object, 2);
@@ -71,9 +80,5 @@ describe('sampleSize', () => {
   it('should work as an iteratee for methods like `_.map`', () => {
     const actual = lodashStable.map([['a']], sampleSize);
     expect(actual).toEqual([['a']]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(sampleSize).toEqualTypeOf<typeof sampleSizeLodash>();
   });
 });

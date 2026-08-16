@@ -14,9 +14,9 @@ import { iteratee } from '../util/iteratee.ts';
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The arrays to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The arrays to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * xorBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -34,10 +34,10 @@ export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, iteratee?: Val
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * xorBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -55,11 +55,11 @@ export function xorBy<T>(
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {...Array<ValueIteratee<T> | ArrayLike<T> | null | undefined>} iteratee - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns the new array of values.
  *
  * @example
  * xorBy([1.2, 2.3], [3.4, 4.5], [5.6, 6.7], Math.floor);
@@ -80,8 +80,8 @@ export function xorBy<T>(
  * @template T - Type of elements in the input arrays.
  * @template U - Type of the values returned by the mapping function.
  *
- * @param {...(ArrayLike<T> | null | undefined | PropertyKey | Partial<T> | ((value: T) => unknown))} values - The arrays to inspect, or the function to map array elements to comparison values.
- * @returns {T[]} An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
+ * @param values - The arrays to inspect, or the function to map array elements to comparison values.
+ * @returns An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
  *
  * @example
  * // Custom mapping function for objects with an 'id' property

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toInteger as toIntegerLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toInteger } from './toInteger';
 import { flatMap } from '../../array/flatMap';
 import { identity } from '../../function/identity';
@@ -214,9 +213,5 @@ describe('toInteger', () => {
 
   it(`should support \`value\` of \`-0\``, () => {
     expect(1 / toInteger(-0)).toBe(-Infinity);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toInteger).toEqualTypeOf<typeof toIntegerLodash>();
   });
 });
