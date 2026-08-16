@@ -50,18 +50,16 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
   source: S
 ): T & S {
   return mergeWith(cloneDeep(target), source, function mergeRecursively(targetValue, sourceValue) {
-    if (Array.isArray(sourceValue)) {
-      if (Array.isArray(targetValue)) {
-        return mergeWith(clone(targetValue), sourceValue, mergeRecursively);
-      } else {
-        return mergeWith([], sourceValue, mergeRecursively);
-      }
+    if (isMergeableValue(sourceValue) && isMergeableValue(targetValue)) {
+      return mergeWith(clone(targetValue), sourceValue, mergeRecursively);
+    } else if (Array.isArray(sourceValue)) {
+      return mergeWith([], sourceValue, mergeRecursively);
     } else if (isPlainObject(sourceValue)) {
-      if (isPlainObject(targetValue)) {
-        return mergeWith(clone(targetValue), sourceValue, mergeRecursively);
-      } else {
-        return mergeWith({}, sourceValue, mergeRecursively);
-      }
+      return mergeWith({}, sourceValue, mergeRecursively);
     }
   });
+}
+
+function isMergeableValue(value: unknown) {
+  return isPlainObject(value) || Array.isArray(value);
 }
