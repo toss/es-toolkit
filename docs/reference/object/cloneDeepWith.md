@@ -1,55 +1,98 @@
 # cloneDeepWith
 
-Deeply clones the given object.
-
-You can customize the deep cloning process using the `cloneValue` function. The function takes the current value `value`, the property name `key`, and the entire object `obj` as arguments. If the function returns a value, that value is used; if it returns `undefined`, the default cloning method is used.
-
-## Signature
+Deeply clones the given value with a custom cloning function.
 
 ```typescript
-function cloneDeepWith<T>(
-  obj: T,
-  cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
-): T;
+const customCloned = cloneDeepWith(obj, cloneValue);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T`): The object to clone.
-- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): A function that specifies how to clone the value. It can return a cloned value instead of using the default method. If it returns `undefined`, the default method is used to clone the value.
-  - `value`: The current value being cloned.
-  - `key`: The property name of the current value being cloned.
-  - `obj`: The entire object `obj` to clone.
-  - `stack`: An internal stack (`Map`) to handle circular references.
+### `cloneDeepWith(obj, cloneValue)`
 
-### Returns
-
-(`T`): A deep clone of the given object.
-
-## Examples
+Use `cloneDeepWith` when you want to deeply copy an object or array with custom logic for specific values. If the custom function `cloneValue` returns a value, that value is used; if it returns `undefined`, the default deep copying method is used.
 
 ```typescript
-// Clone a primitive value
-const num = 29;
-const clonedNum = cloneDeepWith(num);
-console.log(clonedNum); // 29
-console.log(clonedNum === num); // true
+import { cloneDeepWith } from 'es-toolkit/object';
 
-// Clone an object with a customizer
-const obj = { a: 1, b: 2 };
+// Double numbers during cloning
+const obj = { a: 1, b: { c: 2, d: 'text' } };
 const clonedObj = cloneDeepWith(obj, value => {
   if (typeof value === 'number') {
-    return value * 2; // Double the number
+    return value * 2;
+  }
+  // Return undefined to use default cloning
+});
+console.log(clonedObj); // { a: 2, b: { c: 4, d: 'text' } }
+
+// Add 1 to all array elements during cloning
+const arr = [1, [2, 3], { num: 4 }];
+const clonedArr = cloneDeepWith(arr, value => {
+  if (typeof value === 'number') {
+    return value + 1;
   }
 });
-console.log(clonedObj); // { a: 2, b: 4 }
-console.log(clonedObj === obj); // false
-
-// Clone an array with a customizer
-const arr = [1, 2, 3];
-const clonedArr = cloneDeepWith(arr, value => {
-  return value + 1; // Increment each value
-});
-console.log(clonedArr); // [2, 3, 4]
-console.log(clonedArr === arr); // false
+console.log(clonedArr); // [2, [3, 4], { num: 5 }]
 ```
+
+The custom function receives the current value, key, original object, and internal stack information as parameters.
+
+```typescript
+const data = {
+  user: { name: 'Alice', age: 30 },
+  settings: { theme: 'dark', lang: 'en' },
+};
+
+const result = cloneDeepWith(data, (value, key, obj, stack) => {
+  // Clone 'user' object with special handling
+  if (key === 'user' && typeof value === 'object') {
+    return { ...value, cloned: true };
+  }
+
+  // Add prefix to strings
+  if (typeof value === 'string') {
+    return `cloned_${value}`;
+  }
+});
+
+console.log(result);
+// {
+//   user: { name: 'cloned_Alice', age: 30, cloned: true },
+//   settings: { theme: 'cloned_dark', lang: 'cloned_en' }
+// }
+```
+
+Using a custom function allows you to freely configure how objects are cloned. For example, you can copy `Date` objects to be one year in the future.
+
+```typescript
+const data = {
+  created: new Date('2023-01-01'),
+  updated: new Date('2023-12-31'),
+  name: 'Document',
+};
+
+const cloned = cloneDeepWith(data, value => {
+  // Set Date objects to one year in the future
+  if (value instanceof Date) {
+    const newDate = new Date(value);
+    newDate.setFullYear(newDate.getFullYear() + 1);
+    return newDate;
+  }
+});
+
+console.log(cloned.created.getFullYear()); // 2024
+console.log(cloned.updated.getFullYear()); // 2024
+```
+
+#### Parameters
+
+- `obj` (`T`): The value to deeply copy.
+- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): A custom cloning function. Return the value to clone, or return `undefined` to use the default method.
+  - `value`: The current value being cloned.
+  - `key`: The property name of the current value.
+  - `obj`: The original object to clone.
+  - `stack`: An internal stack to handle circular references.
+
+#### Returns
+
+(`T`): A deep copy processed through the custom function.

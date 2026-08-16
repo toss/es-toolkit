@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { transform as transformLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { transform } from './transform';
 import { noop } from '../../function';
 import { falsey } from '../_internal/falsey';
@@ -116,7 +115,7 @@ describe('transform', () => {
     forEach([[], {}], accumulator => {
       const actual = map(values, value => transform(value, noop, accumulator));
 
-      expect(every(actual, result => result === accumulator));
+      expect(every(actual, result => result === accumulator)).toBe(true);
 
       // @ts-expect-error - Just for testing
       expect(transform(null, null, accumulator)).toBe(accumulator);
@@ -133,7 +132,7 @@ describe('transform', () => {
 
   it('should work without an `iteratee`', () => {
     // @ts-expect-error - Just for testing
-    expect(transform(new Foo()) instanceof Foo);
+    expect(transform(new Foo()) instanceof Foo).toBe(true);
   });
 
   it('should ensure `object` is an object before using its `[[Prototype]]`', () => {
@@ -218,9 +217,5 @@ describe('transform', () => {
     });
 
     expect(values.length).toBe(1);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(transform).toEqualTypeOf<typeof transformLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { snakeCase as snakeCaseToolkit } from '../../string/snakeCase.ts';
+import { deburr } from './deburr.ts';
+import { words } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -6,8 +7,8 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  *
  * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
  *
- * @param {string | object} str - The string that is to be changed to snake case.
- * @returns {string} - The converted string to snake case.
+ * @param str - The string that is to be changed to snake case.
+ * @returns The converted string to snake case.
  *
  * @example
  * const convertedStr1 = snakeCase('camelCase') // returns 'camel_case'
@@ -16,5 +17,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
  */
 export function snakeCase(str?: string): string {
-  return snakeCaseToolkit(normalizeForCase(str));
+  return words(normalizeForCase(deburr(str)))
+    .map(word => word.toLowerCase())
+    .join('_');
 }

@@ -98,4 +98,16 @@ describe('Semaphore', () => {
     expect(spy1).toHaveBeenCalledTimes(1);
     expect(spy2).not.toHaveBeenCalled();
   });
+
+  it('should not increase available permits beyond capacity when releasing without pending tasks', () => {
+    const semaphore = new Semaphore(2);
+
+    expect(semaphore.available).toBe(2);
+
+    semaphore.release();
+    expect(semaphore.available).toBe(2);
+
+    semaphore.release();
+    expect(semaphore.available).toBe(2);
+  });
 });

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { includes as includesToolkitCompat_ } from 'es-toolkit/compat';
-import { includes as includesLodash_ } from 'lodash';
+import { includes as includesToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const includesToolkitCompat = includesToolkitCompat_;
-const includesLodash = includesLodash_;
+const { includes: includesLodash } = lodash;
 
 describe('includes (object)', () => {
   const object = {
@@ -23,7 +22,6 @@ describe('includes (object)', () => {
     includesToolkitCompat(object, undefined);
     includesToolkitCompat(object, null);
     includesToolkitCompat(object, Infinity);
-    includesToolkitCompat(object, Symbol('sym1'));
     includesToolkitCompat(object, -0);
     includesToolkitCompat(object, 1, -1);
   });
@@ -35,9 +33,6 @@ describe('includes (object)', () => {
     includesLodash(object, undefined);
     includesLodash(object, null);
     includesLodash(object, Infinity);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    includesLodash(object, Symbol('sym1'));
     includesLodash(object, -0);
     includesLodash(object, 1, -1);
   });

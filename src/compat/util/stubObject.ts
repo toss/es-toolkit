@@ -1,7 +1,7 @@
 /**
  * Returns an empty object.
  *
- * @returns {Object} An empty object.
+ * @returns An empty object.
  * @example
  * stubObject() // Returns {}
  */

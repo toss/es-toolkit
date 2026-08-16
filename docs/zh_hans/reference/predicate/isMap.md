@@ -1,34 +1,48 @@
 # isMap
 
-检查给定值是否为 `Map`。
-
-此函数测试提供的值是否为 `Map` 的实例。
-如果值是 `Map`，则返回 `true`，否则返回 `false`。
-
-此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小为 `Map`。
-
-## 签名
+检查值是否为Map。
 
 ```typescript
-function isMap(value: unknown): value is Map<any, any>;
+const result = isMap(value);
 ```
 
-### 参数
+## 用法
 
-- `value` (`unknown`): 要检查的值。
+### `isMap(value)`
 
-### 返回值
-
-(`value is Map<any, any>`): 如果值是 `Map`，则为 `true`；否则为 `false`。
-
-## 示例
+当你想检查值是否为Map实例时，使用`isMap`。它使用`instanceof`运算符检查是否为`Map`。
 
 ```typescript
-const value1 = new Map();
-const value2 = new Set();
-const value3 = new WeakMap();
+import { isMap } from 'es-toolkit/predicate';
 
-console.log(isMap(value1)); // true
-console.log(isMap(value2)); // false
-console.log(isMap(value3)); // false
+// Map实例
+const map = new Map([['key', 'value']]);
+console.log(isMap(map)); // true
+
+// 非Map值
+console.log(isMap(new Set())); // false
+console.log(isMap(new WeakMap())); // false
+console.log(isMap({})); // false
+console.log(isMap([])); // false
+console.log(isMap(null)); // false
 ```
+
+在TypeScript中也可以用作类型守卫。
+
+```typescript
+function processValue(value: unknown) {
+  if (isMap(value)) {
+    // 现在value被缩小为Map<any, any>类型
+    console.log(value.size);
+    value.set('new-key', 'new-value');
+  }
+}
+```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为`Map`的值。
+
+#### 返回值
+
+(`value is Map<any, any>`): 如果值为Map则返回`true`，否则返回`false`。

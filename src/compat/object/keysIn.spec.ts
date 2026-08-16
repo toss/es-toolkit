@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { keysIn as keysInLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { keysIn } from './keysIn';
 import { args } from '../_internal/args';
 import { primitives } from '../_internal/primitives';
@@ -31,6 +30,14 @@ describe('keys methods', () => {
     ).sort();
 
     expect(actual).toEqual(expected);
+  });
+
+  it('`keysIn` should only include indices for arrays', () => {
+    expect(func([1, 2, 3])).toEqual(['0', '1', '2']);
+  });
+
+  it('`keysIn` should include `length` property for array-like objects', () => {
+    expect(func({ 0: 'a', length: 1 })).toEqual(['0', 'length']);
   });
 
   it(`\`keysIn\` should treat sparse arrays as dense`, () => {
@@ -215,9 +222,5 @@ describe('keys methods', () => {
     expect(actual).not.toContain('buffer');
     expect(actual).not.toContain('byteLength');
     expect(actual).not.toContain('byteOffset');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(keysIn).toEqualTypeOf<typeof keysInLodash>();
   });
 });

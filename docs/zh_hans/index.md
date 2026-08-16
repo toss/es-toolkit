@@ -29,7 +29,7 @@ features:
     details: 与其他替代库相比，es-toolkit的JavaScript代码体积最多减少了97%。
   - title: 简单替代Lodash
     details: es-toolkit提供了一个完整的兼容层，可以轻松替代Lodash。
-    link: /zh_hans/compatibility
+    link: /zh_hans/compat/intro
   - title: 现代化实现
     details: es-toolkit充分利用现代JavaScript API进行简单且无错误的实现。
   - title: 强大的类型支持
@@ -37,7 +37,7 @@ features:
   - title: 经过实战验证
     details: es-toolkit具有100%的测试覆盖率，确保最大的健壮性。
   - title: 广泛采用
-    details: es-toolkit被多个流行的开源项目所信任和使用，例如Storybook、Recharts、ink和CKEditor。
+    details: es-toolkit被多个流行的开源项目所信任和使用，例如Storybook、Recharts、ink、MUI和CKEditor。
   - title: 全面的运行时支持
     details: es-toolkit支持包括Node.js、Deno、Bun和浏览器在内的所有JavaScript环境。
 ---

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { once as onceToolkit_ } from 'es-toolkit';
-import { once as onceToolkitCompat_ } from 'es-toolkit/compat';
-import { once as onceLodash_ } from 'lodash';
+import { once as onceToolkit } from 'es-toolkit';
+import { once as onceToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const onceToolkit = onceToolkit_;
-const onceToolkitCompat = onceToolkitCompat_;
-const onceLodash = onceLodash_;
+const { once: onceLodash } = lodash;
 
 describe('once', () => {
   bench('es-toolkit/once', () => {

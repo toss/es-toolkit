@@ -1,38 +1,94 @@
 # withTimeout
 
-如果响应时间晚于指定时间， 则将其视为 `TimeoutError` 错误。
-
-该函数返回一个 `Promise`，如果响应时间超过特定时间，则会以 `TimeoutError` 错误拒绝。在使用 async/await 函数时，可以通过该函数设置函数的最大执行时间。
-
-## 签名
+为异步函数设置时间限制,如果在指定时间内未完成,则抛出 `TimeoutError`。
 
 ```typescript
-function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
+await withTimeout(run, ms, options?);
 ```
 
-### 参数
+## 用法
 
-- `run` (`() => Promise<T>`): 要执行的 Promise 值。
-- `ms` (`number`): 指定 Promise 的最大执行值的毫秒。
+### `withTimeout(run, ms, options?)`
 
-### 返回值
-
-(`Promise<T>`): 要执行的 Promise 返回值。
-
-## 示例
-
-### 基本用法
+当您想要为异步任务设置超时时,可以使用 `withTimeout`。如果 Promise 在指定时间内未完成,将以 `TimeoutError` 拒绝,从而防止无限等待的情况。
 
 ```typescript
+import { withTimeout } from 'es-toolkit/promise';
+
 async function fetchData() {
-  const response = await fetch('https://example.com/data');
+  const response = await fetch('https://api.example.com/data');
   return response.json();
 }
 
 try {
+  // 必须在 1 秒内完成
   const data = await withTimeout(fetchData, 1000);
-  console.log(data); // 如果 `fetchData` 在 1 秒内解决，将记录获取的数据。
+  console.log('收到数据:', data);
 } catch (error) {
-  console.error(error); // 如果 `fetchData` 在 1 秒内没有解决，将记录 'TimeoutError'。
+  if (error.name === 'TimeoutError') {
+    console.log('请求超时');
+  }
 }
 ```
+
+当您想要为数据库查询设置时间限制时也可以使用。
+
+```typescript
+async function queryDatabase(query: string) {
+  // 数据库查询逻辑
+  return await db.execute(query);
+}
+
+try {
+  const result = await withTimeout(
+    () => queryDatabase('SELECT * FROM users'),
+    5000 // 5秒限制
+  );
+  console.log('查询结果:', result);
+} catch (error) {
+  console.log('查询耗时过长已取消');
+}
+```
+
+在多个 API 调用中只想接收最快响应的情况下也可以使用。
+
+```typescript
+async function getFastestResponse() {
+  const apis = [() => fetch('/api/server1'), () => fetch('/api/server2'), () => fetch('/api/server3')];
+
+  try {
+    // 为每个 API 设置 2 秒限制,只接收最快的响应
+    const promises = apis.map(api => withTimeout(api, 2000));
+    const result = await Promise.race(promises);
+    return result.json();
+  } catch (error) {
+    console.log('所有 API 均已超时');
+  }
+}
+```
+
+您可以传入 `AbortSignal` 来取消超时。中断它会解除时间限制,因此会在没有截止时间的情况下等待 `run`。它不会拒绝返回的 Promise,也不会中断 `run` 本身;如果您也想取消实际的工作,请将同一个信号传入 `run`。
+
+```typescript
+const controller = new AbortController();
+
+// 当用户选择继续等待时,解除 1 秒的限制。
+keepWaitingButton.onclick = () => controller.abort();
+
+const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
+```
+
+#### 参数
+
+- `run` (`() => Promise<T>`): 要执行的异步函数。
+- `ms` (`number`): 超时前的毫秒数。
+- `options` (`WithTimeoutOptions`, 可选): 超时选项。
+  - `signal` (`AbortSignal`, 可选): 可以取消超时的 AbortSignal。中断后,时间限制将被解除,并在没有截止时间的情况下等待 `run`。
+
+#### 返回值
+
+(`Promise<T>`): 返回给定异步函数的结果,或在超时时以 TimeoutError 拒绝的 Promise。
+
+#### 错误
+
+如果在指定时间内未完成,抛出 `TimeoutError`。

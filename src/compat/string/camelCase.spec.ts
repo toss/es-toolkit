@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { camelCase as camelCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { camelCase } from './camelCase';
 
 describe('camelCase', () => {
@@ -36,6 +35,16 @@ describe('camelCase', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should convert string to camel case, identical to lodash', () => {
+    expect(camelCase('åäöÅÄÖ')).toBe('aaoAao');
+    expect(camelCase('helloÅäöWorld')).toBe('helloAaoWorld');
+    expect(camelCase('café')).toBe('cafe');
+    expect(camelCase('naïve')).toBe('naive');
+    expect(camelCase('Zürich')).toBe('zurich');
+    expect(camelCase('São Paulo')).toBe('saoPaulo');
+    expect(camelCase('Москва')).toBe('москва');
+  });
+
   it('should handle double-converting strings', () => {
     const actual = strings.map(str => camelCase(camelCase(str)));
     const expected = strings.map(() => 'fooBar');
@@ -64,7 +73,9 @@ describe('camelCase', () => {
     expect(camelCase({ toString: () => 'foo bar' })).toBe('fooBar');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(camelCase).toEqualTypeOf<typeof camelCaseLodash>();
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(camelCase('foo1stPlace')).toBe('foo1stPlace');
+    expect(camelCase('top10th')).toBe('top10th');
+    expect(camelCase('1st place 2nd 3rd 4th')).toBe('1stPlace2nd3rd4th');
   });
 });

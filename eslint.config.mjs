@@ -1,24 +1,24 @@
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
 import prettier from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import pluginJs from '@eslint/js';
 import vitest from '@vitest/eslint-plugin';
 
-export default [
-  {
-    ignores: [
-      '.yarn/**',
-      'coverage/**',
-      '**/dist/**',
-      '**/cache/**',
-      '.pnp.*',
-      '**/*.d.ts',
-      '**/*.tgz',
-      'node_modules/**',
-    ],
-  },
+export default defineConfig(
+  globalIgnores([
+    '.yarn/**',
+    'coverage/**',
+    '**/dist/**',
+    '**/cache/**',
+    '.pnp.*',
+    '**/*.d.ts',
+    '**/*.tgz',
+    'node_modules/**',
+    'es-toolkit-plugin/skills/*/docs',
+  ]),
   {
     languageOptions: {
       globals: {
@@ -42,13 +42,19 @@ export default [
   {
     files: ['**/*.spec.ts*'],
     plugins: { vitest },
+    settings: { vitest: { typecheck: true } },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     rules: {
       ...vitest.configs.recommended.rules,
+      'vitest/no-conditional-expect': 'warn',
       'vitest/no-commented-out-tests': 'warn',
-      'vitest/expect-expect': 'warn',
       'vitest/valid-expect': 'warn',
-      'vitest/no-identical-title': 'warn',
-      'vitest/valid-title': 'warn',
     },
   },
   prettier,
@@ -135,5 +141,5 @@ export default [
       'vue/multi-word-component-names': 'off',
       'prefer-object-has-own': 'error',
     },
-  },
-];
+  }
+);

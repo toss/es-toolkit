@@ -1,52 +1,56 @@
 # intersection
 
-두 배열 모두에 포함되어 있는 요소를 반환해요.
-
-이 함수는 두 개의 배열을 받고, 두 배열 모두에 포함되어 있는 요소로 구성된 새로운 배열을 반환해요.
-실제로는 첫 번째 배열의 요소들 중에서 두 번째 배열에 포함되어 있지 않은 요소들을 제거해요.
-
-## 인터페이스
+두 배열에 공통으로 포함된 요소들로 이루어진 새 배열을 반환해요.
 
 ```typescript
-function intersection<T>(firstArr: T[], secondArr: T[]): T[];
+const result = intersection(firstArr, secondArr);
 ```
 
-### 파라미터
+## 사용법
 
-- `firstArr` (`T[]`): 비교할 첫 번째 배열.
-- `secondArr` (`T[]`): 비교할 두 번째 배열.
+### `intersection(firstArr, secondArr)`
 
-### 반환 값
-
-(`T[]`) 두 배열 모두에 포함되어 있는 요소로 구성된 새로운 배열.
-
-## 예시
+두 배열에서 공통 요소만 찾고 싶을 때 `intersection`을 사용하세요. 첫 번째 배열의 요소 중에서 두 번째 배열에도 존재하는 것들만 새 배열로 반환해요. 두 데이터 세트의 교집합을 구할 때 유용해요.
 
 ```typescript
-const array1 = [1, 2, 3, 4, 5];
-const array2 = [3, 4, 5, 6, 7];
-const result = intersection(array1, array2);
-// 두 배열에 모두 포함되어 있는 [3, 4, 5]를 반환해요.
+import { intersection } from 'es-toolkit/array';
+
+// 숫자 배열의 교집합을 구해요.
+const numbers1 = [1, 2, 3, 4, 5];
+const numbers2 = [3, 4, 5, 6, 7];
+intersection(numbers1, numbers2);
+// Returns: [3, 4, 5]
+
+// 문자열 배열의 교집합을 구해요.
+const strings1 = ['apple', 'banana', 'cherry'];
+const strings2 = ['banana', 'cherry', 'date'];
+intersection(strings1, strings2);
+// Returns: ['banana', 'cherry']
 ```
 
-## Lodash와의 호환성
-
-`es-toolkit/compat`에서 `intersection`을 가져오면 lodash와 호환돼요.
-
-- `intersection`은 공통 요소를 찾기 위해 여러 개의 유사 배열 객체를 받을 수 있어요.
-- `intersection`은 고유한 요소만 반환해요.
+교집합이 없거나 특별한 경우도 처리해요.
 
 ```typescript
-import { intersection } from 'es-toolkit/compat';
+import { intersection } from 'es-toolkit/array';
 
-const array1 = [1, 2, 3, 4, 4, 5];
-const array2 = [2, 4];
-const array3 = [4, 6];
-const result = intersection(array1, array2, array3);
-// 결과는 [4]예요. 이 유일한 요소는 모든 배열에 존재해요.
+// 교집합이 없는 경우 빈 배열을 반환해요.
+const noCommon1 = [1, 2, 3];
+const noCommon2 = [4, 5, 6];
+intersection(noCommon1, noCommon2);
+// Returns: []
 
-const arrayLike1 = { 0: 1, 1: 2, 2: 3, length: 3 };
-const arrayLike2 = { 0: 2, 1: 3, length: 2 };
-const result2 = intersection(arrayLike1, arrayLike2);
-// 결과2는 [2, 3]예요. 이 요소들은 두 유사 배열 객체에 존재해요.
+// 한쪽이 빈 배열인 경우도 빈 배열을 반환해요.
+const numbers = [1, 2, 3];
+const empty: number[] = [];
+intersection(numbers, empty);
+// Returns: []
 ```
+
+#### 파라미터
+
+- `firstArr` (`readonly T[]`): 비교할 첫 번째 배열이에요.
+- `secondArr` (`readonly T[]`): 비교할 두 번째 배열이에요.
+
+#### 반환 값
+
+(`T[]`): 두 배열에 공통으로 포함된 요소들로 이루어진 새 배열을 반환해요.

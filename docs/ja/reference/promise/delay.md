@@ -1,78 +1,72 @@
 # delay
 
-コードの実行を指定されたミリ秒だけ遅延させます。
-
-この関数は、特定の時間後に解決されるPromiseを返します。async/await関数を使用する場合、関数の実行を一時的に停止させることができます。また、オプションとして遅延をキャンセルするためのAbortSignalをサポートしています。
-
-## インターフェース
+指定された時間だけコードの実行を遅らせます。
 
 ```typescript
-function delay(ms: number, options?: DelayOptions): Promise<void>;
+await delay(ms, options?);
 ```
 
-### パラメータ
+## 使用法
 
-- `ms` (`number`): コードの実行を遅延させるミリ秒。
-- `options` (`DelayOptions`, オプション): オプションオブジェクト。
-  - `signal` (`AbortSignal`, オプション): 遅延をキャンセルするためのオプションの`AbortSignal`。
+### `delay(ms, options?)`
 
-### 戻り値
-
-(`Promise<void>`): 指定された遅延時間後に解決されるPromise。
-
-## 例
-
-### 基本的な使用法
+コードの実行を特定の時間だけ停止したい場合に`delay`を使用します。async/awaitと一緒に使用して、一定時間後に次のコードが実行されるようにできます。必要に応じて`AbortSignal`を通じて遅延をキャンセルすることもできます。
 
 ```typescript
-async function foo() {
+import { delay } from 'es-toolkit/promise';
+
+async function example() {
   console.log('開始');
-  await delay(1000); // コードの実行を1秒間遅延
-  console.log('終了');
+  await delay(1000); // 1秒間実行を遅らせます
+  console.log('1秒後に実行されます');
+
+  await delay(500); // さらに0.5秒遅らせます
+  console.log('さらに0.5秒後に実行されます');
 }
 
-foo();
+example();
 ```
 
-### AbortSignalの使用法
+AbortSignalを使用して遅延をキャンセルすることもできます:
 
 ```typescript
-async function foo() {
+async function cancellableDelay() {
   const controller = new AbortController();
-  const signal = controller.signal;
+  const { signal } = controller;
 
-  setTimeout(() => controller.abort(), 50); // 50ms後に遅延をキャンセル
+  // 50ms後に遅延をキャンセルします
+  setTimeout(() => controller.abort(), 50);
+
   try {
     await delay(1000, { signal });
+    console.log('1秒が経過しました'); // このコードは実行されません
   } catch (error) {
-    console.log(error); // 'The operation was aborted'をログ出力
+    console.log('遅延がキャンセルされました'); // AbortErrorが発生します
   }
 }
 ```
 
-## Lodash 互換性
-
-`es-toolkit/compat`から`delay`をインポートすると、Lodashと完全に互換性があります。
-
-- `delay`は一定時間後に呼び出される関数を受け取ることができます。
-- `delay`はその関数に渡される引数を受け取ることができます。
-- `delay`はタイムアウトをキャンセルできるタイマーIDを返します。
+テストで非同期動作をシミュレートする際にも便利です。
 
 ```typescript
-import { delay } from 'es-toolkit/compat';
-
-// 例 1: 遅延した関数の実行
-const timerId = delay(
-  (greeting, recipient) => {
-    console.log(`${greeting}, ${recipient}!`);
-  },
-  1000,
-  'こんにちは',
-  '太郎'
-);
-// => 1秒後に 'こんにちは, 太郎!' がログに出力されます。
-
-// 例 2: 実行前にタイムアウトをクリア
-clearTimeout(timerId);
-// タイムアウトがクリアされたため、関数は実行されません。
+async function simulateNetworkRequest() {
+  console.log('ネットワークリクエスト開始...');
+  await delay(2000); // 2秒間ネットワーク遅延をシミュレート
+  console.log('レスポンスを受信!');
+  return { data: 'test' };
+}
 ```
+
+#### パラメータ
+
+- `ms` (`number`): 遅延させるミリ秒単位の時間です。
+- `options` (`DelayOptions`, オプション): 遅延オプションです。
+  - `signal` (`AbortSignal`, オプション): 遅延をキャンセルできるAbortSignalです。
+
+#### 戻り値
+
+(`Promise<void>`): 指定された時間後に完了するPromiseを返します。
+
+#### エラー
+
+AbortSignalが有効化されると`AbortError`をスローします。

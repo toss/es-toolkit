@@ -36,4 +36,15 @@ describe('uniq', () => {
 
     expect(array).toEqual([1, 2, 3, 2, 1, 3]);
   });
+
+  it('should handle arrays with undefined And Hole', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const arr: any[] = [1, , 2, undefined, 3, , 2];
+    expect(uniq(arr)).toEqual([1, undefined, 2, 3]);
+  });
+
+  it('should handle arrays with special values', () => {
+    const arr = [NaN, NaN, 0, -0, Infinity, -Infinity];
+    expect(uniq(arr)).toEqual([NaN, 0, Infinity, -Infinity]);
+  });
 });

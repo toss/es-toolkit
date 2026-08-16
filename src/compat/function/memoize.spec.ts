@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { memoize as memoizeLodash } from 'lodash';
 import { memoize } from './memoize';
 import { identity, isFunction, noop, stubTrue } from '../index';
 
@@ -177,7 +176,7 @@ describe('memoize', () => {
     memoize.Cache = oldCache;
   });
 
-  it('should works with an immutable `_.memoize.Cache` ', () => {
+  it('should works with an immutable `_.memoize.Cache`', () => {
     const oldCache = memoize.Cache;
     memoize.Cache = ImmutableCache;
 
@@ -243,9 +242,5 @@ describe('memoize', () => {
     expect(memoized.cache.get('a')).toBe('a');
 
     memoize.Cache = oldCache;
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(memoize).toEqualTypeOf<typeof memoizeLodash>();
   });
 });

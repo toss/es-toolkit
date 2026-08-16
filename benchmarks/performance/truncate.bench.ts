@@ -1,11 +1,8 @@
 import { bench, describe } from 'vitest';
-import { truncate as truncateCompatToolkit_ } from 'es-toolkit/compat';
-import { truncate as truncateToolkit_ } from 'es-toolkit/string';
-import { truncate as truncateLodash_ } from 'lodash';
+import { truncate as truncateCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const truncateToolkit = truncateToolkit_;
-const truncateCompatToolkit = truncateCompatToolkit_;
-const truncateLodash = truncateLodash_;
+const { truncate: truncateLodash } = lodash;
 
 const strAsciiShort = 'hi-diddly-ho there, neighborino';
 const strAsciiLong = strAsciiShort.padEnd(500, 'A').padEnd(1000, '5').padEnd(1500, ' ').padEnd(2000, ', ');
@@ -16,10 +13,6 @@ const strUnicodeLong = (strUnicodeShort.padEnd(500, 'A').padEnd(1000, '5') + str
   .padEnd(2000, ', ');
 
 describe('truncate - short ascii', () => {
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strAsciiShort);
-  });
-
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strAsciiShort);
   });
@@ -31,9 +24,6 @@ describe('truncate - short ascii', () => {
 
 describe('truncate - long ascii', () => {
   const options = { length: 150 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strAsciiLong, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strAsciiLong, options);
@@ -46,9 +36,6 @@ describe('truncate - long ascii', () => {
 
 describe('truncate - short unicode', () => {
   const options = { length: 28 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strUnicodeShort, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strUnicodeShort, options);
@@ -61,9 +48,6 @@ describe('truncate - short unicode', () => {
 
 describe('truncate - long unicode', () => {
   const options = { length: 24, separator: ', ' };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strUnicodeLong, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strUnicodeLong, options);
@@ -76,9 +60,6 @@ describe('truncate - long unicode', () => {
 
 describe('truncate - do nothing - short ascii', () => {
   const options = { length: 100 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strAsciiShort, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strAsciiShort, options);
@@ -91,9 +72,6 @@ describe('truncate - do nothing - short ascii', () => {
 
 describe('truncate - do nothing - long ascii', () => {
   const options = { length: 1_000_000 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strAsciiLong, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strAsciiLong, options);
@@ -106,9 +84,6 @@ describe('truncate - do nothing - long ascii', () => {
 
 describe('truncate - do nothing - short unicode', () => {
   const options = { length: 100 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strUnicodeShort, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strUnicodeShort, options);
@@ -121,9 +96,6 @@ describe('truncate - do nothing - short unicode', () => {
 
 describe('truncate - do nothing - long unicode', () => {
   const options = { length: 1_000_000 };
-  bench('es-toolkit/truncate', () => {
-    truncateToolkit(strUnicodeLong, options);
-  });
 
   bench('es-toolkit/compat/truncate', () => {
     truncateCompatToolkit(strUnicodeLong, options);

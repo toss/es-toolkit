@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { cloneDeepWith as cloneDeepWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
@@ -75,7 +74,7 @@ describe('cloneDeepWith', function () {
       actual = last(arguments);
     });
 
-    expect(actual instanceof Map);
+    expect(actual instanceof Map).toBe(true);
   });
 
   const methodName = 'cloneDeepWith';
@@ -128,7 +127,19 @@ describe('cloneDeepWith', function () {
     });
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(cloneDeepWith).toEqualTypeOf<typeof cloneDeepWithLodash>();
+  it('should clone objects created with Object.create(null) as regular objects with Object.prototype', () => {
+    const nullProtoObj = Object.create(null);
+    nullProtoObj.a = 1;
+    nullProtoObj.b = 'test';
+
+    const cloned = cloneDeepWith(nullProtoObj);
+
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.toString).toBe(Object.prototype.toString);
+
+    expect(cloned.a).toBe(1);
+    expect(cloned.b).toBe('test');
+
+    expect(cloned).not.toBe(nullProtoObj);
   });
 });

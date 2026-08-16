@@ -1,11 +1,10 @@
 import { bench, describe } from 'vitest';
-import { isMatchWith as isMatchWithToolkitCompat_ } from 'es-toolkit/compat';
-import { isMatchWith as isMatchWithLodash_ } from 'lodash';
+import { isMatchWith as isMatchWithToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isMatchWithToolkitCompat = isMatchWithToolkitCompat_;
-const isMatchWithLodash = isMatchWithLodash_;
+const { isMatchWith: isMatchWithLodash } = lodash;
 
-const customizer = (objValue, srcValue) => {
+const customizer = (objValue: unknown, srcValue: unknown) => {
   if (typeof objValue === 'string' && typeof srcValue === 'string') {
     return objValue.toLowerCase() === srcValue.toLowerCase();
   }

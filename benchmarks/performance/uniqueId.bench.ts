@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { uniqueId as uniqueIdToolkitCompat_ } from 'es-toolkit/compat';
-import { uniqueId as uniqueIdLodash_ } from 'lodash';
+import { uniqueId as uniqueIdToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const uniqueIdToolkitCompat = uniqueIdToolkitCompat_;
-const uniqueIdLodash = uniqueIdLodash_;
+const { uniqueId: uniqueIdLodash } = lodash;
 
 describe('uniqueId', () => {
   bench('es-toolkit/compat/uniqueId', () => {

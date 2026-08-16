@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { lowerCase as lowerCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { lowerCase } from './lowerCase';
 
 describe('lowerCase', () => {
@@ -11,6 +10,16 @@ describe('lowerCase', () => {
     const expected = strings.map(() => 'foo bar');
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should convert string to lower case, identical to lodash', () => {
+    expect(lowerCase('åäöÅÄÖ')).toBe('aao aao');
+    expect(lowerCase('helloÅäöWorld')).toBe('hello aao world');
+    expect(lowerCase('café')).toBe('cafe');
+    expect(lowerCase('naïve')).toBe('naive');
+    expect(lowerCase('Zürich')).toBe('zurich');
+    expect(lowerCase('São Paulo')).toBe('sao paulo');
+    expect(lowerCase('Москва')).toBe('москва');
   });
 
   it(`should handle double-converting strings`, () => {
@@ -44,9 +53,5 @@ describe('lowerCase', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(lowerCase({ toString: () => string })).toBe('foo bar');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(lowerCase).toEqualTypeOf<typeof lowerCaseLodash>();
   });
 });

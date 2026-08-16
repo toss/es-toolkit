@@ -1,4 +1,5 @@
 import { pull as pullToolkit } from '../../array/pull.ts';
+import { isNil } from '../../predicate/isNil.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
@@ -8,9 +9,9 @@ import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
  * **Note:** Unlike `_.difference`, this method mutates `array`.
  *
  * @template T
- * @param {T[]} array - The array to modify.
- * @param {ArrayLike<T>} [values] - The values to remove.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [1, 2, 3, 1, 2, 3];
@@ -27,9 +28,9 @@ export function pullAll<T>(array: T[], values?: ArrayLike<T>): T[];
  * **Note:** Unlike `_.difference`, this method mutates `array`.
  *
  * @template L
- * @param {RejectReadonly<L>} array - The array to modify.
- * @param {List<L[0]>} [values] - The values to remove.
- * @returns {L} Returns `array`.
+ * @param array - The array to modify.
+ * @param [values] - The values to remove.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [1, 2, 3, 1, 2, 3];
@@ -47,9 +48,9 @@ export function pullAll<L extends MutableList<any>>(array: RejectReadonly<L>, va
  * If you want to remove values without modifying the original array, use `difference`.
  *
  * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @returns {T[]} The modified array with the specified values removed.
+ * @param arr - The array to modify.
+ * @param valuesToRemove - The values to remove from the array.
+ * @returns The modified array with the specified values removed.
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5, 2, 4];
@@ -57,5 +58,9 @@ export function pullAll<L extends MutableList<any>>(array: RejectReadonly<L>, va
  * console.log(numbers); // [1, 3, 5]
  */
 export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
+  if (isNil(valuesToRemove)) {
+    return arr;
+  }
+
   return pullToolkit(arr, Array.from(valuesToRemove));
 }

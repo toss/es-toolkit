@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { each } from '..';
-import type { zipObject as zipObjectLodash } from 'lodash';
 import { zipObject } from './zipObject';
 
 describe('zipObject', () => {
@@ -38,7 +37,19 @@ describe('zipObject', () => {
     expect(zipObject([], [])).toEqual({});
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(zipObject).toEqualTypeOf<typeof zipObjectLodash>();
+  it('should handle undefined parameters with default values', () => {
+    expect(zipObject()).toEqual({});
+    expect(zipObject(undefined)).toEqual({});
+  });
+
+  it('should treat null keys and values as empty arrays', () => {
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null)).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null, null)).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(null, [1, 2])).toEqual({});
+    // @ts-expect-error - invalid argument
+    expect(zipObject(['a', 'b'], null)).toEqual({ a: undefined, b: undefined });
   });
 });

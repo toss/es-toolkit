@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { overArgs as overArgsToolkitCompat_ } from 'es-toolkit/compat';
-import { overArgs as overArgsLodash_ } from 'lodash';
+import { overArgs as overArgsToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const overArgsToolkitCompat = overArgsToolkitCompat_;
-const overArgsLodash = overArgsLodash_;
+const { overArgs: overArgsLodash } = lodash;
 
 function doubled(n: number) {
   return n * 2;
@@ -34,13 +33,13 @@ describe('overArgs - property shorthand', () => {
   const user2 = { name: 'Jane', age: 25 };
 
   bench('es-toolkit/overArgs - property shorthand', () => {
-    const func = overArgsToolkitCompat((name, age) => `${name} is ${age} years old`, ['name', 'age']);
+    const func = overArgsToolkitCompat((name, age) => `${name} is ${age} years old`, ['name', 'age'] as any[]);
     func(user1, user2);
     func(user2, user1);
   });
 
   bench('lodash/overArgs - property shorthand', () => {
-    const func = overArgsLodash((name, age) => `${name} is ${age} years old`, ['name', 'age']);
+    const func = overArgsLodash((name, age) => `${name} is ${age} years old`, ['name', 'age'] as any[]);
     func(user1, user2);
     func(user2, user1);
   });

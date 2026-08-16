@@ -15,8 +15,8 @@
  *
  * This function serves as a type guard in TypeScript, narrowing the type of the argument to `string`.
  *
- * @param {unknown} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid JSON string, else `false`.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is a valid JSON string, else `false`.
  *
  * @example
  * isJSON('{"name":"John","age":30}'); // true

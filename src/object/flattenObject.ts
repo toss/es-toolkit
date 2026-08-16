@@ -16,10 +16,10 @@ interface FlattenObjectOptions {
 /**
  * Flattens a nested object into a single level object with delimiter-separated keys.
  *
- * @param {object} object - The object to flatten.
- * @param {string} [options.delimiter='.'] - The delimiter to use between nested keys.
- * @param {boolean} [options.flattenArray=false] - Flatten array values.
- * @returns {Record<string, any>} - The flattened object.
+ * @param object - The object to flatten.
+ * @param [options.delimiter='.'] - The delimiter to use between nested keys.
+ * @param [options.flattenArray=false] - Flatten array values.
+ * @returns The flattened object.
  *
  * @example
  * const nestedObject = {
@@ -47,7 +47,12 @@ export function flattenObject(
   return flattenObjectImpl(object, '', delimiter, flattenArray);
 }
 
-function flattenObjectImpl(object: object, prefix = '', delimiter = '.', flattenArray = false): Record<string, any> {
+function flattenObjectImpl(
+  object: object,
+  prefix: string,
+  delimiter: string,
+  flattenArray: boolean
+): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 
@@ -62,7 +67,7 @@ function flattenObjectImpl(object: object, prefix = '', delimiter = '.', flatten
       continue;
     }
 
-    if (Array.isArray(value) && flattenArray) {
+    if (Array.isArray(value) && flattenArray && value.length > 0) {
       Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter, flattenArray));
       continue;
     }

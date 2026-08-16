@@ -1,32 +1,60 @@
 # sampleSize
 
-指定された `size` のサンプル要素の配列を返します。
-
-この関数は配列と数値を受け取ります。[Floydのアルゴリズム](https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html)を使用して、サンプリングされた要素を含む配列を返します。
-
-## インターフェース
+配列から指定された個数だけ無作為に選択された要素で構成される新しい配列を返します。
 
 ```typescript
-function sampleSize<T>(array: T[], size: number): T[];
+const sampled = sampleSize(array, size);
 ```
 
-### パラメータ
+## 使用法
 
-- `array` (`T[]`): サンプリングする配列です。
-- `size` (`number`): サンプリングするサイズです。
+### `sampleSize(array, size)`
 
-### 戻り値
-
-(`T[]`): サンプルサイズが適用された新しい配列です。
-
-### エラー
-
-`size` が `array` の長さより大きい場合、エラーをスローします。
-
-## 例
+配列から複数の要素を無作為にサンプリングしたい場合は `sampleSize` を使用してください。Floydのアルゴリズムを使用して効率的に重複のないランダムサンプルを生成します。アンケート調査でサンプルを抽出したり、ゲームで複数のアイテムを無作為に選択するときに便利です。
 
 ```typescript
-const result = sampleSize([1, 2, 3], 2);
-// 結果は配列の要素から2つを含む配列になります。
-// [1, 2] または [1, 3] または [2, 3]
+import { sampleSize } from 'es-toolkit/array';
+
+// 数値配列から3つを無作為に選択します。
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const randomNumbers = sampleSize(numbers, 3);
+// Returns: [2, 7, 9] (例、実際には無作為)
+
+// 文字列配列から2つを無作為に選択します。
+const fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+const randomFruits = sampleSize(fruits, 2);
+// Returns: ['cherry', 'apple'] (例、実際には無作為)
 ```
+
+様々なサイズでサンプリングできます。
+
+```typescript
+import { sampleSize } from 'es-toolkit/array';
+
+const items = ['a', 'b', 'c', 'd', 'e'];
+
+// 1つ選択
+const single = sampleSize(items, 1);
+// Returns: ['c'] (例)
+
+// 配列全体のサイズと同じ数を選択(シャッフル効果)
+const all = sampleSize(items, 5);
+// Returns: ['b', 'd', 'a', 'e', 'c'] (例)
+
+// 空の配列を選択
+const none = sampleSize(items, 0);
+// Returns: []
+```
+
+#### パラメータ
+
+- `array` (`readonly T[]`): サンプリングする配列です。
+- `size` (`number`): 選択する要素の個数です。
+
+#### 戻り値
+
+(`T[]`): 無作為に選択された要素で構成される新しい配列を返します。
+
+#### エラー
+
+`size` が配列の長さより大きい場合、エラーをスローします。

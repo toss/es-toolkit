@@ -1,47 +1,61 @@
 # attempt
 
-::: info
-重要提示：此函数不适用于异步函数（返回`Promise`的函数）。
-当传递异步函数时，它将返回`[null, Promise<T>]`，但如果Promise稍后被拒绝，则不会捕获任何错误。
-
-对于异步函数，建议使用`attemptAsync`函数代替。
-:::
-
-尝试执行函数并返回包含结果或错误的元组。
-
-## 签名
+执行函数并将结果或错误作为元组返回。
 
 ```typescript
-function attempt<T, E>(func: () => T): [null, T] | [E, null];
+const [error, result] = attempt(func);
 ```
 
-### 参数
+## 用法
 
-- `func` (`() => T`): 尝试执行的函数。
+### `attempt(func)`
 
-### 返回值
-
-(`[null, T] | [E, null]`): 一个元组，其中:
-
-- 成功时: `[null, T]` - 第一个元素为`null`，第二个为结果。
-- 出错时: `[E, null]` - 第一个元素为捕获的错误，第二个为`null`。
-
-## 示例
+当您想安全地执行函数时,请使用 `attempt`。它允许您在不使用 try-catch 块包装代码的情况下处理错误。
 
 ```typescript
 import { attempt } from 'es-toolkit/util';
 
-// 成功时返回 [null, 函数返回值] 元组。
+// 成功的情况
 const [error, result] = attempt(() => 42);
-// [null, 42]
+// error 为 null,result 为 42
 
-// 出错时返回 [函数抛出的错误, null] 元组。
+// 发生错误的情况
 const [error, result] = attempt(() => {
-  throw new Error('出现了问题');
+  throw new Error('出现问题了');
 });
-// [Error, null]
+// error 是 Error 对象,result 为 null
 
-// 使用泛型类型可以指定错误和返回值的类型。
+// 您也可以指定类型
 const [error, names] = attempt<string[], Error>(() => ['Alice', 'Bob']);
-// `error` 被推断为 `Error` 类型，`names` 被推断为 `string[]` 类型。
+// names 被推断为 string[] 类型
 ```
+
+::: warning 不要与异步函数一起使用
+
+此函数不适用于异步函数(返回 `Promise` 的函数)。如果传递异步函数,它将返回 `[null, Promise<T>]`,但即使 Promise 稍后被拒绝,它也无法捕获错误。
+
+对于异步函数,请改用 [`attemptAsync`](./attemptAsync.md) 函数。
+
+```typescript
+// 错误用法
+const [error, promise] = attempt(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+
+// 正确用法
+const [error, data] = await attemptAsync(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+```
+
+:::
+
+#### 参数
+
+- `func` (`() => T`):要执行的函数。
+
+#### 返回值
+
+(`[null, T] | [E, null]`):成功时返回 `[null, 结果值]` 元组,发生错误时返回 `[错误, null]` 元组。

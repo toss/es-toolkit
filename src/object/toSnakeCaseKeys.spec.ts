@@ -123,4 +123,32 @@ describe('snakeizeKeys', () => {
       }>;
     }>();
   });
+
+  it('should have correct TypeScript types for non-plain objects', () => {
+    const input = { a: new Date(), b: /test/, c: new Map() };
+    const result = toSnakeCaseKeys(input);
+
+    expectTypeOf(result.a).toEqualTypeOf<Date>();
+    expectTypeOf(result.b).toEqualTypeOf<RegExp>();
+    expectTypeOf(result.c).toEqualTypeOf<Map<any, any>>();
+  });
+
+  it('should convert uppercase keys to snake_case at both runtime and type level', () => {
+    const input = {
+      FIRST_NAME: 'JinHo',
+      LAST: 'Yeom',
+    } as const;
+
+    const result = toSnakeCaseKeys(input);
+
+    expect(result).toEqual({
+      first_name: 'JinHo',
+      last: 'Yeom',
+    });
+
+    expectTypeOf(result).toMatchTypeOf<{
+      first_name: 'JinHo';
+      last: 'Yeom';
+    }>();
+  });
 });

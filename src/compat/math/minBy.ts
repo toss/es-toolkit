@@ -1,5 +1,5 @@
-import { minBy as minByToolkit } from '../../array/minBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -8,14 +8,14 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * the `iteratee` to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>} iteratee
+ * @param items The array of elements to search.
+ * @param [iteratee=identity]
  * The criteria used to determine the minimum value.
  *  - If a **function** is provided, it extracts a numeric value from each element.
  *  - If a **string** is provided, it is treated as a key to extract values from the objects.
  *  - If a **[key, value]** pair is provided, it matches elements with the specified key-value pair.
  *  - If an **object** is provided, it matches elements that contain the specified properties.
- * @returns {T | undefined} The element with the minimum value as determined by the `iteratee`.
+ * @returns The element with the minimum value as determined by the `iteratee`.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
@@ -31,10 +31,35 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * minBy([{ a: 1 }, { a: 2 }], ['a', 1]); // Returns: { a: 2 }
  * minBy([{ a: 1 }, { a: 2 }], { a: 1 }); // Returns: { a: 2 }
  */
-export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T | undefined {
+export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee: ValueIteratee<T> = identity): T | undefined {
   if (items == null) {
     return undefined;
   }
 
-  return minByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
+  const array = toArray(items);
+
+  if (array.length === 0) {
+    return undefined;
+  }
+
+  const getValue = iterateeToolkit(iteratee);
+
+  let minElement: T | undefined;
+  let min: unknown;
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    const current = getValue(element, i, array);
+
+    if (current == null || Number.isNaN(current) || typeof current === 'symbol') {
+      continue;
+    }
+
+    if (min === undefined || current < (min as number)) {
+      min = current;
+      minElement = element;
+    }
+  }
+
+  return minElement;
 }

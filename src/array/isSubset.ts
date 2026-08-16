@@ -5,9 +5,9 @@ import { difference } from '../array/difference.ts';
  *
  *
  * @template T - The type of elements contained in the arrays.
- * @param {T[]} superset - The array that may contain all elements of the subset.
- * @param {T[]} subset - The array to check against the superset.
- * @returns {boolean} - Returns `true` if all elements of the `subset` are present in the `superset`, otherwise returns `false`.
+ * @param superset - The array that may contain all elements of the subset.
+ * @param subset - The array to check against the superset.
+ * @returns Returns `true` if all elements of the `subset` are present in the `superset`, otherwise returns `false`.
  *
  * @example
  * ```typescript

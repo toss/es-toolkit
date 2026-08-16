@@ -33,4 +33,16 @@ describe('takeWhile', () => {
     const result = takeWhile(arr, item => item.id < 3);
     expect(result).toEqual([{ id: 1 }, { id: 2 }]);
   });
+
+  it('should pass index to predicate function', () => {
+    const arr = [10, 20, 30, 40, 50];
+    const result = takeWhile(arr, (_, index) => index < 3);
+    expect(result).toEqual([10, 20, 30]);
+  });
+
+  it('should pass array to predicate function', () => {
+    const arr = [1, 2, 3, 4];
+    const result = takeWhile(arr, (value, index, array) => value < array.length);
+    expect(result).toEqual([1, 2, 3]);
+  });
 });

@@ -1,5 +1,6 @@
 import { intersection as intersectionToolkit } from '../../array/intersection.ts';
 import { uniq } from '../../array/uniq.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
@@ -10,8 +11,8 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * in every array.
  *
  * @template T - The type of elements in the arrays.
- * @param {...(ArrayLike<T> | null | undefined)} arrays - The arrays to compare.
- * @returns {T[]} A new array containing the elements that are present in all arrays.
+ * @param arrays - The arrays to compare.
+ * @returns A new array containing the elements that are present in all arrays.
  *
  * @example
  * const array1 = [1, 2, 3, 4, 5];
@@ -28,7 +29,7 @@ export function intersection<T>(...arrays: Array<ArrayLike<T> | null | undefined
     return [];
   }
 
-  let result: T[] = uniq(Array.from(arrays[0]));
+  let result: T[] = uniq(toArray(arrays[0]));
 
   for (let i = 1; i < arrays.length; i++) {
     const array = arrays[i];
@@ -37,7 +38,7 @@ export function intersection<T>(...arrays: Array<ArrayLike<T> | null | undefined
       return [];
     }
 
-    result = intersectionToolkit(result, Array.from(array));
+    result = intersectionToolkit(result, toArray(array));
   }
 
   return result;

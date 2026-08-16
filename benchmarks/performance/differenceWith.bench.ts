@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { differenceWith as differenceWithToolkit_ } from 'es-toolkit';
-import { differenceWith as differenceWithCompatToolkit_ } from 'es-toolkit/compat';
-import { differenceWith as differenceWithLodash_ } from 'lodash';
+import { differenceWith as differenceWithToolkit } from 'es-toolkit';
+import { differenceWith as differenceWithCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const differenceWithToolkit = differenceWithToolkit_;
-const differenceWithCompatToolkit = differenceWithCompatToolkit_;
-const differenceWithLodash = differenceWithLodash_;
+const { differenceWith: differenceWithLodash } = lodash;
 
 describe('differenceWith', () => {
   bench('es-toolkit/differenceWith', () => {

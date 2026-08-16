@@ -14,9 +14,9 @@ type Comparator<T> = (a: T, b: T) => boolean;
  * The order of result values is determined by the order they appear in the input array.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} arr  - The array to process.
- * @param {Comparator<T>} [comparator] - Optional function to compare elements for equality.
- * @returns {T[]} A new array with only unique values based on the comparator.
+ * @param arr  - The array to process.
+ * @param [comparator] - Optional function to compare elements for equality.
+ * @returns A new array with only unique values based on the comparator.
  *
  * @example
  * const array = [1, 2, 2, 3];
@@ -32,5 +32,12 @@ export function uniqWith<T>(arr: ArrayLike<T> | null | undefined, comparator?: C
     return [];
   }
 
-  return typeof comparator === 'function' ? uniqWithToolkit(Array.from(arr), comparator) : uniqToolkit(Array.from(arr));
+  if (typeof comparator !== 'function') {
+    return uniqToolkit(Array.from(arr));
+  }
+
+  // `es-toolkit`'s `uniqWith` invokes the comparator as `(kept, candidate)`, but
+  // lodash documents and invokes it as `(candidate, kept)`. Swap the arguments so
+  // that asymmetric comparators behave the same as in lodash.
+  return uniqWithToolkit(Array.from(arr), (kept, candidate) => comparator(candidate, kept));
 }

@@ -1,35 +1,53 @@
 # flatten
 
-将作为参数传递的嵌套数组展开到指定的深度。
-
-它与 JavaScript 默认提供的 [Array.prototype.flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 功能相同，并返回相同的类型。不过，其性能更优秀。
-
-## 签名
+将嵌套数组扁平化到指定深度,返回一个新数组。
 
 ```typescript
-function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<T[], D>>;
+const result = flatten(arr, depth);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要展开的数组。
-- `depth` (`D`): 展开的深度，默认为 1。
+### `flatten(arr, depth = 1)`
 
-### 返回值
+当您想将嵌套数组扁平化到特定深度时,请使用 `flatten`。它将数组内的数组展开到指定级别,形成平面结构。
 
-(`Array<FlatArray<T[], D>>`) 展开后的新数组。
-
-## 示例
+与 JavaScript 内置的 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 效果相同,但速度更快。
 
 ```typescript
-const originArr = [1, [2, 3], [4, [5, 6]]];
+import { flatten } from 'es-toolkit/array';
 
-const array1 = flatten(originArr);
-// 返回 [1, 2, 3, 4, [5, 6]]
+// 使用默认深度 1 进行扁平化
+const array = [1, [2, 3], [4, [5, 6]]];
+flatten(array);
+// Returns: [1, 2, 3, 4, [5, 6]]
 
-const array2 = flatten(originArr, 1);
-// 返回 [1, 2, 3, 4, [5, 6]]
-
-const array3 = flatten(originArr, 2);
-// 返回 [1, 2, 3, 4, 5, 6]
+// 使用深度 2 进行扁平化
+flatten(array, 2);
+// Returns: [1, 2, 3, 4, 5, 6]
 ```
+
+可以调整深度,只扁平化到想要的级别。
+
+```typescript
+import { flatten } from 'es-toolkit/array';
+
+const array = [1, [2, 3], [4, [5, 6]]];
+
+// 使用深度 1 进行扁平化(默认值)
+const result1 = flatten(array, 1);
+// Returns: [1, 2, 3, 4, [5, 6]]
+
+// 使用深度 2 进行扁平化
+const result2 = flatten(array, 2);
+// Returns: [1, 2, 3, 4, 5, 6]
+```
+
+#### 参数
+
+- `arr` (`T[]`): 要扁平化的嵌套数组。
+- `depth` (`D`, 可选): 扁平化的深度。默认值为 `1`。
+
+#### 返回值
+
+(`Array<FlatArray<T[], D>>`): 返回扁平化到指定深度的新数组。

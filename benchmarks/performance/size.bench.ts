@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { size as sizeToolkit_ } from 'es-toolkit/compat';
-import { size as sizeLodash_ } from 'lodash';
+import { size as sizeToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const sizeToolkit = sizeToolkit_;
-const sizeLodash = sizeLodash_;
+const { size: sizeLodash } = lodash;
 
 describe('size', () => {
   bench('es-toolkit/size', () => {

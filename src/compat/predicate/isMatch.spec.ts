@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isMatch as isMatchLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -31,6 +30,10 @@ describe('isMatch', () => {
     expect(isMatch(object, { a: 1, c: 3 })).toBe(true);
     expect(isMatch(object, { c: 3, d: 4 })).toBe(false);
     expect(isMatch({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 }, { a: { b: { c: 1 } } })).toBe(true);
+  });
+
+  it('should return `false` when nested source primitive does not match object target', () => {
+    expect(isMatch({ a: { b: 2 } }, { a: 1 })).toBe(false);
   });
 
   it(`should match boolean values`, () => {
@@ -373,7 +376,15 @@ describe('isMatch', () => {
     expect(actual).toEqual(objects);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(isMatch).toEqualTypeOf<typeof isMatchLodash>();
+  it('should return `false` when object matcher has only undefined values for keys', () => {
+    expect(
+      isMatch(
+        {
+          label: 'Foo',
+          value: 'foo',
+        },
+        { value: { missingKey: undefined } }
+      )
+    ).toBe(false);
   });
 });

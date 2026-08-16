@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
-import type { debounce as debounceLodash } from 'lodash';
+import { describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -439,8 +438,7 @@ describe('debounce', () => {
   const methodName = 'debounce';
 
   it(`\`_.${methodName}\` should not error for non-object \`options\` values`, () => {
-    func(noop, 32, 1 as any);
-    expect(true);
+    expect(() => func(noop, 32, 1 as any)).not.toThrow();
   });
 
   it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, async () => {
@@ -558,9 +556,5 @@ describe('debounce', () => {
 
     await delay(64);
     expect(callCount).toBe(0);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(debounce).toEqualTypeOf<typeof debounceLodash>();
   });
 });

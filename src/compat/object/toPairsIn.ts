@@ -6,8 +6,8 @@ import { setToEntries } from '../_internal/setToEntries.ts';
  * Creates an array of key-value pairs from an object, including inherited properties.
  *
  * @template T
- * @param {Record<string, T> | Record<number, T>} object - The object to query.
- * @returns {Array<[string, T]>} Returns the array of key-value pairs.
+ * @param object - The object to query.
+ * @returns Returns the array of key-value pairs.
  *
  * @example
  * const object = { a: 1, b: 2 };
@@ -18,8 +18,8 @@ export function toPairsIn<T>(object?: Record<string, T> | Record<number, T>): Ar
 /**
  * Creates an array of key-value pairs from an object, including inherited properties.
  *
- * @param {object} object - The object to query.
- * @returns {Array<[string, any]>} Returns the array of key-value pairs.
+ * @param object - The object to query.
+ * @returns Returns the array of key-value pairs.
  *
  * @example
  * const object = { a: 1, b: 2 };
@@ -30,8 +30,8 @@ export function toPairsIn(object?: object): Array<[string, any]>;
 /**
  * Creates an array of key-value pairs from an object, set, or map, including inherited properties.
  *
- * @param {Record<string, T> | Record<number, T> | object} object The object, set, or map to query.
- * @returns {Array<[string, T]> | Array<[string, any]>} Returns the array of key-value pairs.
+ * @param object The object, set, or map to query.
+ * @returns Returns the array of key-value pairs.
  * @example
  * const object = { a: 1, b: 2 };
  * toPairsIn(object); // [['a', 1], ['b', 2]]

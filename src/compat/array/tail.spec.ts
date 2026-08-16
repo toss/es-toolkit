@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { tail as tailLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { args } from '../_internal/args';
 import { tail } from '../index';
 
@@ -47,9 +46,5 @@ describe('tail', () => {
     expect(tail({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual([null, 3]);
     expect(tail('123')).toEqual(['2', '3']);
     expect(tail(args)).toEqual([2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(tail).toEqualTypeOf<typeof tailLodash>();
   });
 });

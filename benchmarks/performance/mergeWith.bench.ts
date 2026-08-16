@@ -1,17 +1,15 @@
 import { bench, describe } from 'vitest';
-import { mergeWith as mergeWithToolkit_ } from 'es-toolkit';
-import { mergeWith as mergeWithCompatToolkit_ } from 'es-toolkit/compat';
-import { mergeWith as mergeWithLodash_ } from 'lodash';
+import { mergeWith as mergeWithToolkit } from 'es-toolkit';
+import { mergeWith as mergeWithCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const mergeWithToolkit = mergeWithToolkit_;
-const mergeWithCompatToolkit = mergeWithCompatToolkit_;
-const mergeWithLodash = mergeWithLodash_;
+const { mergeWith: mergeWithLodash } = lodash;
 
 const object = { a: 1, b: 2 };
 
 const other = { b: 3, c: 4 };
 
-const merge = (targetValue: any, sourceValue: any) => {
+const merge = (targetValue: unknown, sourceValue: unknown) => {
   if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
     return targetValue + sourceValue;
   }

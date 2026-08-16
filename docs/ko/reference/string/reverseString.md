@@ -1,34 +1,54 @@
 # reverseString
 
-문자열을 뒤집어요.
-
-이 함수는 문자열을 입력으로 받아서 그 문자열의 역순을 반환해요.
-
-## 인터페이스
+문자열을 거꾸로 뒤집어요.
 
 ```typescript
-function reverseString(value: string): string;
+const reversed = reverseString(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`string`): 뒤집을 문자열.
+### `reverseString(value)`
 
-### 반환 값
-
-(`string`): 뒤집힌 문자열.
-
-## 예시
+문자열의 글자 순서를 거꾸로 뒤집고 싶을 때 `reverseString`을 사용하세요. 유니코드 문자와 이모지도 올바르게 처리해요.
 
 ```typescript
 import { reverseString } from 'es-toolkit/string';
 
-const reversedStr1 = reverseString('hello'); // returns 'olleh'
-const reversedStr2 = reverseString('PascalCase'); // returns 'esaClacsaP'
-const reversedStr3 = reverseString('foo 😄 bar'); // returns 'rab 😄 oof'
+// 기본 문자열 뒤집기
+reverseString('hello'); // 'olleh'
+reverseString('world'); // 'dlrow'
+
+// 대소문자가 섞인 문자열
+reverseString('PascalCase'); // 'esaClacsaP'
+
+// 공백이 포함된 문자열
+reverseString('hello world'); // 'dlrow olleh'
 ```
 
-## 데모
+이모지와 특수 문자도 정확하게 처리해요.
+
+```typescript
+import { reverseString } from 'es-toolkit/string';
+
+// 이모지가 포함된 문자열
+reverseString('foo 😄 bar'); // 'rab 😄 oof'
+reverseString('안녕하세요'); // '요세하녕안'
+
+// 숫자와 특수 문자
+reverseString('12345'); // '54321'
+reverseString('a-b-c'); // 'c-b-a'
+```
+
+#### 파라미터
+
+- `value` (`string`): 뒤집을 문자열이에요.
+
+#### 반환 값
+
+(`string`): 글자 순서가 뒤집힌 새로운 문자열을 반환해요.
+
+## 사용해보기
 
 ::: sandpack
 

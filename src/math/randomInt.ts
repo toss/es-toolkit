@@ -3,8 +3,8 @@ import { random } from './random.ts';
 /**
  * Generates a random integer between 0 (inclusive) and the given maximum (exclusive).
  *
- * @param {number} maximum - The upper bound (exclusive).
- * @returns {number} A random integer between 0 (inclusive) and maximum (exclusive).
+ * @param maximum - The upper bound (exclusive).
+ * @returns A random integer between 0 (inclusive) and maximum (exclusive).
  * @throws {Error} Throws an error if `maximum` is not greater than `0`.
  *
  * @example
@@ -15,9 +15,9 @@ export function randomInt(maximum: number): number;
 /**
  * Generates a random integer between minimum (inclusive) and maximum (exclusive).
  *
- * @param {number} minimum - The lower bound (inclusive).
- * @param {number} maximum - The upper bound (exclusive).
- * @returns {number} A random integer between minimum (inclusive) and maximum (exclusive).
+ * @param minimum - The lower bound (inclusive).
+ * @param maximum - The upper bound (exclusive).
+ * @returns A random integer between minimum (inclusive) and maximum (exclusive).
  * @throws {Error} Throws an error if `maximum` is not greater than `minimum`.
  *
  * @example
@@ -31,9 +31,9 @@ export function randomInt(minimum: number, maximum: number): number;
  *
  * If only one argument is provided, a number between `0` and the given number is returned.
  *
- * @param {number} minimum - The lower bound (inclusive).
- * @param {number} maximum - The upper bound (exclusive).
- * @returns {number} A random integer between minimum (inclusive) and maximum (exclusive).
+ * @param minimum - The lower bound (inclusive).
+ * @param maximum - The upper bound (exclusive).
+ * @returns A random integer between minimum (inclusive) and maximum (exclusive).
  * @throws {Error} Throws an error if `maximum` is not greater than `minimum`.
  *
  * @example

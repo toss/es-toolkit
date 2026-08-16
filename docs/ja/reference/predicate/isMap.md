@@ -1,34 +1,48 @@
 # isMap
 
-与えられた値が`Map`であるかどうかを確認します。
-
-この関数は、与えられた値が`Map`のインスタンスであるかどうかをテストします。
-その値が`Map`である場合は`true`を返し、そうでない場合は`false`を返します。
-
-この関数は、TypeScriptでも型ガードとして使用できます。
-
-## インターフェース
+値がMapかどうかを確認します。
 
 ```typescript
-function isMap(value: unknown): value is Map<any, any>;
+const result = isMap(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`unknown`): `Map`かどうか確認する値。
+### `isMap(value)`
 
-### 戻り値
-
-(`value is Map<any, any>`): 値が`Map`の場合は`true`、そうでない場合は`false`。
-
-## 例
+値がMapインスタンスかどうかを確認したい場合は`isMap`を使用してください。`instanceof`演算子を使用して`Map`かどうかを検査します。
 
 ```typescript
-const value1 = new Map();
-const value2 = new Set();
-const value3 = new WeakMap();
+import { isMap } from 'es-toolkit/predicate';
 
-console.log(isMap(value1)); // true
-console.log(isMap(value2)); // false
-console.log(isMap(value3)); // false
+// Mapインスタンス
+const map = new Map([['key', 'value']]);
+console.log(isMap(map)); // true
+
+// Mapではない値
+console.log(isMap(new Set())); // false
+console.log(isMap(new WeakMap())); // false
+console.log(isMap({})); // false
+console.log(isMap([])); // false
+console.log(isMap(null)); // false
 ```
+
+TypeScriptでタイプガードとしても使用できます。
+
+```typescript
+function processValue(value: unknown) {
+  if (isMap(value)) {
+    // ここでvalueはMap<any, any>型に絞り込まれます
+    console.log(value.size);
+    value.set('new-key', 'new-value');
+  }
+}
+```
+
+#### パラメータ
+
+- `value` (`unknown`): `Map`かどうか確認する値です。
+
+#### 戻り値
+
+(`value is Map<any, any>`): 値がMapの場合は`true`、そうでない場合は`false`を返します。

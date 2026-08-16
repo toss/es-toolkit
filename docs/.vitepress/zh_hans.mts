@@ -1,9 +1,31 @@
-import path from 'node:path';
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { getSidebarItems } from './libs/getSidebarItems.mts';
-import { sortByText } from './libs/sortByText.mts';
+import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSidebar.mts';
 
-const docsRoot = path.resolve(import.meta.dirname, '..');
+const labels: SidebarLabels = {
+  guide: '指南',
+  reference: '参考',
+  guideItems: {
+    introduction: '简介',
+    installation: '安装和使用',
+    bundleSize: '包体积',
+    performance: '性能',
+    aiIntegration: 'AI 集成',
+  },
+  categories: {
+    array: '数组工具',
+    bigint: 'BigInt 工具',
+    function: '函数工具',
+    map: 'Map 工具',
+    math: '数学工具',
+    object: '对象工具',
+    predicate: '谓词',
+    promise: 'Promise 工具',
+    set: 'Set 工具',
+    string: '字符串工具',
+    util: '工具函数',
+    error: '错误',
+  },
+};
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
@@ -11,9 +33,11 @@ export const zh_hans = defineConfig({
   description: '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
 
   themeConfig: {
+    darkModeSwitchLabel: '深色模式',
+
     nav: nav(),
 
-    sidebar: sidebar(),
+    sidebar: buildFlavorSidebar({ locale: 'zh_hans', labels }),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
@@ -32,89 +56,8 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '主页', link: '/zh_hans/' },
     { text: '简介', link: '/zh_hans/intro' },
     { text: '参考', link: '/zh_hans/reference/array/at' },
-  ];
-}
-
-function sidebar(): DefaultTheme.Sidebar {
-  return [
-    {
-      text: '指南',
-      items: [
-        { text: '简介', link: '/zh_hans/intro' },
-        { text: '安装和使用', link: '/zh_hans/usage' },
-        { text: '包体积影响', link: '/zh_hans/bundle-size' },
-        { text: '性能', link: '/zh_hans/performance' },
-        { text: '与 Lodash 兼容性', link: '/zh_hans/compatibility' },
-      ],
-    },
-    {
-      text: '参考',
-      items: sortByText([
-        {
-          text: '数组工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'array'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'array'),
-          ],
-        },
-        {
-          text: '函数工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'function'),
-          ],
-        },
-        {
-          text: '数学工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'math'),
-          ],
-        },
-        {
-          text: '对象工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'object'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'object'),
-          ],
-        },
-        {
-          text: '谓词',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'predicate'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
-          ],
-        },
-        {
-          text: 'Promise 工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'promise'),
-          ],
-        },
-        {
-          text: '字符串工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'string'),
-          ],
-        },
-        {
-          text: '工具函数',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
-          ],
-        },
-        {
-          text: '错误',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'error'),
-          ],
-        },
-      ]),
-    },
+    { text: 'Lodash 兼容性', link: '/zh_hans/compat/intro' },
+    { text: '演练场', link: '/zh_hans/playground' },
   ];
 }
 

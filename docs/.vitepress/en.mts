@@ -1,9 +1,31 @@
-import path from 'node:path';
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { getSidebarItems } from './libs/getSidebarItems.mts';
-import { sortByText } from './libs/sortByText.mts';
+import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSidebar.mts';
 
-const docsRoot = path.resolve(import.meta.dirname, '..');
+const labels: SidebarLabels = {
+  guide: 'Guide',
+  reference: 'Reference',
+  guideItems: {
+    introduction: 'Introduction',
+    installation: 'Installation & Usage',
+    bundleSize: 'Bundle Size',
+    performance: 'Performance',
+    aiIntegration: 'AI Integration',
+  },
+  categories: {
+    array: 'Array Utilities',
+    bigint: 'BigInt Utilities',
+    function: 'Function Utilities',
+    map: 'Map Utilities',
+    math: 'Math Utilities',
+    object: 'Object Utilities',
+    predicate: 'Predicates',
+    promise: 'Promise Utilities',
+    set: 'Set Utilities',
+    string: 'String Utilities',
+    util: 'Utility Functions',
+    error: 'Errors',
+  },
+};
 
 export const en = defineConfig({
   lang: 'en',
@@ -11,9 +33,11 @@ export const en = defineConfig({
     'A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.',
 
   themeConfig: {
+    darkModeSwitchLabel: 'Dark Mode',
+
     nav: nav(),
 
-    sidebar: sidebar(),
+    sidebar: buildFlavorSidebar({ locale: '', labels }),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
@@ -32,88 +56,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'Home', link: '/' },
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/at' },
-  ];
-}
-
-function sidebar(): DefaultTheme.Sidebar {
-  return [
-    {
-      text: 'Guide',
-      items: [
-        { text: 'Introduction', link: '/intro' },
-        { text: 'Installation & Usage', link: '/usage' },
-        { text: 'Impact on Bundle Size', link: '/bundle-size' },
-        { text: 'Performance', link: '/performance' },
-        { text: 'Compatibility with Lodash', link: '/compatibility' },
-      ],
-    },
-    {
-      text: 'Reference',
-      items: sortByText([
-        {
-          text: 'Array Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'array'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'array'),
-          ],
-        },
-        {
-          text: 'Function Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'function'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'function'),
-          ],
-        },
-        {
-          text: 'Math Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'math'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'math'),
-          ],
-        },
-        {
-          text: 'Object Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'object'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'object'),
-          ],
-        },
-        {
-          text: 'Predicates',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'predicate'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'predicate'),
-          ],
-        },
-        {
-          text: 'Promise Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'promise'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'promise'),
-          ],
-        },
-        {
-          text: 'String Utilities',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'string'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'string'),
-          ],
-        },
-        {
-          text: 'Utility Functions',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'util'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'util'),
-          ],
-        },
-        {
-          text: 'Errors',
-          items: [
-            ...getSidebarItems(docsRoot, 'reference', 'error'),
-            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'error'),
-          ],
-        },
-      ]),
-    },
+    { text: 'Lodash Compatibility', link: '/compat/intro' },
+    { text: 'Playground', link: '/playground' },
   ];
 }

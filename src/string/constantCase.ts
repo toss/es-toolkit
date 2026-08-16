@@ -5,8 +5,8 @@ import { words as getWords } from './words.ts';
  *
  * Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.
  *
- * @param {string} str - The string that is to be changed to constant case.
- * @returns {string} - The converted string to constant case.
+ * @param str - The string that is to be changed to constant case.
+ * @returns The converted string to constant case.
  *
  * @example
  * const convertedStr1 = constantCase('camelCase') // returns 'CAMEL_CASE'

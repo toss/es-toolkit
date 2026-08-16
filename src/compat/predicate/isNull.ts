@@ -1,8 +1,8 @@
 /**
  * Checks if `value` is `null`.
  *
- * @param {any} value - The value to check.
- * @returns {value is null} Returns `true` if `value` is `null`, else `false`.
+ * @param value - The value to check.
+ * @returns Returns `true` if `value` is `null`, else `false`.
  *
  * @example
  * isNull(null); // true

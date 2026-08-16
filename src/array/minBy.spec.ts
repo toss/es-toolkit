@@ -35,9 +35,21 @@ describe('minBy', () => {
     expect(result).toBeUndefined();
   });
 
-  it('should handle arrays with NaN values correctly', () => {
-    const numbers = [1, Number.NaN, 3, 2];
-    const result = minBy(numbers, x => x);
-    expect(result).toBe(1);
+  it('should propagate NaN regardless of its position, matching Math.min', () => {
+    expect(minBy([Number.NaN, 3, 1, 2], x => x)).toBeNaN();
+    expect(minBy([3, Number.NaN, 1, 2], x => x)).toBeNaN();
+    expect(minBy([3, 1, 2, Number.NaN], x => x)).toBeNaN();
+  });
+
+  it('should provide index parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = minBy(items, (item, index) => item.value + index);
+    expect(result).toEqual({ value: 10 });
+  });
+
+  it('should provide array parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = minBy(items, (item, _index, array) => item.value * array.length);
+    expect(result).toEqual({ value: 10 });
   });
 });

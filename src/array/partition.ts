@@ -6,13 +6,42 @@
  * the second array contains elements for which the predicate function returns false.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to partition.
- * @param {(value: T) => boolean} isInTruthy - A predicate function that determines
- * whether an element should be placed in the truthy array. The function is called with each
- * element of the array.
- * @returns {[T[], T[]]} A tuple containing two arrays: the first array contains elements for
+ * @template {T} U - The type being filtered for.
+ * @param arr - The array to partition.
+ * @param isInTruthy - A type guard that determines whether an
+ * element should be placed in the truthy array. The function is called with each element
+ * of the array and its index.
+ * @returns A tuple containing two arrays: the first array contains elements for
  * which the predicate returned true, and the second array contains elements for which the
  * predicate returned false.
+ *
+ * @example
+ * const array = [1, 2, 3, 4] as const;
+ * const isEven = (x: number): x is 2 | 4 => x % 2 === 0;
+ * const [even, odd]: [(2 | 4)[], (2 | 4)[]] = partition(array, isEven);
+ * // even will be [2, 4], and odd will be [1, 3]
+ */
+export function partition<T, U extends T>(
+  arr: readonly T[],
+  isInTruthy: (value: T, index: number, array: readonly T[]) => value is U
+): [truthy: U[], falsy: Array<Exclude<T, U>>];
+
+/**
+ * Splits an array into two groups based on a predicate function.
+ *
+ * This function takes an array and a predicate function. It returns a tuple of two arrays:
+ * the first array contains elements for which the predicate function returns true, and
+ * the second array contains elements for which the predicate function returns false.
+ *
+ * @template T - The type of elements in the array.
+ * @param arr - The array to partition.
+ * @param isInTruthy - A predicate function that determines
+ * whether an element should be placed in the truthy array. An element is placed in the truthy
+ * array when the function returns a truthy value. The function is called with each
+ * element of the array and its index.
+ * @returns A tuple containing two arrays: the first array contains elements for
+ * which the predicate returned a truthy value, and the second array contains elements for which the
+ * predicate returned a falsy value.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];
@@ -20,13 +49,20 @@
  * const [even, odd] = partition(array, isEven);
  * // even will be [2, 4], and odd will be [1, 3, 5]
  */
-export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
+export function partition<T>(
+  arr: readonly T[],
+  isInTruthy: (value: T, index: number, array: readonly T[]) => unknown
+): [truthy: T[], falsy: T[]];
+export function partition<T>(
+  arr: readonly T[],
+  isInTruthy: (value: T, index: number, array: readonly T[]) => unknown
+): [truthy: T[], falsy: T[]] {
   const truthy: T[] = [];
   const falsy: T[] = [];
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
-    if (isInTruthy(item)) {
+    if (isInTruthy(item, i, arr)) {
       truthy.push(item);
     } else {
       falsy.push(item);

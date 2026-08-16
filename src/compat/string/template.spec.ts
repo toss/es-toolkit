@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { template as templateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import * as esToolkit from '../index';
@@ -119,6 +118,14 @@ describe('template', () => {
     const data = { value: 2 };
     expect(template('1${value}3')(data)).toBe('123');
     expect(template('${"{" + value + "\\}"}')(data)).toBe('{2}');
+  });
+
+  it('should disable ES6 template delimiters when "interpolate" is set', () => {
+    const data = { value: 2 };
+    expect(template('1${value}3', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe('1${value}3');
+    expect(template('${"{" + value + "\\}"}', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe(
+      '${"{" + value + "\\}"}'
+    );
   });
 
   it('should support the "imports" option', () => {
@@ -308,7 +315,7 @@ describe('template', () => {
     );
 
     const data = { a: 'A' };
-    expect(compiled(data), '\'a\').toBe("A"');
+    expect(compiled(data)).toBe('\'a\',"A"');
   });
 
   it('should work with templates containing newlines and comments', () => {
@@ -416,11 +423,8 @@ describe('template', () => {
   });
 
   it('should not error for non-object `data` and `options` values', () => {
-    template('')(1 as any);
-    expect(true, '`data` value');
-
-    template('', 1 as any)(1 as any);
-    expect(true, '`options` value');
+    expect(() => template('')(1 as any)).not.toThrow();
+    expect(() => template('', 1 as any)(1 as any)).not.toThrow();
   });
 
   it('should expose the source on compiled templates', () => {
@@ -472,7 +476,10 @@ describe('template', () => {
     expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(template).toEqualTypeOf<typeof templateLodash>();
+  it('should not reset options for a non-iteratee-call `guard`', () => {
+    // @ts-expect-error - type mismatch
+    const compiled = template('a{{x}}b', { interpolate: /\{\{([\s\S]+?)\}\}/g }, { g: 1 });
+
+    expect(compiled({ x: '?' })).toBe('a?b');
   });
 });

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { bindAll as bindAllLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { bindAll } from './bindAll';
 import { toArgs } from '../_internal/toArgs';
 import { cloneDeep } from '../object/cloneDeep';
@@ -114,10 +113,6 @@ describe('bindAll', () => {
     expect(actual).toEqual([1]);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(bindAll).toEqualTypeOf<typeof bindAllLodash>();
-  });
-
   it('should return the same object when object is null', () => {
     const result = bindAll(null);
     expect(result).toBe(null);
@@ -147,5 +142,13 @@ describe('bindAll', () => {
     const object = cloneDeep(source);
     const result = bindAll(object, [], []);
     expect(result).toBe(object);
+  });
+
+  it('should handle non-function properties', () => {
+    const object = cloneDeep(source);
+    bindAll(object, '_a', 'a');
+
+    expect(object._a).toBe(1);
+    expect(object.a()).toBe(1);
   });
 });

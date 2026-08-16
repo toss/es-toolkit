@@ -1,39 +1,67 @@
 # isSubsetWith
 
-`subset` 配列が `superset`配列のサブセットであるかどうかを確認します。
-
-この関数は2つの配列と比較関数を受け取ります。比較関数は要素が同じかどうかを判断するために使用されます。この関数は `subset` 配列のすべての要素が `superset` 配列に存在する場合に `true` を返し、そうでない場合は `false` を返します。
-
-## インターフェース
+ユーザー定義比較関数を基準に、一つの配列が他の配列の部分集合かどうかを確認します。
 
 ```typescript
-function isSubsetWith<T>(superset: T[], subset: T[], areItemsEqual: (x: T, y: T) => boolean): boolean;
+const result = isSubsetWith(superset, subset, areItemsEqual);
 ```
 
-### パラメータ
+## 使用法
 
-- `superset` (`T[]`): サブセットのすべての要素を含む可能性のある配列です。
-- `subset` (`T[]`): スーパーセット配列に含まれているかどうかを比較する配列です。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が等しいかどうかを判定する関数。
+### `isSubsetWith(superset, subset, areItemsEqual)`
 
-### 戻り値
-
-(`boolean`): `subset` 配列が `superset` 配列にすべて含まれている場合は `true` を返します。
-
-## 例
+ユーザーが定義した比較関数で部分集合関係を確認したい場合は `isSubsetWith` を使用してください。オブジェクトを比較したり、特別な比較ロジックが必要な場合に便利です。
 
 ```typescript
-const superset = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const subset = [{ id: 2 }, { id: 1 }];
-const areItemsEqual = (a, b) => a.id === b.id;
+import { isSubsetWith } from 'es-toolkit/array';
 
-isSubsetWith(superset, subset, areItemsEqual);
-// true を返します。
+// オブジェクトのidで部分集合を確認
+const users = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const targetUsers = [
+  { id: 2, name: 'jane' },
+  { id: 1, name: 'john' },
+];
+isSubsetWith(users, targetUsers, (a, b) => a.id === b.id);
+// Returns: true
 
-const superset = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const subset = [{ id: 4 }];
-const areItemsEqual = (a, b) => a.id === b.id;
-
-isSubsetWith(superset, subset, areItemsEqual);
-// false を返します。
+// 部分集合でない場合
+const allUsers = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+];
+const someUsers = [{ id: 3, name: 'bob' }];
+isSubsetWith(allUsers, someUsers, (a, b) => a.id === b.id);
+// Returns: false
 ```
+
+複雑な比較ロジックも使用できます。
+
+```typescript
+import { isSubsetWith } from 'es-toolkit/array';
+
+// 大文字小文字を区別しない文字列比較
+const validNames = ['Alice', 'Bob', 'Charlie'];
+const userNames = ['alice', 'BOB'];
+isSubsetWith(validNames, userNames, (a, b) => a.toLowerCase() === b.toLowerCase());
+// Returns: true
+
+// 範囲内の数値比較
+const validRanges = [1, 2, 3, 4, 5];
+const testNumbers = [1.1, 2.8];
+isSubsetWith(validRanges, testNumbers, (a, b) => Math.abs(a - b) < 0.5);
+// Returns: true (1.1は1と、2.8は3と十分に近い)
+```
+
+#### パラメータ
+
+- `superset` (`readonly T[]`): 部分集合のすべての要素を含むことができる上位集合配列です。
+- `subset` (`readonly T[]`): 上位集合に含まれているかを確認する部分集合配列です。
+- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が等しいかを判断する関数です。等しい場合は `true`、異なる場合は `false` を返す必要があります。
+
+#### 戻り値
+
+(`boolean`): ユーザー定義比較関数を基準に、部分集合のすべての要素が上位集合に含まれている場合は `true`、そうでない場合は `false` を返します。

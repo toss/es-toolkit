@@ -9,8 +9,8 @@ import { times } from '../util/times.ts';
  *
  * Non-object values are coerced to objects.
  *
- * @param {object} object The object to query.
- * @returns {string[]} Returns the array of property names.
+ * @param object The object to query.
+ * @returns Returns the array of property names.
  * @example
  * function Foo() {
  *   this.a = 1;
@@ -55,5 +55,11 @@ function arrayLikeKeys(object: ArrayLike<any>): string[] {
     filteredKeys.add('byteOffset');
   }
 
-  return [...indices, ...Object.keys(object).filter(key => !filteredKeys.has(key))];
+  const inheritedKeys = Object.keys(object).filter(key => !filteredKeys.has(key));
+
+  if (Array.isArray(object)) {
+    return [...indices, ...inheritedKeys];
+  }
+
+  return [...indices.filter(index => Object.hasOwn(object, index)), ...inheritedKeys];
 }

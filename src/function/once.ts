@@ -2,8 +2,8 @@
  * Creates a function that is restricted to invoking func once. Repeat calls to the function return the value of the first invocation.
  *
  * @template F - The type of the function.
- * @param {F} func - The function to restrict.
- * @returns {F} Returns the new restricted function.
+ * @param func - The function to restrict.
+ * @returns Returns the new restricted function.
  *
  * @example
  * const initialize = once(createApplication);
@@ -19,8 +19,8 @@ export function once<F extends (...args: any[]) => any>(func: F): F;
  * Repeated calls to the function will return the value from the first invocation.
  *
  * @template F - The type of function.
- * @param {F} func - The function to restrict.
- * @returns {F} A new function that invokes `func` once and caches the result.
+ * @param func - The function to restrict.
+ * @returns A new function that invokes `func` once and caches the result.
  *
  * @example
  * const initialize = once(() => {

@@ -1,14 +1,12 @@
 import { bench, describe } from 'vitest';
-import { isEqualWith as isEqualWithToolkit_ } from 'es-toolkit';
-import { isEqualWith as isEqualWithToolkitCompat_ } from 'es-toolkit/compat';
-import { isEqualWith as isEqualWithLodash_ } from 'lodash';
+import { isEqualWith as isEqualWithToolkit } from 'es-toolkit';
+import { isEqualWith as isEqualWithToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isEqualWithToolkit = isEqualWithToolkit_;
-const isEqualWithToolkitCompat = isEqualWithToolkitCompat_;
-const isEqualWithLodash = isEqualWithLodash_;
+const { isEqualWith: isEqualWithLodash } = lodash;
 
 describe('isEqualWith primitives', () => {
-  const customizer = (a, b) => {
+  const customizer = (a: unknown, b: unknown) => {
     if (typeof a === 'string' && typeof b === 'string') {
       return a.toLowerCase() === b.toLowerCase();
     }
@@ -52,7 +50,7 @@ describe('isEqualWith primitives', () => {
 });
 
 describe('isEqualWith dates', () => {
-  const customizer = (a, b) => {
+  const customizer = (a: unknown, b: unknown) => {
     if (a instanceof Date && b instanceof Date) {
       return a.getTime() === b.getTime();
     }
@@ -74,7 +72,7 @@ describe('isEqualWith dates', () => {
 });
 
 describe('isEqualWith RegExps', () => {
-  const customizer = (a, b) => {
+  const customizer = (a: unknown, b: unknown) => {
     if (a instanceof RegExp && b instanceof RegExp) {
       return a.source === b.source;
     }
@@ -96,8 +94,8 @@ describe('isEqualWith RegExps', () => {
 });
 
 describe('isEqualWith objects', () => {
-  const customizer = (a, b) => {
-    if (typeof a === 'object' && typeof b === 'object') {
+  const customizer = (a: unknown, b: unknown) => {
+    if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
       return Object.keys(a).length === Object.keys(b).length;
     }
   };
@@ -121,7 +119,7 @@ describe('isEqualWith objects', () => {
 });
 
 describe('isEqualWith arrays', () => {
-  const customizer = (a, b) => {
+  const customizer = (a: unknown, b: unknown) => {
     if (Array.isArray(a) && Array.isArray(b)) {
       return a.length === b.length;
     }

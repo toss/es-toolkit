@@ -1,37 +1,39 @@
 # mapKeys
 
-키를 `getNewKey` 함수가 반환한 키로 바꾼 새로운 객체를 반환해요. 값은 원래 객체의 값과 동일해요.
-
-## 인터페이스
+객체의 키를 함수를 통해 변환한 새로운 객체를 반환해요.
 
 ```typescript
-function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
-  object: T,
-  getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
-): Record<K, T[keyof T]>;
+const newObj = mapKeys(object, getNewKey);
 ```
 
-### 파라미터
+## 사용법
 
-- `obj` (`T extends Record<PropertyKey, any>`): 키를 바꿀 객체.
-- `getNewKey`: (`(value: T[keyof T], key: keyof T, object: T) => K`): 새로운 키를 생성하는 함수.
+### `mapKeys(object, getNewKey)`
 
-### 반환 값
-
-(`Record<K, T[keyof T]>`): 키가 바뀐 새로운 객체.
-
-## 예시
+객체의 각 키를 변환하여 새로운 객체를 만들고 싶을 때 `mapKeys`를 사용하세요. 값은 그대로 유지되고, 키만 `getNewKey` 함수의 결과로 변경돼요.
 
 ```typescript
+import { mapKeys } from 'es-toolkit/object';
+
+// 키에 접두사를 추가해요
 const obj = { a: 1, b: 2 };
-const result = mapKeys(obj, (value, key) => key + value);
-console.log(result); // { a1: 1, b2: 2 }
+const prefixed = mapKeys(obj, (value, key) => `prefix_${key}`);
+// prefixed는 { prefix_a: 1, prefix_b: 2 }가 돼요
+
+// 키와 값을 조합해서 새로운 키를 만들어요
+const combined = mapKeys(obj, (value, key) => `${key}${value}`);
+// combined는 { a1: 1, b2: 2 }가 돼요
+
+// 키를 대문자로 변환해요
+const uppercased = mapKeys(obj, (value, key) => key.toString().toUpperCase());
+// uppercased는 { A: 1, B: 2 }가 돼요
 ```
 
-## 성능 비교
+#### 파라미터
 
-|                   | [번들 사이즈](../../bundle-size.md) | [런타임 성능](../../performance.md) |
-| ----------------- | ----------------------------------- | ----------------------------------- |
-| es-toolkit        | 138 바이트 (99.1% 작음)             | 2,844,013 회 (11% 빠름)             |
-| es-toolkit/compat | 1,124 바이트 (93.2% 작음)           | 2.899,524 회 (13% 빠름)             |
-| lodash-es         | 16,649 바이트                       | 2,559,949 회                        |
+- `object` (`T extends Record<PropertyKey, any>`): 키를 변환할 객체예요.
+- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => K`): 새로운 키를 생성하는 함수예요. 값, 키, 전체 객체를 파라미터로 받아요.
+
+#### 반환 값
+
+(`Record<K, T[keyof T]>`): 키가 변환된 새로운 객체를 반환해요.

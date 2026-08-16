@@ -1,27 +1,46 @@
 # isError
 
-Check if the given value is an Error object.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to Error.
-
-## Signature
+Checks if a value is an `Error` object.
 
 ```typescript
-function isError(value: unknown): value is Error;
+const result = isError(value);
 ```
 
-### Parameters
+## Usage
 
-- `value`(`unknown`): The value to test if it is an Error object.
+### `isError(value)`
 
-### Returns
-
-(`value is Error`): True if the value is an Error object, otherwise false.
-
-## Examples
+Use `isError` when you want to check if a value is an `Error` object. It can be used as a type guard in TypeScript to narrow the value's type to `Error`. Particularly useful in try-catch blocks or API response processing.
 
 ```typescript
-isError(new Error()); // true
+import { isError } from 'es-toolkit/predicate';
+
+// Checking Error objects
+isError(new Error('Something went wrong')); // true
+isError(new TypeError('Type error')); // true
+
+// Distinguishing from other types
 isError('error'); // false
-isError({ name: 'Error', message: '' }); // false
+isError({ name: 'Error', message: 'Custom error' }); // false
 ```
+
+When used as a type guard in TypeScript, the value's type is narrowed.
+
+```typescript
+function handleError(value: unknown) {
+  if (isError(value)) {
+    // value is narrowed to Error
+    console.log(`Error occurred: ${value.message}`);
+    return value.name;
+  }
+  return 'Not an error';
+}
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's an `Error` object.
+
+#### Returns
+
+(`value is Error`): Returns `true` if the value is an `Error` object, `false` otherwise.

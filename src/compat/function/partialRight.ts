@@ -8,8 +8,8 @@ type __ = Placeholder | Toolkit;
  * Creates a function that invokes the provided function with no arguments.
  *
  * @template R The return type of the function
- * @param {() => R} func The function to partially apply
- * @returns {() => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = () => 'Hello!';
@@ -23,8 +23,8 @@ export function partialRight<R>(func: () => R): () => R;
  *
  * @template T The type of the argument
  * @template R The return type of the function
- * @param {(t1: T) => R} func The function to partially apply
- * @returns {(t1: T) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (name: string) => `Hello ${name}!`;
@@ -38,9 +38,9 @@ export function partialRight<T, R>(func: (t1: T) => R): (t1: T) => R;
  *
  * @template T The type of the argument
  * @template R The return type of the function
- * @param {(t1: T) => R} func The function to partially apply
- * @param {T} arg1 The argument to pre-fill
- * @returns {() => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (name: string) => `Hello ${name}!`;
@@ -55,8 +55,8 @@ export function partialRight<T, R>(func: (t1: T) => R, arg1: T): () => R;
  * @template T1 The type of the first argument
  * @template T2 The type of the second argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2) => R} func The function to partially apply
- * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
@@ -71,10 +71,10 @@ export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R): (t1: T1, t
  * @template T1 The type of the first argument
  * @template T2 The type of the second argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2) => R} func The function to partially apply
- * @param {T1} arg1 The argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @returns {(t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
@@ -89,9 +89,9 @@ export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg1: T1, p
  * @template T1 The type of the first argument
  * @template T2 The type of the second argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2) => R} func The function to partially apply
- * @param {T2} arg2 The argument to pre-fill
- * @returns {(t1: T1) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
@@ -106,10 +106,10 @@ export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg2: T2): 
  * @template T1 The type of the first argument
  * @template T2 The type of the second argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @returns {() => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
@@ -124,8 +124,8 @@ export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg1: T1, a
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @returns {(t1: T1, t2: T2, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -141,11 +141,11 @@ export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R)
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {__} plc3 The placeholder for the third argument
- * @returns {(t2: T2, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param plc3 The placeholder for the third argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -166,10 +166,10 @@ export function partialRight<T1, T2, T3, R>(
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @returns {(t1: T1, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -189,11 +189,11 @@ export function partialRight<T1, T2, T3, R>(
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @returns {(t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -214,9 +214,9 @@ export function partialRight<T1, T2, T3, R>(
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T3} arg3 The third argument to pre-fill
- * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg3 The third argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -232,11 +232,11 @@ export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R,
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {T3} arg3 The third argument to pre-fill
- * @returns {(t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param arg3 The third argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -257,10 +257,10 @@ export function partialRight<T1, T2, T3, R>(
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @returns {(t1: T1) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -276,11 +276,11 @@ export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R,
  * @template T2 The type of the second argument
  * @template T3 The type of the third argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @returns {() => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
@@ -297,8 +297,8 @@ export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R,
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @returns {(t1: T1, t2: T2, t3: T3, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -317,12 +317,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {__} plc3 The placeholder for the third argument
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t2: T2, t3: T3, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param plc3 The placeholder for the third argument
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -346,11 +346,11 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t1: T1, t3: T3, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -373,12 +373,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t3: T3, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -402,10 +402,10 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T3} arg3 The third argument to pre-fill
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t1: T1, t2: T2, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg3 The third argument to pre-fill
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -427,12 +427,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {T3} arg3 The third argument to pre-fill
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t2: T2, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param arg3 The third argument to pre-fill
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -456,11 +456,11 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t1: T1, t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -483,12 +483,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @param {__} plc4 The placeholder for the fourth argument
- * @returns {(t4: T4) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @param plc4 The placeholder for the fourth argument
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -512,9 +512,9 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t1: T1, t2: T2, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -535,12 +535,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {__} plc3 The placeholder for the third argument
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t2: T2, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param plc3 The placeholder for the third argument
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -563,11 +563,11 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t1: T1, t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -590,12 +590,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {__} plc3 The placeholder for the third argument
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t3: T3) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param plc3 The placeholder for the third argument
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -619,10 +619,10 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T3} arg3 The third argument to pre-fill
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg3 The third argument to pre-fill
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -644,12 +644,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {__} plc2 The placeholder for the second argument
- * @param {T3} arg3 The third argument to pre-fill
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t2: T2) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param plc2 The placeholder for the second argument
+ * @param arg3 The third argument to pre-fill
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -673,11 +673,11 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {(t1: T1) => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -700,12 +700,12 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @template T3 The type of the third argument
  * @template T4 The type of the fourth argument
  * @template R The return type of the function
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
- * @param {T1} arg1 The first argument to pre-fill
- * @param {T2} arg2 The second argument to pre-fill
- * @param {T3} arg3 The third argument to pre-fill
- * @param {T4} arg4 The fourth argument to pre-fill
- * @returns {() => R} Returns the new partially applied function
+ * @param func The function to partially apply
+ * @param arg1 The first argument to pre-fill
+ * @param arg2 The second argument to pre-fill
+ * @param arg3 The third argument to pre-fill
+ * @param arg4 The fourth argument to pre-fill
+ * @returns Returns the new partially applied function
  *
  * @example
  * const format = (greeting: string, name: string, time: string, punctuation: string) =>
@@ -726,9 +726,9 @@ export function partialRight<T1, T2, T3, T4, R>(
  * The partialRight.placeholder value can be used as a placeholder for partially applied arguments.
  *
  * @template F The type of the function to partially apply
- * @param {F} func The function to partially apply arguments to
- * @param {...any[]} args The arguments to be partially applied
- * @returns {(...args: any[]) => ReturnType<F>} Returns the new partially applied function
+ * @param func The function to partially apply arguments to
+ * @param args The arguments to be partially applied
+ * @returns Returns the new partially applied function
  *
  * @example
  * function greet(greeting: string, name: string) {
@@ -752,9 +752,9 @@ export function partialRight(func: (...args: any[]) => any, ...args: any[]): (..
  * Note: This method doesn't set the `length` property of partially applied functions.
  *
  * @template F The type of the function to partially apply.
- * @param {F} func The function to partially apply arguments to.
- * @param {any[]} partialArgs The arguments to be partially applied.
- * @returns {(...args: any[]) => ReturnType<F>} Returns the new partially applied function.
+ * @param func The function to partially apply arguments to.
+ * @param partialArgs The arguments to be partially applied.
+ * @returns Returns the new partially applied function.
  *
  * @example
  * function greet(greeting, name) {

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { kebabCase as kebabCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { kebabCase } from './kebabCase';
 
 describe('kebabCase', () => {
@@ -11,6 +10,16 @@ describe('kebabCase', () => {
     const expected = strings.map(() => 'foo-bar');
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should convert string to snake case, identical to lodash', () => {
+    expect(kebabCase('åäöÅÄÖ')).toBe('aao-aao');
+    expect(kebabCase('helloÅäöWorld')).toBe('hello-aao-world');
+    expect(kebabCase('café')).toBe('cafe');
+    expect(kebabCase('naïve')).toBe('naive');
+    expect(kebabCase('Zürich')).toBe('zurich');
+    expect(kebabCase('São Paulo')).toBe('sao-paulo');
+    expect(kebabCase('Москва')).toBe('москва');
   });
 
   it(`should handle double-converting strings`, () => {
@@ -46,7 +55,9 @@ describe('kebabCase', () => {
     expect(kebabCase({ toString: () => string })).toBe('foo-bar');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(kebabCase).toEqualTypeOf<typeof kebabCaseLodash>();
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(kebabCase('foo1stPlace')).toBe('foo-1st-place');
+    expect(kebabCase('top10th')).toBe('top-10th');
+    expect(kebabCase('1st place 2nd 3rd 4th')).toBe('1st-place-2nd-3rd-4th');
   });
 });

@@ -1,32 +1,41 @@
 # isWeakMap
 
-이 함수는 주어진 값이 `WeakMap`의 인스턴스인지 확인해요.
-값이 `WeakMap`이면 `true`, 아니면 `false`를 반환해요.
-
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `WeakMap`인 타입으로 좁힐 수 있어요.
-
-## 인터페이스
+주어진 값이 `WeakMap` 인스턴스인지 확인해요.
 
 ```typescript
-function isWeakMap(value: unknown): value is WeakMap<WeakKey, any>;
+const result = isWeakMap(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): `WeakMap`인지 확인할 값.
+### `isWeakMap(value)`
 
-### 반환 값
-
-(`value is WeakMap<WeakKey, any>`): 값이 `WeakMap`이면 `true`, 아니면 `false`.
-
-## 예시
+값이 `WeakMap` 인스턴스인지 확인하고 싶을 때 `isWeakMap`을 사용하세요. `WeakMap`은 약한 참조로 객체를 키로 하는 키-값 저장소로, 메모리 누수를 방지할 때 유용해요.
 
 ```typescript
-const value1 = new WeakMap();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakMap } from 'es-toolkit/predicate';
 
-console.log(isWeakMap(value1)); // true
-console.log(isWeakMap(value2)); // false
-console.log(isWeakMap(value3)); // false
+// WeakMap 인스턴스들
+const weakMap1 = new WeakMap();
+const weakMap2 = new WeakMap([[{}, 'value']]);
+
+console.log(isWeakMap(weakMap1)); // true
+console.log(isWeakMap(weakMap2)); // true
+
+// WeakMap이 아닌 값들
+console.log(isWeakMap(new Map())); // false
+console.log(isWeakMap(new Set())); // false
+console.log(isWeakMap(new WeakSet())); // false
+console.log(isWeakMap({})); // false
+console.log(isWeakMap([])); // false
+console.log(isWeakMap(null)); // false
+console.log(isWeakMap(undefined)); // false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): WeakMap 인스턴스인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is WeakMap<WeakKey, any>`): 값이 WeakMap 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

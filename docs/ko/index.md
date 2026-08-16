@@ -29,7 +29,7 @@ features:
     details: 같은 기능의 함수들을 기준으로, 최대 97% 작은 JavaScript 크기를 가져요.
   - title: 쉬운 Lodash 대체
     details: es-toolkit은 Lodash를 손쉽게 대체할 수 있는 완전한 호환성 레이어를 제공해요.
-    link: /ko/compatibility
+    link: /ko/compat/intro
   - title: 현대적인 구현
     details: 최신 JavaScript API를 사용하여, 구현이 직관적이고 간단해요.
   - title: 견고한 타입
@@ -37,7 +37,7 @@ features:
   - title: 테스트 커버리지 100%
     details: 모든 함수와 분기에 대해서 꼼꼼하게 테스트가 작성되어 있어요.
   - title: 넓은 사용처
-    details: es-toolkit은 Storybook 및 ink와 같은 인기 있는 오픈 소스 라이브러리에서 널리 사용되고 있어요.
+    details: es-toolkit은 Storybook, Recharts, ink, MUI 및 CKEditor와 같은 인기 있는 오픈 소스 라이브러리에서 널리 사용되고 있어요.
   - title: 모든 환경에서 사용 가능
     details: Node.js, Deno, Bun, 그리고 브라우저까지 넓은 JavaScript 환경을 지원해요.
 ---

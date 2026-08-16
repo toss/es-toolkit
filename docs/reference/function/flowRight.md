@@ -1,70 +1,60 @@
 # flowRight
 
-Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
-
-The `this` context of the returned function is also passed to the functions provided as parameters.
-
-This method is like [flow](./flow.md), except that it creates a function that invokes the given functions from right to left.
-
-## Signature
+Creates a new function that executes the given functions in sequence from right to left.
 
 ```typescript
-function flowRight<R>(f: () => R): () => R;
-function flowRight<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
-function flowRight<A extends any[], R1, R2>(f2: (a: R1) => R2, f1: (...args: A) => R1): (...args: A) => R2;
-function flowRight<A extends any[], R1, R2, R3>(
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R3;
-function flowRight<A extends any[], R1, R2, R3, R4>(
-  f4: (a: R3) => R4,
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R4;
-function flowRight<A extends any[], R1, R2, R3, R4, R5>(
-  f5: (a: R4) => R5,
-  f4: (a: R3) => R4,
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R5;
-function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+const combined = flowRight(func1, func2, func3);
 ```
 
-### Parameters
+## Usage
 
-- `funcs` (`Array<(...args: any[]) => any>`): The functions to invoke.
+### `flowRight(...funcs)`
 
-### Returns
+Use `flowRight` when you want to create a new function that executes multiple functions from right to left in sequence. The return value of the previous function is passed as a parameter to the next function.
 
-(`(...args: any[]) => any`): The new composite function.
-
-## Examples
+This is useful for creating data transformation pipelines by composing functions in reverse order. It executes functions in the opposite direction to `flow`.
 
 ```typescript
-const add = (x: number, y: number) => x + y;
-const square = (n: number) => n * n;
-
-const combined = flowRight(square, add);
-console.log(combined(1, 2)); // => 9
-```
-
-## Lodash Compatibility
-
-Import `flowRight` from `es-toolkit/compat` for full compatibility with lodash.
-
-- `flowRight` can accept both arrays of functions and individual functions as arguments.
-- `flowRight` will throw an error if any of the functions provided are not functions.
-
-```typescript
-import { flowRight } from 'es-toolkit/compat';
+import { flowRight } from 'es-toolkit/function';
 
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 const double = (n: number) => n * 2;
 
-const combined = flowRight(double, [square, add]);
-console.log(combined(1, 2)); // => 18
+// Executes from right to left: double -> square -> add
+const combined = flowRight(double, square, add);
+console.log(combined(1, 2)); // 18
+// Execution order: add(1, 2) = 3, square(3) = 9, double(9) = 18
+
+// Can also be used with a single function
+const single = flowRight((x: number) => x + 1);
+console.log(single(5)); // 6
 ```
+
+The `this` context is also passed to the functions.
+
+```typescript
+import { flowRight } from 'es-toolkit/function';
+
+const context = {
+  multiplier: 3,
+};
+
+function multiply(this: typeof context, x: number) {
+  return x * this.multiplier;
+}
+
+const add = (x: number) => x + 10;
+
+const combined = flowRight(multiply, add).bind(context);
+console.log(combined(5)); // 45
+// Execution order: add(5) = 15, multiply(15) = 45
+```
+
+#### Parameters
+
+- `funcs` (`(...args: any[]) => any`): The functions to compose.
+
+#### Returns
+
+(`(...args: any[]) => any`): Returns a new function that executes the given functions from right to left in sequence.

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { method as methodToolkit_ } from 'es-toolkit/compat';
-import { method as methodLodash_ } from 'lodash';
+import { method as methodToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const methodToolkit = methodToolkit_;
-const methodLodash = methodLodash_;
+const { method: methodLodash } = lodash;
 
 const object = {
   a: {

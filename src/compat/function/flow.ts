@@ -7,14 +7,14 @@ import { Many } from '../_internal/Many.ts';
  *
  * @template A - The type of the arguments.
  * @template R - The type of the return values.
- * @param {(...args: A) => R} f1 - The first function to invoke.
- * @param {(a: R) => R} f2 - The second function to invoke.
- * @param {(a: R) => R} f3 - The third function to invoke.
- * @param {(a: R) => R} f4 - The fourth function to invoke.
- * @param {(a: R) => R} f5 - The fifth function to invoke.
- * @param {(a: R) => R} f6 - The sixth function to invoke.
- * @param {(a: R) => R} f7 - The seventh function to invoke.
- * @returns {(...args: A) => R} Returns the new composite function.
+ * @param f1 - The first function to invoke.
+ * @param f2 - The second function to invoke.
+ * @param f3 - The third function to invoke.
+ * @param f4 - The fourth function to invoke.
+ * @param f5 - The fifth function to invoke.
+ * @param f6 - The sixth function to invoke.
+ * @param f7 - The seventh function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * function square(n) {
@@ -167,8 +167,8 @@ export function flow(...func: Array<Many<(...args: any[]) => any>>): (...args: a
  *
  * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
- * @param {Array<((...args: any[]) => any) | Array<(...args: any[]) => any>>} funcs The functions to invoke.
- * @returns {(...args: any[]) => any} Returns the new composite function.
+ * @param funcs The functions to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;

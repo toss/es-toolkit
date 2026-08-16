@@ -1,12 +1,10 @@
 import { bench, describe } from 'vitest';
-import { uniq as uniqToolkit_ } from 'es-toolkit';
-import { uniq as uniqToolkitCompat_ } from 'es-toolkit/compat';
+import { uniq as uniqToolkit } from 'es-toolkit';
+import { uniq as uniqToolkitCompat } from 'es-toolkit/compat';
 import { randomInt } from 'crypto';
-import { uniq as uniqLodash_ } from 'lodash';
+import lodash from 'lodash';
 
-const uniqToolkit = uniqToolkit_;
-const uniqToolkitCompat = uniqToolkitCompat_;
-const uniqLodash = uniqLodash_;
+const { uniq: uniqLodash } = lodash;
 
 describe('uniq', () => {
   bench('es-toolkit/uniq', () => {

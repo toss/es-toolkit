@@ -1,29 +1,54 @@
 # trimEnd
 
-Removes trailing whitespace or specified characters from a string.
-
-If `chars` is a string, it should be a single character. To remove multiple characters from the start of the string, provide an array of single characters instead.
-
-## Signature
+Removes whitespace or specified characters from the end of a string.
 
 ```typescript
-function trimEnd(str: string, chars?: string | string[]): string;
+const trimmed = trimEnd(str, chars);
 ```
 
-### Parameters
+## Usage
 
-- `str` (`string`): The string from which trailing characters will be trimmed.
-- `chars` (`string | string[]`): The character(s) to remove from the end of the string.
+### `trimEnd(str, chars?)`
 
-### Returns
-
-(`string`): The resulting string after the specified trailing character has been removed.
-
-## Examples
+Use `trimEnd` when you want to remove unnecessary characters from the end of a string. If no specific characters are specified, it removes whitespace characters.
 
 ```typescript
-const trimmedStr1 = trimEnd('hello---', '-'); // returns 'hello'
-const trimmedStr2 = trimEnd('123000', '0'); // returns '123'
-const trimmedStr3 = trimEnd('abcabcabc', 'c'); // returns 'abcabcab'
-const trimmedStr4 = trimEnd('trimmedxxx', 'x'); // returns 'trimmed'
+import { trimEnd } from 'es-toolkit/string';
+
+// Basic whitespace removal
+trimEnd('hello  '); // 'hello'
+trimEnd('hello\t\n  '); // 'hello'
+
+// Removing specific characters
+trimEnd('hello---', '-'); // 'hello'
+trimEnd('123000', '0'); // '123'
+trimEnd('abcabcabc', 'c'); // 'abcabcab'
 ```
+
+When you specify multiple characters as an array, all characters that match any of them will be removed.
+
+```typescript
+import { trimEnd } from 'es-toolkit/string';
+
+// Specifying multiple characters as an array
+trimEnd('hello!!@@', ['!', '@']); // 'hello'
+
+// Removing numbers and special characters
+trimEnd('abc123', ['1', '2', '3']); // 'abc'
+
+// Removing characters and whitespace together
+trimEnd('hello__  ', ['_', ' ']); // 'hello'
+```
+
+#### Parameters
+
+- `str` (`string`): The string from which to remove characters from the end.
+- `chars` (`string | string[]`, optional): The characters to remove. Can be a string or an array of characters. Defaults to whitespace characters.
+
+#### Returns
+
+(`string`): Returns a new string with the specified characters removed from the end.
+
+#### Errors
+
+Throws an error if `chars` is a string with a length other than 1.

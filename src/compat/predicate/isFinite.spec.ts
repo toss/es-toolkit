@@ -1,5 +1,4 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isFinite as isFiniteLodash } from 'lodash';
 import { isFinite } from './isFinite';
 
 describe('isFinite', () => {
@@ -32,7 +31,11 @@ describe('isFinite', () => {
     expect(isFinite('-1')).toBe(false);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(isFinite).toEqualTypeOf<typeof isFiniteLodash>();
+  it('should work as a type predicate', () => {
+    const value: unknown = 3;
+    if (isFinite(value)) {
+      expectTypeOf(value).toEqualTypeOf<number>();
+      expect(typeof value).toBe('number');
+    }
   });
 });

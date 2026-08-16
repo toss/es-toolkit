@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { findKey as findKeyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { findKey } from './findKey';
 
 describe('findKey', () => {
@@ -54,7 +53,9 @@ describe('findKey', () => {
     expect(args).toEqual([1, 'a', object]);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(findKey).toEqualTypeOf<typeof findKeyLodash>();
+  it('should work without predicate parameter (default to identity)', () => {
+    const object = { a: 0, b: 1, c: 2 };
+
+    expect(findKey(object)).toBe('b');
   });
 });

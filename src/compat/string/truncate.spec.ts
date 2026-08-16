@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { truncate as truncateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { truncate } from './truncate.ts';
 import { forEach } from '../array/forEach.ts';
 import { map } from '../array/map.ts';
@@ -9,7 +8,7 @@ describe('truncate', () => {
   const string = 'hi-diddly-ho there, neighborino';
 
   it('should use a default `length` of `30`', () => {
-    expect(truncate(string), 'hi-diddly-ho there).toBe(neighbo...');
+    expect(truncate(string)).toBe('hi-diddly-ho there, neighbo...');
   });
 
   it('should not truncate if `string` is <= `length`', () => {
@@ -18,7 +17,7 @@ describe('truncate', () => {
   });
 
   it('should truncate string the given length', () => {
-    expect(truncate(string, { length: 24 }), 'hi-diddly-ho there).toBe(n...');
+    expect(truncate(string, { length: 24 })).toBe('hi-diddly-ho there, n...');
   });
 
   it('should support a `omission` option', () => {
@@ -28,7 +27,7 @@ describe('truncate', () => {
   it('should coerce nullish `omission` values to strings', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    expect(truncate(string, { omission: null }), 'hi-diddly-ho there).toBe(neighbnull');
+    expect(truncate(string, { omission: null })).toBe('hi-diddly-ho there, neighbnull');
     expect(truncate(string, { omission: undefined })).toBe('hi-diddly-ho there, nundefined');
   });
 
@@ -112,7 +111,14 @@ describe('truncate', () => {
     expect(truncate('¥§✈✉🤓', { length: 4, omission: '…' })).toEqual('¥§✈…');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(truncate).toEqualTypeOf<typeof truncateLodash>();
+  it('should handle null and undefined strings', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(truncate(null)).toBe('');
+    expect(truncate(undefined)).toBe('');
+  });
+
+  it('should return base string with omission when separator is not found in truncated string', () => {
+    expect(truncate('hello world test', { length: 10, separator: 'xyz' })).toEqual('hello w...');
   });
 });

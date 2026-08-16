@@ -3,29 +3,36 @@ name: Release
 on:
   push:
     branches:
-      - '*'
+      - main
     tags:
       - 'v*.*.*'
 
+permissions: read-all
+
 jobs:
   release:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
-      deployments: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
-      - uses: denoland/setup-deno@v1
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+      - uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
           deno-version: v1.x
+      - name: Check environment
+        run: |
+          node -v
+          npm -v
+          yarn -v
       - if: github.ref_type == 'branch'
         run: |
           jq \
@@ -41,11 +48,12 @@ jobs:
             jsr.json > jsr.json.tmp
           mv jsr.json.tmp jsr.json
       - run: yarn install
+      - run: yarn test
       - run: 'mkdir -p out && yarn pack --out out/%s-%v.tgz'
       - name: Check Package Entrypoints
         run: 'yarn attw out/*.tgz'
       - id: extract-changelog
-        uses: dahlia/submark@5a5ff0a58382fb812616a5801402f5aef00f90ce
+        uses: dahlia/submark@e3fa710655cb531b68fbfe912c9603aea136fff4
         with:
           input-file: CHANGELOG.md
           heading-level: 2
@@ -54,7 +62,7 @@ jobs:
           omit-heading: true
       - run: 'cat ${{ steps.extract-changelog.outputs.output-file }}'
       - name: Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ steps.extract-changelog.outputs.output-file }}
@@ -68,30 +76,25 @@ jobs:
           (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
         run: |
           set -ex
-          npm config set //registry.npmjs.org/:_authToken "$NPM_AUTH_TOKEN"
-          npm whoami
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
             npm publish --provenance --access public *.tgz
           else
             npm publish --provenance --access public --tag dev *.tgz
           fi
           deno publish --allow-dirty --unstable-sloppy-imports
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         working-directory: ${{ github.workspace }}/out/
 
   deploy-docs:
-    if: github.event_name == 'push' && github.ref_type == 'tag'
+    if: github.repository == 'toss/es-toolkit' && github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install
       - name: Deploy a docs site

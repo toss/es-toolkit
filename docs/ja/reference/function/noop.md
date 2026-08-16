@@ -1,28 +1,66 @@
 # noop
 
-何もしない関数です。関数が必要な場所で空欄を埋めるために使用したり、デフォルト値として使用したりできます。
-
-## インターフェース
+何もしない空の関数です。
 
 ```typescript
-function noop(): void;
+noop();
 ```
 
-### 戻り値
+::: info [`asyncNoop`](./asyncNoop.md) 関数
 
-(`void`): この関数は何も返しません。
+非同期で何もしない関数が必要な場合は、直接`Promise<void>`を返す`asyncNoop`関数を使用してください。
 
-## 例
+:::
+
+## 使用法
+
+### `noop()`
+
+何の動作もしない関数が必要なときに`noop`を使用してください。
+
+関数が必須の場所でデフォルト値として使用したり、コールバック関数を無効化したいときに便利です。プレースホルダーの役割や初期化段階でよく使用されます。
 
 ```typescript
 import { noop } from 'es-toolkit/function';
 
-interface Props {
-  onChange?: () => void;
+// 選択的なコールバックのデフォルト値として使用
+interface EventHandlers {
+  onSuccess?: () => void;
+  onError?: () => void;
 }
 
-function MyComponent({ onChange = noop }: Props) {
-  // ここでonChangeはundefinedにならないので、自由に呼び出せます。
-  onChange();
+function processData({ onSuccess = noop, onError = noop }: EventHandlers = {}) {
+  try {
+    // データ処理ロジック
+    console.log('データ処理完了');
+    onSuccess(); // 安全に呼び出し可能
+  } catch (error) {
+    onError(); // 安全に呼び出し可能
+  }
 }
+
+// undefinedチェックなしで安全に使用
+processData({
+  onSuccess: () => console.log('成功!'),
+  // onErrorはnoopとしてデフォルト処理される
+});
 ```
+
+配列のメソッドでも使用できます。
+
+```typescript
+import { noop } from 'es-toolkit/function';
+
+// 条件付きで関数を実行
+const operations = [
+  () => console.log('最初の作業'),
+  shouldRunSecond ? () => console.log('2番目の作業') : noop,
+  () => console.log('3番目の作業'),
+];
+
+operations.forEach(op => op()); // すべての作業を安全に実行
+```
+
+#### 戻り値
+
+(`void`): 何も返しません。

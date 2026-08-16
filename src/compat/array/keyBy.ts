@@ -9,9 +9,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * Creates an object composed of keys generated from the results of running each element of collection thru iteratee.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ValueIterateeCustom<T, PropertyKey>} [iteratee] - The iteratee to transform keys.
- * @returns {Record<string, T>} Returns the composed aggregate object.
+ * @param collection - The collection to iterate over.
+ * @param [iteratee] - The iteratee to transform keys.
+ * @returns Returns the composed aggregate object.
  *
  * @example
  * const array = [
@@ -34,9 +34,9 @@ export function keyBy<T>(
  * Creates an object composed of keys generated from the results of running each element of collection thru iteratee.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ValueIterateeCustom<T[keyof T], PropertyKey>} [iteratee] - The iteratee to transform keys.
- * @returns {Record<string, T[keyof T]>} Returns the composed aggregate object.
+ * @param collection - The object to iterate over.
+ * @param [iteratee] - The iteratee to transform keys.
+ * @returns Returns the composed aggregate object.
  *
  * @example
  * const obj = { a: { dir: 'left', code: 97 }, b: { dir: 'right', code: 100 } };
@@ -56,14 +56,14 @@ export function keyBy<T extends object>(
  * If there are multiple elements or values generating the same key, the last one among them is used
  * as the value.
  *
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {Function | PropertyKey | Array | Object} [iteratee] - The iteratee to transform keys.
+ * @param collection - The collection to iterate over.
+ * @param [iteratee] - The iteratee to transform keys.
  *   - If a function is provided, it's invoked for each element in the collection.
  *   - If a property name (string) is provided, that property of each element is used as the key.
  *   - If a property-value pair (array) is provided, elements with matching property values are used.
  *   - If a partial object is provided, elements with matching properties are used.
  *   - If omitted, the identity function is used.
- * @returns {Object} Returns the composed aggregate object.
+ * @returns Returns the composed aggregate object.
  *
  * @example
  * // Using an array of objects

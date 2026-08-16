@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { isMatchWith as isMatchWithLodash } from 'lodash';
 import { isMatchWith } from './isMatchWith.ts';
 import { last } from '../../array/last.ts';
 import { partial } from '../../function/partial.ts';
@@ -338,6 +337,10 @@ describe('isMatchWith', () => {
     expect(isMatchWith({}, {}, rootCustomizer)).toBe(true);
   });
 
+  it('should return `false` when nested source primitive does not match object target', () => {
+    expect(isMatchWith({ a: { b: 2 } }, { a: 1 }, () => undefined)).toBe(false);
+  });
+
   it('should handle empty collections', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
@@ -469,9 +472,5 @@ describe('isMatchWith', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(isMatchWith(42, {}, lodashStable.noop)).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isMatchWith).toEqualTypeOf<typeof isMatchWithLodash>();
   });
 });

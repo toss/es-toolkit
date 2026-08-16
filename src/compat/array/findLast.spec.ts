@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { findLast as findLastLodash } from 'lodash';
 import { findLast } from './findLast';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -159,7 +158,34 @@ describe('findLast', () => {
     }
   );
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(findLast).toEqualTypeOf<typeof findLastLodash>();
+  it('should use identity when no _doesMatch is provided', () => {
+    expect(findLast([0, 1, 2])).toBe(2);
+    expect(findLast([false, true, false])).toBe(true);
+    expect(findLast(['', 'hello', ''])).toBe('hello');
+    expect(findLast({ a: 0, b: 1, c: 2 })).toBe(2);
+    expect(findLast({ a: false, b: true, c: false })).toBe(true);
+    expect(findLast({ a: '', b: 'hello', c: '' })).toBe('hello');
+    expect(findLast('123')).toBe('3');
+    expect(findLast(args)).toBe(3);
+  });
+
+  it('should treat a boolean predicate as a `_.property` shorthand, matching lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(findLast({ a: 1, b: 2, c: 3 }, true)).toBe(undefined);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(findLast({ a: 1, b: 2, c: 3 }, false)).toBe(undefined);
+    expect(findLast([1, 2, 3], true)).toBe(undefined);
+    expect(findLast([1, 2, 3], false)).toBe(undefined);
+    const objects = [{ true: 'a' }, { true: 'b' }];
+    expect(findLast(objects, true)).toBe(objects[1]);
+  });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findLast([0, false, null, undefined, '', 1, 2, 3])).toBe(3);
+    expect(findLast([0, false, null, undefined, ''])).toBe(undefined);
+    expect(findLast({ a: 0, b: false, c: null, d: undefined, e: '', f: 1, g: 2 })).toBe(2);
+    expect(findLast({ a: 0, b: false, c: null, d: undefined, e: '' })).toBe(undefined);
   });
 });

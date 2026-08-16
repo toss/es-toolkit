@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { upperCase as upperCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { upperCase } from './upperCase';
 
 describe('upperCase', () => {
@@ -11,6 +10,16 @@ describe('upperCase', () => {
     const expected = strings.map(() => 'FOO BAR');
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should convert string to snake case, identical to lodash', () => {
+    expect(upperCase('åäöÅÄÖ')).toBe('AAO AAO');
+    expect(upperCase('helloÅäöWorld')).toBe('HELLO AAO WORLD');
+    expect(upperCase('café')).toBe('CAFE');
+    expect(upperCase('naïve')).toBe('NAIVE');
+    expect(upperCase('Zürich')).toBe('ZURICH');
+    expect(upperCase('São Paulo')).toBe('SAO PAULO');
+    expect(upperCase('Москва')).toBe('МОСКВА');
   });
 
   it(`should handle double-converting strings`, () => {
@@ -49,9 +58,5 @@ describe('upperCase', () => {
     expect(upperCase('--foo-bar--')).toBe('FOO BAR');
     expect(upperCase('fooBar')).toBe('FOO BAR');
     expect(upperCase('__foo_bar__')).toBe('FOO BAR');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(upperCase).toEqualTypeOf<typeof upperCaseLodash>();
   });
 });

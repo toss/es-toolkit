@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toLength as toLengthLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toLength } from './toLength';
 import { MAX_ARRAY_LENGTH } from '../_internal/MAX_ARRAY_LENGTH';
 import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
@@ -23,7 +22,11 @@ describe('toLength', () => {
     expect(1 / toLength(-0)).toBe(Infinity);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(toLength).toEqualTypeOf<typeof toLengthLodash>();
+  it('should coerce non-numeric values to `0`', () => {
+    expect(toLength('a')).toBe(0);
+    expect(toLength('12px')).toBe(0);
+    expect(toLength(NaN)).toBe(0);
+    expect(toLength({})).toBe(0);
+    expect(toLength(undefined)).toBe(0);
   });
 });

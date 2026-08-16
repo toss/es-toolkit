@@ -2,8 +2,8 @@
  * Casts value as an array if it's not one.
  *
  * @template T The type of elements in the array.
- * @param {T | T[]} value The value to be cast to an array.
- * @returns {T[]} An array containing the input value if it wasn't an array, or the original array if it was.
+ * @param value The value to be cast to an array.
+ * @returns An array containing the input value if it wasn't an array, or the original array if it was.
  *
  * @example
  * const arr1 = castArray(1);

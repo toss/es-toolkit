@@ -1,35 +1,40 @@
 # isUndefined
 
-检查给定的值是否为 `undefined`。
-
-该函数测试提供的值是否严格相等于 `undefined`。
-
-如果值为 `undefined`，则返回 `true`；否则返回 `false`。
-
-在 TypeScript 中，该函数还可以作为类型谓词，将参数的类型缩小为 `undefined`。
-
-## 签名
+检查给定值是否为 `undefined`。
 
 ```typescript
-function isUndefined(x: unknown): x is undefined;
+const result = isUndefined(value);
 ```
 
-### 参数
+## 用法
 
-- `x` (`unknown`): 要检查是否为 `undefined` 的值。
+### `isUndefined(value)`
 
-### 返回值
-
-(`x is undefined`): 如果值为 `undefined`，则返回 `true`；否则返回 `false`。
-
-## 示例
+当您想检查值是否为 `undefined` 时,请使用 `isUndefined`。在检查变量是否已初始化或可选属性是否存在时非常有用。
 
 ```typescript
-const value1 = undefined;
-const value2 = null;
-const value3 = 42;
+import { isUndefined } from 'es-toolkit/predicate';
 
-console.log(isUndefined(value1)); // true
-console.log(isUndefined(value2)); // false
-console.log(isUndefined(value3)); // false
+// undefined 值
+console.log(isUndefined(undefined)); // true
+console.log(isUndefined(void 0)); // true
+
+let uninitialized: string;
+console.log(isUndefined(uninitialized)); // true
+
+// 非 undefined 值
+console.log(isUndefined(null)); // false
+console.log(isUndefined('')); // false
+console.log(isUndefined(0)); // false
+console.log(isUndefined(false)); // false
+console.log(isUndefined({})); // false
+console.log(isUndefined([])); // false
 ```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为 undefined 的值。
+
+#### 返回值
+
+(`value is undefined`): 如果值是 undefined,则返回 `true`,否则返回 `false`。

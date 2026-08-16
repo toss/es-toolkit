@@ -6,8 +6,8 @@
  *
  * @template {unknown} T - The type of the result of the async function.
  * @template {unknown} E - The type of the error that can be thrown by the async function.
- * @param {() => Promise<T>} func - The async function to execute.
- * @returns {Promise<[null, T] | [E, null]>} A Promise that resolves to a tuple containing either [null, result] or [error, null].
+ * @param func - The async function to execute.
+ * @returns A Promise that resolves to a tuple containing either [null, result] or [error, null].
  *
  * @example
  * // Successful execution

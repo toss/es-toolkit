@@ -77,9 +77,9 @@ interface CurriedFunction5<T1, T2, T3, T4, T5, R> {
 
 /**
  * Creates a curried function that accepts a single argument.
- * @param {(t1: T1) => R} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {CurriedFunction1<T1, R>} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const greet = (name: string) => `Hello ${name}`;
  * const curriedGreet = curry(greet);
@@ -89,9 +89,9 @@ export function curry<T1, R>(func: (t1: T1) => R, arity?: number): CurriedFuncti
 
 /**
  * Creates a curried function that accepts two arguments.
- * @param {(t1: T1, t2: T2) => R} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {CurriedFunction2<T1, T2, R>} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const add = (a: number, b: number) => a + b;
  * const curriedAdd = curry(add);
@@ -102,9 +102,9 @@ export function curry<T1, T2, R>(func: (t1: T1, t2: T2) => R, arity?: number): C
 
 /**
  * Creates a curried function that accepts three arguments.
- * @param {(t1: T1, t2: T2, t3: T3) => R} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {CurriedFunction3<T1, T2, T3, R>} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const volume = (l: number, w: number, h: number) => l * w * h;
  * const curriedVolume = curry(volume);
@@ -119,9 +119,9 @@ export function curry<T1, T2, T3, R>(
 
 /**
  * Creates a curried function that accepts four arguments.
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {CurriedFunction4<T1, T2, T3, T4, R>} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const fn = (a: number, b: number, c: number, d: number) => a + b + c + d;
  * const curriedFn = curry(fn);
@@ -136,9 +136,9 @@ export function curry<T1, T2, T3, T4, R>(
 
 /**
  * Creates a curried function that accepts five arguments.
- * @param {(t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {CurriedFunction5<T1, T2, T3, T4, T5, R>} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const fn = (a: number, b: number, c: number, d: number, e: number) => a + b + c + d + e;
  * const curriedFn = curry(fn);
@@ -153,9 +153,9 @@ export function curry<T1, T2, T3, T4, T5, R>(
 
 /**
  * Creates a curried function that accepts any number of arguments.
- * @param {(...args: any[]) => any} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @returns {(...args: any[]) => any} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @returns Returns the new curried function.
  * @example
  * const sum = (...args: number[]) => args.reduce((a, b) => a + b, 0);
  * const curriedSum = curry(sum);
@@ -173,10 +173,10 @@ export function curry(func: (...args: any[]) => any, arity?: number): (...args: 
  *
  * Note: This method doesn't set the `length` property of curried functions.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @param {number=func.length} arity - The arity of func.
- * @param {unknown} guard - Enables use as an iteratee for methods like `Array#map`.
- * @returns {((...args: any[]) => any) & { placeholder: typeof curry.placeholder }} - Returns the new curried function.
+ * @param func - The function to curry.
+ * @param arity - The arity of func.
+ * @param guard - Enables use as an iteratee for methods like `Array#map`.
+ * @returns} - Returns the new curried function.
  *
  * @example
  * const abc = function(a, b, c) {

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { create as createLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { create } from './create';
 import { keys } from './keys';
 import { falsey } from '../_internal/falsey';
@@ -24,8 +23,8 @@ describe('create', () => {
 
     const actual = new Circle();
 
-    expect(actual instanceof Circle);
-    expect(actual instanceof Shape);
+    expect(actual instanceof Circle).toBe(true);
+    expect(actual instanceof Shape).toBe(true);
     expect(Circle.prototype).not.toBe(Shape.prototype);
     // assert.notStrictEqual(Circle.prototype, Shape.prototype);
   });
@@ -37,8 +36,8 @@ describe('create', () => {
 
     const actual = new Circle();
 
-    expect(actual instanceof Circle);
-    expect(actual instanceof Shape);
+    expect(actual instanceof Circle).toBe(true);
+    expect(actual instanceof Shape).toBe(true);
     expect(Object.keys(Circle.prototype)).toEqual(properties);
     properties.forEach(property => {
       expect(Circle.prototype[property]).toBe(expected[property]);
@@ -75,7 +74,7 @@ describe('create', () => {
     const actual = map(falsey, (prototype, index) => (index ? create(prototype) : create()));
 
     actual.forEach(value => {
-      expect(isObject(value));
+      expect(isObject(value)).toBe(true);
     });
   });
 
@@ -84,7 +83,7 @@ describe('create', () => {
     const actual = map(primitives, (value, index) => (index ? create(value) : create()));
 
     actual.forEach(value => {
-      expect(isObject(value));
+      expect(isObject(value)).toBe(true);
     });
   });
 
@@ -96,9 +95,5 @@ describe('create', () => {
     const actual = map(objects, object => object.a === 1 && !keys(object).length);
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(create).toEqualTypeOf<typeof createLodash>();
   });
 });

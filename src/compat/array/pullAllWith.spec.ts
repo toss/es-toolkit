@@ -105,10 +105,14 @@ describe('pullAllWith', () => {
     expect(pullAllWith(undefined, [1, 2, 3])).toEqual(undefined);
   });
 
-  // NOTE: TypeScript doesn't support matching conditional types
-  // it('should match the type of lodash', () => {
-  //   expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
-  // });
+  it('should work with array-like objects as values', () => {
+    const array = [1, 2, 3, 4];
+    const arrayLikeValues = { 0: 2, 1: 4, length: 2 };
+
+    pullAllWith(array, arrayLikeValues);
+
+    expect(array).toEqual([1, 3]);
+  });
 
   it('should work with the same value for `array` and `values`', () => {
     const array = [{ a: 1 }, { b: 2 }];

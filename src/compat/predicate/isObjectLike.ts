@@ -5,8 +5,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.
  *
- * @param {any} value - The value to test if it is an object-like.
- * @returns {boolean} `true` if the value is an object-like, `false` otherwise.
+ * @param value - The value to test if it is an object-like.
+ * @returns `true` if the value is an object-like, `false` otherwise.
  *
  * @example
  * const value1 = { a: 1 };

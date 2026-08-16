@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { delay as delayLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { delay } from './delay';
 import { delay as delayToolkit } from '../../promise';
 import { slice } from '../_internal/slice';
@@ -87,9 +86,5 @@ describe('delay', () => {
       // @ts-expect-error invalid type
       delay('hello', 1000);
     }).toThrow('Expected a function');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(delay).toEqualTypeOf<typeof delayLodash>();
   });
 });

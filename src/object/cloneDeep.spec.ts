@@ -329,6 +329,23 @@ describe('cloneDeep', () => {
     expect(clonedError.stack).toBe(error.stack);
     expect(clonedError.cause).toBe(error.cause);
     expect(clonedError.code).toBe(error.code);
+
+    class FetcherError extends Error {
+      constructor(readonly innerError: Error) {
+        super(innerError.message);
+      }
+    }
+
+    const fetcherError = new FetcherError(error);
+    const clonedFetcherError = cloneDeep(fetcherError);
+
+    expect(clonedFetcherError).not.toBe(fetcherError);
+    expect(clonedFetcherError.message).toBe(fetcherError.message);
+    expect(clonedFetcherError.name).toBe(fetcherError.name);
+    expect(clonedFetcherError.stack).toBe(fetcherError.stack);
+    expect(clonedFetcherError.cause).toBe(fetcherError.cause);
+    expect(clonedFetcherError.innerError).not.toBe(fetcherError.innerError);
+    expect(clonedFetcherError.innerError.message).toBe(fetcherError.innerError.message);
   });
 
   it('should clone DataViews', () => {

@@ -26,12 +26,12 @@ export interface WindowedOptions {
  * Partial windows are smaller sub-arrays created when there aren't enough elements left in the input array to form a full window.
  *
  * @template T
- * @param {readonly T[]} arr - The input array to create windows from.
- * @param {number} size - The size of each window. Must be a positive integer.
- * @param {number} [step=1] - The step size between the start of each window. Must be a positive integer.
- * @param {WindowedOptions} [options={}] - Options object to configure the behavior of the function.
- * @param {boolean} [options.partialWindows=false] - Whether to include partial windows at the end of the array.
- * @returns {T[][]} An array of windows (sub-arrays) created from the input array.
+ * @param arr - The input array to create windows from.
+ * @param size - The size of each window. Must be a positive integer.
+ * @param [step=1] - The step size between the start of each window. Must be a positive integer.
+ * @param [options={}] - Options object to configure the behavior of the function.
+ * @param [options.partialWindows=false] - Whether to include partial windows at the end of the array.
+ * @returns An array of windows (sub-arrays) created from the input array.
  * @throws {Error} If the size or step is not a positive integer.
  *
  * @example

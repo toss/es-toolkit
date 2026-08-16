@@ -1,4 +1,4 @@
-import { flattenDepth } from './flattenDepth.ts';
+import { flatMapDepth } from './flatMapDepth.ts';
 import { uniq } from '../../array/uniq.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
@@ -7,8 +7,8 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * from all input arrays, preserving the order of their first occurrence.
  *
  * @template T - The type of elements in the arrays.
- * @param {Array<ArrayLike<T> | null | undefined>} arrays - The arrays to inspect.
- * @returns {T[]} Returns the new array of combined unique values.
+ * @param arrays - The arrays to inspect.
+ * @returns Returns the new array of combined unique values.
  *
  * @example
  * // Returns [2, 1]
@@ -36,8 +36,8 @@ export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[]
  * from all input arrays, preserving the order of their first occurrence.
  *
  * @template T - The type of elements in the arrays.
- * @param {Array<ArrayLike<T> | null | undefined>} arrays - The arrays to inspect.
- * @returns {T[]} Returns the new array of combined unique values.
+ * @param arrays - The arrays to inspect.
+ * @returns Returns the new array of combined unique values.
  *
  * @example
  * // Returns [2, 1]
@@ -61,7 +61,7 @@ export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[]
 export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[] {
   const validArrays = arrays.filter(isArrayLikeObject);
 
-  const flattened = flattenDepth(validArrays as any, 1);
+  const flattened = flatMapDepth(validArrays as any, v => Array.from(v), 1);
 
   return uniq(flattened) as T[];
 }

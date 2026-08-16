@@ -1,7 +1,9 @@
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { uniqBy } from '../../array/uniqBy.ts';
+import { ary } from '../../function/ary.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
+import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
@@ -14,9 +16,9 @@ type Iteratee<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The arrays to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays - The arrays to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionBy([2.1], [1.2, 2.3], Math.floor);
@@ -34,10 +36,10 @@ export function unionBy<T>(arrays: ArrayLike<T> | null | undefined, iteratee?: V
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays1 - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays1 - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionBy([2.1], [1.2, 2.3], Math.floor);
@@ -55,11 +57,11 @@ export function unionBy<T>(
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays1 - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays1 - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionBy([2.1], [1.2, 2.3], [3.4], Math.floor);
@@ -78,12 +80,12 @@ export function unionBy<T>(
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays1 - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays4 - The fourth array to inspect.
- * @param {ValueIteratee<T>} [iteratee] - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays1 - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param arrays4 - The fourth array to inspect.
+ * @param [iteratee] - The iteratee invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionBy([2.1], [1.2, 2.3], [3.4], [4.5], Math.floor);
@@ -103,13 +105,13 @@ export function unionBy<T>(
  * uniqueness is computed. The iteratee is invoked with one argument: (value).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays1 - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays4 - The fourth array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays5 - The fifth array to inspect.
- * @param {...Array<ValueIteratee<T> | ArrayLike<T> | null | undefined>} iteratee - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays1 - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param arrays4 - The fourth array to inspect.
+ * @param arrays5 - The fifth array to inspect.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionBy([2.1], [1.2, 2.3], [3.4], [4.5], [5.6], Math.floor);
@@ -130,8 +132,8 @@ export function unionBy<T>(
  * An iteratee function can be provided for comparison and it output values from the first possible array
  *
  * @template T - The type of elements in the arrays.
- * @param {...(ArrayLike<T> | null | undefined | Iteratee<T>)} values - The arrays to inspect, or the iteratee function.
- * @returns {T[]} Returns the new array of combined unique values.
+ * @param values - The arrays to inspect, or the iteratee function.
+ * @returns Returns the new array of combined unique values.
  *
  * @example
  * // Returns [2.1, 1.2]
@@ -154,5 +156,5 @@ export function unionBy<T>(...values: Array<ArrayLike<T> | null | undefined | It
     return uniq(flattened);
   }
 
-  return uniqBy(flattened, iteratee(lastValue));
+  return uniqBy(flattened, ary(iteratee(lastValue), 1)).map(normalizeZero);
 }

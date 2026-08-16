@@ -2,33 +2,39 @@
 
 주어진 값이 `undefined`인지 확인해요.
 
-이 함수는 주어진 값이 `undefined` 인지 엄격 일치 (===) 기준으로 확인합니다.
-값이 `undefined` 이면 `true`, 아니면 `false` 를 반환해요.
-
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `undefined`인 타입으로 좁힐 수 있어요.
-
-## 인터페이스
-
 ```typescript
-function isUndefined(x: unknown): x is undefined;
+const result = isUndefined(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `x` (`unknown`): `undefined`인지 확인할 값.
+### `isUndefined(value)`
 
-### 반환 값
-
-(`x is undefined`): 값이 `undefined`이면 `true`, 아니면 `false`.
-
-## 예시
+값이 `undefined`인지 확인하고 싶을 때 `isUndefined`를 사용하세요. 변수의 초기화 여부나 선택적 프로퍼티의 존재 여부를 확인할 때 유용해요.
 
 ```typescript
-const value1 = undefined;
-const value2 = null;
-const value3 = 42;
+import { isUndefined } from 'es-toolkit/predicate';
 
-console.log(isUndefined(value1)); // true
-console.log(isUndefined(value2)); // false
-console.log(isUndefined(value3)); // false
+// undefined 값들
+console.log(isUndefined(undefined)); // true
+console.log(isUndefined(void 0)); // true
+
+let uninitialized: string;
+console.log(isUndefined(uninitialized)); // true
+
+// undefined가 아닌 값들
+console.log(isUndefined(null)); // false
+console.log(isUndefined('')); // false
+console.log(isUndefined(0)); // false
+console.log(isUndefined(false)); // false
+console.log(isUndefined({})); // false
+console.log(isUndefined([])); // false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): undefined인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is undefined`): 값이 undefined이면 `true`, 그렇지 않으면 `false`를 반환해요.

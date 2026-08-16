@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { add as addLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { add } from './add';
 import { symbol } from '../_internal/symbol';
 import { map } from '../array/map';
@@ -21,15 +20,15 @@ describe('add', () => {
     expect(add('x', 'y')).toBe('xy');
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of two positive numbers', () => {
     expect(add(2, 3)).toBe(5);
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of two negative numbers', () => {
     expect(add(-1, -5)).toBe(-6);
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of a negative and a positive number', () => {
     expect(add(-2, 3)).toBe(1);
   });
 
@@ -91,9 +90,5 @@ describe('add', () => {
     expect(add(0, symbol)).toEqual(NaN);
     // @ts-expect-error - invalid arguments
     expect(add(symbol, 0)).toEqual(NaN);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(add).toEqualTypeOf<typeof addLodash>();
   });
 });

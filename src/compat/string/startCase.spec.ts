@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { startCase as startCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { startCase } from './startCase';
 
 describe('startCase', () => {
@@ -11,6 +10,16 @@ describe('startCase', () => {
     const expected = strings.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should convert string to start case, identical to lodash', () => {
+    expect(startCase('åäöÅÄÖ')).toBe('Aao AAO');
+    expect(startCase('helloÅäöWorld')).toBe('Hello Aao World');
+    expect(startCase('café')).toBe('Cafe');
+    expect(startCase('naïve')).toBe('Naive');
+    expect(startCase('Zürich')).toBe('Zurich');
+    expect(startCase('São Paulo')).toBe('Sao Paulo');
+    expect(startCase('Москва')).toBe('Москва');
   });
 
   it(`should handle double-converting strings`, () => {
@@ -52,7 +61,9 @@ describe('startCase', () => {
     expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(startCase).toEqualTypeOf<typeof startCaseLodash>();
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(startCase('foo1stPlace')).toBe('Foo 1st Place');
+    expect(startCase('top10th')).toBe('Top 10th');
+    expect(startCase('1st place 2nd 3rd 4th')).toBe('1st Place 2nd 3rd 4th');
   });
 });

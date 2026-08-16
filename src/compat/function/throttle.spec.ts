@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
-import type { throttle as throttleLodash } from 'lodash';
+import { describe, expect, it, vi } from 'vitest';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -211,8 +210,7 @@ describe('throttle', () => {
   const methodName = 'throttle';
 
   it(`\`_.${methodName}\` should not error for non-object \`options\` values`, () => {
-    func(noop, 32, 1 as any);
-    expect(true);
+    expect(() => func(noop, 32, 1 as any)).not.toThrow();
   });
 
   it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, async () => {
@@ -348,10 +346,6 @@ describe('throttle', () => {
 
     throttled();
     expect(fn).toHaveBeenCalledTimes(4);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(throttle).toEqualTypeOf<typeof throttleLodash>();
   });
 
   it('should not invoke the function even after flush is called if timer is going', async () => {

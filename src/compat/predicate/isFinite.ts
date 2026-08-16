@@ -1,8 +1,11 @@
 /**
  * Checks if `value` is a finite number.
  *
- * @param {any} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a finite number, `false` otherwise.
+ * Acts as a type guard for `number` values — returning `true` only when `value`
+ * is of type `number` and finite (not `Infinity`, `-Infinity`, or `NaN`).
+ *
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is a finite number, `false` otherwise.
  *
  * @example
  * ```typescript
@@ -13,8 +16,12 @@
  * console.log(isFinite(value1)); // true
  * console.log(isFinite(value2)); // false
  * console.log(isFinite(value3)); // false
+ *
+ * if (isFinite(value1)) {
+ *   console.log(value1.toFixed(2));
+ * }
  * ```
  */
-export function isFinite(value?: any): boolean {
+export function isFinite(value: unknown): value is number {
   return Number.isFinite(value);
 }

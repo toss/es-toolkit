@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('debounce bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'debounce');
-    expect(bundleSize).toMatchInlineSnapshot(`2873`);
+    expect(bundleSize).toMatchInlineSnapshot(`2901`);
   });
 
   it('es-toolkit', async () => {

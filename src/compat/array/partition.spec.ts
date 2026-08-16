@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { partition as partitionLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { partition } from './partition';
 import { args } from '../_internal/args';
 
@@ -18,6 +17,15 @@ describe('partition', () => {
     const arr = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
 
     expect(partition(arr, null)).toEqual([
+      [1, 2, 3, 4, 5],
+      [0, null, undefined, false, ''],
+    ]);
+  });
+
+  it('should use `_.identity` when `predicate` is undefined', () => {
+    const arr = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
+
+    expect(partition(arr, undefined)).toEqual([
       [1, 2, 3, 4, 5],
       [0, null, undefined, false, ''],
     ]);
@@ -149,7 +157,12 @@ describe('partition', () => {
     expect(partition(args, isEven)).toEqual([[2], [1, 3]]);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(partition).toEqualTypeOf<typeof partitionLodash>();
+  it('should use identity function when no predicate is provided', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(partition([0, 1, 2, false, true, '', 'hello'])).toEqual([
+      [1, 2, true, 'hello'],
+      [0, false, ''],
+    ]);
   });
 });

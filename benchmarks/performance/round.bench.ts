@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { round as roundToolkit_ } from 'es-toolkit';
-import { round as roundCompat_ } from 'es-toolkit/compat';
-import { round as roundLodash_ } from 'lodash';
+import { round as roundToolkit } from 'es-toolkit';
+import { round as roundCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const roundToolkit = roundToolkit_;
-const roundCompat = roundCompat_;
-const roundLodash = roundLodash_;
+const { round: roundLodash } = lodash;
 
 describe('round', () => {
   bench('es-toolkit/round', () => {
@@ -31,10 +29,7 @@ describe('round (compat)', () => {
     roundCompat(4160, -2);
     roundCompat(4.006, NaN);
     roundCompat(4.016, 2.6);
-    roundCompat(4.016, '+2');
     roundCompat(5e1, 2);
-    roundCompat('5e', 1);
-    roundCompat('5e1e1', 1);
   });
 
   bench('lodash/round', () => {
@@ -46,9 +41,6 @@ describe('round (compat)', () => {
     roundLodash(4160, -2);
     roundLodash(4.006, NaN);
     roundLodash(4.016, 2.6);
-    roundLodash(4.016, '+2');
     roundLodash(5e1, 2);
-    roundLodash('5e', 1);
-    roundLodash('5e1e1', 1);
   });
 });

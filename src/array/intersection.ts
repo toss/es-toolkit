@@ -6,9 +6,9 @@
  * are not found in the second array.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} firstArr - The first array to compare.
- * @param {T[]} secondArr - The second array to compare.
- * @returns {T[]} A new array containing the elements that are present in both arrays.
+ * @param firstArr - The first array to compare.
+ * @param secondArr - The second array to compare.
+ * @returns A new array containing the elements that are present in both arrays.
  *
  * @example
  * const array1 = [1, 2, 3, 4, 5];
@@ -19,7 +19,5 @@
 export function intersection<T>(firstArr: readonly T[], secondArr: readonly T[]): T[] {
   const secondSet = new Set(secondArr);
 
-  return firstArr.filter(item => {
-    return secondSet.has(item);
-  });
+  return firstArr.filter(item => secondSet.has(item));
 }

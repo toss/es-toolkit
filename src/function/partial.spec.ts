@@ -103,4 +103,33 @@ describe('partial', () => {
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });
+
+  it('should create partialed function without copying prototype from arrow function', () => {
+    const arrowFn = (a: number, b: number) => a + b;
+    const partialed = partial(arrowFn, 10);
+
+    expect(partialed(5)).toBe(15);
+    expect(typeof partialed.prototype).toBe('object');
+  });
+
+  it('fully applies a 2-argument function and returns a zero-argument function', () => {
+    const add = (a: number, b: number) => a + b;
+    const addThree = partial(add, 1, 2);
+
+    expect(addThree()).toBe(3);
+  });
+
+  it('fully applies a 3-argument function and returns a zero-argument function', () => {
+    const sum = (a: number, b: number, c: number) => a + b + c;
+    const sumAll = partial(sum, 1, 2, 3);
+
+    expect(sumAll()).toBe(6);
+  });
+
+  it('fully applies a 4-argument function and returns a zero-argument function', () => {
+    const sumFour = (a: number, b: number, c: number, d: number) => a + b + c + d;
+    const sumAll = partial(sumFour, 1, 2, 3, 4);
+
+    expect(sumAll()).toBe(10);
+  });
 });
