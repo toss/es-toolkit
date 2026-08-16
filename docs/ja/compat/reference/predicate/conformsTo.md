@@ -1,4 +1,4 @@
-# conformsTo (Lodash互換性)
+# conformsTo (Lodash 互換性)
 
 オブジェクトが指定された条件関数をすべて満たすかどうかを確認します。
 

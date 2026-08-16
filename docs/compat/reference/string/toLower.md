@@ -1,4 +1,4 @@
-# toLower (Lodash compatibility)
+# toLower (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.toLowerCase`
 

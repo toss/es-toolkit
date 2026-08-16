@@ -93,6 +93,22 @@ console.log(envStyle);
 // }
 ```
 
+使用 `preserveArrays` 选项可以让数组保持为值,而不被扁平化为索引键。
+
+```typescript
+// 数组保持为值
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
 也能适当处理空对象和特殊情况。
 
 ```typescript
@@ -108,7 +124,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +136,7 @@ console.log(result);
 - `object` (`object`): 要扁平化的对象。
 - `options` (`FlattenObjectOptions`, 可选): 扁平化选项。
   - `delimiter` (`string`, 可选): 用于连接嵌套键的分隔符。默认为 `'.'`。
+  - `preserveArrays` (`boolean`, 可选): 为 `true` 时,数组保持为值而不被扁平化。默认为 `false`。
 
 #### 返回值
 

@@ -124,9 +124,10 @@ export function isMatchWith(
         return Boolean(isEqual);
       }
 
-      return isMatchWithInternal(objValue, srcValue, doesMatch, stack);
+      return isMatchWithInternal(objValue, srcValue, doesMatch, stack, false);
     },
-    new Map()
+    new Map(),
+    true
   );
 }
 
@@ -141,7 +142,8 @@ function isMatchWithInternal(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack?: Map<any, any>
+  stack?: Map<any, any>,
+  isRoot = false
 ): boolean {
   if (source === target) {
     return true;
@@ -155,7 +157,7 @@ function isMatchWithInternal(
       const sourceKeys = Object.keys(source);
 
       if (sourceKeys.length > 0) {
-        return isMatchWithInternal(target, { ...source }, compare, stack);
+        return isMatchWithInternal(target, { ...source }, compare, stack, isRoot);
       }
 
       return eq(target, source);
@@ -165,11 +167,15 @@ function isMatchWithInternal(
         return eq(target, source);
       }
 
-      if (typeof source === 'string') {
-        return source === '';
+      if (isRoot) {
+        if (typeof source === 'string') {
+          return source === '';
+        }
+
+        return true;
       }
 
-      return true;
+      return eq(target, source);
     }
   }
 }

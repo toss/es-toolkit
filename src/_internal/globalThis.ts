@@ -6,9 +6,8 @@ const globalThis_: typeof globalThis =
   (typeof window === 'object' && window) ||
   (typeof self === 'object' && self) ||
   (typeof global === 'object' && global) ||
-  (function (this: unknown) {
+  ((function (this: unknown) {
     return this;
-  })() ||
-  Function('return this')();
+  })() as typeof globalThis);
 
 export { globalThis_ as globalThis };

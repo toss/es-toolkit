@@ -1,4 +1,4 @@
-# padEnd (Lodash compatibility)
+# padEnd (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.padEnd`
 

@@ -40,7 +40,7 @@ takeRightWhile(users, o => !o.active);
 
 // 부분 객체로 조건 매칭
 takeRightWhile(users, { active: false });
-// Returns: [{ user: 'pebbles', active: false }]
+// Returns: [{ user: 'fred', active: false }, { user: 'pebbles', active: false }]
 
 // 속성-값 배열로 조건 매칭
 takeRightWhile(users, ['active', false]);

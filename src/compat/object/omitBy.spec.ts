@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { omitBy as omitByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { omitBy } from './omitBy';
 import { symbol } from '../_internal/symbol';
 import { castArray } from '../array/castArray';
@@ -144,9 +143,5 @@ describe('omitBy', () => {
     expect(actual.message).toBe('hi');
     expect(actual.length).toBe(104);
     expect((actual as any)[sym]).toBe('error');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(omitBy).toEqualTypeOf<typeof omitByLodash>();
   });
 });

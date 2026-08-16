@@ -1,6 +1,7 @@
 import { isFunction, isNil } from '../../predicate/index.ts';
 import { get } from '../object/get.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toPath } from '../util/toPath.ts';
 
 /**
  * Invokes the method at path of each element in collection.
@@ -71,15 +72,9 @@ export function invokeMap<T, R>(
 
     let thisContext = value;
 
-    if (Array.isArray(path)) {
-      const pathExceptLast = path.slice(0, -1);
-      if (pathExceptLast.length > 0) {
-        thisContext = get(value, pathExceptLast);
-      }
-    } else if (typeof path === 'string' && path.includes('.')) {
-      const parts = path.split('.');
-      const pathExceptLast = parts.slice(0, -1).join('.');
-      thisContext = get(value, pathExceptLast);
+    const keys = Array.isArray(path) ? path : toPath(path);
+    if (keys.length > 1) {
+      thisContext = get(value, keys.slice(0, -1));
     }
 
     result.push(method == null ? undefined : method.apply(thisContext, args));

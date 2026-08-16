@@ -1,4 +1,4 @@
-# forOwnRight (Lodash compatibility)
+# forOwnRight (Lodash Compatibility)
 
 ::: warning Use `Object.keys` and loops
 This `forOwnRight` function operates slowly due to internal calls to the `keys` function, object transformation processes, and reverse iteration.

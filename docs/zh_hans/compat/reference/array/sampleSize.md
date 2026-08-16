@@ -1,4 +1,4 @@
-# sampleSize（Lodash 兼容性）
+# sampleSize(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 [sampleSize](../../../reference/array/sampleSize.md)
 

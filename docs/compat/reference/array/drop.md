@@ -11,12 +11,12 @@ Instead, use the faster and more modern [`drop`](../../../reference/array/drop.m
 Removes a specified number of elements from the beginning of an array.
 
 ```typescript
-const result = drop(array, n);
+const result = drop(array, itemsCount);
 ```
 
 ## Usage
 
-### `drop(array, n?)`
+### `drop(array, itemsCount?)`
 
 Use `drop` when you want to remove several elements from the beginning of an array and get the rest. By default, it removes the first element.
 
@@ -90,7 +90,7 @@ drop(arrayLike, 1);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array from which elements will be removed.
-- `n` (`number`, optional): The number of elements to remove. Default is `1`.
+- `itemsCount` (`number`, optional): The number of elements to remove. Default is `1`.
 
 #### Returns
 

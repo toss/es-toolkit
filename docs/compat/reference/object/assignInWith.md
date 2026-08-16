@@ -1,4 +1,4 @@
-# assignInWith (Lodash compatibility)
+# assignInWith (Lodash Compatibility)
 
 ::: warning Implementing custom logic is recommended
 
@@ -59,6 +59,10 @@ assignInWith(target3, child, (objValue, srcValue, key) => {
 ```
 
 If the customizer function returns `undefined`, the default assignment behavior is used. Unlike `assignIn`, this function allows you to apply custom logic to each property.
+
+#### Alias
+
+`extendWith`
 
 #### Parameters
 

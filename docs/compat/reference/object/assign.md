@@ -1,4 +1,4 @@
-# assign (Lodash compatibility)
+# assign (Lodash Compatibility)
 
 ::: warning Use `Object.assign` instead
 

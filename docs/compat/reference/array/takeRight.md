@@ -1,4 +1,4 @@
-# takeRight (Lodash compatibility)
+# takeRight (Lodash Compatibility)
 
 ::: warning Please use [takeRight](../../../reference/array/takeRight.md) from `es-toolkit`
 

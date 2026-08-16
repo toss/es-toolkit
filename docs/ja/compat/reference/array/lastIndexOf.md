@@ -1,10 +1,10 @@
-# lastIndexOf (Lodash互換性)
+# lastIndexOf (Lodash 互換性)
 
-::: warning `Array.lastIndexOf`を使用してください
+::: warning `Array.prototype.lastIndexOf`を使用してください
 
 この`lastIndexOf`関数は`null`や`undefined`の処理、`NaN`値の検索などにより遅く動作します。
 
-代わりに、より高速でモダンな`Array.lastIndexOf`を使用してください。
+代わりに、より高速でモダンな`Array.prototype.lastIndexOf`を使用してください。
 
 :::
 
@@ -16,9 +16,9 @@ const index = lastIndexOf(array, searchElement, fromIndex);
 
 ## 使用法
 
-### `lastIndexOf(array, searchElement, fromIndex)`
+### `lastIndexOf(array, searchElement, fromIndex?)`
 
-配列で指定された要素が最後に現れるインデックスを返します。ネイティブの`Array.lastIndexOf`と似ていますが、`NaN`値も見つけることができます。
+配列で指定された要素が最後に現れるインデックスを返します。ネイティブの`Array.prototype.lastIndexOf`と似ていますが、`NaN`値も見つけることができます。
 
 ```typescript
 import { lastIndexOf } from 'es-toolkit/compat';

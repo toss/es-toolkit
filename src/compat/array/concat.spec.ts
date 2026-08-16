@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { concat as concatLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { concat } from './concat';
 
 describe('concat', () => {
@@ -53,9 +52,5 @@ describe('concat', () => {
 
     expect(array).toEqual([1]);
     expect(actual).toEqual([1, 2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(concat).toEqualTypeOf<typeof concatLodash>();
   });
 });

@@ -31,7 +31,7 @@ import { timeout, TimeoutError } from 'es-toolkit';
 
 async function fetchWithTimeout(url: string) {
   try {
-    const response = await timeout(() => fetch(url), 3000);
+    const response = await Promise.race([fetch(url), timeout(3000)]);
     return response;
   } catch (error) {
     if (error instanceof TimeoutError) {

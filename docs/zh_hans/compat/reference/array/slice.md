@@ -1,4 +1,4 @@
-# slice（Lodash 兼容性）
+# slice(Lodash 兼容性)
 
 ::: warning 使用 `Array.prototype.slice`
 

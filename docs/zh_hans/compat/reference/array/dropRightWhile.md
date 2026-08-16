@@ -16,7 +16,7 @@ const result = dropRightWhile(array, predicate);
 
 ## 用法
 
-### `dropRightWhile(array, predicate)`
+### `dropRightWhile(array, predicate?)`
 
 当您想从数组的末尾连续删除满足特定条件的元素时,使用 `dropRightWhile`。当条件函数返回 `false` 时停止删除。
 

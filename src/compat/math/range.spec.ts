@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { range as rangeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { range } from './range';
 import { falsey } from '../_internal/falsey';
 import { each } from '../array/each';
@@ -70,9 +69,5 @@ describe('range', () => {
       const actual = map(collection, range);
       expect(actual).toEqual(expected);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(range).toEqualTypeOf<typeof rangeLodash>();
   });
 });

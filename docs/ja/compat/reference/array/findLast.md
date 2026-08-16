@@ -1,4 +1,4 @@
-# findLast (Lodash互換性)
+# findLast (Lodash 互換性)
 
 ::: warning `Array.prototype.findLast`を使用してください
 
@@ -11,12 +11,12 @@
 配列またはオブジェクトで条件を満たす最後の要素を見つけます。
 
 ```typescript
-const lastEven = findLast(array, predicate);
+const lastEven = findLast(array, doesMatch);
 ```
 
 ## 使用法
 
-### `findLast(collection, predicate?, fromIndex?)`
+### `findLast(collection, doesMatch?, fromIndex?)`
 
 配列またはオブジェクトで与えられた条件を満たす最後の要素を見つけます。配列の末尾から逆順に検索し、条件を満たす最初の要素を返します。
 
@@ -42,7 +42,7 @@ findLast(users, ['age', 18]);
 
 // プロパティ名で条件を指定（真として評価される値を持つ最後の要素）
 findLast(users, 'age');
-// => { user: 'fred', age: 40 }
+// => { user: 'pebbles', age: 18 }
 ```
 
 検索開始インデックスを指定することもできます。
@@ -67,7 +67,7 @@ findLast(undefined, x => x > 0); // undefined
 #### パラメータ
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 検索する配列またはオブジェクトです。
-- `predicate` (`ListIterateeCustom<T, boolean>`, オプション): 各要素に適用する条件です。関数、オブジェクト、キー値ペア、またはプロパティ名を使用できます。デフォルトは`identity`関数です。
+- `doesMatch` (`ListIterateeCustom<T, boolean>`, オプション): 各要素に適用する条件です。関数、オブジェクト、キー値ペア、またはプロパティ名を使用できます。デフォルトは`identity`関数です。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の場合は末尾から計算します。デフォルトは配列の最後のインデックスです。
 
 #### 戻り値

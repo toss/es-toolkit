@@ -40,7 +40,7 @@ takeRightWhile(users, o => !o.active);
 
 // 使用部分对象进行条件匹配
 takeRightWhile(users, { active: false });
-// Returns: [{ user: 'pebbles', active: false }]
+// Returns: [{ user: 'fred', active: false }, { user: 'pebbles', active: false }]
 
 // 使用属性-值数组进行条件匹配
 takeRightWhile(users, ['active', false]);

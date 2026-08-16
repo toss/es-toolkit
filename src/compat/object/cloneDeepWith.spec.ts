@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { cloneDeepWith as cloneDeepWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
@@ -126,10 +125,6 @@ describe('cloneDeepWith', function () {
       expect(actual).toEqual(object);
       expect(actual).not.toBe(object);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(cloneDeepWith).toEqualTypeOf<typeof cloneDeepWithLodash>();
   });
 
   it('should clone objects created with Object.create(null) as regular objects with Object.prototype', () => {

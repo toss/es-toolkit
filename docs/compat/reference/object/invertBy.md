@@ -1,4 +1,4 @@
-# invertBy (Lodash compatibility)
+# invertBy (Lodash Compatibility)
 
 ::: warning Use modern JavaScript APIs
 

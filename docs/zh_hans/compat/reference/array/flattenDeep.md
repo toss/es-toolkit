@@ -2,7 +2,7 @@
 
 ::: warning 使用 `es-toolkit` 的 `flattenDeep`
 
-此 `flattenDeep` 函数由于处理 `null` 或 `undefined`、`ArrayLike` 类型处理、支持各种条件函数格式等而运行较慢。
+此 `flattenDeep` 函数由于处理 `null` 或 `undefined`、`ArrayLike` 类型处理等原因运行较慢。
 
 请改用更快、更现代的 `es-toolkit` 的 [flattenDeep](../../../reference/array/flattenDeep.md)。
 
@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // 结果: ['a', 'b', 'c', 'd']
 ```
 
-空数组、null 或 undefined 返回空数组。
+`null` 或 `undefined` 被视为空数组。
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

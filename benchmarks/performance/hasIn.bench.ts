@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { hasIn as hasInToolkit_ } from 'es-toolkit/compat';
-import { hasIn as hasInLodash_ } from 'lodash';
+import { hasIn as hasInToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const hasInToolkit = hasInToolkit_;
-const hasInLodash = hasInLodash_;
+const { hasIn: hasInLodash } = lodash;
 
 describe('hasIn', () => {
   // 기본 객체 경로 테스트 (문자열)

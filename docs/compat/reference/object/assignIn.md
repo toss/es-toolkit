@@ -1,4 +1,4 @@
-# assignIn (Lodash compatibility)
+# assignIn (Lodash Compatibility)
 
 ::: warning Use `Object.assign` instead
 
@@ -56,6 +56,10 @@ assignIn(target4, arr);
 ```
 
 Unlike `assign`, this function copies inherited properties as well. It also has an optimization that doesn't overwrite if values are the same.
+
+#### Alias
+
+`extend`
 
 #### Parameters
 

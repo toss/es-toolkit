@@ -1,5 +1,5 @@
 import { deburr } from './deburr.ts';
-import { kebabCase as kebabCaseToolkit } from '../../string/kebabCase.ts';
+import { words } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -17,5 +17,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr4 = kebabCase('HTTPRequest') // returns 'http-request'
  */
 export function kebabCase(str?: string): string {
-  return kebabCaseToolkit(normalizeForCase(deburr(str)));
+  return words(normalizeForCase(deburr(str)))
+    .map(word => word.toLowerCase())
+    .join('-');
 }

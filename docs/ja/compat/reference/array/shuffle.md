@@ -1,4 +1,4 @@
-# shuffle（Lodash 互換性）
+# shuffle(Lodash 互換性)
 
 ::: warning `es-toolkit` の `shuffle` を使用してください
 

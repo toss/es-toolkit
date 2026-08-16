@@ -1,4 +1,4 @@
-# random（Lodash 兼容性）
+# random(Lodash 兼容性)
 
 ::: warning 请使用 `Math.random()`
 

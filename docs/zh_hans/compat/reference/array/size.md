@@ -1,4 +1,4 @@
-# size（Lodash 兼容性）
+# size(Lodash 兼容性)
 
 ::: warning 使用 `.length` 属性
 

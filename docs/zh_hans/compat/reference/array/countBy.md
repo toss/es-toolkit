@@ -1,4 +1,4 @@
-# countBy（Lodash 兼容性）
+# countBy(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 `countBy`
 

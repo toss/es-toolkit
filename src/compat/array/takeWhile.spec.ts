@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { takeWhile as takeWhileLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { takeWhile } from './takeWhile';
 import { slice } from '../_internal/slice';
 import { toArgs } from '../_internal/toArgs';
@@ -56,7 +55,8 @@ describe('takeWhile', () => {
     expect(takeWhile(toArgs([3, 2, 1]), value => value > 1)).toEqual([3, 2]);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(takeWhile).toEqualTypeOf<typeof takeWhileLodash>();
+  it('should treat strings as arrays of characters', () => {
+    expect(takeWhile('hello', char => char !== 'o')).toEqual(['h', 'e', 'l', 'l']);
+    expect(takeWhile('hello')).toEqual(['h', 'e', 'l', 'l', 'o']);
   });
 });

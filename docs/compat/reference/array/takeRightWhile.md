@@ -1,4 +1,4 @@
-# takeRightWhile (Lodash compatibility)
+# takeRightWhile (Lodash Compatibility)
 
 ::: warning Please use [takeRightWhile](../../../reference/array/takeRightWhile.md) from `es-toolkit`
 
@@ -40,7 +40,7 @@ takeRightWhile(users, o => !o.active);
 
 // Matching with partial object
 takeRightWhile(users, { active: false });
-// Returns: [{ user: 'pebbles', active: false }]
+// Returns: [{ user: 'fred', active: false }, { user: 'pebbles', active: false }]
 
 // Matching with property-value array
 takeRightWhile(users, ['active', false]);

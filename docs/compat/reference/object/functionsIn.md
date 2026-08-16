@@ -1,4 +1,4 @@
-# functionsIn (Lodash compatibility)
+# functionsIn (Lodash Compatibility)
 
 ::: warning Use `for...in` loop and `typeof` check instead
 

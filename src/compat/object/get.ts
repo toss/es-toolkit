@@ -466,7 +466,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
       const result = object[path];
 
       if (result === undefined) {
-        if (isDeepKey(path)) {
+        if (isDeepKey(path) && !Object.hasOwn(object, path)) {
           return get(object, toPath(path), defaultValue);
         } else {
           return defaultValue;

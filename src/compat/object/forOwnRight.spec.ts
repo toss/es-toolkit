@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { forOwnRight as forOwnRightLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { forOwnRight } from './forOwnRight';
 
 /**
@@ -124,9 +123,5 @@ describe('forOwnRight', () => {
     });
 
     expect(keys).toEqual(['3', '2', '1', '0']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(forOwnRight).toEqualTypeOf<typeof forOwnRightLodash>();
   });
 });

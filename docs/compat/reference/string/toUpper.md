@@ -1,4 +1,4 @@
-# toUpper (Lodash compatibility)
+# toUpper (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.toUpperCase`
 

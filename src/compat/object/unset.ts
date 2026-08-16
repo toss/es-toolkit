@@ -60,7 +60,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       }
     }
     case 'string': {
-      if (obj?.[path] === undefined && isDeepKey(path)) {
+      if (obj?.[path] === undefined && isDeepKey(path) && !Object.hasOwn(obj, path)) {
         return unsetWithPath(obj, toPath(path));
       }
 

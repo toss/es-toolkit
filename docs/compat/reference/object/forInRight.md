@@ -1,4 +1,4 @@
-# forInRight (Lodash compatibility)
+# forInRight (Lodash Compatibility)
 
 ::: warning Use `Object.keys` and `for...in` loops instead
 

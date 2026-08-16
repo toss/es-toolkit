@@ -1,4 +1,4 @@
-# union (Lodash互換)
+# union (Lodash 互換性)
 
 ::: warning `es-toolkit`の[union](../../../reference/array/union.md)を使用してください
 

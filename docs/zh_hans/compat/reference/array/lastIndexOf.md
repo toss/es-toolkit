@@ -1,10 +1,10 @@
-# lastIndexOf (Lodash兼容性)
+# lastIndexOf (Lodash 兼容性)
 
-::: warning 使用`Array.lastIndexOf`
+::: warning 使用`Array.prototype.lastIndexOf`
 
 此`lastIndexOf`函数由于处理`null`或`undefined`、搜索`NaN`值等原因运行缓慢。
 
-请使用更快、更现代的`Array.lastIndexOf`。
+请使用更快、更现代的`Array.prototype.lastIndexOf`。
 
 :::
 
@@ -16,9 +16,9 @@ const index = lastIndexOf(array, searchElement, fromIndex);
 
 ## 用法
 
-### `lastIndexOf(array, searchElement, fromIndex)`
+### `lastIndexOf(array, searchElement, fromIndex?)`
 
-返回数组中指定元素最后出现的索引。与原生`Array.lastIndexOf`类似，但也可以找到`NaN`值。
+返回数组中指定元素最后出现的索引。与原生`Array.prototype.lastIndexOf`类似，但也可以找到`NaN`值。
 
 ```typescript
 import { lastIndexOf } from 'es-toolkit/compat';

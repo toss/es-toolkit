@@ -1,4 +1,4 @@
-# isElement (Lodash互換性)
+# isElement (Lodash 互換性)
 
 ::: warning `instanceof HTMLElement`を使用してください
 

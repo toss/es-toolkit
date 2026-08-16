@@ -1,4 +1,4 @@
-# cloneWith (Lodash compatibility)
+# cloneWith (Lodash Compatibility)
 
 ::: warning Implementing custom logic is recommended
 

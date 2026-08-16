@@ -3,12 +3,12 @@
 비동기 함수에 시간 제한을 걸어서, 지정된 시간 내에 완료되지 않으면 `TimeoutError`를 발생시켜요.
 
 ```typescript
-await withTimeout(run, ms);
+await withTimeout(run, ms, options?);
 ```
 
 ## 사용법
 
-### `withTimeout(run, ms)`
+### `withTimeout(run, ms, options?)`
 
 비동기 작업에 타임아웃을 설정하고 싶을 때 `withTimeout`을 사용하세요. Promise가 지정된 시간 내에 완료되지 않으면 `TimeoutError`로 거부되어서, 무한정 기다리는 상황을 방지할 수 있어요.
 
@@ -67,10 +67,23 @@ async function getFastestResponse() {
 }
 ```
 
+`AbortSignal`을 넘겨서 타임아웃을 취소할 수 있어요. 중단하면 시간 제한이 해제되어서 `run`이 마감 시간 없이 끝까지 기다려져요. 반환된 Promise를 거부하거나 `run` 자체를 중단하지는 않아요. 실제 작업도 취소하고 싶다면 같은 시그널을 `run`에 함께 넘기세요.
+
+```typescript
+const controller = new AbortController();
+
+// 사용자가 계속 기다리기를 선택하면 1초 제한을 해제해요.
+keepWaitingButton.onclick = () => controller.abort();
+
+const data = await withTimeout(fetchData, 1000, { signal: controller.signal });
+```
+
 #### 파라미터
 
 - `run` (`() => Promise<T>`): 실행할 비동기 함수예요.
 - `ms` (`number`): 타임아웃이 발생하기까지의 밀리초 단위 시간이에요.
+- `options` (`WithTimeoutOptions`, 선택): 타임아웃 옵션이에요.
+  - `signal` (`AbortSignal`, 선택): 타임아웃을 취소할 수 있는 AbortSignal이에요. 중단되면 시간 제한이 해제되고 `run`이 마감 시간 없이 기다려져요.
 
 #### 반환 값
 

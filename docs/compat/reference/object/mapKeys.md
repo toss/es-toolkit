@@ -1,4 +1,4 @@
-# mapKeys (Lodash compatibility)
+# mapKeys (Lodash Compatibility)
 
 ::: warning Use `mapKeys` from `es-toolkit`
 

@@ -39,11 +39,13 @@ export function toPath(deepKey: any): string[] {
   let key = '';
   let quoteChar = '';
   let bracket = false;
+  let bracketHadQuote = false;
+  const bracketNumberRegex = /^-?\d+(?:\.\d+)?$/;
 
-  // Leading dot
+  // Leading dot. Record the empty segment that precedes it, but leave the dot for the
+  // main loop so it is still treated as a separator (e.g. '..a' -> ['', '', 'a']).
   if (deepKey.charCodeAt(0) === 46) {
     result.push('');
-    index++;
   }
 
   while (index < length) {
@@ -64,10 +66,23 @@ export function toPath(deepKey: any): string[] {
       if (char === '"' || char === "'") {
         // Start of quoted string inside brackets
         quoteChar = char;
+        bracketHadQuote = true;
       } else if (char === ']') {
-        // End of bracketed segment
+        // End of bracketed segment. Unquoted, non-numeric content with dots is
+        // tokenized like normal path access (matching lodash), e.g. '[a.b]' ->
+        // ['a', 'b']; quoted strings and numbers are kept whole ('["a.b"]',
+        // '[-1.23]').
         bracket = false;
-        result.push(key);
+        if (!bracketHadQuote && key.includes('.') && !bracketNumberRegex.test(key)) {
+          const segments = key.split('.');
+          for (let i = 0; i < segments.length; i++) {
+            if (segments[i] !== '') {
+              result.push(segments[i]);
+            }
+          }
+        } else {
+          result.push(key);
+        }
         key = '';
       } else {
         key += char;
@@ -76,6 +91,7 @@ export function toPath(deepKey: any): string[] {
       if (char === '[') {
         // Start of bracketed segment
         bracket = true;
+        bracketHadQuote = false;
         if (key) {
           result.push(key);
           key = '';
@@ -84,6 +100,13 @@ export function toPath(deepKey: any): string[] {
         if (key) {
           result.push(key);
           key = '';
+        }
+        // A dot that is directly followed by another dot or the end of the string
+        // separates an empty segment, matching lodash (e.g. 'a..b' -> ['a', '', 'b'],
+        // 'a.' -> ['a', '']).
+        const next = deepKey[index + 1];
+        if (next === undefined || next === '.') {
+          result.push('');
         }
       } else {
         key += char;

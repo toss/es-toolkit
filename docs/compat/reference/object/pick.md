@@ -1,4 +1,4 @@
-# pick (Lodash compatibility)
+# pick (Lodash Compatibility)
 
 ::: warning Use `pick` from `es-toolkit`
 

@@ -1,4 +1,4 @@
-# keysIn (Lodash compatibility)
+# keysIn (Lodash Compatibility)
 
 ::: warning Use `for...in` loop or `Object.keys`
 

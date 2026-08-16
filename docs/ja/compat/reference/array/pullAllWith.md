@@ -26,8 +26,8 @@ console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
 // 文字列の長さで比較して削除
 const words = ['hello', 'world', 'test', 'code'];
-pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
-console.log(words); // ['hello', 'world', 'code'] ('test'が'hi'と同じ長さのため削除される)
+pullAllWith(words, ['star'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world'] ('test'と'code'が長さ4のため削除される)
 ```
 
 配列が空または `null`、`undefined` の場合、元の配列がそのまま返されます。

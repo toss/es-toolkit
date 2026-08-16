@@ -145,9 +145,15 @@ onBeforeUnmount(() => {
 
 .flavor-dropdown__panel {
   position: absolute;
-  inset-inline: 0;
+  inset-inline-start: 0;
   top: calc(100% + 6px);
   z-index: 50;
+  /* Grow past the trigger to fit the longest flavor label without truncation.
+     The sidebar clips horizontal overflow at its padding box, so the panel can
+     extend by at most the sidebar's padding-right (32px); cap just under that. */
+  width: max-content;
+  min-width: 100%;
+  max-width: calc(100% + 30px);
   display: flex;
   flex-direction: column;
   gap: 4px;

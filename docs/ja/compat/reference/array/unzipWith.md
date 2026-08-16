@@ -1,4 +1,4 @@
-# unzipWith (Lodash互換)
+# unzipWith (Lodash 互換性)
 
 ::: warning `es-toolkit`の`unzipWith`を使用してください
 

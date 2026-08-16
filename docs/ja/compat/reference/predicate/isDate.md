@@ -1,4 +1,4 @@
-# isDate (Lodash互換性)
+# isDate (Lodash 互換性)
 
 ::: warning es-toolkitの[isDate](../../../reference/predicate/isDate.md)を使用してください
 この`isDate`関数はLodash互換性のための複雑な処理により動作が遅くなります。

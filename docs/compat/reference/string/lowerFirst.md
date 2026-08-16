@@ -1,4 +1,4 @@
-# lowerFirst (Lodash compatibility)
+# lowerFirst (Lodash Compatibility)
 
 ::: warning Use `lowerFirst` from `es-toolkit`
 

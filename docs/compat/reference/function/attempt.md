@@ -59,7 +59,7 @@ try {
 #### Parameters
 
 - `func` (`Function`): The function to execute.
-- `args` (`...any[]`): The arguments to pass to the function.
+- `...args` (`Array<any>`): The arguments to pass to the function.
 
 #### Returns
 

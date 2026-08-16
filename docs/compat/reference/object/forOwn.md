@@ -1,4 +1,4 @@
-# forOwn (Lodash compatibility)
+# forOwn (Lodash Compatibility)
 
 ::: warning Use `Object.keys` with a loop instead
 

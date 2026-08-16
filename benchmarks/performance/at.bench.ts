@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { at as atToolkit_ } from 'es-toolkit';
-import { at as atToolkitCompat_ } from 'es-toolkit/compat';
-import { at as atLodash_ } from 'lodash';
+import { at as atToolkit } from 'es-toolkit';
+import { at as atToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const atToolkit = atToolkit_;
-const atToolkitCompat = atToolkitCompat_;
-const atLodash = atLodash_;
+const { at: atLodash } = lodash;
 
 describe('at', () => {
   const data = ['a', 'b', 'c', 'd', 'e'];

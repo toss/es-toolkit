@@ -1,4 +1,4 @@
-# repeat (Lodash compatibility)
+# repeat (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.repeat`
 

@@ -1,4 +1,4 @@
-# clone (Lodash compatibility)
+# clone (Lodash Compatibility)
 
 ::: warning Use `clone` from `es-toolkit` instead
 

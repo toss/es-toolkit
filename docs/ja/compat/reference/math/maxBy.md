@@ -16,7 +16,7 @@ const maxItem = maxBy(array, iteratee);
 
 ## 使用法
 
-### `maxBy(array, iteratee)`
+### `maxBy(array, iteratee?)`
 
 配列から関数で計算した値が最も大きい要素を見つけます。
 
@@ -107,7 +107,7 @@ maxBy(undefined);
 #### パラメータ
 
 - `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
-- `iteratee` (`ValueIteratee<T>`, オプション): 各要素に適用する関数、プロパティ名、または条件です。
+- `iteratee` (`ValueIteratee<T>`, オプション): 各要素に適用する関数、プロパティ名、または条件です。デフォルトは `identity` です。
 
 #### 戻り値
 

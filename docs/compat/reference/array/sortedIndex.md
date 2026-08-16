@@ -1,4 +1,4 @@
-# sortedIndex (Lodash compatibility)
+# sortedIndex (Lodash Compatibility)
 
 ::: warning Implement binary search directly
 

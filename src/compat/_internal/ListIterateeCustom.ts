@@ -1,5 +1,4 @@
-import { PartialShallow } from './PartialShallow.ts';
+import { IterateeShorthand } from './IterateeShorthand';
+import { ListIterator } from './ListIterator.ts';
 
-export type ListIterateeCustom<T, R> =
-  | ((value: T, index: number, collection: ArrayLike<T>) => R)
-  | (PropertyKey | [PropertyKey, any] | PartialShallow<T>);
+export type ListIterateeCustom<T, R> = ListIterator<T, R> | IterateeShorthand<T>;

@@ -129,6 +129,42 @@ describe('toMerged', () => {
     `);
   });
 
+  it('should not mutate the target through nested values that the source does not touch', () => {
+    const target = { nested: { flag: true } };
+    const result = toMerged(target, {});
+
+    expect(result.nested).not.toBe(target.nested);
+
+    result.nested.flag = false;
+
+    expect(target.nested.flag).toBe(true);
+    expect(target).toEqual({ nested: { flag: true } });
+  });
+
+  it('should deeply clone untouched nested subtrees even when a sibling key is merged', () => {
+    const target = { nested: { flag: true, untouched: { deep: 1 } } };
+    const result = toMerged(target, { nested: { flag: false } });
+
+    expect(result).toEqual({ nested: { flag: false, untouched: { deep: 1 } } });
+    expect(result.nested.untouched).not.toBe(target.nested.untouched);
+
+    result.nested.untouched.deep = 999;
+
+    expect(target.nested.untouched.deep).toBe(1);
+  });
+
+  it('should deeply clone untouched array elements from the target', () => {
+    const target = { list: [{ a: 1 }, { b: 2 }] };
+    const result = toMerged(target, {});
+
+    expect(result.list).not.toBe(target.list);
+    expect(result.list[0]).not.toBe(target.list[0]);
+
+    result.list[0].a = 999;
+
+    expect(target.list[0].a).toBe(1);
+  });
+
   it('should merge arrays deeply', () => {
     const target = { a: [1, 2] };
     const source = { a: [3, 4] };
@@ -182,5 +218,33 @@ describe('toMerged', () => {
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
     expect(target).toEqual({ a: { b: null, c: undefined, d: 'text' } });
+  });
+
+  it('should behave like recursive Object.assign, applying the same logic to nested properties', () => {
+    const arrayTarget = ['1'];
+    const objectTarget = { a: 2 };
+
+    const topLevelArray = toMerged(arrayTarget, { a: 2 });
+    const topLevelObject = toMerged(objectTarget, ['1']);
+
+    const nestedArray = toMerged({ x: ['1'] }, { x: { a: 2 } });
+    const nestedObject = toMerged({ x: { a: 2 } }, { x: ['1'] });
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect((topLevelArray as any).a).toBe(2);
+    expect(arrayTarget).toEqual(['1']);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+    expect(objectTarget).toEqual({ a: 2 });
+
+    expect(typeof nestedObject.x).toBe('object');
+    expect(nestedObject.x).toEqual({ a: 2, 0: '1' });
+    expect(nestedObject.x[0]).toBe('1');
+
+    expect(Array.isArray(nestedArray.x)).toBe(true);
+    expect(nestedArray.x[0]).toBe('1');
+    expect((nestedArray.x as any).a).toBe(2);
   });
 });

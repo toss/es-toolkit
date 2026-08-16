@@ -16,7 +16,7 @@ const result = dropRightWhile(array, predicate);
 
 ## Usage
 
-### `dropRightWhile(array, predicate)`
+### `dropRightWhile(array, predicate?)`
 
 Use `dropRightWhile` when you want to consecutively remove elements from the end of an array that satisfy a specific condition. Removal stops when the predicate function returns `false`.
 

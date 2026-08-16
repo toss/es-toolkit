@@ -1,4 +1,4 @@
-# shuffle（Lodash 兼容性）
+# shuffle(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 `shuffle`
 

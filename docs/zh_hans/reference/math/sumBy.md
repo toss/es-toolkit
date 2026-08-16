@@ -51,7 +51,7 @@ const scores = [
   { subject: 'science', score: 95, weight: 0.5 },
 ];
 const weightedSum = sumBy(scores, item => item.score * item.weight);
-console.log(weightedSum); // 91
+console.log(weightedSum); // 91.5
 
 // 数组的数组中长度的总和
 const arrays = [[1, 2], [3, 4, 5], [6]];
@@ -93,7 +93,7 @@ const students = [
   { name: 'Charlie', tests: [78, 85, 82] },
 ];
 const totalTestScores = sumBy(students, student => student.tests.reduce((sum, score) => sum + score, 0));
-console.log(totalTestScores); // 762
+console.log(totalTestScores); // 782
 ```
 
 空数组返回 0。

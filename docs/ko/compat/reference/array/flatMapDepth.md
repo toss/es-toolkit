@@ -11,12 +11,12 @@
 배열의 각 요소를 iteratee 함수로 변환한 후 지정된 깊이까지 평탄화해요.
 
 ```typescript
-const result = flatMapDepth(collection, iteratee, depth);
+const result = flatMapDepth(collection, iteratee?, depth?);
 ```
 
 ## 사용법
 
-### `flatMapDepth(collection, iteratee, depth)`
+### `flatMapDepth(collection, iteratee?, depth?)`
 
 배열이나 객체의 각 요소를 주어진 함수로 변환한 후, 결과를 지정된 깊이까지 평탄화해서 새 배열로 반환해요. 중첩된 배열 구조를 원하는 깊이까지만 평탄화할 때 유용해요.
 

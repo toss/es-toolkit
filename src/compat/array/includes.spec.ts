@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { includes as includesLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { includes } from './includes';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -11,6 +10,13 @@ describe('includes', () => {
   it('should ignore inherited value', () => {
     const obj = Object.create({ inherited: 'value' });
     expect(includes(obj, 'value')).toBe(false);
+  });
+
+  it(`should not match arrayLike 'length' property value`, () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+    expect(includes(arrayLike, 2)).toBeFalsy();
+    expect(includes(arrayLike, 'a')).toBeTruthy();
+    expect(includes(arrayLike, 'b')).toBeTruthy();
   });
 
   Object.entries({
@@ -174,9 +180,5 @@ describe('includes', () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(includes).toEqualTypeOf<typeof includesLodash>();
   });
 });

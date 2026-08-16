@@ -50,6 +50,30 @@ describe('pullAt', () => {
     expect(actual).toEqual([2, 4, 12, 8, 6, 10]);
   });
 
+  it('should work with a single negative index', () => {
+    const array = [10, 20, 30, 40, 50];
+    const result = pullAt(array, [-1]);
+
+    expect(array).toEqual([10, 20, 30, 40]);
+    expect(result).toEqual([50]);
+  });
+
+  it('should work with multiple negative indices', () => {
+    const array = [10, 20, 30, 40, 50];
+    const result = pullAt(array, [-1, -2]);
+
+    expect(array).toEqual([10, 20, 30]);
+    expect(result).toEqual([50, 40]);
+  });
+
+  it('should work with mixed positive and negative indices', () => {
+    const array = [10, 20, 30, 40, 50];
+    const result = pullAt(array, [0, -1]);
+
+    expect(array).toEqual([20, 30, 40]);
+    expect(result).toEqual([10, 50]);
+  });
+
   it('should work with objects', () => {
     const foo = { foo: 1 };
     const bar = { foo: 2 };

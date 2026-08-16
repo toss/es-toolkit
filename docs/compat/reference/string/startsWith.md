@@ -1,4 +1,4 @@
-# startsWith (Lodash compatibility)
+# startsWith (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.startsWith`
 

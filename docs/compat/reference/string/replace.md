@@ -1,4 +1,4 @@
-# replace (Lodash compatibility)
+# replace (Lodash Compatibility)
 
 ::: warning Use JavaScript's `String.prototype.replace`
 

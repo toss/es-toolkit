@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('curry bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'curry');
-    expect(bundleSize).toMatchInlineSnapshot(`11021`);
+    expect(bundleSize).toMatchInlineSnapshot(`11055`);
   });
 
   it('es-toolkit', async () => {

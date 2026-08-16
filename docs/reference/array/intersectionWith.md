@@ -52,7 +52,7 @@ intersectionWith(words1, words2, (a, b) => a.toLowerCase() === b.toLowerCase());
 const numbers1 = [1.1, 2.3, 3.7];
 const numbers2 = [1.0, 2.5, 4.0];
 intersectionWith(numbers1, numbers2, (a, b) => Math.abs(a - b) < 0.5);
-// Returns: [1.1] (difference between 1.1 and 1.0 is less than 0.5)
+// Returns: [1.1, 2.3, 3.7] (all differ from the corresponding numbers by less than 0.5)
 ```
 
 #### Parameters

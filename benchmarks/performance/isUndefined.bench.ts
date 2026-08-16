@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isUndefined as isUndefinedToolkit_ } from 'es-toolkit';
-import { isUndefined as isUndefinedToolkitCompat_ } from 'es-toolkit/compat';
-import { isUndefined as isUndefinedLodash_ } from 'lodash';
+import { isUndefined as isUndefinedToolkit } from 'es-toolkit';
+import { isUndefined as isUndefinedToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isUndefinedToolkit = isUndefinedToolkit_;
-const isUndefinedToolkitCompat = isUndefinedToolkitCompat_;
-const isUndefinedLodash = isUndefinedLodash_;
+const { isUndefined: isUndefinedLodash } = lodash;
 
 describe('isUndefined', () => {
   bench('es-toolkit/isUndefined', () => {

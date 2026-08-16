@@ -16,7 +16,7 @@ const result = dropWhile(array, predicate);
 
 ## 사용법
 
-### `dropWhile(array, predicate)`
+### `dropWhile(array, predicate?)`
 
 배열의 시작에서부터 특정 조건을 만족하는 요소들을 연속으로 제거하고 싶을 때 `dropWhile`을 사용하세요. 조건 함수가 `false`를 반환하면 제거를 중단해요.
 

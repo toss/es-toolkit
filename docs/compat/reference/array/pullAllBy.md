@@ -1,4 +1,4 @@
-# pullAllBy (Lodash compatibility)
+# pullAllBy (Lodash Compatibility)
 
 Removes specified values from the array based on values transformed by an iteratee.
 

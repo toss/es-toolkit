@@ -1,4 +1,4 @@
-# functions (Lodash compatibility)
+# functions (Lodash Compatibility)
 
 ::: warning Use `Object.keys` and `typeof` check
 

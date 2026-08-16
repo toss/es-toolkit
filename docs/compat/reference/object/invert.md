@@ -1,4 +1,4 @@
-# invert (Lodash compatibility)
+# invert (Lodash Compatibility)
 
 ::: warning Use `invert` from `es-toolkit`
 

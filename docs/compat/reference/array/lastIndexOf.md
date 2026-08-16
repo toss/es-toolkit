@@ -1,10 +1,10 @@
-# lastIndexOf (Lodash compatibility)
+# lastIndexOf (Lodash Compatibility)
 
-::: warning Use `Array.lastIndexOf`
+::: warning Use `Array.prototype.lastIndexOf`
 
 This `lastIndexOf` function operates slowly due to handling `null` or `undefined`, searching for `NaN` values, etc.
 
-Instead, use the faster and more modern `Array.lastIndexOf`.
+Instead, use the faster and more modern `Array.prototype.lastIndexOf`.
 
 :::
 
@@ -16,9 +16,9 @@ const index = lastIndexOf(array, searchElement, fromIndex);
 
 ## Usage
 
-### `lastIndexOf(array, searchElement, fromIndex)`
+### `lastIndexOf(array, searchElement, fromIndex?)`
 
-Returns the last index at which a given element appears in an array. Similar to native `Array.lastIndexOf` but can also find `NaN` values.
+Returns the last index at which a given element appears in an array. Similar to native `Array.prototype.lastIndexOf` but can also find `NaN` values.
 
 ```typescript
 import { lastIndexOf } from 'es-toolkit/compat';

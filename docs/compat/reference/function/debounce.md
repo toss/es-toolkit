@@ -1,4 +1,4 @@
-# debounce (Lodash compatibility)
+# debounce (Lodash Compatibility)
 
 ::: warning Use [`debounce`](../../../reference/function/debounce.md) from `es-toolkit`
 

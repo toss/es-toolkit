@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`の`flattenDeep`を使用してください
 
-この`flattenDeep`関数は、`null`や`undefined`の処理、`ArrayLike`型の処理、様々な条件関数形式のサポートなどにより、動作が遅くなります。
+この`flattenDeep`関数は、`null`や`undefined`の処理、`ArrayLike`型の処理などにより、動作が遅くなります。
 
 代わりに、より高速で現代的な`es-toolkit`の[flattenDeep](../../../reference/array/flattenDeep.md)を使用してください。
 
@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // 結果: ['a', 'b', 'c', 'd']
 ```
 
-空の配列やnull、undefinedは空の配列を返します。
+`null`や`undefined`は空の配列として処理されます。
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

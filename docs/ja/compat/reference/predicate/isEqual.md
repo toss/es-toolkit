@@ -1,4 +1,4 @@
-# isEqual (Lodash互換性)
+# isEqual (Lodash 互換性)
 
 ::: warning `es-toolkit`の[isEqual](../../../reference/predicate/isEqual.md)を使用してください
 この`isEqual`関数はLodash互換性のための複雑な処理により動作が遅くなります。

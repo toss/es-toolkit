@@ -48,10 +48,10 @@ const isShortString = negate(isLongString);
 const words = ['hi', 'hello', 'world', 'javascript'];
 
 const longWords = words.filter(isLongString);
-console.log(longWords); // ['hello', 'javascript']
+console.log(longWords); // ['javascript']
 
 const shortWords = words.filter(isShortString);
-console.log(shortWords); // ['hi', 'world']
+console.log(shortWords); // ['hi', 'hello', 'world']
 ```
 
 #### 参数

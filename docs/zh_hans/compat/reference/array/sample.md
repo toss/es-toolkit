@@ -1,4 +1,4 @@
-# sample（Lodash 兼容性）
+# sample(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 [sample](../../../reference/array/sample.md)
 

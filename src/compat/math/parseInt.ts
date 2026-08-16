@@ -1,3 +1,5 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Converts `string` to an integer of the specified radix. If `radix` is undefined or 0, a `radix` of 10 is used unless `string` is a hexadecimal, in which case a `radix` of 16 is used.
  *
@@ -39,5 +41,5 @@ export function parseInt(string: string, radix = 0, guard?: unknown): number {
     radix = 0;
   }
 
-  return Number.parseInt(string, radix);
+  return Number.parseInt(toString(string), radix);
 }

@@ -1,4 +1,4 @@
-# debounce (Lodash 互換)
+# debounce (Lodash 互換性)
 
 ::: warning `es-toolkit` の [`debounce`](../../../reference/function/debounce.md) を使用してください
 

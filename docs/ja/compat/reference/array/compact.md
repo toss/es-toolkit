@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`の[`compact`](../../../reference/array/compact.md)を使用してください
 
-この `compact` 関数は、`null` や `undefined` の処理、`size` のデフォルト値処理などにより、動作が遅くなります。
+この `compact` 関数は、`null` や `undefined` の処理などにより、動作が遅くなります。
 
 代わりに、より高速で現代的な `es-toolkit` の [compact](../../../reference/array/compact.md) を使用してください。
 

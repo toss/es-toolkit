@@ -1,4 +1,4 @@
-# hasIn (Lodash compatibility)
+# hasIn (Lodash Compatibility)
 
 ::: warning Use the `in` operator instead
 

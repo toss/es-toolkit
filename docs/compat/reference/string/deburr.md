@@ -1,4 +1,4 @@
-# deburr (Lodash compatibility)
+# deburr (Lodash Compatibility)
 
 ::: warning Use `deburr` from `es-toolkit`
 

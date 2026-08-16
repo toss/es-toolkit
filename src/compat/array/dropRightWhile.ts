@@ -1,6 +1,7 @@
 import { dropRightWhile as dropRightWhileToolkit } from '../../array/dropRightWhile.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
@@ -36,7 +37,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  *
  * // Using property shorthand
  * dropRightWhile(users, 'active');
- * // => [{ user: 'barney', active: true }]
+ * // => [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
  */
 export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[];
 
@@ -47,7 +48,7 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * predicate function returns false. It then returns a new array with the remaining elements.
  *
  * @template T - The type of elements in the array.
- * @param arr - The array from which to drop elements.
+ * @param array - The array from which to drop elements.
  * @param predicate - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element, index, and array, and dropping
  * continues as long as it returns true.
@@ -58,25 +59,15 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * const result = dropRightWhile(array, (item, index, arr) => index >= 1);
  * // Returns: [3]
  */
-export function dropRightWhile<T>(
-  arr: ArrayLike<T> | null | undefined,
-  predicate:
-    | ((item: T, index: number, arr: readonly T[]) => unknown)
-    | Partial<T>
-    | [keyof T, unknown]
-    | PropertyKey = identity
-): T[] {
-  if (!isArrayLike(arr)) {
+export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate: ListIteratee<T> = identity): T[] {
+  if (!isArrayLike(array)) {
     return [];
   }
 
-  return dropRightWhileImpl(Array.from(arr), predicate);
+  return dropRightWhileImpl(toArray(array), predicate);
 }
 
-function dropRightWhileImpl<T>(
-  arr: readonly T[],
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
-): T[] {
+function dropRightWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {
   switch (typeof predicate) {
     case 'function': {
       return dropRightWhileToolkit(arr, (item, index, arr) => Boolean(predicate(item, index, arr)));

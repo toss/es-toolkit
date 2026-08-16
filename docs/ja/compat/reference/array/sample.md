@@ -1,4 +1,4 @@
-# sample（Lodash 互換性）
+# sample(Lodash 互換性)
 
 ::: warning `es-toolkit` の [sample](../../../reference/array/sample.md) を使用してください
 

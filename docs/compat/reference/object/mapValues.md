@@ -1,4 +1,4 @@
-# mapValues (Lodash compatibility)
+# mapValues (Lodash Compatibility)
 
 ::: warning Use `mapValues` from `es-toolkit`
 

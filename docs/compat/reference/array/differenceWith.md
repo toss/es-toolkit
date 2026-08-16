@@ -1,4 +1,4 @@
-# differenceWith (Lodash compatible)
+# differenceWith (Lodash Compatibility)
 
 ::: warning Use `differenceWith` from `es-toolkit` instead
 

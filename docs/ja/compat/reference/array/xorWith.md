@@ -1,4 +1,4 @@
-# xorWith (Lodash互換)
+# xorWith (Lodash 互換性)
 
 ::: warning `es-toolkit`の[xorWith](../../../reference/array/xorWith.md)を使用してください
 

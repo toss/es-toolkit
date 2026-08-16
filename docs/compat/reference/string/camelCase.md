@@ -1,4 +1,4 @@
-# camelCase (Lodash compatibility)
+# camelCase (Lodash Compatibility)
 
 ::: warning Use `camelCase` from `es-toolkit`
 

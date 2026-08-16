@@ -7,12 +7,13 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '简介',
     installation: '安装和使用',
-    bundleSize: '包体积影响',
+    bundleSize: '包体积',
     performance: '性能',
     aiIntegration: 'AI 集成',
   },
   categories: {
     array: '数组工具',
+    bigint: 'BigInt 工具',
     function: '函数工具',
     map: 'Map 工具',
     math: '数学工具',

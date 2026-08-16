@@ -1,4 +1,4 @@
-# startCase (Lodash compatibility)
+# startCase (Lodash Compatibility)
 
 ::: warning Use `startCase` from `es-toolkit`
 

@@ -53,7 +53,7 @@ export function take<T>(array: ArrayLike<T> | null | undefined, n?: number): T[]
  * take([1, 2, 3], 5);
  */
 export function take<T>(arr: ArrayLike<T> | null | undefined, count = 1, guard?: unknown): T[] {
-  count = guard ? 1 : toInteger(count);
+  count = guard || count === undefined ? 1 : toInteger(count);
   if (count < 1 || !isArrayLike(arr)) {
     return [];
   }

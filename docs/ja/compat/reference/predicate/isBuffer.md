@@ -1,4 +1,4 @@
-# isBuffer (Lodash互換性)
+# isBuffer (Lodash 互換性)
 
 ::: warning es-toolkitの[isBuffer](../../../reference/predicate/isBuffer.md)を使用してください
 この`isBuffer`関数はLodash互換性のための複雑な処理により動作が遅くなります。

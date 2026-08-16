@@ -1,4 +1,4 @@
-# escapeRegExp (Lodash compatibility)
+# escapeRegExp (Lodash Compatibility)
 
 ::: warning Use `escapeRegExp` from `es-toolkit`
 

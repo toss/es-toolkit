@@ -1,4 +1,4 @@
-# over (Lodash互換性)
+# over (Lodash 互換性)
 
 ::: warning 配列メソッドを直接使用してください
 

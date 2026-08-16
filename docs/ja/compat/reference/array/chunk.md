@@ -1,4 +1,4 @@
-# chunk（Lodash 互換性）
+# chunk(Lodash 互換性)
 
 ::: warning `es-toolkit` の [`chunk`](../../../reference/array/chunk.md) を使用してください
 

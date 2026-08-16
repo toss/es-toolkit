@@ -1,6 +1,7 @@
 export { clone } from './clone.ts';
 export { cloneDeep } from './cloneDeep.ts';
 export { cloneDeepWith } from './cloneDeepWith.ts';
+export { deepFreeze } from './deepFreeze.ts';
 export { findKey } from './findKey.ts';
 export { flattenObject } from './flattenObject.ts';
 export { invert } from './invert.ts';
@@ -14,5 +15,8 @@ export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { sortKeys } from './sortKeys.ts';
 export { toCamelCaseKeys } from './toCamelCaseKeys.ts';
+export { toConstantCaseKeys } from './toConstantCaseKeys.ts';
+export { toKebabCaseKeys } from './toKebabCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
+export { toPascalCaseKeys } from './toPascalCaseKeys.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';

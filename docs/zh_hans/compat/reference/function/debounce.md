@@ -1,4 +1,4 @@
-# debounce (Lodash 兼容)
+# debounce (Lodash 兼容性)
 
 ::: warning 请使用 `es-toolkit` 的 [`debounce`](../../../reference/function/debounce.md)
 

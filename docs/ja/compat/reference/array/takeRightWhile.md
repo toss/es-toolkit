@@ -40,7 +40,7 @@ takeRightWhile(users, o => !o.active);
 
 // 部分オブジェクトで条件マッチング
 takeRightWhile(users, { active: false });
-// Returns: [{ user: 'pebbles', active: false }]
+// Returns: [{ user: 'fred', active: false }, { user: 'pebbles', active: false }]
 
 // プロパティ-値配列で条件マッチング
 takeRightWhile(users, ['active', false]);

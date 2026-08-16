@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { curry as curryToolkit_ } from 'es-toolkit';
-import { curry as curryCompat_ } from 'es-toolkit/compat';
-import { curry as curryLodash_ } from 'lodash';
+import { curry as curryToolkit } from 'es-toolkit';
+import { curry as curryCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const curryToolkit = curryToolkit_;
-const curryCompat = curryCompat_;
-const curryLodash = curryLodash_;
+const { curry: curryLodash } = lodash;
 
 describe('curry', () => {
   const fn = (a: number, b: string, c: boolean) => ({ a, b, c });

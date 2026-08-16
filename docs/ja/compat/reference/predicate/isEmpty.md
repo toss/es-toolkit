@@ -1,4 +1,4 @@
-# isEmpty (Lodash互換性)
+# isEmpty (Lodash 互換性)
 
 指定された値が空かどうかを確認します。
 

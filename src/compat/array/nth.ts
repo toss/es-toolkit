@@ -1,4 +1,4 @@
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
@@ -13,7 +13,7 @@ import { toInteger } from '../util/toInteger.ts';
  * nth([1, 2, 3], -1); // => 3
  */
 export function nth<T>(array: ArrayLike<T> | null | undefined, n = 0): T | undefined {
-  if (!isArrayLikeObject(array) || array.length === 0) {
+  if (!isArrayLike(array) || array.length === 0) {
     return undefined;
   }
 

@@ -16,7 +16,7 @@ const result = filter(collection, predicate);
 
 ## 사용법
 
-### `filter(collection, predicate)`
+### `filter(collection, predicate?)`
 
 배열이나 객체에서 특정 조건을 만족하는 요소들만 걸러내고 싶을 때 `filter`를 사용하세요. 조건은 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름 등 다양한 형태로 지정할 수 있어요.
 
@@ -71,7 +71,7 @@ filter(undefined, x => x > 0);
 #### 파라미터
 
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 필터링할 배열이나 객체예요.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 필터링 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 필터링 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
 
 #### 반환 값
 

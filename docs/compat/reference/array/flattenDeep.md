@@ -2,7 +2,7 @@
 
 ::: warning Use `flattenDeep` from `es-toolkit`
 
-This `flattenDeep` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, and supporting various condition function formats.
+This `flattenDeep` function operates slowly due to handling `null` or `undefined` and `ArrayLike` type processing.
 
 Use the faster and more modern [flattenDeep](../../../reference/array/flattenDeep.md) from `es-toolkit` instead.
 
@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // Result: ['a', 'b', 'c', 'd']
 ```
 
-Empty arrays, null, or undefined return empty arrays.
+`null` or `undefined` are treated as empty arrays.
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';
