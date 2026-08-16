@@ -9,6 +9,10 @@ interface RetryOptions {
    * @example
    * delay: (attempts, error) => error.status === 429 ? 10000 : attempts * 50
    */
+  // TODO: The callback receives `(attempts, error)` while `shouldRetry` receives
+  // `(error, attempt)` — attempts-first is kept for backward compatibility with
+  // existing `(attempts) => number` callbacks. Consider unifying both callbacks
+  // into a single context object (e.g. `({ attempts, error }) => number`) in the next major.
   delay?: number | ((attempts: number, error: unknown) => number);
 
   /**
