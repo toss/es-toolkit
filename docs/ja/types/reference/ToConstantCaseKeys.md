@@ -1,6 +1,6 @@
 # ToConstantCaseKeys
 
-オブジェクト型のすべてのキーを再帰的に CONSTANT_CASE に変換します。[`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 関数の戻り値の型です。
+オブジェクト型のすべてのキーを再帰的に定数ケース(CONSTANT_CASE)に変換します。[`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 関数の戻り値の型です。
 
 ```typescript
 type Converted = ToConstantCaseKeys<T>;
@@ -10,7 +10,7 @@ type Converted = ToConstantCaseKeys<T>;
 
 ### `ToConstantCaseKeys<T>`
 
-キーが CONSTANT_CASE に変換されたデータの型が必要なときに `ToConstantCaseKeys` を使います。たとえば、ペイロードを [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) に通した結果の型を表現できます。ネストしたオブジェクトや配列内のオブジェクトのキーも再帰的に変換されます。`Date` や `Map` などの組み込みオブジェクトとプリミティブ値はそのまま保持されます。
+キーが定数ケースに変換されたデータの型が必要なときに `ToConstantCaseKeys` を使用してください。たとえば、オブジェクトを [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) で変換した結果の型を表現できます。ネストされたオブジェクトと配列内のオブジェクトのキーも再帰的に変換されます。`Date` や `Map` などの組み込みオブジェクトとプリミティブ値はそのまま保持されます。
 
 ```typescript
 import type { ToConstantCaseKeys } from 'es-toolkit/types';

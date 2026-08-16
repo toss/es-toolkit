@@ -1,6 +1,6 @@
 # ToPascalCaseKeys
 
-オブジェクト型のすべてのキーを再帰的に PascalCase に変換します。[`toPascalCaseKeys`](../../reference/object/toPascalCaseKeys.md) 関数の戻り値の型です。
+オブジェクト型のすべてのキーを再帰的にパスカルケース(PascalCase)に変換します。[`toPascalCaseKeys`](../../reference/object/toPascalCaseKeys.md) 関数の戻り値の型です。
 
 ```typescript
 type Converted = ToPascalCaseKeys<T>;
@@ -10,7 +10,7 @@ type Converted = ToPascalCaseKeys<T>;
 
 ### `ToPascalCaseKeys<T>`
 
-キーが PascalCase に変換されたデータの型が必要なときに `ToPascalCaseKeys` を使います。たとえば、ペイロードを [`toPascalCaseKeys`](../../reference/object/toPascalCaseKeys.md) に通した結果の型を表現できます。ネストしたオブジェクトや配列内のオブジェクトのキーも再帰的に変換されます。`Date` や `Map` などの組み込みオブジェクトとプリミティブ値はそのまま保持されます。
+キーがパスカルケースに変換されたデータの型が必要なときに `ToPascalCaseKeys` を使用してください。たとえば、外部 API に送るデータを [`toPascalCaseKeys`](../../reference/object/toPascalCaseKeys.md) で変換した結果の型を表現できます。ネストされたオブジェクトと配列内のオブジェクトのキーも再帰的に変換されます。`Date` や `Map` などの組み込みオブジェクトとプリミティブ値はそのまま保持されます。
 
 ```typescript
 import type { ToPascalCaseKeys } from 'es-toolkit/types';

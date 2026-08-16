@@ -1,6 +1,6 @@
 # ToConstantCaseKeys
 
-递归地将对象类型的所有键转换为 CONSTANT_CASE。这是 [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 函数的返回类型。
+递归地将对象类型的所有键转换为常量命名法(CONSTANT_CASE)。这是 [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 函数的返回类型。
 
 ```typescript
 type Converted = ToConstantCaseKeys<T>;
@@ -10,7 +10,7 @@ type Converted = ToConstantCaseKeys<T>;
 
 ### `ToConstantCaseKeys<T>`
 
-当你需要表示键已转换为 CONSTANT_CASE 的数据类型时，使用 `ToConstantCaseKeys`。例如，可以表示将载荷传入 [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 后得到的类型。嵌套对象和数组内对象的键也会被递归转换。`Date`、`Map` 等内置对象和原始值保持不变。
+当您需要表示键已转换为常量命名法的数据类型时,请使用 `ToConstantCaseKeys`。例如，可以表示用 [`toConstantCaseKeys`](../../reference/object/toConstantCaseKeys.md) 转换对象后得到的类型。嵌套对象和数组中对象的键也会递归转换。`Date`、`Map` 等内置对象和原始值保持不变。
 
 ```typescript
 import type { ToConstantCaseKeys } from 'es-toolkit/types';
