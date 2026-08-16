@@ -16,7 +16,7 @@ const maxItem = maxBy(array, iteratee);
 
 ## Usage
 
-### `maxBy(array, iteratee)`
+### `maxBy(array, iteratee?)`
 
 Finds the element in an array that has the largest value when computed by a function.
 
@@ -107,7 +107,7 @@ maxBy(undefined);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to search.
-- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element.
+- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element. Default is `identity`.
 
 #### Returns
 

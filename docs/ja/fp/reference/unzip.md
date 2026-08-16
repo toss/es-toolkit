@@ -16,6 +16,8 @@ const result = pipe(array, unzip());
 
 `unzip` はグループ化された値の配列を受け取り、各位置の値を集めた配列を返します。
 
+返される配列の長さは最も長い内部配列の長さに合わせられ、短い内部配列で足りない位置は `undefined` で埋められます。
+
 ```typescript
 import { pipe, unzip } from 'es-toolkit/fp';
 

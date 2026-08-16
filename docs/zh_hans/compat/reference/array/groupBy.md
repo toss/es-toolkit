@@ -16,7 +16,7 @@ const grouped = groupBy(collection, iteratee);
 
 ## 用法
 
-### `groupBy(collection, iteratee)`
+### `groupBy(collection, iteratee?)`
 
 根据给定的条件函数对数组或对象的每个元素进行分组，并返回按组分类的对象。条件可以以各种形式提供，如函数、属性名、部分对象等。
 

@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { keyBy as keyByToolkit_ } from 'es-toolkit';
-import { keyBy as keyByToolkitCompat_ } from 'es-toolkit/compat';
-import { keyBy as keyByLodash_ } from 'lodash';
+import { keyBy as keyByToolkit } from 'es-toolkit';
+import { keyBy as keyByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const keyByToolkit = keyByToolkit_;
-const keyByToolkitCompat = keyByToolkitCompat_;
-const keyByLodash = keyByLodash_;
+const { keyBy: keyByLodash } = lodash;
 
 describe('keyBy', () => {
   bench('es-toolkit/keyBy', () => {

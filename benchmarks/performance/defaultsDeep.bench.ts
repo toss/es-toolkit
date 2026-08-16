@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { defaultsDeep as defaultsDeepToolkitCompat_ } from 'es-toolkit/compat';
-import { defaultsDeep as defaultsDeepLodash_ } from 'lodash';
+import { defaultsDeep as defaultsDeepToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const defaultsDeepToolkitCompat = defaultsDeepToolkitCompat_;
-const defaultsDeepLodash = defaultsDeepLodash_;
+const { defaultsDeep: defaultsDeepLodash } = lodash;
 
 describe('defaultsDeep', () => {
   bench('es-toolkit/compat/defaultsDeep ', () => {

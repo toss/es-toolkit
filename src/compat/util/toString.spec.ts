@@ -36,4 +36,15 @@ describe('toString', () => {
   it('should handle an array of symbols', () => {
     expect(toString([symbol])).toBe('Symbol(a)');
   });
+
+  it('should render nested nullish array values, matching lodash', () => {
+    expect(toString([1, null, 3])).toBe('1,null,3');
+    expect(toString([null, undefined])).toBe('null,undefined');
+    expect(
+      toString([
+        [1, null],
+        [2, undefined],
+      ])
+    ).toBe('1,null,2,undefined');
+  });
 });

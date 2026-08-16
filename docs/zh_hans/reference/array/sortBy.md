@@ -71,7 +71,7 @@ const byLength = sortBy(
 #### 参数
 
 - `arr` (`readonly T[]`): 要排序的对象数组。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 排序标准。可以是对象属性名或转换函数的数组,前面的标准优先级更高。
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): 排序标准。可以是对象属性名或转换函数的数组,前面的标准优先级更高。
 
 #### 返回值
 

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { update as updateToolkitCompat_ } from 'es-toolkit/compat';
-import { update as lodashUpdate_ } from 'lodash';
+import { update as updateToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const updateToolkitCompat = updateToolkitCompat_;
-const lodashUpdate = lodashUpdate_;
+const { update: lodashUpdate } = lodash;
 
 describe('update - dot notation', () => {
   const obj = { a: { b: { c: 3 } } };

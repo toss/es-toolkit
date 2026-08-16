@@ -16,7 +16,7 @@ const minItem = minBy(array, iteratee);
 
 ## 用法
 
-### `minBy(array, iteratee)`
+### `minBy(array, iteratee?)`
 
 在数组中找到通过函数计算后值最小的元素。
 
@@ -107,7 +107,7 @@ minBy(undefined);
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
-- `iteratee` (`ValueIteratee<T>`, 可选): 应用于每个元素的函数、属性名或条件。
+- `iteratee` (`ValueIteratee<T>`, 可选): 应用于每个元素的函数、属性名或条件。默认值为 `identity`。
 
 #### 返回值
 

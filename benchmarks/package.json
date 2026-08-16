@@ -2,6 +2,7 @@
   "name": "benchmarks",
   "private": true,
   "scripts": {
+    "bench": "vitest bench --root performance",
     "check-bundle-size": "vitest run --update bundle-size"
   },
   "dependencies": {
@@ -10,7 +11,7 @@
     "lodash": "4.18.1",
     "lodash-es": "4.18.1",
     "remeda": "^2.39.0",
-    "vitest": "4.0.17"
+    "vitest": "4.1.10"
   },
   "devDependencies": {
     "@types/lodash": "4.17.20",

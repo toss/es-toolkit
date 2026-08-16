@@ -60,9 +60,9 @@ orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
 
 #### 参数
 
-- `arr` (`T[]`): 要排序的对象数组。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 排序标准。可以使用对象的属性名或返回值的函数。
-- `orders` (`Array<'asc' | 'desc'>`): 每个标准的排序方向数组。`'asc'` 表示升序,`'desc'` 表示降序。
+- `arr` (`readonly T[]`): 要排序的对象数组。
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): 排序标准。可以使用对象的属性名或返回值的函数。
+- `orders` (`ReadonlyArray<'asc' | 'desc'>`): 每个标准的排序方向数组。`'asc'` 表示升序,`'desc'` 表示降序。
 
 #### 返回值
 

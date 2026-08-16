@@ -16,6 +16,8 @@ const result = pipe(array, unzip());
 
 `unzip` 接收由分组值组成的数组,并返回按每个位置收集值的数组。
 
+返回数组的长度与最长的内部数组一致，较短内部数组中缺少的位置会用 `undefined` 填充。
+
 ```typescript
 import { pipe, unzip } from 'es-toolkit/fp';
 

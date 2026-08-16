@@ -119,4 +119,14 @@ describe('intersectionWith', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should apply the comparator when deduplicating the first array', () => {
+    const actual = func([1, 2, 3], [4, 5, 6], () => true);
+    expect(actual).toEqual([1]);
+  });
+
+  it('should preserve the sign of `-0` when compared with `Object.is`', () => {
+    const actual = func([-0, 0], [0], (a, b) => Object.is(a, b));
+    expect(actual).toEqual([0]);
+  });
 });

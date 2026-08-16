@@ -1,5 +1,5 @@
 import { flatten } from './flatten.ts';
-import { limitAsync } from './limitAsync.ts';
+import { limitAsync } from '../promise/limitAsync.ts';
 
 interface FlatMapAsyncOptions {
   concurrency?: number;

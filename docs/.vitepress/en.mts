@@ -13,6 +13,7 @@ const labels: SidebarLabels = {
   },
   categories: {
     array: 'Array Utilities',
+    bigint: 'BigInt Utilities',
     function: 'Function Utilities',
     map: 'Map Utilities',
     math: 'Math Utilities',

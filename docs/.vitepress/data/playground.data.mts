@@ -24,6 +24,7 @@ const LOCALES = ['en', 'ko', 'ja', 'zh_hans'];
 
 const CATEGORY_ORDER = [
   'array',
+  'bigint',
   'function',
   'math',
   'object',
@@ -114,7 +115,7 @@ function parseMarkdown(content: string, fnName: string): ParseResult | null {
 
   // Normalize import paths: 'es-toolkit/array' → 'es-toolkit'
   // Keep subpath imports for categories not re-exported from main entry (map, set)
-  const SUBPATH_ONLY = ['map', 'set'];
+  const SUBPATH_ONLY = ['bigint', 'map', 'set'];
   code = code.replace(/from 'es-toolkit\/([^']+)'/g, (match, subpath) => {
     if (SUBPATH_ONLY.includes(subpath)) {
       return match;

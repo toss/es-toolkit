@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { create as createToolkitCompat_ } from 'es-toolkit/compat';
-import { create as createToLodash_ } from 'lodash';
+import { create as createToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const createToolkitCompat = createToolkitCompat_;
-const createToLodash = createToLodash_;
+const { create: createToLodash } = lodash;
 
 describe('create', () => {
   bench('es-toolkit/compat/create', () => {
