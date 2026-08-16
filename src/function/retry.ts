@@ -7,9 +7,13 @@ interface RetryOptions {
    *
    * @default 0
    * @example
-   * delay: (attempts) => attempt * 50
+   * delay: (attempts, error) => error.status === 429 ? 10000 : attempts * 50
    */
-  delay?: number | ((attempts: number) => number);
+  // TODO: The callback receives `(attempts, error)` while `shouldRetry` receives
+  // `(error, attempt)` — attempts-first is kept for backward compatibility with
+  // existing `(attempts) => number` callbacks. Consider unifying both callbacks
+  // into a single context object (e.g. `({ attempts, error }) => number`) in the next major.
+  delay?: number | ((attempts: number, error: unknown) => number);
 
   /**
    * The number of retries to attempt.
@@ -73,7 +77,7 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * @template T
  * @param func - The function to retry. It should return a promise.
  * @param options - Options to configure the retry behavior.
- * @param [options.delay=0] - Delay(milliseconds) between retries.
+ * @param [options.delay=0] - Delay(milliseconds) between retries. A number or a function that receives the attempt number and the error object.
  * @param [options.retries=Infinity] - The number of retries to attempt.
  * @param [options.signal] - An AbortSignal to cancel the retry operation.
  * @param [options.shouldRetry] - A function that determines whether to retry.
@@ -88,7 +92,10 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * retry(() => fetchData(), { delay: 1000, retries: 5 });
  *
  * // Retry a function with a delay increasing linearly by 50ms per attempt
- * retry(() => fetchData(), { delay: (attempts) => attempt * 50, retries: 5 });
+ * retry(() => fetchData(), { delay: (attempts) => attempts * 50, retries: 5 });
+ *
+ * // Retry a function with an error-aware delay (e.g., respect Retry-After headers)
+ * retry(() => fetchData(), { delay: (_attempts, error) => error.status === 429 ? 10000 : 1000, retries: 3 });
  *
  * @example
  * // Retry a function with exponential backoff + jitter (max delay 10 seconds)
@@ -108,7 +115,7 @@ export async function retry<T>(func: () => Promise<T>, options: RetryOptions): P
  * @returns A promise that resolves with the value of the successful function call.
  */
 export async function retry<T>(func: () => Promise<T>, _options?: number | RetryOptions): Promise<T> {
-  let delay: number | ((attempts: number) => number);
+  let delay: number | ((attempts: number, error: unknown) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
   let shouldRetry: (error: unknown, attempt: number) => boolean;
@@ -143,7 +150,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       }
 
       if (attempts < retries) {
-        const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
+        const currentDelay = typeof delay === 'function' ? delay(attempts, error) : delay;
         await delayToolkit(currentDelay);
       }
     }
