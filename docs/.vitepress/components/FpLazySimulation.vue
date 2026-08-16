@@ -3,7 +3,9 @@
     <div class="sim-head">
       <code class="sim-pipe">{{ text.pipe }}</code>
     </div>
-    <p class="sim-legend">{{ text.legend }}</p>
+    <p class="sim-legend">
+      {{ text.legend }}
+    </p>
 
     <div class="sim-grid">
       <section
@@ -19,7 +21,7 @@
 
         <!-- fixed-size grid: every cell always rendered; only its class changes -->
         <div class="hm">
-          <span class="hm-corner"></span>
+          <span class="hm-corner" />
           <span v-for="n in 6" :key="'h' + n" class="hm-colh">{{ n }}</span>
 
           <template v-for="row in panel.rows" :key="row.label">
@@ -98,12 +100,18 @@ const tick = ref(0);
 
 const isOn = cell => cell.revealAt != null && tick.value >= cell.revealAt;
 function cellClass(cell) {
-  if (cell.kind === 'off') return 'off';
-  if (!isOn(cell)) return 'pending';
+  if (cell.kind === 'off') {
+    return 'off';
+  }
+  if (!isOn(cell)) {
+    return 'pending';
+  }
   return cell.kind;
 }
 function cellText(cell) {
-  if (cell.kind === 'off' || cell.kind === 'skip' || !isOn(cell)) return '';
+  if (cell.kind === 'off' || cell.kind === 'skip' || !isOn(cell)) {
+    return '';
+  }
   return cell.val;
 }
 const RUN = ['pass', 'drop', 'map', 'take'];
@@ -111,14 +119,18 @@ function worked(panel) {
   let n = 0;
   for (const row of panel.rows) {
     for (const cell of row.cells) {
-      if (RUN.includes(cell.kind) && isOn(cell)) n++;
+      if (RUN.includes(cell.kind) && isOn(cell)) {
+        n++;
+      }
     }
   }
   return n;
 }
 // Eager builds one array per stage (each row that has run); lazy fills a single result array.
 function arrays(panel) {
-  if (panel.key === 'lazy') return worked(panel) > 0 ? 1 : 0;
+  if (panel.key === 'lazy') {
+    return worked(panel) > 0 ? 1 : 0;
+  }
   return panel.rows.filter(row => row.cells.some(cell => RUN.includes(cell.kind) && isOn(cell))).length;
 }
 const isDone = panel => tick.value >= panel.lastTick;
@@ -138,7 +150,9 @@ function next() {
   }
 }
 function start() {
-  if (!timer) timer = setTimeout(next, STEP);
+  if (!timer) {
+    timer = setTimeout(next, STEP);
+  }
 }
 function stop() {
   if (timer) {
@@ -164,8 +178,11 @@ onMounted(() => {
   }
   const io = new IntersectionObserver(
     entries => {
-      if (entries.some(e => e.isIntersecting)) start();
-      else stop();
+      if (entries.some(e => e.isIntersecting)) {
+        start();
+      } else {
+        stop();
+      }
     },
     { threshold: 0.35 }
   );
