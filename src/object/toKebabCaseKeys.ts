@@ -1,54 +1,7 @@
 import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { kebabCase } from '../string/kebabCase.ts';
-
-type SnakeToKebab<S extends string> = S extends `${infer P1}_${infer P2}`
-  ? Lowercase<`${P1}-${SnakeToKebab<P2>}`>
-  : Lowercase<S>;
-type CamelToKebab<S extends string> = S extends `${infer P1}${infer P2}`
-  ? P2 extends Uncapitalize<P2>
-    ? `${Lowercase<P1>}${CamelToKebab<P2>}`
-    : `${Lowercase<P1>}-${CamelToKebab<Uncapitalize<P2>>}`
-  : S;
-
-type KebabCase<S extends string> = S extends `${string}_${string}`
-  ? SnakeToKebab<S>
-  : S extends Uppercase<S>
-    ? Lowercase<S>
-    : CamelToKebab<S>;
-
-type NonPlainObject =
-  | Date
-  | RegExp
-  | Map<any, any>
-  | Set<any>
-  | WeakMap<any, any>
-  | WeakSet<any>
-  | Promise<any>
-  | Error
-  | ArrayBuffer
-  | DataView
-  | Int8Array
-  | Uint8Array
-  | Uint8ClampedArray
-  | Int16Array
-  | Uint16Array
-  | Int32Array
-  | Uint32Array
-  | Float32Array
-  | Float64Array
-  | BigInt64Array
-  | BigUint64Array
-  | ((...args: any[]) => any)
-  | typeof globalThis;
-
-export type ToKebabCaseKeys<T> = T extends NonPlainObject
-  ? T
-  : T extends any[]
-    ? Array<ToKebabCaseKeys<T[number]>>
-    : T extends Record<string, any>
-      ? { [K in keyof T as KebabCase<string & K>]: ToKebabCaseKeys<T[K]> }
-      : T;
+import type { ToKebabCaseKeys } from '../types/ToKebabCaseKeys.ts';
 
 /**
  * Creates a new object composed of the properties with keys converted to kebab-case.
