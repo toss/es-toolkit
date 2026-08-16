@@ -10,7 +10,7 @@ const flattened = flattenObject(object, options?);
 
 ### `flattenObject(object, options?)`
 
-Use `flattenObject` when you want to flatten deeply nested objects or arrays using dot (`.`) notation for keys. Each nested property becomes a single-level object with keys connected by a delimiter.
+Use `flattenObject` when you want to flatten deeply nested objects using dot (`.`) notation for keys. Each nested property becomes a single-level object with keys connected by a delimiter. Arrays are kept as values by default; pass `preserveArrays: false` to flatten them into index keys as well.
 
 ```typescript
 import { flattenObject } from 'es-toolkit/object';
@@ -30,8 +30,7 @@ const flattened = flattenObject(nestedObject);
 console.log(flattened);
 // {
 //   'a.b.c': 1,
-//   'd.0': 2,
-//   'd.1': 3,
+//   'd': [2, 3],
 //   'e': 'simple'
 // }
 
@@ -40,8 +39,7 @@ const withCustomDelimiter = flattenObject(nestedObject, { delimiter: '/' });
 console.log(withCustomDelimiter);
 // {
 //   'a/b/c': 1,
-//   'd/0': 2,
-//   'd/1': 3,
+//   'd': [2, 3],
 //   'e': 'simple'
 // }
 ```
@@ -70,6 +68,22 @@ console.log(flatConfig);
 //   'database.port': 5432,
 //   'database.credentials.username': 'admin',
 //   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
+Using `options.preserveArrays`, you can control how arrays are handled. Arrays are preserved as values by default; set it to `false` to flatten array elements into index keys.
+
+```typescript
+// Flatten arrays into index keys
+const fullyFlattened = flattenObject(config, { preserveArrays: false });
+console.log(fullyFlattened);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
 //   'features.0': 'auth',
 //   'features.1': 'logging',
 //   'debug': true
@@ -80,7 +94,7 @@ Using `options.delimiter`, you can flatten the object with custom characters lik
 
 ```typescript
 // Environment variable style with underscores
-const envStyle = flattenObject(config, { delimiter: '_' });
+const envStyle = flattenObject(config, { delimiter: '_', preserveArrays: false });
 console.log(envStyle);
 // {
 //   'database_host': 'localhost',
@@ -108,7 +122,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +134,7 @@ console.log(result);
 - `object` (`object`): The object to flatten.
 - `options` (`FlattenObjectOptions`, optional): Flattening options.
   - `delimiter` (`string`, optional): The delimiter to connect nested keys. Defaults to `'.'`.
+  - `preserveArrays` (`boolean`, optional): If `true`, arrays are kept as values instead of being flattened. Defaults to `true`.
 
 #### Returns
 

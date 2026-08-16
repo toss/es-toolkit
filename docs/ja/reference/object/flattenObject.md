@@ -10,7 +10,7 @@ const flattened = flattenObject(object, options?);
 
 ### `flattenObject(object, options?)`
 
-深くネストされたオブジェクトや配列をドット(`.`)記法を使用したキーでフラット化したい時に`flattenObject`を使用してください。各ネストされたプロパティが区切り文字で連結されたキーを持つ単一レベルのオブジェクトになります。
+深くネストされたオブジェクトをドット(`.`)記法を使用したキーでフラット化したい時に`flattenObject`を使用してください。各ネストされたプロパティが区切り文字で連結されたキーを持つ単一レベルのオブジェクトになります。配列はデフォルトで値のまま保持されます。配列もインデックスキーにフラット化するには`preserveArrays: false`を渡してください。
 
 ```typescript
 import { flattenObject } from 'es-toolkit/object';
@@ -30,8 +30,7 @@ const flattened = flattenObject(nestedObject);
 console.log(flattened);
 // {
 //   'a.b.c': 1,
-//   'd.0': 2,
-//   'd.1': 3,
+//   'd': [2, 3],
 //   'e': 'simple'
 // }
 
@@ -40,8 +39,7 @@ const withCustomDelimiter = flattenObject(nestedObject, { delimiter: '/' });
 console.log(withCustomDelimiter);
 // {
 //   'a/b/c': 1,
-//   'd/0': 2,
-//   'd/1': 3,
+//   'd': [2, 3],
 //   'e': 'simple'
 // }
 ```
@@ -70,6 +68,22 @@ console.log(flatConfig);
 //   'database.port': 5432,
 //   'database.credentials.username': 'admin',
 //   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
+`options.preserveArrays`オプションで配列の処理方法を制御できます。デフォルトでは配列は値のまま保持され、`false`に設定すると配列の要素がインデックスキーにフラット化されます。
+
+```typescript
+// 配列をインデックスキーにフラット化
+const fullyFlattened = flattenObject(config, { preserveArrays: false });
+console.log(fullyFlattened);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
 //   'features.0': 'auth',
 //   'features.1': 'logging',
 //   'debug': true
@@ -80,7 +94,7 @@ console.log(flatConfig);
 
 ```typescript
 // アンダースコアで連結された環境変数スタイルに
-const envStyle = flattenObject(config, { delimiter: '_' });
+const envStyle = flattenObject(config, { delimiter: '_', preserveArrays: false });
 console.log(envStyle);
 // {
 //   'database_host': 'localhost',
@@ -108,7 +122,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +134,7 @@ console.log(result);
 - `object` (`object`): フラット化するオブジェクトです。
 - `options` (`FlattenObjectOptions`, 選択): フラット化オプションです。
   - `delimiter` (`string`, 選択): ネストされたキーを連結する区切り文字です。デフォルトは`'.'`です。
+  - `preserveArrays` (`boolean`, 選択): `true`の場合、配列はフラット化されず値のまま保持されます。デフォルトは`true`です。
 
 #### 戻り値
 
