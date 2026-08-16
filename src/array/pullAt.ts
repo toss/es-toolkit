@@ -18,9 +18,7 @@ import { at } from './at.ts';
  */
 export function pullAt<T>(arr: T[], indicesToRemove: readonly number[]): T[] {
   const removed = at(arr, indicesToRemove);
-  const indices = new Set(
-    indicesToRemove.map(index => (index < 0 ? index + arr.length : index)).sort((x, y) => y - x)
-  );
+  const indices = new Set(indicesToRemove.map(index => (index < 0 ? index + arr.length : index)).sort((x, y) => y - x));
 
   for (const index of indices) {
     arr.splice(index, 1);
