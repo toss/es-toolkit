@@ -1,31 +1,36 @@
 # deepFreeze
 
-オブジェクトを深くフリーズし、すべてのネストされたオブジェクトを不変にします。
-
-`Object.freeze`はオブジェクトの直接のプロパティのみをフリーズしますが、
-`deepFreeze`はすべてのネストされたオブジェクトと配列を再帰的にフリーズします。
-
-## インターフェース
+オブジェクトと、その中にネストされたすべてのオブジェクトと配列を再帰的に凍結して、変更できないようにします。
 
 ```typescript
-function deepFreeze<T>(obj: T): T;
+const frozen = deepFreeze(obj);
 ```
 
-### パラメータ
+## 使用法
 
-- `obj` (`T`): 深くフリーズするオブジェクト。
+### `deepFreeze(obj)`
 
-### 戻り値
+オブジェクトを完全に変更できないようにしたい時に `deepFreeze` を使用してください。`Object.freeze` はオブジェクトの最上位のプロパティだけを凍結するため、ネストされたオブジェクトは変更できてしまいます。`deepFreeze` はネストされたオブジェクトと配列もすべて再帰的に凍結するので、どの深さでも値を変更できなくなります。
 
-(`T`): 深くフリーズされたオブジェクト。
-
-## 例
+オブジェクトはその場で凍結され、同じ参照がそのまま返されます。すでに凍結されたオブジェクトはスキップされるため、循環参照があっても安全に処理されます。
 
 ```typescript
 import { deepFreeze } from 'es-toolkit/object';
 
-const frozen = deepFreeze({ user: { name: 'Alex', age: 20 } });
+// ネストされたオブジェクトも凍結されます
+const user = deepFreeze({ name: 'Alex', settings: { theme: 'dark' } });
+user.settings.theme = 'light'; // strictモードではTypeErrorが発生します
+// user.settingsは依然として{ theme: 'dark' }です
 
-frozen.user = {}; // strictモードではTypeError
-frozen.user.age = 22; // strictモードではTypeError
+// 配列と配列内のオブジェクトも凍結されます
+const config = deepFreeze({ tags: ['admin', 'user'] });
+config.tags.push('guest'); // strictモードではTypeErrorが発生します
 ```
+
+#### パラメータ
+
+- `obj` (`T`): 深く凍結するオブジェクトです。
+
+#### 戻り値
+
+(`T`): 自分自身とネストされたすべてのオブジェクトと配列が凍結された、同じオブジェクトを返します。

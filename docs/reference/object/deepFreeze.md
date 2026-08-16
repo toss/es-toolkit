@@ -1,31 +1,36 @@
 # deepFreeze
 
-Deeply freezes an object, making it and all nested objects immutable.
-
-Unlike `Object.freeze`, which only freezes the immediate properties of an object,
-`deepFreeze` recursively freezes all nested objects and arrays.
-
-## Signature
+Recursively freezes an object, making it and all nested objects and arrays immutable.
 
 ```typescript
-function deepFreeze<T>(obj: T): T;
+const frozen = deepFreeze(obj);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T`): The object to deeply freeze.
+### `deepFreeze(obj)`
 
-### Returns
+Use `deepFreeze` when you want to make an object completely immutable. `Object.freeze` only freezes the top-level properties of an object, so nested objects can still be modified. `deepFreeze` recursively freezes all nested objects and arrays, so nothing can be changed at any depth.
 
-(`T`): The deeply frozen object.
-
-## Examples
+The object is frozen in place and the same reference is returned. Objects that are already frozen are skipped, so circular references are handled safely.
 
 ```typescript
 import { deepFreeze } from 'es-toolkit/object';
 
-const frozen = deepFreeze({ user: { name: 'Alex', age: 20 } });
+// Nested objects are frozen too
+const user = deepFreeze({ name: 'Alex', settings: { theme: 'dark' } });
+user.settings.theme = 'light'; // TypeError in strict mode
+// user.settings is still { theme: 'dark' }
 
-frozen.user = {}; // TypeError in strict mode
-frozen.user.age = 22; // TypeError in strict mode
+// Arrays and the objects inside them are also frozen
+const config = deepFreeze({ tags: ['admin', 'user'] });
+config.tags.push('guest'); // TypeError in strict mode
 ```
+
+#### Parameters
+
+- `obj` (`T`): The object to freeze deeply.
+
+#### Returns
+
+(`T`): The same object, with itself and all nested objects and arrays frozen.
