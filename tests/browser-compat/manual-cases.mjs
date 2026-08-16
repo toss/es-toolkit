@@ -154,6 +154,30 @@ export const manualCases = [
     },
   },
   {
+    id: 'manual:compat/entries',
+    async: false,
+    run: function (__ns, __assertEq) {
+      const { entries } = __ns.compat;
+      __assertEq(entries({ a: 1, b: 2 }), [
+        ['a', 1],
+        ['b', 2],
+      ]);
+    },
+  },
+  {
+    id: 'manual:compat/entriesIn',
+    async: false,
+    run: function (__ns, __assertEq) {
+      const { entriesIn } = __ns.compat;
+      const object = Object.create({ inherited: 3 });
+      object.a = 1;
+      __assertEq(entriesIn(object), [
+        ['a', 1],
+        ['inherited', 3],
+      ]);
+    },
+  },
+  {
     id: 'manual:compat/extend',
     async: false,
     run: function (__ns, __assertEq) {
