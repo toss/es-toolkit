@@ -1,6 +1,7 @@
 import { clone } from './clone.ts';
 import { cloneDeep } from './cloneDeep.ts';
 import { mergeWith } from './mergeWith.ts';
+import { isMergeableValue } from '../_internal/isMergeableValue.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
@@ -58,8 +59,4 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
       return mergeWith({}, sourceValue, mergeRecursively);
     }
   });
-}
-
-function isMergeableValue(value: unknown) {
-  return isPlainObject(value) || Array.isArray(value);
 }
