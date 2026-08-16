@@ -93,7 +93,7 @@ console.log(envStyle);
 // }
 ```
 
-使用 `options.preserveArrays` 选项可以让数组保持为值,而不被扁平化为索引键。
+使用 `preserveArrays` 选项可以让数组保持为值,而不被扁平化为索引键。
 
 ```typescript
 // 数组保持为值

@@ -93,7 +93,7 @@ console.log(envStyle);
 // }
 ```
 
-Using `options.preserveArrays`, you can keep arrays as values instead of flattening them into index keys.
+Using the `preserveArrays` option, you can keep arrays as values instead of flattening them into index keys.
 
 ```typescript
 // Keep arrays as values

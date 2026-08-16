@@ -93,7 +93,7 @@ console.log(envStyle);
 // }
 ```
 
-`options.preserveArrays` 옵션을 사용하면 배열을 인덱스 키로 평탄화하지 않고 값 그대로 유지할 수 있어요.
+`preserveArrays` 옵션을 사용하면 배열을 인덱스 키로 평탄화하지 않고 값 그대로 유지할 수 있어요.
 
 ```typescript
 // 배열을 값 그대로 유지

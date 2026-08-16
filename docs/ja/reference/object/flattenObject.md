@@ -93,7 +93,7 @@ console.log(envStyle);
 // }
 ```
 
-`options.preserveArrays`オプションを使用すると、配列をインデックスキーにフラット化せず、値のまま保持できます。
+`preserveArrays`オプションを使用すると、配列をインデックスキーにフラット化せず、値のまま保持できます。
 
 ```typescript
 // 配列を値のまま保持
