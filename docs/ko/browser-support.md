@@ -40,6 +40,7 @@ es-toolkit은 Optional Chaining(`foo?.bar`)이나 클래스 필드 같은 최신
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // ... 다른 설정 ...
   build: {
     target: ['chrome80', 'safari14.1'], // [!code highlight]
   },
@@ -54,11 +55,12 @@ Vite는 `build.target`을 es-toolkit을 포함한 번들의 모든 모듈에 적
 
 ```js
 export default {
+  // ... 다른 설정 ...
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /core-js/, // [!code highlight]
+        exclude: /node_modules[\\/](?!es-toolkit)/, // [!code highlight]
         use: {
           loader: 'babel-loader',
           options: {
@@ -102,15 +104,16 @@ if (typeof globalThis.structuredClone !== 'function') {
 Vite는 기본적으로 esbuild로 트랜스파일하는데, esbuild는 아주 오래된 브라우저까지는 지원하지 않아요.
 아주 오래된 브라우저를 지원하려면, 다음과 같이 [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 플러그인을 사용해서 소스 코드를 Babel로 트랜스파일하세요.
 
-```js
+```js{2,7-9}
 import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
+  // ... 다른 설정 ...
   plugins: [
-    legacy({ // [!code highlight]
-      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
-    }), // [!code highlight]
+    legacy({
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'],
+    }),
   ],
 });
 ```

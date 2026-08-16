@@ -40,6 +40,7 @@ es-toolkit 以积极使用可选链(`foo?.bar`)、类字段等现代语法的状
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // ... 其他配置 ...
   build: {
     target: ['chrome80', 'safari14.1'], // [!code highlight]
   },
@@ -54,11 +55,12 @@ Vite 会将 `build.target` 应用到包中的每个模块(包括 es-toolkit),因
 
 ```js
 export default {
+  // ... 其他配置 ...
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /core-js/, // [!code highlight]
+        exclude: /node_modules[\\/](?!es-toolkit)/, // [!code highlight]
         use: {
           loader: 'babel-loader',
           options: {
@@ -102,15 +104,16 @@ if (typeof globalThis.structuredClone !== 'function') {
 Vite 默认使用 esbuild,但 esbuild 不支持非常旧的浏览器。
 要支持它们,需要使用 [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 插件,用 Babel 转译源代码:
 
-```js
+```js{2,7-9}
 import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
+  // ... 其他配置 ...
   plugins: [
-    legacy({ // [!code highlight]
-      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
-    }), // [!code highlight]
+    legacy({
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'],
+    }),
   ],
 });
 ```

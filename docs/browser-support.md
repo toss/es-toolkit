@@ -40,6 +40,7 @@ Set [`build.target`](https://vite.dev/config/build-options.html#build-target) to
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // ... other configuration ...
   build: {
     target: ['chrome80', 'safari14.1'], // [!code highlight]
   },
@@ -54,11 +55,12 @@ Configure `babel-loader` with `@babel/preset-env`, and make sure the `exclude` p
 
 ```js
 export default {
+  // ... other configuration ...
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /core-js/, // [!code highlight]
+        exclude: /node_modules[\\/](?!es-toolkit)/, // [!code highlight]
         use: {
           loader: 'babel-loader',
           options: {
@@ -102,15 +104,16 @@ This code must be loaded at your application entrypoint, before es-toolkit is im
 Vite uses esbuild by default, which does not support very old browsers.
 To support them, transpile your source code with Babel using the [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) plugin:
 
-```js
+```js{2,7-9}
 import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
+  // ... other configuration ...
   plugins: [
-    legacy({ // [!code highlight]
-      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
-    }), // [!code highlight]
+    legacy({
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'],
+    }),
   ],
 });
 ```

@@ -40,6 +40,7 @@ es-toolkit は、オプショナルチェーン(`foo?.bar`)やクラスフィー
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // ... 他の設定 ...
   build: {
     target: ['chrome80', 'safari14.1'], // [!code highlight]
   },
@@ -54,11 +55,12 @@ Vite は `build.target` を es-toolkit を含むバンドル内のすべての�
 
 ```js
 export default {
+  // ... 他の設定 ...
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /core-js/, // [!code highlight]
+        exclude: /node_modules[\\/](?!es-toolkit)/, // [!code highlight]
         use: {
           loader: 'babel-loader',
           options: {
@@ -102,15 +104,16 @@ if (typeof globalThis.structuredClone !== 'function') {
 Vite はデフォルトで esbuild を使用していますが、非常に古いブラウザまではサポートしていません。
 非常に古いブラウザをサポートするには、次のように [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) プラグインを使ってソースコードを Babel でトランスパイルする必要があります。
 
-```js
+```js{2,7-9}
 import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
+  // ... 他の設定 ...
   plugins: [
-    legacy({ // [!code highlight]
-      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
-    }), // [!code highlight]
+    legacy({
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'],
+    }),
   ],
 });
 ```
