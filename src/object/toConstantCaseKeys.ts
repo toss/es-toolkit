@@ -1,48 +1,7 @@
 import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { constantCase } from '../string/constantCase.ts';
-
-type ConstantCase<S extends string> =
-  S extends Lowercase<S>
-    ? Uppercase<S>
-    : S extends `${infer P1}${infer P2}`
-      ? P2 extends Uncapitalize<P2>
-        ? `${Uppercase<P1>}${ConstantCase<P2>}`
-        : `${Uppercase<P1>}_${ConstantCase<Uncapitalize<P2>>}`
-      : Uppercase<S>;
-
-type NonPlainObject =
-  | Date
-  | RegExp
-  | Map<any, any>
-  | Set<any>
-  | WeakMap<any, any>
-  | WeakSet<any>
-  | Promise<any>
-  | Error
-  | ArrayBuffer
-  | DataView
-  | Int8Array
-  | Uint8Array
-  | Uint8ClampedArray
-  | Int16Array
-  | Uint16Array
-  | Int32Array
-  | Uint32Array
-  | Float32Array
-  | Float64Array
-  | BigInt64Array
-  | BigUint64Array
-  | ((...args: any[]) => any)
-  | typeof globalThis;
-
-export type ToConstantCaseKeys<T> = T extends NonPlainObject
-  ? T
-  : T extends any[]
-    ? Array<ToConstantCaseKeys<T[number]>>
-    : T extends Record<string, any>
-      ? { [K in keyof T as ConstantCase<string & K>]: ToConstantCaseKeys<T[K]> }
-      : T;
+import type { ToConstantCaseKeys } from '../types/ToConstantCaseKeys.ts';
 
 /**
  * Creates a new object composed of the properties with keys converted to CONSTANT_CASE.
