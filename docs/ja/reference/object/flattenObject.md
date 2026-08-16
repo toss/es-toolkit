@@ -93,6 +93,22 @@ console.log(envStyle);
 // }
 ```
 
+`preserveArrays`オプションを使用すると、配列をインデックスキーにフラット化せず、値のまま保持できます。
+
+```typescript
+// 配列を値のまま保持
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
 空のオブジェクトと特殊なケースも適切に処理します。
 
 ```typescript
@@ -108,7 +124,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +136,7 @@ console.log(result);
 - `object` (`object`): フラット化するオブジェクトです。
 - `options` (`FlattenObjectOptions`, 選択): フラット化オプションです。
   - `delimiter` (`string`, 選択): ネストされたキーを連結する区切り文字です。デフォルトは`'.'`です。
+  - `preserveArrays` (`boolean`, 選択): `true`の場合、配列はフラット化されず値のまま保持されます。デフォルトは`false`です。
 
 #### 戻り値
 
