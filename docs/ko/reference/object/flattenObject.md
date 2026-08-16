@@ -10,7 +10,7 @@ const flattened = flattenObject(object, options?);
 
 ### `flattenObject(object, options?)`
 
-깊이 중첩된 객체를 점(`.`) 표기법을 사용한 키로 평탄화하고 싶을 때 `flattenObject`를 사용하세요. 각 중첩된 속성이 구분자로 연결된 키를 가진 단일 레벨 객체가 돼요. 배열은 기본적으로 값 그대로 유지돼요. 배열도 인덱스 키로 평탄화하려면 `preserveArrays: false`를 전달하세요.
+깊이 중첩된 객체나 배열을 점(`.`) 표기법을 사용한 키로 평탄화하고 싶을 때 `flattenObject`를 사용하세요. 각 중첩된 속성이 구분자로 연결된 키를 가진 단일 레벨 객체가 돼요.
 
 ```typescript
 import { flattenObject } from 'es-toolkit/object';
@@ -30,7 +30,8 @@ const flattened = flattenObject(nestedObject);
 console.log(flattened);
 // {
 //   'a.b.c': 1,
-//   'd': [2, 3],
+//   'd.0': 2,
+//   'd.1': 3,
 //   'e': 'simple'
 // }
 
@@ -39,7 +40,8 @@ const withCustomDelimiter = flattenObject(nestedObject, { delimiter: '/' });
 console.log(withCustomDelimiter);
 // {
 //   'a/b/c': 1,
-//   'd': [2, 3],
+//   'd/0': 2,
+//   'd/1': 3,
 //   'e': 'simple'
 // }
 ```
@@ -68,22 +70,6 @@ console.log(flatConfig);
 //   'database.port': 5432,
 //   'database.credentials.username': 'admin',
 //   'database.credentials.password': 'secret',
-//   'features': ['auth', 'logging'],
-//   'debug': true
-// }
-```
-
-`options.preserveArrays` 옵션으로 배열을 처리하는 방법을 정할 수 있어요. 기본적으로 배열은 값 그대로 유지되고, `false`로 설정하면 배열 요소가 인덱스 키로 평탄화돼요.
-
-```typescript
-// 배열을 인덱스 키로 평탄화
-const fullyFlattened = flattenObject(config, { preserveArrays: false });
-console.log(fullyFlattened);
-// {
-//   'database.host': 'localhost',
-//   'database.port': 5432,
-//   'database.credentials.username': 'admin',
-//   'database.credentials.password': 'secret',
 //   'features.0': 'auth',
 //   'features.1': 'logging',
 //   'debug': true
@@ -94,7 +80,7 @@ console.log(fullyFlattened);
 
 ```typescript
 // 언더스코어로 연결된 환경 변수 스타일로
-const envStyle = flattenObject(config, { delimiter: '_', preserveArrays: false });
+const envStyle = flattenObject(config, { delimiter: '_' });
 console.log(envStyle);
 // {
 //   'database_host': 'localhost',
@@ -103,6 +89,22 @@ console.log(envStyle);
 //   'database_credentials_password': 'secret',
 //   'features_0': 'auth',
 //   'features_1': 'logging',
+//   'debug': true
+// }
+```
+
+`options.preserveArrays` 옵션을 사용하면 배열을 인덱스 키로 평탄화하지 않고 값 그대로 유지할 수 있어요.
+
+```typescript
+// 배열을 값 그대로 유지
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
 //   'debug': true
 // }
 ```
@@ -134,7 +136,7 @@ console.log(result);
 - `object` (`object`): 평탄화할 객체예요.
 - `options` (`FlattenObjectOptions`, 선택): 평탄화 옵션이에요.
   - `delimiter` (`string`, 선택): 중첩된 키를 연결할 구분자예요. 기본값은 `'.'`예요.
-  - `preserveArrays` (`boolean`, 선택): `true`면 배열을 평탄화하지 않고 값 그대로 유지해요. 기본값은 `true`예요.
+  - `preserveArrays` (`boolean`, 선택): `true`면 배열을 평탄화하지 않고 값 그대로 유지해요. 기본값은 `false`예요.
 
 #### 반환 값
 

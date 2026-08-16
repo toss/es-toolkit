@@ -10,7 +10,7 @@ const flattened = flattenObject(object, options?);
 
 ### `flattenObject(object, options?)`
 
-当您想要使用点(`.`)表示法将深层嵌套的对象扁平化时,请使用 `flattenObject`。每个嵌套属性都将成为一个单层对象,其键由分隔符连接。数组默认保持为值,如果想将数组也扁平化为索引键,请传入 `preserveArrays: false`。
+当您想要使用点(`.`)表示法将深层嵌套的对象或数组扁平化时,请使用 `flattenObject`。每个嵌套属性都将成为一个单层对象,其键由分隔符连接。
 
 ```typescript
 import { flattenObject } from 'es-toolkit/object';
@@ -30,7 +30,8 @@ const flattened = flattenObject(nestedObject);
 console.log(flattened);
 // {
 //   'a.b.c': 1,
-//   'd': [2, 3],
+//   'd.0': 2,
+//   'd.1': 3,
 //   'e': 'simple'
 // }
 
@@ -39,7 +40,8 @@ const withCustomDelimiter = flattenObject(nestedObject, { delimiter: '/' });
 console.log(withCustomDelimiter);
 // {
 //   'a/b/c': 1,
-//   'd': [2, 3],
+//   'd/0': 2,
+//   'd/1': 3,
 //   'e': 'simple'
 // }
 ```
@@ -68,22 +70,6 @@ console.log(flatConfig);
 //   'database.port': 5432,
 //   'database.credentials.username': 'admin',
 //   'database.credentials.password': 'secret',
-//   'features': ['auth', 'logging'],
-//   'debug': true
-// }
-```
-
-使用 `options.preserveArrays` 选项可以控制数组的处理方式。默认情况下数组保持为值,设置为 `false` 时数组元素会被扁平化为索引键。
-
-```typescript
-// 将数组扁平化为索引键
-const fullyFlattened = flattenObject(config, { preserveArrays: false });
-console.log(fullyFlattened);
-// {
-//   'database.host': 'localhost',
-//   'database.port': 5432,
-//   'database.credentials.username': 'admin',
-//   'database.credentials.password': 'secret',
 //   'features.0': 'auth',
 //   'features.1': 'logging',
 //   'debug': true
@@ -94,7 +80,7 @@ console.log(fullyFlattened);
 
 ```typescript
 // 环境变量风格的下划线连接
-const envStyle = flattenObject(config, { delimiter: '_', preserveArrays: false });
+const envStyle = flattenObject(config, { delimiter: '_' });
 console.log(envStyle);
 // {
 //   'database_host': 'localhost',
@@ -103,6 +89,22 @@ console.log(envStyle);
 //   'database_credentials_password': 'secret',
 //   'features_0': 'auth',
 //   'features_1': 'logging',
+//   'debug': true
+// }
+```
+
+使用 `options.preserveArrays` 选项可以让数组保持为值,而不被扁平化为索引键。
+
+```typescript
+// 数组保持为值
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
 //   'debug': true
 // }
 ```
@@ -134,7 +136,7 @@ console.log(result);
 - `object` (`object`): 要扁平化的对象。
 - `options` (`FlattenObjectOptions`, 可选): 扁平化选项。
   - `delimiter` (`string`, 可选): 用于连接嵌套键的分隔符。默认为 `'.'`。
-  - `preserveArrays` (`boolean`, 可选): 为 `true` 时,数组保持为值而不被扁平化。默认为 `true`。
+  - `preserveArrays` (`boolean`, 可选): 为 `true` 时,数组保持为值而不被扁平化。默认为 `false`。
 
 #### 返回值
 

@@ -8,7 +8,7 @@ interface FlattenObjectOptions {
   delimiter?: string;
   /**
    * If true, arrays are kept as values instead of being flattened.
-   * @default true
+   * @default false
    */
   preserveArrays?: boolean;
 }
@@ -18,7 +18,7 @@ interface FlattenObjectOptions {
  *
  * @param object - The object to flatten.
  * @param [options.delimiter='.'] - The delimiter to use between nested keys.
- * @param [options.preserveArrays=true] - If true, arrays are kept as values instead of being flattened.
+ * @param [options.preserveArrays=false] - If true, arrays are kept as values instead of being flattened.
  * @returns The flattened object.
  *
  * @example
@@ -36,21 +36,21 @@ interface FlattenObjectOptions {
  * // Output:
  * // {
  * //   'a.b.c': 1,
- * //   'd': [2, 3]
+ * //   'd.0': 2,
+ * //   'd.1': 3
  * // }
  *
- * const fullyFlattened = flattenObject(nestedObject, { preserveArrays: false });
- * console.log(fullyFlattened);
+ * const preserved = flattenObject(nestedObject, { preserveArrays: true });
+ * console.log(preserved);
  * // Output:
  * // {
  * //   'a.b.c': 1,
- * //   'd.0': 2,
- * //   'd.1': 3
+ * //   'd': [2, 3]
  * // }
  */
 export function flattenObject(
   object: object,
-  { delimiter = '.', preserveArrays = true }: FlattenObjectOptions = {}
+  { delimiter = '.', preserveArrays = false }: FlattenObjectOptions = {}
 ): Record<string, any> {
   return flattenObjectImpl(object, '', delimiter, preserveArrays);
 }

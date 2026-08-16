@@ -142,35 +142,10 @@ describe('flattenObject', function () {
     });
   });
 
-  it('preserves arrays by default', () => {
-    const result = flattenObject({
-      a: [1, 2, 3],
-    });
-
-    expect(result).toEqual({
-      a: [1, 2, 3],
-    });
-  });
-
-  it('preserves nested arrays and their contents by default', () => {
-    const result = flattenObject({
-      a: {
-        b: [1, { c: 2 }],
-      },
-    });
-
-    expect(result).toEqual({
-      'a.b': [1, { c: 2 }],
-    });
-  });
-
   it('handles arrays', () => {
-    const result = flattenObject(
-      {
-        a: [1, 2, 3],
-      },
-      { preserveArrays: false }
-    );
+    const result = flattenObject({
+      a: [1, 2, 3],
+    });
 
     expect(result).toEqual({
       'a.0': 1,
@@ -180,18 +155,43 @@ describe('flattenObject', function () {
   });
 
   it('handles object arrays', () => {
-    const result = flattenObject(
-      {
-        a: [1, { b: 2 }, 3, [{ c: 4 }]],
-      },
-      { preserveArrays: false }
-    );
+    const result = flattenObject({
+      a: [1, { b: 2 }, 3, [{ c: 4 }]],
+    });
 
     expect(result).toEqual({
       'a.0': 1,
       'a.1.b': 2,
       'a.2': 3,
       'a.3.0.c': 4,
+    });
+  });
+
+  it('preserves arrays when preserveArrays is true', () => {
+    const result = flattenObject(
+      {
+        a: [1, 2, 3],
+      },
+      { preserveArrays: true }
+    );
+
+    expect(result).toEqual({
+      a: [1, 2, 3],
+    });
+  });
+
+  it('preserves nested arrays and their contents when preserveArrays is true', () => {
+    const result = flattenObject(
+      {
+        a: {
+          b: [1, { c: 2 }],
+        },
+      },
+      { preserveArrays: true }
+    );
+
+    expect(result).toEqual({
+      'a.b': [1, { c: 2 }],
     });
   });
 
@@ -206,7 +206,7 @@ describe('flattenObject', function () {
             d: [2, 3],
           },
         },
-        { delimiter: '/', preserveArrays: false }
+        { delimiter: '/' }
       );
 
       expect(result).toEqual({
@@ -252,7 +252,7 @@ describe('flattenObject', function () {
             },
           },
         },
-        { delimiter: '_', preserveArrays: false }
+        { delimiter: '_' }
       );
 
       expect(result).toEqual({
@@ -311,7 +311,7 @@ describe('flattenObject', function () {
             },
           },
         },
-        { delimiter: '@#$', preserveArrays: false }
+        { delimiter: '@#$' }
       );
 
       expect(result).toEqual({
