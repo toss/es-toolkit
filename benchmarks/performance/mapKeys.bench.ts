@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { mapKeys as mapKeysToolkit_ } from 'es-toolkit';
-import { mapKeys as mapKeysCompatToolkit_ } from 'es-toolkit/compat';
-import { mapKeys as mapKeysLodash_ } from 'lodash';
+import { mapKeys as mapKeysToolkit } from 'es-toolkit';
+import { mapKeys as mapKeysCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const mapKeysToolkit = mapKeysToolkit_;
-const mapKeysCompatToolkit = mapKeysCompatToolkit_;
-const mapKeysLodash = mapKeysLodash_;
+const { mapKeys: mapKeysLodash } = lodash;
 
 describe('mapKeys', () => {
   bench('es-toolkit/mapKeys', () => {

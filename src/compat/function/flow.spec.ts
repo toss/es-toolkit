@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { flow as flowLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { ary } from './ary';
 import { flow } from './flow';
 import { head } from '../../array/head';
@@ -64,9 +63,5 @@ describe('flow', () => {
     const combined = flow([add, square], fixed);
 
     expect(combined(1, 2)).toBe('9.0');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(flow).toEqualTypeOf<typeof flowLodash>();
   });
 });

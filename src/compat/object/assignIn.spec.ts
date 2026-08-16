@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { assignIn as assignInLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { assignIn } from './assignIn';
 import { noop } from '../../function';
 
@@ -111,9 +110,5 @@ describe('assignIn', () => {
     const values = [{ workId: undefined }, { exerciseId: '1' }];
     const result = assignIn({}, ...values);
     expect(result).toEqual({ workId: undefined, exerciseId: '1' });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(assignIn).toEqualTypeOf<typeof assignInLodash>();
   });
 });

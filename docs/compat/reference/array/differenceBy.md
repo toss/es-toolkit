@@ -80,7 +80,7 @@ differenceBy(undefined, [1, 2], x => x);
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The base array to compute the difference from.
-- `values` (`...ArrayLike<T>[]`): Arrays containing values to exclude.
+- `...values` (`Array<ArrayLike<T>>`): Arrays containing values to exclude.
 - `iteratee` (`ValueIteratee<T>`): The function that transforms each element for comparison. Can be a function, property name, or partial object.
 
 #### Returns

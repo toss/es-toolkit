@@ -80,7 +80,7 @@ differenceBy(undefined, [1, 2], x => x);
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 차집합을 구할 기준 배열이에요.
-- `values` (`...ArrayLike<T>[]`): 제외할 값들을 포함한 배열들이에요.
+- `...values` (`Array<ArrayLike<T>>`): 제외할 값들을 포함한 배열들이에요.
 - `iteratee` (`ValueIteratee<T>`): 각 요소를 비교할 값으로 변환하는 함수예요. 함수, 프로퍼티 이름, 또는 부분 객체를 사용할 수 있어요.
 
 #### 반환 값

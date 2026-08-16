@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { max as maxLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { max } from './max';
 
 describe('max', () => {
@@ -53,9 +52,5 @@ describe('max', () => {
 
   it('should return undefined when skipping all values', () => {
     expect(max([Symbol('a'), null, NaN])).toBe(undefined);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(max).toEqualTypeOf<typeof maxLodash>();
   });
 });

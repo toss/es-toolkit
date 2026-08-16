@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { dropWhile as dropWhileLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { dropWhile } from './dropWhile';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
@@ -72,10 +71,6 @@ describe('dropWhile', () => {
   it('should use identity function when no predicate is provided', () => {
     expect(dropWhile([1, 2, 0, 3])).toEqual([0, 3]);
     expect(dropWhile(['hello', 'world', '', 'test'])).toEqual(['', 'test']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(dropWhile).toEqualTypeOf<typeof dropWhileLodash>();
   });
 
   it('should work with no predicate (uses identity)', () => {

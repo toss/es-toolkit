@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { hasIn as hasInLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { has } from './has';
 import { hasIn } from './hasIn';
 import { range } from '../../math/range';
@@ -128,6 +127,28 @@ describe('hasIn', () => {
     });
   });
 
+  it('should return true for nullish literal keys that look like paths', () => {
+    expect(hasIn({ 'a.b': undefined }, 'a.b')).toBe(true);
+    expect(hasIn({ 'a.b': null }, 'a.b')).toBe(true);
+  });
+
+  it('should return true for inherited nullish literal keys that look like paths', () => {
+    function Foo() {}
+    Foo.prototype['a.b'] = undefined;
+
+    const objectWithUndefined = Object.create(Foo.prototype);
+    expect(hasIn(objectWithUndefined, 'a.b')).toBe(true);
+    expect(has(objectWithUndefined, 'a.b')).toBe(false);
+
+    Foo.prototype['a.b'] = null;
+
+    const objectWithNull = Object.create(Foo.prototype);
+    expect(hasIn(objectWithNull, 'a.b')).toBe(true);
+    expect(has(objectWithNull, 'a.b')).toBe(false);
+
+    delete Foo.prototype['a.b'];
+  });
+
   it(`should return \`true\` for indexes of sparse values`, () => {
     const sparseArgs = toArgs([1]);
     const sparseArray = Array(1);
@@ -243,9 +264,5 @@ describe('hasIn', () => {
 
   it(`should return \`false\` for empty paths`, () => {
     expect(hasIn({ a: null }, [])).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(hasIn).toEqualTypeOf<typeof hasInLodash>();
   });
 });

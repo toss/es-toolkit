@@ -142,8 +142,10 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
         throw err;
       }
 
-      const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
-      await delayToolkit(currentDelay);
+      if (attempts < retries) {
+        const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
+        await delayToolkit(currentDelay);
+      }
     }
   }
 

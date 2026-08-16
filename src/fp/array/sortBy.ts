@@ -23,7 +23,7 @@ import { sortBy as sortByToolkit } from '../../array/sortBy.ts';
  * // => [{ user: 'bar', age: 7 }, { user: 'foo', age: 8 }, { user: 'foo', age: 24 }]
  */
 export function sortBy<T extends object>(
-  criteria: Array<((item: T) => unknown) | keyof T>
+  criteria: ReadonlyArray<((item: T) => unknown) | keyof T>
 ): (array: readonly T[]) => T[] {
   return function (array: readonly T[]): T[] {
     return sortByToolkit(array, criteria);

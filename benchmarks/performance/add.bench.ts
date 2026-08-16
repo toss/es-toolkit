@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { add as addToolkitCompat_ } from 'es-toolkit/compat';
-import { add as addLodash_ } from 'lodash';
+import { add as addToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const addToolkitCompat = addToolkitCompat_;
-const addLodash = addLodash_;
+const { add: addLodash } = lodash;
 
 describe('add function benchmark', () => {
   bench('es-toolkit/compat/add', () => {

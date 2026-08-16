@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { ary as aryLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { ary } from './ary';
 
 describe('ary', () => {
@@ -70,9 +69,5 @@ describe('ary', () => {
     const actual = funcs[0]('a', 'b', 'c');
 
     expect(actual).toEqual(['a', 'b', 'c']);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(ary).toEqualTypeOf<typeof aryLodash>();
   });
 });

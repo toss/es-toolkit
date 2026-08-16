@@ -3,8 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/dropRight bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { dropRight } from "es-toolkit/fp"; console.log(dropRight)')).toBe(
-      144
-    );
+    expect(
+      await getBundleSizeFromScript('import { dropRight } from "es-toolkit/fp"; console.log(dropRight)')
+    ).toMatchInlineSnapshot(`144`);
   });
 });

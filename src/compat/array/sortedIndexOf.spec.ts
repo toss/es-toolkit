@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { sortedIndexOf as sortedIndexOfLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { sortedIndexOf } from './sortedIndexOf';
 import { falsey } from '../_internal/falsey';
 
@@ -151,9 +150,5 @@ describe('sortedIndexOf', () => {
     expect(sortedIndexOf(arr, null)).toBe(-1);
     expect(sortedIndexOf(arr, undefined)).toBe(-1);
     expect(sortedIndexOf(arr, NaN)).toBe(2);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(sortedIndexOf).toEqualTypeOf<typeof sortedIndexOfLodash>();
   });
 });

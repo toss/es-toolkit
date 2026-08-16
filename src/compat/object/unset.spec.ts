@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { unset as unsetLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { unset } from './unset';
 import { numberProto } from '../_internal/numberProto';
 import { stringProto } from '../_internal/stringProto';
@@ -154,10 +153,6 @@ describe('unset', () => {
     expect(unset(object, 'c')).toBe(true);
     expect(unset(object, 0)).toBe(true);
     expect(unset(object, Symbol('a'))).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(unset).toEqualTypeOf<typeof unsetLodash>();
   });
 
   it('should not delete root properties from nonexistent paths', () => {

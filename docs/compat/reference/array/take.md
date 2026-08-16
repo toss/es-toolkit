@@ -49,7 +49,7 @@ const result5 = take(numbers, -1);
 #### Parameters
 
 - `array` (`T[]`): The array to take elements from.
-- `count` (`number`): The number of elements to take. Default is 1.
+- `count` (`number`, optional): The number of elements to take. Default is 1.
 
 #### Returns
 

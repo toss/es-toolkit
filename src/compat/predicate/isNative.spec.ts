@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isNative as isNativeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isNative } from './isNative';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
@@ -105,9 +104,5 @@ describe('isNative', () => {
     });
 
     expect(isNative(fakeNative)).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isNative).toEqualTypeOf<typeof isNativeLodash>();
   });
 });

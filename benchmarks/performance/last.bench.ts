@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { last as lastToolkit_ } from 'es-toolkit';
-import { last as lastToolkitCompat_ } from 'es-toolkit/compat';
-import { last as lastLodash_ } from 'lodash';
+import { last as lastToolkit } from 'es-toolkit';
+import { last as lastToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const lastToolkit = lastToolkit_;
-const lastToolkitCompat = lastToolkitCompat_;
-const lastLodash = lastLodash_;
+const { last: lastLodash } = lodash;
 
 describe('last', () => {
   bench('es-toolkit/last', () => {

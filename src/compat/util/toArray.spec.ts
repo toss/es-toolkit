@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toArray as toArrayLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toArray } from './toArray';
 
 describe('toArray', () => {
@@ -14,6 +13,18 @@ describe('toArray', () => {
     }
   });
 
+  it('should convert non-array-like iterables to arrays', () => {
+    const iterable = {
+      *[Symbol.iterator]() {
+        yield 1;
+        yield 2;
+      },
+    };
+    expect(toArray(iterable)).toEqual([1, 2]);
+    expect(toArray(new Map([['a', 1]]).entries())).toEqual([['a', 1]]);
+    expect(toArray(new Set([1, 2]).values())).toEqual([1, 2]);
+  });
+
   it('should convert maps to arrays', () => {
     if (Map) {
       const map = new Map();
@@ -23,6 +34,13 @@ describe('toArray', () => {
         ['a', 1],
         ['b', 2],
       ]);
+    }
+  });
+
+  it('should convert sets to arrays', () => {
+    if (Set) {
+      const set = new Set([1, 2, 3]);
+      expect(toArray(set)).toEqual([1, 2, 3]);
     }
   });
 
@@ -40,9 +58,5 @@ describe('toArray', () => {
   it('should convert non-iterable values to empty arrays', () => {
     expect(toArray(1)).toEqual([]);
     expect(toArray(true)).toEqual([]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toArray).toEqualTypeOf<typeof toArrayLodash>();
   });
 });

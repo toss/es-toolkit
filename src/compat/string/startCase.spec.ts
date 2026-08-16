@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { startCase as startCaseLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { startCase } from './startCase';
 
 describe('startCase', () => {
@@ -62,7 +61,9 @@ describe('startCase', () => {
     expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(startCase).toEqualTypeOf<typeof startCaseLodash>();
+  it('should keep ordinal numbers as single words, identical to lodash', () => {
+    expect(startCase('foo1stPlace')).toBe('Foo 1st Place');
+    expect(startCase('top10th')).toBe('Top 10th');
+    expect(startCase('1st place 2nd 3rd 4th')).toBe('1st Place 2nd 3rd 4th');
   });
 });

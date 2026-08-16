@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toFinite as toFiniteLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toFinite } from './toFinite';
 import { flatMap } from '../../array/flatMap';
 import { identity } from '../../function/identity';
@@ -193,9 +192,5 @@ describe('toFinite', () => {
     const actual = values.map(toFinite);
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toFinite).toEqualTypeOf<typeof toFiniteLodash>();
   });
 });

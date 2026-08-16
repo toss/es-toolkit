@@ -1,4 +1,6 @@
 import { isNil } from '../../predicate/isNil.ts';
+import { regexMultiByte } from '../_internal/regexMultiByte.ts';
+import { unicodeSize } from '../_internal/unicodeSize.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -46,6 +48,10 @@ export function size(collection: object | string | null | undefined): number;
 export function size(target: any): number {
   if (isNil(target)) {
     return 0;
+  }
+
+  if (typeof target === 'string') {
+    return regexMultiByte.test(target) ? unicodeSize(target) : target.length;
   }
 
   if (isArrayLike(target)) {

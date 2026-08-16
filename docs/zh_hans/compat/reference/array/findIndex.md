@@ -16,7 +16,7 @@ const index = findIndex(arr, doesMatch, fromIndex);
 
 ## 用法
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, doesMatch?, fromIndex?)`
 
 当您想要查找数组中满足特定条件的第一个元素的位置时,使用 `findIndex`。您可以通过多种方式指定条件。如果没有元素满足条件,则返回 `-1`。
 
@@ -92,7 +92,7 @@ findIndex(undefined, 'active'); // -1
 #### 参数
 
 - `arr` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
-- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 匹配条件。可以是函数、部分对象、键值对或属性名。
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 匹配条件。可以是函数、部分对象、键值对或属性名。默认值为 `identity` 函数。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。默认为 `0`。
 
 #### 返回值

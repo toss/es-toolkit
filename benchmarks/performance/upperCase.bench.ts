@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { upperCase as upperCaseToolkit_ } from 'es-toolkit';
-import { upperCase as upperCaseToolkitCompat_ } from 'es-toolkit/compat';
-import { upperCase as upperCaseLodash_ } from 'lodash';
+import { upperCase as upperCaseToolkit } from 'es-toolkit';
+import { upperCase as upperCaseToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const upperCaseToolkit = upperCaseToolkit_;
-const upperCaseToolkitCompat = upperCaseToolkitCompat_;
-const upperCaseLodash = upperCaseLodash_;
+const { upperCase: upperCaseLodash } = lodash;
 
 describe('upperCase', () => {
   describe('short string', () => {

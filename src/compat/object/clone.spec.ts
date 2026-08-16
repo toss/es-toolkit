@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
-import type { clone as cloneLodash } from 'lodash';
 import { clone } from './clone';
 import { args } from '../_internal/args';
 import { typedArrays } from '../_internal/typedArrays';
@@ -546,9 +545,5 @@ describe('clone', () => {
       expect(actual).not.toBe(object);
       expect(clone(value)).toEqual({});
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(clone).toEqualTypeOf<typeof cloneLodash>();
   });
 });

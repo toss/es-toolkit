@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { drop as dropLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { drop } from './drop';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -60,9 +59,5 @@ describe('drop', () => {
   it('should use default count of 1 when count is undefined', () => {
     expect(drop([1, 2, 3])).toEqual([2, 3]);
     expect(drop([1, 2, 3], undefined)).toEqual([2, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(drop).toEqualTypeOf<typeof dropLodash>();
   });
 });

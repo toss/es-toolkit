@@ -78,6 +78,18 @@ meanBy(users, { active: true });
 // Returns: 0.6666666 (active 为 true 的人占总人数的比例)
 ```
 
+如果键不存在或值为 `undefined`，会被当作 0 处理。但如果所有值都是 `undefined`，则返回 `NaN`。
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([{ a: 1 }, {}], 'a');
+// Returns: 0.5 ((1 + 0) / 2)
+
+meanBy([{}, {}], 'a');
+// Returns: NaN
+```
+
 空数组返回 NaN。
 
 ```typescript

@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { functions as functionsToolkit_ } from 'es-toolkit/compat';
-import { functions as functionsLodash_ } from 'lodash';
+import { functions as functionsToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const functionsToolkit = functionsToolkit_;
-const functionsLodash = functionsLodash_;
+const { functions: functionsLodash } = lodash;
 
 describe('functions', () => {
   const testObject = {

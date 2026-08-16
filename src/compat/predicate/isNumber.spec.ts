@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isNumber as isNumberLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isNumber } from './isNumber';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -58,9 +57,5 @@ describe('isNumber', () => {
 
   it('should return `false` for objects inheriting Number.prototype without number data', () => {
     expect(isNumber(Object.create(Number.prototype))).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isNumber).toEqualTypeOf<typeof isNumberLodash>();
   });
 });

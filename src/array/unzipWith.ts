@@ -13,7 +13,7 @@
  * // result will be [9, 12]
  */
 export function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[]) => R): R[] {
-  const maxLength = Math.max(...target.map(innerArray => innerArray.length));
+  const maxLength = Math.max(0, ...target.map(innerArray => innerArray.length));
   const result: R[] = new Array(maxLength);
 
   for (let i = 0; i < maxLength; i++) {

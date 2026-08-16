@@ -3,6 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/minBy bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { minBy } from "es-toolkit/fp"; console.log(minBy)')).toBe(233);
+    expect(
+      await getBundleSizeFromScript('import { minBy } from "es-toolkit/fp"; console.log(minBy)')
+    ).toMatchInlineSnapshot(`233`);
   });
 });

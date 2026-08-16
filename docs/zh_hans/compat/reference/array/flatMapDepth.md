@@ -11,12 +11,12 @@
 使用迭代函数转换数组的每个元素并展平到指定深度。
 
 ```typescript
-const result = flatMapDepth(collection, iteratee, depth);
+const result = flatMapDepth(collection, iteratee?, depth?);
 ```
 
 ## 用法
 
-### `flatMapDepth(collection, iteratee, depth)`
+### `flatMapDepth(collection, iteratee?, depth?)`
 
 使用给定函数转换数组或对象的每个元素,然后将结果展平到指定深度并返回新数组。当您想将嵌套的数组结构仅展平到所需深度时很有用。
 

@@ -19,12 +19,16 @@ export function toString(value: any): string {
     return '';
   }
 
+  return baseToString(value);
+}
+
+function baseToString(value: any): string {
   if (typeof value === 'string') {
     return value;
   }
 
   if (Array.isArray(value)) {
-    return value.map(toString).join(',');
+    return value.map(baseToString).join(',');
   }
 
   const result = String(value);
