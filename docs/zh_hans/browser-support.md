@@ -36,15 +36,42 @@ es-toolkit 以积极使用可选链(`foo?.bar`)、类字段等现代语法的状
 
 将 [`build.target`](https://vite.dev/config/build-options.html#build-target) 设置为你要支持的最旧浏览器:
 
-<<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    target: ['chrome80', 'safari14.1'], // [!code highlight]
+  },
+});
+```
 
 Vite 会将 `build.target` 应用到包中的每个模块(包括 es-toolkit),因此无需其他配置。
 
-#### webpack + Babel
+#### Webpack + Babel
 
 为 `babel-loader` 配置 `@babel/preset-env`,并确保 `exclude` 模式不会排除 es-toolkit:
 
-<<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /core-js/, // [!code highlight]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: '80', safari: '14.1' } }], // [!code highlight]
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### 2. 补充现代运行时 JavaScript API(polyfill)
 
@@ -52,7 +79,19 @@ es-toolkit 使用了 `Array#at`、`structuredClone` 等现代浏览器和运行�
 
 请按如下方式添加 `core-js` 提供的 polyfill:
 
-<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+```js
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
+import 'core-js/actual/array/find-last';
+import 'core-js/actual/array/find-last-index';
+import 'core-js/actual/object/has-own';
+import structuredCloneShim from '@ungap/structured-clone';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = structuredCloneShim;
+}
+```
 
 这段代码必须在应用入口处、导入 es-toolkit 之前加载。
 
@@ -63,7 +102,18 @@ es-toolkit 使用了 `Array#at`、`structuredClone` 等现代浏览器和运行�
 Vite 默认使用 esbuild,但 esbuild 不支持非常旧的浏览器。
 要支持它们,需要使用 [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 插件,用 Babel 转译源代码:
 
-<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+
+export default defineConfig({
+  plugins: [
+    legacy({ // [!code highlight]
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
+    }), // [!code highlight]
+  ],
+});
+```
 
 #### 2. `es-toolkit/bigint` 只能在支持 BigInt 的浏览器中使用
 

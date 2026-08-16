@@ -36,15 +36,42 @@ es-toolkit は、オプショナルチェーン(`foo?.bar`)やクラスフィー
 
 [`build.target`](https://vite.dev/config/build-options.html#build-target) をサポートしたい最も古いブラウザに設定します。
 
-<<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    target: ['chrome80', 'safari14.1'], // [!code highlight]
+  },
+});
+```
 
 Vite は `build.target` を es-toolkit を含むバンドル内のすべてのモジュールに適用するため、追加の設定は不要です。
 
-#### webpack + Babel
+#### Webpack + Babel
 
 `babel-loader` に `@babel/preset-env` を設定し、`exclude` パターンが es-toolkit を除外しないようにします。
 
-<<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /core-js/, // [!code highlight]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: '80', safari: '14.1' } }], // [!code highlight]
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### 2. 最新のランタイム JavaScript API を補う(ポリフィル)
 
@@ -52,7 +79,19 @@ es-toolkit は `Array#at` や `structuredClone` のような、最新のブラ�
 
 次のように `core-js` が提供するポリフィルを追加してください。
 
-<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+```js
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
+import 'core-js/actual/array/find-last';
+import 'core-js/actual/array/find-last-index';
+import 'core-js/actual/object/has-own';
+import structuredCloneShim from '@ungap/structured-clone';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = structuredCloneShim;
+}
+```
 
 このコードは、アプリケーションのエントリーポイントで es-toolkit を読み込む前にロードされる必要があります。
 
@@ -63,7 +102,18 @@ es-toolkit は `Array#at` や `structuredClone` のような、最新のブラ�
 Vite はデフォルトで esbuild を使用していますが、非常に古いブラウザまではサポートしていません。
 非常に古いブラウザをサポートするには、次のように [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) プラグインを使ってソースコードを Babel でトランスパイルする必要があります。
 
-<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+
+export default defineConfig({
+  plugins: [
+    legacy({ // [!code highlight]
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
+    }), // [!code highlight]
+  ],
+});
+```
 
 #### 2. `es-toolkit/bigint` は BigInt をサポートするブラウザでのみ使用できます
 

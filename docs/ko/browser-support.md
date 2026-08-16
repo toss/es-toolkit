@@ -36,15 +36,42 @@ es-toolkit은 Optional Chaining(`foo?.bar`)이나 클래스 필드 같은 최신
 
 [`build.target`](https://vite.dev/config/build-options.html#build-target)을 지원하려는 가장 오래된 브라우저로 설정하세요.
 
-<<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    target: ['chrome80', 'safari14.1'], // [!code highlight]
+  },
+});
+```
 
 Vite는 `build.target`을 es-toolkit을 포함한 번들의 모든 모듈에 적용하기 때문에, 다른 설정은 필요 없어요.
 
-#### webpack + Babel
+#### Webpack + Babel
 
 `babel-loader`에 `@babel/preset-env`를 설정하고, `exclude` 패턴이 es-toolkit을 제외하지 않도록 하세요.
 
-<<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /core-js/, // [!code highlight]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: '80', safari: '14.1' } }], // [!code highlight]
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### 2. 최신 런타임 JavaScript API 채우기 (폴리필)
 
@@ -52,7 +79,19 @@ es-toolkit은 `Array#at`이나 `structuredClone`처럼 최신 브라우저와 �
 
 다음과 같이 `core-js`가 제공하는 폴리필을 추가해 주세요.
 
-<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+```js
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
+import 'core-js/actual/array/find-last';
+import 'core-js/actual/array/find-last-index';
+import 'core-js/actual/object/has-own';
+import structuredCloneShim from '@ungap/structured-clone';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = structuredCloneShim;
+}
+```
 
 이 코드는 애플리케이션 진입점에서 es-toolkit을 불러오기 전에 실행되어야 해요.
 
@@ -63,7 +102,18 @@ es-toolkit은 `Array#at`이나 `structuredClone`처럼 최신 브라우저와 �
 Vite는 기본적으로 esbuild로 트랜스파일하는데, esbuild는 아주 오래된 브라우저까지는 지원하지 않아요.
 아주 오래된 브라우저를 지원하려면, 다음과 같이 [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 플러그인을 사용해서 소스 코드를 Babel로 트랜스파일하세요.
 
-<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+
+export default defineConfig({
+  plugins: [
+    legacy({ // [!code highlight]
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
+    }), // [!code highlight]
+  ],
+});
+```
 
 #### 2. `es-toolkit/bigint`는 BigInt를 지원하는 브라우저에서만 사용할 수 있어요
 

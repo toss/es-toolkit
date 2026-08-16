@@ -36,15 +36,42 @@ Add the following configuration so that the modern syntax es-toolkit uses is con
 
 Set [`build.target`](https://vite.dev/config/build-options.html#build-target) to the oldest browsers you want to support:
 
-<<< @/../tests/browser-compat/fixtures/vite-polyfill/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    target: ['chrome80', 'safari14.1'], // [!code highlight]
+  },
+});
+```
 
 Vite applies `build.target` to every module in the bundle, including es-toolkit, so no further configuration is needed.
 
-#### webpack + Babel
+#### Webpack + Babel
 
 Configure `babel-loader` with `@babel/preset-env`, and make sure the `exclude` pattern does not exclude es-toolkit:
 
-<<< @/../tests/browser-compat/fixtures/webpack/webpack.config.mjs{js}
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /core-js/, // [!code highlight]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: '80', safari: '14.1' } }], // [!code highlight]
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### 2. Filling in modern runtime JavaScript APIs (polyfills)
 
@@ -52,7 +79,19 @@ es-toolkit makes use of modern JavaScript APIs available in recent browsers and 
 
 Add the polyfills provided by `core-js` as follows:
 
-<<< @/../tests/browser-compat/polyfills/minimal.mjs{js}
+```js
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
+import 'core-js/actual/array/find-last';
+import 'core-js/actual/array/find-last-index';
+import 'core-js/actual/object/has-own';
+import structuredCloneShim from '@ungap/structured-clone';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = structuredCloneShim;
+}
+```
 
 This code must be loaded at your application entrypoint, before es-toolkit is imported.
 
@@ -63,7 +102,18 @@ This code must be loaded at your application entrypoint, before es-toolkit is im
 Vite uses esbuild by default, which does not support very old browsers.
 To support them, transpile your source code with Babel using the [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) plugin:
 
-<<< @/../tests/browser-compat/fixtures/vite-legacy/vite.config.mjs{js}
+```js
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy'; // [!code highlight]
+
+export default defineConfig({
+  plugins: [
+    legacy({ // [!code highlight]
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'], // [!code highlight]
+    }), // [!code highlight]
+  ],
+});
+```
 
 #### 2. `es-toolkit/bigint` is only available in browsers that support BigInt
 

@@ -7,7 +7,7 @@ name: Browser Compat
 #                       es-toolkit as published, no transpilation, no
 #                       polyfills.
 #   - downlevel lanes:  Chrome 80 + WebKit 14.1 (Playwright 1.9.2) — the Vite
-#                       and webpack setups documented for that tier.
+#                       and Webpack setups documented for that tier.
 #   - vite-legacy lane: Chrome 51 + WebKit 14.1 — the @vitejs/plugin-legacy
 #                       setup for the ES2015 tier, with the bigint-free case
 #                       set. Chrome 51 predates headless mode, so it runs
