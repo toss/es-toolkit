@@ -59,6 +59,10 @@ toPairsIn(set);
 // => [[1, 1], [2, 2], [3, 3]]
 ```
 
+#### 별칭
+
+`entriesIn`
+
 #### 파라미터
 
 - `object` (`object`): 변환할 객체, Map, 또는 Set이에요.
