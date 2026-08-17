@@ -15,7 +15,7 @@ takeWhile(hugeArray.values(), x => x < 100)
 
 모든 함수는 첫 번째 인자로 `Iterator`를 받아요 — `array.values()`로 얻는 값, 제너레이터 함수, `Map`/`Set` 이터레이터 등이요. 지연 평가 함수는 프로토타입이 네이티브 `Iterator.prototype`인 `IteratorObject`를 반환하기 때문에, 결과는 모든 [네이티브 이터레이터 헬퍼](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)(`map`, `filter`, `take`, `drop`, `flatMap`, `reduce`, `toArray`, ...)를 갖추고 있고, 이들과 자연스럽게 이어서 체이닝할 수 있어요.
 
-이 모듈은 네이티브 헬퍼에 없는 것만 제공해요. 개수 기반의 `take`와 `drop`, `map`, `filter` 등은 이미 `Iterator.prototype`에 있어요. es-toolkit은 그 위에 조건 기반 연산, 상태를 가지는 연산, 여러 소스를 다루는 연산을 더해요: [`chunk`](./reference/chunk.md), [`count`](./reference/count.md), [`dropWhile`](./reference/dropWhile.md), [`head`](./reference/head.md), [`iterate`](./reference/iterate.md), [`partition`](./reference/partition.md), [`range`](./reference/range.md), [`scan`](./reference/scan.md), [`takeWhile`](./reference/takeWhile.md), [`uniqBy`](./reference/uniqBy.md), [`zip`](./reference/zip.md)이에요.
+이 모듈은 네이티브 헬퍼에 없는 것만 제공해요. 개수 기반의 `take`와 `drop`, `map`, `filter` 등은 이미 `Iterator.prototype`에 있어요. es-toolkit은 그 위에 조건 기반 연산, 상태를 가지는 연산, 여러 소스를 다루는 연산을 더해요: [`cartesianProduct`](./reference/cartesianProduct.md), [`chunk`](./reference/chunk.md), [`count`](./reference/count.md), [`dropWhile`](./reference/dropWhile.md), [`head`](./reference/head.md), [`iterate`](./reference/iterate.md), [`partition`](./reference/partition.md), [`range`](./reference/range.md), [`scan`](./reference/scan.md), [`takeWhile`](./reference/takeWhile.md), [`uniqBy`](./reference/uniqBy.md), [`zip`](./reference/zip.md)이에요.
 
 ## 지연 평가와 무한 시퀀스
 

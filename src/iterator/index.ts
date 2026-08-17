@@ -1,3 +1,4 @@
+export { cartesianProduct } from './cartesianProduct.ts';
 export { chunk } from './chunk.ts';
 export { count } from './count.ts';
 export { dropWhile } from './dropWhile.ts';

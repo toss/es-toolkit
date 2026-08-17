@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
+  cartesianProduct,
   chunk,
   count,
   drop,
@@ -37,6 +38,7 @@ describe('es-toolkit/fp/iterator', () => {
       scan,
       uniqBy,
       zip,
+      cartesianProduct,
       toArray,
       head,
       count,
