@@ -28,6 +28,11 @@ describe('matches', () => {
     expect(matches({ a: 1 })({ a: { b: 2 } })).toBe(false);
   });
 
+  it('should not match nested empty object patterns against non-object targets', () => {
+    expect(matches({ value: {} })({ value: 'bar' })).toBe(false);
+    expect(matches({ value: {} })({ value: { b: 1 } })).toBe(true);
+  });
+
   it(`should match inherited string keyed \`object\` properties`, () => {
     interface Foo {
       a: number;
