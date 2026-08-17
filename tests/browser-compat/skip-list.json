@@ -46,8 +46,10 @@
   "nodeSkip": {
     "compat:compat/predicate/isElement#0": "uses DOM (document); still runs in browsers"
   },
-  "browserSkipNote": "predicate:predicate/isPlainObject#0 is overridden below to drop its node:vm cross-realm line, which cannot run in browsers.",
+  "browserSkipNote": "predicate:predicate/isPlainObject#0 is overridden below to drop its node:vm cross-realm line, which cannot run in browsers. util/defer#0 and util/deferAsync#0 are overridden to dispose manually, because no browser in the matrix parses `using` declarations.",
   "overrides": {
+    "util:util/defer#0": "const logs = [];\nconst disposable = defer(() => logs.push('cleanup'));\n__assertEq(logs, []);\ndisposable[Symbol.dispose]();\n__assertEq(logs, ['cleanup']);",
+    "util:util/deferAsync#0": "const logs = [];\nconst disposable = deferAsync(async () => {\n  logs.push('cleanup');\n});\n__assertEq(logs, []);\nawait disposable[Symbol.asyncDispose]();\n__assertEq(logs, ['cleanup']);",
     "predicate:predicate/isNode#0": "__assertEq(typeof isNode(), 'boolean');",
     "predicate:predicate/isBrowser#0": "__assertEq(typeof isBrowser(), 'boolean');",
     "compat:compat/predicate/isNative#0": "if (typeof globalThis === 'undefined' || !globalThis['__core-js_shared__']) {\n  __assertEq(isNative(Array.prototype.push), true);\n  __assertEq(isNative(function () {}), false);\n} else {\n  // Like lodash, isNative refuses to run when core-js shims are detected.\n  __assertEq(true, true);\n}",
