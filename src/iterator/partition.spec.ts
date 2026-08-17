@@ -26,4 +26,22 @@ describe('partition', () => {
   it('returns two empty arrays for an empty source', () => {
     expect(partition([].values(), () => true)).toEqual([[], []]);
   });
+
+  it('closes the source when the predicate throws', () => {
+    let closed = false;
+    function* source() {
+      try {
+        yield* [1, 2, 3];
+      } finally {
+        closed = true;
+      }
+    }
+
+    expect(() =>
+      partition(source(), () => {
+        throw new Error('boom');
+      })
+    ).toThrow('boom');
+    expect(closed).toBe(true);
+  });
 });

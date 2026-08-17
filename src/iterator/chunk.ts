@@ -22,23 +22,26 @@ export function chunk<T>(source: Iterator<T>, size: number): IteratorObject<T[],
     throw new Error('Size must be an integer greater than zero.');
   }
 
-  return iterator(function () {
-    const buffer: T[] = [];
+  return iterator(
+    function () {
+      const buffer: T[] = [];
 
-    while (buffer.length < size) {
-      const result = source.next();
+      while (buffer.length < size) {
+        const result = source.next();
 
-      if (result.done) {
-        break;
+        if (result.done) {
+          break;
+        }
+
+        buffer.push(result.value);
       }
 
-      buffer.push(result.value);
-    }
+      if (buffer.length === 0) {
+        return { value: undefined, done: true };
+      }
 
-    if (buffer.length === 0) {
-      return { value: undefined, done: true };
-    }
-
-    return { value: buffer, done: false };
-  });
+      return { value: buffer, done: false };
+    },
+    () => void source.return?.()
+  );
 }

@@ -21,20 +21,17 @@ export function takeWhile<T>(
   shouldContinue: (value: T, index: number) => boolean
 ): IteratorObject<T, undefined> {
   let index = 0;
-  let done = false;
 
-  return iterator(function () {
-    if (done) {
-      return { value: undefined, done: true };
-    }
+  return iterator(
+    function () {
+      const result = source.next();
 
-    const result = source.next();
+      if (result.done || !shouldContinue(result.value, index++)) {
+        return { value: undefined, done: true };
+      }
 
-    if (result.done || !shouldContinue(result.value, index++)) {
-      done = true;
-      return { value: undefined, done: true };
-    }
-
-    return { value: result.value, done: false };
-  });
+      return { value: result.value, done: false };
+    },
+    () => void source.return?.()
+  );
 }

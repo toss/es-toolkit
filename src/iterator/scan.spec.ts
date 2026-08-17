@@ -1,6 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { scan } from './scan.ts';
 
+function closableSource<T>(values: readonly T[]) {
+  let closed = false;
+  function* generate() {
+    try {
+      yield* values;
+    } finally {
+      closed = true;
+    }
+  }
+  return { source: generate(), isClosed: () => closed };
+}
+
 describe('scan', () => {
   it('emits the initial value then each running accumulator', () => {
     expect(scan([1, 2, 3].values(), (acc, x) => acc + x, 0).toArray()).toEqual([0, 1, 3, 6]);
@@ -31,5 +43,30 @@ describe('scan', () => {
     const it = scan([1, 2].values(), (acc, x) => acc + x, 0);
     expect(it.toArray()).toEqual([0, 1, 3]);
     expect(it.toArray()).toEqual([]);
+  });
+
+  it('closes the source when the consumer stops early', () => {
+    const { source, isClosed } = closableSource([1, 2, 3, 4]);
+
+    scan(source, (acc, x) => acc + x, 0)
+      .take(2)
+      .toArray();
+
+    expect(isClosed()).toBe(true);
+  });
+
+  it('closes the source when the callback throws', () => {
+    const { source, isClosed } = closableSource([1, 2, 3]);
+
+    expect(() =>
+      scan(
+        source,
+        () => {
+          throw new Error('boom');
+        },
+        0
+      ).toArray()
+    ).toThrow('boom');
+    expect(isClosed()).toBe(true);
   });
 });

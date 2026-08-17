@@ -19,7 +19,15 @@ export function partition<T>(source: Iterator<T>, predicate: (value: T, index: n
 
   let next = source.next();
   while (!next.done) {
-    if (predicate(next.value, index++)) {
+    let isMatch;
+    try {
+      isMatch = predicate(next.value, index++);
+    } catch (error) {
+      source.return?.();
+      throw error;
+    }
+
+    if (isMatch) {
       matched.push(next.value);
     } else {
       unmatched.push(next.value);

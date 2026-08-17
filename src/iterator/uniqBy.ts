@@ -21,20 +21,23 @@ import { iterator } from './_internal/iterator.ts';
 export function uniqBy<T, K>(source: Iterator<T>, getKey: (value: T) => K): IteratorObject<T, undefined> {
   const seen = new Set<K>();
 
-  return iterator(function () {
-    let result = source.next();
+  return iterator(
+    function () {
+      let result = source.next();
 
-    while (!result.done) {
-      const key = getKey(result.value);
+      while (!result.done) {
+        const key = getKey(result.value);
 
-      if (!seen.has(key)) {
-        seen.add(key);
-        return { value: result.value, done: false };
+        if (!seen.has(key)) {
+          seen.add(key);
+          return { value: result.value, done: false };
+        }
+
+        result = source.next();
       }
 
-      result = source.next();
-    }
-
-    return { value: undefined, done: true };
-  });
+      return { value: undefined, done: true };
+    },
+    () => void source.return?.()
+  );
 }

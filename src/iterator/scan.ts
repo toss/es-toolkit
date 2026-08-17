@@ -28,19 +28,22 @@ export function scan<T, U>(
   let index = 0;
   let emittedInitial = false;
 
-  return iterator(function () {
-    if (!emittedInitial) {
-      emittedInitial = true;
+  return iterator(
+    function () {
+      if (!emittedInitial) {
+        emittedInitial = true;
+        return { value: accumulator, done: false };
+      }
+
+      const result = source.next();
+
+      if (result.done) {
+        return { value: undefined, done: true };
+      }
+
+      accumulator = callback(accumulator, result.value, index++);
       return { value: accumulator, done: false };
-    }
-
-    const result = source.next();
-
-    if (result.done) {
-      return { value: undefined, done: true };
-    }
-
-    accumulator = callback(accumulator, result.value, index++);
-    return { value: accumulator, done: false };
-  });
+    },
+    () => void source.return?.()
+  );
 }

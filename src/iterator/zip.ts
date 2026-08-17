@@ -9,7 +9,9 @@ type IteratorValue<T> = T extends Iterator<infer V> ? V : never;
  *
  * Stopping at the shortest source (rather than padding to the longest, as the
  * array `zip` does) is what makes this safe to use with infinite iterators:
- * `zip(range(0, Infinity), names.values())` ends with `names`.
+ * `zip(range(0, Infinity), names.values())` ends with `names`. When iteration
+ * ends — because a source ran out or the consumer terminated early — every
+ * source is closed via its `return` method.
  *
  * @template T - A tuple of the source iterator types.
  * @param sources - The iterators to zip together.
@@ -21,23 +23,30 @@ type IteratorValue<T> = T extends Iterator<infer V> ? V : never;
 export function zip<T extends Array<Iterator<unknown>>>(
   ...sources: T
 ): IteratorObject<{ [K in keyof T]: IteratorValue<T[K]> }, undefined> {
-  return iterator(function () {
-    if (sources.length === 0) {
-      return { value: undefined, done: true };
-    }
-
-    const tuple = new Array(sources.length);
-
-    for (let index = 0; index < sources.length; index++) {
-      const result = sources[index].next();
-
-      if (result.done) {
+  return iterator(
+    function () {
+      if (sources.length === 0) {
         return { value: undefined, done: true };
       }
 
-      tuple[index] = result.value;
-    }
+      const tuple = new Array(sources.length);
 
-    return { value: tuple as { [K in keyof T]: IteratorValue<T[K]> }, done: false };
-  });
+      for (let index = 0; index < sources.length; index++) {
+        const result = sources[index].next();
+
+        if (result.done) {
+          return { value: undefined, done: true };
+        }
+
+        tuple[index] = result.value;
+      }
+
+      return { value: tuple as { [K in keyof T]: IteratorValue<T[K]> }, done: false };
+    },
+    () => {
+      for (const source of sources) {
+        source.return?.();
+      }
+    }
+  );
 }

@@ -23,27 +23,30 @@ export function dropWhile<T>(
   let index = 0;
   let dropping = true;
 
-  return iterator(function () {
-    while (dropping) {
+  return iterator(
+    function () {
+      while (dropping) {
+        const result = source.next();
+
+        if (result.done) {
+          dropping = false;
+          return { value: undefined, done: true };
+        }
+
+        if (!shouldDrop(result.value, index++)) {
+          dropping = false;
+          return { value: result.value, done: false };
+        }
+      }
+
       const result = source.next();
 
       if (result.done) {
-        dropping = false;
         return { value: undefined, done: true };
       }
 
-      if (!shouldDrop(result.value, index++)) {
-        dropping = false;
-        return { value: result.value, done: false };
-      }
-    }
-
-    const result = source.next();
-
-    if (result.done) {
-      return { value: undefined, done: true };
-    }
-
-    return { value: result.value, done: false };
-  });
+      return { value: result.value, done: false };
+    },
+    () => void source.return?.()
+  );
 }

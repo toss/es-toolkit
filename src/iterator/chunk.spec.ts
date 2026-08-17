@@ -1,6 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { chunk } from './chunk.ts';
 
+function closableSource<T>(values: readonly T[]) {
+  let closed = false;
+  function* generate() {
+    try {
+      yield* values;
+    } finally {
+      closed = true;
+    }
+  }
+  return { source: generate(), isClosed: () => closed };
+}
+
 describe('chunk', () => {
   it('groups elements into arrays of the given size', () => {
     expect(chunk([1, 2, 3, 4].values(), 2).toArray()).toEqual([
@@ -37,5 +49,13 @@ describe('chunk', () => {
     const it = chunk([1, 2, 3].values(), 2);
     expect(it.toArray()).toEqual([[1, 2], [3]]);
     expect(it.toArray()).toEqual([]);
+  });
+
+  it('closes the source when the consumer stops early', () => {
+    const { source, isClosed } = closableSource([1, 2, 3, 4, 5, 6]);
+
+    chunk(source, 2).take(1).toArray();
+
+    expect(isClosed()).toBe(true);
   });
 });

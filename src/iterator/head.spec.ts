@@ -33,4 +33,18 @@ describe('head', () => {
   it('returns the first element after a lazy chain', () => {
     expect(head([1, 2, 3, 4].values().filter(x => x % 2 === 0))).toBe(2);
   });
+
+  it('closes the source after reading the first element', () => {
+    let closed = false;
+    function* source() {
+      try {
+        yield* [1, 2, 3];
+      } finally {
+        closed = true;
+      }
+    }
+
+    expect(head(source())).toBe(1);
+    expect(closed).toBe(true);
+  });
 });

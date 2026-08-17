@@ -1,6 +1,18 @@
 import { describe, expect, it, vi } from 'vitest';
 import { takeWhile } from './takeWhile.ts';
 
+function closableSource<T>(values: readonly T[]) {
+  let closed = false;
+  function* generate() {
+    try {
+      yield* values;
+    } finally {
+      closed = true;
+    }
+  }
+  return { source: generate(), isClosed: () => closed };
+}
+
 describe('takeWhile', () => {
   it('yields the leading run of matching elements', () => {
     expect(takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray()).toEqual([1, 2]);
@@ -45,6 +57,35 @@ describe('takeWhile', () => {
     const it = takeWhile([1, 2, 9].values(), x => x < 5);
     expect(it.toArray()).toEqual([1, 2]);
     expect(it.toArray()).toEqual([]);
+  });
+
+  it('closes the source when the predicate fails with elements remaining', () => {
+    const { source, isClosed } = closableSource([1, 2, 3, 4, 5]);
+
+    takeWhile(source, x => x < 3).toArray();
+
+    expect(isClosed()).toBe(true);
+  });
+
+  it('closes the source when the consumer stops early', () => {
+    const { source, isClosed } = closableSource([1, 2, 3, 4, 5]);
+
+    takeWhile(source, () => true)
+      .take(2)
+      .toArray();
+
+    expect(isClosed()).toBe(true);
+  });
+
+  it('closes the source when the predicate throws', () => {
+    const { source, isClosed } = closableSource([1, 2, 3]);
+
+    expect(() =>
+      takeWhile(source, () => {
+        throw new Error('boom');
+      }).toArray()
+    ).toThrow('boom');
+    expect(isClosed()).toBe(true);
   });
 
   it('chains with native iterator helpers', () => {

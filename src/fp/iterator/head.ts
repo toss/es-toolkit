@@ -3,8 +3,8 @@ import { head as headIterator } from '../../iterator/head.ts';
 /**
  * Creates a function that returns the first element of an iterator (or
  * `undefined` if it is empty), for use as the terminal step of a {@link pipe}.
- * It pulls a single element and then stops, so it is safe on an infinite
- * iterator.
+ * It pulls a single element and then closes the source via its `return` method,
+ * so it is safe on an infinite iterator.
  *
  * @template T - The type of elements produced by the source iterator.
  * @returns A function mapping an `Iterator<T>` to its first element or `undefined`.
