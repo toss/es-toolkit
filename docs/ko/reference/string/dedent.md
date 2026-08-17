@@ -89,18 +89,27 @@ const text = dedent(raw);
 
 ### `dedent(tagFn)`
 
-TC39 `String.dedent` 제안처럼, 다른 태그 함수가 들여쓰기가 제거된 템플릿 문자열을 받도록 만들고 싶을 때 `dedent`에 태그 함수를 전달하세요.
+다른 태그 함수와 조합해서 사용하고 싶다면, `dedent(tagFn)`처럼 태그 함수를 인자로 전달하세요. 이렇게 만들어진 새로운 태그 함수는 공통 들여쓰기가 미리 제거된 템플릿 문자열을 받아요.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
 
-// 다른 태그 함수와 조합해요
-const html = dedent((strings, ...values) => strings.join(''));
+// 전달받은 파이썬 코드를 실행하는 태그 함수예요
+function pythonInterpreter(strings: TemplateStringsArray, ...values: unknown[]) {
+  return runPython(strings.join(''));
+}
 
-const result = html`
-  <div>Hello</div>
+// dedent로 감싸면 들여쓰기가 제거된 코드를 받게 돼요
+const python = dedent(pythonInterpreter);
+
+python`
+  def greet():
+      print("Hello!")
+
+  greet()
 `;
-// result는 '<div>Hello</div>'가 돼요
+// pythonInterpreter는 다음 코드를 받아요:
+// 'def greet():\n    print("Hello!")\n\ngreet()'
 ```
 
 #### 파라미터

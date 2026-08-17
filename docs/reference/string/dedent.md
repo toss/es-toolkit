@@ -89,18 +89,27 @@ const text = dedent(raw);
 
 ### `dedent(tagFn)`
 
-Use `dedent` with another tag function to make that tag receive dedented template strings, as in the TC39 `String.dedent` proposal.
+To combine `dedent` with another tag function, pass the tag function as an argument, like `dedent(tagFn)`. The new tag function receives template strings with the common leading whitespace already removed.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
 
-// Compose with another tag function
-const html = dedent((strings, ...values) => strings.join(''));
+// A tag function that runs the Python code it receives
+function pythonInterpreter(strings: TemplateStringsArray, ...values: unknown[]) {
+  return runPython(strings.join(''));
+}
 
-const result = html`
-  <div>Hello</div>
+// Wrapping it with dedent makes it receive dedented code
+const python = dedent(pythonInterpreter);
+
+python`
+  def greet():
+      print("Hello!")
+
+  greet()
 `;
-// result is '<div>Hello</div>'
+// pythonInterpreter receives:
+// 'def greet():\n    print("Hello!")\n\ngreet()'
 ```
 
 #### Parameters

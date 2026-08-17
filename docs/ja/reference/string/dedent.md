@@ -89,18 +89,27 @@ const text = dedent(raw);
 
 ### `dedent(tagFn)`
 
-TC39の`String.dedent`提案のように、他のタグ関数がインデントの削除されたテンプレート文字列を受け取るようにしたい時は、`dedent` にタグ関数を渡してください。
+他のタグ関数と組み合わせて使いたい場合は、`dedent(tagFn)`のようにタグ関数を引数として渡してください。こうして作られた新しいタグ関数は、共通のインデントがあらかじめ削除されたテンプレート文字列を受け取ります。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
 
-// 他のタグ関数と合成します
-const html = dedent((strings, ...values) => strings.join(''));
+// 受け取ったPythonコードを実行するタグ関数です
+function pythonInterpreter(strings: TemplateStringsArray, ...values: unknown[]) {
+  return runPython(strings.join(''));
+}
 
-const result = html`
-  <div>Hello</div>
+// dedentでラップすると、インデントが削除されたコードを受け取るようになります
+const python = dedent(pythonInterpreter);
+
+python`
+  def greet():
+      print("Hello!")
+
+  greet()
 `;
-// resultは'<div>Hello</div>'になります
+// pythonInterpreterは次のコードを受け取ります:
+// 'def greet():\n    print("Hello!")\n\ngreet()'
 ```
 
 #### パラメータ

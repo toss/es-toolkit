@@ -89,18 +89,27 @@ const text = dedent(raw);
 
 ### `dedent(tagFn)`
 
-当您想让其他标签函数接收移除缩进后的模板字符串时（如 TC39 `String.dedent` 提案），请将标签函数传给 `dedent`。
+如果您想与其他标签函数组合使用，请像 `dedent(tagFn)` 一样将标签函数作为参数传入。这样创建的新标签函数会接收到已经移除共同缩进的模板字符串。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
 
-// 与其他标签函数组合
-const html = dedent((strings, ...values) => strings.join(''));
+// 执行接收到的 Python 代码的标签函数
+function pythonInterpreter(strings: TemplateStringsArray, ...values: unknown[]) {
+  return runPython(strings.join(''));
+}
 
-const result = html`
-  <div>Hello</div>
+// 用 dedent 包装后，它会接收到移除缩进后的代码
+const python = dedent(pythonInterpreter);
+
+python`
+  def greet():
+      print("Hello!")
+
+  greet()
 `;
-// result 是 '<div>Hello</div>'
+// pythonInterpreter 接收到的代码是:
+// 'def greet():\n    print("Hello!")\n\ngreet()'
 ```
 
 #### 参数
