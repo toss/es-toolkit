@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // 결과: ['a', 'b', 'c', 'd']
 ```
 
-빈 배열이나 null, undefined는 빈 배열을 반환해요.
+`null`이나 `undefined`는 빈 배열로 처리해요.
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

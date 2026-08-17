@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { add as addLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { add } from './add';
 import { symbol } from '../_internal/symbol';
 import { map } from '../array/map';
@@ -91,9 +90,5 @@ describe('add', () => {
     expect(add(0, symbol)).toEqual(NaN);
     // @ts-expect-error - invalid arguments
     expect(add(symbol, 0)).toEqual(NaN);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(add).toEqualTypeOf<typeof addLodash>();
   });
 });

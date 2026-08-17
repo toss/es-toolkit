@@ -25,6 +25,7 @@ umd
 .vercel
 /compat
 /array.js
+/bigint.js
 /compat.js
 /error.js
 /fp.js
@@ -45,3 +46,7 @@ umd
 *.log
 
 /CHOICES.md
+
+# browser-compat test artifacts
+/tests/browser-compat/generated
+/tests/browser-compat/dist-fixtures

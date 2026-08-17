@@ -3,8 +3,8 @@ import { getBundleSizeFromScript } from '../utils/getBundleSize';
 
 describe('fp/partition bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSizeFromScript('import { partition } from "es-toolkit/fp"; console.log(partition)')).toBe(
-      185
-    );
+    expect(
+      await getBundleSizeFromScript('import { partition } from "es-toolkit/fp"; console.log(partition)')
+    ).toMatchInlineSnapshot(`185`);
   });
 });

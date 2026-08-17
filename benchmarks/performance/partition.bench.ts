@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { partition as partitionToolkit_ } from 'es-toolkit';
-import { partition as partitionToolkitCompat_ } from 'es-toolkit/compat';
-import { partition as partitionLodash_ } from 'lodash';
+import { partition as partitionToolkit } from 'es-toolkit';
+import { partition as partitionToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const partitionToolkit = partitionToolkit_;
-const partitionToolkitCompat = partitionToolkitCompat_;
-const partitionLodash = partitionLodash_;
+const { partition: partitionLodash } = lodash;
 
 describe('partition', () => {
   bench('es-toolkit/partition', () => {

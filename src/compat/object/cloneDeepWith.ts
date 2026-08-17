@@ -73,7 +73,9 @@ export function cloneDeepWith<T>(value: T): T;
  * // Clone an array with a customizer
  * const arr = [1, 2, 3];
  * const clonedArr = cloneDeepWith(arr, (value) => {
- *   return value + 1; // Increment each value
+ *   if (typeof value === 'number') {
+ *     return value + 1; // Increment each number
+ *   }
  * });
  * console.log(clonedArr); // [2, 3, 4]
  * console.log(clonedArr === arr); // false

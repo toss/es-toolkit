@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { intersectionWith as intersectionWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { intersectionWith } from './intersectionWith';
 import { map } from './map';
 import { isEqual } from '../../predicate/isEqual';
@@ -121,7 +120,13 @@ describe('intersectionWith', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(intersectionWith).toEqualTypeOf<typeof intersectionWithLodash>();
+  it('should apply the comparator when deduplicating the first array', () => {
+    const actual = func([1, 2, 3], [4, 5, 6], () => true);
+    expect(actual).toEqual([1]);
+  });
+
+  it('should preserve the sign of `-0` when compared with `Object.is`', () => {
+    const actual = func([-0, 0], [0], (a, b) => Object.is(a, b));
+    expect(actual).toEqual([0]);
   });
 });

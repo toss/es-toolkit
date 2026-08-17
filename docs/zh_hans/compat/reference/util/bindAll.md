@@ -71,7 +71,7 @@ obj['-0'](); // 'negative zero'
 #### 参数
 
 - `object` (`Object`): 要绑定方法的对象。
-- `methodNames` (`...(string | string[] | number | IArguments)`): 要绑定的方法名。可以指定为单独的字符串、数组、数字或 Arguments 对象。
+- `...methodNames` (`Array<string | string[] | number | IArguments>`): 要绑定的方法名。可以指定为单独的字符串、数组、数字或 Arguments 对象。
 
 #### 返回值
 

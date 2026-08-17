@@ -1,3 +1,5 @@
+import compatPlugin from 'eslint-plugin-compat';
+import esXPlugin from 'eslint-plugin-es-x';
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
 import prettier from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
@@ -14,6 +16,8 @@ export default defineConfig(
     '**/dist/**',
     '**/cache/**',
     '.pnp.*',
+    'tests/browser-compat/generated/**',
+    'tests/browser-compat/dist-fixtures/**',
     '**/*.d.ts',
     '**/*.tgz',
     'node_modules/**',
@@ -89,6 +93,44 @@ export default defineConfig(
             'Do not use Object.entries for performance. Consider using alternatives like Object.keys() or Object.values().',
         },
       ],
+    },
+  },
+  // Browser support floor: Chrome 98 / Safari 15.4 (see docs/browser-support.md).
+  // These rules ensure new code does not silently raise the minimum supported browsers.
+  {
+    files: ['src/**/*.ts'],
+    ignores: ['**/*.spec.ts', 'src/server/**'],
+    plugins: {
+      'es-x': esXPlugin,
+      compat: compatPlugin,
+    },
+    rules: {
+      // ECMAScript features newer than what Chrome 98 / Safari 15.4 support.
+      ...esXPlugin.configs['flat/no-new-in-es2022'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2023'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2024'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2025'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2026'].rules,
+      // ES2022 features that Chrome 98 / Safari 15.4 already support.
+      'es-x/no-arbitrary-module-namespace-names': 'off', // syntax only; erased by bundlers
+      'es-x/no-array-prototype-at': 'off', // Chrome 92+ / Safari 15.4+
+      'es-x/no-class-instance-fields': 'off', // Chrome 72+ / Safari 14.1+
+      'es-x/no-class-private-fields': 'off', // Chrome 74+ / Safari 14.1+
+      'es-x/no-class-private-methods': 'off', // Chrome 84+ / Safari 15+
+      'es-x/no-class-static-fields': 'off', // Chrome 72+ / Safari 14.1+
+      'es-x/no-error-cause': 'off', // Chrome 93+ / Safari 15+
+      'es-x/no-object-hasown': 'off', // Chrome 93+ / Safari 15.4+
+      'es-x/no-private-in': 'off', // Chrome 91+ / Safari 15+
+      'es-x/no-regexp-d-flag': 'off', // Chrome 90+ / Safari 15+
+      'es-x/no-string-prototype-at': 'off', // Chrome 92+ / Safari 15.4+
+      'es-x/no-top-level-await': 'off', // not applicable to library source
+      // ES2023 features that Chrome 98 / Safari 15.4 already support.
+      'es-x/no-array-prototype-findlast-findlastindex': 'off', // Chrome 97+ / Safari 15.4+
+      // Web APIs (structuredClone etc.) newer than Chrome 98 / Safari 15.4.
+      'compat/compat': 'error',
+    },
+    settings: {
+      browsers: ['chrome 98', 'safari 15.4'],
     },
   },
   {

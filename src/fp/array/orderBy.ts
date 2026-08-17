@@ -18,8 +18,8 @@ import { orderBy as orderByToolkit } from '../../array/orderBy.ts';
  * // => [{ name: 'b', age: 1 }, { name: 'a', age: 2 }]
  */
 export function orderBy<T extends object>(
-  criteria: Array<((item: T) => unknown) | keyof T>,
-  orders: Array<'asc' | 'desc'>
+  criteria: ReadonlyArray<((item: T) => unknown) | keyof T>,
+  orders: ReadonlyArray<'asc' | 'desc'>
 ): (array: readonly T[]) => T[] {
   return function (array: readonly T[]): T[] {
     return orderByToolkit(array, criteria, orders);

@@ -64,6 +64,10 @@ toPairs(undefined);
 // => []
 ```
 
+#### エイリアス
+
+`entries`
+
 #### パラメータ
 
 - `object` (`object`): 変換するオブジェクト、Map、または Set。

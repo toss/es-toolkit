@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { chunk as chunkToolkit_ } from 'es-toolkit';
-import { chunk as chunkCompatToolkit_ } from 'es-toolkit/compat';
-import { chunk as chunkLodash_ } from 'lodash';
+import { chunk as chunkToolkit } from 'es-toolkit';
+import { chunk as chunkCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const chunkToolkit = chunkToolkit_;
-const chunkCompatToolkit = chunkCompatToolkit_;
-const chunkLodash = chunkLodash_;
+const { chunk: chunkLodash } = lodash;
 
 describe('chunk', () => {
   bench('lodash/chunk', () => {

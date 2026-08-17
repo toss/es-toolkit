@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { wrap as wrapToolkit_ } from 'es-toolkit/compat';
-import { wrap as wrapLodash_ } from 'lodash';
+import { wrap as wrapToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const wrapToolkit = wrapToolkit_;
-const wrapLodash = wrapLodash_;
+const { wrap: wrapLodash } = lodash;
 
 describe('wrap', () => {
   bench('es-toolkit/compat/wrap', () => {

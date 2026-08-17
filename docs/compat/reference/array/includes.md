@@ -16,7 +16,7 @@ const hasValue = includes(collection, target, fromIndex);
 
 ## Usage
 
-### `includes(collection, target, fromIndex)`
+### `includes(collection, target?, fromIndex?)`
 
 Use `includes` when you want to check if a specific value exists in an array, object, or string. It compares values using the SameValueZero method.
 
@@ -88,7 +88,7 @@ includes({ a: 1, b: NaN }, NaN);
 #### Parameters
 
 - `collection` (`Array | Record<string, any> | string | null | undefined`): The array, object, or string to search.
-- `target` (`any`): The value to find.
+- `target` (`any`, optional): The value to find.
 - `fromIndex` (`number`, optional): The index to start searching from. Negative values count from the end. Default is `0`.
 
 #### Returns

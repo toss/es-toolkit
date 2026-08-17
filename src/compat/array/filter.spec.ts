@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { filter as filterLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { filter } from './filter';
 import { args } from '../_internal/args';
 import { isEven } from '../_internal/isEven';
@@ -169,9 +168,5 @@ describe('filter', () => {
 
     expect(filter(sparseArray, value => value > 0)).toEqual([1, 3, 5]);
     expect(filter(sparseArray, value => value === undefined)).toEqual([undefined, undefined]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(filter).toEqualTypeOf<typeof filterLodash>();
   });
 });

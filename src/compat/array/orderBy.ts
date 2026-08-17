@@ -5,6 +5,7 @@ import { ListIterator } from '../_internal/ListIterator.ts';
 import { Many } from '../_internal/Many.ts';
 import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
@@ -144,7 +145,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
   orders = guard ? undefined : orders;
 
   if (!Array.isArray(collection)) {
-    collection = Object.values(collection);
+    collection = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
   }
 
   if (!Array.isArray(criteria)) {
@@ -163,17 +164,22 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
 
   const getValueByNestedPath = (object: object, path: PropertyKey[]) => {
     let target: object = object;
+    let index = 0;
 
-    for (let i = 0; i < path.length && target != null; ++i) {
-      target = target[path[i] as keyof typeof target];
+    for (; index < path.length && target != null; ++index) {
+      target = target[path[index] as keyof typeof target];
     }
 
-    return target;
+    return index > 0 && index === path.length ? target : undefined;
   };
 
   const getValueByCriterion = (criterion: Criterion<T> | { key: PropertyKey; path: string[] }, object: T) => {
-    if (object == null || criterion == null) {
+    if (criterion == null) {
       return object;
+    }
+
+    if (object == null) {
+      return undefined;
     }
 
     if (typeof criterion === 'object' && 'key' in criterion) {
@@ -192,11 +198,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
       return getValueByNestedPath(object, criterion);
     }
 
-    if (typeof object === 'object') {
-      return object[criterion as keyof typeof object];
-    }
-
-    return object;
+    return object[criterion as keyof typeof object];
   };
 
   // Prepare all cases for criteria

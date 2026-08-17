@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { unionBy as unionByToolkit_ } from 'es-toolkit';
-import { unionBy as unionByToolkitCompat_ } from 'es-toolkit/compat';
-import { unionBy as unionByLodash_ } from 'lodash';
+import { unionBy as unionByToolkit } from 'es-toolkit';
+import { unionBy as unionByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const unionByToolkit = unionByToolkit_;
-const unionByToolkitCompat = unionByToolkitCompat_;
-const unionByLodash = unionByLodash_;
+const { unionBy: unionByLodash } = lodash;
 
 describe('unionBy', () => {
   const array1 = [{ id: 1 }, { id: 2 }];

@@ -36,7 +36,7 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 // 结果: ['a', 'b', 'c', 'd']
 ```
 
-空数组、null 或 undefined 返回空数组。
+`null` 或 `undefined` 被视为空数组。
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';

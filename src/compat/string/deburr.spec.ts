@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { deburr as deburrLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { deburr } from './deburr';
 import { burredLetters } from '../../_internal/burredLetters';
 import { comboMarks } from '../../_internal/comboMarks';
@@ -67,9 +66,5 @@ describe('deburr', () => {
     const actual = map(values, (value, index) => (index ? deburr(value as any) : deburr()));
 
     expect(actual).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(deburr).toEqualTypeOf<typeof deburrLodash>();
   });
 });

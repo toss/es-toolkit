@@ -256,7 +256,7 @@ export function partial<TS extends any[], R>(func: (...ts: TS) => R): (...ts: TS
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
  * @example
- * const log = (prefix: string, ...messages: string[]) => console.log(prefix, ...messages);
+ * const log = (prefix: string, ...messages: string[]) => [prefix, ...messages].join(' ');
  * const debugLog = partial(log, '[DEBUG]');
  * debugLog('message 1', 'message 2'); // => '[DEBUG] message 1 message 2'
  */

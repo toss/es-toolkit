@@ -1,0 +1,123 @@
+---
+description: The browsers es-toolkit supports out of the box, and how to reach older ones
+---
+
+# Browser Support
+
+es-toolkit works out of the box in all browsers released since early 2022:
+
+| Environment | Minimum version |
+| ----------- | --------------- |
+| Chrome      | 98+             |
+| Edge        | 98+             |
+| Firefox     | 94+             |
+| Safari      | 15.4+           |
+| iOS Safari  | 15.4+           |
+| Node.js     | 18+             |
+
+es-toolkit makes full use of modern JavaScript to keep its codebase small and efficient.
+To support browsers older than the ones above, you can add build configuration. This makes es-toolkit work correctly even in much older browsers that only support ES2015, such as Chrome 51 or Safari 10. See [Supporting older browsers](#supporting-older-browsers) below.
+
+Every es-toolkit release is verified to work correctly in the supported browsers: once statically with ESLint plugins like [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x), and again with real Playwright-based E2E tests.
+
+## Supporting older browsers
+
+With the right bundler configuration, es-toolkit works correctly even in browsers as old as Chrome 51 or Safari 10.
+This requires two pieces of configuration.
+
+### 1. Converting modern syntax to older syntax (transpilation)
+
+es-toolkit is published using modern syntax such as optional chaining (`foo?.bar`) and class fields.
+
+Bundlers generally do not transpile dependencies (`node_modules`).
+Add the following configuration so that the modern syntax es-toolkit uses is converted to syntax that older browsers also support.
+
+#### Vite
+
+Set [`build.target`](https://vite.dev/config/build-options.html#build-target) to the oldest browsers you want to support:
+
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  // ... other configuration ...
+  build: {
+    target: ['chrome80', 'safari14.1'], // [!code highlight]
+  },
+});
+```
+
+Vite applies `build.target` to every module in the bundle, including es-toolkit, so no further configuration is needed.
+
+#### Webpack + Babel
+
+Configure `babel-loader` with `@babel/preset-env`, and make sure the `exclude` pattern does not exclude es-toolkit:
+
+```js
+export default {
+  // ... other configuration ...
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules[\\/](?!es-toolkit)/, // [!code highlight]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: '80', safari: '14.1' } }], // [!code highlight]
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### 2. Filling in modern runtime JavaScript APIs (polyfills)
+
+es-toolkit makes use of modern JavaScript APIs available in recent browsers and runtimes, such as `Array#at` and `structuredClone`. Older browsers do not implement these functions, so to use es-toolkit you need to fill in the implementations.
+
+Add the polyfills provided by `core-js` as follows:
+
+```js
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'core-js/actual/aggregate-error';
+import 'core-js/actual/array/at';
+import 'core-js/actual/array/find-last';
+import 'core-js/actual/array/find-last-index';
+import 'core-js/actual/object/has-own';
+import structuredCloneShim from '@ungap/structured-clone';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = structuredCloneShim;
+}
+```
+
+This code must be loaded at your application entrypoint, before es-toolkit is imported.
+
+### Caveats
+
+#### 1. Supporting very old browsers like Chrome 51 or Safari 10 in Vite requires an extra plugin
+
+Vite uses esbuild by default, which does not support very old browsers.
+To support them, transpile your source code with Babel using the [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) plugin:
+
+```js{2,7-9}
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy';
+
+export default defineConfig({
+  // ... other configuration ...
+  plugins: [
+    legacy({
+      targets: ['chrome >= 51', 'safari >= 10', 'ios_saf >= 10', 'firefox >= 54', 'edge >= 15'],
+    }),
+  ],
+});
+```
+
+#### 2. `es-toolkit/bigint` is only available in browsers that support BigInt
+
+JavaScript's BigInt is a newly added value type, so it can be neither transpiled nor polyfilled. If you use `es-toolkit/bigint`, you can only support Chrome 67+ and Safari 14+.

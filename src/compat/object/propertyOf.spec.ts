@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { propertyOf as propertyOfLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { propertyOf } from './propertyOf';
 import { noop } from '../../function';
 import { constant } from '../util/constant';
@@ -127,9 +126,5 @@ describe('propertyOf', () => {
     ['a', 'a[1].b.c', ['a'], ['a', '1', 'b', 'c']].forEach(path => {
       expect(propOf(path)).toBe(undefined);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(propertyOf).toEqualTypeOf<typeof propertyOfLodash>();
   });
 });

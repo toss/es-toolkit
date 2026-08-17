@@ -11,12 +11,12 @@
 각 요소에 함수를 적용한 후 결과를 평탄화해요.
 
 ```typescript
-const result = flatMap(collection, iteratee);
+const result = flatMap(collection, iteratee?);
 ```
 
 ## 사용법
 
-### `flatMap(collection, iteratee)`
+### `flatMap(collection, iteratee?)`
 
 컬렉션의 각 요소에 반복자 함수를 적용한 후 한 단계 평탄화한 배열을 반환해요. 배열, 객체, 문자열을 지원하며 다양한 형태의 반복자를 사용할 수 있어요.
 
@@ -70,7 +70,7 @@ flatMap(users, { active: false });
 #### 파라미터
 
 - `collection` (`object | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열이 될 수 있어요.
-- `iteratee` (`ListIterator | ObjectIterator | string | object`, 선택): 각 요소에 적용할 반복자예요. 함수, 속성 이름, 또는 부분 객체가 될 수 있어요.
+- `iteratee` (`ListIterator | ObjectIterator | string | object`, 선택): 각 요소에 적용할 반복자예요. 함수, 속성 이름, 또는 부분 객체가 될 수 있어요. 기본값은 `identity`예요.
 
 #### 반환 값
 

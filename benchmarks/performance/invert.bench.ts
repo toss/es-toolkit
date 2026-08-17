@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { invert as invertByToolkit_ } from 'es-toolkit';
-import { invert as invertByToolkitCompat_ } from 'es-toolkit/compat';
-import { invert as invertByLodash_ } from 'lodash';
+import { invert as invertByToolkit } from 'es-toolkit';
+import { invert as invertByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const invertByLodash = invertByLodash_;
-const invertByToolkitCompat = invertByToolkitCompat_;
-const invertByToolkit = invertByToolkit_;
+const { invert: invertByLodash } = lodash;
 
 const object: { [key: string]: string } = {};
 for (let i = 0; i < 10000; i++) {

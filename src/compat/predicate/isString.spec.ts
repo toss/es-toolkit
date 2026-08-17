@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isString as isStringLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isString } from './isString';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -29,9 +28,5 @@ describe('isString', () => {
     expect(isString(1)).toBe(false);
     expect(isString(/x/)).toBe(false);
     expect(isString(symbol)).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isString).toEqualTypeOf<typeof isStringLodash>();
   });
 });

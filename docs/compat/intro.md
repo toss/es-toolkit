@@ -23,6 +23,20 @@ Recommended path for removing Lodash from an existing codebase:
 1. Swap the import path from `lodash` / `lodash-es` to `es-toolkit/compat`. Leave call sites as they are.
 2. Clean up call sites over time and switch the import to [`es-toolkit`](/intro). Once done, you get a smaller bundle and faster runtime.
 
+## Importing individual functions
+
+Like `lodash/merge`, every compat function is also available as its own entry point. It loads only the files that function needs, instead of the entire `es-toolkit/compat` module.
+
+```ts
+import merge from 'es-toolkit/compat/merge';
+```
+
+This helps in environments where tree-shaking is not available, such as CommonJS `require()` calls, React Native, or code running directly on Node.js without a bundler.
+
+```ts
+const merge = require('es-toolkit/compat/merge');
+```
+
 ## How it differs from `es-toolkit`
 
 - **API shape**: matches Lodash 1:1, including implicit type coercions, multiple argument shapes, and deprecated helpers. [`es-toolkit`](/intro) only exposes the type-safe, modern forms.
