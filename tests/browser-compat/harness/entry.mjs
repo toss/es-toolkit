@@ -59,7 +59,11 @@ function runCase(testCase, namespaces) {
 
 export function start(suite) {
   var namespaces = suite.namespaces;
-  var allCases = suite.cases.concat(manualCases);
+  // nodeOnly cases need runtime features (e.g. native Iterator helpers) that
+  // the browsers under test do not have; they are validated by node-check.mjs.
+  var allCases = suite.cases.concat(manualCases).filter(function (testCase) {
+    return !testCase.nodeOnly;
+  });
   var results = [];
   var index = 0;
 

@@ -74,18 +74,21 @@ fs.writeFileSync(
 // exercised by at least one case, or be explicitly listed with a reason in
 // skip-list.json's `uncoveredExports`.
 const skipList = JSON.parse(fs.readFileSync(new URL('./skip-list.json', import.meta.url), 'utf8'));
-const bound = { main: new Set(), compat: new Set(), fp: new Set() };
+const GATED_NAMESPACES = ['main', 'compat', 'fp', 'fpIterator', 'iterator'];
+const bound = Object.fromEntries(GATED_NAMESPACES.map(nsName => [nsName, new Set()]));
 for (const testCase of cases) {
   const source = testCase.run.toString();
   for (const match of source.matchAll(/const \{ ([^}]+) \} = __ns\.(\w+);/g)) {
-    const nsName = match[2] === 'compat' ? 'compat' : match[2] === 'fp' ? 'fp' : 'main';
+    // Category bindings (array, string, ...) count toward main, whose barrel
+    // re-exports them; the iterator namespaces are separate entrypoints.
+    const nsName = bound[match[2]] != null ? match[2] : 'main';
     for (const name of match[1].split(',').map(s => s.trim())) {
       bound[nsName].add(name);
     }
   }
 }
 const uncovered = [];
-for (const nsName of ['main', 'compat', 'fp']) {
+for (const nsName of GATED_NAMESPACES) {
   const ns = namespaces[nsName];
   for (const exportName of Object.keys(ns)) {
     if (exportName === 'default' || typeof ns[exportName] !== 'function') {

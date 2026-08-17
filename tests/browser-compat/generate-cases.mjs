@@ -32,6 +32,7 @@ const CATEGORIES = [
   'bigint',
   'error',
   'function',
+  'iterator',
   'map',
   'math',
   'object',
@@ -42,6 +43,14 @@ const CATEGORIES = [
   'util',
 ];
 
+/**
+ * Namespaces whose cases run only in the Node validation pass. The iterator
+ * modules build on the native Iterator helpers (`Iterator.from`,
+ * `Iterator.prototype.map`, ...), which none of the browsers in the
+ * compatibility matrix implement, so their examples cannot run there.
+ */
+const NODE_ONLY_NAMESPACES = new Set(['iterator', 'fpIterator']);
+
 async function loadNamespaces() {
   const load = async p => {
     const url = pathToFileURL(path.join(ROOT, 'dist', p)).href;
@@ -51,6 +60,7 @@ async function loadNamespaces() {
     main: await load('index.mjs'),
     compat: await load('compat/index.mjs'),
     fp: await load('fp/index.mjs'),
+    fpIterator: await load('fp/iterator/index.mjs'),
   };
   for (const category of CATEGORIES) {
     namespaces[category] = await load(`${category}/index.mjs`);
@@ -318,14 +328,16 @@ function buildCase({ id, ns, body, assertions, namespaces, placeholderFn }) {
   const used = usedNames(body);
   const bindable = n => !declared.has(n) && !RESERVED.has(n);
   const primary = [...used].filter(n => namespaces[ns].has(n) && bindable(n));
+  // fp/iterator examples compose with `pipe` from the fp entrypoint.
+  const fallbackNs = ns === 'fpIterator' ? 'fp' : 'main';
   const fallback =
-    ns === 'main' ? [] : [...used].filter(n => namespaces.main.has(n) && bindable(n) && !primary.includes(n));
+    ns === 'main' ? [] : [...used].filter(n => namespaces[fallbackNs].has(n) && bindable(n) && !primary.includes(n));
   const bindings = [];
   if (primary.length > 0) {
     bindings.push(`const { ${primary.join(', ')} } = __ns.${ns};`);
   }
   if (fallback.length > 0) {
-    bindings.push(`const { ${fallback.join(', ')} } = __ns.main;`);
+    bindings.push(`const { ${fallback.join(', ')} } = __ns.${fallbackNs};`);
   }
   // Lodash-style examples in compat use `_` both as the namespace (`_.map`)
   // and as the partial-application placeholder (`partial(fn, _, 'x')`). In
@@ -352,7 +364,9 @@ function buildCase({ id, ns, body, assertions, namespaces, placeholderFn }) {
     id,
     source: `{\n  id: ${JSON.stringify(id)},\n  async: ${isAsync},\n  assertions: ${assertions},\n  browserOnly: ${
       SKIP_LIST.nodeSkip?.[id] != null
-    },\n  run: ${isAsync ? 'async ' : ''}function (__ns, __assertEq) {\n${fullBody}\n  },\n}`,
+    },\n  nodeOnly: ${NODE_ONLY_NAMESPACES.has(ns)},\n  run: ${
+      isAsync ? 'async ' : ''
+    }function (__ns, __assertEq) {\n${fullBody}\n  },\n}`,
   };
 }
 
@@ -370,7 +384,8 @@ async function main() {
     // Main-library files bind against their category entrypoint so that
     // category-specific functions shadowed in the barrel (e.g. bigint/range)
     // resolve to the right implementation.
-    const ns = top === 'compat' ? 'compat' : top === 'fp' ? 'fp' : top;
+    const fpSub = rel.startsWith('fp/') ? rel.split('/')[1] : null;
+    const ns = top === 'compat' ? 'compat' : top === 'fp' ? (fpSub === 'iterator' ? 'fpIterator' : 'fp') : top;
     if (namespaces[ns] == null) {
       continue;
     }
@@ -439,8 +454,9 @@ async function main() {
       "import * as __mainNs from '../../../dist/index.mjs';",
       "import * as __compatNs from '../../../dist/compat/index.mjs';",
       "import * as __fpNs from '../../../dist/fp/index.mjs';",
+      "import * as __fpIteratorNs from '../../../dist/fp/iterator/index.mjs';",
       ...categories.map(c => `import * as __${c}Ns from '../../../dist/${c}/index.mjs';`),
-      `export const namespaces = { main: __mainNs, compat: __compatNs, fp: __fpNs, ${categories
+      `export const namespaces = { main: __mainNs, compat: __compatNs, fp: __fpNs, fpIterator: __fpIteratorNs, ${categories
         .map(c => `${c}: __${c}Ns`)
         .join(', ')} };`,
       'export const cases = [',
