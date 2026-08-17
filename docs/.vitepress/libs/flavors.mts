@@ -56,6 +56,7 @@ const SERVER_ICON = [
   'M6 16h.01',
 ];
 const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
+const REPEAT_ICON = ['m17 2 4 4-4 4', 'M3 11v-1a4 4 0 0 1 4-4h14', 'm7 22-4-4 4-4', 'M21 13v1a4 4 0 0 1-4 4H3'];
 
 export const flavors = [
   {
@@ -140,6 +141,22 @@ export const flavors = [
     categories: [],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',
+    badge: 'NEW',
+  },
+  {
+    value: 'iterator',
+    label: 'es-toolkit/iterator',
+    description: 'Lazy iterators',
+    descriptions: {
+      ko: '지연 평가 이터레이터',
+      ja: '遅延評価イテレータ',
+      zh_hans: '惰性迭代器',
+    },
+    prefix: 'iterator',
+    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    categories: [],
+    icon: REPEAT_ICON,
+    iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',
   },
 ] as const satisfies readonly FlavorSpec[];
