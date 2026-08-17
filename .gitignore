@@ -29,7 +29,10 @@ umd
 /compat.js
 /error.js
 /fp.js
+/fp/iterator.js
+/fp/iterator.d.ts
 /function.js
+/iterator.js
 /math.js
 /map.js
 /object.js
