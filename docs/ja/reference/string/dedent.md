@@ -1,59 +1,112 @@
 # dedent
 
-複数行の文字列から各行の共通インデントを削除します。
+複数行の文字列のすべての行から共通のインデントを削除します。
 
-## インターフェース
+コードのインデントに合わせて複数行の文字列を書いても、そのインデントが実際の文字列に含まれないようにします。
 
 ```typescript
-function dedent(str: string): string;
-function dedent(str: TemplateStringsArray, ...values: unknown[]): string;
-function dedent<T>(
-  tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T
-): (strings: TemplateStringsArray, ...values: unknown[]) => T;
+const text = dedent`
+  Hello
+  World
+`;
 ```
 
-### パラメータ
+## 使用法
 
-- `str` (`string | TemplateStringsArray | Function`): インデントを削除する文字列、テンプレートリテラル、またはタグ関数。
-- `values` (`unknown[]`): タグ付きテンプレートリテラルとして使用する際に挿入する値。
+### `` dedent`text` ``
 
-### 戻り値
-
-(`string | Function`): 共通インデントが削除された文字列、または合成されたタグ関数。
-
-## 例
+インデントされたコードの中で複数行の文字列を書きたい時に、タグ付きテンプレートリテラルとして `dedent` を使用してください。空でない行が共通して持つ最小のインデントを見つけてすべての行から削除するため、行同士の相対的なインデントの差は保たれます。最初の行や最後の行が空白のみの場合は削除されます。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
 
-// 通常の関数として使用
-dedent('  hello\n  world');
-// 結果: 'hello\nworld'
-
-// タグ付きテンプレートリテラルとして使用
-dedent`
-  hello
-  world
+// コードのインデントが削除されます
+const message = dedent`
+  Hello
+  World
 `;
-// 結果: 'hello\nworld'
+// messageは'Hello\nWorld'になります
 
-// 相対的なインデントを保持します
-dedent`
-  hello
-    world
+// 行同士の相対的なインデントは保たれます
+const list = dedent`
+  Items:
+    - First
+    - Second
 `;
-// 結果: 'hello\n  world'
+// listは'Items:\n  - First\n  - Second'になります
 
-// 補間をサポートします
-const name = 'world';
-dedent`
-  hello
-  ${name}
+// 補間された値はインデントを削除する前に挿入されます
+const name = 'es-toolkit';
+const greeting = dedent`
+  Hello, ${name}!
 `;
-// 結果: 'hello\nworld'
-
-// タグ合成
-const html = dedent((strings, ...values) => strings.join(''));
-html` <div>Hello</div> `;
-// 結果: '<div>Hello</div>'
+// greetingは'Hello, es-toolkit!'になります
 ```
+
+空白のみの行は空の行になり、Windowsの改行（`\r\n`）は`\n`に正規化されます。
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// 空白のみの行は空の行になります
+const text = dedent`
+  First
+
+  Second
+`;
+// textは'First\n\nSecond'になります
+```
+
+#### パラメータ
+
+- `str` (`TemplateStringsArray`): インデントを削除するテンプレートリテラルです。
+- `values` (`unknown[]`): テンプレートリテラルに補間する値です。
+
+#### 戻り値
+
+(`string`): 共通のインデントが削除された文字列を返します。
+
+### `dedent(str)`
+
+ファイルから読み込んだり、コードの他の場所で作られた文字列がすでにある場合は、`dedent` を通常の関数として使用してください。
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// すでにある文字列から共通のインデントを削除します
+const raw = '  Hello\n    World';
+const text = dedent(raw);
+// textは'Hello\n  World'になります
+```
+
+#### パラメータ
+
+- `str` (`string`): インデントを削除する文字列です。
+
+#### 戻り値
+
+(`string`): 共通のインデントが削除された文字列を返します。
+
+### `dedent(tagFn)`
+
+TC39の`String.dedent`提案のように、他のタグ関数がインデントの削除されたテンプレート文字列を受け取るようにしたい時は、`dedent` にタグ関数を渡してください。
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// 他のタグ関数と合成します
+const html = dedent((strings, ...values) => strings.join(''));
+
+const result = html`
+  <div>Hello</div>
+`;
+// resultは'<div>Hello</div>'になります
+```
+
+#### パラメータ
+
+- `tagFn` (`(strings: TemplateStringsArray, ...values: unknown[]) => T`): 合成するタグ関数です。
+
+#### 戻り値
+
+(`(strings: TemplateStringsArray, ...values: unknown[]) => T`): テンプレート文字列から共通のインデントを削除してから`tagFn`に渡す、新しいタグ関数を返します。
