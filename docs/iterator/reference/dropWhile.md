@@ -1,4 +1,4 @@
-# dropWhile
+# dropWhile (for `Iterator`s)
 
 Lazily skips the leading elements of an iterator while a predicate holds, then yields the rest.
 

@@ -1,4 +1,4 @@
-# toArray (関数型プログラミング)
+# toArray (`Iterator`向け)
 
 イテレータの要素を配列に集める関数を作成します。関数型プログラミングの [`pipe`](../../fp/reference/pipe.md) と一緒に使用します。
 

@@ -1,4 +1,4 @@
-# iterate
+# iterate (用于 `Iterator`)
 
 通过对种子值反复应用一个函数,创建一个无限的惰性迭代器。
 

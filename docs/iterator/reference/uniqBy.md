@@ -1,4 +1,4 @@
-# uniqBy
+# uniqBy (for `Iterator`s)
 
 Lazily yields the elements of an iterator whose mapped key has not been seen before.
 

@@ -1,4 +1,4 @@
-# every (Functional Programming)
+# every (for `Iterator`s)
 
 Creates a function that reports whether every element of an iterator matches a predicate. Use it with [`pipe`](../../fp/reference/pipe.md).
 

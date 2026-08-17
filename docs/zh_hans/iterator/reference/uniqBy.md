@@ -1,4 +1,4 @@
-# uniqBy
+# uniqBy (用于 `Iterator`)
 
 惰性地产生迭代器中映射键此前未出现过的元素。
 

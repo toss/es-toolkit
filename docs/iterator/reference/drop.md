@@ -1,4 +1,4 @@
-# drop (Functional Programming)
+# drop (for `Iterator`s)
 
 Creates a function that lazily skips the first `count` elements of an iterator and yields the rest. Use it with [`pipe`](../../fp/reference/pipe.md).
 

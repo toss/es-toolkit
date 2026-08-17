@@ -1,4 +1,4 @@
-# partition
+# partition (for `Iterator`s)
 
 Consumes an iterator and splits its elements into two arrays by a predicate.
 

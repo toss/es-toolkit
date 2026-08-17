@@ -1,4 +1,4 @@
-# flatMap (函数式编程)
+# flatMap (用于 `Iterator`)
 
 创建一个函数,惰性地将迭代器的每个元素映射为一个可迭代对象,并把结果展平一层。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

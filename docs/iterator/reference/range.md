@@ -1,4 +1,4 @@
-# range
+# range (for `Iterator`s)
 
 Lazily yields a sequence of numbers with a fixed step.
 

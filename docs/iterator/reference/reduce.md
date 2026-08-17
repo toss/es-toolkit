@@ -1,4 +1,4 @@
-# reduce (Functional Programming)
+# reduce (for `Iterator`s)
 
 Creates a function that folds an iterator into a single value. Use it with [`pipe`](../../fp/reference/pipe.md).
 

@@ -1,4 +1,4 @@
-# some (Functional Programming)
+# some (for `Iterator`s)
 
 Creates a function that reports whether any element of an iterator matches a predicate. Use it with [`pipe`](../../fp/reference/pipe.md).
 

@@ -1,4 +1,4 @@
-# takeWhile
+# takeWhile (`Iterator`向け)
 
 条件が成り立つ間、イテレータの先頭の要素を遅延的に生成します。
 

@@ -1,4 +1,4 @@
-# takeWhile
+# takeWhile (用于 `Iterator`)
 
 当谓词成立时,惰性地产生迭代器的前导元素。
 

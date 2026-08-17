@@ -1,4 +1,4 @@
-# forEach (函数式编程)
+# forEach (用于 `Iterator`)
 
 创建一个函数,消费迭代器并对每个元素运行回调。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

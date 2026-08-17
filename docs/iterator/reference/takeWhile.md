@@ -1,4 +1,4 @@
-# takeWhile
+# takeWhile (for `Iterator`s)
 
 Lazily yields the leading elements of an iterator while a predicate holds.
 

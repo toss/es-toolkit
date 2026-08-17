@@ -1,4 +1,4 @@
-# partition
+# partition (`Iterator`용)
 
 이터레이터를 소비하고, 요소들을 조건 함수에 따라 두 배열로 나눠요.
 

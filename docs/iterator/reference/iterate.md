@@ -1,4 +1,4 @@
-# iterate
+# iterate (for `Iterator`s)
 
 Creates an infinite lazy iterator by repeatedly applying a function to a seed value.
 

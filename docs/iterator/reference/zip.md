@@ -1,4 +1,4 @@
-# zip
+# zip (for `Iterator`s)
 
 Lazily combines several iterators into a single iterator of tuples.
 

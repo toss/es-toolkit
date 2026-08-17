@@ -1,4 +1,4 @@
-# toArray (Functional Programming)
+# toArray (for `Iterator`s)
 
 Creates a function that collects the elements of an iterator into an array. Use it with [`pipe`](../../fp/reference/pipe.md).
 

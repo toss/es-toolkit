@@ -1,4 +1,4 @@
-# head
+# head (`Iterator`용)
 
 이터레이터의 첫 번째 요소를 반환해요. 비어 있으면 `undefined`를 반환해요.
 

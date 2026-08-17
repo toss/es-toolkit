@@ -1,4 +1,4 @@
-# take (Functional Programming)
+# take (for `Iterator`s)
 
 Creates a function that lazily yields the first `limit` elements of an iterator. Use it with [`pipe`](../../fp/reference/pipe.md).
 

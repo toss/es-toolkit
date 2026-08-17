@@ -1,4 +1,4 @@
-# reduce (函数式编程)
+# reduce (用于 `Iterator`)
 
 创建一个函数,将迭代器折叠为单个值。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

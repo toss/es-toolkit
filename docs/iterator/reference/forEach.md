@@ -1,4 +1,4 @@
-# forEach (Functional Programming)
+# forEach (for `Iterator`s)
 
 Creates a function that consumes an iterator and runs a callback for each element. Use it with [`pipe`](../../fp/reference/pipe.md).
 

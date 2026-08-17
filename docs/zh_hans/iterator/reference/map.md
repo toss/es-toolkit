@@ -1,4 +1,4 @@
-# map (函数式编程)
+# map (用于 `Iterator`)
 
 创建一个函数,惰性地转换迭代器的每个元素。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

@@ -1,4 +1,4 @@
-# dropWhile
+# dropWhile (用于 `Iterator`)
 
 当谓词成立时,惰性地跳过迭代器的前导元素,然后产生其余元素。
 

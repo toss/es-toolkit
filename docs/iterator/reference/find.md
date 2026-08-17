@@ -1,4 +1,4 @@
-# find (Functional Programming)
+# find (for `Iterator`s)
 
 Creates a function that returns the first element of an iterator matching a predicate. Use it with [`pipe`](../../fp/reference/pipe.md).
 

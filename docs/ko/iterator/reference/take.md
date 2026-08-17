@@ -1,4 +1,4 @@
-# take (함수형 프로그래밍)
+# take (`Iterator`용)
 
 이터레이터의 처음 `limit`개 요소를 지연 평가 방식으로 내보내는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

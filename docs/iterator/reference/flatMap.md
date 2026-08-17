@@ -1,4 +1,4 @@
-# flatMap (Functional Programming)
+# flatMap (for `Iterator`s)
 
 Creates a function that lazily maps each element of an iterator to an iterable and flattens the results one level. Use it with [`pipe`](../../fp/reference/pipe.md).
 

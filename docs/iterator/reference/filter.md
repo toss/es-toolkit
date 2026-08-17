@@ -1,4 +1,4 @@
-# filter (Functional Programming)
+# filter (for `Iterator`s)
 
 Creates a function that lazily keeps the elements of an iterator matching a predicate. Use it with [`pipe`](../../fp/reference/pipe.md).
 

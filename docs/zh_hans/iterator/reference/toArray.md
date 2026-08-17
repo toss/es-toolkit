@@ -1,4 +1,4 @@
-# toArray (函数式编程)
+# toArray (用于 `Iterator`)
 
 创建一个函数,将迭代器的元素收集到一个数组中。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

@@ -1,4 +1,4 @@
-# take (函数式编程)
+# take (用于 `Iterator`)
 
 创建一个函数,惰性地产生迭代器的前 `limit` 个元素。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

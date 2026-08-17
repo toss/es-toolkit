@@ -1,4 +1,4 @@
-# count
+# count (for `Iterator`s)
 
 Consumes an iterator and returns the number of elements it produces.
 

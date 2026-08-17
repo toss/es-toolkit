@@ -1,4 +1,4 @@
-# scan
+# scan (for `Iterator`s)
 
 Lazily yields the running accumulation of an iterator, like a `reduce` that emits every intermediate result.
 

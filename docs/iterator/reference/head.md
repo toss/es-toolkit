@@ -1,4 +1,4 @@
-# head
+# head (for `Iterator`s)
 
 Returns the first element of an iterator, or `undefined` if it is empty.
 

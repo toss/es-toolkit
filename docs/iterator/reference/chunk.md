@@ -1,4 +1,4 @@
-# chunk
+# chunk (for `Iterator`s)
 
 Lazily groups the elements of an iterator into arrays of the given length.
 

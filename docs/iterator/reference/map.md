@@ -1,4 +1,4 @@
-# map (Functional Programming)
+# map (for `Iterator`s)
 
 Creates a function that lazily transforms each element of an iterator. Use it with [`pipe`](../../fp/reference/pipe.md).
 
