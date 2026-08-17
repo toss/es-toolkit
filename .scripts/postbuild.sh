@@ -43,10 +43,10 @@ for module in array bigint server error compat fp function iterator math map obj
     create_root_export $module
 done
 
-# Create nested fp/iterator export shim
+# Create nested fp/iterator export shim (paths are relative to the fp/ directory)
 mkdir -p fp
-echo "export * from './dist/fp/iterator';" > fp/iterator.d.ts
-echo "module.exports = require('./dist/fp/iterator');" > fp/iterator.js
+echo "export * from '../dist/fp/iterator';" > fp/iterator.d.ts
+echo "module.exports = require('../dist/fp/iterator');" > fp/iterator.js
 
 # The types module is declaration-only. Drop the empty JS the build emits so the
 # package ships only .d.ts/.d.mts (exposed via the "types" condition in publishConfig).

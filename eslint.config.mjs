@@ -133,6 +133,26 @@ export default defineConfig(
       browsers: ['chrome 98', 'safari 15.4'],
     },
   },
+  // es-toolkit/iterator (and its fp variant) intentionally requires runtimes
+  // with native ES2025 iterator helpers, so the Iterator floor rules above do
+  // not apply to it. Other post-ES2022 features remain forbidden there.
+  {
+    files: ['src/iterator/**/*.ts', 'src/fp/iterator/**/*.ts'],
+    rules: {
+      'es-x/no-iterator': 'off',
+      'es-x/no-iterator-prototype-drop': 'off',
+      'es-x/no-iterator-prototype-every': 'off',
+      'es-x/no-iterator-prototype-filter': 'off',
+      'es-x/no-iterator-prototype-find': 'off',
+      'es-x/no-iterator-prototype-flatmap': 'off',
+      'es-x/no-iterator-prototype-foreach': 'off',
+      'es-x/no-iterator-prototype-map': 'off',
+      'es-x/no-iterator-prototype-reduce': 'off',
+      'es-x/no-iterator-prototype-some': 'off',
+      'es-x/no-iterator-prototype-take': 'off',
+      'es-x/no-iterator-prototype-toarray': 'off',
+    },
+  },
   {
     rules: {
       'no-implicit-coercion': 'error',
