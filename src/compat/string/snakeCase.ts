@@ -1,5 +1,5 @@
 import { deburr } from './deburr.ts';
-import { snakeCase as snakeCaseToolkit } from '../../string/snakeCase.ts';
+import { words } from './words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -17,5 +17,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
  */
 export function snakeCase(str?: string): string {
-  return snakeCaseToolkit(normalizeForCase(deburr(str)));
+  return words(normalizeForCase(deburr(str)))
+    .map(word => word.toLowerCase())
+    .join('_');
 }

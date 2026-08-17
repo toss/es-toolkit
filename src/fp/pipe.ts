@@ -444,40 +444,23 @@ interface OperatorFunctionGroup extends Array<OperatorFunction> {
 }
 
 function chunkFunctions(functions: readonly OperatorFunction[]): OperatorFunctionGroup[] {
-  if (functions.length === 0) {
-    return [];
-  }
+  const result: OperatorFunctionGroup[] = [];
+  let currentGroup: OperatorFunctionGroup | undefined;
 
-  let currentGroup: OperatorFunctionGroup = [functions[0]];
-  const result: OperatorFunctionGroup[] = [currentGroup];
-  let previousIsLazy: boolean = currentGroup[0].lazy != null;
-
-  if (previousIsLazy) {
-    currentGroup.lazy = true;
-  }
-  if (currentGroup[0].shortCircuit) {
-    currentGroup.shortCircuit = true;
-  }
-
-  for (let index = 1; index < functions.length; index++) {
+  for (let index = 0; index < functions.length; index++) {
     const func = functions[index];
     const isLazy = func.lazy != null;
 
-    if (isLazy !== previousIsLazy) {
-      currentGroup = [func];
+    if (currentGroup === undefined || currentGroup.lazy !== isLazy) {
+      currentGroup = [];
+      currentGroup.lazy = isLazy;
       result.push(currentGroup);
-    } else {
-      currentGroup.push(func);
     }
 
-    if (isLazy) {
-      currentGroup.lazy = true;
-    }
+    currentGroup.push(func);
     if (func.shortCircuit) {
       currentGroup.shortCircuit = true;
     }
-
-    previousIsLazy = isLazy;
   }
 
   return result;

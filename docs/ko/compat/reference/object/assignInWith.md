@@ -60,6 +60,10 @@ assignInWith(target3, child, (objValue, srcValue, key) => {
 
 커스터마이저 함수가 `undefined`를 반환하면 기본 할당 동작이 사용돼요. 이 함수는 `assignIn`과 달리 각 속성에 대해 커스텀 로직을 적용할 수 있어요.
 
+#### 별칭
+
+`extendWith`
+
 #### 파라미터
 
 - `target` (`any`): 속성을 복사받을 대상 객체예요.

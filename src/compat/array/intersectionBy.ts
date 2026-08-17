@@ -1,10 +1,12 @@
 import { intersectionBy as intersectionByToolkit } from '../../array/intersectionBy.ts';
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
+import { uniqBy } from '../../array/uniqBy.ts';
 import { identity } from '../../function/identity.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
-import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
@@ -128,13 +130,18 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
   }
 
   const lastValue = last(values);
-  if (lastValue === undefined) {
-    return Array.from(array) as T[];
+  const hasIteratee = !isArrayLikeObject(lastValue);
+  const count = hasIteratee ? values.length - 1 : values.length;
+  const mapper = hasIteratee ? createIteratee(lastValue) : identity;
+  // Lodash invokes the iteratee with a single argument; only a user-supplied function can observe the extras.
+  const iteratee = typeof lastValue === 'function' ? (item: unknown) => mapper(item) : mapper;
+
+  if (count <= 0) {
+    return uniqBy(toArray(array), iteratee);
   }
 
-  let result = uniq(Array.from(array));
-
-  const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
+  // uniq normalizes `-0` to `0` to match Lodash; toArray alone would keep `-0`
+  let result = uniq(toArray(array)) as T[];
 
   for (let i = 0; i < count; ++i) {
     const value = values[i];
@@ -143,14 +150,8 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
       return [];
     }
 
-    if (isArrayLikeObject(lastValue)) {
-      result = intersectionByToolkit(result, Array.from(value), identity);
-    } else if (typeof lastValue === 'function') {
-      result = intersectionByToolkit(result, Array.from(value), value => lastValue(value));
-    } else if (typeof lastValue === 'string') {
-      result = intersectionByToolkit(result, Array.from(value), property(lastValue));
-    }
+    result = intersectionByToolkit(result, toArray(value), iteratee);
   }
 
-  return result as T[];
+  return result;
 }

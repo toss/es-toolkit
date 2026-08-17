@@ -16,6 +16,8 @@ const result = pipe(array, unzip());
 
 `unzip`은 묶인 값들의 배열을 받아 각 위치의 값끼리 모은 배열들을 반환해요.
 
+반환되는 배열의 길이는 가장 긴 내부 배열의 길이에 맞춰지고, 더 짧은 내부 배열에서 빠진 위치는 `undefined`로 채워져요.
+
 ```typescript
 import { pipe, unzip } from 'es-toolkit/fp';
 

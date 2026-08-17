@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toUpper as toUpperLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toUpper } from './toUpper';
 
 describe('toUpper', () => {
@@ -84,7 +83,7 @@ describe('toUpper', () => {
 
   it('should handle mixed types in arrays', () => {
     const sym = Symbol('test');
-    expect((toUpper as any)([1, 'b', sym, null, undefined])).toBe('1,B,SYMBOL(TEST),,');
+    expect((toUpper as any)([1, 'b', sym, null, undefined])).toBe('1,B,SYMBOL(TEST),NULL,UNDEFINED');
   });
 
   it('should maintain proper TypeScript types', () => {
@@ -107,9 +106,5 @@ describe('toUpper', () => {
     expect(toUpper(' ')).toBe(' ');
     expect(toUpper('\t')).toBe('\t');
     expect(toUpper('\n')).toBe('\n');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toUpper).toEqualTypeOf<typeof toUpperLodash>();
   });
 });

@@ -25,7 +25,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * // noElement will be undefined
  */
 export function last<T>(array: ArrayLike<T> | null | undefined): T | undefined {
-  if (!isArrayLike(array)) {
+  if (!isArrayLike(array) || array.length === 0) {
     return undefined;
   }
   return lastToolkit(toArray(array));

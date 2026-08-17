@@ -64,6 +64,10 @@ toPairs(undefined);
 // => []
 ```
 
+#### 别名
+
+`entries`
+
 #### 参数
 
 - `object` (`object`): 要转换的对象、Map 或 Set。

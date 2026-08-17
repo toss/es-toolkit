@@ -33,7 +33,7 @@ chunk(sensorReadings(), 100).take(2).toArray();
 
 (`IteratorObject<T[], undefined>`): 一个惰性迭代器,产生最多包含 `size` 个元素的数组。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
 
-#### 异常
+#### 错误
 
 如果 `size` 不是大于零的整数,则抛出错误。
 

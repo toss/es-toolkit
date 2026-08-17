@@ -35,6 +35,6 @@ pipe([1, 2, 3, 4, 5].values(), drop(2), toArray());
 
 (`(source: Iterator<T>) => IteratorObject<T, undefined>`): 一个将迭代器映射为剩余元素的惰性迭代器的函数。
 
-#### 异常
+#### 错误
 
 如果 `count` 为负数或 `NaN`,则抛出 `RangeError`(原生行为)。

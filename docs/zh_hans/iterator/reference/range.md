@@ -46,6 +46,6 @@ range(0, Infinity).take(3).toArray();
 
 (`IteratorObject<number, undefined>`): 一个产生范围内数字的惰性迭代器。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
 
-#### 异常
+#### 错误
 
 如果 `step` 不是非零整数,则抛出错误。

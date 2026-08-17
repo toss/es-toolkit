@@ -59,6 +59,10 @@ toPairsIn(set);
 // => [[1, 1], [2, 2], [3, 3]]
 ```
 
+#### 别名
+
+`entriesIn`
+
 #### 参数
 
 - `object` (`object`): 要转换的对象、Map 或 Set。

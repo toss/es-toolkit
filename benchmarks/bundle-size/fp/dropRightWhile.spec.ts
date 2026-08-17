@@ -5,6 +5,6 @@ describe('fp/dropRightWhile bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { dropRightWhile } from "es-toolkit/fp"; console.log(dropRightWhile)')
-    ).toBe(168);
+    ).toMatchInlineSnapshot(`168`);
   });
 });

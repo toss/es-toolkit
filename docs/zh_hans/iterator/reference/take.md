@@ -35,6 +35,6 @@ pipe([1, 2, 3, 4, 5].values(), map(x => x * 2), take(3), toArray());
 
 (`(source: Iterator<T>) => IteratorObject<T, undefined>`): 一个将迭代器映射为最多 `limit` 个前导元素的惰性迭代器的函数。
 
-#### 异常
+#### 错误
 
 如果 `limit` 为负数或 `NaN`,则抛出 `RangeError`(原生行为)。

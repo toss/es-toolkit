@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { cond as condToolkitCompat_ } from 'es-toolkit/compat';
-import { cond as condLodash_ } from 'lodash';
+import { cond as condToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const condToolkitCompat = condToolkitCompat_;
-const condLodash = condLodash_;
+const { cond: condLodash } = lodash;
 
 describe('cond', () => {
   const isA = (obj: { a: number }) => obj && obj.a === 1;

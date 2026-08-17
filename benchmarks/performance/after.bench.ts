@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { after as afterToolkit_ } from 'es-toolkit';
-import { after as afterCompatToolkit_ } from 'es-toolkit/compat';
-import { after as afterLodash_ } from 'lodash';
+import { after as afterToolkit } from 'es-toolkit';
+import { after as afterCompatToolkit } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const afterToolkit = afterToolkit_;
-const afterCompatToolkit = afterCompatToolkit_;
-const afterLodash = afterLodash_;
+const { after: afterLodash } = lodash;
 
 describe('after', () => {
   bench('es-toolkit/after', () => {

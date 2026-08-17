@@ -5,6 +5,6 @@ describe('fp/differenceWith bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { differenceWith } from "es-toolkit/fp"; console.log(differenceWith)')
-    ).toBe(390);
+    ).toMatchInlineSnapshot(`390`);
   });
 });

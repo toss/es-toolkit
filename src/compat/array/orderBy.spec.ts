@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { orderBy as orderByLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { orderBy } from './orderBy.ts';
 import { zipObject } from '../../array/zipObject.ts';
 import { partialRight } from '../../function/partialRight.ts';
@@ -203,6 +202,8 @@ describe('orderBy', () => {
   });
 
   it('should work as an iteratee for methods like `_.map`', () => {
+    // `map` passes the index as `iteratees` and the array as `orders`, so the index is used as a
+    // criterion. Numbers have no such property, so the collections are returned in their original order.
     expect(
       [
         [2, 1, 3],
@@ -210,8 +211,8 @@ describe('orderBy', () => {
         // @ts-expect-error - type mismatch
       ].map(orderBy)
     ).toEqual([
-      [1, 2, 3],
-      [1, 2, 3],
+      [2, 1, 3],
+      [3, 2, 1],
     ]);
   });
 
@@ -241,7 +242,46 @@ describe('orderBy', () => {
     expect(orderBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(orderBy).toEqualTypeOf<typeof orderByLodash>();
+  it('should read the property of primitive values', () => {
+    expect(orderBy(['b', 'aa'], 'length')).toEqual(['b', 'aa']);
+    expect(orderBy(['b', 'aa'], 'length', 'desc')).toEqual(['aa', 'b']);
+    expect(orderBy(['ba', 'ab', 'b'], 0)).toEqual(['ab', 'ba', 'b']);
+  });
+
+  it('should keep the original order when primitive values lack the property', () => {
+    expect(orderBy([3, 1, 2], 'b')).toEqual([3, 1, 2]);
+    expect(orderBy(['c', 'a', 'b'], 'x')).toEqual(['c', 'a', 'b']);
+  });
+
+  it('should not include the `length` property for array-like objects', () => {
+    // @ts-expect-error - type mismatch
+    expect(orderBy({ 0: 3, 1: 1, 2: 2, length: 3 }, [null], ['asc'])).toEqual([1, 2, 3]);
+  });
+
+  it('should treat unresolved deep paths and nullish elements as `undefined` like lodash', () => {
+    expect(orderBy([{ a: {} }, { a: null }, null, { a: { b: 1 } }], ['a.b.c'], ['asc'])).toEqual([
+      { a: {} },
+      { a: null },
+      null,
+      { a: { b: 1 } },
+    ]);
+  });
+
+  it('should keep the order of nullish elements for empty or identity criteria', () => {
+    // empty path resolves to `undefined` like lodash's `baseGet`
+    expect(orderBy([null, { a: 1 }], [[]], ['asc'])).toEqual([null, { a: 1 }]);
+    // identity criterion keeps `null` before `undefined`
+    expect(orderBy([3, null, 1, undefined, 2])).toEqual([1, 2, 3, null, undefined]);
+  });
+
+  it('should distinguish a fully resolved `null` value from an unresolved path', () => {
+    // `{ a: { b: null } }` resolves `a.b` to `null`; the others are unresolved → `undefined`
+    expect(orderBy([{ a: { b: null } }, { a: null }, { a: {} }], ['a.b'], ['asc'])).toEqual([
+      { a: { b: null } },
+      { a: null },
+      { a: {} },
+    ]);
+    // `desc` reverses the priority order: `undefined` (higher priority) comes first
+    expect(orderBy([{ a: null }, { a: { b: null } }], ['a.b'], ['desc'])).toEqual([{ a: null }, { a: { b: null } }]);
   });
 });

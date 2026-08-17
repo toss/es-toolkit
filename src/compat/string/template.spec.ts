@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { template as templateLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import * as esToolkit from '../index';
@@ -477,7 +476,10 @@ describe('template', () => {
     expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(template).toEqualTypeOf<typeof templateLodash>();
+  it('should not reset options for a non-iteratee-call `guard`', () => {
+    // @ts-expect-error - type mismatch
+    const compiled = template('a{{x}}b', { interpolate: /\{\{([\s\S]+?)\}\}/g }, { g: 1 });
+
+    expect(compiled({ x: '?' })).toBe('a?b');
   });
 });

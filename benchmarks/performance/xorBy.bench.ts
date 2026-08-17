@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { xorBy as xorByToolkit_ } from 'es-toolkit';
-import { xorBy as xorByToolkitCompat_ } from 'es-toolkit/compat';
-import { xorBy as xorByLodash_ } from 'lodash';
+import { xorBy as xorByToolkit } from 'es-toolkit';
+import { xorBy as xorByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const xorByToolkit = xorByToolkit_;
-const xorByToolkitCompat = xorByToolkitCompat_;
-const xorByLodash = xorByLodash_;
+const { xorBy: xorByLodash } = lodash;
 
 describe('xorBy', () => {
   bench('es-toolkit/xorBy', () => {

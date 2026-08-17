@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { has as hasLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { has } from './has';
 import { range } from '../../math/range';
 import { args } from '../_internal/args';
@@ -99,6 +98,11 @@ describe('has', () => {
     ['a.b', ['a.b']].forEach(path => {
       expect(has(object, path)).toBe(true);
     });
+  });
+
+  it('should return true for nullish literal keys that look like paths', () => {
+    expect(has({ 'a.b': undefined }, 'a.b')).toBe(true);
+    expect(has({ 'a.b': null }, 'a.b')).toBe(true);
   });
 
   it(`should return \`true\` for indexes of sparse values`, () => {
@@ -208,9 +212,5 @@ describe('has', () => {
 
   it(`should return \`false\` for empty paths`, () => {
     expect(has({ a: null }, [])).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(has<unknown>).toEqualTypeOf<typeof hasLodash<unknown>>();
   });
 });

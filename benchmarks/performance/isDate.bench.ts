@@ -1,11 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isDate as isDateToolkit_ } from 'es-toolkit';
-import { isDate as isDateToolkitCompat_ } from 'es-toolkit/compat';
-import { isDate as isDateLodash_ } from 'lodash';
+import { isDate as isDateToolkit } from 'es-toolkit';
+import { isDate as isDateToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const isDateToolkit = isDateToolkit_;
-const isDateToolkitCompat = isDateToolkitCompat_;
-const isDateLodash = isDateLodash_;
+const { isDate: isDateLodash } = lodash;
 
 describe('isDate', () => {
   bench('es-toolkit/isDate', () => {

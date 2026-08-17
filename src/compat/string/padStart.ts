@@ -1,3 +1,5 @@
+import { createPadding, stringSize } from '../_internal/createPadding.ts';
+import { toInteger } from '../util/toInteger.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -18,5 +20,13 @@ import { toString } from '../util/toString.ts';
  * const result4 = padStart('abc', 2);          // result will be 'abc'
  */
 export function padStart(str?: string, length = 0, chars = ' '): string {
-  return toString(str).padStart(length, chars);
+  const value = toString(str);
+  const targetLength = toInteger(length);
+  const strLength = stringSize(value);
+
+  if (targetLength <= strLength) {
+    return value;
+  }
+
+  return createPadding(targetLength - strLength, `${chars}`) + value;
 }

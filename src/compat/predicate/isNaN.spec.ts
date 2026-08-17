@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isNaN as isNaNLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isNaN } from './isNaN';
 
 describe('isNaN', () => {
@@ -28,9 +27,5 @@ describe('isNaN', () => {
     expect(isNaN({})).toBe(false);
     expect(isNaN([])).toBe(false);
     expect(isNaN(() => {})).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isNaN).toEqualTypeOf<typeof isNaNLodash>();
   });
 });

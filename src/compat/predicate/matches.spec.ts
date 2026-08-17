@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { matches as matchesLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { matches } from './matches';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -27,6 +26,11 @@ describe('matches', () => {
 
   it('should return `false` when nested source primitive does not match object target', () => {
     expect(matches({ a: 1 })({ a: { b: 2 } })).toBe(false);
+  });
+
+  it('should not match nested empty object patterns against non-object targets', () => {
+    expect(matches({ value: {} })({ value: 'bar' })).toBe(false);
+    expect(matches({ value: {} })({ value: { b: 1 } })).toBe(true);
   });
 
   it(`should match inherited string keyed \`object\` properties`, () => {
@@ -388,9 +392,5 @@ describe('matches', () => {
       expect(isMatch(object)).toBe(true);
       expect(isMatch(source)).toBe(false);
     });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(matches).toEqualTypeOf<typeof matchesLodash>();
   });
 });

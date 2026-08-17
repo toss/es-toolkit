@@ -1,9 +1,8 @@
 import { bench, describe } from 'vitest';
-import { sortedIndexBy as sortedIndexByToolkitCompat_ } from 'es-toolkit/compat';
-import { sortedIndexBy as sortedIndexByLodash_ } from 'lodash';
+import { sortedIndexBy as sortedIndexByToolkitCompat } from 'es-toolkit/compat';
+import lodash from 'lodash';
 
-const sortedIndexByToolkitCompat = sortedIndexByToolkitCompat_;
-const sortedIndexByLodash = sortedIndexByLodash_;
+const { sortedIndexBy: sortedIndexByLodash } = lodash;
 
 describe('sortedIndexBy', () => {
   const largeArray = Array.from({ length: 1000000 }, (_, i) => ({ x: i * 2 }));

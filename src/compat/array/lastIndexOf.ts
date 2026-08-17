@@ -1,4 +1,5 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Gets the index at which the last occurrence of value is found in array.
@@ -36,19 +37,28 @@ export function lastIndexOf<T>(
 
   const length = array.length;
 
-  let index = (fromIndex as number) ?? length - 1;
-  if (fromIndex != null) {
+  let index = fromIndex === undefined ? length - 1 : toInteger(fromIndex);
+  if (fromIndex !== undefined) {
     index = index < 0 ? Math.max(length + index, 0) : Math.min(index, length - 1);
   }
 
-  // `Array.prototype.lastIndexOf` doesn't find `NaN` values, so we need to handle that case separately.
+  // Not `Array.prototype.lastIndexOf`, which skips holes in sparse arrays. lodash reads a hole
+  // as `undefined`, and indexing does too.
   if (Number.isNaN(searchElement)) {
     for (let i = index; i >= 0; i--) {
       if (Number.isNaN(array[i])) {
         return i;
       }
     }
+
+    return -1;
   }
 
-  return Array.from(array).lastIndexOf(searchElement, index);
+  for (let i = index; i >= 0; i--) {
+    if (array[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
 }

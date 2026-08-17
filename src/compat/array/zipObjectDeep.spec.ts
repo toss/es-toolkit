@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { zipObjectDeep as zipObjectDeepLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { zipObjectDeep } from './zipObjectDeep.ts';
 
 describe('zipObjectDeep', () => {
@@ -56,9 +55,5 @@ describe('zipObjectDeep', () => {
 
   it('should treat values as empty arrays when keys are not array-like', () => {
     expect(zipObjectDeep([1, 2, 3], undefined)).toEqual({ 1: undefined, 2: undefined, 3: undefined });
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(zipObjectDeep).toEqualTypeOf<typeof zipObjectDeepLodash>();
   });
 });

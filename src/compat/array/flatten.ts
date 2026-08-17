@@ -1,48 +1,17 @@
-import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { flattenDepth } from './flattenDepth.ts';
+import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 
 /**
  * Flattens array up to depth times.
  *
  * @template T
- * @param value - The array to flatten.
- * @param depth - The maximum recursion depth.
+ * @param array - The array to flatten.
  * @returns Returns the new flattened array.
  *
  * @example
- * flatten([1, [2, [3, [4]], 5]], 2);
- * // => [1, 2, 3, [4], 5]
+ * flatten([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, [3, [4]], 5]
  */
-export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined): T[];
-
-export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined, depth = 1): T[] {
-  const result: T[] = [];
-  const flooredDepth = Math.floor(depth);
-
-  if (!isArrayLike(value)) {
-    return result as T[];
-  }
-
-  const recursive = (arr: readonly T[], currentDepth: number) => {
-    for (let i = 0; i < arr.length; i++) {
-      const item = arr[i];
-      if (
-        currentDepth < flooredDepth &&
-        (Array.isArray(item) ||
-          Boolean(item?.[Symbol.isConcatSpreadable as keyof object]) ||
-          (item !== null && typeof item === 'object' && Object.prototype.toString.call(item) === '[object Arguments]'))
-      ) {
-        if (Array.isArray(item)) {
-          recursive(item, currentDepth + 1);
-        } else {
-          recursive(Array.from(item as T[]), currentDepth + 1);
-        }
-      } else {
-        result.push(item);
-      }
-    }
-  };
-
-  recursive(Array.from(value) as any, 0);
-
-  return result;
+export function flatten<T>(array: ArrayLike<T | readonly T[]> | null | undefined): T[] {
+  return flattenDepth(array as ListOfRecursiveArraysOrValues<T> | null | undefined, 1);
 }

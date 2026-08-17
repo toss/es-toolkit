@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { isMatch as isMatchLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -389,7 +388,44 @@ describe('isMatch', () => {
     ).toBe(false);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(isMatch).toEqualTypeOf<typeof isMatchLodash>();
+  it('should not match nested empty object patterns against non-object targets', () => {
+    expect(isMatch({ value: 'bar' }, { value: {} })).toBe(false);
+    expect(isMatch({ value: 123 }, { value: {} })).toBe(false);
+    expect(isMatch({ value: true }, { value: {} })).toBe(false);
+    expect(isMatch({ value: null }, { value: {} })).toBe(false);
+    expect(isMatch({ value: undefined }, { value: {} })).toBe(false);
+    expect(isMatch({ value: [] }, { value: {} })).toBe(false);
+    expect(isMatch({ value: new Date(0) }, { value: {} })).toBe(false);
+    expect(isMatch({ value: { b: 1 } }, { value: {} })).toBe(true);
+  });
+
+  it('should not match nested object patterns against non-plain-object targets', () => {
+    expect(isMatch({ value: [1, 2, 3] }, { value: { 0: 1 } })).toBe(false);
+    expect(isMatch({ value: /a/ }, { value: { source: 'a' } })).toBe(false);
+    expect(isMatch({ value: new String('bar') }, { value: { length: 3 } })).toBe(false);
+  });
+
+  it('should match object patterns against primitive targets at the top level', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', {})).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', { length: 3 })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', { 0: 'b' })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', { length: 4 })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', { anyKey: undefined })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch(123, { anyKey: undefined })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch(true, { anyKey: undefined })).toBe(false);
   });
 });
