@@ -68,7 +68,7 @@ const text = dedent`
 
 ### `dedent(str)`
 
-Use `dedent` as a regular function when you already have a string, such as one read from a file or built elsewhere in your code.
+Use `dedent` as a regular function when you want to remove the common leading whitespace from a string already stored in a variable.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

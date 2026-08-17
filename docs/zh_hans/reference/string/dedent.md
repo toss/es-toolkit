@@ -68,7 +68,7 @@ const text = dedent`
 
 ### `dedent(str)`
 
-当您已经有一个字符串时（例如从文件中读取的，或在代码其他地方生成的），请将 `dedent` 用作普通函数。
+如果您想从已经保存在变量中的字符串中移除共同的缩进，请将 `dedent` 用作普通函数。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

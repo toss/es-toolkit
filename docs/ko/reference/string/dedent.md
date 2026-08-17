@@ -68,7 +68,7 @@ const text = dedent`
 
 ### `dedent(str)`
 
-파일에서 읽었거나 코드의 다른 곳에서 만들어진 문자열이 이미 있을 때는, `dedent`를 일반 함수로 사용하세요.
+이미 변수에 저장된 문자열에서 공통된 들여쓰기를 제거하고 싶다면, `dedent`를 일반 함수로 사용하세요.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

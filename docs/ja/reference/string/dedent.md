@@ -68,7 +68,7 @@ const text = dedent`
 
 ### `dedent(str)`
 
-ファイルから読み込んだり、コードの他の場所で作られた文字列がすでにある場合は、`dedent` を通常の関数として使用してください。
+すでに変数に保存されている文字列から共通のインデントを削除したい場合は、`dedent` を通常の関数として使用してください。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
