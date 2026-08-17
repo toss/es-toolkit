@@ -14,15 +14,17 @@ Use `takeWhile` when you want to stop consuming based on a condition rather than
 
 ```typescript
 import { takeWhile } from 'es-toolkit/iterator';
-
-// Yield the leading run of small numbers.
-takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
 // Returns: [1, 2]
-
 // Bound an infinite sequence with a condition.
 import { iterate } from 'es-toolkit/iterator';
 
-takeWhile(iterate(1, x => x * 2), x => x < 100).toArray();
+// Yield the leading run of small numbers.
+takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+
+takeWhile(
+  iterate(1, x => x * 2),
+  x => x < 100
+).toArray();
 // Returns: [1, 2, 4, 8, 16, 32, 64]
 ```
 

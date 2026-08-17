@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { map, toArray } from 'es-toolkit/fp/iterator';
 
 // Materialize the transformed elements.
-pipe([1, 2, 3].values(), map(x => x * 2), toArray());
+pipe(
+  [1, 2, 3].values(),
+  map(x => x * 2),
+  toArray()
+);
 // Returns: [2, 4, 6]
 ```
 

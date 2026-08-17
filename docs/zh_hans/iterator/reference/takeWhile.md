@@ -14,15 +14,17 @@ const leading = takeWhile(source, shouldContinue);
 
 ```typescript
 import { takeWhile } from 'es-toolkit/iterator';
-
-// 产出开头连续的小数字。
-takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
 // 返回: [1, 2]
-
 // 用条件限制无限序列。
 import { iterate } from 'es-toolkit/iterator';
 
-takeWhile(iterate(1, x => x * 2), x => x < 100).toArray();
+// 产出开头连续的小数字。
+takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+
+takeWhile(
+  iterate(1, x => x * 2),
+  x => x < 100
+).toArray();
 // 返回: [1, 2, 4, 8, 16, 32, 64]
 ```
 

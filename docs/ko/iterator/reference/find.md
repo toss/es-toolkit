@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { find } from 'es-toolkit/fp/iterator';
 
 // 기준값을 넘는 첫 번째 요소를 반환해요.
-pipe([1, 2, 3, 4].values(), find(x => x > 2));
+pipe(
+  [1, 2, 3, 4].values(),
+  find(x => x > 2)
+);
 // 반환 값: 3
 
 // 조건을 만족하는 요소가 없으면 undefined를 반환해요.
-pipe([1, 2].values(), find(x => x > 10));
+pipe(
+  [1, 2].values(),
+  find(x => x > 10)
+);
 // 반환 값: undefined
 ```
 

@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { map, toArray } from 'es-toolkit/fp/iterator';
 
 // 変換された要素を配列にします。
-pipe([1, 2, 3].values(), map(x => x * 2), toArray());
+pipe(
+  [1, 2, 3].values(),
+  map(x => x * 2),
+  toArray()
+);
 // 結果: [2, 4, 6]
 ```
 

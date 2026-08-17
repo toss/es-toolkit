@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { every } from 'es-toolkit/fp/iterator';
 
 // すべての要素が偶数です。
-pipe([2, 4, 6].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 4, 6].values(),
+  every(x => x % 2 === 0)
+);
 // 結果: true
 
 // 最初の奇数で停止します。
-pipe([2, 3, 4].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 3, 4].values(),
+  every(x => x % 2 === 0)
+);
 // 結果: false
 ```
 

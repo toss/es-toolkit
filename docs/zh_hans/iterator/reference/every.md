@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { every } from 'es-toolkit/fp/iterator';
 
 // 所有元素都是偶数。
-pipe([2, 4, 6].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 4, 6].values(),
+  every(x => x % 2 === 0)
+);
 // 返回: true
 
 // 在第一个奇数处停止。
-pipe([2, 3, 4].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 3, 4].values(),
+  every(x => x % 2 === 0)
+);
 // 返回: false
 ```
 

@@ -14,6 +14,9 @@ Use `zip` when you want to walk several sequences in lockstep — for example, p
 
 ```typescript
 import { zip } from 'es-toolkit/iterator';
+// Returns: [[1, 'a'], [2, 'b']]
+// Number an arbitrary sequence with an unbounded counter.
+import { range } from 'es-toolkit/iterator';
 
 // Pair elements at matching positions.
 zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
@@ -21,10 +24,6 @@ zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
 
 // The shortest source bounds the result.
 zip([1, 2, 3].values(), ['a', 'b'].values()).toArray();
-// Returns: [[1, 'a'], [2, 'b']]
-
-// Number an arbitrary sequence with an unbounded counter.
-import { range } from 'es-toolkit/iterator';
 
 zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 // Returns: [[0, 'a'], [1, 'b'], [2, 'c']]

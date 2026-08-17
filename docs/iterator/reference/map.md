@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // Transform lazily; only the two consumed elements are computed.
-pipe([1, 2, 3, 4].values(), map(x => x * 10), take(2), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  map(x => x * 10),
+  take(2),
+  toArray()
+);
 // Returns: [10, 20]
 ```
 

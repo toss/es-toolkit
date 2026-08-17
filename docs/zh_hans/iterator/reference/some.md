@@ -23,10 +23,16 @@ import { pipe } from 'es-toolkit/fp';
 import { some } from 'es-toolkit/fp/iterator';
 
 // 一找到偶数就停止。
-pipe([1, 3, 4, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 4, 5].values(),
+  some(x => x % 2 === 0)
+);
 // 返回: true
 
-pipe([1, 3, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 5].values(),
+  some(x => x % 2 === 0)
+);
 // 返回: false
 ```
 

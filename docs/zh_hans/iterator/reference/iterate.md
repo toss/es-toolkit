@@ -16,17 +16,19 @@ const sequence = iterate(seed, getNext);
 
 ```typescript
 import { iterate } from 'es-toolkit/iterator';
+// 返回: [1, 2, 4, 8, 16]
+// 小于一分钟的指数退避延迟。
+import { takeWhile } from 'es-toolkit/iterator';
 
 // 用 take 限制的 2 的幂。
 iterate(1, x => x * 2)
   .take(5)
   .toArray();
-// 返回: [1, 2, 4, 8, 16]
 
-// 小于一分钟的指数退避延迟。
-import { takeWhile } from 'es-toolkit/iterator';
-
-takeWhile(iterate(100, x => x * 2), x => x < 60000).toArray();
+takeWhile(
+  iterate(100, x => x * 2),
+  x => x < 60000
+).toArray();
 // 返回: [100, 200, 400, ..., 51200]
 ```
 

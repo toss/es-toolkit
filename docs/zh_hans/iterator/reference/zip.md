@@ -14,6 +14,9 @@ const pairs = zip(source1, source2);
 
 ```typescript
 import { zip } from 'es-toolkit/iterator';
+// 返回: [[1, 'a'], [2, 'b']]
+// 用无上限的计数器给任意序列编号。
+import { range } from 'es-toolkit/iterator';
 
 // 将相同位置的元素配对。
 zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
@@ -21,10 +24,6 @@ zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
 
 // 最短的源决定结果的长度。
 zip([1, 2, 3].values(), ['a', 'b'].values()).toArray();
-// 返回: [[1, 'a'], [2, 'b']]
-
-// 用无上限的计数器给任意序列编号。
-import { range } from 'es-toolkit/iterator';
 
 zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 // 返回: [[0, 'a'], [1, 'b'], [2, 'c']]

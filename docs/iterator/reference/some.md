@@ -23,10 +23,16 @@ import { pipe } from 'es-toolkit/fp';
 import { some } from 'es-toolkit/fp/iterator';
 
 // Stops as soon as an even number is found.
-pipe([1, 3, 4, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 4, 5].values(),
+  some(x => x % 2 === 0)
+);
 // Returns: true
 
-pipe([1, 3, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 5].values(),
+  some(x => x % 2 === 0)
+);
 // Returns: false
 ```
 

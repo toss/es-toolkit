@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { flatMap, toArray } from 'es-toolkit/fp/iterator';
 
 // Expand each element into itself and its tenfold.
-pipe([1, 2].values(), flatMap(x => [x, x * 10]), toArray());
+pipe(
+  [1, 2].values(),
+  flatMap(x => [x, x * 10]),
+  toArray()
+);
 // Returns: [1, 10, 2, 20]
 ```
 

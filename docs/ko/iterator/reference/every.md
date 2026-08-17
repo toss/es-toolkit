@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { every } from 'es-toolkit/fp/iterator';
 
 // 모든 요소가 짝수예요.
-pipe([2, 4, 6].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 4, 6].values(),
+  every(x => x % 2 === 0)
+);
 // 반환 값: true
 
 // 첫 번째 홀수에서 멈춰요.
-pipe([2, 3, 4].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 3, 4].values(),
+  every(x => x % 2 === 0)
+);
 // 반환 값: false
 ```
 

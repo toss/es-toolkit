@@ -14,6 +14,9 @@ const pairs = zip(source1, source2);
 
 ```typescript
 import { zip } from 'es-toolkit/iterator';
+// 반환 값: [[1, 'a'], [2, 'b']]
+// 끝없는 카운터로 임의의 시퀀스에 번호를 매겨요.
+import { range } from 'es-toolkit/iterator';
 
 // 같은 위치의 요소들을 짝지어요.
 zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
@@ -21,10 +24,6 @@ zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
 
 // 가장 짧은 소스가 결과의 길이를 정해요.
 zip([1, 2, 3].values(), ['a', 'b'].values()).toArray();
-// 반환 값: [[1, 'a'], [2, 'b']]
-
-// 끝없는 카운터로 임의의 시퀀스에 번호를 매겨요.
-import { range } from 'es-toolkit/iterator';
 
 zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 // 반환 값: [[0, 'a'], [1, 'b'], [2, 'c']]

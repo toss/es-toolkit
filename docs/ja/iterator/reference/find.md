@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { find } from 'es-toolkit/fp/iterator';
 
 // しきい値を超える最初の要素を返します。
-pipe([1, 2, 3, 4].values(), find(x => x > 2));
+pipe(
+  [1, 2, 3, 4].values(),
+  find(x => x > 2)
+);
 // 結果: 3
 
 // 条件を満たす要素がなければ undefined になります。
-pipe([1, 2].values(), find(x => x > 10));
+pipe(
+  [1, 2].values(),
+  find(x => x > 10)
+);
 // 結果: undefined
 ```
 

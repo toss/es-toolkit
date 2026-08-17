@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { filter, toArray } from 'es-toolkit/fp/iterator';
 
 // Keep only even numbers.
-pipe([1, 2, 3, 4].values(), filter(x => x % 2 === 0), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  filter(x => x % 2 === 0),
+  toArray()
+);
 // Returns: [2, 4]
 ```
 

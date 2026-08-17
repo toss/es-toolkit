@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { filter, toArray } from 'es-toolkit/fp/iterator';
 
 // 짝수만 남겨요.
-pipe([1, 2, 3, 4].values(), filter(x => x % 2 === 0), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  filter(x => x % 2 === 0),
+  toArray()
+);
 // 반환 값: [2, 4]
 ```
 

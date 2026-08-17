@@ -16,17 +16,19 @@ const sequence = iterate(seed, getNext);
 
 ```typescript
 import { iterate } from 'es-toolkit/iterator';
+// 結果: [1, 2, 4, 8, 16]
+// 1 分未満の指数バックオフの待機時間です。
+import { takeWhile } from 'es-toolkit/iterator';
 
 // 2 の累乗を take で区切ります。
 iterate(1, x => x * 2)
   .take(5)
   .toArray();
-// 結果: [1, 2, 4, 8, 16]
 
-// 1 分未満の指数バックオフの待機時間です。
-import { takeWhile } from 'es-toolkit/iterator';
-
-takeWhile(iterate(100, x => x * 2), x => x < 60000).toArray();
+takeWhile(
+  iterate(100, x => x * 2),
+  x => x < 60000
+).toArray();
 // 結果: [100, 200, 400, ..., 51200]
 ```
 

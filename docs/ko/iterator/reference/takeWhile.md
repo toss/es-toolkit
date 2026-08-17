@@ -14,15 +14,17 @@ const leading = takeWhile(source, shouldContinue);
 
 ```typescript
 import { takeWhile } from 'es-toolkit/iterator';
-
-// 앞쪽에 이어지는 작은 숫자들을 내보내요.
-takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
 // 반환 값: [1, 2]
-
 // 무한 시퀀스를 조건으로 제한해요.
 import { iterate } from 'es-toolkit/iterator';
 
-takeWhile(iterate(1, x => x * 2), x => x < 100).toArray();
+// 앞쪽에 이어지는 작은 숫자들을 내보내요.
+takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+
+takeWhile(
+  iterate(1, x => x * 2),
+  x => x < 100
+).toArray();
 // 반환 값: [1, 2, 4, 8, 16, 32, 64]
 ```
 

@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { map, toArray } from 'es-toolkit/fp/iterator';
 
 // 把转换后的元素收集成数组。
-pipe([1, 2, 3].values(), map(x => x * 2), toArray());
+pipe(
+  [1, 2, 3].values(),
+  map(x => x * 2),
+  toArray()
+);
 // 返回: [2, 4, 6]
 ```
 

@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // 只有前三个元素会被转换。
-pipe([1, 2, 3, 4, 5].values(), map(x => x * 2), take(3), toArray());
+pipe(
+  [1, 2, 3, 4, 5].values(),
+  map(x => x * 2),
+  take(3),
+  toArray()
+);
 // 返回: [2, 4, 6]
 ```
 

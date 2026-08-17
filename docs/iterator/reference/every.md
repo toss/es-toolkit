@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { every } from 'es-toolkit/fp/iterator';
 
 // All elements are even.
-pipe([2, 4, 6].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 4, 6].values(),
+  every(x => x % 2 === 0)
+);
 // Returns: true
 
 // Stops at the first odd element.
-pipe([2, 3, 4].values(), every(x => x % 2 === 0));
+pipe(
+  [2, 3, 4].values(),
+  every(x => x % 2 === 0)
+);
 // Returns: false
 ```
 

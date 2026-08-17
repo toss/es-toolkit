@@ -23,11 +23,17 @@ import { pipe } from 'es-toolkit/fp';
 import { find } from 'es-toolkit/fp/iterator';
 
 // Return the first element above the threshold.
-pipe([1, 2, 3, 4].values(), find(x => x > 2));
+pipe(
+  [1, 2, 3, 4].values(),
+  find(x => x > 2)
+);
 // Returns: 3
 
 // No match yields undefined.
-pipe([1, 2].values(), find(x => x > 10));
+pipe(
+  [1, 2].values(),
+  find(x => x > 10)
+);
 // Returns: undefined
 ```
 

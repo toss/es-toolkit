@@ -23,10 +23,16 @@ import { pipe } from 'es-toolkit/fp';
 import { some } from 'es-toolkit/fp/iterator';
 
 // 짝수를 찾는 즉시 멈춰요.
-pipe([1, 3, 4, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 4, 5].values(),
+  some(x => x % 2 === 0)
+);
 // 반환 값: true
 
-pipe([1, 3, 5].values(), some(x => x % 2 === 0));
+pipe(
+  [1, 3, 5].values(),
+  some(x => x % 2 === 0)
+);
 // 반환 값: false
 ```
 

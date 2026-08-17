@@ -16,17 +16,19 @@ Because the iterator is infinite, it must be bounded by a short-circuiting helpe
 
 ```typescript
 import { iterate } from 'es-toolkit/iterator';
+// Returns: [1, 2, 4, 8, 16]
+// Exponential backoff delays below one minute.
+import { takeWhile } from 'es-toolkit/iterator';
 
 // Powers of two, bounded by take.
 iterate(1, x => x * 2)
   .take(5)
   .toArray();
-// Returns: [1, 2, 4, 8, 16]
 
-// Exponential backoff delays below one minute.
-import { takeWhile } from 'es-toolkit/iterator';
-
-takeWhile(iterate(100, x => x * 2), x => x < 60000).toArray();
+takeWhile(
+  iterate(100, x => x * 2),
+  x => x < 60000
+).toArray();
 // Returns: [100, 200, 400, ..., 51200]
 ```
 

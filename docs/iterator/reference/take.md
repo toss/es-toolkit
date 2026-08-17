@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // Only the first three elements are transformed.
-pipe([1, 2, 3, 4, 5].values(), map(x => x * 2), take(3), toArray());
+pipe(
+  [1, 2, 3, 4, 5].values(),
+  map(x => x * 2),
+  take(3),
+  toArray()
+);
 // Returns: [2, 4, 6]
 ```
 

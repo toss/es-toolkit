@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { map, toArray } from 'es-toolkit/fp/iterator';
 
 // 변환된 요소들을 배열로 만들어요.
-pipe([1, 2, 3].values(), map(x => x * 2), toArray());
+pipe(
+  [1, 2, 3].values(),
+  map(x => x * 2),
+  toArray()
+);
 // 반환 값: [2, 4, 6]
 ```
 

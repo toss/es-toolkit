@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // 지연 평가로 변환해요. 소비된 두 요소만 계산돼요.
-pipe([1, 2, 3, 4].values(), map(x => x * 10), take(2), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  map(x => x * 10),
+  take(2),
+  toArray()
+);
 // 반환 값: [10, 20]
 ```
 

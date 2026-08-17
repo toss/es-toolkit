@@ -14,6 +14,9 @@ const pairs = zip(source1, source2);
 
 ```typescript
 import { zip } from 'es-toolkit/iterator';
+// 結果: [[1, 'a'], [2, 'b']]
+// 上限のないカウンターで任意のシーケンスに番号を付けます。
+import { range } from 'es-toolkit/iterator';
 
 // 対応する位置の要素をペアにします。
 zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
@@ -21,10 +24,6 @@ zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
 
 // 最も短いソースが結果の長さを決めます。
 zip([1, 2, 3].values(), ['a', 'b'].values()).toArray();
-// 結果: [[1, 'a'], [2, 'b']]
-
-// 上限のないカウンターで任意のシーケンスに番号を付けます。
-import { range } from 'es-toolkit/iterator';
 
 zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 // 結果: [[0, 'a'], [1, 'b'], [2, 'c']]

@@ -23,7 +23,11 @@ import { pipe } from 'es-toolkit/fp';
 import { flatMap, toArray } from 'es-toolkit/fp/iterator';
 
 // 각 요소를 자기 자신과 10배한 값으로 펼쳐요.
-pipe([1, 2].values(), flatMap(x => [x, x * 10]), toArray());
+pipe(
+  [1, 2].values(),
+  flatMap(x => [x, x * 10]),
+  toArray()
+);
 // 반환 값: [1, 10, 2, 20]
 ```
 

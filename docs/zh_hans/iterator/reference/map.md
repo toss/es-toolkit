@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // 惰性转换;只有被消费的两个元素会被计算。
-pipe([1, 2, 3, 4].values(), map(x => x * 10), take(2), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  map(x => x * 10),
+  take(2),
+  toArray()
+);
 // 返回: [10, 20]
 ```
 

@@ -14,15 +14,17 @@ const leading = takeWhile(source, shouldContinue);
 
 ```typescript
 import { takeWhile } from 'es-toolkit/iterator';
-
-// 先頭に連続する小さい数を生成します。
-takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
 // 結果: [1, 2]
-
 // 無限シーケンスを条件で区切ります。
 import { iterate } from 'es-toolkit/iterator';
 
-takeWhile(iterate(1, x => x * 2), x => x < 100).toArray();
+// 先頭に連続する小さい数を生成します。
+takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+
+takeWhile(
+  iterate(1, x => x * 2),
+  x => x < 100
+).toArray();
 // 結果: [1, 2, 4, 8, 16, 32, 64]
 ```
 

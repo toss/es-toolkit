@@ -23,7 +23,12 @@ import { pipe } from 'es-toolkit/fp';
 import { map, take, toArray } from 'es-toolkit/fp/iterator';
 
 // 遅延的に変換します。消費される 2 個の要素だけが計算されます。
-pipe([1, 2, 3, 4].values(), map(x => x * 10), take(2), toArray());
+pipe(
+  [1, 2, 3, 4].values(),
+  map(x => x * 10),
+  take(2),
+  toArray()
+);
 // 結果: [10, 20]
 ```
 
