@@ -157,7 +157,6 @@ export const flavors = [
     categories: [],
     icon: REPEAT_ICON,
     iconColor: 'var(--vp-c-purple-1)',
-    badge: 'NEW',
   },
 ] as const satisfies readonly FlavorSpec[];
 
