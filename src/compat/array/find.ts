@@ -135,7 +135,7 @@ export function find<T>(
 
   for (let i = fromIndex; i < keys.length; i++) {
     const key = keys[i];
-    const value = (collection as any)[key] as T;
+    const value = (collection as Record<PropertyKey, T>)[key];
 
     if (doesMatch(value, key, collection)) {
       return value;
