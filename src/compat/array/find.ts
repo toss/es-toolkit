@@ -94,7 +94,7 @@ export function find<T extends object>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param source - The source array or object to search through.
+ * @param collection - The source array or object to search through.
  * @param [doesMatch=identity] - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns The first property value that has the specified property, or `undefined` if no match is found.
@@ -106,7 +106,7 @@ export function find<T extends object>(
  * console.log(result); // { id: 1, name: 'Alice' }
  */
 export function find<T>(
-  source: ArrayLike<T> | Record<any, any> | null | undefined,
+  collection: ArrayLike<T> | Record<any, any> | null | undefined,
   _doesMatch:
     | ((item: T, index: number, arr: any) => unknown)
     | Partial<T>
@@ -114,13 +114,15 @@ export function find<T>(
     | PropertyKey = identity,
   fromIndex = 0
 ): T | undefined {
-  if (!source) {
+  if (!collection) {
     return undefined;
   }
 
   const doesMatch = iteratee(_doesMatch);
 
-  const keys: PropertyKey[] = isArrayLike(source) ? range(0, source.length) : (Object.keys(source) as Array<keyof T>);
+  const keys: PropertyKey[] = isArrayLike(collection)
+    ? range(0, collection.length)
+    : (Object.keys(collection) as Array<keyof T>);
 
   fromIndex = toInteger(fromIndex);
   if (!fromIndex) {
@@ -133,9 +135,9 @@ export function find<T>(
 
   for (let i = fromIndex; i < keys.length; i++) {
     const key = keys[i];
-    const value = (source as any)[key] as T;
+    const value = (collection as any)[key] as T;
 
-    if (doesMatch(value, key, source)) {
+    if (doesMatch(value, key, collection)) {
       return value;
     }
   }

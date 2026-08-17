@@ -60,6 +60,9 @@ export function zipObject(props?: ArrayLike<PropertyKey>): Record<string, undefi
  * // result2 will be { a: 1, b: 2 }
  */
 export function zipObject<K extends PropertyKey, V>(keys: ArrayLike<K> = [], values: ArrayLike<V> = []): Record<K, V> {
+  keys = keys || [];
+  values = values || [];
+
   const result = {} as Record<K, V>;
 
   for (let i = 0; i < keys.length; i++) {

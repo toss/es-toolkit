@@ -141,6 +141,12 @@ describe('sortBy', () => {
     expect(sortBy({ a: 1, b: 2, c: 3 }, Math.sin)).toEqual([3, 1, 2]);
   });
 
+  it('should not include the `length` property for array-like objects', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(sortBy({ 0: 3, 1: 1, 2: 2, length: 3 }, [null])).toEqual([1, 2, 3]);
+  });
+
   it('should move `NaN`, nullish, and symbol values to the end', () => {
     const symbol1 = Symbol ? Symbol('a') : null;
     const symbol2 = Symbol ? Symbol('b') : null;
@@ -190,5 +196,16 @@ describe('sortBy', () => {
   it('should compare strings with ASCII code', () => {
     expect(sortBy(['A', 'a'])).toEqual(['A', 'a']);
     expect(sortBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
+
+  it('should read the property of primitive values', () => {
+    expect(sortBy(['bb', 'a', 'ccc'], 'length')).toEqual(['a', 'bb', 'ccc']);
+    expect(sortBy(['b', 'aa'], 'length')).toEqual(['b', 'aa']);
+    expect(sortBy(['ba', 'ab', 'b'], 0)).toEqual(['ab', 'ba', 'b']);
+  });
+
+  it('should keep the original order when primitive values lack the property', () => {
+    expect(sortBy([3, 1, 2], 'b')).toEqual([3, 1, 2]);
+    expect(sortBy(['c', 'a', 'b'], 'x')).toEqual(['c', 'a', 'b']);
   });
 });

@@ -64,6 +64,10 @@ toPairs(undefined);
 // => []
 ```
 
+#### 별칭
+
+`entries`
+
 #### 파라미터
 
 - `object` (`object`): 변환할 객체, Map, 또는 Set이에요.

@@ -169,6 +169,8 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.create).toEqualTypeOf<typeof lodash.create>();
     expectTypeOf(compat.defaults).toEqualTypeOf<typeof lodash.defaults>();
     expectTypeOf(compat.defaultsDeep).toEqualTypeOf<typeof lodash.defaultsDeep>();
+    expectTypeOf(compat.entries).toEqualTypeOf<typeof lodash.entries>();
+    expectTypeOf(compat.entriesIn).toEqualTypeOf<typeof lodash.entriesIn>();
     expectTypeOf(compat.extend).toEqualTypeOf<typeof lodash.extend>();
     expectTypeOf(compat.extendWith).toEqualTypeOf<typeof lodash.extendWith>();
     expectTypeOf(compat.findKey).toEqualTypeOf<typeof lodash.findKey>();

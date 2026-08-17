@@ -9,6 +9,7 @@ const labels: SidebarLabels = {
     installation: 'Installation & Usage',
     bundleSize: 'Bundle Size',
     performance: 'Performance',
+    browserSupport: 'Browser Support',
     aiIntegration: 'AI Integration',
   },
   categories: {

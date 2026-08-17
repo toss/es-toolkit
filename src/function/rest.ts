@@ -23,7 +23,7 @@
  *
  * // Using start index 1
  * const transformedFnWithStart = rest(fn, 1);
- * console.log(transformedFnWithStart(1, 2, 3, 4)); // [1, [2, 3, 4]]
+ * console.log(transformedFnWithStart(1, 2, 3, 4)); // [1, [2, 3, 4], undefined]
  *
  * // With fewer arguments than the start index
  * console.log(transformedFn(1)); // [1, undefined, []]

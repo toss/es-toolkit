@@ -6,6 +6,11 @@ interface FlattenObjectOptions {
    * @default '.'
    */
   delimiter?: string;
+  /**
+   * If true, arrays are kept as values instead of being flattened.
+   * @default false
+   */
+  preserveArrays?: boolean;
 }
 
 /**
@@ -13,6 +18,7 @@ interface FlattenObjectOptions {
  *
  * @param object - The object to flatten.
  * @param [options.delimiter='.'] - The delimiter to use between nested keys.
+ * @param [options.preserveArrays=false] - If true, arrays are kept as values instead of being flattened.
  * @returns The flattened object.
  *
  * @example
@@ -33,12 +39,28 @@ interface FlattenObjectOptions {
  * //   'd.0': 2,
  * //   'd.1': 3
  * // }
+ *
+ * const preserved = flattenObject(nestedObject, { preserveArrays: true });
+ * console.log(preserved);
+ * // Output:
+ * // {
+ * //   'a.b.c': 1,
+ * //   'd': [2, 3]
+ * // }
  */
-export function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any> {
-  return flattenObjectImpl(object, '', delimiter);
+export function flattenObject(
+  object: object,
+  { delimiter = '.', preserveArrays = false }: FlattenObjectOptions = {}
+): Record<string, any> {
+  return flattenObjectImpl(object, '', delimiter, preserveArrays);
 }
 
-function flattenObjectImpl(object: object, prefix: string, delimiter: string): Record<string, any> {
+function flattenObjectImpl(
+  object: object,
+  prefix: string,
+  delimiter: string,
+  preserveArrays: boolean
+): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 
@@ -49,12 +71,12 @@ function flattenObjectImpl(object: object, prefix: string, delimiter: string): R
     const prefixedKey = prefix ? `${prefix}${delimiter}${key}` : key;
 
     if (isPlainObject(value) && Object.keys(value).length > 0) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter, preserveArrays));
       continue;
     }
 
-    if (Array.isArray(value) && value.length > 0) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+    if (Array.isArray(value) && !preserveArrays && value.length > 0) {
+      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter, preserveArrays));
       continue;
     }
 

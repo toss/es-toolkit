@@ -1,4 +1,4 @@
-import { limitAsync } from './limitAsync.ts';
+import { limitAsync } from '../promise/limitAsync.ts';
 
 interface ForEachAsyncOptions {
   concurrency?: number;

@@ -87,18 +87,19 @@ export function omit<T extends object>(obj: T | null | undefined, ...keysArr: Ar
   const result = cloneInOmit(obj, keysArr);
 
   for (let i = 0; i < keysArr.length; i++) {
-    let keys = keysArr[i];
+    const keys = keysArr[i];
 
     switch (typeof keys) {
       case 'object': {
-        if (!Array.isArray(keys)) {
-          keys = Array.from(keys as PropertyKey[]);
-        }
+        if (Array.isArray(keys)) {
+          // A key array is a single deep path (e.g. `['a', 'b']` targets `a.b`), matching lodash.
+          unset(result, keys);
+        } else {
+          const arrayLikeKeys = Array.from(keys as PropertyKey[]);
 
-        for (let j = 0; j < keys.length; j++) {
-          const key = keys[j];
-
-          unset(result, key);
+          for (let j = 0; j < arrayLikeKeys.length; j++) {
+            unset(result, arrayLikeKeys[j]);
+          }
         }
 
         break;
