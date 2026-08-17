@@ -38,33 +38,35 @@ export function dedent(
   str: string | TemplateStringsArray | ((strings: TemplateStringsArray, ...values: unknown[]) => unknown),
   ...values: unknown[]
 ): unknown {
-  if (typeof str === 'function') {
-    return function (strings: TemplateStringsArray, ...args: unknown[]) {
-      return str(dedentTemplateStringsArray(strings), ...args);
-    };
-  }
+  switch (typeof str) {
+    case 'function': {
+      return function (strings: TemplateStringsArray, ...args: unknown[]) {
+        return str(dedentTemplateStringsArray(strings), ...args);
+      };
+    }
+    case 'string': {
+      return dedentImpl(str);
+    }
+    default: {
+      let text = str[0];
+      for (let i = 0; i < values.length; i++) {
+        text += String(values[i]) + str[i + 1];
+      }
 
-  if (typeof str === 'string') {
-    return processDedent(str);
+      return dedentImpl(text);
+    }
   }
-
-  let text = str[0];
-  for (let i = 0; i < values.length; i++) {
-    text += String(values[i]) + str[i + 1];
-  }
-
-  return processDedent(text);
 }
 
 function dedentTemplateStringsArray(strings: TemplateStringsArray): TemplateStringsArray {
   const joined = strings.join('\x00');
-  const dedented = processDedent(joined);
+  const dedented = dedentImpl(joined);
   const parts = dedented.split('\x00');
 
   return Object.assign(parts, { raw: parts }) as unknown as TemplateStringsArray;
 }
 
-function processDedent(text: string): string {
+function dedentImpl(text: string): string {
   text = text.replace(/\r\n/g, '\n');
   const lines = text.split('\n');
 
