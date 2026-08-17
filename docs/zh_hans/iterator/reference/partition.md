@@ -1,4 +1,4 @@
-# partition (用于 `Iterator`)
+# partition (`Iterator`)
 
 消费一个迭代器,并按谓词将其元素拆分为两个数组。
 

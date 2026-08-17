@@ -1,4 +1,4 @@
-# take (`Iterator`向け)
+# take (`Iterator`)
 
 イテレータの先頭 `limit` 個の要素を遅延的に生成する関数を作成します。関数型プログラミングの [`pipe`](../../fp/reference/pipe.md) と一緒に使用します。
 

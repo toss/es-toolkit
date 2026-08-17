@@ -1,4 +1,4 @@
-# takeWhile (`Iterator`용)
+# takeWhile (`Iterator`)
 
 조건 함수가 성립하는 동안 이터레이터의 앞쪽 요소들을 지연 평가 방식으로 내보내요.
 

@@ -1,4 +1,4 @@
-# head (用于 `Iterator`)
+# head (`Iterator`)
 
 返回迭代器的第一个元素;如果迭代器为空,则返回 `undefined`。
 

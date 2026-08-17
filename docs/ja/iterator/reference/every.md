@@ -1,4 +1,4 @@
-# every (`Iterator`向け)
+# every (`Iterator`)
 
 イテレータのすべての要素が条件を満たすかどうかを返す関数を作成します。関数型プログラミングの [`pipe`](../../fp/reference/pipe.md) と一緒に使用します。
 

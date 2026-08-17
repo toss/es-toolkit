@@ -1,4 +1,4 @@
-# dropWhile (`Iterator`向け)
+# dropWhile (`Iterator`)
 
 条件が成り立つ間、イテレータの先頭の要素を遅延的にスキップし、残りの要素を生成します。
 

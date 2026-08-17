@@ -1,4 +1,4 @@
-# filter (`Iterator`용)
+# filter (`Iterator`)
 
 조건 함수를 만족하는 이터레이터의 요소만 지연 평가 방식으로 남기는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

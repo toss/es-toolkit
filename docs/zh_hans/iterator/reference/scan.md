@@ -1,4 +1,4 @@
-# scan (用于 `Iterator`)
+# scan (`Iterator`)
 
 惰性地产生迭代器的累积过程,就像一个会输出每个中间结果的 `reduce`。
 

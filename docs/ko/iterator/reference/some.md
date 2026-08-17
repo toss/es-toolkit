@@ -1,4 +1,4 @@
-# some (`Iterator`용)
+# some (`Iterator`)
 
 이터레이터의 요소 중 하나라도 조건 함수를 만족하는지 알려주는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

@@ -1,4 +1,4 @@
-# chunk (`Iterator`向け)
+# chunk (`Iterator`)
 
 イテレータの要素を、指定した長さの配列に遅延的にまとめます。
 

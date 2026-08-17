@@ -1,4 +1,4 @@
-# map (`Iterator`向け)
+# map (`Iterator`)
 
 イテレータの各要素を遅延的に変換する関数を作成します。関数型プログラミングの [`pipe`](../../fp/reference/pipe.md) と一緒に使用します。
 

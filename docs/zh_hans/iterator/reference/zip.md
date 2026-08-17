@@ -1,4 +1,4 @@
-# zip (用于 `Iterator`)
+# zip (`Iterator`)
 
 惰性地将多个迭代器合并为一个产生元组的迭代器。
 

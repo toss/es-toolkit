@@ -1,4 +1,4 @@
-# partition (`Iterator`向け)
+# partition (`Iterator`)
 
 イテレータを消費し、条件によって要素を 2 つの配列に分割します。
 

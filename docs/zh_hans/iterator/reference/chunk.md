@@ -1,4 +1,4 @@
-# chunk (用于 `Iterator`)
+# chunk (`Iterator`)
 
 惰性地将迭代器的元素分组为指定长度的数组。
 

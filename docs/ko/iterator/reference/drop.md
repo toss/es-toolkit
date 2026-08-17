@@ -1,4 +1,4 @@
-# drop (`Iterator`용)
+# drop (`Iterator`)
 
 이터레이터의 처음 `count`개 요소를 지연 평가 방식으로 건너뛰고 나머지를 내보내는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

@@ -1,4 +1,4 @@
-# some (用于 `Iterator`)
+# some (`Iterator`)
 
 创建一个函数,报告迭代器中是否有任一元素匹配谓词。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

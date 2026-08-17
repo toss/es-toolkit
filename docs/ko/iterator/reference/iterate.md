@@ -1,4 +1,4 @@
-# iterate (`Iterator`용)
+# iterate (`Iterator`)
 
 시드 값에 함수를 반복해서 적용하며 무한한 지연 평가 이터레이터를 만들어요.
 

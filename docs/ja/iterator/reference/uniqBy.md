@@ -1,4 +1,4 @@
-# uniqBy (`Iterator`向け)
+# uniqBy (`Iterator`)
 
 変換したキーがまだ登場していないイテレータの要素を、遅延的に生成します。
 

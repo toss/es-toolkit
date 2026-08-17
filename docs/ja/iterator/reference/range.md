@@ -1,4 +1,4 @@
-# range (`Iterator`向け)
+# range (`Iterator`)
 
 一定の間隔で数のシーケンスを遅延的に生成します。
 

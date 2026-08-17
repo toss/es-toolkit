@@ -1,4 +1,4 @@
-# range (用于 `Iterator`)
+# range (`Iterator`)
 
 惰性地产生一个具有固定步长的数字序列。
 

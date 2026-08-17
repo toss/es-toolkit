@@ -1,4 +1,4 @@
-# find (用于 `Iterator`)
+# find (`Iterator`)
 
 创建一个函数,返回迭代器中第一个匹配谓词的元素。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

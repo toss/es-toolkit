@@ -1,4 +1,4 @@
-# reduce (`Iterator`용)
+# reduce (`Iterator`)
 
 이터레이터를 하나의 값으로 접는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

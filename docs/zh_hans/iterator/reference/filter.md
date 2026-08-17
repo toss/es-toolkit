@@ -1,4 +1,4 @@
-# filter (用于 `Iterator`)
+# filter (`Iterator`)
 
 创建一个函数,惰性地保留迭代器中匹配谓词的元素。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

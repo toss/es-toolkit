@@ -1,4 +1,4 @@
-# every (用于 `Iterator`)
+# every (`Iterator`)
 
 创建一个函数,报告迭代器的所有元素是否都匹配谓词。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

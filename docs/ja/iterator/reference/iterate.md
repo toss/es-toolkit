@@ -1,4 +1,4 @@
-# iterate (`Iterator`向け)
+# iterate (`Iterator`)
 
 シード値に関数を繰り返し適用して、無限の遅延評価イテレータを作成します。
 

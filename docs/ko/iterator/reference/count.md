@@ -1,4 +1,4 @@
-# count (`Iterator`용)
+# count (`Iterator`)
 
 이터레이터를 소비하고, 이터레이터가 내보내는 요소의 개수를 반환해요.
 

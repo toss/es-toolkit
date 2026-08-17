@@ -1,4 +1,4 @@
-# drop (用于 `Iterator`)
+# drop (`Iterator`)
 
 创建一个函数,惰性地跳过迭代器的前 `count` 个元素并产生其余元素。与 [`pipe`](../../fp/reference/pipe.md) 一起使用。
 

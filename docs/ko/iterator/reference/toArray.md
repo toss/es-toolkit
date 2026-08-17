@@ -1,4 +1,4 @@
-# toArray (`Iterator`용)
+# toArray (`Iterator`)
 
 이터레이터의 요소들을 배열로 모으는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

@@ -1,4 +1,4 @@
-# forEach (`Iterator`용)
+# forEach (`Iterator`)
 
 이터레이터를 소비하면서 각 요소에 대해 콜백을 실행하는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

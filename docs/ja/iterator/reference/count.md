@@ -1,4 +1,4 @@
-# count (`Iterator`向け)
+# count (`Iterator`)
 
 イテレータを消費して、生成される要素の数を返します。
 

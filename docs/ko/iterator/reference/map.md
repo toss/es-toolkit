@@ -1,4 +1,4 @@
-# map (`Iterator`용)
+# map (`Iterator`)
 
 이터레이터의 각 요소를 지연 평가 방식으로 변환하는 함수를 만들어요. [`pipe`](../../fp/reference/pipe.md)와 같이 사용해요.
 

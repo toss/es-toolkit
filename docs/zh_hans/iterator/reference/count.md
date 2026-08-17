@@ -1,4 +1,4 @@
-# count (用于 `Iterator`)
+# count (`Iterator`)
 
 消费一个迭代器,并返回它产生的元素数量。
 
