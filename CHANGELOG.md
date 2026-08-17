@@ -1,5 +1,87 @@
 # es-toolkit Changelog
 
+## Version v1.51.0
+
+Released on August 17th, 2026.
+
+- Added the `es-toolkit/bigint` entrypoint: `bigint` counterparts of the math
+  functions (`sum`, `sumBy`, `max`, `min`, `maxBy`, `minBy`, `clamp`, `inRange`,
+  `median`, `medianBy`, `percentile`, `range`, `rangeRight`), kept separate so
+  the `number` implementations stay unchanged. ([#1966])
+- Added `dedent`, which removes common leading whitespace from template strings. ([#1679])
+- Added `deepFreeze` for recursively freezing objects. ([#1680])
+- Added `mapValuesAsync` and `mapKeysAsync`. ([#1544])
+- Added `toPascalCaseKeys`, `toKebabCaseKeys`, and `toConstantCaseKeys`,
+  completing the object key casing family. ([#1984])
+- Exported the `ToCamelCaseKeys`, `ToPascalCaseKeys`, `ToSnakeCaseKeys`,
+  `ToKebabCaseKeys`, and `ToConstantCaseKeys` types. ([#1651])
+- Added a `preserveArrays` option to `flattenObject`. ([#974])
+
+- Fixed `retry` to pass the last error to the `delay` callback ([#1759]) and to
+  throw the last attempt's error without applying a final delay ([#1901]).
+- Fixed `mergeWith` and `toMerged` to handle mixed array/object types
+  consistently with `merge`. ([#2026])
+- Fixed `pullAt` to remove the correct elements with negative indices. ([#1613])
+- Fixed `at`, `pullAt`, `orderBy`, and `sortBy` to accept readonly arrays. ([#2016])
+- Moved `limitAsync` from the array to the promise category. ([#2022])
+- Included the NOTICE file in the published npm and JSR packages. ([#2020])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Added `entries` and `entriesIn`. ([#1874])
+- Fixed `compat/isMatch` and `compat/isMatchWith` to handle object source
+  patterns against primitive and non-plain-object targets like Lodash. ([#1432])
+- Fixed `compat/set` to block `constructor.prototype` paths, preventing
+  prototype pollution. ([#1904])
+- Fixed `compat/find` to respect array-like `length` ([#1958]) and to convert
+  `fromIndex` to an integer ([#1961]), and `compat/indexOf` to convert
+  `fromIndex` to an integer when searching for `NaN` ([#1951]).
+- Fixed `compat/orderBy` to resolve unresolved deep paths and nullish elements
+  to `undefined` ([#2010]), to exclude the `length` property from array-like
+  values ([#2002]), and to read the criterion property from primitive values ([#1903]).
+- Fixed `compat/toPath` to split unquoted dotted keys inside brackets. ([#1899])
+- Fixed `compat/omit` to treat a key array as a single deep path. ([#1902])
+- Fixed `compat/map` to make the iteratee optional with an identity default. ([#1928])
+- Fixed `compat/size` to count combined Unicode symbols as single characters. ([#1900])
+- Fixed `compat/intersectionBy` to support number, object, and nullish iteratee
+  shorthands ([#1993]), and `compat/intersectionWith` to apply the comparator
+  when deduplicating the first array ([#1953]).
+- Fixed `compat/difference`, `compat/differenceBy`, `compat/uniqBy`, and
+  `compat/unionBy` to normalize `-0` to `0`. ([#2007])
+- Fixed `compat/maxBy` and `compat/minBy` to skip nullish iteratee values ([#1927]),
+  and `compat/meanBy` to skip `undefined` values when averaging ([#1978]).
+- Fixed `compat/some`, `compat/template` ([#2009]), and `compat/fill` ([#1952])
+  to gate guard handling with `isIterateeCall`.
+- Fixed `compat/iteratee` to treat a boolean as a property shorthand. ([#1941])
+- Fixed `compat/reverse` to support array-like objects and `arguments`. ([#2008])
+- Fixed `compat/toArray` to convert non-array-like iterables. ([#1999])
+- Fixed `compat/toString` to render nested nullish values like Lodash. ([#1992])
+- Fixed `compat/zipObject` to treat `null` keys and values as empty arrays. ([#2005])
+- Fixed `compat/sampleSize` to clamp the default size to the collection length. ([#2003])
+- Fixed `compat/takeWhile`, `compat/takeRightWhile`, and `compat/uniqBy` to
+  support string inputs. ([#2004])
+- Fixed `compat/chunk` to return an empty array for an empty collection with an
+  `Infinity` size. ([#1995])
+- Fixed `compat/lastIndexOf` to read holes in sparse arrays as `undefined`. ([#1977])
+- Fixed `compat/last` to return `undefined` for empty array-like inputs. ([#1954])
+- Fixed `compat/pullAll` to return the array as-is when `values` is nullish. ([#1962])
+
+- Added a browser compatibility test suite. ([#2012])
+- Improved documentation, JSDoc accuracy, tests, and internal refactoring across
+  `compat` and the docs site. ([#1622], [#1789], [#1824], [#1844], [#1849],
+  [#1854], [#1855], [#1859], [#1860], [#1868], [#1871], [#1887], [#1898],
+  [#1933], [#1939], [#1947], [#1950], [#1955], [#1956], [#1957], [#1960],
+  [#1963], [#1964], [#1968], [#1969], [#1970], [#1972], [#1979], [#1985],
+  [#2000], [#2001], [#2021], [#2025], [#2027])
+
+We sincerely thank @Antoliny0919, @D-Sketon, @kojesung, @chuenchen309,
+@mariazuheros, @DongEun02, @raon0211, @sukvvon, @racgoo, @dayongkr, @Kropiunig,
+@ssi02014, @sarathfrancis90, @mym0404, @mlnwns, @kdelay, @gwagjiug, @dohwi,
+@blro0319, @benedictleejh, @amir-rezaei, @ianzone, @sen2y, @rossyman,
+@eunwoo-levi, @ramong26, @Gdm0714, and everyone else who contributed.
+We appreciate your great efforts!
+
 ## Version v1.50.0
 
 Released on July 24th, 2026.
