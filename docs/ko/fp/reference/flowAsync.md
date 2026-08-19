@@ -9,7 +9,7 @@ const result = await fn(...args);
 
 ::: info
 
-`flowAsync`는 [`flow`](./flow.md)의 Promise 인식 버전이에요. `flow`는 각 함수의 반환값을 그대로 다음 함수에 넘기기 때문에 `Promise`를 반환하면 해결되지 않은 채로 전달돼요. `flowAsync`는 매 단계를 기다려서, 동기 함수와 비동기 함수를 한 체인에서 자유롭게 섞어 쓸 수 있어요.
+`flowAsync`는 [`flow`](./flow.md)의 Promise 인식 버전이에요. `flow`는 각 함수의 반환값을 그대로 다음 함수에 넘기기 때문에, 어떤 함수가 `Promise`를 반환하면 `await`되지 않은 상태로 다음 함수에 전달돼요. `flowAsync`는 매 단계를 기다려서, 동기 함수와 비동기 함수를 한 체인에서 자유롭게 섞어 쓸 수 있어요.
 
 :::
 
