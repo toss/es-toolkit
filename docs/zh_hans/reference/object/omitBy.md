@@ -34,7 +34,7 @@ const nonAdmins = omitBy(data, (value, key) => key.startsWith('admin'));
 #### 参数
 
 - `obj` (`T extends Record<string, any>`): 要过滤属性的对象。
-- `shouldOmit` (`(value: T[keyof T], key: keyof T) => boolean`): 决定是否排除属性的条件函数。接收值和键,返回 `true` 表示排除,返回 `false` 表示保留。
+- `shouldOmit` (`(value: T[keyof T], key: StringKeyOf<T>) => boolean`): 决定是否排除属性的条件函数。接收值和键,返回 `true` 表示排除,返回 `false` 表示保留。`StringKeyOf<T>` 会保留已知的字符串键，并将数字键转换为字符串，与 `Object.keys` 的行为一致。
 
 #### 返回值
 
