@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: '문자열',
     util: '유틸리티',
     error: '에러',
+    objects: '객체',
+    keys: '키 변환',
+    arrays: '배열',
   },
 };
 

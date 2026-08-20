@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: '字符串工具',
     util: '工具函数',
     error: '错误',
+    objects: '对象',
+    keys: '键转换',
+    arrays: '数组',
   },
 };
 

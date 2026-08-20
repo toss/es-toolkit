@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: 'String Utilities',
     util: 'Utility Functions',
     error: 'Errors',
+    objects: 'Objects',
+    keys: 'Keys',
+    arrays: 'Arrays',
   },
 };
 
