@@ -21,6 +21,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 判断两个类型是否完全相同。                                        |
 | [`Primitive`](./reference/Primitive.md)                      | JavaScript 中所有原始值的联合。                                   |
 | [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` 能够产生的任何值。                                   |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | 键和值都未知的对象。用它代替 `{}`。                               |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为驼峰命名法。`toCamelCaseKeys` 的返回类型。    |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为蛇形命名法。`toSnakeCaseKeys` 的返回类型。    |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为帕斯卡命名法。`toPascalCaseKeys` 的返回类型。 |

@@ -21,6 +21,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 두 타입이 정확히 같은지 알려줘요.                                                       |
 | [`Primitive`](./reference/Primitive.md)                      | 자바스크립트의 모든 원시값을 모은 유니온이에요.                                         |
 | [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | 키도 값도 알 수 없는 객체예요. `{}` 대신 쓰세요.                                        |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 모든 키를 재귀적으로 카멜 표기법으로 변환해요. `toCamelCaseKeys`의 반환 타입이에요.     |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 모든 키를 재귀적으로 스네이크 표기법으로 변환해요. `toSnakeCaseKeys`의 반환 타입이에요. |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 모든 키를 재귀적으로 파스칼 표기법으로 변환해요. `toPascalCaseKeys`의 반환 타입이에요.  |
