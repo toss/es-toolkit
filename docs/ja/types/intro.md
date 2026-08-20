@@ -22,6 +22,7 @@ TypeScript に用意されていないために毎回自分で書いていた型
 | [`Primitive`](./reference/Primitive.md)                      | JavaScript のすべてのプリミティブ値をまとめたユニオンです。                             |
 | [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` が生成しうるすべての値です。                                               |
 | [`UnknownRecord`](./reference/UnknownRecord.md)              | キーも値も分からないオブジェクトです。`{}` の代わりに使います。                         |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | プロパティを 1 つも持たないオブジェクトです。`isEmptyObject` と対になります。           |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | すべてのキーを再帰的にキャメルケースに変換します。`toCamelCaseKeys` の戻り値の型です。  |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | すべてのキーを再帰的にスネークケースに変換します。`toSnakeCaseKeys` の戻り値の型です。  |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | すべてのキーを再帰的にパスカルケースに変換します。`toPascalCaseKeys` の戻り値の型です。 |
