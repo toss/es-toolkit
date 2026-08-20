@@ -10,26 +10,26 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 타입스크립트에 없어서 매번 직접 만들어 쓰던 타입들만 골라 담았어요.
 
-| 타입                                                         | 설명                                                                                    |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| [`ValueOf<T>`](./reference/ValueOf.md)                       | 객체의 값 타입들을 유니온으로 만들어요. `keyof`의 값 버전이에요.                        |
-| [`Simplify<T>`](./reference/Simplify.md)                     | 교차 타입이나 매핑된 타입을 하나의 읽기 쉬운 객체 타입으로 펼쳐요.                      |
-| [`Writable<T>`](./reference/Writable.md)                     | 모든 프로퍼티에서 `readonly`를 없애요. 기본 `Readonly`의 반대예요.                      |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 최소 한 개 이상의 요소를 가지는 배열이에요.                                             |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)               | 중첩된 객체까지 재귀적으로 모두 선택적으로 만들어요.                                    |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요.                                  |
-| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 두 타입이 정확히 같은지 알려줘요.                                                       |
-| [`Primitive`](./reference/Primitive.md)                      | 자바스크립트의 모든 원시값을 모은 유니온이에요.                                         |
-| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
-| [`UnknownRecord`](./reference/UnknownRecord.md)              | 키도 값도 알 수 없는 객체예요. `{}` 대신 쓰세요.                                        |
-| [`EmptyObject`](./reference/EmptyObject.md)                  | 프로퍼티가 하나도 없는 객체예요. `isEmptyObject`와 짝을 이뤄요.                         |
-| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 원하는 키만 골라 선택적으로 만들어요. 기본 `Partial`의 키 지정 버전이에요.              |
-| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 원하는 키만 골라 필수로 만들어요. 기본 `Required`의 키 지정 버전이에요.                 |
-| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 모든 키를 재귀적으로 카멜 표기법으로 변환해요. `toCamelCaseKeys`의 반환 타입이에요.     |
-| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 모든 키를 재귀적으로 스네이크 표기법으로 변환해요. `toSnakeCaseKeys`의 반환 타입이에요. |
-| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 모든 키를 재귀적으로 파스칼 표기법으로 변환해요. `toPascalCaseKeys`의 반환 타입이에요.  |
-| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | 모든 키를 재귀적으로 케밥 표기법으로 변환해요. `toKebabCaseKeys`의 반환 타입이에요.     |
-| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | 모든 키를 재귀적으로 상수 표기법으로 변환해요. `toConstantCaseKeys`의 반환 타입이에요.  |
+| 타입                                                                 | 설명                                                                                    |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/objects/ValueOf.md)                       | 객체의 값 타입들을 유니온으로 만들어요. `keyof`의 값 버전이에요.                        |
+| [`Simplify<T>`](./reference/objects/Simplify.md)                     | 교차 타입이나 매핑된 타입을 하나의 읽기 쉬운 객체 타입으로 펼쳐요.                      |
+| [`Writable<T>`](./reference/objects/Writable.md)                     | 모든 프로퍼티에서 `readonly`를 없애요. 기본 `Readonly`의 반대예요.                      |
+| [`NonEmptyArray<T>`](./reference/values/NonEmptyArray.md)            | 최소 한 개 이상의 요소를 가지는 배열이에요.                                             |
+| [`DeepPartial<T>`](./reference/objects/DeepPartial.md)               | 중첩된 객체까지 재귀적으로 모두 선택적으로 만들어요.                                    |
+| [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요.                                  |
+| [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | 두 타입이 정확히 같은지 알려줘요.                                                       |
+| [`Primitive`](./reference/values/Primitive.md)                       | 자바스크립트의 모든 원시값을 모은 유니온이에요.                                         |
+| [`JsonValue`](./reference/values/JsonValue.md)                       | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
+| [`UnknownRecord`](./reference/values/UnknownRecord.md)               | 키도 값도 알 수 없는 객체예요. `{}` 대신 쓰세요.                                        |
+| [`EmptyObject`](./reference/values/EmptyObject.md)                   | 프로퍼티가 하나도 없는 객체예요. `isEmptyObject`와 짝을 이뤄요.                         |
+| [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | 원하는 키만 골라 선택적으로 만들어요. 기본 `Partial`의 키 지정 버전이에요.              |
+| [`SetRequired<T, K>`](./reference/objects/SetRequired.md)            | 원하는 키만 골라 필수로 만들어요. 기본 `Required`의 키 지정 버전이에요.                 |
+| [`ToCamelCaseKeys<T>`](./reference/objects/ToCamelCaseKeys.md)       | 모든 키를 재귀적으로 카멜 표기법으로 변환해요. `toCamelCaseKeys`의 반환 타입이에요.     |
+| [`ToSnakeCaseKeys<T>`](./reference/objects/ToSnakeCaseKeys.md)       | 모든 키를 재귀적으로 스네이크 표기법으로 변환해요. `toSnakeCaseKeys`의 반환 타입이에요. |
+| [`ToPascalCaseKeys<T>`](./reference/objects/ToPascalCaseKeys.md)     | 모든 키를 재귀적으로 파스칼 표기법으로 변환해요. `toPascalCaseKeys`의 반환 타입이에요.  |
+| [`ToKebabCaseKeys<T>`](./reference/objects/ToKebabCaseKeys.md)       | 모든 키를 재귀적으로 케밥 표기법으로 변환해요. `toKebabCaseKeys`의 반환 타입이에요.     |
+| [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | 모든 키를 재귀적으로 상수 표기법으로 변환해요. `toConstantCaseKeys`의 반환 타입이에요.  |
 
 ## 선정 기준
 

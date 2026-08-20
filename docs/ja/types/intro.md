@@ -10,26 +10,26 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 TypeScript に用意されていないために毎回自分で書いていた型だけを厳選して収録しました。
 
-| 型                                                           | 説明                                                                                    |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| [`ValueOf<T>`](./reference/ValueOf.md)                       | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。                          |
-| [`Simplify<T>`](./reference/Simplify.md)                     | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。                       |
-| [`Writable<T>`](./reference/Writable.md)                     | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。          |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 少なくとも 1 つ以上の要素を持つ配列です。                                               |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)               | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。                        |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。                    |
-| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 2 つの型が完全に同じかどうかを判定します。                                              |
-| [`Primitive`](./reference/Primitive.md)                      | JavaScript のすべてのプリミティブ値をまとめたユニオンです。                             |
-| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` が生成しうるすべての値です。                                               |
-| [`UnknownRecord`](./reference/UnknownRecord.md)              | キーも値も分からないオブジェクトです。`{}` の代わりに使います。                         |
-| [`EmptyObject`](./reference/EmptyObject.md)                  | プロパティを 1 つも持たないオブジェクトです。`isEmptyObject` と対になります。           |
-| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 指定したキーだけを省略可能にします。組み込みの `Partial` をキー単位にしたものです。     |
-| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 指定したキーだけを必須にします。組み込みの `Required` をキー単位にしたものです。        |
-| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | すべてのキーを再帰的にキャメルケースに変換します。`toCamelCaseKeys` の戻り値の型です。  |
-| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | すべてのキーを再帰的にスネークケースに変換します。`toSnakeCaseKeys` の戻り値の型です。  |
-| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | すべてのキーを再帰的にパスカルケースに変換します。`toPascalCaseKeys` の戻り値の型です。 |
-| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | すべてのキーを再帰的にケバブケースに変換します。`toKebabCaseKeys` の戻り値の型です。    |
-| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | すべてのキーを再帰的に定数ケースに変換します。`toConstantCaseKeys` の戻り値の型です。   |
+| 型                                                                   | 説明                                                                                    |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/objects/ValueOf.md)                       | オブジェクトの値の型のユニオンを作ります。`keyof` の値版です。                          |
+| [`Simplify<T>`](./reference/objects/Simplify.md)                     | 交差型やマップ型を 1 つの読みやすいオブジェクト型に平坦化します。                       |
+| [`Writable<T>`](./reference/objects/Writable.md)                     | すべてのプロパティから `readonly` を外します。組み込みの `Readonly` の逆です。          |
+| [`NonEmptyArray<T>`](./reference/values/NonEmptyArray.md)            | 少なくとも 1 つ以上の要素を持つ配列です。                                               |
+| [`DeepPartial<T>`](./reference/objects/DeepPartial.md)               | ネストしたオブジェクトの内側まで再帰的にすべて省略可能にします。                        |
+| [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。                    |
+| [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | 2 つの型が完全に同じかどうかを判定します。                                              |
+| [`Primitive`](./reference/values/Primitive.md)                       | JavaScript のすべてのプリミティブ値をまとめたユニオンです。                             |
+| [`JsonValue`](./reference/values/JsonValue.md)                       | `JSON.parse` が生成しうるすべての値です。                                               |
+| [`UnknownRecord`](./reference/values/UnknownRecord.md)               | キーも値も分からないオブジェクトです。`{}` の代わりに使います。                         |
+| [`EmptyObject`](./reference/values/EmptyObject.md)                   | プロパティを 1 つも持たないオブジェクトです。`isEmptyObject` と対になります。           |
+| [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | 指定したキーだけを省略可能にします。組み込みの `Partial` をキー単位にしたものです。     |
+| [`SetRequired<T, K>`](./reference/objects/SetRequired.md)            | 指定したキーだけを必須にします。組み込みの `Required` をキー単位にしたものです。        |
+| [`ToCamelCaseKeys<T>`](./reference/objects/ToCamelCaseKeys.md)       | すべてのキーを再帰的にキャメルケースに変換します。`toCamelCaseKeys` の戻り値の型です。  |
+| [`ToSnakeCaseKeys<T>`](./reference/objects/ToSnakeCaseKeys.md)       | すべてのキーを再帰的にスネークケースに変換します。`toSnakeCaseKeys` の戻り値の型です。  |
+| [`ToPascalCaseKeys<T>`](./reference/objects/ToPascalCaseKeys.md)     | すべてのキーを再帰的にパスカルケースに変換します。`toPascalCaseKeys` の戻り値の型です。 |
+| [`ToKebabCaseKeys<T>`](./reference/objects/ToKebabCaseKeys.md)       | すべてのキーを再帰的にケバブケースに変換します。`toKebabCaseKeys` の戻り値の型です。    |
+| [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | すべてのキーを再帰的に定数ケースに変換します。`toConstantCaseKeys` の戻り値の型です。   |
 
 ## 選定基準
 
