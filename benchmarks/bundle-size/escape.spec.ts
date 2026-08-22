@@ -14,6 +14,6 @@ describe('escape bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'escape');
-    expect(bundleSize).toMatchInlineSnapshot(`348`);
+    expect(bundleSize).toMatchInlineSnapshot(`449`);
   });
 });

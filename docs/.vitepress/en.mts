@@ -9,10 +9,12 @@ const labels: SidebarLabels = {
     installation: 'Installation & Usage',
     bundleSize: 'Bundle Size',
     performance: 'Performance',
+    browserSupport: 'Browser Support',
     aiIntegration: 'AI Integration',
   },
   categories: {
     array: 'Array Utilities',
+    bigint: 'BigInt Utilities',
     function: 'Function Utilities',
     map: 'Map Utilities',
     math: 'Math Utilities',

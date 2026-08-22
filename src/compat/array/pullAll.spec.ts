@@ -53,4 +53,10 @@ describe('pullAll', () => {
     expect(result).toBe(array);
     expect(array).toEqual([1, 2, 3]);
   });
+
+  it('should return the array as is when `values` is `null` or `undefined`', () => {
+    const array = [1, 2, 3];
+    expect(pullAll(array, null as any)).toBe(array);
+    expect(pullAll(array, undefined)).toBe(array);
+  });
 });

@@ -71,4 +71,34 @@ describe('lastIndexOf', () => {
     expect(lastIndexOf(null, 1)).toBe(-1);
     expect(lastIndexOf(undefined, 1)).toBe(-1);
   });
+
+  it(`should treat holes in a sparse array as \`undefined\``, () => {
+    const sparse = [1];
+    sparse[2] = 1;
+
+    expect(lastIndexOf(sparse, undefined, 2)).toBe(1);
+
+    const allHoles: number[] = [];
+    allHoles.length = 2;
+
+    expect(lastIndexOf(allHoles, undefined, 1)).toBe(1);
+  });
+
+  it(`should find values in a sparse array`, () => {
+    const sparse = [1];
+    sparse[2] = 1;
+
+    expect(lastIndexOf(sparse, 1)).toBe(2);
+    expect(lastIndexOf(sparse, 1, 1)).toBe(0);
+
+    const withNaN = [1];
+    withNaN[2] = NaN;
+
+    expect(lastIndexOf(withNaN, NaN)).toBe(2);
+  });
+
+  it(`should work with array-like values`, () => {
+    expect(lastIndexOf({ 0: 1, 1: 2, 2: 3, 3: 2, length: 4 }, 2)).toBe(3);
+    expect(lastIndexOf('abcb', 'b')).toBe(3);
+  });
 });

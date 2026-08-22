@@ -16,7 +16,7 @@ const index = findIndex(arr, doesMatch, fromIndex);
 
 ## 用法
 
-### `findIndex(arr, doesMatch, fromIndex)`
+### `findIndex(arr, doesMatch?, fromIndex?)`
 
 当您想要查找数组中满足特定条件的第一个元素的位置时,使用 `findIndex`。您可以通过多种方式指定条件。如果没有元素满足条件,则返回 `-1`。
 

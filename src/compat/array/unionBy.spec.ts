@@ -55,4 +55,8 @@ describe('unionBy', () => {
     const actual = unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], 'x');
     expect(actual).toEqual([{ x: 1, y: 1 }]);
   });
+
+  it('should normalize `-0` to `0` like lodash', () => {
+    expect(unionBy([-0], [-0], value => value)).toEqual([0]);
+  });
 });

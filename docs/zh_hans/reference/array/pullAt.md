@@ -42,7 +42,7 @@ console.log(items); // [2]
 #### 参数
 
 - `arr` (`T[]`): 要移除元素的数组。
-- `indicesToRemove` (`number[]`): 要移除的元素的索引数组。负数索引从数组末尾开始计算。
+- `indicesToRemove` (`readonly number[]`): 要移除的元素的索引数组。负数索引从数组末尾开始计算。
 
 #### 返回值
 

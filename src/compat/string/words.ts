@@ -14,28 +14,40 @@ const rUnicodeBreak = `[\\p{Z}\\p{P}${rNonCharLatin}]`;
 const rUnicodeMiscUpper = `(?:${rUnicodeUpper}|${rMisc})`;
 const rUnicodeMiscLower = `(?:${rUnicodeLower}|${rMisc})`;
 
-const rUnicodeWord = RegExp(
-  [
-    `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
+let rUnicodeWord: RegExp | undefined;
 
-    `${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)`,
+// The pattern uses Unicode property escapes, which engines older than
+// Chrome 64 / Safari 11.1 cannot parse. Since it is assembled from strings,
+// transpilers cannot rewrite it either, so it is compiled lazily: merely
+// importing this module never throws, only calling `words` without a custom
+// pattern requires engine support.
+function getUnicodeWordPattern(): RegExp {
+  if (rUnicodeWord == null) {
+    rUnicodeWord = RegExp(
+      [
+        `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
 
-    `${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}`,
+        `${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)`,
 
-    `${rUnicodeUpper}+${rUnicodeOptContrUpper}`,
+        `${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}`,
 
-    `${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])`,
+        `${rUnicodeUpper}+${rUnicodeOptContrUpper}`,
 
-    `${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])`,
+        `${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])`,
 
-    `${rNumber}+`,
+        `${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])`,
 
-    '\\p{Emoji_Presentation}',
+        `${rNumber}+`,
 
-    '\\p{Extended_Pictographic}',
-  ].join('|'),
-  'gu'
-);
+        '\\p{Emoji_Presentation}',
+
+        '\\p{Extended_Pictographic}',
+      ].join('|'),
+      'gu'
+    );
+  }
+  return rUnicodeWord;
+}
 
 /**
  * Splits `string` into an array of its words.
@@ -75,11 +87,11 @@ export function words(string: string, index: string | number, guard: object): st
  * const wordsArray1 = words('fred, barney, & pebbles');
  * // => ['fred', 'barney', 'pebbles']
  */
-export function words(str?: string, pattern: string | number | RegExp = rUnicodeWord, guard?: object): string[] {
+export function words(str?: string, pattern?: string | number | RegExp, guard?: object): string[] {
   const input = toString(str);
 
-  if (guard) {
-    pattern = rUnicodeWord;
+  if (guard || pattern === undefined) {
+    pattern = getUnicodeWordPattern();
   }
 
   if (typeof pattern === 'number') {

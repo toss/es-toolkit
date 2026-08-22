@@ -265,4 +265,13 @@ describe('hasIn', () => {
   it(`should return \`false\` for empty paths`, () => {
     expect(hasIn({ a: null }, [])).toBe(false);
   });
+
+  it(`should treat \`-0\` as the key \`'-0'\`, matching lodash`, () => {
+    expect(hasIn({ 0: 'a' }, -0)).toBe(false);
+    expect(hasIn([1, 2], -0)).toBe(false);
+    expect(hasIn(new Array(3), -0)).toBe(false);
+    expect(hasIn('str', -0)).toBe(false);
+    expect(hasIn({ '-0': 'a' }, -0)).toBe(true);
+    expect(hasIn({ a: { '-0': 1 } }, ['a', -0])).toBe(true);
+  });
 });

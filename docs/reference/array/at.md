@@ -34,8 +34,8 @@ at([1, 2, 3, 4], [1.5, 2.9]); // [2, 3]
 
 #### Parameters
 
-- `arr` (`T[]`): The array to get elements from.
-- `indices` (`number[]`): An array of indices of the elements to get. Negative values count from the end of the array.
+- `arr` (`readonly T[]`): The array to get elements from.
+- `indices` (`readonly number[]`): An array of indices of the elements to get. Negative values count from the end of the array.
 
 #### Returns
 

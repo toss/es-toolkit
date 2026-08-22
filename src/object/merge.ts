@@ -1,3 +1,4 @@
+import { isMergeableValue } from '../_internal/isMergeableValue.ts';
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -100,8 +101,4 @@ export function merge(target: Record<PropertyKey, any>, source: Record<PropertyK
   }
 
   return target;
-}
-
-function isMergeableValue(value: unknown) {
-  return isPlainObject(value) || Array.isArray(value);
 }

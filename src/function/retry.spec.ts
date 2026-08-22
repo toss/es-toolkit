@@ -98,6 +98,16 @@ describe('retry', () => {
     expect(shouldRetry).toHaveBeenCalledWith(error, 0);
   });
 
+  it('should pass error to delay function', async () => {
+    const error = new Error('Server Error');
+    const func = vi.fn().mockRejectedValueOnce(error).mockResolvedValue('success');
+    const delayFn = vi.fn(() => 0);
+
+    await retry(func, { delay: delayFn, retries: 1 });
+
+    expect(delayFn).toHaveBeenCalledWith(0, error);
+  });
+
   it('should pass attempt number to shouldRetry', async () => {
     const error = new Error('failure');
     const func = vi.fn().mockRejectedValue(error);
@@ -108,5 +118,16 @@ describe('retry', () => {
     expect(shouldRetry).toHaveBeenCalledWith(error, 0);
     expect(shouldRetry).toHaveBeenCalledWith(error, 1);
     expect(shouldRetry).toHaveBeenCalledWith(error, 2);
+  });
+
+  it('should throw the error from the last attempt without applying a delay', async () => {
+    const func = vi.fn().mockRejectedValue(new Error('failure'));
+    const retries = 3;
+    const delay = vi.fn((attempt: number) => attempt);
+
+    await expect(retry(func, { delay, retries })).rejects.toThrow('failure');
+
+    expect(func).toHaveBeenCalledTimes(retries + 1);
+    expect(delay).toHaveBeenCalledTimes(retries);
   });
 });

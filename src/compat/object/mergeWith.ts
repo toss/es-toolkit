@@ -259,7 +259,9 @@ function mergeWithDeep(
   if (Array.isArray(source)) {
     source = source.slice();
     for (let i = 0; i < source.length; i++) {
-      source[i] = source[i] ?? undefined;
+      if (!(i in source)) {
+        source[i] = undefined;
+      }
     }
   }
 

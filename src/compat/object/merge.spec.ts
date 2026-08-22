@@ -217,6 +217,20 @@ describe('merge', () => {
     expect(actual.a).toBe(null);
   });
 
+  it('should assign `null` values in array sources', () => {
+    expect(merge([1, 2], [null])).toEqual([null, 2]);
+    expect(merge([1, 2], [null, 3])).toEqual([null, 3]);
+    expect(merge({ a: [1, 2] }, { a: [null] })).toEqual({ a: [null, 2] });
+    expect(merge([{ x: 1 }], [null])).toEqual([null]);
+    expect(merge({}, ['a', null])).toEqual({ 0: 'a', 1: null });
+  });
+
+  it('should skip `undefined` values and holes in array sources', () => {
+    expect(merge([1, 2], [undefined, 3])).toEqual([1, 3]);
+    // eslint-disable-next-line no-sparse-arrays
+    expect(merge([1, 2], [, 3])).toEqual([1, 3]);
+  });
+
   it('should assign non array/buffer/typed-array/plain-object source values directly', () => {
     function Foo() {}
 

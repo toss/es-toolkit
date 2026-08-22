@@ -56,6 +56,7 @@ const SERVER_ICON = [
   'M6 16h.01',
 ];
 const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
+const REPEAT_ICON = ['m17 2 4 4-4 4', 'M3 11v-1a4 4 0 0 1 4-4h14', 'm7 22-4-4 4-4', 'M21 13v1a4 4 0 0 1-4 4H3'];
 const BRACES_ICON = [
   'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1',
   'M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1',
@@ -77,10 +78,12 @@ export const flavors = [
       { labelKey: 'installation', slug: 'usage' },
       { labelKey: 'bundleSize', slug: 'bundle-size' },
       { labelKey: 'performance', slug: 'performance' },
+      { labelKey: 'browserSupport', slug: 'browser-support' },
       { labelKey: 'aiIntegration', slug: 'ai-integration' },
     ],
     categories: [
       'array',
+      'bigint',
       'function',
       'map',
       'math',
@@ -161,6 +164,21 @@ export const flavors = [
     icon: BRACES_ICON,
     iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',
+  },
+  {
+    value: 'iterator',
+    label: 'es-toolkit/iterator',
+    description: 'Lazy iterators',
+    descriptions: {
+      ko: '지연 평가 이터레이터',
+      ja: '遅延評価イテレータ',
+      zh_hans: '惰性迭代器',
+    },
+    prefix: 'iterator',
+    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    categories: [],
+    icon: REPEAT_ICON,
+    iconColor: 'var(--vp-c-red-1)',
   },
 ] as const satisfies readonly FlavorSpec[];
 

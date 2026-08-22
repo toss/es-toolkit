@@ -1,3 +1,5 @@
+import { isSymbol } from '../predicate/isSymbol.ts';
+
 /**
  * Converts `value` to a string.
  *
@@ -19,15 +21,26 @@ export function toString(value: any): string {
     return '';
   }
 
+  return baseToString(value);
+}
+
+function baseToString(value: any): string {
   if (typeof value === 'string') {
     return value;
   }
 
   if (Array.isArray(value)) {
-    return value.map(toString).join(',');
+    return value.map(baseToString).join(',');
   }
 
-  const result = String(value);
+  if (isSymbol(value)) {
+    return value.toString();
+  }
+
+  // Concatenation converts the value with the default hint, which reads `valueOf()` before
+  // `toString()`. `String(value)` uses the string hint instead and never reads `valueOf()`.
+  // eslint-disable-next-line no-implicit-coercion
+  const result = value + '';
 
   if (result === '0' && Object.is(Number(value), -0)) {
     return '-0';

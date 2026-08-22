@@ -1,3 +1,4 @@
+import { isIterable } from '../../predicate/isIterable.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isMap } from '../predicate/isMap.ts';
 import { isSet } from '../predicate/isSet.ts';
@@ -10,8 +11,8 @@ import { isSet } from '../predicate/isSet.ts';
  * @returns Returns an array of the record's values or an empty array if null/undefined.
  *
  * @example
- * toArray({ 'a': 1, 'b': 2 }) // => returns [1, 2]
- * toArray(null) // => returns []
+ * toArray({ 'a': 1, 'b': 2 }) // => [1, 2]
+ * toArray(null) // => []
  */
 export function toArray<T>(value: Record<string, T> | Record<number, T> | null | undefined): T[];
 
@@ -23,8 +24,8 @@ export function toArray<T>(value: Record<string, T> | Record<number, T> | null |
  * @returns Returns an array of the value's values.
  *
  * @example
- * toArray({ x: 10, y: 20 }) // => returns [10, 20]
- * toArray('abc') // => returns ['a', 'b', 'c']
+ * toArray({ x: 10, y: 20 }) // => [10, 20]
+ * toArray('abc') // => ['a', 'b', 'c']
  */
 export function toArray<T>(value: T): Array<T[keyof T]>;
 
@@ -34,7 +35,7 @@ export function toArray<T>(value: T): Array<T[keyof T]>;
  * @returns Returns an empty array.
  *
  * @example
- * toArray() // => returns []
+ * toArray() // => []
  */
 export function toArray(): any[];
 
@@ -45,10 +46,10 @@ export function toArray(): any[];
  * @returns Returns the converted array.
  *
  * @example
- * toArray({ 'a': 1, 'b': 2 }) // => returns [1,2]
- * toArray('abc') // => returns ['a', 'b', 'c']
- * toArray(1) // => returns []
- * toArray(null) // => returns []
+ * toArray({ 'a': 1, 'b': 2 }) // => [1,2]
+ * toArray('abc') // => ['a', 'b', 'c']
+ * toArray(1) // => []
+ * toArray(null) // => []
  */
 export function toArray(value?: unknown): any[] {
   if (value == null) {
@@ -60,6 +61,10 @@ export function toArray(value?: unknown): any[] {
   }
 
   if (typeof value === 'object') {
+    if (isIterable(value)) {
+      return Array.from(value);
+    }
+
     return Object.values(value);
   }
 
