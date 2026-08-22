@@ -51,11 +51,11 @@ describe('pickBy', () => {
     expect(result).toEqual({ 2: 'pick' });
   });
 
-  it('should type number index signature keys as strings', () => {
+  it('should type number index signature keys as numeric strings', () => {
     const obj: Record<number, string> = { 1: 'skip', 2: 'pick' };
 
     pickBy(obj, (_value, key) => {
-      expectTypeOf(key).toEqualTypeOf<string>();
+      expectTypeOf(key).toEqualTypeOf<`${number}`>();
       return key === '2';
     });
   });

@@ -34,7 +34,7 @@ const admins = pickBy(data, (value, key) => key.startsWith('admin') && value > 2
 #### パラメータ
 
 - `obj` (`T extends Record<string, any>`): プロパティをフィルタリングするオブジェクトです。
-- `shouldPick` (`(value: T[keyof T], key: StringKeyOf<T>) => boolean`): プロパティを選択するかを決定する条件関数です。値とキーを受け取り、選択する場合は`true`、除外する場合は`false`を返します。数値キーは条件関数に文字列として渡されます。
+- `shouldPick` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): プロパティを選択するかを決定する条件関数です。値とキーを受け取り、選択する場合は`true`、除外する場合は`false`を返します。数値キーは条件関数に文字列として渡されます。
 
 #### 戻り値
 

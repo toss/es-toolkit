@@ -1,6 +1,7 @@
 export type { DeepPartial } from './DeepPartial.ts';
 export type { DeepReadonly } from './DeepReadonly.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';
+export type { ObjectKeys } from './ObjectKeys.ts';
 export type { Simplify } from './Simplify.ts';
 export type { ToCamelCaseKeys } from './ToCamelCaseKeys.ts';
 export type { ToConstantCaseKeys } from './ToConstantCaseKeys.ts';

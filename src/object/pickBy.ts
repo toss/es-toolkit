@@ -1,4 +1,4 @@
-import type { StringKeyOf } from '../_internal/StringKeyOf.ts';
+import type { ObjectKeys } from '../types/ObjectKeys.ts';
 
 /**
  * Creates a new object composed of the properties that satisfy the predicate function.
@@ -21,11 +21,11 @@ import type { StringKeyOf } from '../_internal/StringKeyOf.ts';
  */
 export function pickBy<T extends Record<string, any>>(
   obj: T,
-  shouldPick: (value: T[keyof T], key: StringKeyOf<T>) => boolean
+  shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  const keys = Object.keys(obj) as Array<StringKeyOf<T>>;
+  const keys = Object.keys(obj) as Array<ObjectKeys<T>>;
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const objectKey = key as keyof T;

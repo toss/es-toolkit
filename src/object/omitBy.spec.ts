@@ -51,11 +51,11 @@ describe('omitBy', () => {
     expect(result).toEqual({ 1: 'keep' });
   });
 
-  it('should type number index signature keys as strings', () => {
+  it('should type number index signature keys as numeric strings', () => {
     const obj: Record<number, string> = { 1: 'keep', 2: 'omit' };
 
     omitBy(obj, (_value, key) => {
-      expectTypeOf(key).toEqualTypeOf<string>();
+      expectTypeOf(key).toEqualTypeOf<`${number}`>();
       return key === '2';
     });
   });
