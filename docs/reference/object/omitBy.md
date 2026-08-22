@@ -38,4 +38,7 @@ const nonAdmins = omitBy(data, (value, key) => key.startsWith('admin'));
 
 #### Returns
 
-(`Partial<T>`): A new object consisting of properties that do not satisfy the condition function.
+A new object consisting of properties that do not satisfy the condition function. Its type depends on whether `obj` has an index signature:
+
+- If `obj` has a **string or number index signature** (e.g. `Record<string, number>`): returns `T` — such a type already allows any key to be missing, so the result can be passed anywhere the original object is expected.
+- Otherwise (e.g. `{ a: number; b: string }`): returns `Partial<T>` — any of the known properties may have been excluded.

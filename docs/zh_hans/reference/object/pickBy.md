@@ -38,4 +38,7 @@ const admins = pickBy(data, (value, key) => key.startsWith('admin') && value > 2
 
 #### 返回值
 
-(`Partial<T>`): 返回一个仅包含满足条件函数的属性的新对象。
+返回一个仅包含满足条件函数的属性的新对象。返回类型取决于 `obj` 是否有索引签名。
+
+- 如果 `obj` 有**字符串或数字索引签名**（例如 `Record<string, number>`）：返回 `T` — 这类类型本来就允许任何键不存在，因此结果可以直接传给需要原对象的地方。
+- 否则（例如 `{ a: number; b: string }`）：返回 `Partial<T>` — 因为已知属性中的任何一个都可能已被排除。
