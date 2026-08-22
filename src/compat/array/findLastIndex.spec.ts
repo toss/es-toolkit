@@ -110,6 +110,15 @@ describe('findLastIndex', () => {
     expect(findLastIndex(array, x => x === 3, -0.5)).toBe(5);
   });
 
+  it(`\`findLastIndex\` should coerce a non-numeric \`fromIndex\` like lodash`, () => {
+    // eslint-disable-next-line
+    // @ts-ignore
+    expect(findLastIndex(array, x => x === 1, '-2')).toBe(3);
+    // eslint-disable-next-line
+    // @ts-ignore
+    expect(findLastIndex(array, x => x === 1, 'abc')).toBe(0);
+  });
+
   it(`\`findLastIndex\` with \`NaN\` \`fromIndex\` should start from 0`, () => {
     // Lodash coerces `NaN` via `toInteger`, so `fromIndex` becomes `0` and the
     // search still covers the first element. The existing falsey test uses a
