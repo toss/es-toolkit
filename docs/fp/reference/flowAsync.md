@@ -63,4 +63,4 @@ await risky(1); // rejects with Error: user 1 not found
 
 #### Returns
 
-(`(...args: any[]) => Promise<unknown>`): A new async function that applies every function in sequence, awaiting each result. It accepts the same parameters as the first function and resolves to the awaited result of the last. The public overloads infer the precise types from the chain.
+A new async function that applies every function in sequence, awaiting each result. It accepts the same parameters as the first function and resolves to the awaited result of the last. The public overloads infer the precise types from the chain.
