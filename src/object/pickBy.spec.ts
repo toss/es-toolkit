@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { pickBy } from './pickBy';
 
 describe('pickBy', () => {
@@ -35,5 +35,35 @@ describe('pickBy', () => {
     const shouldPick = (value: number | { nested: string }, key: string) => key === 'b';
     const result = pickBy(obj, shouldPick);
     expect(result).toEqual({ b: { nested: 'pick' } });
+  });
+
+  it('should pass numeric keys as strings', () => {
+    const obj = { 1: 'skip', 2: 'pick' };
+    const keys: string[] = [];
+
+    const result = pickBy(obj, (value, key) => {
+      expectTypeOf(key).toEqualTypeOf<'1' | '2'>();
+      keys.push(key);
+      return value === 'pick';
+    });
+
+    expect(keys).toEqual(['1', '2']);
+    expect(result).toEqual({ 2: 'pick' });
+  });
+
+  it('should type number index signature keys as numeric strings', () => {
+    const obj: Record<number, string> = { 1: 'skip', 2: 'pick' };
+
+    pickBy(obj, (_value, key) => {
+      expectTypeOf(key).toEqualTypeOf<`${number}`>();
+      return key === '2';
+    });
+  });
+
+  it('should preserve string literal key types', () => {
+    pickBy({ a: 1, b: 2 }, (_value, key) => {
+      expectTypeOf(key).toEqualTypeOf<'a' | 'b'>();
+      return true;
+    });
   });
 });
