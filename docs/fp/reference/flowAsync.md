@@ -59,7 +59,7 @@ await risky(1); // rejects with Error: user 1 not found
 
 #### Parameters
 
-- `functions` (`Array<(...args: any[]) => any>`): The functions to compose, from left to right. The first may take any number of arguments; the rest are unary, each receiving the awaited output of the previous function.
+- `functions`: The functions to compose, from left to right. The first may take any number of arguments; the rest are unary, each receiving the awaited output of the previous function.
 
 #### Returns
 
