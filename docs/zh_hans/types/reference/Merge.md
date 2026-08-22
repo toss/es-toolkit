@@ -1,6 +1,6 @@
 # Merge
 
-将两个对象类型深度合并为一个类型。这是 [`merge`](../../reference/object/merge.md) 的返回类型。内置的交叉类型 `T & S` 在嵌套属性重叠时可能坍缩为 `never`,而 `Merge<T, S>` 会像 `merge` 在运行时那样逐个属性地合并。
+创建将两个对象类型深度合并后的类型。
 
 ```typescript
 type Result = Merge<Target, Source>;
@@ -10,46 +10,43 @@ type Result = Merge<Target, Source>;
 
 ### `Merge<T, S>`
 
-当你需要表示将源对象深度合并到目标对象后的结果类型时使用。例如,可以表示用 [`merge`](../../reference/object/merge.md) 将覆盖项应用到默认配置后得到的配置对象类型。
+当你需要表示两个对象深度合并后的结果类型时使用。例如,可以表示用 [merge](../../reference/object/merge.md) 将覆盖项应用到默认配置后的结果类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Defaults = {
-  server: { host: string; port: number };
-  debug: boolean;
-};
-
-type Overrides = {
-  server: { port: 8080; tls: boolean };
-};
+type Defaults = { host: string; port: number };
+type Overrides = { debug: boolean };
 
 type Config = Merge<Defaults, Overrides>;
-// => { server: { host: string; port: 8080; tls: boolean }; debug: boolean }
+// => { host: string; port: number; debug: boolean }
 ```
 
-#### 合并规则
-
-结果遵循 `merge` 在运行时应用的规则。
-
-- **只存在于一侧的键**: 原样保留,并保持可选性。
-- **两侧都是普通对象**: 递归合并。
-- **两侧都是数组**: 元组按索引逐个合并;其他数组则变为包含两侧元素类型的数组。
-- **源值可能为 `undefined`**: 由于 `merge` 不会用 `undefined` 覆盖已定义的值,因此保留目标类型。
-- **不可合并的值** (函数、`Date`、`RegExp`、`Map`、`Set` 等非普通对象): 源值会替换目标值。
-- **数组遇到普通对象**: 由于 `merge` 会把源的属性赋值到目标上,因此两侧的属性都会保留(`T & S`)。
+嵌套对象也可以合并。TypeScript 内置的合并类型 `T & S` 不会合并嵌套对象,而使用 `Merge` 类型则可以合并。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-// 元组按索引逐个合并。
-type A = Merge<{ a: [1, 2] }, { a: [3] }>; // { a: [3, 2] }
+type Target = { server: { host: string; port: number } };
+type Source = { server: { tls: boolean } };
 
-// 可能为 undefined 的源值不会覆盖目标。
-type B = Merge<{ a: number }, { a?: string }>; // { a: number | string }
+type Result = Merge<Target, Source>;
+// => { server: { host: string; port: number; tls: boolean } }
+```
 
-// 非普通对象不会被合并,而是被替换。
-type C = Merge<{ at: { x: number } }, { at: Date }>; // { at: Date }
+当存在重叠的键时,使用第二个对象的值类型。TypeScript 内置的合并类型 `T & S` 会把重叠键的值显示为 `never`,而使用 `Merge` 类型时,会使用第二个对象的值类型。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Target = { id: string; value: string };
+type Source = { value: number };
+
+type Result = Merge<Target, Source>;
+// => { id: string; value: number }
+
+type Broken = Target & Source;
+// => { id: string; value: never } (string & number 会变成 never)
 ```
 
 #### 类型参数
