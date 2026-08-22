@@ -18,6 +18,13 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 최소 한 개 이상의 요소를 가지는 배열이에요.                                             |
 | [`DeepPartial<T>`](./reference/DeepPartial.md)               | 중첩된 객체까지 재귀적으로 모두 선택적으로 만들어요.                                    |
 | [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요.                                  |
+| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 두 타입이 정확히 같은지 알려줘요.                                                       |
+| [`Primitive`](./reference/Primitive.md)                      | 자바스크립트의 모든 원시값을 모은 유니온이에요.                                         |
+| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | 키도 값도 알 수 없는 객체예요. `{}` 대신 쓰세요.                                        |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | 프로퍼티가 하나도 없는 객체예요. `isEmptyObject`와 짝을 이뤄요.                         |
+| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 원하는 키만 골라 선택적으로 만들어요. 기본 `Partial`의 키 지정 버전이에요.              |
+| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 원하는 키만 골라 필수로 만들어요. 기본 `Required`의 키 지정 버전이에요.                 |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 모든 키를 재귀적으로 카멜 표기법으로 변환해요. `toCamelCaseKeys`의 반환 타입이에요.     |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 모든 키를 재귀적으로 스네이크 표기법으로 변환해요. `toSnakeCaseKeys`의 반환 타입이에요. |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 모든 키를 재귀적으로 파스칼 표기법으로 변환해요. `toPascalCaseKeys`의 반환 타입이에요.  |

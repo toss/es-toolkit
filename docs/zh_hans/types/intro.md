@@ -18,6 +18,13 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 至少包含一个元素的数组。                                          |
 | [`DeepPartial<T>`](./reference/DeepPartial.md)               | 递归地将包括嵌套对象在内的所有属性变为可选。                      |
 | [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。               |
+| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 判断两个类型是否完全相同。                                        |
+| [`Primitive`](./reference/Primitive.md)                      | JavaScript 中所有原始值的联合。                                   |
+| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` 能够产生的任何值。                                   |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | 键和值都未知的对象。用它代替 `{}`。                               |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | 没有任何属性的对象。与 `isEmptyObject` 相对应。                   |
+| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 把指定的键变为可选。相当于按键生效的内置 `Partial`。              |
+| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 把指定的键变为必填。相当于按键生效的内置 `Required`。             |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为驼峰命名法。`toCamelCaseKeys` 的返回类型。    |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为蛇形命名法。`toSnakeCaseKeys` 的返回类型。    |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为帕斯卡命名法。`toPascalCaseKeys` 的返回类型。 |
