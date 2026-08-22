@@ -34,7 +34,7 @@ const nonAdmins = omitBy(data, (value, key) => key.startsWith('admin'));
 #### パラメータ
 
 - `obj` (`T extends Record<string, any>`): プロパティをフィルタリングするオブジェクトです。
-- `shouldOmit` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): プロパティを除外するかを決定する条件関数です。値とキーを受け取り、除外する場合は`true`、維持する場合は`false`を返します。数値キーは条件関数に文字列として渡されます。
+- `shouldOmit` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): プロパティを除外するかを決定する条件関数です。値とキーを受け取り、除外する場合は`true`、維持する場合は`false`を返します。数値キーは条件関数に文字列として渡されます([`ObjectKeys<T>`](/ja/types/reference/ObjectKeys)を参照)。
 
 #### 戻り値
 

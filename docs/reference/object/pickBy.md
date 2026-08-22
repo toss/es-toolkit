@@ -34,7 +34,7 @@ const admins = pickBy(data, (value, key) => key.startsWith('admin') && value > 2
 #### Parameters
 
 - `obj` (`T extends Record<string, any>`): The object to filter properties from.
-- `shouldPick` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): A condition function that determines whether to pick a property. Receives the value and key, and returns `true` to pick, `false` to exclude. Numeric keys are passed to the condition function as strings.
+- `shouldPick` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): A condition function that determines whether to pick a property. Receives the value and key, and returns `true` to pick, `false` to exclude. Numeric keys are passed to the condition function as strings (see [`ObjectKeys<T>`](/types/reference/ObjectKeys)).
 
 #### Returns
 
