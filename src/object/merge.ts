@@ -1,35 +1,7 @@
 import { isMergeableValue } from '../_internal/isMergeableValue.ts';
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
-
-/**
- * The result of deeply merging `S` into `T`, key by key.
- *
- * When both sides have an object (or array) at the same key, the merge recurses.
- * If the source value type can be `undefined`, the target type is kept because
- * `merge` skips `undefined` source values at runtime.
- *
- * @template T - Type of the target object.
- * @template S - Type of the source object.
- */
-export type MergeDeep<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>> = {
-  [K in keyof T | keyof S]: K extends keyof S
-    ? K extends keyof T
-      ? MergeDeepValue<T[K], S[K]>
-      : S[K]
-    : K extends keyof T
-      ? T[K]
-      : never;
-};
-
-type MergeDeepValue<TargetValue, SourceValue> =
-  SourceValue extends Record<PropertyKey, any>
-    ? TargetValue extends Record<PropertyKey, any>
-      ? MergeDeep<TargetValue, SourceValue>
-      : SourceValue
-    : undefined extends SourceValue
-      ? TargetValue | Exclude<SourceValue, undefined>
-      : SourceValue;
+import type { Merge } from '../types/Merge.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -74,7 +46,7 @@ type MergeDeepValue<TargetValue, SourceValue> =
 export function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
   target: T,
   source: S
-): MergeDeep<T, S>;
+): Merge<T, S>;
 
 export function merge(target: Record<PropertyKey, any>, source: Record<PropertyKey, any>): Record<PropertyKey, any> {
   const sourceKeys = Object.keys(source) as Array<keyof typeof source>;

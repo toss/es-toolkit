@@ -1,5 +1,6 @@
 export type { DeepPartial } from './DeepPartial.ts';
 export type { DeepReadonly } from './DeepReadonly.ts';
+export type { Merge } from './Merge.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';
 export type { Simplify } from './Simplify.ts';
 export type { ToCamelCaseKeys } from './ToCamelCaseKeys.ts';

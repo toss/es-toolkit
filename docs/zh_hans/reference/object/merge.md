@@ -50,7 +50,7 @@ merge(target, source);
 
 #### 返回值
 
-(`T & S`): 返回已合并源对象的目标对象。
+([`Merge<T, S>`](../../types/reference/Merge.md)): 返回已合并源对象的目标对象。嵌套的对象类型会按属性逐个合并。
 
 ## 示例
 
