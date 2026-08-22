@@ -1,6 +1,7 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { PropertyPath } from '../_internal/PropertyPath.ts';
+import { toKey } from '../_internal/toKey.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { toPath } from '../util/toPath.ts';
 
@@ -64,12 +65,12 @@ export function hasIn<T>(object: T, path: PropertyPath): boolean {
   let current = object;
 
   for (let i = 0; i < resolvedPath.length; i++) {
-    const key = resolvedPath[i] as keyof T;
+    const key = toKey(resolvedPath[i]) as keyof T;
 
     // hasIn: check both own and inherited properties
     if (current == null || !(key in Object(current))) {
       const isSparseIndex =
-        (Array.isArray(current) || isArguments(current)) && isIndex(key) && (key as number) < current.length;
+        (Array.isArray(current) || isArguments(current)) && isIndex(key) && Number(key) < current.length;
 
       if (!isSparseIndex) {
         return false;
