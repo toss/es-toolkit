@@ -104,6 +104,10 @@ describe('findLastIndex', () => {
 
   it(`\`findLastIndex\` should coerce \`fromIndex\` to an integer`, () => {
     expect(findLastIndex(array, x => x === 2, 4.2)).toBe(4);
+    // `fromIndex` is truncated toward zero, so the search starts at index 5, 2, and 6.
+    expect(findLastIndex(array, x => x === 3, -1.5)).toBe(5);
+    expect(findLastIndex(array, x => x === 3, -4.5)).toBe(2);
+    expect(findLastIndex(array, x => x === 3, -0.5)).toBe(5);
   });
 
   it(`\`findLastIndex\` with \`NaN\` \`fromIndex\` should start from 0`, () => {
