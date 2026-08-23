@@ -1,5 +1,11 @@
 import type { ObjectKeys } from '../types/ObjectKeys.ts';
 
+type OmitByResult<T> = string extends keyof T
+  ? Record<string, T[string & keyof T]>
+  : number extends keyof T
+    ? Record<number, T[number & keyof T]>
+    : Partial<T>;
+
 /**
  * Creates a new object composed of the properties that do not satisfy the predicate function.
  *
@@ -22,7 +28,7 @@ import type { ObjectKeys } from '../types/ObjectKeys.ts';
 export function omitBy<T extends Record<string, any>>(
   obj: T,
   shouldOmit: (value: T[keyof T], key: ObjectKeys<T>) => boolean
-): Partial<T> {
+): OmitByResult<T> {
   const result: Partial<T> = {};
 
   const keys = Object.keys(obj) as Array<ObjectKeys<T>>;
@@ -37,5 +43,5 @@ export function omitBy<T extends Record<string, any>>(
     }
   }
 
-  return result;
+  return result as OmitByResult<T>;
 }

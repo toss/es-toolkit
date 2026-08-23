@@ -1,5 +1,11 @@
 import type { ObjectKeys } from '../types/ObjectKeys.ts';
 
+type PickByResult<T> = string extends keyof T
+  ? Record<string, T[string & keyof T]>
+  : number extends keyof T
+    ? Record<number, T[number & keyof T]>
+    : Partial<T>;
+
 /**
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
@@ -22,7 +28,7 @@ import type { ObjectKeys } from '../types/ObjectKeys.ts';
 export function pickBy<T extends Record<string, any>>(
   obj: T,
   shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
-): Partial<T> {
+): PickByResult<T> {
   const result: Partial<T> = {};
 
   const keys = Object.keys(obj) as Array<ObjectKeys<T>>;
@@ -36,5 +42,5 @@ export function pickBy<T extends Record<string, any>>(
     }
   }
 
-  return result;
+  return result as PickByResult<T>;
 }

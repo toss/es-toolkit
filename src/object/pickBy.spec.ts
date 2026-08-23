@@ -54,16 +54,35 @@ describe('pickBy', () => {
   it('should type number index signature keys as numeric strings', () => {
     const obj: Record<number, string> = { 1: 'skip', 2: 'pick' };
 
-    pickBy(obj, (_value, key) => {
+    const result = pickBy(obj, (_value, key) => {
       expectTypeOf(key).toEqualTypeOf<`${number}`>();
       return key === '2';
     });
+
+    expectTypeOf(result).toEqualTypeOf<Record<number, string>>();
+  });
+
+  it('should preserve string index signatures', () => {
+    const obj: Record<string, number> = { a: 1, b: 2 };
+    const result = pickBy(obj, value => value === 2);
+
+    expectTypeOf(result).toEqualTypeOf<Record<string, number>>();
+  });
+
+  it('should not preserve required properties alongside an index signature', () => {
+    const obj: Record<string, number> & { required: number } = { required: 1, other: 2 };
+    const result = pickBy(obj, (_value, key) => key !== 'required');
+
+    expectTypeOf(result).toEqualTypeOf<Record<string, number>>();
+    expect(result).toEqual({ other: 2 });
   });
 
   it('should preserve string literal key types', () => {
-    pickBy({ a: 1, b: 2 }, (_value, key) => {
+    const result = pickBy({ a: 1, b: 2 }, (_value, key) => {
       expectTypeOf(key).toEqualTypeOf<'a' | 'b'>();
       return true;
     });
+
+    expectTypeOf(result).toEqualTypeOf<Partial<{ a: number; b: number }>>();
   });
 });
