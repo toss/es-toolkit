@@ -2,7 +2,7 @@
 name: migrate
 description: Guide migrating lodash code to es-toolkit. Use when the user wants to migrate from lodash, replace lodash imports, reduce bundle size by switching to es-toolkit, or understand the difference between es-toolkit and es-toolkit/compat.
 argument-hint: '<paste lodash code, function names, or ask about strict vs compat>'
-allowed-tools: Read, Grep, Glob
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # Lodash Migration & Compat Guide
@@ -21,7 +21,7 @@ $ARGUMENTS — Lodash code to migrate, specific function names, or a question ab
 
 ## Why source-first matters
 
-The only reliable way to know the difference between strict and compat is to read the actual implementation. Never guess — always verify from source.
+The only reliable way to know the difference between strict and compat is to inspect the version installed in the user's project. The skill may be installed as a standalone directory, so never assume the es-toolkit repository or a sibling `docs` directory is available.
 
 ## Workflow
 
@@ -31,14 +31,37 @@ The only reliable way to know the difference between strict and compat is to rea
 
 Extract which lodash functions are used and how they're imported.
 
-#### 2. Verify availability in source code
+#### 2. Verify availability in the installed package
 
-For each function, search both APIs:
+Run from the package that depends on es-toolkit. In a monorepo this is usually a workspace package, not the repository root. If the project uses Yarn Plug'n'Play, use `yarn node` instead of `node`.
 
-- `src/{category}/{fn}.ts` — strict API
-- `src/compat/{category}/{fn}.ts` — compat API
+Replace the example names with the lodash functions found in the input:
 
-Read the implementation to understand the exact signature and any behavioral differences.
+```bash
+node --input-type=module -e "
+const names = ['get', 'chunk', 'map'];
+const entries = ['es-toolkit', 'es-toolkit/fp', 'es-toolkit/server', 'es-toolkit/compat'];
+const modules = await Promise.all(entries.map(entry => import(entry).catch(() => null)));
+if (modules.every(module => module == null)) {
+  console.error('es-toolkit is not resolvable from ' + process.cwd());
+  process.exit(1);
+}
+for (const name of names) {
+  const found = entries.filter((_, index) => modules[index] != null && name in modules[index]);
+  console.log(name.padEnd(20), found.join(', ') || 'NOT AVAILABLE');
+}
+"
+```
+
+A function can appear in several entry points, so read the complete result. `es-toolkit/types` is type-only and cannot be checked through a runtime import.
+
+Resolve the package metadata with the following command, then read declarations under its `dist/` directory for exact signatures and JSDoc. Do not assume a conventional `node_modules` path.
+
+```bash
+node -e "console.log(require.resolve('es-toolkit/package.json'))"
+```
+
+When the current project is the es-toolkit source repository itself, inspect `src/{category}/{fn}.ts`, `src/compat/{category}/{fn}.ts`, and their specs directly instead of requiring a built package.
 
 #### 3. Determine the right migration path
 
@@ -56,7 +79,7 @@ If the function only exists in compat (like `get`, `set`, `has`), explain why �
 For each function, provide:
 
 - Availability: es-toolkit and/or es-toolkit/compat
-- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}` (strict) or `https://es-toolkit.dev/reference/compat/{category}/{fn}` (compat)
+- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html` (strict) or `https://es-toolkit.dev/compat/reference/{category}/{fn}.html` (compat)
 - Before (lodash) and After (es-toolkit) code examples
 - Any behavioral differences found in source code
 - **Feature comparison table**: Compare API capabilities side-by-side (e.g., cancel support, flush, maxWait, return values, AbortSignal, callback arguments). Read both implementations to identify all supported options and present them in a table like:
@@ -87,7 +110,7 @@ When migrating many files, mention practical automation approaches:
 
 #### 6. Note bundle size impact
 
-es-toolkit is up to 97% smaller than lodash and 2-3x faster. Bundle size numbers come from `benchmarks/bundle-size/` and runtime performance numbers from `benchmarks/performance/` and `docs/performance.md` — reference them for specific function comparisons if the user asks.
+Explain that strict and compat imports are tree-shakeable, but quote exact size or performance numbers only after measuring the user's project or reading current benchmark data from an es-toolkit source checkout. Otherwise link to the official bundle-size and performance pages.
 
 ### If no specific function (migration strategy overview)
 
@@ -110,11 +133,16 @@ For each option, include a **trade-off matrix**:
 
 For concrete behavioral differences, read a few representative function pairs from source (e.g., `chunk`, `debounce`) to give real examples rather than abstract descriptions.
 
-## Search local docs for discovery
+## Documentation links
 
-If you need to check whether a lodash function has an es-toolkit equivalent:
+- Migration overview: `https://es-toolkit.dev/compat/intro.html`
+- Bundle size: `https://es-toolkit.dev/bundle-size.html`
+- Performance: `https://es-toolkit.dev/performance.html`
 
-- **By name**: Read `docs/reference/{category}/{functionName}.md` directly
-- **By keyword**: `Grep` for the function name across `docs/reference/**/*.md`
-- **Compat-only functions**: `Glob docs/reference/compat/{category}/*.md` — then check if the same file exists in `docs/reference/{category}/`
-- **Available categories**: array, compat, error, function, map, math, object, predicate, promise, set, string, util
+Function pages use these forms:
+
+- strict: `https://es-toolkit.dev/reference/{category}/{fn}.html`
+- compat: `https://es-toolkit.dev/compat/reference/{category}/{fn}.html`
+- fp: `https://es-toolkit.dev/fp/reference/{fn}.html`
+
+If you are unsure that a page exists, omit the page link rather than guessing.

@@ -42,6 +42,8 @@ jobs:
           else
             echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
           fi
+      - name: Plugin skills
+        run: node .scripts/check-plugin-skills.mjs
 
   typecheck:
     runs-on: ubuntu-latest
