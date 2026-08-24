@@ -1,6 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { toArray } from '../_internal/toArray.ts';
+import { toInteger } from '../compat.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -61,13 +62,11 @@ export function findLastIndex<T>(
   if (!arr) {
     return -1;
   }
-  if (Number.isNaN(fromIndex)) {
-    fromIndex = 0;
-  }
+  const index = toInteger(fromIndex);
   if (fromIndex < 0) {
-    fromIndex = Math.max(arr.length + fromIndex, 0);
+    fromIndex = Math.max(arr.length + index, 0);
   } else {
-    fromIndex = Math.min(fromIndex, arr.length - 1);
+    fromIndex = Math.min(index, arr.length - 1);
   }
 
   const subArray = toArray(arr).slice(0, fromIndex + 1);
