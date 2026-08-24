@@ -32,7 +32,7 @@ describe('differenceWith', () => {
 
     expect(actual).toEqual([[], []]);
 
-    expect(differenceWith([-0, 1], [1])).toEqual([-0]);
+    expect(differenceWith([-0, 1], [1])).toEqual([0]);
   });
 
   it(`should match \`NaN\``, () => {
@@ -64,7 +64,7 @@ describe('differenceWith', () => {
     expect(actual).toEqual([[], []]);
 
     const largeArray = times(LARGE_ARRAY_SIZE, stubOne);
-    expect(differenceWith([-0, 1], largeArray)).toEqual([-0]);
+    expect(differenceWith([-0, 1], largeArray)).toEqual([0]);
   });
 
   it(`should work with large arrays of \`NaN\``, () => {
@@ -117,5 +117,10 @@ describe('differenceWith', () => {
     const actual = others.map(other => differenceWith(array, other, eq).map(toString));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should normalize `-0` to `0` like lodash', () => {
+    expect(differenceWith([-0, 1], [1])).toEqual([0]);
+    expect(differenceWith([-0], [])).toEqual([0]);
   });
 });
