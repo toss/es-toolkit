@@ -30,6 +30,8 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 모든 키를 재귀적으로 파스칼 표기법으로 변환해요. `toPascalCaseKeys`의 반환 타입이에요.  |
 | [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | 모든 키를 재귀적으로 케밥 표기법으로 변환해요. `toKebabCaseKeys`의 반환 타입이에요.     |
 | [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | 모든 키를 재귀적으로 상수 표기법으로 변환해요. `toConstantCaseKeys`의 반환 타입이에요.  |
+| [`Merge<T, S>`](./reference/Merge.md)                        | 한 객체 타입에 다른 객체 타입을 깊게 합친 결과예요. `merge`의 반환 타입이에요.          |
+| [`ObjectKeys<T>`](./reference/ObjectKeys.md)                 | `Object.keys`가 돌려주는 형태로 키를 유니온으로 만들어요. `ValueOf`의 키 버전이에요.    |
 
 ## 선정 기준
 

@@ -10,26 +10,28 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 我们只挑选了那些因为 TypeScript 没有内置、你不得不每次手写的类型。
 
-| 类型                                                         | 说明                                                              |
-| ------------------------------------------------------------ | ----------------------------------------------------------------- |
-| [`ValueOf<T>`](./reference/ValueOf.md)                       | 创建对象所有值类型的联合。`keyof` 的值版本。                      |
-| [`Simplify<T>`](./reference/Simplify.md)                     | 将交叉类型或映射类型展开为单个易读的对象类型。                    |
-| [`Writable<T>`](./reference/Writable.md)                     | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。           |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 至少包含一个元素的数组。                                          |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)               | 递归地将包括嵌套对象在内的所有属性变为可选。                      |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。               |
-| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 判断两个类型是否完全相同。                                        |
-| [`Primitive`](./reference/Primitive.md)                      | JavaScript 中所有原始值的联合。                                   |
-| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` 能够产生的任何值。                                   |
-| [`UnknownRecord`](./reference/UnknownRecord.md)              | 键和值都未知的对象。用它代替 `{}`。                               |
-| [`EmptyObject`](./reference/EmptyObject.md)                  | 没有任何属性的对象。与 `isEmptyObject` 相对应。                   |
-| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 把指定的键变为可选。相当于按键生效的内置 `Partial`。              |
-| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 把指定的键变为必填。相当于按键生效的内置 `Required`。             |
-| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为驼峰命名法。`toCamelCaseKeys` 的返回类型。    |
-| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为蛇形命名法。`toSnakeCaseKeys` 的返回类型。    |
-| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为帕斯卡命名法。`toPascalCaseKeys` 的返回类型。 |
-| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | 递归地将所有键转换为短横线命名法。`toKebabCaseKeys` 的返回类型。  |
-| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | 递归地将所有键转换为常量命名法。`toConstantCaseKeys` 的返回类型。 |
+| 类型                                                         | 说明                                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [`ValueOf<T>`](./reference/ValueOf.md)                       | 创建对象所有值类型的联合。`keyof` 的值版本。                       |
+| [`Simplify<T>`](./reference/Simplify.md)                     | 将交叉类型或映射类型展开为单个易读的对象类型。                     |
+| [`Writable<T>`](./reference/Writable.md)                     | 移除所有属性上的 `readonly`。内置 `Readonly` 的逆操作。            |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | 至少包含一个元素的数组。                                           |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)               | 递归地将包括嵌套对象在内的所有属性变为可选。                       |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。                |
+| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 判断两个类型是否完全相同。                                         |
+| [`Primitive`](./reference/Primitive.md)                      | JavaScript 中所有原始值的联合。                                    |
+| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` 能够产生的任何值。                                    |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | 键和值都未知的对象。用它代替 `{}`。                                |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | 没有任何属性的对象。与 `isEmptyObject` 相对应。                    |
+| [`SetOptional<T, K>`](./reference/SetOptional.md)            | 把指定的键变为可选。相当于按键生效的内置 `Partial`。               |
+| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 把指定的键变为必填。相当于按键生效的内置 `Required`。              |
+| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为驼峰命名法。`toCamelCaseKeys` 的返回类型。     |
+| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为蛇形命名法。`toSnakeCaseKeys` 的返回类型。     |
+| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为帕斯卡命名法。`toPascalCaseKeys` 的返回类型。  |
+| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | 递归地将所有键转换为短横线命名法。`toKebabCaseKeys` 的返回类型。   |
+| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | 递归地将所有键转换为常量命名法。`toConstantCaseKeys` 的返回类型。  |
+| [`Merge<T, S>`](./reference/Merge.md)                        | 把一个对象类型深度合并进另一个对象类型的结果。`merge` 的返回类型。 |
+| [`ObjectKeys<T>`](./reference/ObjectKeys.md)                 | 以 `Object.keys` 返回的形式创建键的联合。`ValueOf` 的键侧对应物。  |
 
 ## 选定标准
 
