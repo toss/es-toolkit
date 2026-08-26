@@ -4,6 +4,7 @@ export type { IsEqual } from './IsEqual.ts';
 export type { Merge } from './Merge.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';
 export type { ObjectKeys } from './ObjectKeys.ts';
+export type { Primitive } from './Primitive.ts';
 export type { Simplify } from './Simplify.ts';
 export type { ToCamelCaseKeys } from './ToCamelCaseKeys.ts';
 export type { ToConstantCaseKeys } from './ToConstantCaseKeys.ts';

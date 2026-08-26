@@ -19,6 +19,7 @@ We picked only the types you'd otherwise have to write by hand because TypeScrip
 | [`DeepPartial<T>`](./reference/DeepPartial.md)               | Makes every property optional recursively, including nested objects.                      |
 | [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | Makes every property `readonly` recursively, including nested objects.                    |
 | [`IsEqual<A, B>`](./reference/IsEqual.md)                    | Resolves to `true` when two types are exactly the same.                                   |
+| [`Primitive`](./reference/Primitive.md)                      | A union of every primitive value in JavaScript.                                           |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | Converts every key to camelCase recursively. The return type of `toCamelCaseKeys`.        |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | Converts every key to snake_case recursively. The return type of `toSnakeCaseKeys`.       |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | Converts every key to PascalCase recursively. The return type of `toPascalCaseKeys`.      |
