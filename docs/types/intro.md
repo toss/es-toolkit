@@ -10,19 +10,28 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 
 We picked only the types you'd otherwise have to write by hand because TypeScript doesn't ship them.
 
-| Type                                                         | Description                                                                               |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| [`ValueOf<T>`](./reference/ValueOf.md)                       | Creates a union of an object's value types. The value-side counterpart to `keyof`.        |
-| [`Simplify<T>`](./reference/Simplify.md)                     | Flattens an intersection or mapped type into a single, readable object type.              |
-| [`Writable<T>`](./reference/Writable.md)                     | Removes `readonly` from all properties. The inverse of the built-in `Readonly`.           |
-| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | An array with at least one element.                                                       |
-| [`DeepPartial<T>`](./reference/DeepPartial.md)               | Makes every property optional recursively, including nested objects.                      |
-| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | Makes every property `readonly` recursively, including nested objects.                    |
-| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | Converts every key to camelCase recursively. The return type of `toCamelCaseKeys`.        |
-| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | Converts every key to snake_case recursively. The return type of `toSnakeCaseKeys`.       |
-| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | Converts every key to PascalCase recursively. The return type of `toPascalCaseKeys`.      |
-| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | Converts every key to kebab-case recursively. The return type of `toKebabCaseKeys`.       |
-| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | Converts every key to CONSTANT_CASE recursively. The return type of `toConstantCaseKeys`. |
+| Type                                                         | Description                                                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [`ValueOf<T>`](./reference/ValueOf.md)                       | Creates a union of an object's value types. The value-side counterpart to `keyof`.                |
+| [`Simplify<T>`](./reference/Simplify.md)                     | Flattens an intersection or mapped type into a single, readable object type.                      |
+| [`Writable<T>`](./reference/Writable.md)                     | Removes `readonly` from all properties. The inverse of the built-in `Readonly`.                   |
+| [`NonEmptyArray<T>`](./reference/NonEmptyArray.md)           | An array with at least one element.                                                               |
+| [`DeepPartial<T>`](./reference/DeepPartial.md)               | Makes every property optional recursively, including nested objects.                              |
+| [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | Makes every property `readonly` recursively, including nested objects.                            |
+| [`IsEqual<A, B>`](./reference/IsEqual.md)                    | Resolves to `true` when two types are exactly the same.                                           |
+| [`Primitive`](./reference/Primitive.md)                      | A union of every primitive value in JavaScript.                                                   |
+| [`JsonValue`](./reference/JsonValue.md)                      | Any value that `JSON.parse` can produce.                                                          |
+| [`UnknownRecord`](./reference/UnknownRecord.md)              | An object with unknown keys and unknown values. Use it instead of `{}`.                           |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | An object with no properties. Pairs with the `isEmptyObject` guard.                               |
+| [`SetOptional<T, K>`](./reference/SetOptional.md)            | Makes the given keys optional. Like `Partial`, but scoped to specific keys.                       |
+| [`SetRequired<T, K>`](./reference/SetRequired.md)            | Makes the given keys required. Like `Required`, but scoped to specific keys.                      |
+| [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | Converts every key to camelCase recursively. The return type of `toCamelCaseKeys`.                |
+| [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | Converts every key to snake_case recursively. The return type of `toSnakeCaseKeys`.               |
+| [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | Converts every key to PascalCase recursively. The return type of `toPascalCaseKeys`.              |
+| [`ToKebabCaseKeys<T>`](./reference/ToKebabCaseKeys.md)       | Converts every key to kebab-case recursively. The return type of `toKebabCaseKeys`.               |
+| [`ToConstantCaseKeys<T>`](./reference/ToConstantCaseKeys.md) | Converts every key to CONSTANT_CASE recursively. The return type of `toConstantCaseKeys`.         |
+| [`Merge<T, S>`](./reference/Merge.md)                        | The result of deeply merging one object type into another. The return type of `merge`.            |
+| [`ObjectKeys<T>`](./reference/ObjectKeys.md)                 | A union of an object's keys as `Object.keys` returns them. The key-side counterpart to `ValueOf`. |
 
 ## Selection criteria
 
