@@ -1,5 +1,6 @@
 export type { DeepPartial } from './DeepPartial.ts';
 export type { DeepReadonly } from './DeepReadonly.ts';
+export type { IsEqual } from './IsEqual.ts';
 export type { Merge } from './Merge.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';
 export type { ObjectKeys } from './ObjectKeys.ts';
