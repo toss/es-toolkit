@@ -2,6 +2,7 @@ import { differenceWith } from './differenceWith.ts';
 import { intersectionWith } from './intersectionWith.ts';
 import { last } from './last.ts';
 import { unionWith } from './unionWith.ts';
+import { xor } from './xor.ts';
 import { windowed } from '../../array/windowed.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
@@ -88,14 +89,14 @@ export function xorWith<T>(
 export function xorWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((a: T, b: T) => boolean)>): T[] {
   const lastValue = last(values);
 
-  let comparator = (a: T, b: T) => a === b;
-
-  if (typeof lastValue === 'function') {
-    comparator = lastValue as (a: T, b: T) => boolean;
-    values = values.slice(0, -1);
+  // Without a comparator lodash runs plain `baseXor`, which compares with
+  // SameValueZero and normalizes `-0`. That is exactly what `xor` does.
+  if (typeof lastValue !== 'function') {
+    return xor(...(values as Array<ArrayLike<T> | null | undefined>));
   }
 
-  const arrays = values.filter(isArrayLikeObject) as T[][];
+  const comparator = lastValue as (a: T, b: T) => boolean;
+  const arrays = values.slice(0, -1).filter(isArrayLikeObject) as T[][];
 
   // eslint-disable-next-line
   // @ts-ignore
