@@ -24,6 +24,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`UnknownRecord`](./reference/UnknownRecord.md)              | 键和值都未知的对象。用它代替 `{}`。                               |
 | [`EmptyObject`](./reference/EmptyObject.md)                  | 没有任何属性的对象。与 `isEmptyObject` 相对应。                   |
 | [`SetOptional<T, K>`](./reference/SetOptional.md)            | 把指定的键变为可选。相当于按键生效的内置 `Partial`。              |
+| [`SetRequired<T, K>`](./reference/SetRequired.md)            | 把指定的键变为必填。相当于按键生效的内置 `Required`。             |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | 递归地将所有键转换为驼峰命名法。`toCamelCaseKeys` 的返回类型。    |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | 递归地将所有键转换为蛇形命名法。`toSnakeCaseKeys` 的返回类型。    |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | 递归地将所有键转换为帕斯卡命名法。`toPascalCaseKeys` 的返回类型。 |
