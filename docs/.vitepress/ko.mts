@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: '문자열',
     util: '유틸리티',
     error: '에러',
+    'types:objects': '객체',
+    'types:values': '값',
+    'types:predicate': '타입 판정',
   },
 };
 

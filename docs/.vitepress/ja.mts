@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: '文字列',
     util: 'ユーティリティ',
     error: 'エラー',
+    'types:objects': 'オブジェクト',
+    'types:values': '値',
+    'types:predicate': '型の判定',
   },
 };
 
