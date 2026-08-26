@@ -12,5 +12,6 @@ export type { ToConstantCaseKeys } from './ToConstantCaseKeys.ts';
 export type { ToKebabCaseKeys } from './ToKebabCaseKeys.ts';
 export type { ToPascalCaseKeys } from './ToPascalCaseKeys.ts';
 export type { ToSnakeCaseKeys } from './ToSnakeCaseKeys.ts';
+export type { UnknownRecord } from './UnknownRecord.ts';
 export type { ValueOf } from './ValueOf.ts';
 export type { Writable } from './Writable.ts';
