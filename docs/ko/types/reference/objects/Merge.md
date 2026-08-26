@@ -10,7 +10,7 @@ type Result = Merge<Target, Source>;
 
 ### `Merge<T, S>`
 
-두 객체를 깊이 병합한 결과의 타입이 필요할 때 사용해요. 예를 들어 [merge](../../reference/object/merge.md)로 기본 설정에 덮어쓰기를 적용한 결과의 타입을 표현할 수 있어요.
+두 객체를 깊이 병합한 결과의 타입이 필요할 때 사용해요. 예를 들어 [merge](../../../reference/object/merge.md)로 기본 설정에 덮어쓰기를 적용한 결과의 타입을 표현할 수 있어요.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';

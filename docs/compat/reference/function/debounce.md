@@ -42,13 +42,13 @@ import { debounce } from 'es-toolkit/compat';
 const debouncedCompat = debounce(func, 300, {
   leading: true,
   trailing: false,
-  maxWait: 1000
+  maxWait: 1000,
 });
 
 // Main library version (faster, simpler)
 import { debounce } from 'es-toolkit';
 const debouncedMain = debounce(func, 300, {
-  edges: ['leading'] // Uses edges instead of leading/trailing
+  edges: ['leading'], // Uses edges instead of leading/trailing
 });
 ```
 

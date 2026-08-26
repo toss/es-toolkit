@@ -10,7 +10,7 @@ type Result = Merge<Target, Source>;
 
 ### `Merge<T, S>`
 
-2つのオブジェクトを深くマージした結果の型が必要なときに使います。たとえば、[merge](../../reference/object/merge.md)でデフォルト設定に上書きを適用した結果の型を表現できます。
+2つのオブジェクトを深くマージした結果の型が必要なときに使います。たとえば、[merge](../../../reference/object/merge.md)でデフォルト設定に上書きを適用した結果の型を表現できます。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';

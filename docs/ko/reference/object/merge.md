@@ -50,7 +50,7 @@ merge(target, source);
 
 #### 반환 값
 
-([`Merge<T, S>`](../../types/reference/Merge.md)): 소스 객체가 병합된 대상 객체를 반환해요. 중첩된 객체 타입은 프로퍼티 단위로 병합돼요.
+([`Merge<T, S>`](../../types/reference/objects/Merge.md)): 소스 객체가 병합된 대상 객체를 반환해요. 중첩된 객체 타입은 프로퍼티 단위로 병합돼요.
 
 ## 예시
 

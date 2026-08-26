@@ -1,16 +1,16 @@
 # Merge
 
-Creates a type that deeply merges two object types.
+创建将两个对象类型深度合并后的类型。
 
 ```typescript
 type Result = Merge<Target, Source>;
 ```
 
-## Usage
+## 用法
 
 ### `Merge<T, S>`
 
-Use `Merge` when you need the type of the result of deeply merging two objects — for example, the type of a configuration after applying overrides with [merge](../../reference/object/merge.md).
+当你需要表示两个对象深度合并后的结果类型时使用。例如,可以表示用 [merge](../../../reference/object/merge.md) 将覆盖项应用到默认配置后的结果类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -22,7 +22,7 @@ type Config = Merge<Defaults, Overrides>;
 // => { host: string; port: number; debug: boolean }
 ```
 
-Nested objects are merged as well. TypeScript's built-in merge type `T & S` does not merge nested objects, but the `Merge` type does.
+嵌套对象也可以合并。TypeScript 内置的合并类型 `T & S` 不会合并嵌套对象,而使用 `Merge` 类型则可以合并。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -34,7 +34,7 @@ type Result = Merge<Target, Source>;
 // => { server: { host: string; port: number; tls: boolean } }
 ```
 
-When keys overlap, the value type of the second object is used. With TypeScript's built-in merge type `T & S`, the value of an overlapping key can show up as `never`, but with the `Merge` type the second object's value type is used.
+当存在重叠的键时,使用第二个对象的值类型。TypeScript 内置的合并类型 `T & S` 会把重叠键的值显示为 `never`,而使用 `Merge` 类型时,会使用第二个对象的值类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -46,10 +46,10 @@ type Result = Merge<Target, Source>;
 // => { id: string; value: number }
 
 type Broken = Target & Source;
-// => { id: string; value: never } (string & number becomes never)
+// => { id: string; value: never } (string & number 会变成 never)
 ```
 
-#### Type Parameters
+#### 类型参数
 
-- `T`: Type of the target object.
-- `S`: Type of the source object merged into `T`.
+- `T`: 目标对象的类型。
+- `S`: 要合并到 `T` 中的源对象的类型。
