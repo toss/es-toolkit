@@ -20,6 +20,7 @@ TypeScript に用意されていないために毎回自分で書いていた型
 | [`DeepReadonly<T>`](./reference/DeepReadonly.md)             | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。                    |
 | [`IsEqual<A, B>`](./reference/IsEqual.md)                    | 2 つの型が完全に同じかどうかを判定します。                                              |
 | [`Primitive`](./reference/Primitive.md)                      | JavaScript のすべてのプリミティブ値をまとめたユニオンです。                             |
+| [`JsonValue`](./reference/JsonValue.md)                      | `JSON.parse` が生成しうるすべての値です。                                               |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | すべてのキーを再帰的にキャメルケースに変換します。`toCamelCaseKeys` の戻り値の型です。  |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | すべてのキーを再帰的にスネークケースに変換します。`toSnakeCaseKeys` の戻り値の型です。  |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | すべてのキーを再帰的にパスカルケースに変換します。`toPascalCaseKeys` の戻り値の型です。 |
