@@ -1,6 +1,6 @@
 # Primitive
 
-자바스크립트의 모든 원시값을 모은 유니온이에요. 원시값이 아닌 건 전부 객체예요.
+문자열이나 숫자처럼 더 쪼갤 수 없는 값들이에요. 객체가 아닌 값은 전부 여기에 들어가요.
 
 ```typescript
 type Value = Primitive;
@@ -10,7 +10,7 @@ type Value = Primitive;
 
 ### `Primitive`
 
-어떤 원시값이든 올 수 있지만 객체는 안 되는 자리에 사용하세요. 직접 유니온을 쓰면 `bigint`나 `symbol`을 빠뜨리기 쉬워요.
+객체는 받지 않고 원시값만 받고 싶을 때 사용하세요. 직접 나열하다 보면 `bigint`나 `symbol`을 빼먹기 쉬워요.
 
 ```typescript
 import type { Primitive } from 'es-toolkit/types';
@@ -23,5 +23,5 @@ const a: Primitive = 'text';
 const b: Primitive = 1n;
 const c: Primitive = Symbol('id');
 
-// const d: Primitive = {}; // 에러예요. 객체는 원시값이 아니에요.
+// const d: Primitive = {}; // 객체는 원시값이 아니라 에러가 나요.
 ```

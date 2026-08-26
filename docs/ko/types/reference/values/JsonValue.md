@@ -1,6 +1,6 @@
 # JsonValue
 
-`JSON.parse`가 만들어낼 수 있는 모든 값이에요.
+JSON으로 주고받을 수 있는 값이에요.
 
 ```typescript
 type Value = JsonValue;
@@ -10,7 +10,7 @@ type Value = JsonValue;
 
 ### `JsonValue`
 
-API 응답이나 설정 파일처럼 JSON을 거쳐 오가는 데이터에 사용하세요. 함수, `Date`, `undefined`, 클래스 인스턴스는 JSON을 왕복하면 살아남지 못해서 제외돼요.
+API 응답이나 설정 파일처럼 JSON으로 오가는 데이터에 사용하세요. 함수나 `Date`, `undefined`는 `JSON.stringify`를 거치면 원래 모습이 사라지기 때문에 넣을 수 없어요.
 
 ```typescript
 import type { JsonValue } from 'es-toolkit/types';
@@ -24,12 +24,12 @@ if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
 
 const ok: JsonValue = { name: 'toss', tags: ['a', 'b'], count: null };
 
-// const bad: JsonValue = { at: new Date() }; // 에러예요. Date는 JSON이 아니에요.
+// const bad: JsonValue = { at: new Date() }; // Date는 JSON으로 못 담아서 에러가 나요.
 
-// JSON 객체만 받고 싶다면 Record를 쓰세요.
+// 객체 형태만 받고 싶다면 Record로 감싸서 쓰세요.
 declare function send(body: Record<string, JsonValue>): void;
 ```
 
-#### 타입 파라미터
+#### 주의할 점
 
-- `NaN`과 `Infinity`는 `number`이지만 JSON에서는 쓸 수 없어요. 타입으로는 이 차이를 표현할 수 없어요.
+`NaN`과 `Infinity`는 `number`라서 타입 검사는 통과하지만, `JSON.stringify`를 거치면 `null`이 돼요. 타입으로는 막을 수 없으니 값을 만들 때 조심하세요.

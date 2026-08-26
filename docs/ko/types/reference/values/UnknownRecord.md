@@ -1,6 +1,6 @@
 # UnknownRecord
 
-키도 값도 알 수 없는 객체예요.
+어떤 키가 들어 있는지 모르는 객체예요.
 
 ```typescript
 type Data = UnknownRecord;
@@ -10,7 +10,9 @@ type Data = UnknownRecord;
 
 ### `UnknownRecord`
 
-`{}` 대신 사용하세요. `{}`는 이름과 달리 `null`과 `undefined`만 빼고 숫자나 문자열까지 전부 받아요. 값이 `unknown`이라 꺼내 쓰려면 먼저 확인해야 해요.
+`{}` 대신 사용하세요. `{}`는 생긴 것과 달리 빈 객체라는 뜻이 아니라서, `null`과 `undefined`만 빼면 숫자나 문자열까지 다 통과해요.
+
+값이 `unknown`이라 바로 쓸 수는 없고, 무슨 타입인지 확인한 다음에 써야 해요.
 
 ```typescript
 import type { UnknownRecord } from 'es-toolkit/types';
@@ -21,11 +23,27 @@ function log(data: UnknownRecord) {
   }
 }
 
-log({ id: '1' }); // 통과해요
+log({ id: '1' }); // 잘 통과해요
 
-// log(42); // 에러예요. `{}`였다면 통과했을 거예요.
+// log(42); // 숫자라서 에러가 나요. `{}`로 받았다면 그냥 통과했을 거예요.
 ```
 
-#### 타입 파라미터
+#### 주의할 점
 
-- 인덱스 시그니처가 있는 타입만 대입할 수 있어요. `interface`는 키를 하나씩 선언하기 때문에 거절되니, 호출하는 쪽에서 `interface`를 넘길 수 있다면 `object`로 받거나 호출부에서 펼쳐서 넘기세요.
+인덱스 시그니처가 있는 타입만 대입할 수 있어요. `interface`는 키를 하나씩 선언하기 때문에 거절돼요.
+
+```typescript
+interface Payload {
+  id: string;
+}
+
+type PayloadAlias = { id: string };
+
+declare const payload: Payload;
+declare const alias: PayloadAlias;
+
+const a: UnknownRecord = alias; // 잘 통과해요
+// const b: UnknownRecord = payload; // 모양은 같은데 인덱스 시그니처가 없어서 에러가 나요.
+```
+
+`interface`가 들어올 수 있는 자리라면 `object`로 받으세요. 아니면 넘기는 쪽에서 `{ ...payload }`처럼 펼쳐서 주면 돼요.
