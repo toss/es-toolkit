@@ -22,6 +22,7 @@ We picked only the types you'd otherwise have to write by hand because TypeScrip
 | [`Primitive`](./reference/Primitive.md)                      | A union of every primitive value in JavaScript.                                           |
 | [`JsonValue`](./reference/JsonValue.md)                      | Any value that `JSON.parse` can produce.                                                  |
 | [`UnknownRecord`](./reference/UnknownRecord.md)              | An object with unknown keys and unknown values. Use it instead of `{}`.                   |
+| [`EmptyObject`](./reference/EmptyObject.md)                  | An object with no properties. Pairs with the `isEmptyObject` guard.                       |
 | [`ToCamelCaseKeys<T>`](./reference/ToCamelCaseKeys.md)       | Converts every key to camelCase recursively. The return type of `toCamelCaseKeys`.        |
 | [`ToSnakeCaseKeys<T>`](./reference/ToSnakeCaseKeys.md)       | Converts every key to snake_case recursively. The return type of `toSnakeCaseKeys`.       |
 | [`ToPascalCaseKeys<T>`](./reference/ToPascalCaseKeys.md)     | Converts every key to PascalCase recursively. The return type of `toPascalCaseKeys`.      |
