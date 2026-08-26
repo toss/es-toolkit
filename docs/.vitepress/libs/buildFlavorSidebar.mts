@@ -40,7 +40,7 @@ export function buildFlavorSidebar({
       flavor.categories.length > 0
         ? sortByText(
             flavor.categories.map(category => ({
-              text: labels.categories[category] ?? category,
+              text: labels.categories[`${flavor.value}:${category}`] ?? labels.categories[category] ?? category,
               collapsed: true,
               items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', category),
             }))
