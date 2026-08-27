@@ -24,7 +24,7 @@ To get started:
 
 ## 1. Our Design Principles
 
-Note that we value performance, simplicity of implementation, and detailed documentations. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
+Note that we value performance, simplicity of implementation, and detailed documentation. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
 
 ### 1.1 Development Scope
 
