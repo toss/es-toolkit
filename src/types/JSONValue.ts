@@ -5,15 +5,15 @@
  * do not survive a JSON round trip.
  *
  * @example
- * declare function parse(text: string): JsonValue;
+ * declare function parse(text: string): JSONValue;
  *
  * const value = parse('{"a":[1,null]}');
  * if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
- *   const a = value.a; // JsonValue
+ *   const a = value.a; // JSONValue
  * }
  *
  * @example
  * // Use `Record` when you want to accept a JSON object specifically.
- * declare function send(body: Record<string, JsonValue>): void;
+ * declare function send(body: Record<string, JSONValue>): void;
  */
-export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+export type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };

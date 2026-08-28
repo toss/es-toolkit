@@ -20,7 +20,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | 중첩된 객체까지 재귀적으로 모두 `readonly`로 만들어요.                                  |
 | [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | 두 타입이 정확히 같은지 알려줘요.                                                       |
 | [`Primitive`](./reference/values/Primitive.md)                       | 자바스크립트의 모든 원시값을 모은 유니온이에요.                                         |
-| [`JsonValue`](./reference/values/JsonValue.md)                       | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
+| [`JSONValue`](./reference/values/JSONValue.md)                       | `JSON.parse`가 만들어낼 수 있는 모든 값이에요.                                          |
 | [`UnknownRecord`](./reference/values/UnknownRecord.md)               | 키도 값도 알 수 없는 객체예요. `{}` 대신 쓰세요.                                        |
 | [`EmptyObject`](./reference/values/EmptyObject.md)                   | 프로퍼티가 하나도 없는 객체예요. `isEmptyObject`와 짝을 이뤄요.                         |
 | [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | 원하는 키만 골라 선택적으로 만들어요. 기본 `Partial`의 키 지정 버전이에요.              |

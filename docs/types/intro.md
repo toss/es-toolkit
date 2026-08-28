@@ -20,7 +20,7 @@ We picked only the types you'd otherwise have to write by hand because TypeScrip
 | [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | Makes every property `readonly` recursively, including nested objects.                            |
 | [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | Resolves to `true` when two types are exactly the same.                                           |
 | [`Primitive`](./reference/values/Primitive.md)                       | A union of every primitive value in JavaScript.                                                   |
-| [`JsonValue`](./reference/values/JsonValue.md)                       | Any value that `JSON.parse` can produce.                                                          |
+| [`JSONValue`](./reference/values/JSONValue.md)                       | Any value that `JSON.parse` can produce.                                                          |
 | [`UnknownRecord`](./reference/values/UnknownRecord.md)               | An object with unknown keys and unknown values. Use it instead of `{}`.                           |
 | [`EmptyObject`](./reference/values/EmptyObject.md)                   | An object with no properties. Pairs with the `isEmptyObject` guard.                               |
 | [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | Makes the given keys optional. Like `Partial`, but scoped to specific keys.                       |
