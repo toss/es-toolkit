@@ -85,4 +85,36 @@ describe('ceil', () => {
     expect(ceil(5e-324, 323)).toBe(1e-292);
     expect(ceil(5e-324, -323)).toBe(0);
   });
+
+  it(`\`ceil\` should coerce \`precision\` with \`toInteger\` like lodash`, () => {
+    // Values that `toInteger` resolves to `0`, so no decimal adjustment happens.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, [1, 2, 3])).toBe(5);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, '2px')).toBe(5);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, true)).toBe(4.1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, '0x2')).toBe(4.02);
+
+    // Capped at `292`.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, '1e3')).toBe(4.016);
+    expect(ceil(4.016, Infinity)).toBe(4.016);
+  });
+
+  it(`\`ceil\` should coerce \`number\` with \`toNumber\` like lodash`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(Symbol('a'))).toBe(NaN);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(ceil(4.016, Symbol('a'))).toBe(5);
+  });
 });
