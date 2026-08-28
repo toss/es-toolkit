@@ -39,8 +39,14 @@ Replace the example names with the lodash functions found in the input:
 
 ```bash
 node --input-type=module -e "
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 const names = ['get', 'chunk', 'map'];
-const entries = ['es-toolkit', 'es-toolkit/fp', 'es-toolkit/server', 'es-toolkit/compat'];
+const pkg = require('es-toolkit/package.json');
+const entries = Object.keys(pkg.exports)
+  .filter(subpath => subpath !== './package.json' && !subpath.includes('*'))
+  .map(subpath => subpath === '.' ? 'es-toolkit' : 'es-toolkit/' + subpath.slice(2));
 const modules = await Promise.all(entries.map(entry => import(entry).catch(() => null)));
 if (modules.every(module => module == null)) {
   console.error('es-toolkit is not resolvable from ' + process.cwd());
