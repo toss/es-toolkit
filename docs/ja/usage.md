@@ -47,7 +47,7 @@ sum([1, 2, 3]);
 es-toolkitはDenoでも使用できます。[JSR](https://jsr.io/@es-toolkit/es-toolkit)から以下のコマンドでインストールしてください。
 
 ```sh
-deno add @es-toolkit/es-toolkit
+deno add jsr:@es-toolkit/es-toolkit
 ```
 
 Denoで使用する場合、JSRの制限により、NPMとは異なり追加のスコープが必要です。

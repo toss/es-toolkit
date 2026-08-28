@@ -219,7 +219,7 @@ We sincerely thank @SrAnthony and @umsungjun for their contributions. We appreci
 
 ## Version v1.46.0
 
-Released on April 22th, 2026.
+Released on April 22nd, 2026.
 
 - Changed `AbortError` and `TimeoutError` to extend `DOMException`. ([#1660])
 - Added `keyBy` to the `map` entrypoint exports. ([#1650])
@@ -390,7 +390,7 @@ We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contr
 
 ## Version v1.39.6
 
-Released on July 2th, 2025.
+Released on July 2nd, 2025.
 
 - Fixed handling of null/undefined values in `values` function.
 - Fixed type safety in `compat/get` by adding GetFieldType utility type.
@@ -1015,4 +1015,4 @@ Released on June 3rd, 2024.
 
 ## Version v1.0.2
 
-Initial release. Released on May 31th, 2024.
+Initial release. Released on May 31st, 2024.

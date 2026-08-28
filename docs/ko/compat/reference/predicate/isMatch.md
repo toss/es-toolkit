@@ -10,7 +10,7 @@ const result = isMatch(target, source);
 
 ### `isMatch(target, source)`
 
-객체나 배열이 다른 객체의 구조와 값에 부분적으로 일치하는지 확인할 때 `isMatch`를 사용하세요. 전체가 동일할 필요는 없고, source의 모든 프로퍼티가 target에 존재하고 같은 값을 가지면 되요.
+객체나 배열이 다른 객체의 구조와 값에 부분적으로 일치하는지 확인할 때 `isMatch`를 사용하세요. 전체가 동일할 필요는 없고, source의 모든 프로퍼티가 target에 존재하고 같은 값을 가지면 돼요.
 
 ```typescript
 import { isMatch } from 'es-toolkit/compat';
