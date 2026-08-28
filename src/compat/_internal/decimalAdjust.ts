@@ -12,7 +12,7 @@ export function decimalAdjust(
   }
   // lodash coerces the precision with `toInteger` and caps it at 292, rather
   // than parsing it as a decimal integer literal.
-  precision = precision == null ? 0 : Math.min(toInteger(precision), 292);
+  precision = Math.min(toInteger(precision), 292);
   if (precision && Number.isFinite(Number(number))) {
     const [magnitude, exponent = 0] = number.toString().split('e');
     let adjustedValue: string | number = Math[type](Number(`${magnitude}e${Number(exponent) + precision}`));
