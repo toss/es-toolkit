@@ -20,7 +20,7 @@ TypeScript に用意されていないために毎回自分で書いていた型
 | [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | ネストしたオブジェクトの内側まで再帰的にすべて `readonly` にします。                       |
 | [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | 2 つの型が完全に同じかどうかを判定します。                                                 |
 | [`Primitive`](./reference/values/Primitive.md)                       | JavaScript のすべてのプリミティブ値をまとめたユニオンです。                                |
-| [`JsonValue`](./reference/values/JsonValue.md)                       | `JSON.parse` が生成しうるすべての値です。                                                  |
+| [`JSONValue`](./reference/values/JSONValue.md)                       | `JSON.parse` が生成しうるすべての値です。                                                  |
 | [`UnknownRecord`](./reference/values/UnknownRecord.md)               | キーも値も分からないオブジェクトです。`{}` の代わりに使います。                            |
 | [`EmptyObject`](./reference/values/EmptyObject.md)                   | プロパティを 1 つも持たないオブジェクトです。`isEmptyObject` と対になります。              |
 | [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | 指定したキーだけを省略可能にします。組み込みの `Partial` をキー単位にしたものです。        |

@@ -20,7 +20,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`DeepReadonly<T>`](./reference/objects/DeepReadonly.md)             | 递归地将包括嵌套对象在内的所有属性变为 `readonly`。                |
 | [`IsEqual<A, B>`](./reference/predicate/IsEqual.md)                  | 判断两个类型是否完全相同。                                         |
 | [`Primitive`](./reference/values/Primitive.md)                       | JavaScript 中所有原始值的联合。                                    |
-| [`JsonValue`](./reference/values/JsonValue.md)                       | `JSON.parse` 能够产生的任何值。                                    |
+| [`JSONValue`](./reference/values/JSONValue.md)                       | `JSON.parse` 能够产生的任何值。                                    |
 | [`UnknownRecord`](./reference/values/UnknownRecord.md)               | 键和值都未知的对象。用它代替 `{}`。                                |
 | [`EmptyObject`](./reference/values/EmptyObject.md)                   | 没有任何属性的对象。与 `isEmptyObject` 相对应。                    |
 | [`SetOptional<T, K>`](./reference/objects/SetOptional.md)            | 把指定的键变为可选。相当于按键生效的内置 `Partial`。               |
