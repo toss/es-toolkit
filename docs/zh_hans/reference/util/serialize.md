@@ -44,20 +44,33 @@ serialize(new Uint8Array([1, 2, 3]));
 // 返回 'Uint8Array[1,2,3]'
 ```
 
-基本类型的序列化方式如下。
+各类型的序列化方式如下。
 
-| 类型        | 输入                     | 结果          |
-| ----------- | ------------------------ | ------------- |
-| 字符串      | `serialize('abc')`       | `"'abc'"`     |
-| 数字        | `serialize(123)`         | `"123"`       |
-|             | `serialize(-0)`          | `"0"`         |
-|             | `serialize(NaN)`         | `"NaN"`       |
-|             | `serialize(Infinity)`    | `"Infinity"`  |
-| 布尔值      | `serialize(true)`        | `"true"`      |
-| `undefined` | `serialize(undefined)`   | `"undefined"` |
-| `null`      | `serialize(null)`        | `"null"`      |
-| `BigInt`    | `serialize(123n)`        | `"123n"`      |
-| 符号        | `serialize(Symbol('a'))` | `"Symbol(a)"` |
+| 类型                    | 输入                            | 结果                               |
+| ----------------------- | ------------------------------- | ---------------------------------- |
+| 字符串                  | `'abc'`                         | `"'abc'"`                          |
+| 数字                    | `123`                           | `"123"`                            |
+|                         | `-0`                            | `"0"`                              |
+|                         | `NaN`                           | `"NaN"`                            |
+|                         | `Infinity`                      | `"Infinity"`                       |
+| 布尔值                  | `true`                          | `"true"`                           |
+| `undefined`             | `undefined`                     | `"undefined"`                      |
+| `null`                  | `null`                          | `"null"`                           |
+| `BigInt`                | `123n`                          | `"123n"`                           |
+| 符号                    | `Symbol('a')`                   | `"Symbol(a)"`                      |
+| 对象                    | `{ a: 1 }`                      | `"{'a':1}"`                        |
+| 数组                    | `[1, 'a']`                      | `"[1,'a']"`                        |
+| 函数                    | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`      |
+| 原生函数                | `Math.max`                      | `"max:[native]"`                   |
+| `Date`                  | `new Date(0)`                   | `"Date(1970-01-01T00:00:00.000Z)"` |
+| `RegExp`                | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`               |
+| `Set`                   | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                     |
+| `Map`                   | `new Map([['a', 1]])`           | `"Map{'a':1}"`                     |
+| TypedArray              | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`              |
+|                         | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`           |
+| `ArrayBuffer`           | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`               |
+| `Error`                 | `new TypeError('boom')`         | `"Error(TypeError: boom)"`         |
+| 带有 `entries()` 的对象 | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`       |
 
 类实例会连同类名一起序列化。如果实例有 `toJSON` 方法,则序列化 `toJSON` 的结果。
 
