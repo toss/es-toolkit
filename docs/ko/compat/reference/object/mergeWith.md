@@ -11,7 +11,7 @@
 사용자 정의 함수로 병합 방식을 제어하면서 여러 객체를 깊게 병합해요.
 
 ```typescript
-const result = mergeWith(target, ...sources, customizer?);
+const result = mergeWith(target, ...sources, customizer);
 ```
 
 ## 사용법

@@ -11,7 +11,7 @@ Use the faster and more modern [`mergeWith`](../../../reference/object/mergeWith
 Deeply merges multiple objects while controlling the merge behavior with a custom function.
 
 ```typescript
-const result = mergeWith(target, ...sources, customizer?);
+const result = mergeWith(target, ...sources, customizer);
 ```
 
 ## Usage

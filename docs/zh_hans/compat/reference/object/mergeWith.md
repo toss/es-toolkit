@@ -11,7 +11,7 @@
 使用自定义函数控制合并行为,深度合并多个对象。
 
 ```typescript
-const result = mergeWith(target, ...sources, customizer?);
+const result = mergeWith(target, ...sources, customizer);
 ```
 
 ## 用法

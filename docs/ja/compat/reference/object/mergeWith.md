@@ -11,7 +11,7 @@
 カスタマイザー関数でマージ方法を制御しながら、複数のオブジェクトを深くマージします。
 
 ```typescript
-const result = mergeWith(target, ...sources, customizer?);
+const result = mergeWith(target, ...sources, customizer);
 ```
 
 ## 使用法
