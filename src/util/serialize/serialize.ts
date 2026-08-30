@@ -69,9 +69,11 @@ export function serializeValue(value: unknown, refs: Map<object, string>, noQuot
     case 'object': {
       return serializeObject(value, refs);
     }
-    default: {
-      // boolean and undefined
+    case 'boolean': {
       return String(value);
+    }
+    case 'undefined': {
+      return 'undefined';
     }
   }
 }

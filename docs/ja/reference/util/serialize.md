@@ -1,6 +1,6 @@
 # serialize
 
-任意の値を安定した文字列にシリアライズします。
+値を文字列にシリアライズします。
 
 ```typescript
 const serialized = serialize(value);
@@ -10,7 +10,9 @@ const serialized = serialize(value);
 
 ### `serialize(value)`
 
-ハッシュ化、キャッシュキー、変更検知など、値の安定した文字列表現が必要な場合に `serialize` を使用してください。同じ構造を持つ2つの値は、常に同じ文字列にシリアライズされます。プレーンオブジェクトのキー、`Map` のキー、`Set` の値はソートされるため、出力は挿入順序に依存しません。
+値を文字列に変換したい場合は `serialize` を使用してください。組み込みの `JSON.stringify()` と異なり、`Map` や `Set`、`Date`、`RegExp` のような組み込みオブジェクトや、`BigInt` のような値もシリアライズできます。
+
+`{ a: 1, b: 2 }` と `{ b: 2, a: 1 }` のように同じ構造を持つ値は、常に同じ安定した文字列にシリアライズされます。
 
 ```typescript
 import { serialize } from 'es-toolkit/util';
@@ -42,6 +44,21 @@ serialize(new Uint8Array([1, 2, 3]));
 // 'Uint8Array[1,2,3]' を返します
 ```
 
+プリミティブ型は次のようにシリアライズされます。
+
+| 型          | 入力                     | 結果          |
+| ----------- | ------------------------ | ------------- |
+| 文字列      | `serialize('abc')`       | `"'abc'"`     |
+| 数値        | `serialize(123)`         | `"123"`       |
+|             | `serialize(-0)`          | `"0"`         |
+|             | `serialize(NaN)`         | `"NaN"`       |
+|             | `serialize(Infinity)`    | `"Infinity"`  |
+| 真偽値      | `serialize(true)`        | `"true"`      |
+| `undefined` | `serialize(undefined)`   | `"undefined"` |
+| `null`      | `serialize(null)`        | `"null"`      |
+| `BigInt`    | `serialize(123n)`        | `"123n"`      |
+| シンボル    | `serialize(Symbol('a'))` | `"Symbol(a)"` |
+
 クラスのインスタンスはクラス名と共にシリアライズされます。インスタンスに `toJSON` メソッドがある場合は、`toJSON` の結果がシリアライズされます。
 
 ```typescript
@@ -50,6 +67,19 @@ class User {
 }
 serialize(new User());
 // "User{name:'Alice'}" を返します
+```
+
+関数は `名前:ソース` の形式でシリアライズされます。コードのフォーマットによって結果が変わらないように、ソースの改行とその前後の空白は削除されます。ソースを確認できないネイティブ関数は `名前:[native]` としてシリアライズされます。
+
+```typescript
+function sum(a, b) {
+  return a + b;
+}
+serialize(sum);
+// 'sum:function sum(a, b) {return a + b;}' を返します
+
+serialize(Math.max);
+// 'max:[native]' を返します
 ```
 
 循環参照は `#ref{n}` 形式のバックリファレンスとしてシリアライズされます。`n` はオブジェクトが最初に訪問された順序です。
@@ -68,9 +98,9 @@ serialize(new WeakMap());
 // TypeError: Cannot serialize WeakMap
 ```
 
-::: warning セキュリティ目的には設計されていません
+::: warning セキュリティが重要な用途には使用しないでください
 
-`serialize` は文字列やキーをエスケープしないため、異なる値が同じ文字列にシリアライズされるように意図的に作ることができます。キャッシュキーや変更検知に使用し、セキュリティが重要な用途には使用しないでください。
+`serialize` はパフォーマンスのために文字列やキーをエスケープしません。そのため、異なる値が同じ文字列にシリアライズされるように悪意のある入力を作ることができます。一般的な用途のキャッシュキーや変更検知に使用し、セキュリティが重要な場面では使用しないでください。
 
 :::
 
@@ -84,4 +114,4 @@ serialize(new WeakMap());
 
 #### エラー
 
-(`TypeError`):`Promise`、`WeakMap`、`WeakSet`、`Blob`、`DataView` のようにシリアライズできないオブジェクトが含まれている場合にスローされます。
+(`TypeError`):`Promise`、`WeakMap`、`WeakSet`、`Blob`、`DataView` のようにシリアライズできないオブジェクトが含まれている場合にエラーが発生します。

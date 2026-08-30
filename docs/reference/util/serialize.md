@@ -1,6 +1,6 @@
 # serialize
 
-Serializes any value into a stable string.
+Serializes a value into a string.
 
 ```typescript
 const serialized = serialize(value);
@@ -10,7 +10,9 @@ const serialized = serialize(value);
 
 ### `serialize(value)`
 
-Use `serialize` when you need a stable string representation of a value, such as for hashing, cache keys, or change detection. Two values with the same structure always serialize to the same string: plain object keys, `Map` keys, and `Set` values are sorted, so the output does not depend on insertion order.
+Use `serialize` when you want to convert a value into a string. Unlike the built-in `JSON.stringify()`, it can also serialize built-in objects like `Map`, `Set`, `Date`, and `RegExp`, as well as values like `BigInt`.
+
+Values with the same structure, like `{ a: 1, b: 2 }` and `{ b: 2, a: 1 }`, are always serialized to the same stable string.
 
 ```typescript
 import { serialize } from 'es-toolkit/util';
@@ -42,7 +44,22 @@ serialize(new Uint8Array([1, 2, 3]));
 // Returns 'Uint8Array[1,2,3]'
 ```
 
-Class instances are serialized with their class name. If the instance has a `toJSON` method, the serialized value comes from `toJSON`.
+Primitive types are serialized as follows.
+
+| Type        | Input                    | Result        |
+| ----------- | ------------------------ | ------------- |
+| String      | `serialize('abc')`       | `"'abc'"`     |
+| Number      | `serialize(123)`         | `"123"`       |
+|             | `serialize(-0)`          | `"0"`         |
+|             | `serialize(NaN)`         | `"NaN"`       |
+|             | `serialize(Infinity)`    | `"Infinity"`  |
+| Boolean     | `serialize(true)`        | `"true"`      |
+| `undefined` | `serialize(undefined)`   | `"undefined"` |
+| `null`      | `serialize(null)`        | `"null"`      |
+| `BigInt`    | `serialize(123n)`        | `"123n"`      |
+| Symbol      | `serialize(Symbol('a'))` | `"Symbol(a)"` |
+
+Class instances are serialized with their class name. If the instance has a `toJSON` method, the result of `toJSON` is serialized instead.
 
 ```typescript
 class User {
@@ -50,6 +67,19 @@ class User {
 }
 serialize(new User());
 // Returns "User{name:'Alice'}"
+```
+
+Functions are serialized as `name:source`. Newlines and their surrounding whitespace are removed from the source so that the result does not depend on code formatting. Native functions, whose source is not available, are serialized as `name:[native]`.
+
+```typescript
+function sum(a, b) {
+  return a + b;
+}
+serialize(sum);
+// Returns 'sum:function sum(a, b) {return a + b;}'
+
+serialize(Math.max);
+// Returns 'max:[native]'
 ```
 
 Circular references are serialized as `#ref{n}` back-references, where `n` is the order in which the object was first visited.
@@ -68,9 +98,9 @@ serialize(new WeakMap());
 // Throws TypeError: Cannot serialize WeakMap
 ```
 
-::: warning Not designed for security purposes
+::: warning Do not use for security-sensitive purposes
 
-`serialize` does not escape strings or keys, so different values can intentionally be crafted to serialize to the same string. Use it for cache keys and change detection, not for anything security-sensitive.
+For performance, `serialize` does not escape strings or keys. This means malicious input can be crafted so that different values serialize to the same string. Use it for general-purpose cache keys and change detection, and do not use it where security matters.
 
 :::
 

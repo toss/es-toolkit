@@ -1,6 +1,6 @@
 # hash
 
-将任意值哈希为稳定的43字符字符串。
+将值转换为43字符的哈希字符串。
 
 ```typescript
 const hashed = hash(value);
@@ -10,9 +10,11 @@ const hashed = hash(value);
 
 ### `hash(value)`
 
-当您需要值的简短且稳定的标识符时(例如缓存键或变更检测令牌),请使用 `hash`。值首先通过 [`serialize`](./serialize.md) 序列化,因此结构相同的两个值无论键的插入顺序如何,总是产生相同的哈希;然后使用 SHA-256 计算摘要,并以 Base64URL 格式编码。
+当您需要值的简短且稳定的标识符时(例如缓存键或变更检测令牌),请使用 `hash`。值首先通过 [`serialize`](./serialize.md) 序列化,然后使用 SHA-256 计算摘要,并以 Base64URL 格式编码。
 
-`hash` 只能通过专用入口点 `es-toolkit/util/hash` 使用。它永远无法从主入口点访问,因此除非您显式导入它,否则不会对打包体积产生任何影响。
+结构相同的值(例如 `{ a: 1, b: 2 }` 和 `{ b: 2, a: 1 }`)总是具有相同的哈希。
+
+`hash` 只能通过专用入口点 `es-toolkit/util/hash` 使用。它无法从主入口点访问,因此除非您显式导入它,否则不会对打包体积产生任何影响。
 
 ```typescript
 import { hash } from 'es-toolkit/util/hash';
@@ -39,9 +41,9 @@ hash(new WeakMap());
 // 抛出 TypeError: Cannot serialize WeakMap
 ```
 
-::: warning 并非为安全目的而设计
+::: warning 请勿用于对安全性敏感的用途
 
-`hash` 是为缓存键和变更检测而构建的。序列化格式不会转义字符串或键,因此可以故意构造出冲突的输入。请勿将其用于密码、签名或任何对安全性敏感的用途。
+`hash` 是为缓存键和变更检测而构建的。为了性能,序列化格式不会转义字符串或键,因此可以构造恶意输入来产生哈希冲突。请勿将其用于密码、签名或任何对安全性重要的场景。
 
 :::
 
@@ -55,4 +57,4 @@ hash(new WeakMap());
 
 #### 错误
 
-(`TypeError`): 如果值中包含无法序列化的对象,则抛出。
+(`TypeError`): 如果值中包含无法序列化的对象,则会发生错误。
