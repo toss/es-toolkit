@@ -172,7 +172,7 @@ describe('serializeObject', () => {
 
     it('should serialize toJSON on plain objects', () => {
       // A plain object with toJSON is still serialized as a plain object.
-      expect(serialize({ toJSON: () => 42, a: 1 })).toContain('toJSON:');
+      expect(serialize({ toJSON: () => 42, a: 1 })).toBe("{'a':1,'toJSON':toJSON:() => 42}");
     });
 
     it('should not loop forever when toJSON returns this', () => {
