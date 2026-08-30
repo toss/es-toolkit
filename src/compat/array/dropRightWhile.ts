@@ -59,12 +59,12 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * const result = dropRightWhile(array, (item, index, arr) => index >= 1);
  * // Returns: [3]
  */
-export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate: ListIteratee<T> = identity): T[] {
+export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[] {
   if (!isArrayLike(array)) {
     return [];
   }
 
-  return dropRightWhileImpl(toArray(array), predicate);
+  return dropRightWhileImpl(toArray(array), predicate ?? identity);
 }
 
 function dropRightWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {
