@@ -78,4 +78,14 @@ describe('dropWhile', () => {
     expect(dropWhile([1, 2, 3, 0])).toEqual([0]);
     expect(dropWhile([false, 0, null, undefined, ''])).toEqual([false, 0, null, undefined, '']);
   });
+  it('should treat a boolean `predicate` as a property shorthand like lodash', () => {
+    // lodash's `baseIteratee` falls through to `property` for any non-function,
+    // non-object value, so `true` and `false` read the `'true'` and `'false'` keys.
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropWhile([1, 2, 3], true)).toEqual([1, 2, 3]);
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropWhile([{ true: 1 }, { true: 0 }], true)).toEqual([{ true: 0 }]);
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropWhile([{ false: 1 }], false)).toEqual([]);
+  });
 });

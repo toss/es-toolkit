@@ -82,9 +82,7 @@ function dropRightWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T
         return dropRightWhileToolkit(arr, matches(predicate));
       }
     }
-    case 'symbol':
-    case 'number':
-    case 'string': {
+    default: {
       return dropRightWhileToolkit(arr, property(predicate));
     }
   }
