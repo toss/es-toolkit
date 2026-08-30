@@ -168,7 +168,7 @@ const text = 'Hello world! Hello everyone!';
 
 console.log(searchText(text, /hello/gi)); // 2 (正则表达式)
 console.log(searchText(text, 'Hello')); // 2 (字符串,已转义)
-console.log(searchText(text, /h.llo/i)); // 2 (模式匹配)
+console.log(searchText(text, /h.llo/gi)); // 2 (模式匹配)
 
 // 动态过滤
 function createFilter(patterns: unknown[]) {
@@ -181,7 +181,7 @@ function createFilter(patterns: unknown[]) {
 
 // 垃圾邮件过滤器示例
 const spamPatterns = [
-  /\b(广告|促销)\b/,
+  /(广告|促销)/,
   /\d{3}-\d{4}-\d{4}/, // 电话号码模式
   'invalid', // 不是 RegExp,从过滤器中排除
   /\$\d+/, // 价格模式
