@@ -31,7 +31,7 @@ describe('serialize', () => {
     });
 
     it('should serialize symbols', () => {
-      expect(serialize(Symbol('test'))).toBe('Symbol(test)');
+      expect(serialize(Symbol('test'))).toBe("Symbol('test')");
     });
 
     it('should serialize functions', () => {
@@ -54,7 +54,7 @@ describe('serialize', () => {
     });
 
     it('should serialize builtin objects', () => {
-      expect(serialize(new Date(0))).toBe('Date(1970-01-01T00:00:00.000Z)');
+      expect(serialize(new Date(0))).toBe("Date('1970-01-01T00:00:00.000Z')");
       expect(serialize(/.*/)).toBe('RegExp(/.*/)');
       expect(serialize(new Map([['a', 1]]))).toBe("Map{'a':1}");
       expect(serialize(new Uint8Array([1, 2, 3]))).toBe('Uint8Array[1,2,3]');

@@ -34,7 +34,7 @@ describe('serializeObject', () => {
 
   describe('Date', () => {
     it('should serialize dates in ISO format', () => {
-      expect(serialize(new Date(0))).toBe('Date(1970-01-01T00:00:00.000Z)');
+      expect(serialize(new Date(0))).toBe("Date('1970-01-01T00:00:00.000Z')");
     });
 
     it('should serialize invalid dates as Date(null)', () => {
@@ -118,8 +118,19 @@ describe('serializeObject', () => {
 
   describe('Error', () => {
     it('should serialize errors with their name and message', () => {
-      expect(serialize(new Error('test'))).toBe('Error(Error: test)');
-      expect(serialize(new TypeError('boom'))).toBe('Error(TypeError: boom)');
+      expect(serialize(new Error('test'))).toBe("Error(Error: 'test')");
+      expect(serialize(new TypeError('boom'))).toBe("Error(TypeError: 'boom')");
+    });
+
+    it('should keep the name and message boundary unambiguous', () => {
+      const first = new Error('b: c');
+      first.name = 'a';
+      const second = new Error('c');
+      second.name = 'a: b';
+
+      expect(serialize(first)).toBe("Error(a: 'b: c')");
+      expect(serialize(second)).toBe("Error(a: b: 'c')");
+      expect(serialize(new Error(''))).toBe("Error(Error: '')");
     });
   });
 

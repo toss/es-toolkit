@@ -38,7 +38,7 @@ serialize(
 // Returns "Map{'a':1,'b':2}"
 
 serialize(new Date(0));
-// Returns 'Date(1970-01-01T00:00:00.000Z)'
+// Returns "Date('1970-01-01T00:00:00.000Z')"
 
 serialize(new Uint8Array([1, 2, 3]));
 // Returns 'Uint8Array[1,2,3]'
@@ -46,31 +46,31 @@ serialize(new Uint8Array([1, 2, 3]));
 
 Each type is serialized as follows.
 
-| Type                     | Input                           | Result                             |
-| ------------------------ | ------------------------------- | ---------------------------------- |
-| String                   | `'abc'`                         | `"'abc'"`                          |
-| Number                   | `123`                           | `"123"`                            |
-|                          | `-0`                            | `"0"`                              |
-|                          | `NaN`                           | `"NaN"`                            |
-|                          | `Infinity`                      | `"Infinity"`                       |
-| Boolean                  | `true`                          | `"true"`                           |
-| `undefined`              | `undefined`                     | `"undefined"`                      |
-| `null`                   | `null`                          | `"null"`                           |
-| `BigInt`                 | `123n`                          | `"123n"`                           |
-| Symbol                   | `Symbol('a')`                   | `"Symbol(a)"`                      |
-| Object                   | `{ a: 1 }`                      | `"{'a':1}"`                        |
-| Array                    | `[1, 'a']`                      | `"[1,'a']"`                        |
-| Function                 | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`      |
-| Native function          | `Math.max`                      | `"max:[native]"`                   |
-| `Date`                   | `new Date(0)`                   | `"Date(1970-01-01T00:00:00.000Z)"` |
-| `RegExp`                 | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`               |
-| `Set`                    | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                     |
-| `Map`                    | `new Map([['a', 1]])`           | `"Map{'a':1}"`                     |
-| TypedArray               | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`              |
-|                          | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`           |
-| `ArrayBuffer`            | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`               |
-| `Error`                  | `new TypeError('boom')`         | `"Error(TypeError: boom)"`         |
-| Objects with `entries()` | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`       |
+| Type                     | Input                           | Result                               |
+| ------------------------ | ------------------------------- | ------------------------------------ |
+| String                   | `'abc'`                         | `"'abc'"`                            |
+| Number                   | `123`                           | `"123"`                              |
+|                          | `-0`                            | `"0"`                                |
+|                          | `NaN`                           | `"NaN"`                              |
+|                          | `Infinity`                      | `"Infinity"`                         |
+| Boolean                  | `true`                          | `"true"`                             |
+| `undefined`              | `undefined`                     | `"undefined"`                        |
+| `null`                   | `null`                          | `"null"`                             |
+| `BigInt`                 | `123n`                          | `"123n"`                             |
+| Symbol                   | `Symbol('a')`                   | `"Symbol('a')"`                      |
+| Object                   | `{ a: 1 }`                      | `"{'a':1}"`                          |
+| Array                    | `[1, 'a']`                      | `"[1,'a']"`                          |
+| Function                 | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`        |
+| Native function          | `Math.max`                      | `"max:[native]"`                     |
+| `Date`                   | `new Date(0)`                   | `"Date('1970-01-01T00:00:00.000Z')"` |
+| `RegExp`                 | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`                 |
+| `Set`                    | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                       |
+| `Map`                    | `new Map([['a', 1]])`           | `"Map{'a':1}"`                       |
+| TypedArray               | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`                |
+|                          | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`             |
+| `ArrayBuffer`            | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`                 |
+| `Error`                  | `new TypeError('boom')`         | `"Error(TypeError: 'boom')"`         |
+| Objects with `entries()` | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`         |
 
 Class instances are serialized with their class name. If the instance has a `toJSON` method, the result of `toJSON` is serialized instead.
 

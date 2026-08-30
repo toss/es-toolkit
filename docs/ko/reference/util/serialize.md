@@ -38,7 +38,7 @@ serialize(
 // "Map{'a':1,'b':2}"를 반환해요
 
 serialize(new Date(0));
-// 'Date(1970-01-01T00:00:00.000Z)'를 반환해요
+// "Date('1970-01-01T00:00:00.000Z')"를 반환해요
 
 serialize(new Uint8Array([1, 2, 3]));
 // 'Uint8Array[1,2,3]'을 반환해요
@@ -46,31 +46,31 @@ serialize(new Uint8Array([1, 2, 3]));
 
 각 타입은 다음과 같이 직렬화돼요.
 
-| 타입                    | 입력                            | 결과                               |
-| ----------------------- | ------------------------------- | ---------------------------------- |
-| 문자열                  | `'abc'`                         | `"'abc'"`                          |
-| 숫자                    | `123`                           | `"123"`                            |
-|                         | `-0`                            | `"0"`                              |
-|                         | `NaN`                           | `"NaN"`                            |
-|                         | `Infinity`                      | `"Infinity"`                       |
-| 불리언                  | `true`                          | `"true"`                           |
-| `undefined`             | `undefined`                     | `"undefined"`                      |
-| `null`                  | `null`                          | `"null"`                           |
-| `BigInt`                | `123n`                          | `"123n"`                           |
-| 심볼                    | `Symbol('a')`                   | `"Symbol(a)"`                      |
-| 객체                    | `{ a: 1 }`                      | `"{'a':1}"`                        |
-| 배열                    | `[1, 'a']`                      | `"[1,'a']"`                        |
-| 함수                    | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`      |
-| 네이티브 함수           | `Math.max`                      | `"max:[native]"`                   |
-| `Date`                  | `new Date(0)`                   | `"Date(1970-01-01T00:00:00.000Z)"` |
-| `RegExp`                | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`               |
-| `Set`                   | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                     |
-| `Map`                   | `new Map([['a', 1]])`           | `"Map{'a':1}"`                     |
-| TypedArray              | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`              |
-|                         | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`           |
-| `ArrayBuffer`           | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`               |
-| `Error`                 | `new TypeError('boom')`         | `"Error(TypeError: boom)"`         |
-| `entries()`가 있는 객체 | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`       |
+| 타입                    | 입력                            | 결과                                 |
+| ----------------------- | ------------------------------- | ------------------------------------ |
+| 문자열                  | `'abc'`                         | `"'abc'"`                            |
+| 숫자                    | `123`                           | `"123"`                              |
+|                         | `-0`                            | `"0"`                                |
+|                         | `NaN`                           | `"NaN"`                              |
+|                         | `Infinity`                      | `"Infinity"`                         |
+| 불리언                  | `true`                          | `"true"`                             |
+| `undefined`             | `undefined`                     | `"undefined"`                        |
+| `null`                  | `null`                          | `"null"`                             |
+| `BigInt`                | `123n`                          | `"123n"`                             |
+| 심볼                    | `Symbol('a')`                   | `"Symbol('a')"`                      |
+| 객체                    | `{ a: 1 }`                      | `"{'a':1}"`                          |
+| 배열                    | `[1, 'a']`                      | `"[1,'a']"`                          |
+| 함수                    | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`        |
+| 네이티브 함수           | `Math.max`                      | `"max:[native]"`                     |
+| `Date`                  | `new Date(0)`                   | `"Date('1970-01-01T00:00:00.000Z')"` |
+| `RegExp`                | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`                 |
+| `Set`                   | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                       |
+| `Map`                   | `new Map([['a', 1]])`           | `"Map{'a':1}"`                       |
+| TypedArray              | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`                |
+|                         | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`             |
+| `ArrayBuffer`           | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`                 |
+| `Error`                 | `new TypeError('boom')`         | `"Error(TypeError: 'boom')"`         |
+| `entries()`가 있는 객체 | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`         |
 
 클래스 인스턴스는 클래스 이름과 함께 직렬화돼요. 인스턴스에 `toJSON` 메서드가 있으면 `toJSON`의 결과를 직렬화해요.
 

@@ -30,7 +30,7 @@ import { serializeSymbol } from './serializeSymbol.ts';
  * serialize({ b: 2, a: 1 }); // "{'a':1,'b':2}"
  * serialize([1, 2n, 'a', { k: 1 }]); // "[1,2n,'a',{'k':1}]"
  * serialize(new Set([3, 1, 2])); // "Set[1,2,3]"
- * serialize(new Date(0)); // "Date(1970-01-01T00:00:00.000Z)"
+ * serialize(new Date(0)); // "Date('1970-01-01T00:00:00.000Z')"
  *
  * const obj = {};
  * obj.self = obj;

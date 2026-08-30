@@ -38,7 +38,7 @@ serialize(
 // "Map{'a':1,'b':2}" を返します
 
 serialize(new Date(0));
-// 'Date(1970-01-01T00:00:00.000Z)' を返します
+// "Date('1970-01-01T00:00:00.000Z')" を返します
 
 serialize(new Uint8Array([1, 2, 3]));
 // 'Uint8Array[1,2,3]' を返します
@@ -46,31 +46,31 @@ serialize(new Uint8Array([1, 2, 3]));
 
 各型は次のようにシリアライズされます。
 
-| 型                             | 入力                            | 結果                               |
-| ------------------------------ | ------------------------------- | ---------------------------------- |
-| 文字列                         | `'abc'`                         | `"'abc'"`                          |
-| 数値                           | `123`                           | `"123"`                            |
-|                                | `-0`                            | `"0"`                              |
-|                                | `NaN`                           | `"NaN"`                            |
-|                                | `Infinity`                      | `"Infinity"`                       |
-| 真偽値                         | `true`                          | `"true"`                           |
-| `undefined`                    | `undefined`                     | `"undefined"`                      |
-| `null`                         | `null`                          | `"null"`                           |
-| `BigInt`                       | `123n`                          | `"123n"`                           |
-| シンボル                       | `Symbol('a')`                   | `"Symbol(a)"`                      |
-| オブジェクト                   | `{ a: 1 }`                      | `"{'a':1}"`                        |
-| 配列                           | `[1, 'a']`                      | `"[1,'a']"`                        |
-| 関数                           | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`      |
-| ネイティブ関数                 | `Math.max`                      | `"max:[native]"`                   |
-| `Date`                         | `new Date(0)`                   | `"Date(1970-01-01T00:00:00.000Z)"` |
-| `RegExp`                       | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`               |
-| `Set`                          | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                     |
-| `Map`                          | `new Map([['a', 1]])`           | `"Map{'a':1}"`                     |
-| TypedArray                     | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`              |
-|                                | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`           |
-| `ArrayBuffer`                  | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`               |
-| `Error`                        | `new TypeError('boom')`         | `"Error(TypeError: boom)"`         |
-| `entries()` を持つオブジェクト | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`       |
+| 型                             | 入力                            | 結果                                 |
+| ------------------------------ | ------------------------------- | ------------------------------------ |
+| 文字列                         | `'abc'`                         | `"'abc'"`                            |
+| 数値                           | `123`                           | `"123"`                              |
+|                                | `-0`                            | `"0"`                                |
+|                                | `NaN`                           | `"NaN"`                              |
+|                                | `Infinity`                      | `"Infinity"`                         |
+| 真偽値                         | `true`                          | `"true"`                             |
+| `undefined`                    | `undefined`                     | `"undefined"`                        |
+| `null`                         | `null`                          | `"null"`                             |
+| `BigInt`                       | `123n`                          | `"123n"`                             |
+| シンボル                       | `Symbol('a')`                   | `"Symbol('a')"`                      |
+| オブジェクト                   | `{ a: 1 }`                      | `"{'a':1}"`                          |
+| 配列                           | `[1, 'a']`                      | `"[1,'a']"`                          |
+| 関数                           | `function sum(a, b) {}`         | `"sum:function sum(a, b) {}"`        |
+| ネイティブ関数                 | `Math.max`                      | `"max:[native]"`                     |
+| `Date`                         | `new Date(0)`                   | `"Date('1970-01-01T00:00:00.000Z')"` |
+| `RegExp`                       | `/ab+c/gi`                      | `"RegExp(/ab+c/gi)"`                 |
+| `Set`                          | `new Set([3, 1, 2])`            | `"Set[1,2,3]"`                       |
+| `Map`                          | `new Map([['a', 1]])`           | `"Map{'a':1}"`                       |
+| TypedArray                     | `new Uint8Array([1, 2, 3])`     | `"Uint8Array[1,2,3]"`                |
+|                                | `new BigInt64Array([1n, 2n])`   | `"BigInt64Array[1n,2n]"`             |
+| `ArrayBuffer`                  | `new Uint8Array([1, 2]).buffer` | `"ArrayBuffer[1,2]"`                 |
+| `Error`                        | `new TypeError('boom')`         | `"Error(TypeError: 'boom')"`         |
+| `entries()` を持つオブジェクト | `new URLSearchParams('a=1')`    | `"URLSearchParams{'a':'1'}"`         |
 
 クラスのインスタンスはクラス名と共にシリアライズされます。インスタンスに `toJSON` メソッドがある場合は、`toJSON` の結果がシリアライズされます。
 

@@ -1,6 +1,7 @@
 import { compareValues } from './compareValues.ts';
 import { serializeValue } from './serialize.ts';
 import { serializePlainObject } from './serializePlainObject.ts';
+import { serializeString } from './serializeString.ts';
 import { isArrayBuffer } from '../../predicate/isArrayBuffer.ts';
 import { isDate } from '../../predicate/isDate.ts';
 import { isError } from '../../predicate/isError.ts';
@@ -54,7 +55,7 @@ function serializeObjectImpl(value: object, refs: Map<object, string>): string {
   }
 
   if (isDate(value)) {
-    return Number.isNaN(value.getTime()) ? 'Date(null)' : `Date(${value.toISOString()})`;
+    return Number.isNaN(value.getTime()) ? 'Date(null)' : `Date(${serializeString(value.toISOString())})`;
   }
 
   if (isRegExp(value)) {
@@ -85,7 +86,7 @@ function serializeObjectImpl(value: object, refs: Map<object, string>): string {
   }
 
   if (isError(value)) {
-    return `Error(${String(value)})`;
+    return `Error(${value.name}: ${serializeString(value.message)})`;
   }
 
   const tag = Object.prototype.toString.call(value).slice(8, -1);
