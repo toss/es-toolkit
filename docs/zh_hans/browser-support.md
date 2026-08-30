@@ -13,7 +13,7 @@ es-toolkit 在 2022 年初以后发布的所有浏览器中无需任何配置即
 | Firefox    | 94+      |
 | Safari     | 15.4+    |
 | iOS Safari | 15.4+    |
-| Node.js    | 18+      |
+| Node.js    | 20.12+   |
 
 es-toolkit 积极使用现代 JavaScript,以保持代码库小巧高效。
 如果要支持比上述版本更旧的浏览器,可以添加构建配置。这样即使在只支持 ES2015 的更旧浏览器(如 Chrome 51 或 Safari 10)中,es-toolkit 也能正常工作。参见下面的[支持更旧的浏览器](#支持更旧的浏览器)。

@@ -33,6 +33,10 @@
     "./server": "./src/server/index.ts",
     "./types": "./src/types/index.ts",
     "./util": "./src/util/index.ts",
+    "./util/hash": {
+      "node": "./src/util/hash/node.ts",
+      "default": "./src/util/hash/browser.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -47,6 +51,8 @@
     "fp.js",
     "fp/iterator.js",
     "fp/iterator.d.ts",
+    "util/hash.js",
+    "util/hash.d.ts",
     "function.js",
     "iterator.js",
     "map.js",
@@ -318,6 +324,28 @@
         "require": {
           "types": "./dist/util/index.d.ts",
           "default": "./dist/util/index.js"
+        }
+      },
+      "./util/hash": {
+        "node": {
+          "import": {
+            "types": "./dist/util/hash/node.d.mts",
+            "default": "./dist/util/hash/node.mjs"
+          },
+          "require": {
+            "types": "./dist/util/hash/node.d.ts",
+            "default": "./dist/util/hash/node.js"
+          }
+        },
+        "default": {
+          "import": {
+            "types": "./dist/util/hash/browser.d.mts",
+            "default": "./dist/util/hash/browser.mjs"
+          },
+          "require": {
+            "types": "./dist/util/hash/browser.d.ts",
+            "default": "./dist/util/hash/browser.js"
+          }
         }
       },
       "./package.json": "./package.json"
