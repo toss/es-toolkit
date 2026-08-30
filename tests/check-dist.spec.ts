@@ -41,6 +41,7 @@ const ENTRYPOINTS = [
   './string',
   './types',
   './util',
+  './util/hash',
 ];
 
 describe(`es-toolkit's package tarball`, () => {
@@ -107,5 +108,54 @@ console.log(exported);
 
       expect(cjsResult.stdout).toEqual(esmResult.stdout);
     }
+  });
+
+  it('does not reach util/hash from any other entrypoint', { timeout: 120_000 }, async () => {
+    const tmpdir = await createTmpDir();
+
+    const packageJson = {
+      dependencies: {
+        'es-toolkit': tarball.path,
+      },
+    };
+
+    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
+    await execa('npm', ['install'], { cwd: tmpdir });
+
+    // Static check: dist modules are unbundled 1:1 with static import strings,
+    // so no dist file outside dist/util/hash may reference util/hash.
+    const distDir = path.join(tmpdir, 'node_modules', 'es-toolkit', 'dist');
+    const distFiles = (await fs.promises.readdir(distDir, { recursive: true })) as string[];
+
+    for (const file of distFiles) {
+      const posixPath = file.split(path.sep).join('/');
+
+      if (posixPath.startsWith('util/hash/') || !/\.(js|mjs|cjs|d\.ts|d\.mts)$/.test(posixPath)) {
+        continue;
+      }
+
+      const content = await fs.promises.readFile(path.join(distDir, file), 'utf-8');
+      expect(content.includes('util/hash'), `dist/${posixPath} must not reference util/hash`).toBe(false);
+    }
+
+    // Runtime check: loading the main entrypoints must not load any module
+    // under dist/util/hash.
+    const script = `
+const path = require('node:path');
+
+require('es-toolkit');
+require('es-toolkit/util');
+
+const loaded = Object.keys(require.cache).map((p) => p.split(path.sep).join('/'));
+if (loaded.some((p) => p.includes('dist/util/hash'))) {
+  throw new Error('util/hash was loaded from a main entrypoint');
+}
+console.log('isolated');
+    `.trim();
+    const scriptPath = path.join(tmpdir, 'isolation.cjs');
+    await fs.promises.writeFile(scriptPath, script);
+
+    const result = await execa('node', [scriptPath], { cwd: tmpdir });
+    expect(result.stdout).toBe('isolated');
   });
 });

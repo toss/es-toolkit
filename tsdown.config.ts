@@ -7,8 +7,14 @@ const packageJson = createRequire(import.meta.url)('./package.json') as {
 
 const SERVER_ENTRY = './src/server/index.ts';
 
-const allEntrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
-const neutralEntrypoints = allEntrypoints.filter(f => f !== SERVER_ENTRY);
+const allEntrypoints = Object.values(packageJson.exports).filter(
+  (f): f is string => typeof f === 'string' && /^(\.\/)?src\//.test(f) && f.endsWith('.ts')
+);
+// "./util/hash" is a conditional export (node/default), so its entries are not
+// collected above and are wired explicitly: the browser implementation builds
+// as a neutral entry, and the node implementation gets its own node-platform
+// build below.
+const neutralEntrypoints = [...allEntrypoints.filter(f => f !== SERVER_ENTRY), './src/util/hash/browser.ts'];
 
 export default defineConfig([
   {
@@ -36,6 +42,23 @@ export default defineConfig([
     dts: true,
     sourcemap: false,
     treeshake: false,
+    clean: false,
+    exports: false,
+    attw: false,
+    publint: false,
+  },
+  {
+    // The node implementation of `es-toolkit/util/hash` imports `node:crypto`,
+    // so it cannot be part of the neutral build. It is bundled (not unbundled)
+    // so that its `serialize` dependency does not escape the outDir.
+    entry: ['./src/util/hash/node.ts'],
+    format: ['esm', 'cjs'],
+    outDir: 'dist/util/hash',
+    platform: 'node',
+    fixedExtension: false,
+    dts: true,
+    sourcemap: false,
+    treeshake: true,
     clean: false,
     exports: false,
     attw: false,

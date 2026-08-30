@@ -13,7 +13,7 @@ es-toolkit works out of the box in all browsers released since early 2022:
 | Firefox     | 94+             |
 | Safari      | 15.4+           |
 | iOS Safari  | 15.4+           |
-| Node.js     | 18+             |
+| Node.js     | 20.12+          |
 
 es-toolkit makes full use of modern JavaScript to keep its codebase small and efficient.
 To support browsers older than the ones above, you can add build configuration. This makes es-toolkit work correctly even in much older browsers that only support ES2015, such as Chrome 51 or Safari 10. See [Supporting older browsers](#supporting-older-browsers) below.
