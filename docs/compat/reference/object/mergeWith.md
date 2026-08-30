@@ -11,12 +11,12 @@ Use the faster and more modern [`mergeWith`](../../../reference/object/mergeWith
 Deeply merges multiple objects while controlling the merge behavior with a custom function.
 
 ```typescript
-const result = mergeWith(target, ...sources, customizer);
+const result = mergeWith(target, ...sources, customizer?);
 ```
 
 ## Usage
 
-### `mergeWith(object, ...sources, customizer)`
+### `mergeWith(object, ...sources, customizer?)`
 
 Deeply merges one or more source objects into the target object, controlling the merge behavior with a customizer function. If the customizer function returns `undefined`, the default merge logic is used. Useful for concatenating arrays or applying special merge rules.
 
@@ -83,11 +83,24 @@ const customizer = (objValue, srcValue, key, object, source, stack) => {
 };
 ```
 
+The customizer is optional. The last argument is only treated as the customizer when it is a function; otherwise it is merged as another source.
+
+```typescript
+import { mergeWith } from 'es-toolkit/compat';
+
+// Without a customizer, every argument after the target is a source
+const result = mergeWith({ a: 1 }, { b: 2 });
+// Result: { a: 1, b: 2 }
+
+const merged = mergeWith({}, { a: 1 }, { b: 2 }, { c: 3 });
+// Result: { a: 1, b: 2, c: 3 }
+```
+
 #### Parameters
 
 - `object` (`any`): The target object to merge into. This object is modified.
 - `...sources` (`any[]`): The source objects to merge from.
-- `customizer` (`MergeWithCustomizer`): The function to customize value assignment. Format: `(objValue, srcValue, key, object, source, stack) => any`.
+- `customizer` (`MergeWithCustomizer`, optional): The function to customize value assignment. Format: `(objValue, srcValue, key, object, source, stack) => any`. If the last argument is not a function, it is treated as another source object.
 
 #### Returns
 
