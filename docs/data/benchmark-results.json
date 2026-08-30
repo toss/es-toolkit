@@ -1,55 +1,55 @@
 {
   "labels": {
-    "esToolkit": "es-toolkit@1.49.0",
+    "esToolkit": "es-toolkit@1.52.0",
     "lodash": "lodash@4.18.1"
   },
   "environment": {
-    "node": "v24.11.1",
-    "platform": "win32 x64",
-    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
-    "cpuCores": 16,
-    "memory": "31.82 GB"
+    "node": "v22.23.2",
+    "platform": "darwin arm64",
+    "cpu": "Apple M4",
+    "cpuCores": 10,
+    "memory": "16.00 GB"
   },
   "data": {
     "omit": {
-      "esToolkit": 5022632,
-      "lodash": 1402566
+      "esToolkit": 3973624,
+      "lodash": 1306896
     },
     "pick": {
-      "esToolkit": 11335718,
-      "lodash": 2876787
+      "esToolkit": 9038224,
+      "lodash": 2220822
     },
     "differenceWith": {
-      "esToolkit": 16930604,
-      "lodash": 5811529
+      "esToolkit": 12169353,
+      "lodash": 4009328
     },
     "difference": {
-      "esToolkit": 12373746,
-      "lodash": 7004902
+      "esToolkit": 9097445,
+      "lodash": 5122555
     },
     "intersectionWith": {
-      "esToolkit": 17384852,
-      "lodash": 5031392
+      "esToolkit": 11220380,
+      "lodash": 3022015
     },
     "intersection": {
-      "esToolkit": 11338214,
-      "lodash": 5550564
+      "esToolkit": 8431475,
+      "lodash": 4348418
     },
     "unionBy": {
-      "esToolkit": 5068515,
-      "lodash": 5342267
+      "esToolkit": 4422940,
+      "lodash": 3558872
     },
     "union": {
-      "esToolkit": 4849245,
-      "lodash": 6209626
+      "esToolkit": 4092678,
+      "lodash": 4331186
     },
     "dropRightWhile": {
-      "esToolkit": 18381692,
-      "lodash": 12726057
+      "esToolkit": 12852312,
+      "lodash": 8392579
     },
     "groupBy": {
-      "esToolkit": 6507297,
-      "lodash": 6540958
+      "esToolkit": 4540652,
+      "lodash": 3557114
     }
   }
 }
