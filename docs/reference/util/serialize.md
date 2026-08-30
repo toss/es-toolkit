@@ -27,7 +27,12 @@ serialize([1, 2n, 'a', { k: 1 }]);
 serialize(new Set([3, 1, 2]));
 // Returns 'Set[1,2,3]'
 
-serialize(new Map([['b', 2], ['a', 1]]));
+serialize(
+  new Map([
+    ['b', 2],
+    ['a', 1],
+  ])
+);
 // Returns 'Map{a:1,b:2}'
 
 serialize(new Date(0));

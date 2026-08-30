@@ -3,13 +3,9 @@
   "version": "1.52.0",
   "exports": {
     ".": "./src/index.ts",
-    "./compat": "./src/compat/index.ts",
-    "./util/hash": "./src/util/hash/node.ts"
+    "./compat": "./src/compat/index.ts"
   },
   "publish": {
-    "include": [
-      "./src/**/*.ts",
-      "./NOTICE"
-    ]
+    "include": ["./src/**/*.ts", "./NOTICE"]
   }
 }
