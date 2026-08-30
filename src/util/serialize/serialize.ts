@@ -14,9 +14,10 @@ import { serializeSymbol } from './serializeSymbol.ts';
  * intentional collisions can be crafted from user input.
  *
  * Plain object keys, `Map` keys, and `Set` values are sorted, so the output
- * does not depend on insertion order. Circular references are serialized as
- * `#ref{n}` back-references, where `n` is the order in which the object was
- * first visited.
+ * does not depend on insertion order. String keys are always quoted, so a
+ * string key never collides with a key of another type. Circular references
+ * are serialized as `#ref{n}` back-references, where `n` is the order in
+ * which the object was first visited.
  *
  * Objects that cannot be serialized meaningfully, such as `Promise`, `WeakMap`,
  * or `Blob`, throw a `TypeError`.
@@ -26,14 +27,14 @@ import { serializeSymbol } from './serializeSymbol.ts';
  * @throws {TypeError} If the value contains an object that cannot be serialized.
  *
  * @example
- * serialize({ b: 2, a: 1 }); // "{a:1,b:2}"
- * serialize([1, 2n, 'a', { k: 1 }]); // "[1,2n,'a',{k:1}]"
+ * serialize({ b: 2, a: 1 }); // "{'a':1,'b':2}"
+ * serialize([1, 2n, 'a', { k: 1 }]); // "[1,2n,'a',{'k':1}]"
  * serialize(new Set([3, 1, 2])); // "Set[1,2,3]"
  * serialize(new Date(0)); // "Date(1970-01-01T00:00:00.000Z)"
  *
  * const obj = {};
  * obj.self = obj;
- * serialize(obj); // "{self:#ref0}"
+ * serialize(obj); // "{'self':#ref0}"
  */
 export function serialize(value: unknown): string {
   return serializeValue(value, new Map());
@@ -45,14 +46,12 @@ export function serialize(value: unknown): string {
  * @param value - The value to serialize.
  * @param refs - Objects that are being serialized or have been serialized,
  *   mapped to their back-reference placeholder or completed serialization.
- * @param noQuotes - Whether to omit the quotes around strings. Used in key
- *   positions and for sorting, where quotes are unnecessary.
  * @returns The serialized string.
  */
-export function serializeValue(value: unknown, refs: Map<object, string>, noQuotes = false): string {
+export function serializeValue(value: unknown, refs: Map<object, string>): string {
   switch (typeof value) {
     case 'string': {
-      return noQuotes ? value : serializeString(value);
+      return serializeString(value);
     }
     case 'number': {
       return serializeNumber(value);

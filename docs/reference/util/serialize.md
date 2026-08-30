@@ -18,13 +18,13 @@ Values with the same structure, like `{ a: 1, b: 2 }` and `{ b: 2, a: 1 }`, are 
 import { serialize } from 'es-toolkit/util';
 
 serialize({ b: 2, a: 1 });
-// Returns '{a:1,b:2}'
+// Returns "{'a':1,'b':2}"
 
 serialize({ a: 1, b: 2 }) === serialize({ b: 2, a: 1 });
 // Returns true
 
 serialize([1, 2n, 'a', { k: 1 }]);
-// Returns "[1,2n,'a',{k:1}]"
+// Returns "[1,2n,'a',{'k':1}]"
 
 serialize(new Set([3, 1, 2]));
 // Returns 'Set[1,2,3]'
@@ -35,7 +35,7 @@ serialize(
     ['a', 1],
   ])
 );
-// Returns 'Map{a:1,b:2}'
+// Returns "Map{'a':1,'b':2}"
 
 serialize(new Date(0));
 // Returns 'Date(1970-01-01T00:00:00.000Z)'
@@ -66,7 +66,7 @@ class User {
   name = 'Alice';
 }
 serialize(new User());
-// Returns "User{name:'Alice'}"
+// Returns "User{'name':'Alice'}"
 ```
 
 Functions are serialized as `name:source`. Newlines and their surrounding whitespace are removed from the source so that the result does not depend on code formatting. Native functions, whose source is not available, are serialized as `name:[native]`.
@@ -88,7 +88,7 @@ Circular references are serialized as `#ref{n}` back-references, where `n` is th
 const obj = {};
 obj.self = obj;
 serialize(obj);
-// Returns '{self:#ref0}'
+// Returns "{'self':#ref0}"
 ```
 
 Objects that cannot be serialized meaningfully, such as `Promise`, `WeakMap`, or `Blob`, throw a `TypeError`.

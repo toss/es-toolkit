@@ -56,18 +56,18 @@ describe('serializeObject', () => {
     });
 
     it('should sort object values by their serialized form', () => {
-      expect(serialize(new Set([{ b: 1 }, { a: 1 }]))).toBe('Set[{a:1},{b:1}]');
+      expect(serialize(new Set([{ b: 1 }, { a: 1 }]))).toBe("Set[{'a':1},{'b':1}]");
     });
 
     it('should sort mixed values', () => {
       // `Array.prototype.sort` always places undefined elements last,
       // without consulting the comparator.
-      expect(serialize(new Set([3, 'a', { b: 1 }, null, undefined]))).toBe("Set[3,'a',null,{b:1},undefined]");
+      expect(serialize(new Set([3, 'a', { b: 1 }, null, undefined]))).toBe("Set['a',3,null,{'b':1},undefined]");
     });
   });
 
   describe('Map', () => {
-    it('should sort entries by key and serialize keys without quotes', () => {
+    it('should sort entries by key and quote string keys', () => {
       const map = new Map<unknown, unknown>([
         [1, 4],
         [2, 3],
@@ -76,7 +76,7 @@ describe('serializeObject', () => {
         [{ x: 42 }, '3'],
       ]);
 
-      expect(serialize(map)).toBe("Map{1:4,2:3,a:'1',z:2,{x:42}:'3'}");
+      expect(serialize(map)).toBe("Map{'a':'1','z':2,1:4,2:3,{'x':42}:'3'}");
     });
 
     it('should serialize empty maps', () => {
@@ -128,14 +128,14 @@ describe('serializeObject', () => {
       class Test {
         x = 1;
       }
-      expect(serialize(new Test())).toBe('Test{x:1}');
+      expect(serialize(new Test())).toBe("Test{'x':1}");
     });
 
     it('should serialize class instances even when the class name exists in globalThis', () => {
       class CustomEvent {
         y = 1;
       }
-      expect(serialize(new CustomEvent())).toBe('CustomEvent{y:1}');
+      expect(serialize(new CustomEvent())).toBe("CustomEvent{'y':1}");
     });
 
     it('should use toJSON when available', () => {
@@ -151,7 +151,7 @@ describe('serializeObject', () => {
           return { a: 1, b: 2 };
         }
       }
-      expect(serialize(new TestObject())).toBe('TestObject{a:1,b:2}');
+      expect(serialize(new TestObject())).toBe("TestObject{'a':1,'b':2}");
     });
 
     it('should wrap primitive toJSON results in parentheses', () => {
@@ -190,21 +190,21 @@ describe('serializeObject', () => {
       const params = new URLSearchParams();
       params.set('foo', 'bar');
       params.set('bar', 'baz');
-      expect(serialize(params)).toBe("URLSearchParams{bar:'baz',foo:'bar'}");
+      expect(serialize(params)).toBe("URLSearchParams{'bar':'baz','foo':'bar'}");
     });
 
     it('should serialize FormData', () => {
       const form = new FormData();
       form.set('foo', 'bar');
       form.set('bar', 'baz');
-      expect(serialize(form)).toBe("FormData{bar:'baz',foo:'bar'}");
+      expect(serialize(form)).toBe("FormData{'bar':'baz','foo':'bar'}");
     });
 
     it('should serialize Headers', () => {
       const headers = new Headers();
       headers.set('b', '2');
       headers.set('a', '1');
-      expect(serialize(headers)).toBe("Headers{a:'1',b:'2'}");
+      expect(serialize(headers)).toBe("Headers{'a':'1','b':'2'}");
     });
   });
 
@@ -244,13 +244,13 @@ describe('serializeObject', () => {
     it('should serialize a self-referencing object', () => {
       const object: Record<string, unknown> = {};
       object.foo = object;
-      expect(serialize(object)).toBe('{foo:#ref0}');
+      expect(serialize(object)).toBe("{'foo':#ref0}");
     });
 
     it('should serialize circular references in nested objects', () => {
       const object: Record<string, any> = { a: { b: {} } };
       object.a.b = object;
-      expect(serialize(object)).toBe('{a:{b:#ref0}}');
+      expect(serialize(object)).toBe("{'a':{'b':#ref0}}");
     });
 
     it('should serialize circular references in arrays', () => {
@@ -262,18 +262,18 @@ describe('serializeObject', () => {
     it('should number back-references by visit order', () => {
       const object: Record<string, any> = { a: { b: { c: {} } } };
       object.a.b.c = object.a;
-      expect(serialize(object)).toBe('{a:{b:{c:#ref1}}}');
+      expect(serialize(object)).toBe("{'a':{'b':{'c':#ref1}}}");
 
       const deep: Record<string, any> = { x: { y: { z: {} } } };
       deep.x.y.z.ref1 = deep.x;
       deep.x.y.z.ref2 = deep;
-      expect(serialize(deep)).toBe('{x:{y:{z:{ref1:#ref1,ref2:#ref0}}}}');
+      expect(serialize(deep)).toBe("{'x':{'y':{'z':{'ref1':#ref1,'ref2':#ref0}}}}");
     });
 
     it('should serialize circular references in Map and Set', () => {
       const map = new Map();
       map.set('key', map);
-      expect(serialize(map)).toBe('Map{key:#ref0}');
+      expect(serialize(map)).toBe("Map{'key':#ref0}");
 
       const mapAsKey = new Map();
       mapAsKey.set(mapAsKey, 'value');
@@ -287,7 +287,7 @@ describe('serializeObject', () => {
     it('should serialize multiple references to the same object', () => {
       const shared: Record<string, unknown> = {};
       shared.ref = shared;
-      expect(serialize({ a: shared, b: shared })).toBe('{a:{ref:#ref1},b:{ref:#ref1}}');
+      expect(serialize({ a: shared, b: shared })).toBe("{'a':{'ref':#ref1},'b':{'ref':#ref1}}");
     });
 
     it('should reuse the serialized string of completed objects', () => {

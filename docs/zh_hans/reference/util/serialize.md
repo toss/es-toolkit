@@ -18,13 +18,13 @@ const serialized = serialize(value);
 import { serialize } from 'es-toolkit/util';
 
 serialize({ b: 2, a: 1 });
-// 返回 '{a:1,b:2}'
+// 返回 "{'a':1,'b':2}"
 
 serialize({ a: 1, b: 2 }) === serialize({ b: 2, a: 1 });
 // 返回 true
 
 serialize([1, 2n, 'a', { k: 1 }]);
-// 返回 "[1,2n,'a',{k:1}]"
+// 返回 "[1,2n,'a',{'k':1}]"
 
 serialize(new Set([3, 1, 2]));
 // 返回 'Set[1,2,3]'
@@ -35,7 +35,7 @@ serialize(
     ['a', 1],
   ])
 );
-// 返回 'Map{a:1,b:2}'
+// 返回 "Map{'a':1,'b':2}"
 
 serialize(new Date(0));
 // 返回 'Date(1970-01-01T00:00:00.000Z)'
@@ -66,7 +66,7 @@ class User {
   name = 'Alice';
 }
 serialize(new User());
-// 返回 "User{name:'Alice'}"
+// 返回 "User{'name':'Alice'}"
 ```
 
 函数会以 `名称:源码` 的形式序列化。为了使结果不受代码格式的影响,源码中的换行及其周围的空白会被移除。无法获取源码的原生函数会被序列化为 `名称:[native]`。
@@ -88,7 +88,7 @@ serialize(Math.max);
 const obj = {};
 obj.self = obj;
 serialize(obj);
-// 返回 '{self:#ref0}'
+// 返回 "{'self':#ref0}"
 ```
 
 无法有意义地序列化的对象(例如 `Promise`、`WeakMap` 或 `Blob`)会抛出 `TypeError`。

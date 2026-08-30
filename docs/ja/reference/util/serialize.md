@@ -18,13 +18,13 @@ const serialized = serialize(value);
 import { serialize } from 'es-toolkit/util';
 
 serialize({ b: 2, a: 1 });
-// '{a:1,b:2}' を返します
+// "{'a':1,'b':2}" を返します
 
 serialize({ a: 1, b: 2 }) === serialize({ b: 2, a: 1 });
 // true を返します
 
 serialize([1, 2n, 'a', { k: 1 }]);
-// "[1,2n,'a',{k:1}]" を返します
+// "[1,2n,'a',{'k':1}]" を返します
 
 serialize(new Set([3, 1, 2]));
 // 'Set[1,2,3]' を返します
@@ -35,7 +35,7 @@ serialize(
     ['a', 1],
   ])
 );
-// 'Map{a:1,b:2}' を返します
+// "Map{'a':1,'b':2}" を返します
 
 serialize(new Date(0));
 // 'Date(1970-01-01T00:00:00.000Z)' を返します
@@ -66,7 +66,7 @@ class User {
   name = 'Alice';
 }
 serialize(new User());
-// "User{name:'Alice'}" を返します
+// "User{'name':'Alice'}" を返します
 ```
 
 関数は `名前:ソース` の形式でシリアライズされます。コードのフォーマットによって結果が変わらないように、ソースの改行とその前後の空白は削除されます。ソースを確認できないネイティブ関数は `名前:[native]` としてシリアライズされます。
@@ -88,7 +88,7 @@ serialize(Math.max);
 const obj = {};
 obj.self = obj;
 serialize(obj);
-// '{self:#ref0}' を返します
+// "{'self':#ref0}" を返します
 ```
 
 `Promise`、`WeakMap`、`Blob` のように意味のあるシリアライズができないオブジェクトは `TypeError` をスローします。

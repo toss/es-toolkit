@@ -20,15 +20,10 @@ describe('compareValues', () => {
   });
 
   it('should compare mixed types by their serialized form', () => {
-    // 'a' vs serialized {b:1} => 'a' < '{b:1}'
+    // "'a'" vs "{'b':1}"
     expect(compareValues('a', { b: 1 }, new Map())).toBeLessThan(0);
-    // 3 => '3' vs 'a'
-    expect(compareValues(3, 'a', new Map())).toBeLessThan(0);
-  });
-
-  it('should compare strings without quotes', () => {
-    // If quotes were included, `'a'` would sort before `1`.
-    expect(compareValues(1, 'a', new Map())).toBeLessThan(0);
+    // "3" vs "'a'" — the quote sorts before digits, so strings come first
+    expect(compareValues(3, 'a', new Map())).toBeGreaterThan(0);
   });
 
   it('should sort in a stable order usable by Array.prototype.sort', () => {
@@ -36,6 +31,6 @@ describe('compareValues', () => {
     // without consulting the comparator.
     const values = [3, 'a', { b: 1 }, null, undefined];
     const sorted = [...values].sort((a, b) => compareValues(a, b, new Map()));
-    expect(sorted).toEqual([3, 'a', null, { b: 1 }, undefined]);
+    expect(sorted).toEqual(['a', 3, null, { b: 1 }, undefined]);
   });
 });

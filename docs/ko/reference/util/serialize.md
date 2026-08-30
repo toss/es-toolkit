@@ -18,13 +18,13 @@ const serialized = serialize(value);
 import { serialize } from 'es-toolkit/util';
 
 serialize({ b: 2, a: 1 });
-// '{a:1,b:2}'를 반환해요
+// "{'a':1,'b':2}"를 반환해요
 
 serialize({ a: 1, b: 2 }) === serialize({ b: 2, a: 1 });
 // true를 반환해요
 
 serialize([1, 2n, 'a', { k: 1 }]);
-// "[1,2n,'a',{k:1}]"를 반환해요
+// "[1,2n,'a',{'k':1}]"를 반환해요
 
 serialize(new Set([3, 1, 2]));
 // 'Set[1,2,3]'을 반환해요
@@ -35,7 +35,7 @@ serialize(
     ['a', 1],
   ])
 );
-// 'Map{a:1,b:2}'를 반환해요
+// "Map{'a':1,'b':2}"를 반환해요
 
 serialize(new Date(0));
 // 'Date(1970-01-01T00:00:00.000Z)'를 반환해요
@@ -66,7 +66,7 @@ class User {
   name = 'Alice';
 }
 serialize(new User());
-// "User{name:'Alice'}"를 반환해요
+// "User{'name':'Alice'}"를 반환해요
 ```
 
 함수는 `이름:소스` 형태로 직렬화돼요. 코드 포매팅에 따라 결과가 달라지지 않도록 소스의 줄바꿈과 주변 공백은 제거돼요. 소스를 확인할 수 없는 네이티브 함수는 `이름:[native]`로 직렬화돼요.
@@ -88,7 +88,7 @@ serialize(Math.max);
 const obj = {};
 obj.self = obj;
 serialize(obj);
-// '{self:#ref0}'을 반환해요
+// "{'self':#ref0}"을 반환해요
 ```
 
 `Promise`, `WeakMap`, `Blob`처럼 의미 있게 직렬화할 수 없는 객체는 `TypeError`를 던져요.

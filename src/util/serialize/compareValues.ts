@@ -4,8 +4,7 @@ import { serializeValue } from './serialize.ts';
  * Compares two values for sorting `Set` values and `Map` keys.
  *
  * Numbers are compared numerically and strings by code unit. Any other
- * combination is compared by the code unit order of the serialized values,
- * without quotes around strings.
+ * combination is compared by the code unit order of the serialized values.
  *
  * @param a - The first value to compare.
  * @param b - The second value to compare.
@@ -18,8 +17,8 @@ export function compareValues(a: unknown, b: unknown, refs: Map<object, string>)
     return a - b;
   }
 
-  const serializedA = typeof a === 'string' ? a : serializeValue(a, refs, true);
-  const serializedB = typeof b === 'string' ? b : serializeValue(b, refs, true);
+  const serializedA = typeof a === 'string' && typeof b === 'string' ? a : serializeValue(a, refs);
+  const serializedB = typeof a === 'string' && typeof b === 'string' ? b : serializeValue(b, refs);
 
   if (serializedA === serializedB) {
     return 0;

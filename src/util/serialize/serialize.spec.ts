@@ -5,7 +5,7 @@ describe('serialize', () => {
   describe('primitives', () => {
     it('should serialize strings with quotes', () => {
       expect(serialize('hello world 😎')).toBe("'hello world 😎'");
-      expect(serialize({ msg: 'hello world 😎' })).toBe("{msg:'hello world 😎'}");
+      expect(serialize({ msg: 'hello world 😎' })).toBe("{'msg':'hello world 😎'}");
     });
 
     it('should serialize numbers', () => {
@@ -45,18 +45,18 @@ describe('serialize', () => {
 
   describe('objects', () => {
     it('should serialize plain objects with sorted keys', () => {
-      expect(serialize({ a: 1, b: 2 })).toBe('{a:1,b:2}');
-      expect(serialize({ b: 2, a: 1 })).toBe('{a:1,b:2}');
+      expect(serialize({ a: 1, b: 2 })).toBe("{'a':1,'b':2}");
+      expect(serialize({ b: 2, a: 1 })).toBe("{'a':1,'b':2}");
     });
 
     it('should serialize nested structures', () => {
-      expect(serialize({ a: [1, { b: new Set([2, 1]) }], c: 3n })).toBe('{a:[1,{b:Set[1,2]}],c:3n}');
+      expect(serialize({ a: [1, { b: new Set([2, 1]) }], c: 3n })).toBe("{'a':[1,{'b':Set[1,2]}],'c':3n}");
     });
 
     it('should serialize builtin objects', () => {
       expect(serialize(new Date(0))).toBe('Date(1970-01-01T00:00:00.000Z)');
       expect(serialize(/.*/)).toBe('RegExp(/.*/)');
-      expect(serialize(new Map([['a', 1]]))).toBe('Map{a:1}');
+      expect(serialize(new Map([['a', 1]]))).toBe("Map{'a':1}");
       expect(serialize(new Uint8Array([1, 2, 3]))).toBe('Uint8Array[1,2,3]');
     });
 
@@ -101,7 +101,7 @@ describe('serialize', () => {
     it('should not depend on the locale when sorting keys', () => {
       // In Slovak, `ch` is a single letter sorted after `h`; code unit
       // ordering keeps `checkIn` before `destination` in every locale.
-      expect(serialize({ destination: 'bar', checkIn: 'foo' })).toBe("{checkIn:'foo',destination:'bar'}");
+      expect(serialize({ destination: 'bar', checkIn: 'foo' })).toBe("{'checkIn':'foo','destination':'bar'}");
     });
 
     it('should distinguish values with different types', () => {
@@ -115,7 +115,7 @@ describe('serialize', () => {
     it('should serialize circular references as back-references', () => {
       const object: Record<string, unknown> = {};
       object.self = object;
-      expect(serialize(object)).toBe('{self:#ref0}');
+      expect(serialize(object)).toBe("{'self':#ref0}");
     });
   });
 });

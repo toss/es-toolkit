@@ -127,7 +127,7 @@ function serializeEntries(tag: string, entries: Iterable<[unknown, unknown]>, re
       result += ',';
     }
 
-    result += `${serializeValue(key, refs, true)}:${serializeValue(value, refs)}`;
+    result += `${serializeValue(key, refs)}:${serializeValue(value, refs)}`;
   }
 
   return result + '}';
