@@ -10,7 +10,7 @@ type Flat = Simplify<T>;
 
 ### `Simplify<T>`
 
-交叉类型（`&`）若保持原样，会在编辑器提示中显示为 `A & B`，让人难以看清真实结构。用 `Simplify` 包裹后，会把最终属性展开成一个对象。`?`（可选）和 `readonly` 标记也会保留。
+交叉类型（`&`）若保持原样，会在编辑器提示中显示为 `A & B`，让人难以看清真实结构。用 `Simplify` 包裹后，会把最终属性展开成一个对象。`?`（可选）和 `readonly` 标记也会保留。原始类型（包括品牌化原始类型）会保持不变。
 
 ```typescript
 import type { Simplify } from 'es-toolkit/types';

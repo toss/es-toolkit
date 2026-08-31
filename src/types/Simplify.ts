@@ -1,8 +1,11 @@
+import type { Primitive } from './Primitive.ts';
+
 /**
  * Flattens an intersection or mapped type into a single, readable object type.
  *
  * The result is equivalent for plain object types, but editors show the
- * resolved shape (`{ a: 1; b: 2 }`) instead of `A & B`.
+ * resolved shape (`{ a: 1; b: 2 }`) instead of `A & B`. Primitive types,
+ * including branded primitives, pass through unchanged.
  *
  * @template T - The type to flatten.
  *
@@ -12,4 +15,4 @@
  * type User = Simplify<A & B>;
  * // hover => { name: string; age: number }   (instead of A & B)
  */
-export type Simplify<T> = { [K in keyof T]: T[K] } & {};
+export type Simplify<T> = T extends Primitive ? T : { [K in keyof T]: T[K] } & {};

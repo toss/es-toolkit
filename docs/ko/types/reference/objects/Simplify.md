@@ -10,7 +10,7 @@ type Flat = Simplify<T>;
 
 ### `Simplify<T>`
 
-교차 타입(`&`)을 그대로 두면 에디터 툴팁에 `A & B`로 표시돼서 실제 모양을 알기 어려워요. `Simplify`로 감싸면 최종 프로퍼티들을 한 객체로 펼쳐서 보여줘요. `?`(선택)와 `readonly` 표시도 그대로 유지해요.
+교차 타입(`&`)을 그대로 두면 에디터 툴팁에 `A & B`로 표시돼서 실제 모양을 알기 어려워요. `Simplify`로 감싸면 최종 프로퍼티들을 한 객체로 펼쳐서 보여줘요. `?`(선택)와 `readonly` 표시도 그대로 유지해요. 브랜드가 적용된 원시 타입을 포함한 원시 타입은 그대로 통과시켜요.
 
 ```typescript
 import type { Simplify } from 'es-toolkit/types';

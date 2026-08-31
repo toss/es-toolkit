@@ -2,6 +2,13 @@ import { describe, expectTypeOf, it } from 'vitest';
 import type { DeepPartial } from './DeepPartial';
 
 describe('DeepPartial', () => {
+  it('preserves branded primitive types', () => {
+    type UserId = string & { readonly __brand: 'UserId' };
+
+    expectTypeOf<DeepPartial<UserId>>().toEqualTypeOf<UserId>();
+    expectTypeOf<DeepPartial<{ userId: UserId }>>().toEqualTypeOf<{ userId?: UserId }>();
+  });
+
   it('makes nested object properties optional recursively', () => {
     type Config = { server: { host: string; port: number }; debug: boolean };
     expectTypeOf<DeepPartial<Config>>().toEqualTypeOf<{

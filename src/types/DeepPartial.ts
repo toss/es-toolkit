@@ -1,10 +1,12 @@
+import type { Primitive } from './Primitive.ts';
+
 /**
  * Makes all properties of `T` optional recursively, unlike the built-in
  * `Partial` which only affects the first level.
  *
  * Recurses into plain objects, arrays/tuples (elements do not become sparse),
- * and `Map`/`Set` contents. Functions, `Date`, and `RegExp` pass through
- * unchanged.
+ * and `Map`/`Set` contents. Primitive types (including branded primitives),
+ * functions, `Date`, and `RegExp` pass through unchanged.
  *
  * @template T - The type to make deeply optional.
  *
@@ -17,7 +19,7 @@
  */
 // prettier-ignore
 export type DeepPartial<T> =
-  T extends ((...args: any[]) => unknown) | Date | RegExp ? T :
+  T extends Primitive | ((...args: any[]) => unknown) | Date | RegExp ? T :
   T extends Map<infer K, infer V> ? Map<DeepPartial<K>, DeepPartial<V>> :
   T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<DeepPartial<K>, DeepPartial<V>> :
   T extends Set<infer U> ? Set<DeepPartial<U>> :

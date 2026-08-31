@@ -2,6 +2,13 @@ import { describe, expectTypeOf, it } from 'vitest';
 import type { DeepReadonly } from './DeepReadonly';
 
 describe('DeepReadonly', () => {
+  it('preserves branded primitive types', () => {
+    type UserId = string & { readonly __brand: 'UserId' };
+
+    expectTypeOf<DeepReadonly<UserId>>().toEqualTypeOf<UserId>();
+    expectTypeOf<DeepReadonly<{ userId: UserId }>>().toEqualTypeOf<{ readonly userId: UserId }>();
+  });
+
   it('makes nested object properties readonly recursively', () => {
     type State = { user: { name: string; active: boolean } };
     expectTypeOf<DeepReadonly<State>>().toEqualTypeOf<{

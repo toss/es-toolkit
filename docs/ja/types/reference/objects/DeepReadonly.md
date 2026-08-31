@@ -27,7 +27,7 @@ state.user.name = 'x'; // エラー: name は readonly です。
 #### 再帰のルール
 
 - **踏み込むもの**: 通常のオブジェクト、配列/タプル（→ `readonly` 配列/タプル）、`Map`/`Set`（→ `ReadonlyMap`/`ReadonlySet`）。
-- **そのまま通すもの**: 関数、`Date`、`RegExp` は変更せずに通します。
+- **そのまま通すもの**: ブランド付きプリミティブ型を含むプリミティブ型、関数、`Date`、`RegExp` は変更せずに通します。
 
 ```typescript
 import type { DeepReadonly } from 'es-toolkit/types';

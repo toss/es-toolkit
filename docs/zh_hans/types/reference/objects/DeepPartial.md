@@ -31,7 +31,7 @@ const patch: ConfigPatch = { server: { port: 8080 } }; // ok，可省略 host
 深入到哪里、在哪里停止都是有明确规定的。
 
 - **深入的对象**：普通对象、数组/元组，以及 `Map`/`Set` 的内容。但数组元素本身不会变为可选（数组不会变为稀疏数组）。
-- **原样通过的对象**：函数、`Date`、`RegExp` 保持不变通过。
+- **原样通过的对象**：原始类型（包括品牌化原始类型）、函数、`Date`、`RegExp` 保持不变通过。
 
 ```typescript
 import type { DeepPartial } from 'es-toolkit/types';
