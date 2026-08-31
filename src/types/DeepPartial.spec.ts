@@ -29,6 +29,7 @@ describe('DeepPartial', () => {
 
   it('keeps functions, Date, and RegExp unchanged', () => {
     expectTypeOf<DeepPartial<() => void>>().toEqualTypeOf<() => void>();
+    expectTypeOf<DeepPartial<(value: string) => number>>().toEqualTypeOf<(value: string) => number>();
     expectTypeOf<DeepPartial<Date>>().toEqualTypeOf<Date>();
     expectTypeOf<DeepPartial<RegExp>>().toEqualTypeOf<RegExp>();
   });

@@ -20,7 +20,7 @@ import type { Primitive } from './Primitive.ts';
  */
 // prettier-ignore
 export type DeepReadonly<T> =
-  T extends Primitive | ((...args: any[]) => unknown) | Date | RegExp ? T :
+  T extends Primitive | ((...args: never[]) => unknown) | Date | RegExp ? T :
   T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>> :
   T extends ReadonlySet<infer U> ? ReadonlySet<DeepReadonly<U>> :
   T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } :

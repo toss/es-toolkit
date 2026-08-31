@@ -19,7 +19,7 @@ import type { Primitive } from './Primitive.ts';
  */
 // prettier-ignore
 export type DeepPartial<T> =
-  T extends Primitive | ((...args: any[]) => unknown) | Date | RegExp ? T :
+  T extends Primitive | ((...args: never[]) => unknown) | Date | RegExp ? T :
   T extends Map<infer K, infer V> ? Map<DeepPartial<K>, DeepPartial<V>> :
   T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<DeepPartial<K>, DeepPartial<V>> :
   T extends Set<infer U> ? Set<DeepPartial<U>> :

@@ -32,6 +32,7 @@ describe('DeepReadonly', () => {
 
   it('keeps functions, Date, and RegExp unchanged', () => {
     expectTypeOf<DeepReadonly<() => void>>().toEqualTypeOf<() => void>();
+    expectTypeOf<DeepReadonly<(value: string) => number>>().toEqualTypeOf<(value: string) => number>();
     expectTypeOf<DeepReadonly<Date>>().toEqualTypeOf<Date>();
     expectTypeOf<DeepReadonly<RegExp>>().toEqualTypeOf<RegExp>();
   });
