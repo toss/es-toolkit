@@ -49,7 +49,7 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  *
  * @template T - The type of elements in the array.
  * @param array - The array from which to drop elements.
- * @param predicate - A predicate function that determines
+ * @param [predicate=identity] - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element, index, and array, and dropping
  * continues as long as it returns true.
  * @returns A new array with the elements remaining after the predicate returns false.
