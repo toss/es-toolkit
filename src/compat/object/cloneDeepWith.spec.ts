@@ -142,4 +142,16 @@ describe('cloneDeepWith', function () {
 
     expect(cloned).not.toBe(nullProtoObj);
   });
+
+  it('should use the compat custom-tag behavior when the customizer returns undefined', () => {
+    class Tagged {
+      nested = { value: 1 };
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const source = Object.preventExtensions(new Tagged());
+    const cloned = cloneDeepWith({ source }, () => undefined);
+
+    expect(cloned.source).toBe(source);
+  });
 });

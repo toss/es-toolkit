@@ -535,6 +535,26 @@ describe('cloneDeep', () => {
     expect(cloned).toBeInstanceOf(Tagged);
   });
 
+  it('should preserve an own __proto__ data property on a tagged class instance', () => {
+    class Tagged {}
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const instance = new Tagged() as Tagged & { __proto__: { nested: { value: number } } };
+    Object.defineProperty(instance, '__proto__', {
+      configurable: true,
+      enumerable: true,
+      value: { nested: { value: 1 } },
+      writable: true,
+    });
+
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).toBeInstanceOf(Tagged);
+    expect(Object.hasOwn(cloned, '__proto__')).toBe(true);
+    expect(cloned.__proto__).not.toBe(instance.__proto__);
+    expect(cloned.__proto__).toEqual(instance.__proto__);
+  });
+
   it('should detach a nested tagged instance from the source', () => {
     class Tagged {
       items: string[] = [];
@@ -586,6 +606,20 @@ describe('cloneDeep', () => {
     expect(cloneDeep(instance)).not.toBe(instance);
   });
 
+  it('should ignore a deeper string tag shadowed by an own non-string tag', () => {
+    class Tagged {
+      nested = { value: 1 };
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const instance = new Tagged() as Tagged & { [Symbol.toStringTag]: number };
+    instance[Symbol.toStringTag] = 123;
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned.nested).not.toBe(instance.nested);
+  });
+
   it('should return a value with an accessor `Symbol.toStringTag` by reference', () => {
     class Tagged {
       value = 1;
@@ -627,5 +661,112 @@ describe('cloneDeep', () => {
     expect(cloned.url).toBe(source.url);
     expect(cloned.promise).toBe(source.promise);
     expect(cloned.formatter).toBe(source.formatter);
+  });
+
+  it.each(['Tagged', 'Object', 'Map'])('should not clone a URL that reports the %s tag', customTag => {
+    for (const enumerable of [false, true]) {
+      const url = new URL('https://example.com/path');
+      Object.defineProperty(url, Symbol.toStringTag, {
+        configurable: true,
+        enumerable,
+        value: customTag,
+        writable: true,
+      });
+
+      expect(cloneDeep(url)).toBe(url);
+      expect(cloneDeep({ url }).url).toBe(url);
+      expect(url.href).toBe('https://example.com/path');
+    }
+  });
+
+  it.each(['Object', 'Map'])('should clone an ordinary class instance that reports the %s tag', customTag => {
+    class Tagged {
+      nested = { value: 1 };
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = customTag;
+
+    const instance = new Tagged();
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned).toBeInstanceOf(Tagged);
+    expect(cloned.nested).not.toBe(instance.nested);
+  });
+
+  it('should preserve the known-tag path for an ordinary read-only Object tag', () => {
+    class Tagged {
+      nested = { value: 1 };
+    }
+    Object.defineProperty(Tagged.prototype, Symbol.toStringTag, { value: 'Object' });
+
+    const instance = new Tagged();
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned).toBeInstanceOf(Tagged);
+    expect(cloned.nested).not.toBe(instance.nested);
+  });
+
+  it('should not trust a frozen known tag that shadows a native brand', () => {
+    const url = new URL('https://example.com/path');
+    Object.defineProperty(url, Symbol.toStringTag, {
+      configurable: true,
+      enumerable: true,
+      value: 'Object',
+      writable: true,
+    });
+    Object.freeze(url);
+
+    expect(cloneDeep(url)).toBe(url);
+    expect(cloneDeep({ url }).url).toBe(url);
+    expect(url.href).toBe('https://example.com/path');
+  });
+
+  it('should clone a tagged DataView without losing its internal slots or expandos', () => {
+    const view = new DataView(new Uint8Array([7, 8]).buffer) as DataView & { nested: { value: number } };
+    view.nested = { value: 1 };
+    Object.defineProperty(view, Symbol.toStringTag, {
+      configurable: true,
+      enumerable: true,
+      value: 'TaggedView',
+      writable: true,
+    });
+
+    const cloned = cloneDeep(view);
+
+    expect(cloned).not.toBe(view);
+    expect(cloned).toBeInstanceOf(DataView);
+    expect(cloned.getUint8(0)).toBe(7);
+    expect(cloned.nested).not.toBe(view.nested);
+    expect(Object.hasOwn(cloned, Symbol.toStringTag)).toBe(true);
+    expect(Object.prototype.toString.call(cloned)).toBe('[object TaggedView]');
+  });
+
+  it.each([
+    new Proxy(
+      { value: 1 },
+      {
+        has(target, key) {
+          if (key === Symbol.toStringTag) {
+            throw new Error('has trap');
+          }
+          return Reflect.has(target, key);
+        },
+      }
+    ),
+    new Proxy(
+      { value: 1 },
+      {
+        get(target, key, receiver) {
+          if (key === Symbol.toStringTag) {
+            throw new Error('tag access');
+          }
+          return Reflect.get(target, key, receiver);
+        },
+      }
+    ),
+  ])('should conservatively return a value when tag classification throws', value => {
+    expect(() => cloneDeep(value)).not.toThrow();
+    expect(cloneDeep(value)).toBe(value);
   });
 });

@@ -68,8 +68,8 @@ const taggedObj = {
   nested: { instance: new Tagged() },
 };
 
-// Branded built-ins define `Symbol.toStringTag` as non-writable. They share the unrecognized-tag
-// path with the fixture above but must not pay for resolving it.
+// Branded built-ins define a read-only or accessor `Symbol.toStringTag`. They measure the added
+// classification cost on values that must continue to be returned by reference.
 const brandedObj = {
   url: new URL('https://es-toolkit.dev/reference/object/cloneDeep.html'),
   promise: Promise.resolve(1),

@@ -1,6 +1,11 @@
-import { hasCustomToStringTag } from '../_internal/hasCustomToStringTag.ts';
+import {
+  CUSTOM_TAG_BRANDED,
+  CUSTOM_TAG_INHERITED,
+  CUSTOM_TAG_OWN,
+  CUSTOM_TAG_UNCLONEABLE,
+  getCustomToStringTagType,
+} from '../_internal/getCustomToStringTagType.ts';
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
-import { getTag } from '../compat/_internal/getTag.ts';
 import {
   argumentsTag,
   arrayBufferTag,
@@ -75,7 +80,7 @@ export function cloneDeepWith<T>(
   obj: T,
   cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T {
-  return cloneDeepWithImpl(obj, undefined, obj, new Map(), cloneValue);
+  return cloneDeepWithImpl(obj, undefined, obj, new Map(), cloneValue, false);
 }
 
 export function cloneDeepWithImpl<T>(
@@ -83,7 +88,8 @@ export function cloneDeepWithImpl<T>(
   keyToClone: PropertyKey | undefined,
   objectToClone: T,
   stack = new Map<any, any>(),
-  cloneValue: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined = undefined
+  cloneValue: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined = undefined,
+  isLodashCompat = false
 ): T {
   const cloned = cloneValue?.(valueToClone, keyToClone, objectToClone, stack);
 
@@ -104,7 +110,7 @@ export function cloneDeepWithImpl<T>(
     stack.set(valueToClone, result);
 
     for (let i = 0; i < valueToClone.length; i++) {
-      result[i] = cloneDeepWithImpl(valueToClone[i], i, objectToClone, stack, cloneValue);
+      result[i] = cloneDeepWithImpl(valueToClone[i], i, objectToClone, stack, cloneValue, isLodashCompat);
     }
 
     // For RegExpArrays
@@ -139,7 +145,7 @@ export function cloneDeepWithImpl<T>(
     stack.set(valueToClone, result);
 
     for (const [key, value] of valueToClone) {
-      result.set(key, cloneDeepWithImpl(value, key, objectToClone, stack, cloneValue));
+      result.set(key, cloneDeepWithImpl(value, key, objectToClone, stack, cloneValue, isLodashCompat));
     }
 
     return result as T;
@@ -150,7 +156,7 @@ export function cloneDeepWithImpl<T>(
     stack.set(valueToClone, result);
 
     for (const value of valueToClone) {
-      result.add(cloneDeepWithImpl(value, undefined, objectToClone, stack, cloneValue));
+      result.add(cloneDeepWithImpl(value, undefined, objectToClone, stack, cloneValue, isLodashCompat));
     }
 
     return result as T;
@@ -165,7 +171,7 @@ export function cloneDeepWithImpl<T>(
     stack.set(valueToClone, result);
 
     for (let i = 0; i < valueToClone.length; i++) {
-      result[i] = cloneDeepWithImpl(valueToClone[i], i, objectToClone, stack, cloneValue);
+      result[i] = cloneDeepWithImpl(valueToClone[i], i, objectToClone, stack, cloneValue, isLodashCompat);
     }
 
     return result as T;
@@ -182,7 +188,7 @@ export function cloneDeepWithImpl<T>(
     const result = new DataView(valueToClone.buffer.slice(0), valueToClone.byteOffset, valueToClone.byteLength);
     stack.set(valueToClone, result);
 
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
 
     return result as T;
   }
@@ -194,7 +200,7 @@ export function cloneDeepWithImpl<T>(
     });
     stack.set(valueToClone, result);
 
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
 
     return result as T;
   }
@@ -204,7 +210,7 @@ export function cloneDeepWithImpl<T>(
     const result = new Blob([valueToClone], { type: valueToClone.type });
     stack.set(valueToClone, result);
 
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
 
     return result as T;
   }
@@ -219,7 +225,7 @@ export function cloneDeepWithImpl<T>(
     result.cause = valueToClone.cause;
     result.constructor = valueToClone.constructor;
 
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
 
     return result as T;
   }
@@ -227,35 +233,49 @@ export function cloneDeepWithImpl<T>(
   if (valueToClone instanceof Boolean) {
     const result = new Boolean(valueToClone.valueOf()) as T;
     stack.set(valueToClone, result);
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
     return result;
   }
 
   if (valueToClone instanceof Number) {
     const result = new Number(valueToClone.valueOf()) as T;
     stack.set(valueToClone, result);
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
     return result;
   }
 
   if (valueToClone instanceof String) {
     const result = new String(valueToClone.valueOf()) as T;
     stack.set(valueToClone, result);
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
     return result;
   }
 
-  if (typeof valueToClone === 'object' && isCloneableObject(valueToClone)) {
-    const result = Object.create(Object.getPrototypeOf(valueToClone));
+  if (typeof valueToClone === 'object') {
+    const cloneableObjectType = getCloneableObjectType(valueToClone, isLodashCompat);
 
-    stack.set(valueToClone, result);
+    if (cloneableObjectType) {
+      const useObjectPrototype =
+        isLodashCompat && cloneableObjectType === 2 && typeof valueToClone.constructor !== 'function';
+      const prototype = Object.getPrototypeOf(valueToClone);
+      const stagePrototype = useObjectPrototype || Object.hasOwn(valueToClone, '__proto__');
+      const result = Object.create(stagePrototype ? null : prototype);
 
-    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+      stack.set(valueToClone, result);
 
-    return result as T;
+      copyProperties(result, valueToClone, objectToClone, stack, cloneValue, isLodashCompat);
+
+      if (stagePrototype) {
+        Object.setPrototypeOf(result, useObjectPrototype ? Object.prototype : prototype);
+      }
+
+      return result as T;
+    }
   }
 
-  return valueToClone;
+  return (
+    isLodashCompat && valueToClone === objectToClone && typeof valueToClone === 'object' ? {} : valueToClone
+  ) as T;
 }
 
 export function copyProperties<T>(
@@ -263,7 +283,8 @@ export function copyProperties<T>(
   source: any,
   objectToClone: T = target,
   stack?: Map<any, any> | undefined,
-  cloneValue?: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined
+  cloneValue?: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined,
+  isLodashCompat = false
 ): void {
   const keys = [...Object.keys(source), ...getSymbols(source)];
 
@@ -272,24 +293,62 @@ export function copyProperties<T>(
     const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
     if (descriptor == null || descriptor.writable) {
-      target[key] = cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue);
+      const cloned = cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue, isLodashCompat);
+
+      if (key === Symbol.toStringTag) {
+        if (!Reflect.set(target, key, cloned) && !isLodashCompat) {
+          Object.defineProperty(target, key, {
+            configurable: true,
+            enumerable: true,
+            value: cloned,
+            writable: true,
+          });
+        }
+      } else {
+        target[key] = cloned;
+      }
     }
   }
 }
 
-function isCloneableObject(object: object) {
-  const tag = getTag(object);
+export function getCloneableObjectType(object: object, isLodashCompat: boolean): number | boolean {
+  try {
+    const tag = Object.prototype.toString.call(object);
 
-  if (isCloneableTag(tag)) {
-    return true;
+    if (!(Symbol.toStringTag in object)) {
+      return isCloneableTag(tag);
+    }
+
+    const cloneableTag = isCloneableTag(tag);
+    const customTagType = getCustomToStringTagType(object, tag, cloneableTag);
+
+    if (customTagType === CUSTOM_TAG_UNCLONEABLE) {
+      return 0;
+    }
+
+    if ((customTagType & CUSTOM_TAG_BRANDED) !== 0 && !isLodashCompat) {
+      return 0;
+    }
+
+    if (cloneableTag) {
+      return (customTagType & (CUSTOM_TAG_OWN | CUSTOM_TAG_INHERITED)) !== 0 &&
+        (customTagType & CUSTOM_TAG_UNCLONEABLE) === 0
+        ? 2
+        : 1;
+    }
+
+    if (customTagType === 0 || (customTagType & CUSTOM_TAG_UNCLONEABLE) !== 0) {
+      return 0;
+    }
+
+    return !isLodashCompat ||
+      (customTagType & CUSTOM_TAG_OWN) !== 0 ||
+      ((customTagType & CUSTOM_TAG_INHERITED) !== 0 && Object.isExtensible(object))
+      ? 2
+      : 0;
+  } catch {
+    return 0;
   }
-
-  // `getTag` reads `Symbol.toStringTag`, which any value can set, so an ordinary object can
-  // report a tag that is not in the list above and be returned by reference. A tag that a
-  // writable property fully accounts for says nothing about what the value is, so it must not
-  // decide whether the value can be cloned. This runs only for an unrecognized tag, so values
-  // that are already cloneable pay nothing for it.
-  return hasCustomToStringTag(object, tag);
 }
 
 function isCloneableTag(tag: string) {
