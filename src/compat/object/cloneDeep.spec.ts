@@ -264,4 +264,17 @@ describe('cloneDeep', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should match lodash for a class instance with a custom `Symbol.toStringTag`', () => {
+    class Tagged {
+      items: string[] = [];
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const source = { box: new Tagged() };
+    const cloned = cloneDeep(source);
+
+    expect(cloned.box).not.toBe(source.box);
+    expect(cloned.box).toBeInstanceOf(Tagged);
+  });
 });

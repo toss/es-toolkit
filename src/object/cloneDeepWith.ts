@@ -1,3 +1,4 @@
+import { hasCustomToStringTag } from '../_internal/hasCustomToStringTag.ts';
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { getTag } from '../compat/_internal/getTag.ts';
 import {
@@ -277,7 +278,22 @@ export function copyProperties<T>(
 }
 
 function isCloneableObject(object: object) {
-  switch (getTag(object)) {
+  const tag = getTag(object);
+
+  if (isCloneableTag(tag)) {
+    return true;
+  }
+
+  // `getTag` reads `Symbol.toStringTag`, which any value can set, so an ordinary object can
+  // report a tag that is not in the list above and be returned by reference. A tag that a
+  // writable property fully accounts for says nothing about what the value is, so it must not
+  // decide whether the value can be cloned. This runs only for an unrecognized tag, so values
+  // that are already cloneable pay nothing for it.
+  return hasCustomToStringTag(object, tag);
+}
+
+function isCloneableTag(tag: string) {
+  switch (tag) {
     case argumentsTag:
     case arrayTag:
     case arrayBufferTag:

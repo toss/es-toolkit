@@ -504,4 +504,128 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(arr);
     expect(cloned).toBeInstanceOf(Int32Array);
   });
+
+  it('should clone a class instance with a custom `Symbol.toStringTag`', () => {
+    class Tagged {
+      items: string[] = [];
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const instance = new Tagged();
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned).toBeInstanceOf(Tagged);
+    expect(cloned).toEqual(instance);
+  });
+
+  it('should clone a class instance tagged in its constructor', () => {
+    class Tagged {
+      items: string[] = [];
+
+      constructor() {
+        (this as any)[Symbol.toStringTag] = 'Tagged';
+      }
+    }
+
+    const instance = new Tagged();
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned).toBeInstanceOf(Tagged);
+  });
+
+  it('should detach a nested tagged instance from the source', () => {
+    class Tagged {
+      items: string[] = [];
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const source = { box: new Tagged() };
+    const cloned = cloneDeep(source);
+
+    cloned.box.items.push('apple');
+
+    expect(cloned.box).not.toBe(source.box);
+    expect(source.box.items).toEqual([]);
+  });
+
+  it('should leave the source `Symbol.toStringTag` untouched while cloning', () => {
+    class Tagged {}
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const instance = new Tagged();
+
+    cloneDeep(instance);
+
+    expect(Object.prototype.hasOwnProperty.call(instance, Symbol.toStringTag)).toBe(false);
+    expect(Object.prototype.toString.call(instance)).toBe('[object Tagged]');
+  });
+
+  it('should clone a frozen instance with a custom `Symbol.toStringTag`', () => {
+    class Tagged {
+      value = 1;
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const instance = Object.freeze(new Tagged());
+    const cloned = cloneDeep(instance);
+
+    expect(cloned).not.toBe(instance);
+    expect(cloned).toBeInstanceOf(Tagged);
+  });
+
+  it('should clone an instance whose tag is not a string', () => {
+    class Tagged {
+      value = 1;
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 123;
+
+    const instance = new Tagged();
+
+    expect(cloneDeep(instance)).not.toBe(instance);
+  });
+
+  it('should return a value with an accessor `Symbol.toStringTag` by reference', () => {
+    class Tagged {
+      value = 1;
+
+      get [Symbol.toStringTag]() {
+        return 'Tagged';
+      }
+    }
+
+    const source = { box: new Tagged() };
+
+    expect(cloneDeep(source).box).toBe(source.box);
+  });
+
+  it('should return a value with a read-only `Symbol.toStringTag` by reference', () => {
+    class Tagged {
+      value = 1;
+    }
+    Object.defineProperty(Tagged.prototype, Symbol.toStringTag, { value: 'Tagged' });
+
+    const source = { box: new Tagged() };
+
+    expect(cloneDeep(source).box).toBe(source.box);
+  });
+
+  it('should return branded built-ins by reference without throwing', () => {
+    const source = {
+      url: new URL('https://example.com'),
+      promise: Promise.resolve(),
+      formatter: new Intl.NumberFormat(),
+    };
+
+    let cloned!: typeof source;
+
+    expect(() => {
+      cloned = cloneDeep(source);
+    }).not.toThrow();
+
+    expect(cloned.url).toBe(source.url);
+    expect(cloned.promise).toBe(source.promise);
+    expect(cloned.formatter).toBe(source.formatter);
+  });
 });
