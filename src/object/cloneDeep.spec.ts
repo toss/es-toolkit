@@ -558,7 +558,7 @@ describe('cloneDeep', () => {
 
     cloneDeep(instance);
 
-    expect(Object.prototype.hasOwnProperty.call(instance, Symbol.toStringTag)).toBe(false);
+    expect(Object.hasOwn(instance, Symbol.toStringTag)).toBe(false);
     expect(Object.prototype.toString.call(instance)).toBe('[object Tagged]');
   });
 
