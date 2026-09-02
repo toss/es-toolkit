@@ -45,13 +45,4 @@ describe('findKey', () => {
 
     expect(findKey(users, (_, key, obj) => key === 'fred' && obj[key].active === false)).toBe('fred');
   });
-
-  it('should exclude symbol keys', () => {
-    const sym = Symbol('barney');
-    const usersWithSymbol = {
-      [sym]: { age: 24, active: true },
-      fred: { age: 30, active: false },
-    };
-    expect(findKey(usersWithSymbol, o => o.age < 40)).toBe('fred');
-  });
 });

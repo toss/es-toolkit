@@ -32,7 +32,7 @@ const uppercased = mapKeys(obj, (value, key) => key.toString().toUpperCase());
 #### 파라미터
 
 - `object` (`T extends Record<PropertyKey, any>`): 키를 변환할 객체예요.
-- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => K`): 새로운 키를 생성하는 함수예요. 값, 키, 전체 객체를 파라미터로 받아요.
+- `getNewKey` (`(value: T[keyof T], key: ObjectKeys<T>, object: T) => K`): 새로운 키를 생성하는 함수예요. 값, 키, 전체 객체를 파라미터로 받아요 ([`ObjectKeys<T>`](/ko/types/reference/objects/ObjectKeys) 참고).
 
 #### 반환 값
 
