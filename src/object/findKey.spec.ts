@@ -43,6 +43,6 @@ describe('findKey', () => {
       fred: { age: 40, active: false },
     };
 
-    expect(findKey(users, (value, key, obj) => key === 'fred' && obj[key].active === false)).toBe('fred');
+    expect(findKey(users, (_, key, obj) => key === 'fred' && obj[key].active === false)).toBe('fred');
   });
 });

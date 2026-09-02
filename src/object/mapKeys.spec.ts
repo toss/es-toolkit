@@ -7,7 +7,7 @@ describe('mapKeys', () => {
   });
 
   it('should iterate over and map the object using its own number keys', () => {
-    expect(mapKeys({ 1: 'a', 2: 'b', 3: 'c' }, (_, key) => key * 2)).toEqual({ 2: 'a', 4: 'b', 6: 'c' });
+    expect(mapKeys({ 1: 'a', 2: 'b', 3: 'c' }, (_, key) => Number(key) * 2)).toEqual({ 2: 'a', 4: 'b', 6: 'c' });
   });
 
   it('should pass the value corresponding to the current key into the iteratee', () => {
