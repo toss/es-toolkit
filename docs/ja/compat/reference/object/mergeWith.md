@@ -16,7 +16,7 @@ const result = mergeWith(target, ...sources, customizer);
 
 ## 使用法
 
-### `mergeWith(object, ...sources, customizer)`
+### `mergeWith(object, ...sources, customizer?)`
 
 ターゲットオブジェクトに1つ以上のソースオブジェクトを深くマージしますが、カスタマイザー関数でマージ方法を制御します。カスタマイザー関数が`undefined`を返す場合、デフォルトのマージロジックが使用されます。配列の連結や特別なマージルールが必要な場合に便利です。
 
@@ -83,11 +83,24 @@ const customizer = (objValue, srcValue, key, object, source, stack) => {
 };
 ```
 
+カスタマイザーは省略可能です。最後の引数は関数である場合にのみカスタマイザーとして扱われ、そうでない場合は別のソースオブジェクトとしてマージされます。
+
+```typescript
+import { mergeWith } from 'es-toolkit/compat';
+
+// カスタマイザーがない場合、ターゲットの後のすべての引数はソースオブジェクトです
+const result = mergeWith({ a: 1 }, { b: 2 });
+// 結果: { a: 1, b: 2 }
+
+const merged = mergeWith({}, { a: 1 }, { b: 2 }, { c: 3 });
+// 結果: { a: 1, b: 2, c: 3 }
+```
+
 #### パラメータ
 
 - `object` (`any`): マージ先となるターゲットオブジェクトです。このオブジェクトは変更されます。
 - `...sources` (`any[]`): マージするソースオブジェクトです。
-- `customizer` (`MergeWithCustomizer`): 値の割り当てをカスタマイズする関数です。形式: `(objValue, srcValue, key, object, source, stack) => any`。
+- `customizer` (`MergeWithCustomizer`, 省略可能): 値の割り当てをカスタマイズする関数です。形式: `(objValue, srcValue, key, object, source, stack) => any`。最後の引数が関数でない場合、別のソースオブジェクトとして扱われます。
 
 #### 戻り値
 
