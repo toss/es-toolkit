@@ -3,7 +3,7 @@
 Converts a string to sentence case.
 
 ```typescript
-const converted = sentenceCase(str);
+const result = sentenceCase(str);
 ```
 
 ## Usage
@@ -15,45 +15,35 @@ Use `sentenceCase` when you want to convert a string to sentence case. Sentence 
 ```typescript
 import { sentenceCase } from 'es-toolkit/string';
 
-// Basic usage
-sentenceCase('hello world'); // 'Hello world'
-sentenceCase('HELLO WORLD'); // 'Hello world'
-
-// Converting camelCase or PascalCase
-sentenceCase('fooBar'); // 'Foo bar'
-sentenceCase('PascalCase'); // 'Pascal case'
-
-// Words connected with hyphens or underscores
-sentenceCase('hello-world'); // 'Hello world'
-sentenceCase('hello_world'); // 'Hello world'
+// Convert various string formats to sentence case
+sentenceCase('hello world'); // returns 'Hello world'
+sentenceCase('some-hyphen-text'); // returns 'Some hyphen text'
+sentenceCase('CONSTANT_CASE'); // returns 'Constant case'
+sentenceCase('PascalCase'); // returns 'Pascal case'
+sentenceCase('mixed   SpAcE'); // returns 'Mixed sp ac e'
 ```
 
-It's useful when turning identifiers such as field names or enum values into human-readable labels.
+It converts identifiers such as property names, enum values, or config keys into a format suitable for human-readable labels and messages.
 
 ```typescript
 import { sentenceCase } from 'es-toolkit/string';
 
-sentenceCase('firstName'); // 'First name'
-sentenceCase('MAX_RETRY_COUNT'); // 'Max retry count'
-sentenceCase('user-profile-settings'); // 'User profile settings'
+// Convert property names to form labels
+const fieldName = 'user_first_name';
+const label = sentenceCase(fieldName); // 'User first name'
+
+// Convert constant names to display text
+const errorCode = 'MAX_RETRY_COUNT';
+const message = sentenceCase(errorCode); // 'Max retry count'
 ```
 
-It also correctly handles strings with various delimiters and special characters.
+It also preserves Unicode characters.
 
 ```typescript
 import { sentenceCase } from 'es-toolkit/string';
 
-// Cases with multiple delimiters
-sentenceCase('--foo-bar--'); // 'Foo bar'
-sentenceCase('__FOO_BAR__'); // 'Foo bar'
-
-// Handling consecutive uppercase letters and numbers
-sentenceCase('XMLHttpRequest'); // 'Xml http request'
-sentenceCase('_abc_123_def'); // 'Abc 123 def'
-
-// Cases with empty strings or only meaningless delimiters
-sentenceCase('_-_-_-_'); // ''
-sentenceCase('12abc 12ABC'); // '12 abc 12 abc'
+sentenceCase('keep unicode 😅'); // returns 'Keep unicode 😅'
+sentenceCase('한글-테스트'); // returns '한글 테스트'
 ```
 
 #### Parameters
@@ -62,16 +52,4 @@ sentenceCase('12abc 12ABC'); // '12 abc 12 abc'
 
 #### Returns
 
-(`string`): Returns a new string with the first letter of the first word capitalized, the rest in lowercase, and words joined with spaces.
-
-## Try It
-
-::: sandpack
-
-```ts index.ts
-import { sentenceCase } from 'es-toolkit/string';
-
-console.log(sentenceCase('sentenceCase'));
-```
-
-:::
+(`string`): Returns a new string converted to sentence case.
