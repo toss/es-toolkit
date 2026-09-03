@@ -11,6 +11,7 @@ export { lowerFirst } from './lowerFirst.ts';
 export { pad } from './pad.ts';
 export { pascalCase } from './pascalCase.ts';
 export { reverseString } from './reverseString.ts';
+export { sentenceCase } from './sentenceCase.ts';
 export { snakeCase } from './snakeCase.ts';
 export { startCase } from './startCase.ts';
 export { trim } from './trim.ts';
