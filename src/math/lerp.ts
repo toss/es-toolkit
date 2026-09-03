@@ -1,16 +1,17 @@
 /**
- * Linearly interpolates between two numbers.
+ * Returns the number that lies at `fraction` of the way between `start` and `stop`,
+ * using linear interpolation.
  *
- * Returns the number that is `t` of the way from `a` to `b`. When `t` is `0` the result is `a`,
- * when `t` is `1` the result is `b`, and when `t` is `0.5` the result is halfway between them.
- * Values of `t` outside `[0, 1]` are not clamped and extrapolate along the same line.
+ * When `fraction` is `0` the result is `start`, when it is `1` the result is `stop`,
+ * and when it is `0.5` the result is halfway between them. A `fraction` outside `[0, 1]`
+ * is not clamped, so the result continues past `start` or `stop` along the same line.
  *
- * `lerp` is short for "linear interpolation". It is the inverse of `inverseLerp`.
+ * This is the inverse of `inverseLerp`.
  *
- * @param a - The start value, returned when `t` is `0`.
- * @param b - The end value, returned when `t` is `1`.
- * @param t - The interpolation factor, usually between `0` and `1`.
- * @returns The interpolated number.
+ * @param start - The number returned when `fraction` is `0`.
+ * @param stop - The number returned when `fraction` is `1`.
+ * @param fraction - Where the result lies between `start` and `stop`, usually from `0` to `1`.
+ * @returns The number at `fraction` of the way between `start` and `stop`.
  *
  * @example
  * lerp(0, 100, 0.5); // 50
@@ -19,10 +20,10 @@
  * lerp(0, 100, 1); // 100
  * lerp(0, 100, 1.5); // 150
  */
-export function lerp(a: number, b: number, t: number): number {
-  if (t === 1) {
-    return b;
+export function lerp(start: number, stop: number, fraction: number): number {
+  if (fraction === 1) {
+    return stop;
   }
 
-  return a + (b - a) * t;
+  return start + (stop - start) * fraction;
 }

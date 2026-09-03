@@ -1,75 +1,73 @@
 # lerp
 
-Linearly interpolates between two numbers.
-
-`lerp` is short for "linear interpolation". It returns the number that is a given fraction of the way from one number to another.
+Calculates the number that lies at `fraction` of the way between two numbers `start` and `stop`, using linear interpolation.
 
 ```typescript
-const result = lerp(a, b, t);
+const result = lerp(start, stop, fraction);
 ```
 
 ## Usage
 
-### `lerp(a, b, t)`
+### `lerp(start, stop, fraction)`
 
-Use `lerp` when you want the number that lies `t` of the way from `a` to `b`. When `t` is `0` you get `a`, when `t` is `1` you get `b`, and when `t` is `0.5` you get the midpoint. This is useful for animations, progress bars, and mapping a `0` to `1` value onto a range.
+Use `lerp` when you treat `start` to `stop` as one range and need the number at position `fraction` within it. When `fraction` is `0` you get `start`, when it is `1` you get `stop`, and when it is `0.5` you get the number halfway between them. This is useful for computing in-between values in an animation, or for turning a progress value from `0` to `1` into an actual number.
 
 ```typescript
 import { lerp } from 'es-toolkit/math';
 
-// Halfway between 0 and 100
+// The number halfway between 0 and 100
 lerp(0, 100, 0.5);
 // Returns: 50
 
-// A quarter of the way from 10 to 20
+// The number a quarter of the way from 10 to 20
 lerp(10, 20, 0.25);
 // Returns: 12.5
 
-// t of 0 gives a, t of 1 gives b
+// A fraction of 0 gives start, a fraction of 1 gives stop
 lerp(0, 100, 0);
 // Returns: 0
 lerp(0, 100, 1);
 // Returns: 100
 
-// a can be greater than b
+// start can be greater than stop
 lerp(100, 0, 0.25);
 // Returns: 75
 ```
 
-The result is not clamped. When `t` is less than `0` or greater than `1`, the value is extrapolated along the same line. Use `clamp` on `t` first if you need to stay within the range.
+When `fraction` is less than `0` or greater than `1`, the result also falls outside `start` and `stop`. If you only want numbers within the range, apply `clamp` to `fraction` first.
 
 ```typescript
 import { clamp, lerp } from 'es-toolkit/math';
 
-// Extrapolates beyond b
+// The result goes past stop
 lerp(0, 100, 1.5);
 // Returns: 150
 
-// Clamp t to keep the result within [a, b]
+// Keeping fraction between 0 and 1 keeps the result between start and stop
 lerp(0, 100, clamp(1.5, 0, 1));
 // Returns: 100
 ```
 
-`lerp` is the inverse of `inverseLerp`. Combining them maps a number from one range to another.
+Combined with `inverseLerp`, you can move a number from one range to another.
 
 ```typescript
 import { inverseLerp, lerp } from 'es-toolkit/math';
 
-// Map 0.25 from [0, 1] to [10, 20]
+// Move 0.25 from [0, 1] to [10, 20]
 lerp(10, 20, 0.25);
 // Returns: 12.5
 
-// Map 150 from [100, 200] to [0, 1000]
+// Move 150 from [100, 200] to [0, 1000]
 lerp(0, 1000, inverseLerp(100, 200, 150));
 // Returns: 500
 ```
 
 #### Parameters
 
-- `a` (`number`): The start value, returned when `t` is `0`.
-- `b` (`number`): The end value, returned when `t` is `1`.
-- `t` (`number`): The interpolation factor, usually between `0` and `1`.
+- `start` (`number`): The start of the range. Returned when `fraction` is `0`.
+- `stop` (`number`): The end of the range. Returned when `fraction` is `1`.
+- `fraction` (`number`): The position between start and stop, usually from `0` to `1`.
 
 #### Returns
 
-(`number`): The interpolated number.
+(`number`): The number that lies at `fraction` of the way between `start` and `stop`.
