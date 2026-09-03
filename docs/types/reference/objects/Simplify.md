@@ -10,7 +10,7 @@ type Flat = Simplify<T>;
 
 ### `Simplify<T>`
 
-An intersection (`&`) left as-is shows up as `A & B` in editor tooltips, which makes the real shape hard to read. Wrapping it in `Simplify` expands the final properties into one object. The `?` (optional) and `readonly` markers are preserved.
+An intersection (`&`) left as-is shows up as `A & B` in editor tooltips, which makes the real shape hard to read. Wrapping it in `Simplify` expands the final properties into one object. The `?` (optional) and `readonly` markers are preserved. Primitive types, including branded primitives, pass through unchanged.
 
 ```typescript
 import type { Simplify } from 'es-toolkit/types';
