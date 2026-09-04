@@ -58,6 +58,26 @@ describe('add', () => {
     expect(add(undefined, 4)).toBe(4);
   });
 
+  it(`\`add\` should treat \`null\` operands like Lodash`, () => {
+    // A `null` operand next to a string is stringified as `'null'`, not `''`.
+    // @ts-expect-error - invalid arguments
+    expect(add(null, '1')).toBe('null1');
+    // @ts-expect-error - invalid arguments
+    expect(add('1', null)).toBe('1null');
+    // @ts-expect-error - invalid arguments
+    expect(add(null, 'a')).toBe('nulla');
+    // A present `null` must win over a missing `undefined`.
+    // @ts-expect-error - invalid arguments
+    expect(add(null, undefined)).toBe(null);
+    // @ts-expect-error - invalid arguments
+    expect(add(undefined, null)).toBe(null);
+    // A `null` operand coerces to `0` in the numeric path.
+    // @ts-expect-error - invalid arguments
+    expect(add(null, 3)).toBe(3);
+    // @ts-expect-error - invalid arguments
+    expect(add(null, null)).toBe(0);
+  });
+
   it(`\`add\` should preserve the sign of \`0\``, () => {
     const values = [0, '0', -0, '-0'];
     const expected = [
