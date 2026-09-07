@@ -62,6 +62,23 @@ describe('multiply', () => {
     expect(multiply(undefined, 4)).toBe(4);
   });
 
+  it(`\`multiply\` should treat \`null\` operands like Lodash`, () => {
+    // A `null` operand next to a string is stringified as `'null'`, so the
+    // product yields `NaN` (not `0` from an empty-string coercion).
+    // @ts-expect-error - invalid arguments
+    expect(multiply(null, '1')).toBe(NaN);
+    // @ts-expect-error - invalid arguments
+    expect(multiply('1', null)).toBe(NaN);
+    // A present `null` must win over a missing `undefined`.
+    // @ts-expect-error - invalid arguments
+    expect(multiply(null, undefined)).toBe(null);
+    // @ts-expect-error - invalid arguments
+    expect(multiply(undefined, null)).toBe(null);
+    // A `null` operand coerces to `0` in the numeric path.
+    // @ts-expect-error - invalid arguments
+    expect(multiply(null, 3)).toBe(0);
+  });
+
   it(`\`multiply\` should preserve the sign of \`0\``, () => {
     const values = [0, '0', -0, '-0'];
     const expected = [

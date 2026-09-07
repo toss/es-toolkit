@@ -21,11 +21,15 @@ export function add(value: number, other: number): number {
     return 0;
   }
   if (value === undefined || other === undefined) {
-    return value ?? other;
+    // Only `undefined` is treated as a missing argument. A `null` operand is a
+    // real value and must be returned as-is (matches Lodash).
+    return (value === undefined ? other : value) as number;
   }
   if (typeof value === 'string' || typeof other === 'string') {
-    value = toString(value) as any;
-    other = toString(other) as any;
+    // Lodash concatenates using `baseToString`, which stringifies `null` as
+    // `'null'` (unlike `toString`, which returns `''` for nullish values).
+    value = (value === null ? 'null' : toString(value)) as any;
+    other = (other === null ? 'null' : toString(other)) as any;
   } else {
     value = toNumber(value);
     other = toNumber(other);
