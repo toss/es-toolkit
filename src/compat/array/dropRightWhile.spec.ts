@@ -78,4 +78,23 @@ describe('dropRightWhile', () => {
     expect(dropRightWhile([1, 2, 3, 0])).toEqual([1, 2, 3, 0]);
     expect(dropRightWhile([false, 0, null, undefined, ''])).toEqual([false, 0, null, undefined, '']);
   });
+  it('should treat a boolean `predicate` as a property shorthand like lodash', () => {
+    // lodash's `baseIteratee` falls through to `property` for any non-function,
+    // non-object value, so `true` and `false` read the `'true'` and `'false'` keys.
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropRightWhile([1, 2, 3], true)).toEqual([1, 2, 3]);
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropRightWhile([{ true: 1 }, { true: 0 }], true)).toEqual([{ true: 1 }, { true: 0 }]);
+    // @ts-expect-error - lodash accepts a boolean shorthand
+    expect(dropRightWhile([{ false: 1 }], false)).toEqual([]);
+  });
+  it('should treat a `null` predicate as `identity` like lodash', () => {
+    // lodash's `baseIteratee` returns `identity` for `null`, while a default
+    // parameter only covers `undefined`.
+    // @ts-expect-error - lodash accepts a nullish shorthand
+    expect(dropRightWhile([1, 2, 0], null)).toEqual([1, 2, 0]);
+    // @ts-expect-error - lodash accepts a nullish shorthand
+    expect(dropRightWhile([0, 1, 2], null)).toEqual([0]);
+    expect(dropRightWhile([0, 1, 2], undefined)).toEqual([0]);
+  });
 });
