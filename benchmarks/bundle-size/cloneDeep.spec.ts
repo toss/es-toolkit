@@ -9,11 +9,11 @@ describe('cloneDeep bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'cloneDeep');
-    expect(bundleSize).toMatchInlineSnapshot(`3400`);
+    expect(bundleSize).toMatchInlineSnapshot(`4364`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'cloneDeep');
-    expect(bundleSize).toMatchInlineSnapshot(`3840`);
+    expect(bundleSize).toMatchInlineSnapshot(`4885`);
   });
 });

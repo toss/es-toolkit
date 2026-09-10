@@ -1,6 +1,4 @@
-import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWith.ts';
-import { copyProperties } from '../../object/cloneDeepWith.ts';
-import { getTag } from '../_internal/getTag.ts';
+import { cloneDeepWithImpl, copyProperties, getCloneableObjectType } from '../../object/cloneDeepWith.ts';
 import { argumentsTag, booleanTag, numberTag, objectTag, stringTag } from '../_internal/tags.ts';
 
 type CloneDeepWithCustomizer<TObject> = (
@@ -81,41 +79,47 @@ export function cloneDeepWith<T>(value: T): T;
  * console.log(clonedArr === arr); // false
  */
 export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>): any | T {
-  return cloneDeepWithToolkit(obj, (value, key, object, stack) => {
+  const cloneValue = (value: any, key: PropertyKey | undefined, object: T, stack: Map<any, any>) => {
     const cloned = customizer?.(value, key as any, object, stack);
 
     if (cloned !== undefined) {
       return cloned;
     }
 
+    if (value instanceof DataView && !getCloneableObjectType(value, true)) {
+      return value === obj ? {} : value;
+    }
+
     if (typeof obj !== 'object') {
       return undefined;
     }
 
+    const tag = Object.prototype.toString.call(obj);
+
     // eslint-disable-next-line
     // @ts-ignore
-    if (getTag(obj) === objectTag && typeof obj.constructor !== 'function') {
+    if (tag === objectTag && typeof obj.constructor !== 'function') {
       const result = {};
       stack.set(obj, result);
-      copyProperties(result, obj, object, stack);
+      copyProperties(result, obj, object, stack, undefined, true);
       return result;
     }
 
-    switch (Object.prototype.toString.call(obj)) {
+    switch (tag) {
       case numberTag:
       case stringTag:
       case booleanTag: {
         // eslint-disable-next-line
         // @ts-ignore
         const result = new obj.constructor(obj?.valueOf()) as T;
-        copyProperties(result, obj);
+        copyProperties(result, obj, result, undefined, undefined, true);
         return result;
       }
 
       case argumentsTag: {
         const result = {} as any;
 
-        copyProperties(result, obj);
+        copyProperties(result, obj, result, undefined, undefined, true);
 
         // eslint-disable-next-line
         // @ts-ignore
@@ -131,5 +135,7 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
         return undefined;
       }
     }
-  });
+  };
+
+  return cloneDeepWithImpl(obj, undefined, obj, new Map(), cloneValue, true);
 }

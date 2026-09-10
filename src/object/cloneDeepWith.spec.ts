@@ -157,4 +157,18 @@ describe('cloneDeepWith', () => {
 
     expect(cloned).toEqual({ a: 2, b: { c: 4, d: { e: 6 } } });
   });
+
+  it('should use the default custom-tag behavior when the customizer returns undefined', () => {
+    class Tagged {
+      nested = { value: 1 };
+    }
+    (Tagged.prototype as any)[Symbol.toStringTag] = 'Tagged';
+
+    const source = new Tagged();
+    const cloned = cloneDeepWith(source, () => undefined);
+
+    expect(cloned).not.toBe(source);
+    expect(cloned).toBeInstanceOf(Tagged);
+    expect(cloned.nested).not.toBe(source.nested);
+  });
 });

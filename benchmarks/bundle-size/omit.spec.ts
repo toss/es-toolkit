@@ -14,6 +14,6 @@ describe('omit bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'omit');
-    expect(bundleSize).toMatchInlineSnapshot(`8832`);
+    expect(bundleSize).toMatchInlineSnapshot(`9993`);
   });
 });
