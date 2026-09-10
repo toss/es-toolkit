@@ -33,23 +33,16 @@ export function countBy(collection: any, iteratee?: any): Record<string, number>
   const array = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
   const mapper = iterateeToolkit(iteratee ?? undefined) as (value: any) => any;
 
-  // The counts live on a plain object, matching lodash. Reading a count therefore has to go
-  // through `Object.hasOwn`, so that an inherited member such as `constructor` is not mistaken
-  // for an existing count, and `__proto__` has to be defined rather than assigned, so that it
-  // becomes an own property instead of replacing the prototype.
-  const result = {} as Record<string, number>;
+  // The counts are collected on a null-prototype object, so that keys such as `constructor` and
+  // `__proto__` behave like any other key while counting.
+  const result = Object.create(null) as Record<string, number>;
 
   for (let i = 0; i < array.length; i++) {
     const item = array[i];
     const key = mapper(item);
-    const count = (Object.hasOwn(result, key) ? result[key] : 0) + 1;
-
-    if (key === '__proto__') {
-      Object.defineProperty(result, key, { value: count, writable: true, enumerable: true, configurable: true });
-    } else {
-      result[key] = count;
-    }
+    result[key] = (result[key] ?? 0) + 1;
   }
 
-  return result;
+  // lodash returns a plain object.
+  return Object.setPrototypeOf(result, Object.prototype);
 }
