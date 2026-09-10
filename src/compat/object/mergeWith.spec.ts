@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';
@@ -250,5 +250,35 @@ describe('mergeWith', () => {
     expect(actual.x).toEqual(['1']);
     expect(Object.keys(actual.x)).toEqual(['0']);
     expect((actual.x as any).a).toBeUndefined();
+  });
+
+  it('should treat a trailing non-function argument as a source', () => {
+    expect(mergeWith({ a: 1 }, { b: 2 })).toEqual({ a: 1, b: 2 });
+    expect(mergeWith({}, { a: 1 }, { b: 2 })).toEqual({ a: 1, b: 2 });
+    expect(mergeWith({}, { a: 1 }, { b: 2 }, { c: 3 })).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it('should deeply merge when customizer is not given', () => {
+    const actual = mergeWith({ a: { x: 1, y: 2 }, b: [1, 2] }, { a: { y: 3, z: 4 }, b: [9] });
+
+    expect(actual).toEqual({ a: { x: 1, y: 3, z: 4 }, b: [9, 2] });
+  });
+
+  it('should still treat a trailing function as the customizer', () => {
+    const actual = mergeWith({ a: 1, b: 2 }, { b: 3, c: 4 }, (objValue: any, srcValue: any) => {
+      if (typeof objValue === 'number' && typeof srcValue === 'number') {
+        return objValue + srcValue;
+      }
+    });
+
+    expect(actual).toEqual({ a: 1, b: 5, c: 4 });
+  });
+
+  it('should treat a trailing function as the customizer across multiple sources', () => {
+    const customizer = vi.fn();
+    const actual = mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, customizer);
+
+    expect(actual).toEqual({ a: 1, b: 2, c: 3 });
+    expect(customizer).toHaveBeenCalled();
   });
 });
