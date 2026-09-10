@@ -53,6 +53,13 @@ describe('toString', () => {
     ).toBe('1,null,2,undefined');
   });
 
+  it('should read holes in a sparse array as undefined, matching lodash', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    expect(toString([1, , 3])).toBe('1,undefined,3');
+    // eslint-disable-next-line no-sparse-arrays
+    expect(toString([, ,])).toBe('undefined,undefined');
+  });
+
   it('should read `valueOf` before `toString`, matching lodash', () => {
     expect(toString({ valueOf: () => 7 })).toBe('7');
     expect(toString({ valueOf: () => 7, toString: () => 'from toString' })).toBe('7');
