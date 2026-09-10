@@ -27,7 +27,7 @@ state.user.name = 'x'; // error: name is readonly.
 #### Recursion rules
 
 - **Recurses into**: plain objects, arrays/tuples (→ `readonly` arrays/tuples), and `Map`/`Set` (→ `ReadonlyMap`/`ReadonlySet`).
-- **Passes through**: functions, `Date`, and `RegExp` are left unchanged.
+- **Passes through**: primitive types (including branded primitives), functions, `Date`, and `RegExp` are left unchanged.
 
 ```typescript
 import type { DeepReadonly } from 'es-toolkit/types';

@@ -31,7 +31,7 @@ const patch: ConfigPatch = { server: { port: 8080 } }; // ok, host 생략 가능
 어디까지 파고들고 어디서 멈추는지 정해져 있어요.
 
 - **파고드는 것**: 일반 객체, 배열/튜플, `Map`/`Set`의 내용. 단, 배열 요소는 선택적으로 만들지 않아요(희소 배열이 되지 않아요).
-- **그대로 두는 것**: 함수, `Date`, `RegExp`는 통과시켜요.
+- **그대로 두는 것**: 브랜드가 적용된 원시 타입을 포함한 원시 타입과 함수, `Date`, `RegExp`는 통과시켜요.
 
 ```typescript
 import type { DeepPartial } from 'es-toolkit/types';

@@ -27,7 +27,7 @@ state.user.name = 'x'; // 에러: name은 readonly예요.
 #### 재귀 규칙
 
 - **파고드는 것**: 일반 객체, 배열/튜플(→ `readonly` 배열/튜플), `Map`/`Set`(→ `ReadonlyMap`/`ReadonlySet`).
-- **그대로 두는 것**: 함수, `Date`, `RegExp`는 통과시켜요.
+- **그대로 두는 것**: 브랜드가 적용된 원시 타입을 포함한 원시 타입과 함수, `Date`, `RegExp`는 통과시켜요.
 
 ```typescript
 import type { DeepReadonly } from 'es-toolkit/types';

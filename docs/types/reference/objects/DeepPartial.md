@@ -31,7 +31,7 @@ const patch: ConfigPatch = { server: { port: 8080 } }; // ok, host can be omitte
 There are set rules for how far it recurses and where it stops.
 
 - **Recurses into**: plain objects, arrays/tuples, and the contents of `Map`/`Set`. Array elements themselves are not made optional (the array does not become sparse).
-- **Passes through**: functions, `Date`, and `RegExp` are left unchanged.
+- **Passes through**: primitive types (including branded primitives), functions, `Date`, and `RegExp` are left unchanged.
 
 ```typescript
 import type { DeepPartial } from 'es-toolkit/types';

@@ -27,7 +27,7 @@ state.user.name = 'x'; // 错误：name 是 readonly。
 #### 递归规则
 
 - **深入的对象**：普通对象、数组/元组（→ `readonly` 数组/元组）、`Map`/`Set`（→ `ReadonlyMap`/`ReadonlySet`）。
-- **原样通过的对象**：函数、`Date`、`RegExp` 保持不变通过。
+- **原样通过的对象**：原始类型（包括品牌化原始类型）、函数、`Date`、`RegExp` 保持不变通过。
 
 ```typescript
 import type { DeepReadonly } from 'es-toolkit/types';

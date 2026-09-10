@@ -31,7 +31,7 @@ const patch: ConfigPatch = { server: { port: 8080 } }; // ok, host は省略可�
 どこまで踏み込み、どこで止まるかが決まっています。
 
 - **踏み込むもの**: 通常のオブジェクト、配列/タプル、`Map`/`Set` の中身。ただし配列の要素自体は省略可能にしません（配列がスパースになりません）。
-- **そのまま通すもの**: 関数、`Date`、`RegExp` は変更せずに通します。
+- **そのまま通すもの**: ブランド付きプリミティブ型を含むプリミティブ型、関数、`Date`、`RegExp` は変更せずに通します。
 
 ```typescript
 import type { DeepPartial } from 'es-toolkit/types';
