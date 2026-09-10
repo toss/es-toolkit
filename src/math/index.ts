@@ -1,5 +1,7 @@
 export { clamp } from './clamp.ts';
 export { inRange } from './inRange.ts';
+export { inverseLerp } from './inverseLerp.ts';
+export { lerp } from './lerp.ts';
 export { mean } from './mean.ts';
 export { meanBy } from './meanBy.ts';
 export { median } from './median.ts';

@@ -1,3 +1,5 @@
+import type { ObjectKeys } from '../types/ObjectKeys.ts';
+
 /**
  * Creates a new object with the same values as the given object, but with keys generated
  * by running each own enumerable property of the object through the iteratee function.
@@ -17,10 +19,10 @@
  */
 export function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
   object: T,
-  getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
+  getNewKey: (value: T[keyof T], key: ObjectKeys<T>, object: T) => K
 ): Record<K, T[keyof T]> {
   const result = {} as Record<K, T[keyof T]>;
-  const keys = Object.keys(object) as Array<keyof T>;
+  const keys = Object.keys(object) as Array<ObjectKeys<T>>;
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];

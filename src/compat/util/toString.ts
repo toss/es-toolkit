@@ -30,7 +30,19 @@ function baseToString(value: any): string {
   }
 
   if (Array.isArray(value)) {
-    return value.map(baseToString).join(',');
+    // `Array.prototype.map` skips holes in a sparse array, but lodash reads
+    // each index, so a hole is rendered as `undefined` rather than dropped.
+    let result = '';
+
+    for (let i = 0; i < value.length; i++) {
+      if (i > 0) {
+        result += ',';
+      }
+
+      result += baseToString(value[i]);
+    }
+
+    return result;
   }
 
   if (isSymbol(value)) {

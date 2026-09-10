@@ -146,9 +146,7 @@ export function some<T>(
         return values.some(matchFunc);
       }
     }
-    case 'number':
-    case 'symbol':
-    case 'string': {
+    default: {
       const propFunc = property(predicate);
       if (Array.isArray(source)) {
         for (let i = 0; i < source.length; i++) {

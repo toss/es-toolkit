@@ -201,4 +201,11 @@ describe('some', () => {
     expect(some(sparseArray, value => value > 0)).toEqual(true);
     expect(some(sparseArray, value => value === undefined)).toEqual(true);
   });
+  it('should treat a boolean `predicate` as a property shorthand like lodash', () => {
+    // lodash's `baseIteratee` falls through to `property` for any non-function,
+    // non-object value, so `true` and `false` read the `'true'` and `'false'` keys.
+    expect(some([1, 2, 3], true)).toBe(false);
+    expect(some([{ true: 1 }, { true: 0 }], true)).toBe(true);
+    expect(some([{ false: 1 }], false)).toBe(true);
+  });
 });
