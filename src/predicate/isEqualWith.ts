@@ -209,7 +209,7 @@ function areObjectsEqual(
         // unordered multiset instead, pairing each `a` entry with a `b` entry
         // whose key and value are both equal, and removing it so duplicate-shaped
         // keys still pair one to one. Mirrors the set branch below and lodash.
-        const bEntries = Array.from(b.entries());
+        const bEntries: Array<[any, any]> = Array.from(b.entries());
 
         for (const [aKey, aValue] of a.entries()) {
           const index = bEntries.findIndex(
