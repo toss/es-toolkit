@@ -59,4 +59,18 @@ describe('pullAll', () => {
     expect(pullAll(array, null as any)).toBe(array);
     expect(pullAll(array, undefined)).toBe(array);
   });
+  it('should return the array as is when it is `null` or `undefined`', () => {
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(pullAll(null, [1])).toBe(null);
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(pullAll(undefined, [1])).toBe(undefined);
+  });
+
+  it('should ignore `values` that are not array-like like lodash', () => {
+    const array = [1, 2, 3];
+
+    // @ts-expect-error - lodash accepts non-array-like values
+    expect(pullAll(array, new Set([1]))).toBe(array);
+    expect(array).toEqual([1, 2, 3]);
+  });
 });
