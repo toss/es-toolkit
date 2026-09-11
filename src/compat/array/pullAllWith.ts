@@ -140,21 +140,24 @@ export function pullAllWith<T>(
   }
 
   const valuesArray = Array.isArray(values) ? values : Array.from(values);
-  const hasUndefined = valuesArray.includes(undefined as any);
 
   for (let i = 0; i < array.length; i++) {
-    if (i in array) {
-      const shouldRemove = valuesArray.some(value => comparator(array[i], value));
-
-      if (!shouldRemove) {
-        (array as any)[resultLength++] = array[i];
+    let shouldRemove = false;
+    for (let j = 0; j < valuesArray.length; j++) {
+      if (comparator(array[i], valuesArray[j])) {
+        shouldRemove = true;
+        break;
       }
+    }
 
+    if (shouldRemove) {
       continue;
     }
 
-    // For handling sparse arrays
-    if (!hasUndefined) {
+    if (i in array) {
+      (array as any)[resultLength++] = array[i];
+    } else {
+      // Preserve unmatched holes in sparse arrays.
       delete (array as any)[resultLength++];
     }
   }
