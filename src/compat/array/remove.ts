@@ -63,5 +63,9 @@ export function remove<T>(
     | [keyof T, unknown]
     | keyof T = identity as any
 ): T[] {
+  if (arr?.length == null) {
+    return [];
+  }
+
   return removeToolkit(arr as T[], iteratee(shouldRemoveElement));
 }
