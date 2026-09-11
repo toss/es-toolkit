@@ -1,3 +1,5 @@
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Groups the elements of an array based on a provided key-generating function.
  *
@@ -46,7 +48,7 @@ export function groupBy<T, K extends PropertyKey>(
     const item = arr[i];
     const key = getKeyFromItem(item, i, arr);
 
-    if (!Object.hasOwn(result, key)) {
+    if (!hasOwnProperty.call(result, key)) {
       result[key] = [];
     }
 

@@ -1,3 +1,4 @@
+import { legacyWords } from '../_internal/legacyWords.ts';
 import { toString } from '../util/toString.ts';
 
 const rNonCharLatin = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\xd7\\xf7';
@@ -14,16 +15,25 @@ const rUnicodeBreak = `[\\p{Z}\\p{P}${rNonCharLatin}]`;
 const rUnicodeMiscUpper = `(?:${rUnicodeUpper}|${rMisc})`;
 const rUnicodeMiscLower = `(?:${rUnicodeLower}|${rMisc})`;
 
-let rUnicodeWord: RegExp | undefined;
+// `null` once compiling the pattern has failed, so the fallback is used without retrying.
+let rUnicodeWord: RegExp | null | undefined;
 
 // The pattern uses Unicode property escapes, which engines older than
 // Chrome 64 / Safari 11.1 cannot parse. Since it is assembled from strings,
 // transpilers cannot rewrite it either, so it is compiled lazily: merely
 // importing this module never throws, only calling `words` without a custom
 // pattern requires engine support.
-function getUnicodeWordPattern(): RegExp {
-  if (rUnicodeWord == null) {
-    rUnicodeWord = RegExp(
+function getUnicodeWordPattern(): RegExp | null {
+  if (rUnicodeWord === undefined) {
+    rUnicodeWord = compileUnicodeWordPattern();
+  }
+  return rUnicodeWord;
+}
+
+function compileUnicodeWordPattern(): RegExp | null {
+  try {
+    // eslint-disable-next-line es-x/no-regexp-unicode-property-escapes, es-x/no-regexp-unicode-property-escapes-2019 -- compiled inside try/catch; `legacyWords` is the fallback for engines without property escapes
+    return RegExp(
       [
         `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
 
@@ -45,8 +55,11 @@ function getUnicodeWordPattern(): RegExp {
       ].join('|'),
       'gu'
     );
+  } catch (e) {
+    // Engines without Unicode property escapes (e.g. Node.js 6) throw a
+    // SyntaxError here; use lodash's ES5-compatible word patterns instead.
+    return null;
   }
-  return rUnicodeWord;
 }
 
 /**
@@ -91,14 +104,21 @@ export function words(str?: string, pattern?: string | number | RegExp, guard?: 
   const input = toString(str);
 
   if (guard || pattern === undefined) {
-    pattern = getUnicodeWordPattern();
+    const unicodeWordPattern = getUnicodeWordPattern();
+
+    if (unicodeWordPattern == null) {
+      return legacyWords(input);
+    }
+
+    pattern = unicodeWordPattern;
   }
 
   if (typeof pattern === 'number') {
     pattern = pattern.toString();
   }
 
-  const words = Array.from(input.match(pattern) ?? []);
+  const matched = input.match(pattern);
+  const words = matched == null ? [] : Array.from(matched);
 
   return words.filter(x => x !== '');
 }

@@ -13,6 +13,12 @@ const unEscapedRegExp = /['\n\r\u2028\u2029\\]/g;
 // A regular expression for matching no match.
 const noMatchExp = /($^)/;
 
+function getSource(regexp: RegExp | null | undefined): string {
+  const source = regexp == null ? undefined : regexp.source;
+
+  return source == null ? noMatchExp.source : source;
+}
+
 const escapeMap = new Map([
   ['\\', '\\'],
   ["'", "'"],
@@ -127,14 +133,14 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
     options = templateSettings;
   }
 
-  options = defaults({ ...options }, templateSettings);
+  options = defaults(Object.assign({}, options), templateSettings);
 
   const delimitersRegExp = new RegExp(
     [
-      options.escape?.source ?? noMatchExp.source,
-      options.interpolate?.source ?? noMatchExp.source,
+      getSource(options.escape),
+      getSource(options.interpolate),
       options.interpolate === defaultInterpolateRegExp ? esTemplateRegExp.source : noMatchExp.source,
-      options.evaluate?.source ?? noMatchExp.source,
+      getSource(options.evaluate),
       '$',
     ].join('|'),
     'g'
@@ -144,7 +150,9 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
   let isEvaluated = false;
   let source = `__p += ''`;
 
-  for (const match of string.matchAll(delimitersRegExp)) {
+  let match = delimitersRegExp.exec(string);
+
+  while (match !== null) {
     const [fullMatch, escapeValue, interpolateValue, esTemplateValue, evaluateValue] = match;
     const { index } = match;
 
@@ -166,11 +174,18 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
     }
 
     lastIndex = index + fullMatch.length;
+
+    // Like `String.prototype.matchAll`, step past a zero-length match so the loop cannot get stuck.
+    if (fullMatch.length === 0) {
+      delimitersRegExp.lastIndex++;
+    }
+
+    match = delimitersRegExp.exec(string);
   }
 
-  const imports = defaults({ ...options.imports }, templateSettings.imports);
+  const imports = defaults(Object.assign({}, options.imports), templateSettings.imports);
   const importsKeys = Object.keys(imports);
-  const importValues = Object.values(imports);
+  const importValues = importsKeys.map(key => imports[key]);
 
   const sourceURL = `//# sourceURL=${
     options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`

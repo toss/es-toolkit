@@ -5,6 +5,8 @@ import { toKey } from '../_internal/toKey.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { toPath } from '../util/toPath.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Checks if a given path exists within an object.
  *
@@ -106,7 +108,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
     const key = toKey(resolvedPath[i]);
 
     // Check if the current key is a direct property of the current object
-    if (current == null || !Object.hasOwn(current, key)) {
+    if (current == null || !hasOwnProperty.call(current, key)) {
       const isSparseIndex =
         (Array.isArray(current) || isArguments(current)) && isIndex(key) && Number(key) < current.length;
 

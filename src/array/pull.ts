@@ -1,3 +1,5 @@
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Removes all specified values from an array.
  *
@@ -24,7 +26,7 @@ export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
     }
 
     // For handling sparse arrays
-    if (!Object.hasOwn(arr, i)) {
+    if (!hasOwnProperty.call(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }

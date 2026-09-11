@@ -1,6 +1,6 @@
 import { conformsTo } from './conformsTo.ts';
-import { cloneDeep } from '../../object/cloneDeep.ts';
 import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
+import { cloneDeep } from '../object/cloneDeep.ts';
 
 /**
  * Creates a function that invokes the predicate properties of `source` with the corresponding property values of a given object, returning `true` if all predicates return truthy, else `false`.

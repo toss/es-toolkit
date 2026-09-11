@@ -85,7 +85,7 @@ export function omitBy<T, S extends T>(
 
   const result: Partial<T> = {};
 
-  const predicate = createIteratee(shouldOmit ?? identity);
+  const predicate = createIteratee(shouldOmit == null ? identity : shouldOmit);
 
   const keys = [...keysIn(object), ...getSymbolsIn(object)] as Array<keyof T>;
   for (let i = 0; i < keys.length; i++) {

@@ -25,7 +25,7 @@ export function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement
 
   // `Array.prototype.indexOf` doesn't find `NaN` values, so we need to handle that case separately.
   if (Number.isNaN(searchElement)) {
-    fromIndex = toInteger(fromIndex ?? 0);
+    fromIndex = toInteger(fromIndex == null ? 0 : fromIndex);
 
     if (fromIndex < 0) {
       fromIndex = Math.max(0, array.length + fromIndex);

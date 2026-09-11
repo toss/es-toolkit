@@ -1,5 +1,4 @@
 import { identity } from '../../function/identity.ts';
-import { negate } from '../../function/negate.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
@@ -96,7 +95,13 @@ export function takeRightWhile<T>(
   }
 
   const array = toArray(_array);
-  const index = array.findLastIndex(negate(createIteratee(predicate ?? identity)));
+  const shouldTake = createIteratee(predicate == null ? identity : predicate);
+
+  let index = array.length - 1;
+
+  while (index >= 0 && shouldTake(array[index], index, array)) {
+    index--;
+  }
 
   return array.slice(index + 1);
 }
