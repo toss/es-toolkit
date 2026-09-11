@@ -65,7 +65,7 @@ export function toArray(value?: unknown): any[] {
       return Array.from(value);
     }
 
-    return Object.values(value);
+    return Object.keys(value).map(key => (value as any)[key]);
   }
 
   return [];

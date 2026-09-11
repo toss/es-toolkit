@@ -23,7 +23,7 @@ export function multiply(value: number, other: number): number {
   }
 
   if (value === undefined || other === undefined) {
-    return value ?? other;
+    return value == null ? other : value;
   }
 
   if (typeof value === 'string' || typeof other === 'string') {

@@ -69,7 +69,7 @@ export function matchesProperty<T, V>(path: PropertyPath, srcValue: T): (value: 
 export function matchesProperty<T, V>(property: PropertyPath, source: T): (target?: V) => boolean {
   switch (typeof property) {
     case 'object': {
-      if (Object.is(property?.valueOf(), -0)) {
+      if (property != null && Object.is(property.valueOf(), -0)) {
         property = '-0';
       }
       break;

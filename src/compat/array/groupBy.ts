@@ -86,7 +86,7 @@ export function groupBy<T, K extends PropertyKey>(
     return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source) ? toArray(source) : Object.values(source);
+  const items = isArrayLike(source) ? toArray(source) : Object.keys(source).map(key => source[key]);
   const getKeyFromItem = createIteratee(_getKeyFromItem);
 
   return groupByToolkit<T, K>(items, getKeyFromItem);
