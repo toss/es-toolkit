@@ -134,27 +134,46 @@ export function pullAllWith<T>(
   }
 
   let resultLength = 0;
+  const isDefaultComparator = comparator == null;
 
   if (comparator == null) {
     comparator = (a, b) => eq(a, b);
   }
 
   const valuesArray = Array.isArray(values) ? values : Array.from(values);
-  const hasUndefined = valuesArray.includes(undefined as any);
+  const valuesLength = valuesArray.length;
+  const hasUndefined = isDefaultComparator && valuesArray.includes(undefined as T);
 
   for (let i = 0; i < array.length; i++) {
-    if (i in array) {
-      const shouldRemove = valuesArray.some(value => comparator(array[i], value));
-
-      if (!shouldRemove) {
-        (array as any)[resultLength++] = array[i];
+    if (isDefaultComparator && !(i in array)) {
+      if (!hasUndefined) {
+        delete (array as any)[resultLength++];
       }
-
       continue;
     }
 
-    // For handling sparse arrays
-    if (!hasUndefined) {
+    let shouldRemove = false;
+    if (valuesArray.length === valuesLength) {
+      // Unlike some, findIndex also visits holes and snapshots the length.
+      shouldRemove = valuesArray.findIndex(value => comparator(array[i], value)) !== -1;
+    } else {
+      // A comparator may have changed values.length while processing an earlier element.
+      for (let j = 0; j < valuesLength; j++) {
+        if (comparator(array[i], valuesArray[j])) {
+          shouldRemove = true;
+          break;
+        }
+      }
+    }
+
+    if (shouldRemove) {
+      continue;
+    }
+
+    if (i in array) {
+      (array as any)[resultLength++] = array[i];
+    } else {
+      // Preserve unmatched holes in sparse arrays.
       delete (array as any)[resultLength++];
     }
   }

@@ -46,6 +46,74 @@ describe('pullAllWith', () => {
     expect(array).toEqual([1, 3]);
   });
 
+  it('should preserve holes when the comparator does not match undefined', () => {
+    const array = [1, 2, 3];
+    delete array[1];
+
+    pullAllWith(array, [undefined], () => false);
+
+    expect(array).toHaveLength(3);
+    expect(1 in array).toBe(false);
+    expect(array[0]).toBe(1);
+    expect(array[2]).toBe(3);
+  });
+
+  it('should remove holes when the comparator matches them', () => {
+    const array: Array<number | null> = [1, 2, 3];
+    delete array[1];
+
+    pullAllWith(array, [null], (a, b) => a == null && b == null);
+
+    expect(array).toStrictEqual([1, 3]);
+  });
+
+  it.each([undefined, Object.is])('should treat holes in values as undefined with comparator %s', comparator => {
+    const array = [undefined, 1, undefined];
+    const values = new Array<undefined>(1);
+
+    pullAllWith(array, values, comparator);
+
+    expect(array).toStrictEqual([1]);
+  });
+
+  it.each([{ array: [2] }, { array: [3, 2] }])('should ignore appended removal values for $array', ({ array }) => {
+    const expected = array.slice();
+    const values = [1];
+
+    pullAllWith(array, values, (a, b) => {
+      if (values.length === 1) {
+        values.push(2);
+      }
+      return a === b;
+    });
+
+    expect(array).toStrictEqual(expected);
+  });
+
+  it('should visit the original removal range when the comparator shortens values', () => {
+    const array = [undefined];
+    const values: Array<number | undefined> = [1, 2];
+
+    pullAllWith(array, values, (a, b) => {
+      values.length = 1;
+      return a === b;
+    });
+
+    expect(array).toStrictEqual([]);
+  });
+
+  it.each([{ values: [undefined] }, { values: new Array<undefined>(1) }])(
+    'should remove input holes with default removal values $values',
+    ({ values }) => {
+      const array = new Array<number | undefined>(3);
+      array[1] = 1;
+
+      pullAllWith(array, values);
+
+      expect(array).toStrictEqual([1]);
+    }
+  );
+
   it(`\`_.${methodName}\` should match NaN`, () => {
     const array = [1, NaN, 3, NaN];
 
