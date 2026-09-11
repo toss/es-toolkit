@@ -134,19 +134,35 @@ export function pullAllWith<T>(
   }
 
   let resultLength = 0;
+  const isDefaultComparator = comparator == null;
 
   if (comparator == null) {
     comparator = (a, b) => eq(a, b);
   }
 
   const valuesArray = Array.isArray(values) ? values : Array.from(values);
+  const valuesLength = valuesArray.length;
+  const hasUndefined = isDefaultComparator && valuesArray.includes(undefined as T);
 
   for (let i = 0; i < array.length; i++) {
+    if (isDefaultComparator && !(i in array)) {
+      if (!hasUndefined) {
+        delete (array as any)[resultLength++];
+      }
+      continue;
+    }
+
     let shouldRemove = false;
-    for (let j = 0; j < valuesArray.length; j++) {
-      if (comparator(array[i], valuesArray[j])) {
-        shouldRemove = true;
-        break;
+    if (valuesArray.length === valuesLength) {
+      // Unlike some, findIndex also visits holes and snapshots the length.
+      shouldRemove = valuesArray.findIndex(value => comparator(array[i], value)) !== -1;
+    } else {
+      // A comparator may have changed values.length while processing an earlier element.
+      for (let j = 0; j < valuesLength; j++) {
+        if (comparator(array[i], valuesArray[j])) {
+          shouldRemove = true;
+          break;
+        }
       }
     }
 

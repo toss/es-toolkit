@@ -76,6 +76,44 @@ describe('pullAllWith', () => {
     expect(array).toStrictEqual([1]);
   });
 
+  it.each([{ array: [2] }, { array: [3, 2] }])('should ignore appended removal values for $array', ({ array }) => {
+    const expected = array.slice();
+    const values = [1];
+
+    pullAllWith(array, values, (a, b) => {
+      if (values.length === 1) {
+        values.push(2);
+      }
+      return a === b;
+    });
+
+    expect(array).toStrictEqual(expected);
+  });
+
+  it('should visit the original removal range when the comparator shortens values', () => {
+    const array = [undefined];
+    const values: Array<number | undefined> = [1, 2];
+
+    pullAllWith(array, values, (a, b) => {
+      values.length = 1;
+      return a === b;
+    });
+
+    expect(array).toStrictEqual([]);
+  });
+
+  it.each([{ values: [undefined] }, { values: new Array<undefined>(1) }])(
+    'should remove input holes with default removal values $values',
+    ({ values }) => {
+      const array = new Array<number | undefined>(3);
+      array[1] = 1;
+
+      pullAllWith(array, values);
+
+      expect(array).toStrictEqual([1]);
+    }
+  );
+
   it(`\`_.${methodName}\` should match NaN`, () => {
     const array = [1, NaN, 3, NaN];
 
