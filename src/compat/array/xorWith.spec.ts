@@ -84,4 +84,19 @@ describe('xorWith', () => {
     expect(xorWith([NaN], [NaN], eq)).toEqual([NaN, NaN]);
     expect(xorWith([-0, 1], [1], eq)).toEqual([-0]);
   });
+  it('should ignore the `comparator` when given a single array like lodash', () => {
+    const eq = (a: number, b: number) => a === b;
+
+    // With fewer than two arrays lodash's `baseXor` returns `baseUniq(arrays[0])`,
+    // which never sees the comparator.
+    expect(xorWith([{ a: 1 }, { a: 1 }], isEqual)).toEqual([{ a: 1 }, { a: 1 }]);
+    expect(xorWith([1, 2, 3], eq)).toEqual([1, 2, 3]);
+    // @ts-expect-error - lodash accepts a comparator with no arrays
+    expect(xorWith(eq)).toEqual([]);
+
+    // It still de-duplicates with SameValueZero and normalizes `-0`.
+    expect(xorWith([1, 1, 2], eq)).toEqual([1, 2]);
+    expect(xorWith([NaN, NaN], eq)).toEqual([NaN]);
+    expect(xorWith([-0], eq)).toEqual([0]);
+  });
 });
