@@ -98,6 +98,12 @@ export function xorWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((
   const comparator = lastValue as (a: T, b: T) => boolean;
   const arrays = values.slice(0, -1).filter(isArrayLikeObject) as T[][];
 
+  // With fewer than two arrays lodash's `baseXor` returns `baseUniq(arrays[0])`,
+  // dropping the comparator too.
+  if (arrays.length < 2) {
+    return xor(...arrays);
+  }
+
   // eslint-disable-next-line
   // @ts-ignore
   const union = unionWith(...arrays, comparator);
