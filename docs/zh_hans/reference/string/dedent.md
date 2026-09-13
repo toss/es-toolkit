@@ -35,7 +35,7 @@ const list = dedent`
 `;
 // list 是 'Items:\n  - First\n  - Second'
 
-// 插值会在移除缩进之前插入
+// 插值会在移除缩进之后插入，因此值内部的换行和缩进会原样保留
 const name = 'es-toolkit';
 const greeting = dedent`
   Hello, ${name}!
