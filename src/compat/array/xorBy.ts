@@ -2,7 +2,7 @@ import { differenceBy } from './differenceBy.ts';
 import { intersectionBy } from './intersectionBy.ts';
 import { last } from './last.ts';
 import { unionBy } from './unionBy.ts';
-import { xor } from './xor.ts';
+import { uniq } from './uniq.ts';
 import { windowed } from '../../array/windowed.ts';
 import { identity } from '../../function/identity.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
@@ -102,10 +102,8 @@ export function xorBy<T>(...values: Array<ArrayLike<T> | null | undefined | Valu
 
   const arrays = values.filter(isArrayLikeObject) as [any];
 
-  // With fewer than two arrays lodash's `baseXor` returns `baseUniq(arrays[0])`,
-  // dropping the iteratee. That is exactly what `xor` does.
   if (arrays.length < 2) {
-    return xor(...arrays);
+    return uniq(arrays[0]);
   }
 
   const union = unionBy(...arrays, mapper);

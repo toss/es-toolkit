@@ -2,6 +2,7 @@ import { differenceWith } from './differenceWith.ts';
 import { intersectionWith } from './intersectionWith.ts';
 import { last } from './last.ts';
 import { unionWith } from './unionWith.ts';
+import { uniq } from './uniq.ts';
 import { xor } from './xor.ts';
 import { windowed } from '../../array/windowed.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
@@ -98,10 +99,8 @@ export function xorWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((
   const comparator = lastValue as (a: T, b: T) => boolean;
   const arrays = values.slice(0, -1).filter(isArrayLikeObject) as T[][];
 
-  // With fewer than two arrays lodash's `baseXor` returns `baseUniq(arrays[0])`,
-  // dropping the comparator too.
   if (arrays.length < 2) {
-    return xor(...arrays);
+    return uniq(arrays[0]);
   }
 
   // eslint-disable-next-line
