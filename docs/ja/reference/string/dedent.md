@@ -57,7 +57,7 @@ const text = dedent`
 // textは'First\n\nSecond'になります
 ```
 
-テンプレートは `String.dedent` 提案が求めるものと同じ形である必要があります。開始バッククォートの直後の最初の行と、終了バッククォートの直前の最後の行には空白のみを含めることができます。それ以外の内容が含まれている場合は `TypeError` をスローします。
+開始バッククォートの直後の最初の行と、終了バッククォートの直前の最後の行には空白のみを含めることができます。それ以外の内容が含まれている場合は `TypeError` をスローします。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

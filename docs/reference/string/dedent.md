@@ -57,7 +57,7 @@ const text = dedent`
 // text is 'First\n\nSecond'
 ```
 
-The template must have the same shape that the `String.dedent` proposal requires. The opening line, right after the opening backtick, and the closing line, right before the closing backtick, may contain only whitespace. If either line has other content, a `TypeError` is thrown.
+The opening line, right after the opening backtick, and the closing line, right before the closing backtick, may contain only whitespace. If either line has other content, a `TypeError` is thrown.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

@@ -57,7 +57,7 @@ const text = dedent`
 // text는 'First\n\nSecond'가 돼요
 ```
 
-템플릿은 `String.dedent` 제안이 요구하는 것과 같은 형태여야 해요. 여는 백틱 바로 뒤의 첫 줄과 닫는 백틱 바로 앞의 마지막 줄에는 공백만 올 수 있어요. 다른 내용이 있으면 `TypeError`를 던져요.
+여는 백틱 바로 뒤의 첫 줄과 닫는 백틱 바로 앞의 마지막 줄에는 공백만 올 수 있어요. 다른 내용이 있으면 `TypeError`를 던져요.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';

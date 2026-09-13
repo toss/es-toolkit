@@ -57,7 +57,7 @@ const text = dedent`
 // text 是 'First\n\nSecond'
 ```
 
-模板必须具有与 `String.dedent` 提案要求相同的形式。紧跟在起始反引号之后的第一行和紧靠结束反引号之前的最后一行只能包含空白。如果包含其他内容，则会抛出 `TypeError`。
+紧跟在起始反引号之后的第一行和紧靠结束反引号之前的最后一行只能包含空白。如果包含其他内容，则会抛出 `TypeError`。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
