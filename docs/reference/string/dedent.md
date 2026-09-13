@@ -15,7 +15,7 @@ const text = dedent`
 
 ### `` dedent`text` ``
 
-Use `dedent` as a tagged template literal to write multi-line strings inside indented code. It finds the smallest indentation shared by the non-empty lines and removes it from every line, so relative indentation differences between lines are preserved. If the first or last line contains only whitespace, it is removed.
+Use `dedent` as a tagged template literal to write multi-line strings inside indented code. It finds the smallest indentation shared by the non-empty lines and removes it from every line, so relative indentation differences between lines are preserved. The opening and closing lines are removed.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
@@ -57,6 +57,23 @@ const text = dedent`
 // text is 'First\n\nSecond'
 ```
 
+The template must have the same shape that the `String.dedent` proposal requires. The opening line, right after the opening backtick, and the closing line, right before the closing backtick, may contain only whitespace. If either line has other content, a `TypeError` is thrown.
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// The opening and closing lines may contain only whitespace
+dedent`Hello
+  World
+`;
+// Throws a TypeError
+
+dedent`
+  Hello
+  World`;
+// Throws a TypeError
+```
+
 #### Parameters
 
 - `str` (`TemplateStringsArray`): The template literal to dedent.
@@ -65,6 +82,10 @@ const text = dedent`
 #### Returns
 
 (`string`): The string with the common leading whitespace removed.
+
+#### Throws
+
+Throws a `TypeError` if the opening line or the closing line of the template literal contains anything other than whitespace.
 
 ### `dedent(str)`
 
@@ -119,3 +140,7 @@ python`
 #### Returns
 
 (`(strings: TemplateStringsArray, ...values: unknown[]) => T`): A new tag function that removes the common leading whitespace from the template strings before passing them to `tagFn`.
+
+#### Throws
+
+Throws a `TypeError` if the opening line or the closing line of the template literal contains anything other than whitespace.

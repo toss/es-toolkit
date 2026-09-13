@@ -7,9 +7,15 @@
  * preserving relative indentation differences between lines.
  * The first and last lines are removed if they are empty or contain only whitespace.
  *
+ * When used as a tagged template literal or composed with a tag function, the template
+ * must have the same shape `String.dedent` requires: the opening line, right after the
+ * opening backtick, and the closing line, right before the closing backtick, may contain
+ * only whitespace. Otherwise a `TypeError` is thrown.
+ *
  * @param {string | TemplateStringsArray | Function} str - The string, template literal, or tag function to dedent.
  * @param {unknown[]} values - The values to interpolate when used as a tagged template literal.
  * @returns {string | Function} The dedented string, or a dedented tag function when composed.
+ * @throws {TypeError} If a template literal has content on its opening or closing line.
  *
  * @example
  * // As a regular function
@@ -48,6 +54,8 @@ export function dedent(
       return dedentImpl(str);
     }
     default: {
+      assertTemplateShape(str);
+
       let text = str[0];
       for (let i = 0; i < values.length; i++) {
         text += String(values[i]) + str[i + 1];
@@ -59,11 +67,40 @@ export function dedent(
 }
 
 function dedentTemplateStringsArray(strings: TemplateStringsArray): TemplateStringsArray {
+  assertTemplateShape(strings);
+
   const joined = strings.join('\x00');
   const dedented = dedentImpl(joined);
   const parts = dedented.split('\x00');
 
   return Object.assign(parts, { raw: parts }) as unknown as TemplateStringsArray;
+}
+
+/**
+ * Checks that a template literal has the shape `String.dedent` requires.
+ *
+ * Only the static parts of the template are inspected, so interpolated values
+ * never affect the check. The opening line must end with a newline and the closing
+ * line must be preceded by one, and both may contain only whitespace.
+ */
+function assertTemplateShape(strings: ArrayLike<string>): void {
+  const first = strings[0];
+  const openingLineEnd = first.indexOf('\n');
+
+  if (openingLineEnd === -1 || first.slice(0, openingLineEnd).trim() !== '') {
+    throw new TypeError(
+      'The opening line of a dedent template literal must contain only whitespace and end with a newline.'
+    );
+  }
+
+  const last = strings[strings.length - 1];
+  const closingLineStart = last.lastIndexOf('\n');
+
+  if (closingLineStart === -1 || last.slice(closingLineStart + 1).trim() !== '') {
+    throw new TypeError(
+      'The closing line of a dedent template literal must contain only whitespace and be preceded by a newline.'
+    );
+  }
 }
 
 function dedentImpl(text: string): string {

@@ -15,7 +15,7 @@ const text = dedent`
 
 ### `` dedent`text` ``
 
-들여쓰기된 코드 안에서 여러 줄 문자열을 작성하고 싶을 때, `dedent`를 태그드 템플릿 리터럴로 사용하세요. 비어 있지 않은 줄들이 공통으로 가진 가장 작은 들여쓰기를 찾아서 모든 줄에서 제거하기 때문에, 줄 사이의 상대적인 들여쓰기 차이는 유지돼요. 첫 줄이나 마지막 줄이 공백만 포함하면 제거돼요.
+들여쓰기된 코드 안에서 여러 줄 문자열을 작성하고 싶을 때, `dedent`를 태그드 템플릿 리터럴로 사용하세요. 비어 있지 않은 줄들이 공통으로 가진 가장 작은 들여쓰기를 찾아서 모든 줄에서 제거하기 때문에, 줄 사이의 상대적인 들여쓰기 차이는 유지돼요. 첫 줄과 마지막 줄은 제거돼요.
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
@@ -57,6 +57,23 @@ const text = dedent`
 // text는 'First\n\nSecond'가 돼요
 ```
 
+템플릿은 `String.dedent` 제안이 요구하는 것과 같은 형태여야 해요. 여는 백틱 바로 뒤의 첫 줄과 닫는 백틱 바로 앞의 마지막 줄에는 공백만 올 수 있어요. 다른 내용이 있으면 `TypeError`를 던져요.
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// 첫 줄과 마지막 줄에는 공백만 올 수 있어요
+dedent`Hello
+  World
+`;
+// TypeError를 던져요
+
+dedent`
+  Hello
+  World`;
+// TypeError를 던져요
+```
+
 #### 파라미터
 
 - `str` (`TemplateStringsArray`): 들여쓰기를 제거할 템플릿 리터럴이에요.
@@ -65,6 +82,10 @@ const text = dedent`
 #### 반환 값
 
 (`string`): 공통 들여쓰기가 제거된 문자열을 반환해요.
+
+#### 에러
+
+템플릿 리터럴의 첫 줄이나 마지막 줄에 공백 외의 내용이 있으면 `TypeError`를 던져요.
 
 ### `dedent(str)`
 
@@ -119,3 +140,7 @@ python`
 #### 반환 값
 
 (`(strings: TemplateStringsArray, ...values: unknown[]) => T`): 템플릿 문자열에서 공통 들여쓰기를 제거한 뒤 `tagFn`에 전달하는 새로운 태그 함수를 반환해요.
+
+#### 에러
+
+템플릿 리터럴의 첫 줄이나 마지막 줄에 공백 외의 내용이 있으면 `TypeError`를 던져요.

@@ -15,7 +15,7 @@ const text = dedent`
 
 ### `` dedent`text` ``
 
-当您想在有缩进的代码中书写多行字符串时，请将 `dedent` 用作标签模板字面量。它会找出非空行共同拥有的最小缩进，并从每一行中移除，因此行与行之间的相对缩进差异会被保留。如果第一行或最后一行只包含空白，则会被移除。
+当您想在有缩进的代码中书写多行字符串时，请将 `dedent` 用作标签模板字面量。它会找出非空行共同拥有的最小缩进，并从每一行中移除，因此行与行之间的相对缩进差异会被保留。第一行和最后一行会被移除。
 
 ```typescript
 import { dedent } from 'es-toolkit/string';
@@ -57,6 +57,23 @@ const text = dedent`
 // text 是 'First\n\nSecond'
 ```
 
+模板必须具有与 `String.dedent` 提案要求相同的形式。紧跟在起始反引号之后的第一行和紧靠结束反引号之前的最后一行只能包含空白。如果包含其他内容，则会抛出 `TypeError`。
+
+```typescript
+import { dedent } from 'es-toolkit/string';
+
+// 第一行和最后一行只能包含空白
+dedent`Hello
+  World
+`;
+// 抛出 TypeError
+
+dedent`
+  Hello
+  World`;
+// 抛出 TypeError
+```
+
 #### 参数
 
 - `str` (`TemplateStringsArray`): 要移除缩进的模板字面量。
@@ -65,6 +82,10 @@ const text = dedent`
 #### 返回值
 
 (`string`): 移除了共同前导缩进的字符串。
+
+#### 错误
+
+如果模板字面量的第一行或最后一行包含空白以外的内容，则抛出 `TypeError`。
 
 ### `dedent(str)`
 
@@ -119,3 +140,7 @@ python`
 #### 返回值
 
 (`(strings: TemplateStringsArray, ...values: unknown[]) => T`): 返回一个新的标签函数，它会先移除模板字符串中共同的前导缩进，再将其传给 `tagFn`。
+
+#### 错误
+
+如果模板字面量的第一行或最后一行包含空白以外的内容，则抛出 `TypeError`。
