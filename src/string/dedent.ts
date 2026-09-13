@@ -88,18 +88,14 @@ function assertTemplateShape(strings: ArrayLike<string>): void {
   const openingLineEnd = first.indexOf('\n');
 
   if (openingLineEnd === -1 || first.slice(0, openingLineEnd).trim() !== '') {
-    throw new TypeError(
-      'The opening line of a dedent template literal must contain only whitespace and end with a newline.'
-    );
+    throw new TypeError('Invalid opening line.');
   }
 
   const last = strings[strings.length - 1];
   const closingLineStart = last.lastIndexOf('\n');
 
   if (closingLineStart === -1 || last.slice(closingLineStart + 1).trim() !== '') {
-    throw new TypeError(
-      'The closing line of a dedent template literal must contain only whitespace and be preceded by a newline.'
-    );
+    throw new TypeError('Invalid closing line.');
   }
 }
 
