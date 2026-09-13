@@ -48,22 +48,47 @@ export function dedent(
       return dedentImpl(str);
     }
     default: {
-      let text = str[0];
+      const parts = dedentParts(str);
+
+      let text = parts[0];
       for (let i = 0; i < values.length; i++) {
-        text += String(values[i]) + str[i + 1];
+        text += String(values[i]) + parts[i + 1];
       }
 
-      return dedentImpl(text);
+      return text;
     }
   }
 }
 
 function dedentTemplateStringsArray(strings: TemplateStringsArray): TemplateStringsArray {
-  const joined = strings.join('\x00');
-  const dedented = dedentImpl(joined);
-  const parts = dedented.split('\x00');
+  const parts = dedentParts(strings);
 
   return Object.assign(parts, { raw: parts }) as unknown as TemplateStringsArray;
+}
+
+/**
+ * Dedents the static parts of a template literal as a whole, without letting the
+ * interpolated values take part in the indentation calculation.
+ *
+ * Each interpolation is temporarily replaced by a placeholder that contains no
+ * whitespace or line break, so it counts as regular content of its line just
+ * like the substituted value would.
+ */
+function dedentParts(strings: ArrayLike<string>): string[] {
+  const parts = Array.from(strings);
+
+  if (parts.length === 1) {
+    return [dedentImpl(parts[0])];
+  }
+
+  let placeholder = '\x00';
+  const joinedParts = parts.join('');
+
+  while (joinedParts.includes(placeholder)) {
+    placeholder += '\x00';
+  }
+
+  return dedentImpl(parts.join(placeholder)).split(placeholder);
 }
 
 function dedentImpl(text: string): string {

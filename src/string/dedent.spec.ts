@@ -35,6 +35,42 @@ describe('dedent', () => {
     expect(result).toBe('hello\nworld');
   });
 
+  it('should not dedent the lines of a multi-line interpolated value', () => {
+    const value = 'a\nb';
+    const result = dedent`
+      hello ${value}
+      world
+    `;
+    expect(result).toBe('hello a\nb\nworld');
+  });
+
+  it('should not let an indented interpolated value change the common indentation', () => {
+    const value = 'x';
+    const result = dedent`
+      hello
+        ${value}
+    `;
+    expect(result).toBe('hello\n  x');
+  });
+
+  it('should handle an interpolated value that contains a null character', () => {
+    const value = '\x00';
+    const result = dedent`
+      hello ${value}
+      world
+    `;
+    expect(result).toBe('hello \x00\nworld');
+  });
+
+  it('should handle a static part that contains a null character', () => {
+    const value = 'x';
+    const result = dedent`
+      \x00 ${value}
+      world
+    `;
+    expect(result).toBe('\x00 x\nworld');
+  });
+
   it('should handle empty lines', () => {
     const result = dedent`
       hello
@@ -119,5 +155,26 @@ describe('dedent', () => {
       ${name}!
     `;
     expect(result).toBe('Welcome to\nes-toolkit!');
+  });
+
+  it('should compose with another tag function and not dedent multi-line interpolations', () => {
+    const identity = (strings: TemplateStringsArray, ...values: unknown[]) => {
+      let result = '';
+      for (let i = 0; i < strings.length; i++) {
+        result += strings[i];
+        if (i < values.length) {
+          result += String(values[i]);
+        }
+      }
+      return result;
+    };
+
+    const dedentedIdentity = dedent(identity);
+    const value = 'a\nb';
+    const result = dedentedIdentity`
+      hello ${value}
+      world
+    `;
+    expect(result).toBe('hello a\nb\nworld');
   });
 });
