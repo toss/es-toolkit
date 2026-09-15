@@ -52,6 +52,12 @@ describe('words', () => {
     expect(words('नमस्ते नमस्ते')).toEqual(['नमस्ते', 'नमस्ते']);
   });
 
+  it('should match titlecase letters', () => {
+    expect(words('ǅ')).toEqual(['ǅ']);
+    expect(words('ǅ ǈ ǋ ǲ')).toEqual(['ǅ', 'ǈ', 'ǋ', 'ǲ']);
+    expect(words('fooǅBar')).toEqual(['fooǅ', 'Bar']);
+  });
+
   it('should match ordinal numbers', () => {
     expect(words('1st 2nd+3rd--4th@1ST*2ND-3RD_4TH')).toEqual(['1st', '2nd', '3rd', '4th', '1ST', '2ND', '3RD', '4TH']);
   });
