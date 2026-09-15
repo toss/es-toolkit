@@ -16,7 +16,7 @@ const result = mergeWith(target, ...sources, customizer);
 
 ## 用法
 
-### `mergeWith(object, ...sources, customizer)`
+### `mergeWith(object, ...sources, customizer?)`
 
 将一个或多个源对象深度合并到目标对象中,使用自定义函数控制合并行为。如果自定义函数返回 `undefined`,则使用默认合并逻辑。适用于连接数组或应用特殊合并规则。
 
@@ -83,11 +83,24 @@ const customizer = (objValue, srcValue, key, object, source, stack) => {
 };
 ```
 
+自定义函数是可选的。只有当最后一个参数是函数时才会被视为自定义函数,否则会作为另一个源对象进行合并。
+
+```typescript
+import { mergeWith } from 'es-toolkit/compat';
+
+// 没有自定义函数时,目标对象之后的每个参数都是源对象
+const result = mergeWith({ a: 1 }, { b: 2 });
+// 结果: { a: 1, b: 2 }
+
+const merged = mergeWith({}, { a: 1 }, { b: 2 }, { c: 3 });
+// 结果: { a: 1, b: 2, c: 3 }
+```
+
 #### 参数
 
 - `object` (`any`): 要合并到的目标对象。此对象会被修改。
 - `...sources` (`any[]`): 要合并的源对象。
-- `customizer` (`MergeWithCustomizer`): 自定义值分配的函数。格式: `(objValue, srcValue, key, object, source, stack) => any`。
+- `customizer` (`MergeWithCustomizer`, 可选): 自定义值分配的函数。格式: `(objValue, srcValue, key, object, source, stack) => any`。如果最后一个参数不是函数,则会被视为另一个源对象。
 
 #### 返回值
 
