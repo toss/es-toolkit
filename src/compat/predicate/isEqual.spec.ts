@@ -574,6 +574,36 @@ describe('isEqual', () => {
       map1.clear();
       map2.clear();
     });
+
+    const map1 = new Map<object, number>([
+      [{ a: 1 }, 1],
+      [{ b: 2 }, 2],
+    ]);
+    const map2 = new Map<object, number>([
+      [{ a: 1 }, 1],
+      [{ b: 2 }, 2],
+    ]);
+    expect(isEqual(map1, map2)).toBe(true);
+
+    const map3 = new Map<object, number>([
+      [{}, 1],
+      [{}, 2],
+    ]);
+    const map4 = new Map<object, number>([
+      [{}, 2],
+      [{}, 1],
+    ]);
+    expect(isEqual(map3, map4)).toBe(true);
+
+    const map5 = new Map<object, number>([
+      [{}, 1],
+      [{}, 2],
+    ]);
+    const map6 = new Map<object, number>([
+      [{}, 1],
+      [{}, 3],
+    ]);
+    expect(isEqual(map5, map6)).toBe(false);
   });
 
   it('should compare maps with circular references', () => {
