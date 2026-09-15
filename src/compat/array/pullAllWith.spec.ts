@@ -126,7 +126,7 @@ describe('pullAllWith', () => {
     const array = [{ a: { b: 1 } }, { a: { b: 2 } }];
     const values = [{ a: { b: 1 } }];
 
-    const shallow = (a: any, b: any) => a.a === b.a;
+    const shallow = (a: (typeof array)[number], b: (typeof array)[number]) => a.a === b.a;
     const deep = isEqual;
 
     const arr1 = [...array];

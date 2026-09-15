@@ -45,6 +45,7 @@ export function pullAllWith<T>(array: T[], values?: ArrayLike<T>, comparator?: (
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Match Lodash's generic constraint for type compatibility.
 export function pullAllWith<L extends MutableList<any>>(
   array: RejectReadonly<L>,
   values?: ArrayLike<L[0]>,
@@ -93,6 +94,7 @@ export function pullAllWith<T, U>(array: T[], values: ArrayLike<U>, comparator: 
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Match Lodash's generic constraint for type compatibility.
 export function pullAllWith<L1 extends MutableList<any>, L2>(
   array: RejectReadonly<L1>,
   values: ArrayLike<L2>,
@@ -121,7 +123,7 @@ export function pullAllWith<L1 extends MutableList<any>, L2>(
  * console.log(array);  // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
  */
 export function pullAllWith<T>(
-  array: T[] | ArrayLike<T>,
+  array: MutableList<T>,
   values?: T[] | ArrayLike<T>,
   comparator?: (a: T, b: T) => boolean
 ): T[] | ArrayLike<T> {
@@ -147,7 +149,7 @@ export function pullAllWith<T>(
   for (let i = 0; i < array.length; i++) {
     if (isDefaultComparator && !(i in array)) {
       if (!hasUndefined) {
-        delete (array as any)[resultLength++];
+        delete array[resultLength++];
       }
       continue;
     }
@@ -171,14 +173,14 @@ export function pullAllWith<T>(
     }
 
     if (i in array) {
-      (array as any)[resultLength++] = array[i];
+      array[resultLength++] = array[i];
     } else {
       // Preserve unmatched holes in sparse arrays.
-      delete (array as any)[resultLength++];
+      delete array[resultLength++];
     }
   }
 
-  (array as any).length = resultLength;
+  array.length = resultLength;
 
   return array;
 }
