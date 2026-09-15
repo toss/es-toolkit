@@ -124,4 +124,34 @@ describe('forOwnRight', () => {
 
     expect(keys).toEqual(['3', '2', '1', '0']);
   });
+  it('should resolve a non-function `iteratee` like lodash instead of throwing', () => {
+    const object = { a: { a: 1 }, b: { a: 2 } };
+
+    // @ts-expect-error - lodash accepts a nullish iteratee
+    expect(forOwnRight(object, null)).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forOwnRight(object, 'a')).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forOwnRight(object, { a: 1 })).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forOwnRight(object, ['a', 1])).toBe(object);
+  });
+
+  it('should stop when a property shorthand returns `false` like lodash', () => {
+    let visited = 0;
+    const object = {
+      y: {
+        get a() {
+          visited++;
+          return true;
+        },
+      },
+      x: { a: false },
+    };
+
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    forOwnRight(object, 'a');
+
+    expect(visited).toBe(0);
+  });
 });
