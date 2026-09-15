@@ -5,7 +5,7 @@ const rNonCharLatin = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\xd7\\xf7';
 const rUnicodeUpper = '(?:\\p{Lu}\\p{M}*)';
 const rUnicodeLower = '(?:\\p{Ll}\\p{M}*)';
 
-const rMisc = '(?:[\\p{Lm}\\p{Lo}]\\p{M}*)';
+const rMisc = '(?:[\\p{Lm}\\p{Lo}\\p{Lt}]\\p{M}*)';
 const rNumber = '\\d';
 const rUnicodeOptContrLower = "(?:['\u2019](?:d|ll|m|re|s|t|ve))?";
 const rUnicodeOptContrUpper = "(?:['\u2019](?:D|LL|M|RE|S|T|VE))?";
