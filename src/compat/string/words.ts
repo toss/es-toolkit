@@ -2,8 +2,8 @@ import { toString } from '../util/toString.ts';
 
 const rNonCharLatin = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\xd7\\xf7';
 
-const rUnicodeUpper = '\\p{Lu}';
-const rUnicodeLower = '\\p{Ll}';
+const rUnicodeUpper = '(?:\\p{Lu}\\p{M}*)';
+const rUnicodeLower = '(?:\\p{Ll}\\p{M}*)';
 
 const rMisc = '(?:[\\p{Lm}\\p{Lo}]\\p{M}*)';
 const rNumber = '\\d';

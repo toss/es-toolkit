@@ -77,4 +77,20 @@ describe('words', () => {
     const result = words('test123', 123 as any);
     expect(result).toEqual(['123']);
   });
+
+  it('should keep a combining mark attached to the letter it modifies', () => {
+    const nfdStr = 'cafe\u0301'; // 'café'
+    const nfcStr = 'caf\u00E9'; // 'café'
+
+    expect(words(nfdStr)).toEqual(['café']);
+    expect(words(nfcStr)).toEqual(['café']);
+  });
+
+  it('should not split a decomposed word at the combining mark', () => {
+    const nfdStr = 'abc\u0301def'; // 'abćdef'
+    const nfcStr = 'ab\u0107def'; // 'abćdef'
+
+    expect(words(nfdStr)).toEqual(['abćdef']);
+    expect(words(nfcStr)).toEqual(['abćdef']);
+  });
 });
