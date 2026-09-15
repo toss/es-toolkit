@@ -71,10 +71,10 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   }
 
   // Use string.slice for non-unicode strings for performance
-  let base = strArray === undefined ? string.slice(0, lengthBase) : strArray?.slice(0, lengthBase).join('');
+  let base = strArray === undefined ? string.slice(0, lengthBase) : strArray.slice(0, lengthBase).join('');
 
   // Return truncated string with omission appended when there is no separator to check for
-  const separator = options?.separator;
+  const separator = options == null ? undefined : options.separator;
   if (!separator) {
     base += omission;
     return base;
@@ -83,10 +83,10 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   // Further truncate the string to the last separator using unicode regex
   const search = separator instanceof RegExp ? separator.source : separator;
   const flags = 'u' + (separator instanceof RegExp ? separator.flags.replace('u', '') : '');
-  const withoutSeparator = new RegExp(`(?<result>.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
+  const withoutSeparator = new RegExp(`(.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
 
   // Return the final truncated string with the omission string appended
-  return (!withoutSeparator?.groups ? base : withoutSeparator.groups.result) + omission;
+  return (withoutSeparator == null ? base : withoutSeparator[1]) + omission;
 }
 
 function parseLength(length: number | undefined) {

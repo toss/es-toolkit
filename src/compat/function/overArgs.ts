@@ -1,3 +1,4 @@
+import { flatten } from '../../array/flatten.ts';
 import { identity } from '../../function/identity.ts';
 import { Many } from '../_internal/Many.ts';
 import { iteratee } from '../util/iteratee.ts';
@@ -55,15 +56,16 @@ export function overArgs(
     throw new TypeError('Expected a function');
   }
 
-  const transforms = _transforms.flat();
+  const transforms = flatten(_transforms);
 
   return function (this: any, ...args: any[]) {
     const length = Math.min(args.length, transforms.length);
     const transformedArgs = [...args];
 
     for (let i = 0; i < length; i++) {
-      const transform = iteratee(transforms[i] ?? identity);
-      transformedArgs[i] = transform.call(this, args[i]);
+      const transform = transforms[i];
+      const transformFn = iteratee(transform == null ? identity : transform);
+      transformedArgs[i] = transformFn.call(this, args[i]);
     }
 
     return func.apply(this, transformedArgs);

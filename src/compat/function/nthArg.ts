@@ -38,6 +38,8 @@ export function nthArg(n?: number): (...args: any[]) => any;
  */
 export function nthArg(n = 0): (...args: any[]) => unknown {
   return function (...args: any[]) {
-    return args.at(toInteger(n));
+    const index = toInteger(n);
+
+    return index < 0 ? args[args.length + index] : args[index];
   };
 }

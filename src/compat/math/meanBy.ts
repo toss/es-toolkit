@@ -36,5 +36,5 @@ export function meanBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: Val
     return NaN;
   }
 
-  return sumBy(items, iterateeToolkit(iteratee ?? identity)) / length;
+  return sumBy(items, iterateeToolkit(iteratee == null ? identity : iteratee)) / length;
 }

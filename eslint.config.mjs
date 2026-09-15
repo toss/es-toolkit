@@ -155,6 +155,44 @@ export default defineConfig(
       browsers: ['chrome 98', 'safari 15.4'],
     },
   },
+  // es-toolkit/compat runtime floor: Node.js 6 (see docs/browser-support.md).
+  // compat exists for migrating lodash code, which often lives in old
+  // environments, so it must run there with no transpilation and no polyfills:
+  // ES2015 syntax and ES2015 built-ins only. Every ES2016+ feature is
+  // forbidden here, including the ones the browser floor above allows.
+  // The Node.js 6 CI lane (tests/browser-compat, `node6-check`) runs the
+  // built package on a real Node.js 6 and also covers the main-library
+  // files that compat imports, which this block does not lint.
+  {
+    files: ['src/compat/**/*.ts'],
+    ignores: ['**/*.spec.ts'],
+    plugins: {
+      'es-x': esXPlugin,
+      compat: compatPlugin,
+    },
+    rules: {
+      ...esXPlugin.configs['flat/no-new-in-es2016'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2017'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2018'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2019'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2020'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2021'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2022'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2023'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2024'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2025'].rules,
+      ...esXPlugin.configs['flat/no-new-in-es2026'].rules,
+      'es-x/no-array-prototype-includes': 'off', // ES2016, but Node.js 6 ships it
+      'prefer-object-has-own': 'off', // Object.hasOwn is ES2022; hasOwnProperty.call is the only option here
+      'es-x/no-arbitrary-module-namespace-names': 'off', // syntax only; erased by bundlers
+      'es-x/no-top-level-await': 'off', // not applicable to library source
+      // Web APIs (structuredClone, AbortController, ...) missing in Node.js 6.
+      'compat/compat': 'error',
+    },
+    settings: {
+      browsers: ['node 6'],
+    },
+  },
   // es-toolkit/iterator (and its fp variant) intentionally requires runtimes
   // with native ES2025 iterator helpers, so the Iterator floor rules above do
   // not apply to it. Other post-ES2022 features remain forbidden there.

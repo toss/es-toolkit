@@ -89,7 +89,7 @@ export function partition<T>(
     return [[], []];
   }
 
-  const values = isArrayLike(collection) ? collection : Object.values(collection);
+  const values = isArrayLike(collection) ? collection : Object.keys(collection).map(key => (collection as any)[key]);
 
   predicate = iteratee(predicate);
 
