@@ -33,3 +33,17 @@ describe('pullAllWith/largeArray', () => {
     pullAllWithLodash([...largeArray], valuesToRemove, comparator);
   });
 });
+
+describe('pullAllWith/sparseArray', () => {
+  const array = new Array<number>(10000);
+  array[5000] = 100;
+  const valuesToRemove = Array.from({ length: 100 }, (_, i) => i);
+
+  bench('es-toolkit/pullAllWith', () => {
+    pullAllWithToolkit(array.slice(), valuesToRemove);
+  });
+
+  bench('lodash/pullAllWith', () => {
+    pullAllWithLodash(array.slice(), valuesToRemove);
+  });
+});
