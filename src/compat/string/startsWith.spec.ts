@@ -71,4 +71,14 @@ describe('startsWith', () => {
     expect(startsWith('test', undefined)).toBe(false);
     expect(startsWith(undefined, undefined)).toBe(false);
   });
+  it('should coerce its arguments like lodash', () => {
+    expect(startsWith(undefined, '')).toBe(true);
+    // @ts-expect-error - lodash coerces `target` with `baseToString`
+    expect(startsWith('null', null)).toBe(true);
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(startsWith(-0, '-0')).toBe(true);
+    // @ts-expect-error - lodash coerces `position` with `toInteger`
+    expect(startsWith('abc', 'b', '1')).toBe(true);
+    expect(startsWith('abc', 'a', -1)).toBe(true);
+  });
 });

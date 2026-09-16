@@ -1,3 +1,7 @@
+import { baseToString } from '../_internal/baseToString.ts';
+import { toInteger } from '../util/toInteger.ts';
+import { toString } from '../util/toString.ts';
+
 /**
  * Checks if a string contains another string at the beginning of the string.
  *
@@ -16,13 +20,9 @@
  * const isPrefix = startsWith('fooBar', 'Bar', 5) // returns false
  */
 export function startsWith(str?: string, target?: string, position?: number): boolean {
-  if (str == null || target == null) {
-    return false;
-  }
+  const string = toString(str);
+  const search = baseToString(target);
+  const index = position == null ? 0 : Math.min(Math.max(toInteger(position), 0), string.length);
 
-  if (position == null) {
-    position = 0;
-  }
-
-  return str.startsWith(target, position);
+  return string.startsWith(search, index);
 }
