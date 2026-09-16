@@ -1,3 +1,7 @@
+import { baseToString } from '../_internal/baseToString.ts';
+import { toInteger } from '../util/toInteger.ts';
+import { toString } from '../util/toString.ts';
+
 /**
  * Checks if a string contains another string at the end of the string.
  *
@@ -16,13 +20,10 @@
  * const isPrefix = endsWith('fooBar', 'abc', 5) // returns false
  */
 export function endsWith(str?: string, target?: string, position?: number): boolean {
-  if (str == null || target == null) {
-    return false;
-  }
+  const string = toString(str);
+  const search = baseToString(target);
+  const length = string.length;
+  const end = position === undefined ? length : Math.min(Math.max(toInteger(position), 0), length);
 
-  if (position == null) {
-    position = str.length;
-  }
-
-  return str.endsWith(target, position);
+  return string.endsWith(search, end);
 }

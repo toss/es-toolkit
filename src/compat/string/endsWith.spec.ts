@@ -77,4 +77,12 @@ describe('endsWith', () => {
     expect(endsWith('test', undefined)).toBe(false);
     expect(endsWith(undefined, undefined)).toBe(false);
   });
+  it('should coerce its arguments like lodash', () => {
+    expect(endsWith(undefined, '')).toBe(true);
+    // @ts-expect-error - lodash coerces `position` with `toInteger`, so `null` is `0`
+    expect(endsWith('xax', 'x', null)).toBe(false);
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(endsWith(1.5, '.5')).toBe(true);
+    expect(endsWith('abc', 'b', 2)).toBe(true);
+  });
 });
