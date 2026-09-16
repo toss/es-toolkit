@@ -1,4 +1,6 @@
 import { trimStart as trimStartToolkit } from '../../string/trimStart.ts';
+import { baseToString } from '../_internal/baseToString.ts';
+import { toString } from '../util/toString.ts';
 
 /**
  * Removes leading whitespace or specified characters from a string.
@@ -46,13 +48,17 @@ export function trimStart(string: string, index: string | number, guard: object)
  * // => 'abc-_-'
  */
 export function trimStart(str?: string, chars?: string | number, guard?: object): string {
-  if (str == null) {
-    return '';
+  const string = toString(str);
+
+  if (string && (guard || chars === undefined)) {
+    return string.trimStart();
   }
 
-  if (guard != null || chars == null) {
-    return str.toString().trimStart();
+  const chrs = baseToString(chars);
+
+  if (!string || !chrs) {
+    return string;
   }
 
-  return trimStartToolkit(str, chars.toString().split(''));
+  return trimStartToolkit(string, chrs.split(''));
 }
