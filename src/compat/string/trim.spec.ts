@@ -82,4 +82,20 @@ describe('trim', () => {
     expect(func(string, ['he', 'd', 'lr'])).toBe(expected);
     expect(func(string, ['d', 'l', 'r', 'e', 'h'])).toBe(expected);
   });
+  it('should coerce its arguments like lodash', () => {
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(trim(-0)).toBe('-0');
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(trim(1.5)).toBe('1.5');
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(trim(['a', 'b'])).toBe('a,b');
+    // @ts-expect-error - lodash coerces `chars` with `baseToString`
+    expect(trim('_a_', ['_'])).toBe('a');
+    // @ts-expect-error - lodash coerces `chars` with `baseToString`
+    expect(trim('a,b', ['a', 'b'])).toBe('');
+    // @ts-expect-error - lodash coerces `chars` with `baseToString`
+    expect(trim(' a ', null)).toBe(' a ');
+    // @ts-expect-error - lodash coerces `chars` with `baseToString`
+    expect(trim('null', null)).toBe('');
+  });
 });
