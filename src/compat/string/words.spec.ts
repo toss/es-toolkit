@@ -52,6 +52,12 @@ describe('words', () => {
     expect(words('नमस्ते नमस्ते')).toEqual(['नमस्ते', 'नमस्ते']);
   });
 
+  it('should match titlecase letters', () => {
+    expect(words('ǅ')).toEqual(['ǅ']);
+    expect(words('ǅ ǈ ǋ ǲ')).toEqual(['ǅ', 'ǈ', 'ǋ', 'ǲ']);
+    expect(words('fooǅBar')).toEqual(['fooǅ', 'Bar']);
+  });
+
   it('should match ordinal numbers', () => {
     expect(words('1st 2nd+3rd--4th@1ST*2ND-3RD_4TH')).toEqual(['1st', '2nd', '3rd', '4th', '1ST', '2ND', '3RD', '4TH']);
   });
@@ -76,5 +82,23 @@ describe('words', () => {
   it('should convert number pattern to string', () => {
     const result = words('test123', 123 as any);
     expect(result).toEqual(['123']);
+  });
+
+  it('should keep a combining mark attached to the letter it modifies, returning the same words for NFC and NFD', () => {
+    const str = 'café';
+    const nfdStr = str.normalize('NFD'); // 'cafe\u0301', length: 5
+    const nfcStr = str.normalize('NFC'); // 'caf\u00E9', length: 4
+
+    expect(words(nfcStr)).toEqual([nfcStr]);
+    expect(words(nfdStr)).toEqual([nfdStr]);
+  });
+
+  it('should not split a decomposed word at the combining mark, returning the same words for NFC and NFD', () => {
+    const str = 'abćdef';
+    const nfdStr = str.normalize('NFD'); // 'abc\u0301def', length: 7
+    const nfcStr = str.normalize('NFC'); // 'ab\u0107def', length: 6
+
+    expect(words(nfcStr)).toEqual([nfcStr]);
+    expect(words(nfdStr)).toEqual([nfdStr]);
   });
 });

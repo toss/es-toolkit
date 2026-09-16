@@ -7,9 +7,15 @@
  * preserving relative indentation differences between lines.
  * The first and last lines are removed if they are empty or contain only whitespace.
  *
+ * When used as a tagged template literal or composed with a tag function, the template
+ * must have the same shape `String.dedent` requires: the opening line, right after the
+ * opening backtick, and the closing line, right before the closing backtick, may contain
+ * only whitespace. Otherwise a `TypeError` is thrown.
+ *
  * @param {string | TemplateStringsArray | Function} str - The string, template literal, or tag function to dedent.
  * @param {unknown[]} values - The values to interpolate when used as a tagged template literal.
  * @returns {string | Function} The dedented string, or a dedented tag function when composed.
+ * @throws {TypeError} If a template literal has content on its opening or closing line.
  *
  * @example
  * // As a regular function
@@ -75,6 +81,8 @@ function dedentTemplateStringsArray(strings: TemplateStringsArray): TemplateStri
  * like the substituted value would.
  */
 function dedentParts(strings: ArrayLike<string>): string[] {
+  assertTemplateShape(strings);
+
   const parts = Array.from(strings);
 
   if (parts.length === 1) {
@@ -89,6 +97,29 @@ function dedentParts(strings: ArrayLike<string>): string[] {
   }
 
   return dedentImpl(parts.join(placeholder)).split(placeholder);
+}
+
+/**
+ * Checks that a template literal has the shape `String.dedent` requires.
+ *
+ * Only the static parts of the template are inspected, so interpolated values
+ * never affect the check. The opening line must end with a newline and the closing
+ * line must be preceded by one, and both may contain only whitespace.
+ */
+function assertTemplateShape(strings: ArrayLike<string>): void {
+  const first = strings[0];
+  const openingLineEnd = first.indexOf('\n');
+
+  if (openingLineEnd === -1 || first.slice(0, openingLineEnd).trim() !== '') {
+    throw new TypeError('Invalid opening line.');
+  }
+
+  const last = strings[strings.length - 1];
+  const closingLineStart = last.lastIndexOf('\n');
+
+  if (closingLineStart === -1 || last.slice(closingLineStart + 1).trim() !== '') {
+    throw new TypeError('Invalid closing line.');
+  }
 }
 
 function dedentImpl(text: string): string {
