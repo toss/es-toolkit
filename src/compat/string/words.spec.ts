@@ -83,4 +83,22 @@ describe('words', () => {
     const result = words('test123', 123 as any);
     expect(result).toEqual(['123']);
   });
+
+  it('should keep a combining mark attached to the letter it modifies, returning the same words for NFC and NFD', () => {
+    const str = 'café';
+    const nfdStr = str.normalize('NFD'); // 'cafe\u0301', length: 5
+    const nfcStr = str.normalize('NFC'); // 'caf\u00E9', length: 4
+
+    expect(words(nfcStr)).toEqual([nfcStr]);
+    expect(words(nfdStr)).toEqual([nfdStr]);
+  });
+
+  it('should not split a decomposed word at the combining mark, returning the same words for NFC and NFD', () => {
+    const str = 'abćdef';
+    const nfdStr = str.normalize('NFD'); // 'abc\u0301def', length: 7
+    const nfcStr = str.normalize('NFC'); // 'ab\u0107def', length: 6
+
+    expect(words(nfcStr)).toEqual([nfcStr]);
+    expect(words(nfdStr)).toEqual([nfdStr]);
+  });
 });
