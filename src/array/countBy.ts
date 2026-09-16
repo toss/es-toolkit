@@ -40,8 +40,19 @@ export function countBy<T, K extends PropertyKey>(
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
     const key = mapper(item, i, arr);
+    const count = result[key];
 
-    result[key] = (result[key] ?? 0) + 1;
+    if (typeof count === 'number') {
+      result[key] = count + 1;
+    } else if (key === '__proto__') {
+      // `__proto__` is an accessor on `Object.prototype`, so a plain assignment would call the
+      // setter instead of creating an own property.
+      Object.defineProperty(result, key, { value: 1, writable: true, enumerable: true, configurable: true });
+    } else {
+      // `result` inherits from `Object.prototype`, so reading `result[key]` for a key such as
+      // `constructor` finds the inherited function. Only a number counts as an existing entry.
+      result[key] = 1;
+    }
   }
 
   return result;
