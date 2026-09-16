@@ -92,4 +92,10 @@ describe('trimEnd', () => {
     // @ts-expect-error
     expect(func(string, ['d', 'l', 'r'])).toBe(expected);
   });
+  it('should coerce its arguments like lodash', () => {
+    // @ts-expect-error - lodash coerces the string with `toString`
+    expect(trimEnd(-0)).toBe('-0');
+    // @ts-expect-error - lodash coerces `chars` with `baseToString`
+    expect(trimEnd(' a ', null)).toBe(' a ');
+  });
 });

@@ -1,4 +1,6 @@
 import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
+import { baseToString } from '../_internal/baseToString.ts';
+import { toString } from '../util/toString.ts';
 
 /**
  * Removes trailing whitespace or specified characters from a string.
@@ -46,13 +48,17 @@ export function trimEnd(string: string, index: string | number, guard: object): 
  * // => '-_-abc'
  */
 export function trimEnd(str?: string, chars?: string | number, guard?: object): string {
-  if (str == null) {
-    return '';
+  const string = toString(str);
+
+  if (string && (guard || chars === undefined)) {
+    return string.trimEnd();
   }
 
-  if (guard != null || chars == null) {
-    return str.toString().trimEnd();
+  const chrs = baseToString(chars);
+
+  if (!string || !chrs) {
+    return string;
   }
 
-  return trimEndToolkit(str, chars.toString().split(''));
+  return trimEndToolkit(string, chrs.split(''));
 }
