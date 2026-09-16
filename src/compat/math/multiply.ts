@@ -1,5 +1,5 @@
 import { toNumber } from '../util/toNumber.ts';
-import { toString } from '../util/toString.ts';
+import { baseToString } from '../util/toString.ts';
 
 /**
  * Multiply two numbers.
@@ -29,10 +29,8 @@ export function multiply(value: number, other: number): number {
   }
 
   if (typeof value === 'string' || typeof other === 'string') {
-    // Lodash coerces using `baseToString`, which stringifies `null` as `'null'`
-    // (unlike `toString`, which returns `''` for nullish values).
-    value = (value === null ? 'null' : toString(value)) as any;
-    other = (other === null ? 'null' : toString(other)) as any;
+    value = baseToString(value) as any;
+    other = baseToString(other) as any;
   } else {
     value = toNumber(value);
     other = toNumber(other);

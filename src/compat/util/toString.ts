@@ -24,7 +24,11 @@ export function toString(value: any): string {
   return baseToString(value);
 }
 
-function baseToString(value: any): string {
+/**
+ * Lodash-compatible base string coercion. Unlike {@link toString}, this
+ * stringifies `null` as `'null'` (and does not special-case nullish values).
+ */
+export function baseToString(value: any): string {
   if (typeof value === 'string') {
     return value;
   }

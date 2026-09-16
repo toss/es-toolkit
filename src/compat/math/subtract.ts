@@ -1,5 +1,5 @@
 import { toNumber } from '../util/toNumber.ts';
-import { toString } from '../util/toString.ts';
+import { baseToString } from '../util/toString.ts';
 
 /**
  * Subtracts one number from another.
@@ -25,10 +25,8 @@ export function subtract(value: number, other: number): number {
     return (value === undefined ? other : value) as number;
   }
   if (typeof value === 'string' || typeof other === 'string') {
-    // Lodash coerces using `baseToString`, which stringifies `null` as `'null'`
-    // (unlike `toString`, which returns `''` for nullish values).
-    value = (value === null ? 'null' : toString(value)) as any;
-    other = (other === null ? 'null' : toString(other)) as any;
+    value = baseToString(value) as any;
+    other = baseToString(other) as any;
   } else {
     value = toNumber(value);
     other = toNumber(other);
