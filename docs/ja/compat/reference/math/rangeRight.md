@@ -73,7 +73,7 @@ rangeRight(1, 4, 0);
 import { rangeRight } from 'es-toolkit/compat';
 
 rangeRight(0, 1, 0.2);
-// Returns: [0.8, 0.6, 0.4, 0.2, 0]
+// Returns: [0.8, 0.6000000000000001, 0.4, 0.2, 0]
 
 rangeRight(1, 0, -0.25);
 // Returns: [0.25, 0.5, 0.75, 1]
