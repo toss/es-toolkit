@@ -33,15 +33,6 @@ takeRight([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-如果省略 `count`,则只获取最后一个元素。
-
-```typescript
-import { takeRight } from 'es-toolkit/array';
-
-takeRight([1, 2, 3]);
-// Returns: [3]
-```
-
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。

@@ -33,15 +33,6 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-`count` を省略すると最初の要素だけを取得します。
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### パラメータ
 
 - `arr` (`T[]`): 要素を取得する配列です。

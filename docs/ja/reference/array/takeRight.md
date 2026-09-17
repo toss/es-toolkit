@@ -33,15 +33,6 @@ takeRight([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-`count` を省略すると最後の要素だけを取得します。
-
-```typescript
-import { takeRight } from 'es-toolkit/array';
-
-takeRight([1, 2, 3]);
-// Returns: [3]
-```
-
 #### パラメータ
 
 - `arr` (`T[]`): 要素を取得する配列です。

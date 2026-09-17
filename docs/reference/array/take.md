@@ -33,15 +33,6 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-If you omit `count`, it takes only the first element.
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.

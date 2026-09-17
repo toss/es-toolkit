@@ -33,15 +33,6 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-如果省略 `count`,则只获取第一个元素。
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。

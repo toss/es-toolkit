@@ -33,15 +33,6 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-`count`를 생략하면 첫 번째 요소만 가져와요.
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### 파라미터
 
 - `arr` (`T[]`): 요소를 가져올 배열이에요.
