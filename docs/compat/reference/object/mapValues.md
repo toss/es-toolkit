@@ -40,7 +40,7 @@ const charMap = mapValues(str, char => char.toUpperCase());
 
 // Convert array to object
 const arr = [10, 20, 30];
-const arrMap = mapValues(arr, (value, index) => value + index);
+const arrMap = mapValues(arr, (value, index) => value + Number(index));
 // Result: { '0': 10, '1': 21, '2': 32 }
 
 // Extract values using property path

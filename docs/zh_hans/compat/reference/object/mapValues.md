@@ -40,7 +40,7 @@ const charMap = mapValues(str, char => char.toUpperCase());
 
 // 将数组转换为对象
 const arr = [10, 20, 30];
-const arrMap = mapValues(arr, (value, index) => value + index);
+const arrMap = mapValues(arr, (value, index) => value + Number(index));
 // 结果: { '0': 10, '1': 21, '2': 32 }
 
 // 使用属性路径提取值

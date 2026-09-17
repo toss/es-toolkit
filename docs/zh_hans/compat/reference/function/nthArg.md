@@ -50,7 +50,7 @@ const arrays = [
   [4, 5, 6],
   [7, 8, 9],
 ];
-arrays.map(nthArg(1));
+arrays.map(array => nthArg(1)(...array));
 // Returns: [2, 5, 8]
 ```
 

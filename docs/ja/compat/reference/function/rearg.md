@@ -82,7 +82,7 @@ import { rearg } from 'es-toolkit/compat';
 const fn = (a, b, c, d) => [a, b, c, d];
 
 // ネストされた配列インデックス
-const rearranged = rearg(fn, [1, [2, 0]], 3);
+const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // 戻り値: ['b', 'c', 'a', 'd']
 ```
