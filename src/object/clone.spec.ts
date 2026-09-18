@@ -287,4 +287,47 @@ describe('clone', () => {
     expect(clonedInstance.value).toBe(instance.value);
     expect(clonedInstance.getValue()).toBe(123);
   });
+
+  it('should clone Number wrapper objects', () => {
+    // eslint-disable-next-line no-new-wrappers
+    const num = new Number(42);
+    const clonedNum = clone(num);
+
+    expect(clonedNum).toEqual(num);
+    expect(clonedNum).not.toBe(num);
+    expect(clonedNum).toBeInstanceOf(Number);
+    expect(clonedNum.valueOf()).toBe(42);
+  });
+
+  it('should clone Boolean wrapper objects', () => {
+    // eslint-disable-next-line no-new-wrappers
+    const bool = new Boolean(true);
+    const clonedBool = clone(bool);
+
+    expect(clonedBool).toEqual(bool);
+    expect(clonedBool).not.toBe(bool);
+    expect(clonedBool).toBeInstanceOf(Boolean);
+    expect(clonedBool.valueOf()).toBe(true);
+  });
+
+  it('should clone String wrapper objects', () => {
+    // eslint-disable-next-line no-new-wrappers
+    const str = new String('es-toolkit');
+    const clonedStr = clone(str);
+
+    expect(clonedStr).toEqual(str);
+    expect(clonedStr).not.toBe(str);
+    expect(clonedStr).toBeInstanceOf(String);
+    expect(clonedStr.valueOf()).toBe('es-toolkit');
+  });
+
+  it('should preserve extra own properties on wrapper objects', () => {
+    // eslint-disable-next-line no-new-wrappers
+    const num = new Number(1);
+    (num as unknown as Record<string, unknown>).extra = 'es-toolkit';
+    const clonedNum = clone(num);
+
+    expect(clonedNum.valueOf()).toBe(1);
+    expect((clonedNum as unknown as Record<string, unknown>).extra).toBe('es-toolkit');
+  });
 });

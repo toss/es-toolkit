@@ -85,6 +85,25 @@ export function clone<T>(obj: T): T {
     return newFile;
   }
 
+  if (obj instanceof Boolean || obj instanceof Number || obj instanceof String) {
+    const cloned = new Constructor(obj.valueOf());
+
+    // Copy any extra own enumerable properties, skipping intrinsic
+    // non-writable ones such as a String wrapper's indexed characters.
+    const keys = Object.keys(obj);
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const descriptor = Object.getOwnPropertyDescriptor(cloned, key);
+
+      if (descriptor == null || descriptor.writable) {
+        cloned[key] = obj[key as keyof typeof obj];
+      }
+    }
+
+    return cloned;
+  }
+
   if (typeof obj === 'object') {
     const newObject = Object.create(prototype);
     return Object.assign(newObject, obj);
