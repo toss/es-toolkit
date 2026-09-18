@@ -330,4 +330,24 @@ describe('clone', () => {
     expect(clonedNum.valueOf()).toBe(1);
     expect((clonedNum as unknown as Record<string, unknown>).extra).toBe('es-toolkit');
   });
+
+  it('should preserve enumerable symbol properties on wrapper objects', () => {
+    const sym = Symbol('sym');
+    // eslint-disable-next-line no-new-wrappers
+    const str = new String('es-toolkit');
+    (str as unknown as Record<symbol, unknown>)[sym] = 'symbol-value';
+    const clonedStr = clone(str);
+
+    expect(clonedStr.valueOf()).toBe('es-toolkit');
+    expect((clonedStr as unknown as Record<symbol, unknown>)[sym]).toBe('symbol-value');
+  });
+
+  it('should read the intrinsic primitive even when valueOf is shadowed', () => {
+    // eslint-disable-next-line no-new-wrappers
+    const num = new Number(1);
+    (num as unknown as { valueOf: () => number }).valueOf = () => 2;
+    const clonedNum = clone(num);
+
+    expect(Number.prototype.valueOf.call(clonedNum)).toBe(1);
+  });
 });

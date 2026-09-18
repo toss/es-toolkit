@@ -9,7 +9,7 @@ describe('clone bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'clone');
-    expect(bundleSize).toMatchInlineSnapshot(`1232`);
+    expect(bundleSize).toMatchInlineSnapshot(`1464`);
   });
 
   it('es-toolkit/compat', async () => {
