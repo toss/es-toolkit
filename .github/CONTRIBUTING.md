@@ -184,7 +184,14 @@ Our benchmarks use [Vitest's benchmark feature](https://vitest.dev/api/#bench) a
 
 #### Fixing behavior that differs from Lodash
 
-**Welcome.** This applies to `es-toolkit/compat`, where matching Lodash exactly is the entire point—if we return something different, migrating projects break in ways that are hard to trace.
+We welcome contributions for inputs that Lodash's own types allow. It is important for `es-toolkit/compat` to match Lodash exactly since if we return something different, migrating projects break in ways that are hard to trace.
+
+However, there are some legacy behaviors that Lodash supports, such as handling invalid inputs such as `null` or numbers in positions of strings. Each of these adds branches to code that runs very often, for a call no typed project can write. So we accept a difference only when at least one of the following holds:
+
+1. **The call compiles against `@types/lodash` in TypeScript `strict` mode.** Write the reproduction as `import { fn } from 'lodash'` and check it with `tsc`. If the types reject the call, the difference is out of scope.
+2. **Real code makes the call.** Link to a permalink of a file in a public repository on GitHub that passes such input. It has to be a project that others use, not a repository you created to show the bug, not a fork, and not Lodash's own test suite, which describes how Lodash behaves rather than how anyone uses it.
+
+If neither applies, we close the pull request even when the fix is correct.
 
 Show the difference as code instead of describing it: the exact input, what Lodash returns for it, and what `es-toolkit/compat` returns today. Add a test that fails before your change and passes after it, so the behavior stays fixed. If the function you are touching runs in a hot path, attach benchmark results as well—these fixes tend to add branches to code that runs very often.
 
