@@ -45,7 +45,6 @@ invokeMap([123, 456], 'toString', 2);
 invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
 // => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
 // => ['A', 'B', 'C']
-// => ['A', 'B', 'C']
 ```
 
 For objects, the method is invoked on each value.

@@ -45,7 +45,6 @@ invokeMap([123, 456], 'toString', 2);
 invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
 // => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
 // => ['A', 'B', 'C']
-// => ['A', 'B', 'C']
 ```
 
 객체의 경우 각 값에서 메서드를 호출해요.
