@@ -60,5 +60,5 @@ export function sample<T>(collection: ArrayLike<T> | Record<string, T> | null | 
     return sampleToolkit(toArray(collection));
   }
 
-  return sampleToolkit(Object.values(collection));
+  return sampleToolkit(Object.keys(collection).map(key => collection[key]));
 }

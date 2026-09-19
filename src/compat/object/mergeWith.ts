@@ -278,11 +278,11 @@ function mergeWithDeep(
     let targetValue = target[key];
 
     if (isArguments(sourceValue)) {
-      sourceValue = { ...sourceValue };
+      sourceValue = Object.assign({}, sourceValue);
     }
 
     if (isArguments(targetValue)) {
-      targetValue = { ...targetValue };
+      targetValue = Object.assign({}, targetValue);
     }
 
     if (isBuffer(sourceValue)) {

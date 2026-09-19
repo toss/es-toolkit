@@ -6,6 +6,7 @@
     "generate": "node generate-cases.mjs",
     "node-check": "node node-check.mjs",
     "build:native": "vite build --config fixtures/native/vite.config.mjs",
+    "build:node6": "node fixtures/node6/build.mjs",
     "build:vite-legacy": "vite build --config fixtures/vite-legacy/vite.config.mjs",
     "build:vite-polyfill": "vite build --config fixtures/vite-polyfill/vite.config.mjs",
     "build:webpack": "webpack --config fixtures/webpack/webpack.config.mjs",

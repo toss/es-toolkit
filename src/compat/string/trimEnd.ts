@@ -51,7 +51,7 @@ export function trimEnd(str?: string, chars?: string | number, guard?: object): 
   }
 
   if (guard != null || chars == null) {
-    return str.toString().trimEnd();
+    return str.toString().replace(/\s+$/, '');
   }
 
   return trimEndToolkit(str, chars.toString().split(''));

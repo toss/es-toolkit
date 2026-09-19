@@ -4,6 +4,8 @@ import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Removes the property at the given path of the object.
  *
@@ -37,7 +39,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       if (typeof path === 'number') {
         path = toKey(path);
       } else if (typeof path === 'object') {
-        if (Object.is(path?.valueOf(), -0)) {
+        if (path != null && Object.is(path.valueOf(), -0)) {
           path = '-0';
         } else {
           path = String(path);
@@ -48,19 +50,19 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         return false;
       }
 
-      if (obj?.[path as PropertyKey] === undefined) {
+      if (obj[path as PropertyKey] === undefined) {
         return true;
       }
 
       try {
         delete obj[path as PropertyKey];
         return true;
-      } catch {
+      } catch (e) {
         return false;
       }
     }
     case 'string': {
-      if (obj?.[path] === undefined && isDeepKey(path) && !Object.hasOwn(obj, path)) {
+      if (obj[path] === undefined && isDeepKey(path) && !hasOwnProperty.call(obj, path)) {
         return unsetWithPath(obj, toPath(path));
       }
 
@@ -71,7 +73,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       try {
         delete obj[path];
         return true;
-      } catch {
+      } catch (e) {
         return false;
       }
     }
@@ -82,7 +84,7 @@ function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
   const parent = path.length === 1 ? obj : get(obj, path.slice(0, -1));
   const lastKey = path[path.length - 1];
 
-  if (parent?.[lastKey] === undefined) {
+  if (parent == null || parent[lastKey] === undefined) {
     return true;
   }
 
@@ -93,7 +95,7 @@ function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
   try {
     delete parent[lastKey];
     return true;
-  } catch {
+  } catch (e) {
     return false;
   }
 }

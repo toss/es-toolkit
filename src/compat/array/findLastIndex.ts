@@ -71,24 +71,37 @@ export function findLastIndex<T>(
 
   const subArray = toArray(arr).slice(0, fromIndex + 1);
 
+  let predicate: (item: T, index: number, arr: any) => unknown;
+
   switch (typeof doesMatch) {
     case 'function': {
-      return subArray.findLastIndex(doesMatch);
+      predicate = doesMatch;
+      break;
     }
     case 'object': {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
 
-        return subArray.findLastIndex(matchesProperty(key, value));
+        predicate = matchesProperty(key, value);
       } else {
-        return subArray.findLastIndex(matches(doesMatch));
+        predicate = matches(doesMatch);
       }
+      break;
     }
     case 'number':
     case 'symbol':
     case 'string': {
-      return subArray.findLastIndex(property(doesMatch));
+      predicate = property(doesMatch);
+      break;
     }
   }
+
+  for (let i = subArray.length - 1; i >= 0; i--) {
+    if (predicate(subArray[i], i, subArray)) {
+      return i;
+    }
+  }
+
+  return -1;
 }

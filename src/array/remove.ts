@@ -1,3 +1,5 @@
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Removes elements from an array based on a predicate function.
  *
@@ -28,7 +30,7 @@ export function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: numbe
     }
 
     // For handling sparse arrays
-    if (!Object.hasOwn(arr, i)) {
+    if (!hasOwnProperty.call(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }

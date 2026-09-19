@@ -4,6 +4,8 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 import { times } from '../util/times.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * This function retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
  *
@@ -92,5 +94,5 @@ function arrayLikeKeysIn(object: ArrayLike<any>): string[] {
     return [...indices, ...inheritedKeys];
   }
 
-  return [...indices.filter(index => Object.hasOwn(object, index)), ...inheritedKeys];
+  return [...indices.filter(index => hasOwnProperty.call(object, index)), ...inheritedKeys];
 }
