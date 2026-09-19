@@ -5,14 +5,22 @@ const rNonCharLatin = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\xd7\\xf7';
 const rUnicodeUpper = '(?:\\p{Lu}\\p{M}*)';
 const rUnicodeLower = '(?:\\p{Ll}\\p{M}*)';
 
-const rMisc = '(?:[\\p{Lm}\\p{Lo}\\p{Lt}]\\p{M}*)';
+const rEmojiPict = '(?:\\p{Emoji_Presentation}|\\p{Extended_Pictographic})';
+
+const rMisc = `(?:(?:[\\p{Lm}\\p{Lo}\\p{Lt}]|(?![${rNonCharLatin}0-9]|${rEmojiPict})[\\p{N}\\p{S}])\\p{M}*)`;
+
 const rNumber = '\\d';
+
 const rUnicodeOptContrLower = "(?:['\u2019](?:d|ll|m|re|s|t|ve))?";
 const rUnicodeOptContrUpper = "(?:['\u2019](?:D|LL|M|RE|S|T|VE))?";
 const rUnicodeBreak = `[\\p{Z}\\p{P}${rNonCharLatin}]`;
 
 const rUnicodeMiscUpper = `(?:${rUnicodeUpper}|${rMisc})`;
 const rUnicodeMiscLower = `(?:${rUnicodeLower}|${rMisc})`;
+
+const rEmojiMod = '\\uFE0F?\\p{Emoji_Modifier}?';
+const rEmojiAtom = `(?:\\p{Regional_Indicator}{2}|${rEmojiPict}${rEmojiMod})`;
+const rEmojiSeq = `${rEmojiAtom}(?:\\u200D${rEmojiAtom})*`;
 
 let rUnicodeWord: RegExp | undefined;
 
@@ -24,25 +32,14 @@ let rUnicodeWord: RegExp | undefined;
 function getUnicodeWordPattern(): RegExp {
   if (rUnicodeWord == null) {
     rUnicodeWord = RegExp(
-      [
-        `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
-
-        `${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)`,
-
-        `${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}`,
-
-        `${rUnicodeUpper}+${rUnicodeOptContrUpper}`,
-
-        `${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])`,
-
-        `${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])`,
-
-        `${rNumber}+`,
-
-        '\\p{Emoji_Presentation}',
-
-        '\\p{Extended_Pictographic}',
-      ].join('|'),
+      `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)` +
+        `|${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)` +
+        `|${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}` +
+        `|${rUnicodeUpper}+${rUnicodeOptContrUpper}` +
+        `|${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])` +
+        `|${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])` +
+        `|${rEmojiSeq}` +
+        `|${rNumber}+`,
       'gu'
     );
   }
