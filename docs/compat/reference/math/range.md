@@ -72,8 +72,8 @@ Decimal steps are also possible.
 ```typescript
 import { range } from 'es-toolkit/compat';
 
-range(0, 1, 0.2);
-// Returns: [0, 0.2, 0.4, 0.6000000000000001, 0.8]
+range(0, 1, 0.25);
+// Returns: [0, 0.25, 0.5, 0.75]
 
 range(1, 0, -0.25);
 // Returns: [1, 0.75, 0.5, 0.25]
