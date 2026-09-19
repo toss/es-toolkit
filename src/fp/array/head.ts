@@ -1,23 +1,6 @@
 import { head as headToolkit } from '../../array/head.ts';
 
 /**
- * Creates a function that returns the first element of a non-empty array.
- *
- * This overload preserves the non-empty tuple guarantee: the returned function
- * always returns T when the piped array has at least one element.
- *
- * @template T - The type of elements in the array.
- * @returns A function that maps a non-empty readonly array to its first element.
- *
- * @example
- * import { head, pipe } from 'es-toolkit/fp';
- *
- * pipe([1, 2, 3] as const, head());
- * // => 1
- */
-export function head<T>(): (array: readonly [T, ...T[]]) => T;
-
-/**
  * Creates a function that returns the first element of an array, or undefined.
  *
  * Empty arrays return undefined, matching the main {@link head} behavior. Use
@@ -32,7 +15,9 @@ export function head<T>(): (array: readonly [T, ...T[]]) => T;
  * pipe([] as number[], head());
  * // => undefined
  */
-export function head<T>(): (array: readonly T[]) => T | undefined;
+export function head<T>(): <A extends readonly T[]>(
+  array: A
+) => A extends readonly [unknown, ...unknown[]] ? A[number] : A[number] | undefined;
 export function head<T>(): (array: readonly T[]) => T | undefined {
   return function (array: readonly T[]): T | undefined {
     return headToolkit(array);

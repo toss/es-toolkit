@@ -6,7 +6,7 @@ import { pipe } from './pipe.ts';
  * @param fn1 - The first function, which may take any number of arguments.
  * @returns A function with the same parameters as `fn1` that returns its result.
  */
-export function flow<A extends any[], R1>(fn1: (...args: A) => R1): (...args: A) => R1;
+export function flow<A extends unknown[], R1>(fn1: (...args: A) => R1): (...args: A) => R1;
 /**
  * Composes `fn1` and `fn2` left-to-right into a single reusable function.
  *
@@ -14,7 +14,7 @@ export function flow<A extends any[], R1>(fn1: (...args: A) => R1): (...args: A)
  * @param fn2 - Applied to the result of `fn1`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn2`.
  */
-export function flow<A extends any[], R1, R2>(fn1: (...args: A) => R1, fn2: (input: R1) => R2): (...args: A) => R2;
+export function flow<A extends unknown[], R1, R2>(fn1: (...args: A) => R1, fn2: (input: R1) => R2): (...args: A) => R2;
 /**
  * Composes `fn1` through `fn3` left-to-right into a single reusable function.
  *
@@ -23,7 +23,7 @@ export function flow<A extends any[], R1, R2>(fn1: (...args: A) => R1, fn2: (inp
  * @param fn3 - Applied to the result of `fn2`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn3`.
  */
-export function flow<A extends any[], R1, R2, R3>(
+export function flow<A extends unknown[], R1, R2, R3>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3
@@ -37,7 +37,7 @@ export function flow<A extends any[], R1, R2, R3>(
  * @param fn4 - Applied to the result of `fn3`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn4`.
  */
-export function flow<A extends any[], R1, R2, R3, R4>(
+export function flow<A extends unknown[], R1, R2, R3, R4>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -53,7 +53,7 @@ export function flow<A extends any[], R1, R2, R3, R4>(
  * @param fn5 - Applied to the result of `fn4`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn5`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -71,7 +71,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5>(
  * @param fn6 - Applied to the result of `fn5`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn6`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -91,7 +91,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6>(
  * @param fn7 - Applied to the result of `fn6`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn7`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -113,7 +113,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7>(
  * @param fn8 - Applied to the result of `fn7`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn8`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -137,7 +137,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8>(
  * @param fn9 - Applied to the result of `fn8`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn9`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -163,7 +163,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9>(
  * @param fn10 - Applied to the result of `fn9`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn10`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -191,7 +191,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10>(
  * @param fn11 - Applied to the result of `fn10`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn11`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -221,7 +221,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R
  * @param fn12 - Applied to the result of `fn11`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn12`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -253,7 +253,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R
  * @param fn13 - Applied to the result of `fn12`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn13`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -287,7 +287,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R
  * @param fn14 - Applied to the result of `fn13`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn14`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
@@ -323,7 +323,7 @@ export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R
  * @param fn15 - Applied to the result of `fn14`.
  * @returns A function with the same parameters as `fn1` that returns the result of `fn15`.
  */
-export function flow<A extends any[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15>(
+export function flow<A extends unknown[], R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15>(
   fn1: (...args: A) => R1,
   fn2: (input: R1) => R2,
   fn3: (input: R2) => R3,
