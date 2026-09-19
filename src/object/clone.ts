@@ -85,6 +85,37 @@ export function clone<T>(obj: T): T {
     return newFile;
   }
 
+  if (obj instanceof Boolean || obj instanceof Number || obj instanceof String) {
+    // Read the wrapped primitive from the intrinsic slot rather than `obj.valueOf()`,
+    // which can be shadowed by an own property and return the wrong value.
+    const primitive =
+      obj instanceof Boolean
+        ? Boolean.prototype.valueOf.call(obj)
+        : obj instanceof Number
+          ? Number.prototype.valueOf.call(obj)
+          : String.prototype.valueOf.call(obj);
+    const cloned = new Constructor(primitive);
+
+    // Shallow-copy any extra own enumerable properties (string and symbol keys,
+    // matching the generic `Object.assign` path), skipping intrinsic non-writable
+    // ones such as a String wrapper's indexed characters.
+    const keys: PropertyKey[] = [
+      ...Object.keys(obj),
+      ...Object.getOwnPropertySymbols(obj).filter(symbol => Object.prototype.propertyIsEnumerable.call(obj, symbol)),
+    ];
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const descriptor = Object.getOwnPropertyDescriptor(cloned, key);
+
+      if (descriptor == null || descriptor.writable) {
+        cloned[key] = obj[key as keyof typeof obj];
+      }
+    }
+
+    return cloned;
+  }
+
   if (typeof obj === 'object') {
     const newObject = Object.create(prototype);
     return Object.assign(newObject, obj);
