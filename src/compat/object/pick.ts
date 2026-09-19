@@ -6,6 +6,8 @@ import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Creates a new object composed of the picked object properties.
  *
@@ -104,7 +106,7 @@ export function pick<T extends object, U extends keyof T>(
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(object, key)) {
+      if (typeof key === 'string' && hasOwnProperty.call(object, key)) {
         result[key] = object[key];
       } else {
         set(result, key, value);

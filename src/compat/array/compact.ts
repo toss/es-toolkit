@@ -1,6 +1,7 @@
 import { compact as compactToolkit } from '../../array/compact.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
+// eslint-disable-next-line es-x/no-bigint -- type-only, erased at build time
 type Falsey = false | null | 0 | 0n | '' | undefined;
 
 /**

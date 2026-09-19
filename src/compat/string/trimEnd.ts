@@ -51,7 +51,7 @@ export function trimEnd(str?: string, chars?: string | number, guard?: object): 
   }
 
   if (guard != null || chars == null) {
-    return str.toString().trimEnd();
+    return trimEndToolkit(str.toString());
   }
 
   return trimEndToolkit(str, chars.toString().split(''));

@@ -1,5 +1,7 @@
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Recursively assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
  * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
@@ -38,7 +40,7 @@ function defaultsDeepRecursive(target: any, source: any, stack: WeakMap<any, any
     const sourceValue = source[key];
     const targetValue = target[key];
 
-    if (targetValue === undefined || !Object.hasOwn(target, key)) {
+    if (targetValue === undefined || !hasOwnProperty.call(target, key)) {
       target[key] = handleMissingProperty(sourceValue, stack);
       continue;
     }

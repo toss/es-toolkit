@@ -65,7 +65,9 @@ export function deburr(str: string): string {
       continue;
     }
 
-    result += deburrMap.get(char) ?? char;
+    const mapped = deburrMap.get(char);
+
+    result += mapped == null ? char : mapped;
   }
 
   return result;

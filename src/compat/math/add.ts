@@ -21,7 +21,7 @@ export function add(value: number, other: number): number {
     return 0;
   }
   if (value === undefined || other === undefined) {
-    return value ?? other;
+    return value == null ? other : value;
   }
   if (typeof value === 'string' || typeof other === 'string') {
     value = toString(value) as any;
