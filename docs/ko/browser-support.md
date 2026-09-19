@@ -20,6 +20,20 @@ es-toolkit은 현대적인 JavaScript를 적극적으로 활용해서 작고 효
 
 es-toolkit은 새 버전을 릴리스할 때마다 지원하는 브라우저에서 올바르게 동작하는지 검증하고 있어요. 먼저 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 같은 ESLint 플러그인으로 정적으로 검증하고, 실제 브라우저에서 Playwright 기반 E2E 테스트를 실행해 다시 한번 검증해요.
 
+## Node.js 지원
+
+`es-toolkit`은 위 표처럼 Node.js 20.12 이상이 필요해요.
+
+`es-toolkit/compat`은 달라요. lodash 코드를 옮기기 위한 모듈인데, 그런 코드는 오래된 환경에서 실행되는 경우가 많아서, `es-toolkit/compat`은 배포된 그대로 **Node.js 6 이상**을 지원해요. 트랜스파일이나 폴리필이 필요 없어요.
+
+```js
+// Node.js 6 이상에서 그대로 동작해요
+const { get, cloneDeep } = require('es-toolkit/compat');
+const isEqual = require('es-toolkit/compat/isEqual');
+```
+
+이 지원 범위는 `es-toolkit/compat`과 함수별 진입점(`es-toolkit/compat/*`)에만 적용돼요. `es-toolkit`, `es-toolkit/array`, `es-toolkit/fp` 같은 다른 진입점은 위 표의 요구 사항을 그대로 따라요. Node.js 6 지원은 변경이 있을 때마다 빌드된 패키지를 실제 Node.js 6에서 실행해 검증하고 있어요.
+
 ## 오래된 브라우저 지원하기
 
 번들러를 올바르게 설정하면 es-toolkit을 Chrome 51이나 Safari 10처럼 오래된 브라우저에서도 사용할 수 있어요.

@@ -16,7 +16,7 @@
  */
 export function trimStart(str: string, chars?: string | string[]): string {
   if (chars === undefined) {
-    return str.trimStart();
+    return str.replace(/^\s+/, '');
   }
 
   let startIndex = 0;

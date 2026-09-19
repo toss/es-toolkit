@@ -63,7 +63,7 @@ export function remove<T>(
     | [keyof T, unknown]
     | keyof T = identity as any
 ): T[] {
-  if (arr?.length == null) {
+  if (arr == null || arr.length == null) {
     return [];
   }
 

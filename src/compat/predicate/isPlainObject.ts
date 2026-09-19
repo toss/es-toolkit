@@ -42,7 +42,8 @@ export function isPlainObject(object?: any): boolean {
       return false;
     }
 
-    const isTagReadonly = !Object.getOwnPropertyDescriptor(object, Symbol.toStringTag)?.writable;
+    const descriptor = Object.getOwnPropertyDescriptor(object, Symbol.toStringTag);
+    const isTagReadonly = descriptor == null || !descriptor.writable;
 
     if (isTagReadonly) {
       return false;

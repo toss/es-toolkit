@@ -83,7 +83,7 @@ export function keyBy<T>(
     return {};
   }
 
-  const keyFn = createIteratee(iteratee ?? identity);
+  const keyFn = createIteratee(iteratee == null ? identity : iteratee);
 
   return reduce(
     collection as ArrayLike<T>,

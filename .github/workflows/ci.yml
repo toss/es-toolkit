@@ -85,6 +85,46 @@ jobs:
       - name: Check Peer Dependency
         run: ./.scripts/check-peer.sh || (echo "Peer Dependency 오류가 발생했습니다."; exit 1)
 
+  compat-node6:
+    # es-toolkit/compat is published for Node.js 6+ as-is (no transpilation, no
+    # polyfills; see docs/browser-support.md). ESLint only enforces that floor
+    # inside src/compat, so this lane also guards the main-library files compat
+    # imports: it runs the built package on a real Node.js 6 on every change.
+    runs-on: ubuntu-latest
+    env:
+      NODE6_VERSION: 6.17.1
+      NODE6_SHA256: 0f88dacefc4be4709e0a9f9fe685efdfe1582a724d8f42614179c2f604c36165
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: corepack enable
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+      - run: yarn install
+      - name: Build dist
+        run: yarn build
+      - name: Generate cases and build the Node.js 6 fixture
+        run: |
+          yarn workspace browser-compat-tests generate
+          yarn workspace browser-compat-tests build:node6
+      - name: Cache Node.js 6
+        id: node6-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node6
+          key: node6-${{ env.NODE6_VERSION }}-linux-x64
+      - name: Download Node.js 6
+        if: steps.node6-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL -o node6.tar.xz "https://nodejs.org/dist/v${NODE6_VERSION}/node-v${NODE6_VERSION}-linux-x64.tar.xz"
+          echo "${NODE6_SHA256}  node6.tar.xz" | sha256sum -c -
+          mkdir node6
+          tar -xJf node6.tar.xz -C node6 --strip-components=1
+          rm node6.tar.xz
+      - name: Run es-toolkit/compat on Node.js 6
+        run: ./node6/bin/node tests/browser-compat/dist-fixtures/node6/run.cjs
+
   test:
     runs-on: ubuntu-latest
     steps:

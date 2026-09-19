@@ -16,7 +16,7 @@
  */
 export function trimEnd(str: string, chars?: string | string[]): string {
   if (chars === undefined) {
-    return str.trimEnd();
+    return str.replace(/\s+$/, '');
   }
 
   let endIndex = str.length;

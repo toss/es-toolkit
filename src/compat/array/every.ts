@@ -100,7 +100,7 @@ export function every<T>(
     doesMatch = undefined;
   }
 
-  const predicate = iteratee(doesMatch ?? identity);
+  const predicate = iteratee(doesMatch == null ? identity : doesMatch);
 
   if (!isArrayLike(collection)) {
     const keys = Object.keys(collection) as Array<keyof typeof collection>;
