@@ -49,7 +49,6 @@ import { fromPairs } from 'es-toolkit/compat';
 
 fromPairs(null); // {}
 fromPairs(undefined); // {}
-fromPairs('invalid'); // {}
 ```
 
 #### パラメータ

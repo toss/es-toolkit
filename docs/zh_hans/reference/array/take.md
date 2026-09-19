@@ -33,19 +33,10 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-如果省略 `count`,则只获取第一个元素。
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。
-- `count` (`number`, 可选): 要获取的元素数量。默认值为 `1`。
+- `count` (`number`): 要获取的元素数量。
 
 #### 返回值
 

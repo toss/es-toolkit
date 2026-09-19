@@ -30,7 +30,7 @@ updateWith(object, 'a[0].b.c', n => n * n);
 
 // Update with array path
 updateWith(object, ['a', 0, 'b', 'c'], n => n + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 19 } }] }
 ```
 
 You can control the shape of intermediate objects created using a customizer.

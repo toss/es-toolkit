@@ -32,7 +32,7 @@ const spreadAdd = spread(add);
 spreadAdd([1, 2]); // 3
 
 // 두 번째 인수가 배열인 경우
-function greet(greeting, names) {
+function greet(greeting, ...names) {
   return `${greeting}, ${names.join(' and ')}!`;
 }
 

@@ -33,19 +33,10 @@ takeRight([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-If you omit `count`, it takes only the last element.
-
-```typescript
-import { takeRight } from 'es-toolkit/array';
-
-takeRight([1, 2, 3]);
-// Returns: [3]
-```
-
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
-- `count` (`number`, optional): The number of elements to take. Default is `1`.
+- `count` (`number`): The number of elements to take.
 
 #### Returns
 

@@ -32,7 +32,7 @@ const spreadAdd = spread(add);
 spreadAdd([1, 2]); // 3
 
 // 2番目の引数が配列の場合
-function greet(greeting, names) {
+function greet(greeting, ...names) {
   return `${greeting}, ${names.join(' and ')}!`;
 }
 
