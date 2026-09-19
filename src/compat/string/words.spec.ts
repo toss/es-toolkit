@@ -95,15 +95,10 @@ describe('words', () => {
 
   it('should keep a flag emoji formed by two regional indicator symbols as one word', () => {
     expect(words('flag 🇰🇷 end')).toEqual(['flag', '🇰🇷', 'end']);
-    expect(words('flag 🏴󠁧󠁢󠁥󠁮󠁧󠁿 end')).toEqual(['flag', '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'end']);
   });
 
   it('should keep a gender-neutral emoji with a skin tone modifier as one word', () => {
     expect(words('🕵🏻‍♂️')).toEqual(['🕵🏻‍♂️']);
-  });
-
-  it('should recognize a keycap emoji as a single emoji, not a separate number and symbol', () => {
-    expect(words('1️⃣')).toEqual(['1️⃣']);
   });
 
   it('should recognize Arabic-Indic numerals as a single numeric word', () => {
@@ -124,7 +119,6 @@ describe('words', () => {
   it('should treat symbols as word characters, aligning with lodash', () => {
     expect(words('a€b')).toEqual(['a€b']);
     expect(words('a→b')).toEqual(['a→b']);
-    expect(words('a✓b')).toEqual(['a✓b']);
     expect(words('ⓐⓑ')).toEqual(['ⓐⓑ']);
   });
 

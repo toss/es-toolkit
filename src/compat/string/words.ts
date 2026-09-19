@@ -19,11 +19,7 @@ const rUnicodeMiscUpper = `(?:${rUnicodeUpper}|${rMisc})`;
 const rUnicodeMiscLower = `(?:${rUnicodeLower}|${rMisc})`;
 
 const rEmojiMod = '\\uFE0F?\\p{Emoji_Modifier}?';
-const rEmojiTag = '[\\u{E0020}-\\u{E007F}]*';
-const rEmojiAtom =
-  '(?:' +
-  ['\\p{Regional_Indicator}{2}', `[${rNumber}#*]\\uFE0F?\\u20E3`, `${rEmojiPict}${rEmojiMod}${rEmojiTag}`].join('|') +
-  ')';
+const rEmojiAtom = `(?:\\p{Regional_Indicator}{2}|${rEmojiPict}${rEmojiMod})`;
 const rEmojiSeq = `${rEmojiAtom}(?:\\u200D${rEmojiAtom})*`;
 
 let rUnicodeWord: RegExp | undefined;
@@ -36,22 +32,14 @@ let rUnicodeWord: RegExp | undefined;
 function getUnicodeWordPattern(): RegExp {
   if (rUnicodeWord == null) {
     rUnicodeWord = RegExp(
-      [
-        `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
-
-        `${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)`,
-
-        `${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}`,
-
-        `${rUnicodeUpper}+${rUnicodeOptContrUpper}`,
-
-        `${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])`,
-        `${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])`,
-
-        rEmojiSeq,
-
-        `${rNumber}+`,
-      ].join('|'),
+      `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)` +
+        `|${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)` +
+        `|${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}` +
+        `|${rUnicodeUpper}+${rUnicodeOptContrUpper}` +
+        `|${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])` +
+        `|${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])` +
+        `|${rEmojiSeq}` +
+        `|${rNumber}+`,
       'gu'
     );
   }
