@@ -5,3 +5,4 @@ export { deferAsync } from './deferAsync.ts';
 export { invariant } from './invariant.ts';
 export { invariant as assert } from './invariant.ts';
 export { serialize } from './serialize/serialize.ts';
+export { stringifySearch } from './stringifySearch.ts';
