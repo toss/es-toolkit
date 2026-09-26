@@ -1,6 +1,6 @@
 # stringifySearch
 
-객체를 URL 뒤에 붙일 `?a=1&b=2` 형태의 문자열로 바꿔요.
+객체로 URL 뒤에 붙일 쿼리 문자열을 만들어요. 결과는 `?a=1&b=2`처럼 `?`로 시작해요.
 
 ```typescript
 const search = stringifySearch(query);
@@ -10,57 +10,42 @@ const search = stringifySearch(query);
 
 ### `stringifySearch(query)`
 
-URL에 쿼리 파라미터를 붙이고 싶을 때 `stringifySearch`를 사용하세요. `?`로 시작하는 문자열을 반환하기 때문에 경로 뒤에 그대로 붙일 수 있어요. 붙일 값이 없으면 빈 문자열을 반환해요.
+URL에 쿼리 파라미터를 붙여야 할 때 `stringifySearch`를 사용하세요. 결과가 `?`로 시작하기 때문에 경로 뒤에 바로 이어 붙이면 돼요.
 
 ```typescript
 import { stringifySearch } from 'es-toolkit/util';
 
-// 객체를 쿼리 문자열로 바꿔요.
+// 객체로 쿼리 문자열을 만들어요.
 stringifySearch({ page: 1, q: 'hello world' });
 // '?page=1&q=hello%20world'를 반환해요
 
-// 경로 뒤에 붙여요. 값이 `undefined`인 키는 빠져요.
+// 배열은 같은 키를 반복해서 넣어요. 빈 문자열은 그대로 두고, 빈 배열은 넣지 않아요.
+stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+// '?tags=a&tags=b&q='를 반환해요
+
+// 경로 뒤에 붙여요. 값이 `null`이나 `undefined`인 키는 넣지 않아요.
 `/items${stringifySearch({ page: 1, ref: undefined })}`;
 // '/items?page=1'을 반환해요
 
-// 붙일 값이 없으면 경로가 그대로 남아요.
+// 넣을 값이 하나도 없으면 경로가 그대로 남아요.
 `/items${stringifySearch({ ref: undefined })}`;
 // '/items'를 반환해요
 ```
 
-각 값은 다음과 같이 바뀌어요.
+키와 값은 `encodeURIComponent`로 인코딩해요. 공백은 `%20`, `+`는 `%2B`로 바뀌어서 결과를 `URLSearchParams`로 읽어도, `decodeURIComponent`로 읽어도 같은 값이 나와요.
 
-| 값                     | 입력                        | 결과                  |
-| ---------------------- | --------------------------- | --------------------- |
-| 문자열                 | `{ q: 'a b+c' }`            | `'?q=a%20b%2Bc'`      |
-| 빈 문자열              | `{ q: '' }`                 | `'?q='`               |
-| 숫자, 불리언, `BigInt` | `{ page: 1, open: true }`   | `'?page=1&open=true'` |
-| `null`, `undefined`    | `{ a: null, b: undefined }` | `''`                  |
-| 배열                   | `{ tags: ['a', 'b'] }`      | `'?tags=a&tags=b'`    |
-| 빈 배열                | `{ tags: [] }`              | `''`                  |
+값으로 객체나 `Date`를 넣으면 타입 에러가 나요. `JSON.stringify()`나 `toISOString()`으로 먼저 문자열로 바꿔서 넣어 주세요.
 
-키와 값은 `encodeURIComponent`로 인코딩해요. 공백은 `%20`, `+`는 `%2B`가 되기 때문에 결과를 `URLSearchParams`로 읽든 `decodeURIComponent`로 읽든 같은 값이 나와요.
-
-객체 안에 들어 있는 객체나 `Date`는 지원하지 않고, 넣으면 타입 에러가 나요. `JSON.stringify()`나 `toISOString()` 같은 방법으로 먼저 문자열로 바꿔 주세요.
-
-앞의 `?` 없이 쿼리만 필요하면 `.slice(1)`을 사용하세요.
-
-```typescript
-import { stringifySearch } from 'es-toolkit/util';
-
-// 앞의 `?`를 떼요.
-stringifySearch({ page: 1 }).slice(1);
-// 'page=1'을 반환해요
-```
+앞의 `?` 없이 쿼리 부분만 필요하면 결과에 `.slice(1)`을 호출하세요.
 
 #### 파라미터
 
-- `query` (`T`): 바꿀 객체. 각 값은 문자열, 숫자, 불리언, `BigInt`, `null`, `undefined`이거나 이 값들의 배열이어야 해요.
+- `query` (`T`): 쿼리 문자열로 만들 객체. 값은 문자열, 숫자, 불리언, `BigInt`, `null`, `undefined` 중 하나이거나 이 값들의 배열이어야 해요.
 
 #### 반환 값
 
-(`string`): `?`로 시작하는 문자열. 붙일 값이 없으면 빈 문자열이에요.
+(`string`): `?`로 시작하는 쿼리 문자열. 넣을 값이 없으면 빈 문자열이에요.
 
 #### 에러
 
-(`URIError`): 이모지를 반으로 자른 것처럼 깨진 문자가 키나 값에 들어 있으면 에러가 발생해요.
+(`URIError`): `'😀'.slice(0, 1)`처럼 반으로 잘린 문자가 키나 값에 있으면 에러가 발생해요.

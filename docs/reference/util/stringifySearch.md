@@ -1,6 +1,6 @@
 # stringifySearch
 
-Converts an object into a string like `?a=1&b=2` to append to a URL.
+Converts an object into a query string to append to a URL, such as `?a=1&b=2`.
 
 ```typescript
 const search = stringifySearch(query);
@@ -10,7 +10,7 @@ const search = stringifySearch(query);
 
 ### `stringifySearch(query)`
 
-Use `stringifySearch` when you want to add query parameters to a URL. It returns a string that starts with `?`, so you can append it to a path as is. When there is nothing to add, it returns an empty string.
+Use `stringifySearch` when you want to add query parameters to a URL. The result starts with `?`, so you can append it to a path as is.
 
 ```typescript
 import { stringifySearch } from 'es-toolkit/util';
@@ -19,7 +19,11 @@ import { stringifySearch } from 'es-toolkit/util';
 stringifySearch({ page: 1, q: 'hello world' });
 // Returns: '?page=1&q=hello%20world'
 
-// Append it to a path. `undefined` values are left out.
+// Arrays repeat the key. Empty strings are kept, and empty arrays are left out.
+stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+// Returns: '?tags=a&tags=b&q='
+
+// Append it to a path. Keys whose value is `null` or `undefined` are left out.
 `/items${stringifySearch({ page: 1, ref: undefined })}`;
 // Returns: '/items?page=1'
 
@@ -28,30 +32,11 @@ stringifySearch({ page: 1, q: 'hello world' });
 // Returns: '/items'
 ```
 
-Each value is converted as follows.
-
-| Value                     | Input                       | Result                |
-| ------------------------- | --------------------------- | --------------------- |
-| String                    | `{ q: 'a b+c' }`            | `'?q=a%20b%2Bc'`      |
-| Empty string              | `{ q: '' }`                 | `'?q='`               |
-| Number, boolean, `BigInt` | `{ page: 1, open: true }`   | `'?page=1&open=true'` |
-| `null`, `undefined`       | `{ a: null, b: undefined }` | `''`                  |
-| Array                     | `{ tags: ['a', 'b'] }`      | `'?tags=a&tags=b'`    |
-| Empty array               | `{ tags: [] }`              | `''`                  |
-
 Keys and values are encoded with `encodeURIComponent`. Spaces become `%20` and `+` becomes `%2B`, so you get the same value whether you read the result with `URLSearchParams` or `decodeURIComponent`.
 
-Nested objects and `Date` are not supported and cause a type error. Convert them to strings first, for example with `JSON.stringify()` or `toISOString()`.
+Objects and `Date` values cause a type error. Convert them to strings first, for example with `JSON.stringify()` or `toISOString()`.
 
-When you need the query without the leading `?`, use `.slice(1)`.
-
-```typescript
-import { stringifySearch } from 'es-toolkit/util';
-
-// Remove the leading `?`.
-stringifySearch({ page: 1 }).slice(1);
-// Returns: 'page=1'
-```
+To get the query without the leading `?`, call `.slice(1)` on the result.
 
 #### Parameters
 
@@ -59,8 +44,8 @@ stringifySearch({ page: 1 }).slice(1);
 
 #### Returns
 
-(`string`): A string that starts with `?`, or an empty string when there is nothing to add.
+(`string`): A query string that starts with `?`, or an empty string when there is nothing to add.
 
 #### Throws
 
-(`URIError`): Throws when a key or value contains a broken character, such as half of an emoji.
+(`URIError`): Throws when a key or value contains a character cut in half, such as `'😀'.slice(0, 1)`.
