@@ -1,5 +1,5 @@
+import { baseToString } from '../_internal/baseToString.ts';
 import { toNumber } from '../util/toNumber.ts';
-import { baseToString } from '../util/toString.ts';
 
 /**
  * Divide two numbers.
@@ -22,9 +22,7 @@ export function divide(value: number, other: number): number {
   }
 
   if (value === undefined || other === undefined) {
-    // Only `undefined` is treated as a missing argument. A `null` operand is a
-    // real value and must be returned as-is (matches Lodash).
-    return (value === undefined ? other : value) as number;
+    return value === undefined ? other : value;
   }
 
   if (typeof value === 'string' || typeof other === 'string') {

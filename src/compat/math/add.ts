@@ -1,5 +1,5 @@
+import { baseToString } from '../_internal/baseToString.ts';
 import { toNumber } from '../util/toNumber.ts';
-import { baseToString } from '../util/toString.ts';
 
 /**
  * Adds two numbers while safely handling `NaN` values.
@@ -21,9 +21,7 @@ export function add(value: number, other: number): number {
     return 0;
   }
   if (value === undefined || other === undefined) {
-    // Only `undefined` is treated as a missing argument. A `null` operand is a
-    // real value and must be returned as-is (matches Lodash).
-    return (value === undefined ? other : value) as number;
+    return value === undefined ? other : value;
   }
   if (typeof value === 'string' || typeof other === 'string') {
     value = baseToString(value) as any;
