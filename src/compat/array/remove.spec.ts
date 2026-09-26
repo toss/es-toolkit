@@ -107,4 +107,10 @@ describe('remove', () => {
     expect(result).toEqual([1, true, 'hello']);
     expect(array).toEqual([0, false, '']);
   });
+  it('should return an empty array when the array is `null` or `undefined`', () => {
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(remove(null, isEven)).toEqual([]);
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(remove(undefined)).toEqual([]);
+  });
 });

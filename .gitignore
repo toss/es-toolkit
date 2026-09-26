@@ -42,6 +42,8 @@ umd
 /set.js
 /string.js
 /util.js
+/util/hash.js
+/util/hash.d.ts
 
 /test
 

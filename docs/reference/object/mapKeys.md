@@ -32,7 +32,7 @@ const uppercased = mapKeys(obj, (value, key) => key.toString().toUpperCase());
 #### Parameters
 
 - `object` (`T extends Record<PropertyKey, any>`): The object to transform keys from.
-- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => K`): A function that generates new keys. Receives value, key, and the entire object as parameters.
+- `getNewKey` (`(value: T[keyof T], key: ObjectKeys<T>, object: T) => K`): A function that generates new keys. Receives value, key, and the entire object as parameters (see [`ObjectKeys<T>`](/types/reference/objects/ObjectKeys)).
 
 #### Returns
 

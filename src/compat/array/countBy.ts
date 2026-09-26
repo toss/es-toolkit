@@ -33,6 +33,8 @@ export function countBy(collection: any, iteratee?: any): Record<string, number>
   const array = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
   const mapper = iterateeToolkit(iteratee ?? undefined) as (value: any) => any;
 
+  // The counts are collected on a null-prototype object, so that keys such as `constructor` and
+  // `__proto__` behave like any other key while counting.
   const result = Object.create(null) as Record<string, number>;
 
   for (let i = 0; i < array.length; i++) {
@@ -41,5 +43,6 @@ export function countBy(collection: any, iteratee?: any): Record<string, number>
     result[key] = (result[key] ?? 0) + 1;
   }
 
-  return result;
+  // lodash returns a plain object.
+  return Object.setPrototypeOf(result, Object.prototype);
 }

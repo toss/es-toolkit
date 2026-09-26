@@ -81,8 +81,8 @@ console.log(highRamKey); // 'laptop'
 #### 파라미터
 
 - `obj` (`T extends Record<any, any>`): 검색할 객체예요.
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 각 요소에 대해 실행할 조건 함수예요. `true`를 반환하는 첫 번째 요소의 키를 찾아요.
+- `predicate` (`(value: T[keyof T], key: ObjectKeys<T>, obj: T) => boolean`): 각 요소에 대해 실행할 조건 함수예요. `true`를 반환하는 첫 번째 요소의 키를 찾아요 ([`ObjectKeys<T>`](/ko/types/reference/objects/ObjectKeys) 참고).
 
 #### 반환 값
 
-(`keyof T | undefined`): 조건을 만족하는 첫 번째 요소의 키예요. 조건을 만족하는 요소가 없으면 `undefined`를 반환해요.
+(`ObjectKeys<T> | undefined`): 조건을 만족하는 첫 번째 요소의 키예요. 조건을 만족하는 요소가 없으면 `undefined`를 반환해요.

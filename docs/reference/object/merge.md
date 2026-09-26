@@ -50,7 +50,7 @@ merge(target, source);
 
 #### Returns
 
-([`Merge<T, S>`](../../types/reference/Merge.md)): Returns the target object with the source object merged in. Nested object types are merged property by property.
+([`Merge<T, S>`](../../types/reference/objects/Merge.md)): Returns the target object with the source object merged in. Nested object types are merged property by property.
 
 ## Examples
 

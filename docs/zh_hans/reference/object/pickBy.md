@@ -34,7 +34,7 @@ const admins = pickBy(data, (value, key) => key.startsWith('admin') && value > 2
 #### 参数
 
 - `obj` (`T extends Record<string, any>`): 要过滤属性的对象。
-- `shouldPick` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): 决定是否选择属性的条件函数。接收值和键,返回 `true` 表示选择,返回 `false` 表示排除。数字键会以字符串形式传递给条件函数(参见 [`ObjectKeys<T>`](/zh_hans/types/reference/ObjectKeys))。
+- `shouldPick` (`(value: T[keyof T], key: ObjectKeys<T>) => boolean`): 决定是否选择属性的条件函数。接收值和键,返回 `true` 表示选择,返回 `false` 表示排除。数字键会以字符串形式传递给条件函数(参见 [`ObjectKeys<T>`](/zh_hans/types/reference/objects/ObjectKeys))。
 
 #### 返回值
 

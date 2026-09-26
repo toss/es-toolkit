@@ -42,13 +42,13 @@ import { debounce } from 'es-toolkit/compat';
 const debouncedCompat = debounce(func, 300, {
   leading: true,
   trailing: false,
-  maxWait: 1000
+  maxWait: 1000,
 });
 
 // 메인 라이브러리 버전 (더 빠름, 간단함)
 import { debounce } from 'es-toolkit';
 const debouncedMain = debounce(func, 300, {
-  edges: ['leading'] // leading/trailing 대신 edges 사용
+  edges: ['leading'], // leading/trailing 대신 edges 사용
 });
 ```
 

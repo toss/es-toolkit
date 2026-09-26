@@ -33,7 +33,7 @@ After installing, run `/reload-plugins` to load the skills.
 | **Recommend** | `/es-toolkit:recommend` | Find the right es-toolkit function for your use case                           |
 | **Migrate**   | `/es-toolkit:migrate`   | Guide migrating lodash code to es-toolkit, and understand strict vs compat API |
 
-All skills verify information from the local source code and bundled documentation — no network requests needed.
+The skills are self-contained when installed individually. They inspect the es-toolkit version installed in your project, and they fall back to the source tree when run inside this repository. No repository-level symlinks or network requests are required.
 
 ## Usage Examples
 
@@ -68,7 +68,7 @@ All skills verify information from the local source code and bundled documentati
 
 ## How It Works
 
-Each skill reads the local source code and bundled reference documentation to ensure accuracy — no network requests needed. All recommendations are grounded in the actual codebase — not generic JavaScript advice.
+The recommendation and migration skills resolve exports and declarations from the es-toolkit version installed in your project. The guide reads the same package metadata when available and otherwise provides standalone setup guidance. When the skills run inside this repository, they can use its source and documentation directly.
 
 ## Links
 

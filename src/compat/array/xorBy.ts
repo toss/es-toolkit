@@ -2,6 +2,7 @@ import { differenceBy } from './differenceBy.ts';
 import { intersectionBy } from './intersectionBy.ts';
 import { last } from './last.ts';
 import { unionBy } from './unionBy.ts';
+import { uniq } from './uniq.ts';
 import { windowed } from '../../array/windowed.ts';
 import { identity } from '../../function/identity.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
@@ -100,6 +101,10 @@ export function xorBy<T>(...values: Array<ArrayLike<T> | null | undefined | Valu
   }
 
   const arrays = values.filter(isArrayLikeObject) as [any];
+
+  if (arrays.length < 2) {
+    return uniq(arrays[0]);
+  }
 
   const union = unionBy(...arrays, mapper);
   const intersections = windowed(arrays, 2).map(([arr1, arr2]) => intersectionBy(arr1, arr2, mapper)) as [any];

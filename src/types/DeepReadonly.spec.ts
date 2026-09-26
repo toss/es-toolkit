@@ -2,6 +2,13 @@ import { describe, expectTypeOf, it } from 'vitest';
 import type { DeepReadonly } from './DeepReadonly';
 
 describe('DeepReadonly', () => {
+  it('preserves branded primitive types', () => {
+    type UserId = string & { readonly __brand: 'UserId' };
+
+    expectTypeOf<DeepReadonly<UserId>>().toEqualTypeOf<UserId>();
+    expectTypeOf<DeepReadonly<{ userId: UserId }>>().toEqualTypeOf<{ readonly userId: UserId }>();
+  });
+
   it('makes nested object properties readonly recursively', () => {
     type State = { user: { name: string; active: boolean } };
     expectTypeOf<DeepReadonly<State>>().toEqualTypeOf<{
@@ -25,6 +32,7 @@ describe('DeepReadonly', () => {
 
   it('keeps functions, Date, and RegExp unchanged', () => {
     expectTypeOf<DeepReadonly<() => void>>().toEqualTypeOf<() => void>();
+    expectTypeOf<DeepReadonly<(value: string) => number>>().toEqualTypeOf<(value: string) => number>();
     expectTypeOf<DeepReadonly<Date>>().toEqualTypeOf<Date>();
     expectTypeOf<DeepReadonly<RegExp>>().toEqualTypeOf<RegExp>();
   });

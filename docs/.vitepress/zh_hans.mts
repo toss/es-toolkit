@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: '字符串工具',
     util: '工具函数',
     error: '错误',
+    'types:objects': '对象',
+    'types:values': '值',
+    'types:predicate': '类型判断',
   },
 };
 

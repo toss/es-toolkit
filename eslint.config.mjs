@@ -95,11 +95,33 @@ export default defineConfig(
       ],
     },
   },
+  // `es-toolkit/util/hash` must stay opt-in: nothing reachable from the main
+  // entrypoints may import it, or the platform-conditional export would leak
+  // into every bundle. tests/check-dist.spec.ts verifies the same invariant
+  // on the packed artifact.
+  {
+    files: ['src/**/*.ts'],
+    ignores: ['src/util/hash/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['es-toolkit/util/hash', '**/util/hash', '**/util/hash/**'],
+              message:
+                'hash is opt-in only; it must never be reachable from es-toolkit entrypoints. Consumers import it explicitly via es-toolkit/util/hash.',
+            },
+          ],
+        },
+      ],
+    },
+  },
   // Browser support floor: Chrome 98 / Safari 15.4 (see docs/browser-support.md).
   // These rules ensure new code does not silently raise the minimum supported browsers.
   {
     files: ['src/**/*.ts'],
-    ignores: ['**/*.spec.ts', 'src/server/**'],
+    ignores: ['**/*.spec.ts', 'src/server/**', 'src/util/hash/node.ts'],
     plugins: {
       'es-x': esXPlugin,
       compat: compatPlugin,

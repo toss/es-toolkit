@@ -37,7 +37,7 @@
  * });
  * ```
  */
-export function attempt<T, E>(func: () => T): [null, T] | [E, null] {
+export function attempt<T, E = unknown>(func: () => T): [null, T] | [E, null] {
   try {
     return [null, func()];
   } catch (error) {

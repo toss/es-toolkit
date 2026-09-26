@@ -35,10 +35,10 @@ export function once<F extends (() => any) | ((...args: any[]) => void)>(func: F
   let called = false;
   let cache: ReturnType<F>;
 
-  return function (...args: Parameters<F>): ReturnType<F> {
+  return function (this: unknown, ...args: Parameters<F>): ReturnType<F> {
     if (!called) {
       called = true;
-      cache = func(...args);
+      cache = func.apply(this, args);
     }
 
     return cache;

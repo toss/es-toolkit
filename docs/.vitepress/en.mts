@@ -25,6 +25,9 @@ const labels: SidebarLabels = {
     string: 'String Utilities',
     util: 'Utility Functions',
     error: 'Errors',
+    'types:objects': 'Objects',
+    'types:values': 'Values',
+    'types:predicate': 'Predicates',
   },
 };
 

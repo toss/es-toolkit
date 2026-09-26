@@ -28,7 +28,7 @@ console.log(result); // { 1: 'b', 2: 'c' } (後に出現する'b'がキー1の�
 // 文字列キーと数値の値
 const grades = { alice: 85, bob: 92, charlie: 88 };
 const invertedGrades = invert(grades);
-console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
+console.log(invertedGrades); // { 85: 'alice', 88: 'charlie', 92: 'bob' }
 ```
 
 様々な型のキーと値で使用できます。

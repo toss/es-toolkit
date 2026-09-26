@@ -1,3 +1,5 @@
+import type { ObjectKeys } from '../types/ObjectKeys.ts';
+
 /**
  * Finds the key of the first element in the object that satisfies the provided testing function.
  *
@@ -18,9 +20,9 @@
  */
 export function findKey<T extends Record<any, any>>(
   obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined {
-  const keys = Object.keys(obj) as Array<keyof T>;
+  predicate: (value: T[keyof T], key: ObjectKeys<T>, obj: T) => boolean
+): ObjectKeys<T> | undefined {
+  const keys = Object.keys(obj) as Array<ObjectKeys<T>>;
 
   return keys.find(key => predicate(obj[key], key, obj));
 }

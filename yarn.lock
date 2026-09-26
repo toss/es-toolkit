@@ -5279,6 +5279,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/object-hash@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@types/object-hash@npm:3.0.6"
+  checksum: 10c0/a5450cafdbc33c840be2c36fb1ace96cce7aa580177cf68dbdbda80f18938207692d74c76403321c99f43460ac31981c4af7fe8b49eca1570f8e9a4c01eaf33d
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
@@ -7347,11 +7354,14 @@ __metadata:
   dependencies:
     "@types/lodash": "npm:4.17.20"
     "@types/lodash-es": "npm:4.17.12"
+    "@types/object-hash": "npm:3.0.6"
     deep-freeze-es6: "npm:^5.0.0"
     es-toolkit: "workspace:^"
     esbuild: "npm:0.28.0"
     lodash: "npm:4.18.1"
     lodash-es: "npm:4.18.1"
+    object-hash: "npm:3.0.0"
+    ohash: "npm:2.0.11"
     remeda: "npm:^2.39.0"
     rfdc: "npm:1.4.1"
     vitest: "npm:4.1.10"
@@ -12721,10 +12731,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"object-hash@npm:3.0.0":
+  version: 3.0.0
+  resolution: "object-hash@npm:3.0.0"
+  checksum: 10c0/a06844537107b960c1c8b96cd2ac8592a265186bfa0f6ccafe0d34eabdb526f6fa81da1f37c43df7ed13b12a4ae3457a16071603bcd39d8beddb5f08c37b0f47
+  languageName: node
+  linkType: hard
+
 "obug@npm:^2.1.1":
   version: 2.1.1
   resolution: "obug@npm:2.1.1"
   checksum: 10c0/59dccd7de72a047e08f8649e94c1015ec72f94eefb6ddb57fb4812c4b425a813bc7e7cd30c9aca20db3c59abc3c85cc7a62bb656a968741d770f4e8e02bc2e78
+  languageName: node
+  linkType: hard
+
+"ohash@npm:2.0.11":
+  version: 2.0.11
+  resolution: "ohash@npm:2.0.11"
+  checksum: 10c0/d07c8d79cc26da082c1a7c8d5b56c399dd4ed3b2bd069fcae6bae78c99a9bcc3ad813b1e1f49ca2f335292846d689c6141a762cf078727d2302a33d414e69c79
   languageName: node
   linkType: hard
 

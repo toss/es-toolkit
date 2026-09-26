@@ -42,4 +42,18 @@ describe('pull', () => {
     pull(array, [NaN]);
     expect(array).toEqual([1, 3]);
   });
+  it('should return the array as is when it is `null` or `undefined`', () => {
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(pullToolkit(null, 1)).toBe(null);
+    // @ts-expect-error - lodash accepts a nullish array
+    expect(pullToolkit(undefined, 1)).toBe(undefined);
+  });
+
+  it('should leave values without a `length` untouched like lodash', () => {
+    const object = { a: 1 };
+
+    // @ts-expect-error - lodash accepts values without a `length`
+    expect(pullToolkit(object, 1)).toBe(object);
+    expect(object).toEqual({ a: 1 });
+  });
 });

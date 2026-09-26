@@ -57,7 +57,7 @@ const result = cloneDeepWith(data, (value, key, obj, stack) => {
 
 console.log(result);
 // {
-//   user: { name: 'cloned_Alice', age: 30, cloned: true },
+//   user: { name: 'Alice', age: 30, cloned: true },
 //   settings: { theme: 'cloned_dark', lang: 'cloned_zh' }
 // }
 ```

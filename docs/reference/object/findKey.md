@@ -81,8 +81,8 @@ console.log(highRamKey); // 'laptop'
 #### Parameters
 
 - `obj` (`T extends Record<any, any>`): The object to search.
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): A condition function to execute for each element. Finds the key of the first element that returns `true`.
+- `predicate` (`(value: T[keyof T], key: ObjectKeys<T>, obj: T) => boolean`): A condition function to execute for each element. Finds the key of the first element that returns `true` (see [`ObjectKeys<T>`](/types/reference/objects/ObjectKeys)).
 
 #### Returns
 
-(`keyof T | undefined`): The key of the first element that satisfies the condition. Returns `undefined` if no element satisfies the condition.
+(`ObjectKeys<T> | undefined`): The key of the first element that satisfies the condition. Returns `undefined` if no element satisfies the condition.

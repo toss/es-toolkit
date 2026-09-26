@@ -52,4 +52,24 @@ describe('countBy', () => {
     expect(countBy(null)).toEqual({});
     expect(countBy(undefined)).toEqual({});
   });
+
+  it('should return a plain object', () => {
+    const actual = countBy(array, Math.floor);
+
+    expect(Object.getPrototypeOf(actual)).toBe(Object.prototype);
+    expect(actual instanceof Object).toBe(true);
+    expect(typeof actual.hasOwnProperty).toBe('function');
+    expect(`${actual}`).toBe('[object Object]');
+    expect(Object.getPrototypeOf(countBy([]))).toBe(Object.prototype);
+  });
+
+  it('should count a `__proto__` key as an own property', () => {
+    const actual = countBy(['__proto__', '__proto__', 'a']);
+
+    expect(Object.hasOwn(actual, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(actual)).toBe(Object.prototype);
+    expect(Object.keys(actual)).toEqual(['__proto__', 'a']);
+    expect(actual['__proto__' as string]).toBe(2);
+    expect(actual.a).toBe(1);
+  });
 });

@@ -42,7 +42,6 @@ jobs:
           else
             echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
           fi
-
   typecheck:
     runs-on: ubuntu-latest
     steps:

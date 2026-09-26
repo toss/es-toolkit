@@ -160,7 +160,7 @@ export const flavors = [
     },
     prefix: 'types',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
-    categories: [],
+    categories: ['objects', 'values', 'predicate'],
     icon: BRACES_ICON,
     iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',

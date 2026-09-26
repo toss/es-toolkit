@@ -28,7 +28,7 @@ console.log(result); // { 1: 'b', 2: 'c' } (后面出现的 'b' 用作键 1 的�
 // 字符串键和数字值
 const grades = { alice: 85, bob: 92, charlie: 88 };
 const invertedGrades = invert(grades);
-console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
+console.log(invertedGrades); // { 85: 'alice', 88: 'charlie', 92: 'bob' }
 ```
 
 可以用于各种类型的键和值。

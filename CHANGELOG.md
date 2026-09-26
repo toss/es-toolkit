@@ -1,5 +1,40 @@
 # es-toolkit Changelog
 
+## Version v1.52.0
+
+Released on August 28th, 2026.
+
+- Added the `es-toolkit/iterator` entrypoint, a lazy iterator module with `chunk`,
+  `count`, `dropWhile`, `head`, `iterate`, `partition`, `range`, `scan`,
+  `takeWhile`, `uniqBy`, and `zip` ([#1815]), plus `cartesianProduct` ([#2031]).
+  The same functions are also available from `es-toolkit/fp/iterator`.
+- Added `defer` and `deferAsync` to `es-toolkit/util`. ([#2032])
+- Added `flowAsync` to `es-toolkit/fp`, a promise-aware left-to-right composition. ([#2033])
+- Added the `EmptyObject`, `IsEqual`, `JSONValue`, `Primitive`, `SetOptional`,
+  `SetRequired`, and `UnknownRecord` types. ([#2044])
+
+- Fixed `merge` to infer the deep merged return type, and exported the `Merge` type. ([#1959])
+- Fixed `omitBy` and `pickBy` to type numeric callback keys as strings, and
+  exported the `ObjectKeys` type. ([#2037])
+- Fixed `attempt` and `attemptAsync` to default their error type parameter to `unknown`. ([#2052])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/debounce` to skip the `maxWait` invocation when both `leading` and
+  `trailing` are `false`. ([#1678])
+- Fixed `compat/toString` to convert objects with a custom `valueOf`. ([#2034])
+- Fixed `compat/mergeWith` to assign `null` values in array sources. ([#1929])
+- Fixed `compat/has` and `compat/hasIn` to normalize the `-0` path key. ([#2035])
+- Fixed `compat/differenceWith` and `compat/without` to normalize `-0` to `0`. ([#2049])
+- Fixed `compat/findLastIndex` to convert `fromIndex` to an integer. ([#2047])
+- Fixed `compat/xorWith` to match Lodash when no comparator is given. ([#2057])
+
+- Covered the new iterator entrypoints in the dist and browser compatibility
+  checks. ([#2030])
+- Made the agent skills portable when installed on their own. ([#2054])
+- Fixed documentation typos and the Deno install commands. ([#2062])
+
 ## Version v1.51.0
 
 Released on August 17th, 2026.
@@ -219,7 +254,7 @@ We sincerely thank @SrAnthony and @umsungjun for their contributions. We appreci
 
 ## Version v1.46.0
 
-Released on April 22th, 2026.
+Released on April 22nd, 2026.
 
 - Changed `AbortError` and `TimeoutError` to extend `DOMException`. ([#1660])
 - Added `keyBy` to the `map` entrypoint exports. ([#1650])
@@ -390,7 +425,7 @@ We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contr
 
 ## Version v1.39.6
 
-Released on July 2th, 2025.
+Released on July 2nd, 2025.
 
 - Fixed handling of null/undefined values in `values` function.
 - Fixed type safety in `compat/get` by adding GetFieldType utility type.
@@ -1015,4 +1050,4 @@ Released on June 3rd, 2024.
 
 ## Version v1.0.2
 
-Initial release. Released on May 31th, 2024.
+Initial release. Released on May 31st, 2024.
