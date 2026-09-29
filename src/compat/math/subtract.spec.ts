@@ -59,6 +59,23 @@ describe('subtract', () => {
     expect(subtract(undefined, 4)).toBe(4);
   });
 
+  it(`\`subtract\` should treat \`null\` operands like Lodash`, () => {
+    // A `null` operand next to a string is stringified as `'null'`, so the
+    // subtraction yields `NaN` (not `-1` from an empty-string coercion).
+    // @ts-expect-error - invalid arguments
+    expect(subtract(null, '1')).toBe(NaN);
+    // @ts-expect-error - invalid arguments
+    expect(subtract('1', null)).toBe(NaN);
+    // A present `null` must win over a missing `undefined`.
+    // @ts-expect-error - invalid arguments
+    expect(subtract(null, undefined)).toBe(null);
+    // @ts-expect-error - invalid arguments
+    expect(subtract(undefined, null)).toBe(null);
+    // A `null` operand coerces to `0` in the numeric path.
+    // @ts-expect-error - invalid arguments
+    expect(subtract(null, 3)).toBe(-3);
+  });
+
   it(`\`subtract\` should preserve the sign of \`0\``, () => {
     const values = [0, '0', -0, '-0'];
     const expected = [

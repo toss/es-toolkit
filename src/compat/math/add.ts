@@ -1,5 +1,5 @@
+import { baseToString } from '../_internal/baseToString.ts';
 import { toNumber } from '../util/toNumber.ts';
-import { toString } from '../util/toString.ts';
 
 /**
  * Adds two numbers while safely handling `NaN` values.
@@ -21,11 +21,11 @@ export function add(value: number, other: number): number {
     return 0;
   }
   if (value === undefined || other === undefined) {
-    return value ?? other;
+    return value === undefined ? other : value;
   }
   if (typeof value === 'string' || typeof other === 'string') {
-    value = toString(value) as any;
-    other = toString(other) as any;
+    value = baseToString(value) as any;
+    other = baseToString(other) as any;
   } else {
     value = toNumber(value);
     other = toNumber(other);
