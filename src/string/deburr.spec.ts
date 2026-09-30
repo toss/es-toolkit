@@ -3,6 +3,7 @@ import { deburr } from './deburr';
 import { burredLetters } from '../_internal/burredLetters';
 import { comboMarks } from '../_internal/comboMarks';
 import { deburredLetters } from '../_internal/deburredLetters';
+import { deburr as deburrCompat } from '../compat/string/deburr';
 
 describe('deburr', () => {
   it('should convert examples correctly', () => {
@@ -59,5 +60,53 @@ describe('deburr', () => {
   it('should remove consecutive marks spanning different ranges', () => {
     expect(deburr('a\u0301\u0327\u20d1')).toBe('a');
     expect(deburr('\u00c6\u20dd')).toBe('Ae');
+  });
+
+  it('should not decompose Hangul syllables', () => {
+    expect(deburr('한국어')).toBe('한국어');
+    expect(deburr('한국어')).toHaveLength(3);
+    expect(deburr('한국어 테스트')).toBe('한국어 테스트');
+  });
+
+  it('should keep letters of other scripts as they are, even with diacritical marks', () => {
+    expect(deburr('йогурт')).toBe('йогурт');
+    expect(deburr('Мой край')).toBe('Мой край');
+    expect(deburr('Ελληνικά')).toBe('Ελληνικά');
+    expect(deburr('がぎぐ')).toBe('がぎぐ');
+  });
+
+  it('should not decompose Indic and Arabic letters', () => {
+    expect(deburr('\u0958')).toBe('\u0958'); // Devanagari KA with nukta
+    expect(deburr('\u09cb')).toBe('\u09cb'); // Bengali vowel sign O
+    expect(deburr('\u0623')).toBe('\u0623'); // Arabic ALEF with hamza above
+  });
+
+  it('should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks', () => {
+    expect(deburr('Tiếng Việt')).toBe('Tieng Viet');
+    expect(deburr('Ǎǎ')).toBe('Aa');
+  });
+
+  it('should deburr letters that decompose into a special Latin letter', () => {
+    expect(deburr('ǢǣǼǽǾǿẛ')).toBe('AeaeAeaeOos');
+  });
+
+  it('should keep non-letter symbols that decompose into ASCII', () => {
+    expect(deburr('≠')).toBe('≠');
+    expect(deburr('\u037e')).toBe('\u037e'); // Greek question mark
+  });
+
+  it('should deburr only Latin letters in a mixed string', () => {
+    expect(deburr('Café Москва 한국어')).toBe('Cafe Москва 한국어');
+  });
+
+  it('should keep surrogate pairs', () => {
+    expect(deburr('😀é')).toBe('😀e');
+  });
+
+  it('should match the compat implementation for U+00C0 to U+017F', () => {
+    for (let code = 0xc0; code <= 0x17f; code++) {
+      const char = String.fromCharCode(code);
+      expect(deburr(char)).toBe(deburrCompat(char));
+    }
   });
 });

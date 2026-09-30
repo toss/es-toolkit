@@ -34,6 +34,9 @@ const deburrMap = new Map<string, string>([
  * Converts a string by replacing special characters and diacritical marks with their ASCII equivalents.
  * For example, "Crème brûlée" becomes "Creme brulee".
  *
+ * Only Latin letters are converted. Letters of other scripts, such as Hangul, Cyrillic, or Greek,
+ * are kept as they are, even if they carry diacritical marks.
+ *
  * @param str - The input string to be deburred.
  * @returns The deburred string with special characters replaced by their ASCII equivalents.
  *
@@ -48,25 +51,70 @@ const deburrMap = new Map<string, string>([
  * @example
  * // Special characters:
  * deburr('Crème brûlée') // returns 'Creme brulee'
+ *
+ * @example
+ * // Letters of other scripts are kept as they are:
+ * deburr('한국어') // returns '한국어'
+ * deburr('йогурт') // returns 'йогурт'
  */
 export function deburr(str: string): string {
-  str = str.normalize('NFD');
-
   let result = '';
 
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-
-    if (
-      (char >= '\u0300' && char <= '\u036f') ||
-      (char >= '\u20d0' && char <= '\u20ff') ||
-      (char >= '\ufe20' && char <= '\ufe2f')
-    ) {
-      continue;
-    }
-
-    result += deburrMap.get(char) ?? char;
+  for (let index = 0; index < str.length; index++) {
+    result += deburrChar(str[index]);
   }
 
   return result;
+}
+
+function deburrChar(char: string): string {
+  const code = char.charCodeAt(0);
+
+  if (code < 0x80) {
+    return char;
+  }
+
+  if (isCombiningMark(code)) {
+    return '';
+  }
+
+  const deburred = deburrMap.get(char);
+
+  if (deburred != null) {
+    return deburred;
+  }
+
+  const decomposed = char.normalize('NFD');
+  const base = decomposed[0];
+
+  // Only a Latin letter with diacritical marks is deburred.
+  // Other letters, such as Hangul syllables or Cyrillic letters, are kept as they are.
+  if (!isAsciiLetter(base.charCodeAt(0)) && !deburrMap.has(base)) {
+    return char;
+  }
+
+  let result = '';
+
+  for (let index = 0; index < decomposed.length; index++) {
+    if (!isCombiningMark(decomposed.charCodeAt(index))) {
+      result += deburrMap.get(decomposed[index]) ?? decomposed[index];
+    }
+  }
+
+  return result;
+}
+
+function isAsciiLetter(code: number): boolean {
+  return (code >= 0x41 && code <= 0x5a) || (code >= 0x61 && code <= 0x7a);
+}
+
+function isCombiningMark(code: number): boolean {
+  return (
+    // Combining Diacritical Marks
+    (code >= 0x300 && code <= 0x36f) ||
+    // Combining Diacritical Marks for Symbols
+    (code >= 0x20d0 && code <= 0x20ff) ||
+    // Combining Half Marks
+    (code >= 0xfe20 && code <= 0xfe2f)
+  );
 }
