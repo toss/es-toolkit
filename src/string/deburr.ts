@@ -84,15 +84,14 @@ function deburrChar(char: string): string {
     return deburred;
   }
 
-  const decomposed = char.normalize('NFD');
-  const base = decomposed[0];
-
-  // Only a Latin letter with diacritical marks is deburred.
+  // Only Latin letters with diacritical marks are decomposed. They live in the Latin-1 Supplement,
+  // Latin Extended-A, Latin Extended-B, and Latin Extended Additional blocks, and the Kelvin and Angstrom signs.
   // Other letters, such as Hangul syllables or Cyrillic letters, are kept as they are.
-  if (!isAsciiLetter(base.charCodeAt(0)) && !deburrMap.has(base)) {
+  if (!isLatinLetter(code)) {
     return char;
   }
 
+  const decomposed = char.normalize('NFD');
   let result = '';
 
   for (let index = 0; index < decomposed.length; index++) {
@@ -104,8 +103,8 @@ function deburrChar(char: string): string {
   return result;
 }
 
-function isAsciiLetter(code: number): boolean {
-  return (code >= 0x41 && code <= 0x5a) || (code >= 0x61 && code <= 0x7a);
+function isLatinLetter(code: number): boolean {
+  return (code >= 0xc0 && code <= 0x233) || (code >= 0x1e00 && code <= 0x1ef9) || code === 0x212a || code === 0x212b;
 }
 
 function isCombiningMark(code: number): boolean {

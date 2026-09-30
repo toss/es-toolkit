@@ -84,6 +84,8 @@ describe('deburr', () => {
   it('should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks', () => {
     expect(deburr('Tiếng Việt')).toBe('Tieng Viet');
     expect(deburr('Ǎǎ')).toBe('Aa');
+    expect(deburr('Ǯǯ')).toBe('Ʒʒ');
+    expect(deburr('\u212a\u212b')).toBe('KA'); // Kelvin and Angstrom signs
   });
 
   it('should deburr letters that decompose into a special Latin letter', () => {
