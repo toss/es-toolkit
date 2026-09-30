@@ -67,4 +67,16 @@ describe('groupBy', () => {
     expect(groupBy(undefined)).toEqual({});
     expect(groupBy(null)).toEqual({});
   });
+
+  it('should call the iteratee with only the element, like lodash', () => {
+    const args: unknown[][] = [];
+    groupBy(['a', 'b'], (...rest: unknown[]) => {
+      args.push(rest);
+      return 'key';
+    });
+    expect(args).toEqual([['a'], ['b']]);
+
+    // `parseInt` would treat an index as its radix
+    expect(groupBy(['10', '11', '12'], parseInt)).toEqual({ 10: ['10'], 11: ['11'], 12: ['12'] });
+  });
 });
