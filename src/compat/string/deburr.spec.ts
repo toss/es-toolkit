@@ -58,6 +58,17 @@ describe('deburr', () => {
     expect(deburr('\u00c6\u20dd')).toBe('Ae');
   });
 
+  it('should not convert letters outside the Latin-1 Supplement and Latin Extended-A blocks, identical to lodash', () => {
+    expect(deburr('한국어')).toBe('한국어');
+    expect(deburr('한국어')).toHaveLength(3);
+    expect(deburr('がぎぐ')).toBe('がぎぐ');
+    expect(deburr('йогурт')).toBe('йогурт');
+    expect(deburr('Мой край')).toBe('Мой край');
+    expect(deburr('Ελληνικά')).toBe('Ελληνικά');
+    expect(deburr('Tiếng Việt')).toBe('Tiếng Việt');
+    expect(deburr('Café Москва 한국어')).toBe('Cafe Москва 한국어');
+  });
+
   it('should return an empty string for empty values', () => {
     // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined, ''];
