@@ -2,7 +2,6 @@ import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { uniqWith } from '../../array/uniqWith.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
  * This method is like `union` except that it accepts `comparator` which
@@ -98,9 +97,12 @@ export function unionWith<T>(...values: Array<ArrayLike<T> | null | undefined | 
   const lastValue = last(values);
   const flattened = flattenArrayLike(values as Array<ArrayLike<T>>);
 
-  if (isArrayLikeObject(lastValue) || lastValue == null) {
+  if (typeof lastValue !== 'function') {
     return uniq(flattened);
   }
 
-  return uniqWith(flattened, lastValue);
+  // `es-toolkit`'s `uniqWith` invokes the comparator as `(kept, candidate)`, but
+  // lodash documents and invokes it as `(candidate, kept)`. Swap the arguments so
+  // that asymmetric comparators behave the same as in lodash.
+  return uniqWith(flattened, (kept, candidate) => lastValue(candidate, kept));
 }
