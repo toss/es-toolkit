@@ -292,7 +292,7 @@ describe('clone', () => {
     const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
     const cloned = clone(parsed);
 
-    expect(Object.prototype.hasOwnProperty.call(cloned, '__proto__')).toBe(true);
+    expect(Object.hasOwn(cloned, '__proto__')).toBe(true);
     expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
     expect((cloned as any).isAdmin).toBeUndefined();
   });

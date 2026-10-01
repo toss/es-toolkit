@@ -223,7 +223,7 @@ describe('pickBy', () => {
     const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
     const result = pickBy(parsed, (_val, key) => key === '__proto__' || key === 'x');
 
-    expect(Object.prototype.hasOwnProperty.call(result, '__proto__')).toBe(true);
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
     expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
     expect((result as any).isAdmin).toBeUndefined();
   });

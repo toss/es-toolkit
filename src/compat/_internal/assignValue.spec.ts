@@ -12,7 +12,7 @@ describe('assignValue', () => {
     const object: Record<string, any> = {};
     assignValue(object, '__proto__', { isAdmin: true });
 
-    expect(Object.prototype.hasOwnProperty.call(object, '__proto__')).toBe(true);
+    expect(Object.hasOwn(object, '__proto__')).toBe(true);
     expect(Object.getPrototypeOf(object)).toBe(Object.prototype);
     expect((object as any).isAdmin).toBeUndefined();
   });
