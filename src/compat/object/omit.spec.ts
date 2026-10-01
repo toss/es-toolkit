@@ -117,4 +117,13 @@ describe('omit', () => {
     expect('3' in result).toBe(false);
     expect('4' in result).toBe(false);
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const result = omit(parsed, 'x');
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect((result as any).isAdmin).toBeUndefined();
+  });
 });

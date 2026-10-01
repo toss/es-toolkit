@@ -207,7 +207,16 @@ function isCloneableObject(object: any): boolean {
 function copyOwnProperties(target: any, source: any): void {
   for (const key in source) {
     if (Object.hasOwn(source, key)) {
-      target[key] = source[key];
+      if (key === '__proto__') {
+        Object.defineProperty(target, key, {
+          configurable: true,
+          enumerable: true,
+          value: source[key],
+          writable: true,
+        });
+      } else {
+        target[key] = source[key];
+      }
     }
   }
 }
