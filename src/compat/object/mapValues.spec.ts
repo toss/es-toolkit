@@ -43,4 +43,13 @@ describe('mapValues', () => {
   it('should return empty object when object is undefined', () => {
     expect(mapValues(undefined)).toEqual({});
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const result = mapValues(parsed, v => v);
+
+    expect(Object.prototype.hasOwnProperty.call(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect((result as any).isAdmin).toBeUndefined();
+  });
 });
