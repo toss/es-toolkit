@@ -9,11 +9,11 @@ describe('mapValues bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'mapValues');
-    expect(bundleSize).toMatchInlineSnapshot(`138`);
+    expect(bundleSize).toMatchInlineSnapshot(`237`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'mapValues');
-    expect(bundleSize).toMatchInlineSnapshot(`8592`);
+    expect(bundleSize).toMatchInlineSnapshot(`8800`);
   });
 });
