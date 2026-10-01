@@ -140,7 +140,16 @@ export function pickBy<T, S extends T>(
     const value = obj[key as keyof typeof obj];
 
     if (predicate(value, key, obj)) {
-      result[key] = value;
+      if (key === '__proto__') {
+        Object.defineProperty(result, key, {
+          configurable: true,
+          enumerable: true,
+          value,
+          writable: true,
+        });
+      } else {
+        result[key] = value;
+      }
     }
   }
 

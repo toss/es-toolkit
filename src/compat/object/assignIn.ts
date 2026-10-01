@@ -146,7 +146,16 @@ function assignInImpl(object: any, source: any): any {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     if (!(key in object) || !eq(object[key], source[key])) {
-      object[key] = source[key];
+      if (key === '__proto__') {
+        Object.defineProperty(object, key, {
+          configurable: true,
+          enumerable: true,
+          value: source[key],
+          writable: true,
+        });
+      } else {
+        object[key] = source[key];
+      }
     }
   }
 }

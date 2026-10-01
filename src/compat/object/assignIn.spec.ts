@@ -111,4 +111,13 @@ describe('assignIn', () => {
     const result = assignIn({}, ...values);
     expect(result).toEqual({ workId: undefined, exerciseId: '1' });
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const result = assignIn({}, parsed);
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect((result as any).isAdmin).toBeUndefined();
+  });
 });

@@ -105,7 +105,16 @@ export function pick<T extends object, U extends keyof T>(
       }
 
       if (typeof key === 'string' && Object.hasOwn(object, key)) {
-        result[key] = object[key];
+        if (key === '__proto__') {
+          Object.defineProperty(result, key, {
+            configurable: true,
+            enumerable: true,
+            value: object[key],
+            writable: true,
+          });
+        } else {
+          result[key] = object[key];
+        }
       } else {
         set(result, key, value);
       }
