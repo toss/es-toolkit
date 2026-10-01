@@ -204,10 +204,44 @@ function areObjectsEqual(
           return false;
         }
 
-        for (const [key, value] of a.entries()) {
-          if (!b.has(key) || !isEqualWithImpl(value, b.get(key), key, a, b, stack, areValuesEqual)) {
+        const remainingBEntries = new Map(b);
+        const remainingAEntries: Array<[any, any]> = [];
+
+        for (const [aKey, aValue] of a) {
+          const bValue = remainingBEntries.get(aKey);
+
+          if (
+            remainingBEntries.has(aKey) &&
+            isEqualWithImpl(aKey, aKey, undefined, a, b, stack, areValuesEqual) &&
+            isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
+          ) {
+            remainingBEntries.delete(aKey);
+            continue;
+          }
+
+          remainingAEntries.push([aKey, aValue]);
+        }
+
+        if (remainingAEntries.length === 0) {
+          return true;
+        }
+
+        const remainingBEntriesArray = Array.from(remainingBEntries.entries()) as Array<[any, any]>;
+
+        for (let i = 0; i < remainingAEntries.length; i++) {
+          const [aKey, aValue] = remainingAEntries[i];
+
+          const index = remainingBEntriesArray.findIndex(
+            ([bKey, bValue]: [any, any]) =>
+              isEqualWithImpl(aKey, bKey, undefined, a, b, stack, areValuesEqual) &&
+              isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
+          );
+
+          if (index === -1) {
             return false;
           }
+
+          remainingBEntriesArray.splice(index, 1);
         }
 
         return true;
@@ -218,12 +252,27 @@ function areObjectsEqual(
           return false;
         }
 
-        const aValues = Array.from(a.values());
-        const bValues = Array.from(b.values());
+        const remainingBValues = new Set(b);
+        const remainingAValues: any[] = [];
 
-        for (let i = 0; i < aValues.length; i++) {
-          const aValue = aValues[i];
-          const index = bValues.findIndex(bValue => {
+        for (const aValue of a) {
+          if (remainingBValues.has(aValue) && isEqualWithImpl(aValue, aValue, undefined, a, b, stack, areValuesEqual)) {
+            remainingBValues.delete(aValue);
+            continue;
+          }
+
+          remainingAValues.push(aValue);
+        }
+
+        if (remainingAValues.length === 0) {
+          return true;
+        }
+
+        const remainingBValuesArray = Array.from(remainingBValues.values());
+
+        for (let i = 0; i < remainingAValues.length; i++) {
+          const aValue = remainingAValues[i];
+          const index = remainingBValuesArray.findIndex(bValue => {
             return isEqualWithImpl(aValue, bValue, undefined, a, b, stack, areValuesEqual);
           });
 
@@ -231,7 +280,7 @@ function areObjectsEqual(
             return false;
           }
 
-          bValues.splice(index, 1);
+          remainingBValuesArray.splice(index, 1);
         }
 
         return true;
