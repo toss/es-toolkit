@@ -32,7 +32,7 @@ const spreadAdd = spread(add);
 spreadAdd([1, 2]); // 3
 
 // 当第二个参数是数组时
-function greet(greeting, names) {
+function greet(greeting, ...names) {
   return `${greeting}, ${names.join(' and ')}!`;
 }
 

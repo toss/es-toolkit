@@ -32,7 +32,7 @@ const spreadAdd = spread(add);
 spreadAdd([1, 2]); // 3
 
 // When the second argument is an array
-function greet(greeting, names) {
+function greet(greeting, ...names) {
   return `${greeting}, ${names.join(' and ')}!`;
 }
 
