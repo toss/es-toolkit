@@ -1,5 +1,3 @@
-import { debounce } from './debounce.ts';
-
 export interface ThrottleOptions {
   /**
    * An optional AbortSignal to cancel the throttled function.
@@ -53,36 +51,106 @@ export function throttle<F extends (...args: any[]) => void>(
   throttleMs: number,
   { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
 ): ThrottledFunction<F> {
-  let pendingAt: number | null = null;
+  const leading = edges.includes('leading');
+  const trailing = edges.includes('trailing');
 
-  const debounced = debounce(
-    function (this: any, ...args: Parameters<F>) {
-      pendingAt = Date.now();
-      func.apply(this, args);
-    },
-    throttleMs,
-    { signal, edges }
-  );
+  let lastInvokeTime: number | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let pendingThis: unknown = undefined;
+  let pendingArgs: Parameters<F> | null = null;
+
+  const clearTimer = () => {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  const clearPending = () => {
+    pendingThis = undefined;
+    pendingArgs = null;
+  };
+
+  const invoke = (time: number) => {
+    if (pendingArgs !== null) {
+      const args = pendingArgs;
+      const thisArg = pendingThis;
+      clearPending();
+      lastInvokeTime = time;
+      func.apply(thisArg, args);
+    }
+  };
+
+  const schedule = (delay: number) => {
+    if (timeoutId === null) {
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        invoke(Date.now());
+      }, delay);
+    }
+  };
+
+  const cancel = () => {
+    clearTimer();
+    clearPending();
+    lastInvokeTime = null;
+  };
+
+  const flush = () => {
+    clearTimer();
+    invoke(Date.now());
+  };
+
+  const setPending = (thisArg: unknown, args: Parameters<F>) => {
+    pendingThis = thisArg;
+    pendingArgs = args;
+  };
 
   const throttled = function (this: any, ...args: Parameters<F>) {
-    if (pendingAt == null) {
-      pendingAt = Date.now();
-    }
-
-    if (Date.now() - pendingAt >= throttleMs) {
-      pendingAt = Date.now();
-      func.apply(this, args);
-
-      debounced.cancel();
-      debounced.schedule();
+    if (signal?.aborted || (!leading && !trailing)) {
       return;
     }
 
-    debounced.apply(this, args);
+    const now = Date.now();
+
+    if (lastInvokeTime === null) {
+      if (leading) {
+        setPending(this, args);
+        invoke(now);
+      } else {
+        setPending(this, args);
+        schedule(throttleMs);
+      }
+
+      return;
+    }
+
+    const remaining = throttleMs - (now - lastInvokeTime);
+
+    if (remaining <= 0) {
+      clearTimer();
+
+      if (leading) {
+        setPending(this, args);
+        invoke(now);
+      } else {
+        setPending(this, args);
+        schedule(throttleMs);
+      }
+
+      return;
+    }
+
+    if (trailing) {
+      setPending(this, args);
+      schedule(remaining);
+    }
   };
 
-  throttled.cancel = debounced.cancel;
-  throttled.flush = debounced.flush;
+  throttled.cancel = cancel;
+  throttled.flush = flush;
+
+  signal?.addEventListener('abort', cancel, { once: true });
 
   return throttled;
 }
