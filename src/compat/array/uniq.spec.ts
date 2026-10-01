@@ -35,4 +35,36 @@ describe('uniq', () => {
     expect(uniq('112')).toEqual(['1', '2']);
     expect(uniq(args)).toEqual([1, 2, 3]);
   });
+
+  it('should read array-like objects by index, ignoring a custom iterator', () => {
+    const arrayLike = {
+      0: 1,
+      1: 1,
+      2: 2,
+      length: 3,
+      *[Symbol.iterator]() {
+        yield 9;
+        yield 9;
+        yield 8;
+      },
+    };
+
+    expect(uniq(arrayLike)).toEqual([1, 2]);
+  });
+
+  it('should read an array subclass by index when it overrides the iterator', () => {
+    class OverriddenIterator extends Array {
+      *[Symbol.iterator](): Generator<string, undefined> {
+        yield 'x';
+        yield 'x';
+        yield 'y';
+        return undefined;
+      }
+    }
+
+    const array = new OverriddenIterator();
+    array.push(1, 1, 2);
+
+    expect(uniq(array)).toEqual([1, 2]);
+  });
 });

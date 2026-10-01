@@ -1,4 +1,3 @@
-import { uniq as uniqToolkit } from '../../array/uniq.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -20,5 +19,12 @@ export function uniq<T>(arr: ArrayLike<T> | null | undefined): T[] {
   if (!isArrayLike(arr)) {
     return [];
   }
-  return uniqToolkit(Array.from(arr));
+
+  const set = new Set<T>();
+
+  for (let i = 0; i < arr.length; i++) {
+    set.add(arr[i]);
+  }
+
+  return [...set];
 }

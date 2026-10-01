@@ -167,6 +167,38 @@ describe('uniqWith', () => {
     expect(result).toEqual([{ id: 1 }, { id: 2 }]);
   });
 
+  it('should read array-like objects by index, ignoring a custom iterator', () => {
+    const arrayLike = {
+      0: 1,
+      1: 1,
+      2: 2,
+      length: 3,
+      *[Symbol.iterator]() {
+        yield 9;
+        yield 9;
+        yield 8;
+      },
+    };
+
+    expect(uniqWith(arrayLike, (a, b) => a === b)).toEqual([1, 2]);
+  });
+
+  it('should read an array subclass by index when it overrides the iterator', () => {
+    class OverriddenIterator extends Array {
+      *[Symbol.iterator](): Generator<string, undefined> {
+        yield 'x';
+        yield 'x';
+        yield 'y';
+        return undefined;
+      }
+    }
+
+    const array = new OverriddenIterator();
+    array.push(1, 1, 2);
+
+    expect(uniqWith(array, (a, b) => a === b)).toEqual([1, 2]);
+  });
+
   it('should return an empty array when input is not array-like', () => {
     expect(uniqWith(null, (a, b) => a === b)).toEqual([]);
   });
