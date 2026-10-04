@@ -8,9 +8,9 @@ import { toString } from '../util/toString.ts';
  * @returns The converted string.
  *
  * @example
- * const convertedStr1 = lowerCase('fred') // returns 'fred'
- * const convertedStr2 = lowerCase('Fred') // returns 'fred'
- * const convertedStr3 = lowerCase('FRED') // returns 'fRED'
+ * const convertedStr1 = lowerFirst('fred') // returns 'fred'
+ * const convertedStr2 = lowerFirst('Fred') // returns 'fred'
+ * const convertedStr3 = lowerFirst('FRED') // returns 'fRED'
  */
 export function lowerFirst<T extends string = string>(str?: T): Uncapitalize<T> {
   return lowerFirstToolkit(toString(str)) as Uncapitalize<T>;
