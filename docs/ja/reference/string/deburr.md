@@ -40,6 +40,16 @@ deburr('niño'); // returns 'nino'
 deburr('mañana'); // returns 'manana'
 ```
 
+ラテン文字のみが変換されます。ハングル、キリル文字、ギリシャ文字など他の文字体系の文字は、ダイアクリティカルマークが付いていてもそのまま保持されます。
+
+```typescript
+import { deburr } from 'es-toolkit/string';
+
+deburr('한국어'); // returns '한국어'
+deburr('йогурт'); // returns 'йогурт'
+deburr('Café Москва 한국어'); // returns 'Cafe Москва 한국어'
+```
+
 URL生成やファイル名の整理に活用できます。
 
 ```typescript
