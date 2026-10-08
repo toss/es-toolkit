@@ -5,9 +5,9 @@
  * @returns The converted string.
  *
  * @example
- * const convertedStr1 = lowerCase('fred') // returns 'fred'
- * const convertedStr2 = lowerCase('Fred') // returns 'fred'
- * const convertedStr3 = lowerCase('FRED') // returns 'fRED'
+ * const convertedStr1 = lowerFirst('fred') // returns 'fred'
+ * const convertedStr2 = lowerFirst('Fred') // returns 'fred'
+ * const convertedStr3 = lowerFirst('FRED') // returns 'fRED'
  */
 export function lowerFirst(str: string): string {
   return str.substring(0, 1).toLowerCase() + str.substring(1);
