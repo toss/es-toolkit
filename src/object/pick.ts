@@ -22,7 +22,16 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
     const key = keys[i];
 
     if (Object.hasOwn(obj, key)) {
-      result[key] = obj[key];
+      if (key === '__proto__') {
+        Object.defineProperty(result, key, {
+          configurable: true,
+          enumerable: true,
+          value: obj[key],
+          writable: true,
+        });
+      } else {
+        result[key] = obj[key];
+      }
     }
   }
 

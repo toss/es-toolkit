@@ -93,7 +93,16 @@ export function omitBy<T, S extends T>(
     const value = object[key as keyof typeof object];
 
     if (!predicate(value, key, object)) {
-      result[key] = value;
+      if (key === '__proto__') {
+        Object.defineProperty(result, key, {
+          configurable: true,
+          enumerable: true,
+          value,
+          writable: true,
+        });
+      } else {
+        result[key] = value;
+      }
     }
   }
 

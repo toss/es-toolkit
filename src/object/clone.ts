@@ -85,8 +85,16 @@ export function clone<T>(obj: T): T {
     return newFile;
   }
 
-  if (typeof obj === 'object') {
+  if (typeof obj === 'object' && obj !== null) {
     const newObject = Object.create(prototype);
+    if (Object.hasOwn(obj, '__proto__')) {
+      Object.defineProperty(newObject, '__proto__', {
+        configurable: true,
+        enumerable: true,
+        value: (obj as any)['__proto__'],
+        writable: true,
+      });
+    }
     return Object.assign(newObject, obj);
   }
 
