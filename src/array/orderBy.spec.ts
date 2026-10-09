@@ -96,7 +96,7 @@ describe('orderBy', () => {
       { name: 'c', value: 1 },
     ]);
   });
-  
+
   it('should place NaN values after other values when ascending', () => {
     const items = [
       { name: 'a', value: 3 },
