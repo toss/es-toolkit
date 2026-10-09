@@ -4,6 +4,8 @@ import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Creates an object composed of keys generated from the results of running each element of collection through iteratee.
  * The order of grouped values is determined by the order they occur in collection.
@@ -96,7 +98,7 @@ export function groupBy<T, K extends PropertyKey>(
     // which also passes the index and array (e.g. `groupBy(['10', '11'], parseInt)`).
     const key = getKeyFromItem(item) as K;
 
-    if (!Object.hasOwn(result, key)) {
+    if (!hasOwnProperty.call(result, key)) {
       result[key] = [];
     }
 
