@@ -48,7 +48,7 @@ unzipWith(
     ['b', 'y'],
     ['c', 'z'],
   ],
-  (a, b) => a + b
+  (a, b, c) => a + b + c
 );
 // 返回: ['abc', 'xyz']
 

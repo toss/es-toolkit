@@ -82,7 +82,7 @@ import { rearg } from 'es-toolkit/compat';
 const fn = (a, b, c, d) => [a, b, c, d];
 
 // 嵌套数组索引
-const rearranged = rearg(fn, [1, [2, 0]], 3);
+const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // 返回值: ['b', 'c', 'a', 'd']
 ```

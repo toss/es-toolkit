@@ -30,7 +30,7 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 
 // 使用数组路径更新
 update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 16 } }] }
 ```
 
 如果路径不存在，将自动创建必要的嵌套结构。
