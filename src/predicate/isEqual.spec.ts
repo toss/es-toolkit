@@ -112,4 +112,43 @@ describe('isEqual', () => {
 
     expect(isEqual(buffer3, buffer4)).toBe(false);
   });
+
+  it('should return true for equal Maps with structurally-equal object keys', () => {
+    const map1 = new Map<object, number>([
+      [{ a: 1 }, 1],
+      [{ b: 2 }, 2],
+    ]);
+    const map2 = new Map<object, number>([
+      [{ a: 1 }, 1],
+      [{ b: 2 }, 2],
+    ]);
+
+    expect(isEqual(map1, map2)).toBe(true);
+  });
+
+  it('should return true for equal Maps with duplicate-shaped elements in different order', () => {
+    const map1 = new Map<object, number>([
+      [{}, 1],
+      [{}, 2],
+    ]);
+    const map2 = new Map<object, number>([
+      [{}, 2],
+      [{}, 1],
+    ]);
+
+    expect(isEqual(map1, map2)).toBe(true);
+  });
+
+  it('should return false for Maps with structurally-equal keys but mismatched values', () => {
+    const map1 = new Map<object, number>([
+      [{}, 1],
+      [{}, 2],
+    ]);
+    const map2 = new Map<object, number>([
+      [{}, 1],
+      [{}, 3],
+    ]);
+
+    expect(isEqual(map1, map2)).toBe(false);
+  });
 });
