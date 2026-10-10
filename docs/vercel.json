@@ -6,10 +6,10 @@
     }
   },
   "redirects": [
-    { "source": "/iterator/intro.html", "destination": "/iterator.html", "permanent": false },
-    { "source": "/ko/iterator/intro.html", "destination": "/ko/iterator.html", "permanent": false },
-    { "source": "/ja/iterator/intro.html", "destination": "/ja/iterator.html", "permanent": false },
-    { "source": "/zh_hans/iterator/intro.html", "destination": "/zh_hans/iterator.html", "permanent": false },
+    { "source": "/iterator/intro.html", "destination": "/intro.html", "permanent": false },
+    { "source": "/ko/iterator/intro.html", "destination": "/ko/intro.html", "permanent": false },
+    { "source": "/ja/iterator/intro.html", "destination": "/ja/intro.html", "permanent": false },
+    { "source": "/zh_hans/iterator/intro.html", "destination": "/zh_hans/intro.html", "permanent": false },
     {
       "source": "/iterator/reference/:name(drop|every|filter|find|flatMap|forEach|map|reduce|some|take|toArray).html",
       "destination": "/fp/reference/iterator/:name.html",

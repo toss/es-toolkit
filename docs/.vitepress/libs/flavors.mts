@@ -80,7 +80,6 @@ export const flavors = [
     guideItems: [
       { labelKey: 'introduction', slug: 'intro' },
       { labelKey: 'installation', slug: 'usage' },
-      { labelKey: 'iterator', slug: 'iterator' },
       { labelKey: 'bundleSize', slug: 'bundle-size' },
       { labelKey: 'performance', slug: 'performance' },
       { labelKey: 'browserSupport', slug: 'browser-support' },

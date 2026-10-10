@@ -7,7 +7,6 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '简介',
     installation: '安装和使用',
-    iterator: '迭代器',
     bundleSize: '包体积',
     performance: '性能',
     browserSupport: '浏览器支持',

@@ -7,7 +7,6 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '紹介',
     installation: 'インストールと使用方法',
-    iterator: 'イテレータ',
     bundleSize: 'バンドルサイズ',
     performance: 'パフォーマンス',
     browserSupport: 'ブラウザサポート',
