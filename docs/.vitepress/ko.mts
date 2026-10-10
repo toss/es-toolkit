@@ -7,6 +7,7 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '소개',
     installation: '설치 및 사용 방법',
+    iterator: '이터레이터',
     bundleSize: '번들 사이즈',
     performance: '성능',
     browserSupport: '브라우저 지원',
@@ -16,6 +17,7 @@ const labels: SidebarLabels = {
     array: '배열',
     bigint: 'BigInt',
     function: '함수',
+    iterator: '이터레이터',
     map: 'Map',
     math: '숫자',
     object: '객체',

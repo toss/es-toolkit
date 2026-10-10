@@ -6,6 +6,30 @@
     }
   },
   "redirects": [
+    { "source": "/iterator/intro.html", "destination": "/iterator.html", "permanent": false },
+    { "source": "/ko/iterator/intro.html", "destination": "/ko/iterator.html", "permanent": false },
+    { "source": "/ja/iterator/intro.html", "destination": "/ja/iterator.html", "permanent": false },
+    { "source": "/zh_hans/iterator/intro.html", "destination": "/zh_hans/iterator.html", "permanent": false },
+    {
+      "source": "/iterator/reference/:path*.html",
+      "destination": "/reference/iterator/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/ko/iterator/reference/:path*.html",
+      "destination": "/ko/reference/iterator/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/ja/iterator/reference/:path*.html",
+      "destination": "/ja/reference/iterator/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/zh_hans/iterator/reference/:path*.html",
+      "destination": "/zh_hans/reference/iterator/:path*.html",
+      "permanent": false
+    },
     { "source": "/compatibility.html", "destination": "/compat/intro.html", "permanent": false },
     { "source": "/ko/compatibility.html", "destination": "/ko/compat/intro.html", "permanent": false },
     { "source": "/ja/compatibility.html", "destination": "/ja/compat/intro.html", "permanent": false },

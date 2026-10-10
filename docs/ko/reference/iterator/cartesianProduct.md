@@ -10,7 +10,7 @@ const pairs = cartesianProduct(source1, source2);
 
 ### `cartesianProduct(...sources)`
 
-여러 시퀀스에서 가능한 모든 요소 조합이 필요할 때 `cartesianProduct`를 사용하세요. 예를 들어 모든 사용자와 모든 역할을 짝짓거나, 파라미터 집합으로 테스트 케이스를 만들 때요. 튜플은 사전식 순서로 나와요. 배열 버전 [`cartesianProduct`](../../reference/array/cartesianProduct.md)와 마찬가지로, 가장 오른쪽 소스가 주행계 숫자처럼 가장 빠르게 넘어가요.
+여러 시퀀스에서 가능한 모든 요소 조합이 필요할 때 `cartesianProduct`를 사용하세요. 예를 들어 모든 사용자와 모든 역할을 짝짓거나, 파라미터 집합으로 테스트 케이스를 만들 때요. 튜플은 사전식 순서로 나와요. 배열 버전 [`cartesianProduct`](../array/cartesianProduct.md)와 마찬가지로, 가장 오른쪽 소스가 주행계 숫자처럼 가장 빠르게 넘어가요.
 
 첫 번째를 제외한 소스들은 여러 번 순회되기 때문에, 순회가 시작될 때 배열로 버퍼링돼요. 첫 번째 소스는 요소를 하나씩 지연 소비하므로 무한 이터레이터여도 괜찮아요. 순회가 끝나면 — 첫 번째 소스가 소진됐든, 다른 소스가 비어 있었든, 소비자가 일찍 멈췄든 — 모든 소스가 `return` 메서드를 통해 닫혀요.
 

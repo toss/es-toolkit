@@ -12,7 +12,7 @@ const numbers = range(start, end, step);
 
 ### `range(end)` / `range(start, end)` / `range(start, end, step)`
 
-配列を確保せずに数のシーケンスを生成するには `range` を使用してください。引数が 1 つの場合は `0` から `end`（含まない）まで `1` ずつ数えます。引数が 2 つの場合は `start`（含む）から始まります。3 番目の引数は間隔を設定し、負の値にすると減っていきます。`es-toolkit/math` の配列版 [`range`](../../reference/math/range.md) と違って、イテレータが消費されるまで数は計算されないため、`range(0, Infinity)` は上限のないカウンターを書く実用的な方法になります。
+配列を確保せずに数のシーケンスを生成するには `range` を使用してください。引数が 1 つの場合は `0` から `end`（含まない）まで `1` ずつ数えます。引数が 2 つの場合は `start`（含む）から始まります。3 番目の引数は間隔を設定し、負の値にすると減っていきます。`es-toolkit/math` の配列版 [`range`](../math/range.md) と違って、イテレータが消費されるまで数は計算されないため、`range(0, Infinity)` は上限のないカウンターを書く実用的な方法になります。
 
 ```typescript
 import { range } from 'es-toolkit/iterator';

@@ -7,6 +7,7 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '简介',
     installation: '安装和使用',
+    iterator: '迭代器',
     bundleSize: '包体积',
     performance: '性能',
     browserSupport: '浏览器支持',
@@ -16,6 +17,7 @@ const labels: SidebarLabels = {
     array: '数组工具',
     bigint: 'BigInt 工具',
     function: '函数工具',
+    iterator: '迭代器工具',
     map: 'Map 工具',
     math: '数学工具',
     object: '对象工具',

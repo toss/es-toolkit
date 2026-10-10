@@ -15,7 +15,7 @@ takeWhile(hugeArray.values(), x => x < 100)
 
 每个函数都接收一个 `Iterator` 作为第一个参数——也就是 `array.values()`、生成器函数、`Map`/`Set` 迭代器等给出的值。惰性函数返回的 `IteratorObject` 以原生的 `Iterator.prototype` 为原型,因此结果带有所有[原生迭代器辅助方法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)(`map`、`filter`、`take`、`drop`、`flatMap`、`reduce`、`toArray` 等),可以与它们无缝地链式调用。
 
-这个模块只提供原生辅助方法缺少的部分。基于数量的 `take` 和 `drop`,以及 `map`、`filter` 等已经存在于 `Iterator.prototype` 上;es-toolkit 在此之上补充了基于谓词的、有状态的以及多数据源的操作:[`cartesianProduct`](./reference/cartesianProduct.md)、[`chunk`](./reference/chunk.md)、[`count`](./reference/count.md)、[`dropWhile`](./reference/dropWhile.md)、[`head`](./reference/head.md)、[`iterate`](./reference/iterate.md)、[`partition`](./reference/partition.md)、[`range`](./reference/range.md)、[`scan`](./reference/scan.md)、[`takeWhile`](./reference/takeWhile.md)、[`uniqBy`](./reference/uniqBy.md) 和 [`zip`](./reference/zip.md)。
+这个模块只提供原生辅助方法缺少的部分。基于数量的 `take` 和 `drop`,以及 `map`、`filter` 等已经存在于 `Iterator.prototype` 上;es-toolkit 在此之上补充了基于谓词的、有状态的以及多数据源的操作:[`cartesianProduct`](./reference/iterator/cartesianProduct.md)、[`chunk`](./reference/iterator/chunk.md)、[`count`](./reference/iterator/count.md)、[`dropWhile`](./reference/iterator/dropWhile.md)、[`head`](./reference/iterator/head.md)、[`iterate`](./reference/iterator/iterate.md)、[`partition`](./reference/iterator/partition.md)、[`range`](./reference/iterator/range.md)、[`scan`](./reference/iterator/scan.md)、[`takeWhile`](./reference/iterator/takeWhile.md)、[`uniqBy`](./reference/iterator/uniqBy.md) 和 [`zip`](./reference/iterator/zip.md)。
 
 ## 惰性求值与无限序列
 
@@ -51,7 +51,7 @@ chunk(lines(), 100).take(2).toArray();
 
 ## 与 pipe 一起使用
 
-所有操作也都以柯里化形式从 `es-toolkit/fp/iterator` 提供,以便与 [`pipe`](../fp/reference/pipe.md) 一起使用;此外还提供了原生辅助方法(`map`、`filter`、`take` 等)的适用于管道的封装。
+所有操作也都以柯里化形式从 `es-toolkit/fp/iterator` 提供,以便与 [`pipe`](./fp/reference/pipe.md) 一起使用;此外还提供了原生辅助方法(`map`、`filter`、`take` 等)的适用于管道的封装。
 
 ```typescript
 import { pipe } from 'es-toolkit/fp';

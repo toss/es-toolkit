@@ -10,7 +10,7 @@ const pairs = cartesianProduct(source1, source2);
 
 ### `cartesianProduct(...sources)`
 
-当你需要多个序列中元素的所有可能组合时,请使用 `cartesianProduct`。例如,将每个用户与每个角色配对,或从参数集合生成测试用例。元组按字典序产生:与数组版 [`cartesianProduct`](../../reference/array/cartesianProduct.md) 一样,最右边的源推进得最快,就像里程表的数字一样。
+当你需要多个序列中元素的所有可能组合时,请使用 `cartesianProduct`。例如,将每个用户与每个角色配对,或从参数集合生成测试用例。元组按字典序产生:与数组版 [`cartesianProduct`](../array/cartesianProduct.md) 一样,最右边的源推进得最快,就像里程表的数字一样。
 
 由于除第一个源之外的所有源都会被多次遍历,它们会在迭代开始时被缓冲为数组。第一个源逐个元素地惰性消费,因此可以是无限迭代器。当迭代结束时 — 无论是第一个源耗尽、其他源为空,还是消费者提前停止 — 每个源都会通过其 `return` 方法关闭。
 

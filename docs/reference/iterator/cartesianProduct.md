@@ -10,7 +10,7 @@ const pairs = cartesianProduct(source1, source2);
 
 ### `cartesianProduct(...sources)`
 
-Use `cartesianProduct` when you want every possible combination of elements from several sequences — for example, pairing every user with every role, or generating test cases from parameter sets. Tuples are yielded in lexicographic order: the rightmost source advances fastest, like the digits of an odometer, just as in the array [`cartesianProduct`](../../reference/array/cartesianProduct.md).
+Use `cartesianProduct` when you want every possible combination of elements from several sequences — for example, pairing every user with every role, or generating test cases from parameter sets. Tuples are yielded in lexicographic order: the rightmost source advances fastest, like the digits of an odometer, just as in the array [`cartesianProduct`](../array/cartesianProduct.md).
 
 Because every source except the first is traversed many times, those sources are buffered into arrays when iteration starts. The first source is consumed lazily, one element at a time, so it may be infinite. When iteration ends — because the first source ran out, another source was empty, or the consumer stopped early — every source is closed via its `return` method.
 

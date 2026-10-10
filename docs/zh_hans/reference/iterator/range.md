@@ -12,7 +12,7 @@ const numbers = range(start, end, step);
 
 ### `range(end)` / `range(start, end)` / `range(start, end, step)`
 
-使用 `range` 生成数字序列而无需分配数组。只传一个参数时,它从 `0` 开始以步长 `1` 数到 `end`(不含);传两个参数时,从 `start`(含)开始;第三个参数设置步长,步长可以为负,用于递减计数。与 `es-toolkit/math` 中基于数组的 [`range`](../../reference/math/range.md) 不同,在迭代器被消费之前不会计算任何数字,因此 `range(0, Infinity)` 是编写无上限计数器的实用方式。
+使用 `range` 生成数字序列而无需分配数组。只传一个参数时,它从 `0` 开始以步长 `1` 数到 `end`(不含);传两个参数时,从 `start`(含)开始;第三个参数设置步长,步长可以为负,用于递减计数。与 `es-toolkit/math` 中基于数组的 [`range`](../math/range.md) 不同,在迭代器被消费之前不会计算任何数字,因此 `range(0, Infinity)` 是编写无上限计数器的实用方式。
 
 ```typescript
 import { range } from 'es-toolkit/iterator';

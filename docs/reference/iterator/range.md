@@ -12,7 +12,7 @@ const numbers = range(start, end, step);
 
 ### `range(end)` / `range(start, end)` / `range(start, end, step)`
 
-Use `range` to generate a numeric sequence without allocating an array. With one argument it counts from `0` up to `end` (exclusive) by `1`; with two arguments it starts at `start` (inclusive); the third argument sets the step, which may be negative to count down. Unlike the array [`range`](../../reference/math/range.md) in `es-toolkit/math`, no numbers are computed until the iterator is consumed, so `range(0, Infinity)` is a practical way to write an unbounded counter.
+Use `range` to generate a numeric sequence without allocating an array. With one argument it counts from `0` up to `end` (exclusive) by `1`; with two arguments it starts at `start` (inclusive); the third argument sets the step, which may be negative to count down. Unlike the array [`range`](../math/range.md) in `es-toolkit/math`, no numbers are computed until the iterator is consumed, so `range(0, Infinity)` is a practical way to write an unbounded counter.
 
 ```typescript
 import { range } from 'es-toolkit/iterator';

@@ -12,7 +12,7 @@ const numbers = range(start, end, step);
 
 ### `range(end)` / `range(start, end)` / `range(start, end, step)`
 
-배열을 할당하지 않고 숫자 시퀀스를 만들 때 `range`를 사용하세요. 인자가 하나면 `0`부터 `end` 직전까지(미포함) `1`씩 세요. 인자가 둘이면 `start`부터(포함) 시작해요. 세 번째 인자는 간격을 정하고, 음수로 지정하면 감소하는 방향으로 셀 수 있어요. `es-toolkit/math`의 배열 버전 [`range`](../../reference/math/range.md)와 달리, 이터레이터가 소비되기 전에는 어떤 숫자도 계산되지 않아서 `range(0, Infinity)`로 끝없는 카운터를 실용적으로 만들 수 있어요.
+배열을 할당하지 않고 숫자 시퀀스를 만들 때 `range`를 사용하세요. 인자가 하나면 `0`부터 `end` 직전까지(미포함) `1`씩 세요. 인자가 둘이면 `start`부터(포함) 시작해요. 세 번째 인자는 간격을 정하고, 음수로 지정하면 감소하는 방향으로 셀 수 있어요. `es-toolkit/math`의 배열 버전 [`range`](../math/range.md)와 달리, 이터레이터가 소비되기 전에는 어떤 숫자도 계산되지 않아서 `range(0, Infinity)`로 끝없는 카운터를 실용적으로 만들 수 있어요.
 
 ```typescript
 import { range } from 'es-toolkit/iterator';

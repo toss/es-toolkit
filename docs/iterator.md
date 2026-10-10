@@ -15,7 +15,7 @@ takeWhile(hugeArray.values(), x => x < 100)
 
 Every function takes an `Iterator` as its first argument — the value you get from `array.values()`, a generator function, a `Map`/`Set` iterator, and so on. Lazy functions return an `IteratorObject` whose prototype is the native `Iterator.prototype`, so the result carries every [native iterator helper](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator) (`map`, `filter`, `take`, `drop`, `flatMap`, `reduce`, `toArray`, ...) and chains with them seamlessly.
 
-The module only ships what the native helpers are missing. Count-based `take` and `drop`, `map`, `filter`, and friends already exist on `Iterator.prototype`; es-toolkit adds the predicate-based, stateful, and multi-source operations on top: [`cartesianProduct`](./reference/cartesianProduct.md), [`chunk`](./reference/chunk.md), [`count`](./reference/count.md), [`dropWhile`](./reference/dropWhile.md), [`head`](./reference/head.md), [`iterate`](./reference/iterate.md), [`partition`](./reference/partition.md), [`range`](./reference/range.md), [`scan`](./reference/scan.md), [`takeWhile`](./reference/takeWhile.md), [`uniqBy`](./reference/uniqBy.md), and [`zip`](./reference/zip.md).
+The module only ships what the native helpers are missing. Count-based `take` and `drop`, `map`, `filter`, and friends already exist on `Iterator.prototype`; es-toolkit adds the predicate-based, stateful, and multi-source operations on top: [`cartesianProduct`](./reference/iterator/cartesianProduct.md), [`chunk`](./reference/iterator/chunk.md), [`count`](./reference/iterator/count.md), [`dropWhile`](./reference/iterator/dropWhile.md), [`head`](./reference/iterator/head.md), [`iterate`](./reference/iterator/iterate.md), [`partition`](./reference/iterator/partition.md), [`range`](./reference/iterator/range.md), [`scan`](./reference/iterator/scan.md), [`takeWhile`](./reference/iterator/takeWhile.md), [`uniqBy`](./reference/iterator/uniqBy.md), and [`zip`](./reference/iterator/zip.md).
 
 ## Lazy evaluation and infinite sequences
 
@@ -51,7 +51,7 @@ chunk(lines(), 100).take(2).toArray();
 
 ## Using with pipe
 
-Every operation is also available from `es-toolkit/fp/iterator` in a curried form for use with [`pipe`](../fp/reference/pipe.md), alongside pipe-friendly wrappers of the native helpers (`map`, `filter`, `take`, ...).
+Every operation is also available from `es-toolkit/fp/iterator` in a curried form for use with [`pipe`](./fp/reference/pipe.md), alongside pipe-friendly wrappers of the native helpers (`map`, `filter`, `take`, ...).
 
 ```typescript
 import { pipe } from 'es-toolkit/fp';

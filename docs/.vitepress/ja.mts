@@ -7,6 +7,7 @@ const labels: SidebarLabels = {
   guideItems: {
     introduction: '紹介',
     installation: 'インストールと使用方法',
+    iterator: 'イテレータ',
     bundleSize: 'バンドルサイズ',
     performance: 'パフォーマンス',
     browserSupport: 'ブラウザサポート',
@@ -16,6 +17,7 @@ const labels: SidebarLabels = {
     array: '配列',
     bigint: 'BigInt',
     function: '関数',
+    iterator: 'イテレータ',
     map: 'Map',
     math: '数学',
     object: 'オブジェクト',

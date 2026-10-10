@@ -10,7 +10,7 @@ const pairs = zip(source1, source2);
 
 ### `zip(...sources)`
 
-Use `zip` when you want to walk several sequences in lockstep — for example, pairing indices with values or names with scores. Elements at matching positions are combined into tuples, and iteration stops as soon as the **shortest** source is exhausted. Stopping at the shortest source (rather than padding to the longest, as the array [`zip`](../../reference/array/zip.md) does) is what makes it safe to combine finite and infinite iterators. When iteration ends — because a source ran out or the consumer stopped early — every source is closed via its `return` method.
+Use `zip` when you want to walk several sequences in lockstep — for example, pairing indices with values or names with scores. Elements at matching positions are combined into tuples, and iteration stops as soon as the **shortest** source is exhausted. Stopping at the shortest source (rather than padding to the longest, as the array [`zip`](../array/zip.md) does) is what makes it safe to combine finite and infinite iterators. When iteration ends — because a source ran out or the consumer stopped early — every source is closed via its `return` method.
 
 ```typescript
 import { zip } from 'es-toolkit/iterator';
