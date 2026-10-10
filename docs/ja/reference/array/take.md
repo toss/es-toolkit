@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## 使用法
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 配列の前から何個かの要素だけが必要な場合は `take` を使用してください。要求された個数が配列の長さより大きい場合は配列全体を返します。
 
