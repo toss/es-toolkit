@@ -1,34 +1,34 @@
-# stringifySearch
+# stringify (クエリ文字列用)
 
 オブジェクトから、URL の末尾に付けるクエリ文字列を作ります。結果は `?a=1&b=2` のように `?` から始まります。
 
 ```typescript
-const search = stringifySearch(query);
+const search = stringify(query);
 ```
 
 ## 使用法
 
-### `stringifySearch(query)`
+### `stringify(query)`
 
-URL にクエリパラメータを付けたいときは `stringifySearch` を使用してください。結果が `?` から始まるので、パスの後ろにそのままつなげられます。
+URL にクエリパラメータを付けたいときは `stringify` を使用してください。結果が `?` から始まるので、パスの後ろにそのままつなげられます。
 
 ```typescript
-import { stringifySearch } from 'es-toolkit/util';
+import { stringify } from 'es-toolkit/query-string';
 
 // オブジェクトからクエリ文字列を作ります。
-stringifySearch({ page: 1, q: 'hello world' });
+stringify({ page: 1, q: 'hello world' });
 // '?page=1&q=hello%20world' を返します
 
 // 配列は同じキーを繰り返して表します。空文字列は残り、空の配列は含まれません。
-stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+stringify({ tags: ['a', 'b'], q: '', ids: [] });
 // '?tags=a&tags=b&q=' を返します
 
 // パスの後ろにつなげます。値が `null` や `undefined` のキーは含まれません。
-`/items${stringifySearch({ page: 1, ref: undefined })}`;
+`/items${stringify({ page: 1, ref: undefined })}`;
 // '/items?page=1' を返します
 
 // 付ける値が一つもなければ、パスはそのままです。
-`/items${stringifySearch({ ref: undefined })}`;
+`/items${stringify({ ref: undefined })}`;
 // '/items' を返します
 ```
 

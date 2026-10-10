@@ -21,6 +21,7 @@ const labels: SidebarLabels = {
     object: 'オブジェクト',
     predicate: '述語',
     promise: 'Promise',
+    'query-string': 'クエリ文字列',
     set: 'Set',
     string: '文字列',
     util: 'ユーティリティ',

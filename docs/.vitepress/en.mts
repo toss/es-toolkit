@@ -21,6 +21,7 @@ const labels: SidebarLabels = {
     object: 'Object Utilities',
     predicate: 'Predicates',
     promise: 'Promise Utilities',
+    'query-string': 'Query String Utilities',
     set: 'Set Utilities',
     string: 'String Utilities',
     util: 'Utility Functions',

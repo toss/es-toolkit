@@ -90,6 +90,7 @@ export const flavors = [
       'object',
       'predicate',
       'promise',
+      'query-string',
       'set',
       'string',
       'util',

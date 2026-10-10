@@ -14,15 +14,13 @@ type QueryValue = string | number | boolean | bigint | null | undefined;
  * @throws {URIError} Throws when a key or value contains an unpaired surrogate.
  *
  * @example
- * stringifySearch({ page: 1, tags: ['a', 'b'], q: 'hello world', ref: undefined });
+ * stringify({ page: 1, tags: ['a', 'b'], q: 'hello world', ref: undefined });
  * // => '?page=1&tags=a&tags=b&q=hello%20world'
  *
- * stringifySearch({ ref: undefined });
+ * stringify({ ref: undefined });
  * // => ''
  */
-export function stringifySearch<T extends object & { [K in keyof T]: QueryValue | readonly QueryValue[] }>(
-  query: T
-): string {
+export function stringify<T extends object & { [K in keyof T]: QueryValue | readonly QueryValue[] }>(query: T): string {
   const parts: string[] = [];
   const keys = Object.keys(query) as Array<keyof T & string>;
 

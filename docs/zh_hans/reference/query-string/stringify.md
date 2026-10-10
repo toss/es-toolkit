@@ -1,34 +1,34 @@
-# stringifySearch
+# stringify (用于查询字符串)
 
 根据对象生成拼接在 URL 末尾的查询字符串。结果以 `?` 开头,例如 `?a=1&b=2`。
 
 ```typescript
-const search = stringifySearch(query);
+const search = stringify(query);
 ```
 
 ## 用法
 
-### `stringifySearch(query)`
+### `stringify(query)`
 
-当您需要给 URL 加上查询参数时,请使用 `stringifySearch`。结果以 `?` 开头,可以直接拼接在路径后面。
+当您需要给 URL 加上查询参数时,请使用 `stringify`。结果以 `?` 开头,可以直接拼接在路径后面。
 
 ```typescript
-import { stringifySearch } from 'es-toolkit/util';
+import { stringify } from 'es-toolkit/query-string';
 
 // 根据对象生成查询字符串。
-stringifySearch({ page: 1, q: 'hello world' });
+stringify({ page: 1, q: 'hello world' });
 // 返回 '?page=1&q=hello%20world'
 
 // 数组会重复使用同一个键。空字符串会保留,空数组会被忽略。
-stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+stringify({ tags: ['a', 'b'], q: '', ids: [] });
 // 返回 '?tags=a&tags=b&q='
 
 // 拼接在路径后面。值为 `null` 或 `undefined` 的键会被忽略。
-`/items${stringifySearch({ page: 1, ref: undefined })}`;
+`/items${stringify({ page: 1, ref: undefined })}`;
 // 返回 '/items?page=1'
 
 // 没有任何可添加的值时,路径保持不变。
-`/items${stringifySearch({ ref: undefined })}`;
+`/items${stringify({ ref: undefined })}`;
 // 返回 '/items'
 ```
 

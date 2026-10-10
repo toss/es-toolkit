@@ -1,34 +1,34 @@
-# stringifySearch
+# stringify (for query strings)
 
 Converts an object into a query string to append to a URL, such as `?a=1&b=2`.
 
 ```typescript
-const search = stringifySearch(query);
+const search = stringify(query);
 ```
 
 ## Usage
 
-### `stringifySearch(query)`
+### `stringify(query)`
 
-Use `stringifySearch` when you want to add query parameters to a URL. The result starts with `?`, so you can append it to a path as is.
+Use `stringify` when you want to add query parameters to a URL. The result starts with `?`, so you can append it to a path as is.
 
 ```typescript
-import { stringifySearch } from 'es-toolkit/util';
+import { stringify } from 'es-toolkit/query-string';
 
 // Convert an object into a query string.
-stringifySearch({ page: 1, q: 'hello world' });
+stringify({ page: 1, q: 'hello world' });
 // Returns: '?page=1&q=hello%20world'
 
 // Arrays repeat the key. Empty strings are kept, and empty arrays are left out.
-stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+stringify({ tags: ['a', 'b'], q: '', ids: [] });
 // Returns: '?tags=a&tags=b&q='
 
 // Append it to a path. Keys whose value is `null` or `undefined` are left out.
-`/items${stringifySearch({ page: 1, ref: undefined })}`;
+`/items${stringify({ page: 1, ref: undefined })}`;
 // Returns: '/items?page=1'
 
 // When there is nothing to add, the path stays the same.
-`/items${stringifySearch({ ref: undefined })}`;
+`/items${stringify({ ref: undefined })}`;
 // Returns: '/items'
 ```
 

@@ -1,34 +1,34 @@
-# stringifySearch
+# stringify (쿼리 문자열용)
 
 객체로 URL 뒤에 붙일 쿼리 문자열을 만들어요. 결과는 `?a=1&b=2`처럼 `?`로 시작해요.
 
 ```typescript
-const search = stringifySearch(query);
+const search = stringify(query);
 ```
 
 ## 사용법
 
-### `stringifySearch(query)`
+### `stringify(query)`
 
-URL에 쿼리 파라미터를 붙여야 할 때 `stringifySearch`를 사용하세요. 결과가 `?`로 시작하기 때문에 경로 뒤에 바로 이어 붙이면 돼요.
+URL에 쿼리 파라미터를 붙여야 할 때 `stringify`를 사용하세요. 결과가 `?`로 시작하기 때문에 경로 뒤에 바로 이어 붙이면 돼요.
 
 ```typescript
-import { stringifySearch } from 'es-toolkit/util';
+import { stringify } from 'es-toolkit/query-string';
 
 // 객체로 쿼리 문자열을 만들어요.
-stringifySearch({ page: 1, q: 'hello world' });
+stringify({ page: 1, q: 'hello world' });
 // '?page=1&q=hello%20world'를 반환해요
 
 // 배열은 같은 키를 반복해서 넣어요. 빈 문자열은 그대로 두고, 빈 배열은 넣지 않아요.
-stringifySearch({ tags: ['a', 'b'], q: '', ids: [] });
+stringify({ tags: ['a', 'b'], q: '', ids: [] });
 // '?tags=a&tags=b&q='를 반환해요
 
 // 경로 뒤에 붙여요. 값이 `null`이나 `undefined`인 키는 넣지 않아요.
-`/items${stringifySearch({ page: 1, ref: undefined })}`;
+`/items${stringify({ page: 1, ref: undefined })}`;
 // '/items?page=1'을 반환해요
 
 // 넣을 값이 하나도 없으면 경로가 그대로 남아요.
-`/items${stringifySearch({ ref: undefined })}`;
+`/items${stringify({ ref: undefined })}`;
 // '/items'를 반환해요
 ```
 
