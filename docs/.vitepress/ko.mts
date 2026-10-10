@@ -21,6 +21,7 @@ const labels: SidebarLabels = {
     object: '객체',
     predicate: '타입 가드',
     promise: 'Promise',
+    'query-string': '쿼리 문자열',
     set: 'Set',
     string: '문자열',
     util: '유틸리티',
