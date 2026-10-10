@@ -13,9 +13,8 @@
  *   2. Provide docs at `/{prefix}/{slug}.md` and `/{prefix}/reference/<category>/...`.
  *   3. Provide labels in each locale file (`guideItems[labelKey]`, `categories[name]`).
  *
- * Each category becomes a collapsible group read from `/{prefix}/reference/<category>/`.
- * Docs placed directly in `/{prefix}/reference/` are listed after the groups, so a
- * flavor can use both, or set `categories` to an empty array to list only those docs.
+ * If a flavor does not need category groups, set `categories` to an empty array.
+ * Its reference docs will be read directly from `/{prefix}/reference/*.md`.
  */
 export interface GuideItem {
   /** Resolved against `SidebarLabels.guideItems` per locale. */
@@ -36,6 +35,11 @@ export interface FlavorSpec {
   prefix: string;
   guideItems: readonly GuideItem[];
   categories: readonly string[];
+  /**
+   * Folders under `/{prefix}/reference/` listed as their own sidebar sections after the
+   * reference, separated by a divider instead of folded into a collapsible group.
+   */
+  sections: readonly string[];
   /** SVG path `d` attributes rendered inside a 24x24 stroke icon. */
   icon: readonly string[];
   /** CSS color (or `var(...)`) applied to the icon stroke. */
@@ -98,6 +102,7 @@ export const flavors = [
       'util',
       'error',
     ],
+    sections: [],
     icon: WRENCH_ICON,
     iconColor: 'var(--vp-c-brand-1)',
   },
@@ -113,6 +118,7 @@ export const flavors = [
     prefix: 'server',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: [],
+    sections: [],
     icon: SERVER_ICON,
     iconColor: 'var(--vp-c-indigo-1)',
     badge: 'NEW',
@@ -129,6 +135,7 @@ export const flavors = [
     prefix: 'compat',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],
+    sections: [],
     icon: ARROW_LEFT_RIGHT_ICON,
     iconColor: 'var(--vp-c-warning-1)',
   },
@@ -147,7 +154,8 @@ export const flavors = [
       { labelKey: 'bundleSize', slug: 'bundle-size' },
       { labelKey: 'performance', slug: 'performance' },
     ],
-    categories: ['iterator'],
+    categories: [],
+    sections: ['iterator'],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',
     badge: 'NEW',
@@ -164,6 +172,7 @@ export const flavors = [
     prefix: 'types',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['objects', 'values', 'predicate'],
+    sections: [],
     icon: BRACES_ICON,
     iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',
