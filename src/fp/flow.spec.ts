@@ -1,5 +1,7 @@
 import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import { filter } from './array/filter.ts';
+import { head } from './array/head.ts';
+import { last } from './array/last.ts';
 import { map } from './array/map.ts';
 import { take } from './array/take.ts';
 import { flow } from './flow.ts';
@@ -91,6 +93,24 @@ describe('flow', () => {
     expect(double(1)).toBe(2);
     expect(double(2)).toBe(4);
     expect(double(3)).toBe(6);
+  });
+
+  it('preserves head input types with an annotated next function', () => {
+    const format = flow(head<number>(), (value: number | undefined) => value?.toFixed());
+
+    expectTypeOf(format).parameters.toEqualTypeOf<[readonly number[]]>();
+
+    // @ts-expect-error An empty array produces undefined, not a number.
+    flow(head<number>(), (value: number) => value.toFixed());
+  });
+
+  it('preserves last input types with an annotated next function', () => {
+    const format = flow(last<number>(), (value: number | undefined) => value?.toFixed());
+
+    expectTypeOf(format).parameters.toEqualTypeOf<[readonly number[]]>();
+
+    // @ts-expect-error An empty array produces undefined, not a number.
+    flow(last<number>(), (value: number) => value.toFixed());
   });
 
   it('infers the first function parameters and the final return type', () => {
