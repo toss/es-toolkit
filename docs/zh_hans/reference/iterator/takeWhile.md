@@ -13,15 +13,14 @@ const leading = takeWhile(source, shouldContinue);
 当你想根据条件而不是固定数量来停止消费时,请使用 `takeWhile`——例如,读取测量值直到第一个异常值为止。只要 `shouldContinue` 返回真值,元素就会被产出;迭代在它返回假值的第一个元素处停止(且不包含该元素),其余元素永远不会从源中被拉取。这使它成为限制无限迭代器的一种安全方式。原生迭代器辅助方法提供了基于数量的 `take`,但没有基于谓词的 `takeWhile`,这正是提供此函数的原因。
 
 ```typescript
-import { takeWhile } from 'es-toolkit/iterator';
-// 返回: [1, 2]
-// 用条件限制无限序列。
-import { iterate } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // 产出开头连续的小数字。
 takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+// 返回: [1, 2]
 
-takeWhile(
+// 用条件限制无限序列。
+const powersOfTwo = takeWhile(
   iterate(1, x => x * 2),
   x => x < 100
 ).toArray();

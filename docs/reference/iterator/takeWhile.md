@@ -13,15 +13,14 @@ const leading = takeWhile(source, shouldContinue);
 Use `takeWhile` when you want to stop consuming based on a condition rather than a fixed count — for example, reading measurements until the first outlier. Elements are yielded as long as `shouldContinue` returns a truthy value; iteration stops at (and excludes) the first element for which it returns a falsy value, and the remaining elements are never pulled from the source. This makes it a safe way to bound an infinite iterator. The native iterator helpers offer `take` (by count) but not a predicate-based `takeWhile`, which is why this is provided.
 
 ```typescript
-import { takeWhile } from 'es-toolkit/iterator';
-// Returns: [1, 2]
-// Bound an infinite sequence with a condition.
-import { iterate } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // Yield the leading run of small numbers.
 takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+// Returns: [1, 2]
 
-takeWhile(
+// Bound an infinite sequence with a condition.
+const powersOfTwo = takeWhile(
   iterate(1, x => x * 2),
   x => x < 100
 ).toArray();

@@ -13,10 +13,7 @@ const pairs = zip(source1, source2);
 当你想同步遍历多个序列时,请使用 `zip`——例如,将索引与值配对,或将名字与分数配对。位于相同位置的元素会被组合成元组,并且一旦**最短**的源耗尽,迭代就会停止。在最短的源处停止(而不是像数组版 [`zip`](../array/zip.md) 那样补齐到最长)正是它能安全地组合有限迭代器和无限迭代器的原因。当迭代结束时——无论是某个源耗尽还是消费者提前停止——所有源都会通过它们的 `return` 方法被关闭。
 
 ```typescript
-import { zip } from 'es-toolkit/iterator';
-// 返回: [[1, 'a'], [2, 'b']]
-// 用无上限的计数器给任意序列编号。
-import { range } from 'es-toolkit/iterator';
+import { range, zip } from 'es-toolkit/iterator';
 
 // 将相同位置的元素配对。
 zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
@@ -24,7 +21,9 @@ zip([1, 2, 3].values(), ['a', 'b', 'c'].values()).toArray();
 
 // 最短的源决定结果的长度。
 zip([1, 2, 3].values(), ['a', 'b'].values()).toArray();
+// 返回: [[1, 'a'], [2, 'b']]
 
+// 用无上限的计数器给任意序列编号。
 zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 // 返回: [[0, 'a'], [1, 'b'], [2, 'c']]
 ```

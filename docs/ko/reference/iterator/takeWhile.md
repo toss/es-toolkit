@@ -13,15 +13,14 @@ const leading = takeWhile(source, shouldContinue);
 정해진 개수가 아니라 조건에 따라 소비를 멈추고 싶을 때 `takeWhile`을 사용하세요. 예를 들어 첫 번째 이상치가 나올 때까지 측정값을 읽을 때요. `shouldContinue`가 참으로 평가되는 값을 반환하는 동안 요소를 내보내고, 처음으로 거짓으로 평가되는 값을 반환한 요소에서 순회를 멈춰요(그 요소는 제외돼요). 남은 요소들은 소스에서 아예 꺼내지지 않아요. 그래서 무한 이터레이터의 범위를 안전하게 제한할 수 있어요. 네이티브 이터레이터 헬퍼에는 개수 기반의 `take`는 있지만 조건 기반의 `takeWhile`은 없어서, 이 함수를 제공해요.
 
 ```typescript
-import { takeWhile } from 'es-toolkit/iterator';
-// 반환 값: [1, 2]
-// 무한 시퀀스를 조건으로 제한해요.
-import { iterate } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // 앞쪽에 이어지는 작은 숫자들을 내보내요.
 takeWhile([1, 2, 3, 4, 1].values(), x => x < 3).toArray();
+// 반환 값: [1, 2]
 
-takeWhile(
+// 무한 시퀀스를 조건으로 제한해요.
+const powersOfTwo = takeWhile(
   iterate(1, x => x * 2),
   x => x < 100
 ).toArray();
