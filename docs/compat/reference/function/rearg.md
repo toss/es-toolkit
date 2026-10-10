@@ -74,14 +74,14 @@ rearranged('a', 'b', 'c');
 // Returns: [undefined, 'b', 'a']
 ```
 
-Nested arrays are also flattened and processed.
+Index arguments are flattened one level, so the indices can be split across several arrays.
 
 ```typescript
 import { rearg } from 'es-toolkit/compat';
 
 const fn = (a, b, c, d) => [a, b, c, d];
 
-// Nested array indices
+// Indices split across arrays
 const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // Returns: ['b', 'c', 'a', 'd']

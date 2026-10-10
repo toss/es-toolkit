@@ -8,7 +8,7 @@ const taken = takeRight(arr, count);
 
 ## Usage
 
-### `takeRight(arr, count?)`
+### `takeRight(arr, count)`
 
 Use `takeRight` when you only need a few elements from the end of an array. If the requested count is greater than the array length, it returns the entire array.
 

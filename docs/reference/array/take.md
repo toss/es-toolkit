@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## Usage
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 Use `take` when you only need a few elements from the front of an array. If the requested count is greater than the array length, it returns the entire array.
 

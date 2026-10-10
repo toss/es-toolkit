@@ -8,7 +8,7 @@ const taken = takeRight(arr, count);
 
 ## 使用法
 
-### `takeRight(arr, count?)`
+### `takeRight(arr, count)`
 
 配列の最後から何個かの要素だけが必要な場合は `takeRight` を使用してください。要求された個数が配列の長さより大きい場合は配列全体を返します。
 

@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## 用法
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 当您只需要数组前面的几个元素时,请使用 `take`。如果请求的数量大于数组长度,则返回整个数组。
 
