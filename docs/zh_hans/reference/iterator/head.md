@@ -37,19 +37,3 @@ head([1, 2, 3, 4].values().filter(x => x % 2 === 0));
 #### 返回值
 
 (`T | undefined`): 第一个元素;当迭代器不产生任何值时为 `undefined`。
-
-### 在 `pipe` 中使用 `head()`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式,并把它用作终结步骤。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { filter, head } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  head()
-);
-// 返回: 2
-```

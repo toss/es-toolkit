@@ -33,19 +33,3 @@ scan(['a', 'b'].values(), (acc, x) => acc + x, '').toArray();
 #### Returns
 
 (`IteratorObject<U, undefined>`): A lazy iterator over the initial value and each successive accumulator. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `scan(callback, initial)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes the callback and initial value, and returns a function that takes the iterator.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { scan, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3].values(),
-  scan((acc, x) => acc + x, 0),
-  toArray()
-);
-// Returns: [0, 1, 3, 6]
-```

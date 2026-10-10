@@ -32,18 +32,3 @@ partition([3, 1, 4, 1, 5, 9, 2].values(), x => x > 3);
 #### Returns
 
 (`[T[], T[]]`): A two-element tuple of `[matched, unmatched]` arrays.
-
-### `partition(predicate)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator` and use it as the terminal step.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { partition } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  partition(x => x % 2 === 0)
-);
-// Returns: [[2, 4], [1, 3]]
-```

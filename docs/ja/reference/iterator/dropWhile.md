@@ -32,19 +32,3 @@ dropWhile([5, 1, 2].values(), x => x < 3).toArray();
 #### 戻り値
 
 (`IteratorObject<T, undefined>`): スキップされた先頭部分の後の要素を生成する遅延評価のイテレータです。ネイティブのイテレータヘルパー（`map`、`take`、`toArray` など）をすべて備えているため、そのままチェーンを続けられます。
-
-### `pipe` と一緒に使う `dropWhile(shouldDrop)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。条件関数だけを受け取り、イテレータを受け取る関数を返します。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { dropWhile, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 1].values(),
-  dropWhile(x => x < 3),
-  toArray()
-);
-// 結果: [3, 1]
-```

@@ -33,19 +33,3 @@ scan(['a', 'b'].values(), (acc, x) => acc + x, '').toArray();
 #### 返回值
 
 (`IteratorObject<U, undefined>`): 一个惰性迭代器,依次产生初始值以及每个后续的累加器。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
-
-### 在 `pipe` 中使用 `scan(callback, initial)`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式。它接收回调和初始值,并返回一个接收迭代器的函数。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { scan, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3].values(),
-  scan((acc, x) => acc + x, 0),
-  toArray()
-);
-// 返回: [0, 1, 3, 6]
-```

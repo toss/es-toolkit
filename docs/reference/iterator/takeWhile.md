@@ -36,19 +36,3 @@ takeWhile(
 #### Returns
 
 (`IteratorObject<T, undefined>`): A lazy iterator over the leading run of matching elements. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `takeWhile(shouldContinue)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes only the predicate and returns a function that takes the iterator.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { takeWhile, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 1].values(),
-  takeWhile(x => x < 3),
-  toArray()
-);
-// Returns: [1, 2]
-```

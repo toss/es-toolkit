@@ -31,19 +31,3 @@ count([1, 2, 3, 4, 5].values().filter(x => x % 2 === 1));
 #### 返回值
 
 (`number`): `source` 产生的元素数量。
-
-### 在 `pipe` 中使用 `count()`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式,并把它用作终结步骤。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { count, filter } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  count()
-);
-// 返回: 2
-```

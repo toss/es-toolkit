@@ -37,15 +37,3 @@ uniqBy(events.values(), e => e.userId).toArray();
 #### Returns
 
 (`IteratorObject<T, undefined>`): A lazy iterator over the elements with duplicate keys removed. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `uniqBy(getKey)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes only the key function and returns a function that takes the iterator.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, uniqBy } from 'es-toolkit/fp/iterator';
-
-pipe([1.1, 1.2, 2.3, 2.4].values(), uniqBy(Math.floor), toArray());
-// Returns: [1.1, 2.3]
-```

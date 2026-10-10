@@ -33,19 +33,3 @@ scan(['a', 'b'].values(), (acc, x) => acc + x, '').toArray();
 #### 戻り値
 
 (`IteratorObject<U, undefined>`): 初期値と、続く各アキュムレータを生成する遅延評価のイテレータです。ネイティブのイテレータヘルパー（`map`、`take`、`toArray` など）をすべて備えているため、そのままチェーンを続けられます。
-
-### `pipe` と一緒に使う `scan(callback, initial)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。コールバックと初期値を受け取り、イテレータを受け取る関数を返します。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { scan, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3].values(),
-  scan((acc, x) => acc + x, 0),
-  toArray()
-);
-// 結果: [0, 1, 3, 6]
-```

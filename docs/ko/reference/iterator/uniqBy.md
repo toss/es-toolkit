@@ -37,15 +37,3 @@ uniqBy(events.values(), e => e.userId).toArray();
 #### 반환 값
 
 (`IteratorObject<T, undefined>`): 중복된 키를 가진 요소가 제거된 요소들을 내보내는 지연 평가 이터레이터예요. 모든 네이티브 이터레이터 헬퍼(`map`, `take`, `toArray`, ...)를 갖추고 있어서 이어서 체이닝할 수 있어요.
-
-### `pipe`와 함께 쓰는 `uniqBy(getKey)`
-
-[`pipe`](../../fp/reference/pipe.md)로 변환을 조합할 때는 `es-toolkit/fp/iterator`에서 커링된 형태를 가져오세요. 키 함수만 받고, 이터레이터를 받는 함수를 반환해요.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, uniqBy } from 'es-toolkit/fp/iterator';
-
-pipe([1.1, 1.2, 2.3, 2.4].values(), uniqBy(Math.floor), toArray());
-// 반환 값: [1.1, 2.3]
-```

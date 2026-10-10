@@ -39,15 +39,3 @@ cartesianProduct(range(0, Infinity), ['a', 'b'].values()).take(3).toArray();
 #### 반환 값
 
 (`IteratorObject<[...], undefined>`): 데카르트 곱의 튜플을 내보내는 지연 평가 이터레이터예요. 타입은 소스들을 따라 정해져요. 모든 네이티브 이터레이터 헬퍼(`map`, `take`, `toArray`, ...)를 갖추고 있어서 이어서 체이닝할 수 있어요.
-
-### `pipe`와 함께 쓰는 `cartesianProduct(other)`
-
-[`pipe`](../../fp/reference/pipe.md)로 변환을 조합할 때는 `es-toolkit/fp/iterator`에서 커링된 형태를 가져오세요. 다른 이터레이터 하나를 받아서, 파이프로 전달된 이터레이터의 모든 요소를 그 이터레이터의 모든 요소와 짝지어요. 다른 이터레이터 쪽이 더 빠르게 넘어가요.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { cartesianProduct, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2].values(), cartesianProduct(['a', 'b'].values()), toArray());
-// 반환 값: [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
-```

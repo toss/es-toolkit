@@ -36,15 +36,3 @@ zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 #### Returns
 
 (`IteratorObject<[...], undefined>`): A lazy iterator over tuples of the paired elements, typed after the sources. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `zip(other)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes one other iterator and pairs the piped iterator's elements with it.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, zip } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3].values(), zip(['a', 'b', 'c'].values()), toArray());
-// Returns: [[1, 'a'], [2, 'b'], [3, 'c']]
-```

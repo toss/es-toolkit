@@ -11,6 +11,26 @@
     { "source": "/ja/iterator/intro.html", "destination": "/ja/iterator.html", "permanent": false },
     { "source": "/zh_hans/iterator/intro.html", "destination": "/zh_hans/iterator.html", "permanent": false },
     {
+      "source": "/iterator/reference/:name(drop|every|filter|find|flatMap|forEach|map|reduce|some|take|toArray).html",
+      "destination": "/fp/reference/iterator/:name.html",
+      "permanent": false
+    },
+    {
+      "source": "/ko/iterator/reference/:name(drop|every|filter|find|flatMap|forEach|map|reduce|some|take|toArray).html",
+      "destination": "/ko/fp/reference/iterator/:name.html",
+      "permanent": false
+    },
+    {
+      "source": "/ja/iterator/reference/:name(drop|every|filter|find|flatMap|forEach|map|reduce|some|take|toArray).html",
+      "destination": "/ja/fp/reference/iterator/:name.html",
+      "permanent": false
+    },
+    {
+      "source": "/zh_hans/iterator/reference/:name(drop|every|filter|find|flatMap|forEach|map|reduce|some|take|toArray).html",
+      "destination": "/zh_hans/fp/reference/iterator/:name.html",
+      "permanent": false
+    },
+    {
       "source": "/iterator/reference/:path*.html",
       "destination": "/reference/iterator/:path*.html",
       "permanent": false

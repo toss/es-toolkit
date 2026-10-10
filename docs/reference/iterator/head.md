@@ -37,19 +37,3 @@ head([1, 2, 3, 4].values().filter(x => x % 2 === 0));
 #### Returns
 
 (`T | undefined`): The first element, or `undefined` when the iterator yields nothing.
-
-### `head()` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator` and use it as the terminal step.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { filter, head } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  head()
-);
-// Returns: 2
-```

@@ -36,15 +36,3 @@ chunk(sensorReadings(), 100).take(2).toArray();
 #### 错误
 
 如果 `size` 不是大于零的整数,则抛出错误。
-
-### 在 `pipe` 中使用 `chunk(size)`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式。它只接收 `size`,并返回一个接收迭代器的函数。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { chunk, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3, 4, 5].values(), chunk(2), toArray());
-// 返回: [[1, 2], [3, 4], [5]]
-```

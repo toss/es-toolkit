@@ -13,8 +13,9 @@
  *   2. Provide docs at `/{prefix}/{slug}.md` and `/{prefix}/reference/<category>/...`.
  *   3. Provide labels in each locale file (`guideItems[labelKey]`, `categories[name]`).
  *
- * If a flavor does not need category groups, set `categories` to an empty array.
- * Its reference docs will be read directly from `/{prefix}/reference/*.md`.
+ * Each category becomes a collapsible group read from `/{prefix}/reference/<category>/`.
+ * Docs placed directly in `/{prefix}/reference/` are listed after the groups, so a
+ * flavor can use both, or set `categories` to an empty array to list only those docs.
  */
 export interface GuideItem {
   /** Resolved against `SidebarLabels.guideItems` per locale. */
@@ -146,7 +147,7 @@ export const flavors = [
       { labelKey: 'bundleSize', slug: 'bundle-size' },
       { labelKey: 'performance', slug: 'performance' },
     ],
-    categories: [],
+    categories: ['iterator'],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',
     badge: 'NEW',

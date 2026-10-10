@@ -36,15 +36,3 @@ zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 #### 返回值
 
 (`IteratorObject<[...], undefined>`): 一个惰性迭代器,产生由配对元素组成的元组,其类型依据各个源推断。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
-
-### 在 `pipe` 中使用 `zip(other)`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式。它接收另一个迭代器,并将管道中迭代器的元素与之配对。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, zip } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3].values(), zip(['a', 'b', 'c'].values()), toArray());
-// 返回: [[1, 'a'], [2, 'b'], [3, 'c']]
-```

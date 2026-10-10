@@ -36,19 +36,3 @@ takeWhile(
 #### 戻り値
 
 (`IteratorObject<T, undefined>`): 条件を満たす先頭の連続した要素を生成する遅延評価のイテレータです。ネイティブのイテレータヘルパー（`map`、`take`、`toArray` など）をすべて備えているため、そのままチェーンを続けられます。
-
-### `pipe` と一緒に使う `takeWhile(shouldContinue)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。条件関数だけを受け取り、イテレータを受け取る関数を返します。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { takeWhile, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 1].values(),
-  takeWhile(x => x < 3),
-  toArray()
-);
-// 結果: [1, 2]
-```

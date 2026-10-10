@@ -33,19 +33,3 @@ scan(['a', 'b'].values(), (acc, x) => acc + x, '').toArray();
 #### 반환 값
 
 (`IteratorObject<U, undefined>`): 초기값과 이어지는 각 누적값을 내보내는 지연 평가 이터레이터예요. 모든 네이티브 이터레이터 헬퍼(`map`, `take`, `toArray`, ...)를 갖추고 있어서 이어서 체이닝할 수 있어요.
-
-### `pipe`와 함께 쓰는 `scan(callback, initial)`
-
-[`pipe`](../../fp/reference/pipe.md)로 변환을 조합할 때는 `es-toolkit/fp/iterator`에서 커링된 형태를 가져오세요. 콜백과 초기값을 받고, 이터레이터를 받는 함수를 반환해요.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { scan, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3].values(),
-  scan((acc, x) => acc + x, 0),
-  toArray()
-);
-// 반환 값: [0, 1, 3, 6]
-```

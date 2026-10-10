@@ -32,18 +32,3 @@ partition([3, 1, 4, 1, 5, 9, 2].values(), x => x > 3);
 #### 返回值
 
 (`[T[], T[]]`): 由 `[matched, unmatched]` 两个数组组成的二元组。
-
-### 在 `pipe` 中使用 `partition(predicate)`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式,并把它用作终结步骤。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { partition } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  partition(x => x % 2 === 0)
-);
-// 返回: [[2, 4], [1, 3]]
-```

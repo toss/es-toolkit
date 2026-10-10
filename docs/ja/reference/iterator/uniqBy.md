@@ -37,15 +37,3 @@ uniqBy(events.values(), e => e.userId).toArray();
 #### 戻り値
 
 (`IteratorObject<T, undefined>`): 重複したキーを持つ要素を取り除いた遅延評価のイテレータです。ネイティブのイテレータヘルパー（`map`、`take`、`toArray` など）をすべて備えているため、そのままチェーンを続けられます。
-
-### `pipe` と一緒に使う `uniqBy(getKey)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。キー関数だけを受け取り、イテレータを受け取る関数を返します。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, uniqBy } from 'es-toolkit/fp/iterator';
-
-pipe([1.1, 1.2, 2.3, 2.4].values(), uniqBy(Math.floor), toArray());
-// 結果: [1.1, 2.3]
-```

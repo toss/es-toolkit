@@ -32,18 +32,3 @@ partition([3, 1, 4, 1, 5, 9, 2].values(), x => x > 3);
 #### 戻り値
 
 (`[T[], T[]]`): 条件を満たした要素の配列と、満たさなかった要素の配列からなる 2 要素のタプル（`[matched, unmatched]`）です。
-
-### `pipe` と一緒に使う `partition(predicate)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートし、終端操作として使用してください。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { partition } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  partition(x => x % 2 === 0)
-);
-// 結果: [[2, 4], [1, 3]]
-```

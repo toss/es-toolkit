@@ -36,15 +36,3 @@ chunk(sensorReadings(), 100).take(2).toArray();
 #### Throws
 
 Throws an error if `size` is not an integer greater than zero.
-
-### `chunk(size)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes only `size` and returns a function that takes the iterator.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { chunk, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3, 4, 5].values(), chunk(2), toArray());
-// Returns: [[1, 2], [3, 4], [5]]
-```

@@ -31,19 +31,3 @@ count([1, 2, 3, 4, 5].values().filter(x => x % 2 === 1));
 #### 반환 값
 
 (`number`): `source`가 내보낸 요소의 개수예요.
-
-### `pipe`와 함께 쓰는 `count()`
-
-[`pipe`](../../fp/reference/pipe.md)로 변환을 조합할 때는 `es-toolkit/fp/iterator`에서 커링된 형태를 가져와서 마지막 단계로 사용하세요.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { count, filter } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  count()
-);
-// 반환 값: 2
-```

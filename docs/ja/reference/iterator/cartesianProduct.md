@@ -39,15 +39,3 @@ cartesianProduct(range(0, Infinity), ['a', 'b'].values()).take(3).toArray();
 #### 戻り値
 
 (`IteratorObject<[...], undefined>`): デカルト積を表すタプルを生成する遅延イテレータ。型はソースに従って決まります。すべてのネイティブイテレータヘルパー(`map`、`take`、`toArray` など)を備えているため、続けてチェーンできます。
-
-### `pipe` と組み合わせる `cartesianProduct(other)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換を合成する場合は、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。他のイテレータを 1 つ受け取り、パイプで渡されたイテレータのすべての要素をそのイテレータのすべての要素と組み合わせます。他のイテレータ側がより速く進みます。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { cartesianProduct, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2].values(), cartesianProduct(['a', 'b'].values()), toArray());
-// 戻り値: [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
-```

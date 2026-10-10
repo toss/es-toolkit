@@ -32,18 +32,3 @@ partition([3, 1, 4, 1, 5, 9, 2].values(), x => x > 3);
 #### 반환 값
 
 (`[T[], T[]]`): `[matched, unmatched]` 배열로 이루어진 두 요소 튜플이에요.
-
-### `pipe`와 함께 쓰는 `partition(predicate)`
-
-[`pipe`](../../fp/reference/pipe.md)로 변환을 조합할 때는 `es-toolkit/fp/iterator`에서 커링된 형태를 가져와서 마지막 단계로 사용하세요.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { partition } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  partition(x => x % 2 === 0)
-);
-// 반환 값: [[2, 4], [1, 3]]
-```

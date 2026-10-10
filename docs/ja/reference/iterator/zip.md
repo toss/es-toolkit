@@ -36,15 +36,3 @@ zip(range(0, Infinity), ['a', 'b', 'c'].values()).toArray();
 #### 戻り値
 
 (`IteratorObject<[...], undefined>`): ペアにした要素のタプルを生成する遅延評価のイテレータで、型はソースに応じて決まります。ネイティブのイテレータヘルパー（`map`、`take`、`toArray` など）をすべて備えているため、そのままチェーンを続けられます。
-
-### `pipe` と一緒に使う `zip(other)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。もう 1 つのイテレータを受け取り、パイプで渡されたイテレータの要素とペアにします。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, zip } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3].values(), zip(['a', 'b', 'c'].values()), toArray());
-// 結果: [[1, 'a'], [2, 'b'], [3, 'c']]
-```

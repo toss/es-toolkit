@@ -36,15 +36,3 @@ chunk(sensorReadings(), 100).take(2).toArray();
 #### エラー
 
 `size` が 0 より大きい整数でない場合、エラーを投げます。
-
-### `pipe` と一緒に使う `chunk(size)`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートしてください。`size` だけを受け取り、イテレータを受け取る関数を返します。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { chunk, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2, 3, 4, 5].values(), chunk(2), toArray());
-// 結果: [[1, 2], [3, 4], [5]]
-```

@@ -39,15 +39,3 @@ cartesianProduct(range(0, Infinity), ['a', 'b'].values()).take(3).toArray();
 #### 返回值
 
 (`IteratorObject<[...], undefined>`): 产生笛卡尔积元组的惰性迭代器,类型由源决定。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
-
-### 与 `pipe` 搭配使用的 `cartesianProduct(other)`
-
-使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式。它接收另一个迭代器,并将管道传入的迭代器的每个元素与该迭代器的每个元素配对,其中另一个迭代器推进得更快。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { cartesianProduct, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2].values(), cartesianProduct(['a', 'b'].values()), toArray());
-// 返回值: [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
-```

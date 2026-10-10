@@ -37,19 +37,3 @@ head([1, 2, 3, 4].values().filter(x => x % 2 === 0));
 #### 戻り値
 
 (`T | undefined`): 最初の要素です。イテレータが何も生成しない場合は `undefined` です。
-
-### `pipe` と一緒に使う `head()`
-
-[`pipe`](../../fp/reference/pipe.md) で変換をつなげるときは、`es-toolkit/fp/iterator` からカリー化された形式をインポートし、終端操作として使用してください。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { filter, head } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  head()
-);
-// 結果: 2
-```

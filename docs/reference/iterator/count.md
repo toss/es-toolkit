@@ -31,19 +31,3 @@ count([1, 2, 3, 4, 5].values().filter(x => x % 2 === 1));
 #### Returns
 
 (`number`): The number of elements produced by `source`.
-
-### `count()` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator` and use it as the terminal step.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { count, filter } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 4].values(),
-  filter(x => x % 2 === 0),
-  count()
-);
-// Returns: 2
-```

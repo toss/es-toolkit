@@ -37,15 +37,3 @@ uniqBy(events.values(), e => e.userId).toArray();
 #### 返回值
 
 (`IteratorObject<T, undefined>`): 一个惰性迭代器,产生移除重复键之后的元素。它带有所有原生迭代器辅助方法(`map`、`take`、`toArray` 等),可以继续链式调用。
-
-### 在 `pipe` 中使用 `uniqBy(getKey)`
-
-当使用 [`pipe`](../../fp/reference/pipe.md) 组合转换时,请从 `es-toolkit/fp/iterator` 导入柯里化形式。它只接收键函数,并返回一个接收迭代器的函数。
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { toArray, uniqBy } from 'es-toolkit/fp/iterator';
-
-pipe([1.1, 1.2, 2.3, 2.4].values(), uniqBy(Math.floor), toArray());
-// 返回: [1.1, 2.3]
-```

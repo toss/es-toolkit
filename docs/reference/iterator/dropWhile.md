@@ -32,19 +32,3 @@ dropWhile([5, 1, 2].values(), x => x < 3).toArray();
 #### Returns
 
 (`IteratorObject<T, undefined>`): A lazy iterator over the elements after the dropped leading run. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `dropWhile(shouldDrop)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes only the predicate and returns a function that takes the iterator.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { dropWhile, toArray } from 'es-toolkit/fp/iterator';
-
-pipe(
-  [1, 2, 3, 1].values(),
-  dropWhile(x => x < 3),
-  toArray()
-);
-// Returns: [3, 1]
-```

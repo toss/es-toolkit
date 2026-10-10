@@ -39,15 +39,3 @@ cartesianProduct(range(0, Infinity), ['a', 'b'].values()).take(3).toArray();
 #### Returns
 
 (`IteratorObject<[...], undefined>`): A lazy iterator over tuples representing the Cartesian product, typed after the sources. It carries every native iterator helper (`map`, `take`, `toArray`, ...) for further chaining.
-
-### `cartesianProduct(other)` with `pipe`
-
-When composing transformations with [`pipe`](../../fp/reference/pipe.md), import the curried form from `es-toolkit/fp/iterator`. It takes one other iterator and pairs every element of the piped iterator with every element of it, with the other iterator advancing fastest.
-
-```typescript
-import { pipe } from 'es-toolkit/fp';
-import { cartesianProduct, toArray } from 'es-toolkit/fp/iterator';
-
-pipe([1, 2].values(), cartesianProduct(['a', 'b'].values()), toArray());
-// Returns: [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
-```
