@@ -59,6 +59,10 @@ export function buildFlavorSidebar({
         text: labels.reference,
         items: referenceItems,
       },
+      ...flavor.sections.map(section => ({
+        text: labels.categories[`${flavor.value}:${section}`] ?? labels.categories[section] ?? section,
+        items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', section),
+      })),
     ];
   }
 

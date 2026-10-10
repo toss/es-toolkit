@@ -26,6 +26,7 @@ const CATEGORY_ORDER = [
   'array',
   'bigint',
   'function',
+  'iterator',
   'math',
   'object',
   'predicate',
@@ -115,8 +116,8 @@ function parseMarkdown(content: string, fnName: string): ParseResult | null {
   }
 
   // Normalize import paths: 'es-toolkit/array' → 'es-toolkit'
-  // Keep subpath imports for categories not re-exported from main entry (map, set)
-  const SUBPATH_ONLY = ['bigint', 'map', 'set', 'query-string'];
+  // Keep subpath imports for categories not re-exported from the main entry
+  const SUBPATH_ONLY = ['bigint', 'map', 'set', 'query-string', 'iterator'];
   code = code.replace(/from 'es-toolkit\/([^']+)'/g, (match, subpath) => {
     if (SUBPATH_ONLY.includes(subpath)) {
       return match;

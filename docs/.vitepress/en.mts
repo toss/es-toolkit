@@ -16,6 +16,7 @@ const labels: SidebarLabels = {
     array: 'Array Utilities',
     bigint: 'BigInt Utilities',
     function: 'Function Utilities',
+    iterator: 'Iterator Utilities',
     map: 'Map Utilities',
     math: 'Math Utilities',
     object: 'Object Utilities',

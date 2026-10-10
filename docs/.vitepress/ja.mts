@@ -16,6 +16,7 @@ const labels: SidebarLabels = {
     array: '配列',
     bigint: 'BigInt',
     function: '関数',
+    iterator: 'Iterator',
     map: 'Map',
     math: '数学',
     object: 'オブジェクト',

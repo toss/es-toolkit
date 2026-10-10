@@ -35,6 +35,11 @@ export interface FlavorSpec {
   prefix: string;
   guideItems: readonly GuideItem[];
   categories: readonly string[];
+  /**
+   * Folders under `/{prefix}/reference/` listed as their own sidebar sections after the
+   * reference, separated by a divider instead of folded into a collapsible group.
+   */
+  sections: readonly string[];
   /** SVG path `d` attributes rendered inside a 24x24 stroke icon. */
   icon: readonly string[];
   /** CSS color (or `var(...)`) applied to the icon stroke. */
@@ -56,7 +61,6 @@ const SERVER_ICON = [
   'M6 16h.01',
 ];
 const CHEVRONS_RIGHT_ICON = ['m6 17 5-5-5-5', 'm13 17 5-5-5-5'];
-const REPEAT_ICON = ['m17 2 4 4-4 4', 'M3 11v-1a4 4 0 0 1 4-4h14', 'm7 22-4-4 4-4', 'M21 13v1a4 4 0 0 1-4 4H3'];
 const BRACES_ICON = [
   'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1',
   'M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1',
@@ -85,6 +89,7 @@ export const flavors = [
       'array',
       'bigint',
       'function',
+      'iterator',
       'map',
       'math',
       'object',
@@ -96,6 +101,7 @@ export const flavors = [
       'util',
       'error',
     ],
+    sections: [],
     icon: WRENCH_ICON,
     iconColor: 'var(--vp-c-brand-1)',
   },
@@ -111,6 +117,7 @@ export const flavors = [
     prefix: 'server',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: [],
+    sections: [],
     icon: SERVER_ICON,
     iconColor: 'var(--vp-c-indigo-1)',
     badge: 'NEW',
@@ -127,6 +134,7 @@ export const flavors = [
     prefix: 'compat',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],
+    sections: [],
     icon: ARROW_LEFT_RIGHT_ICON,
     iconColor: 'var(--vp-c-warning-1)',
   },
@@ -146,6 +154,7 @@ export const flavors = [
       { labelKey: 'performance', slug: 'performance' },
     ],
     categories: [],
+    sections: ['iterator'],
     icon: CHEVRONS_RIGHT_ICON,
     iconColor: 'var(--vp-c-green-1)',
     badge: 'NEW',
@@ -162,24 +171,10 @@ export const flavors = [
     prefix: 'types',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['objects', 'values', 'predicate'],
+    sections: [],
     icon: BRACES_ICON,
     iconColor: 'var(--vp-c-purple-1)',
     badge: 'NEW',
-  },
-  {
-    value: 'iterator',
-    label: 'es-toolkit/iterator',
-    description: 'Lazy iterators',
-    descriptions: {
-      ko: '지연 평가 이터레이터',
-      ja: '遅延評価イテレータ',
-      zh_hans: '惰性迭代器',
-    },
-    prefix: 'iterator',
-    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
-    categories: [],
-    icon: REPEAT_ICON,
-    iconColor: 'var(--vp-c-red-1)',
   },
 ] as const satisfies readonly FlavorSpec[];
 
