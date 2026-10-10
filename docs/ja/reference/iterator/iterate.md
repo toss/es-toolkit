@@ -15,17 +15,16 @@ const sequence = iterate(seed, getNext);
 イテレータは無限であるため、消費する前にネイティブの `take` や [`takeWhile`](./takeWhile.md) のような途中で打ち切れるヘルパーで範囲を区切る必要があります。
 
 ```typescript
-import { iterate } from 'es-toolkit/iterator';
-// 結果: [1, 2, 4, 8, 16]
-// 1 分未満の指数バックオフの待機時間です。
-import { takeWhile } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // 2 の累乗を take で区切ります。
-iterate(1, x => x * 2)
+const powersOfTwo = iterate(1, x => x * 2)
   .take(5)
   .toArray();
+// 結果: [1, 2, 4, 8, 16]
 
-takeWhile(
+// 1 分未満の指数バックオフの待機時間です。
+const backoffDelays = takeWhile(
   iterate(100, x => x * 2),
   x => x < 60000
 ).toArray();

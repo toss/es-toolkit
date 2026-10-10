@@ -15,17 +15,16 @@ const sequence = iterate(seed, getNext);
 이터레이터가 무한하기 때문에, 소비하기 전에 네이티브 `take`나 [`takeWhile`](./takeWhile.md)처럼 일찍 멈추는 헬퍼로 범위를 제한해야 해요.
 
 ```typescript
-import { iterate } from 'es-toolkit/iterator';
-// 반환 값: [1, 2, 4, 8, 16]
-// 1분 미만의 지수 백오프 지연 시간.
-import { takeWhile } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // 2의 거듭제곱을 take로 제한해요.
-iterate(1, x => x * 2)
+const powersOfTwo = iterate(1, x => x * 2)
   .take(5)
   .toArray();
+// 반환 값: [1, 2, 4, 8, 16]
 
-takeWhile(
+// 1분 미만의 지수 백오프 지연 시간.
+const backoffDelays = takeWhile(
   iterate(100, x => x * 2),
   x => x < 60000
 ).toArray();

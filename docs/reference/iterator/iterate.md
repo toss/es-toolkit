@@ -15,17 +15,16 @@ Use `iterate` to generate a sequence where each value is derived from the previo
 Because the iterator is infinite, it must be bounded by a short-circuiting helper such as the native `take` or [`takeWhile`](./takeWhile.md) before being consumed.
 
 ```typescript
-import { iterate } from 'es-toolkit/iterator';
-// Returns: [1, 2, 4, 8, 16]
-// Exponential backoff delays below one minute.
-import { takeWhile } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // Powers of two, bounded by take.
-iterate(1, x => x * 2)
+const powersOfTwo = iterate(1, x => x * 2)
   .take(5)
   .toArray();
+// Returns: [1, 2, 4, 8, 16]
 
-takeWhile(
+// Exponential backoff delays below one minute.
+const backoffDelays = takeWhile(
   iterate(100, x => x * 2),
   x => x < 60000
 ).toArray();

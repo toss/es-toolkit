@@ -13,15 +13,15 @@ const chunks = chunk(source, size);
 要素のストリームを固定サイズのまとまりで処理したいときに `chunk` を使用してください。たとえば、レコードを 100 件ずつデータベースに保存する場合などです。各チャンクは要求された時点でのみ生成されるため、ネイティブの `take` のような途中で打ち切れるヘルパーで範囲を区切れば、無限イテレータでも使用できます。ソースの長さが `size` のちょうど倍数でない場合、最後のチャンクには残りの要素が入るため、他より短くなることがあります。
 
 ```typescript
-import { chunk } from 'es-toolkit/iterator';
+import { chunk, range } from 'es-toolkit/iterator';
 
 // 要素を 2 個ずつまとめます。余った要素は短い最後のチャンクになります。
 chunk([1, 2, 3, 4, 5].values(), 2).toArray();
 // 結果: [[1, 2], [3, 4], [5]]
 
 // 無限のソースをバッチで処理し、take で範囲を区切ります。
-chunk(sensorReadings(), 100).take(2).toArray();
-// 結果: 100 件ずつの最初の 2 バッチ
+chunk(range(0, Infinity), 100).take(2).toArray();
+// 結果: [[0, 1, ..., 99], [100, 101, ..., 199]]
 ```
 
 #### パラメータ

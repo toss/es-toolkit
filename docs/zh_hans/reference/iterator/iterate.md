@@ -15,17 +15,16 @@ const sequence = iterate(seed, getNext);
 由于该迭代器是无限的,在被消费之前必须用原生 `take` 或 [`takeWhile`](./takeWhile.md) 这样的短路辅助方法加以限制。
 
 ```typescript
-import { iterate } from 'es-toolkit/iterator';
-// 返回: [1, 2, 4, 8, 16]
-// 小于一分钟的指数退避延迟。
-import { takeWhile } from 'es-toolkit/iterator';
+import { iterate, takeWhile } from 'es-toolkit/iterator';
 
 // 用 take 限制的 2 的幂。
-iterate(1, x => x * 2)
+const powersOfTwo = iterate(1, x => x * 2)
   .take(5)
   .toArray();
+// 返回: [1, 2, 4, 8, 16]
 
-takeWhile(
+// 小于一分钟的指数退避延迟。
+const backoffDelays = takeWhile(
   iterate(100, x => x * 2),
   x => x < 60000
 ).toArray();

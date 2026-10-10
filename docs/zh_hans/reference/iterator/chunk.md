@@ -13,15 +13,15 @@ const chunks = chunk(source, size);
 当你想按固定大小的批次处理元素流时,请使用 `chunk`——例如,每次向数据库保存 100 条记录。每个分块只有在被请求时才会产生,因此在用原生 `take` 这样的短路辅助方法限制范围时,它也适用于无限迭代器。当源的长度不是 `size` 的整数倍时,最后一个分块会包含剩余的元素,因此它可能更短。
 
 ```typescript
-import { chunk } from 'es-toolkit/iterator';
+import { chunk, range } from 'es-toolkit/iterator';
 
 // 将元素两两分组;剩下的元素构成一个更短的最后分块。
 chunk([1, 2, 3, 4, 5].values(), 2).toArray();
 // 返回: [[1, 2], [3, 4], [5]]
 
 // 用 take 限制范围,按批次处理无限数据源。
-chunk(sensorReadings(), 100).take(2).toArray();
-// 返回: 前两批各 100 条读数
+chunk(range(0, Infinity), 100).take(2).toArray();
+// 返回: [[0, 1, ..., 99], [100, 101, ..., 199]]
 ```
 
 #### 参数
