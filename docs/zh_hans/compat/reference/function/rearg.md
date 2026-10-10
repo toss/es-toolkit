@@ -74,14 +74,14 @@ rearranged('a', 'b', 'c');
 // 返回值: [undefined, 'b', 'a']
 ```
 
-嵌套数组也会被展平处理。
+索引参数只会被展平一层，因此可以把索引拆分到多个数组中传递。
 
 ```typescript
 import { rearg } from 'es-toolkit/compat';
 
 const fn = (a, b, c, d) => [a, b, c, d];
 
-// 嵌套数组索引
+// 拆分到多个数组的索引
 const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // 返回值: ['b', 'c', 'a', 'd']
