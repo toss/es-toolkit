@@ -8,7 +8,7 @@ const taken = takeRight(arr, count);
 
 ## 用法
 
-### `takeRight(arr, count?)`
+### `takeRight(arr, count)`
 
 当您只需要数组末尾的几个元素时,请使用 `takeRight`。如果请求的数量大于数组长度,则返回整个数组。
 

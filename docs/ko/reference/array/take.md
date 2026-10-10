@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## 사용법
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 배열의 앞에서 몇 개의 요소만 필요할 때 `take`를 사용하세요. 요청한 개수가 배열 길이보다 크면 전체 배열을 반환해요.
 
