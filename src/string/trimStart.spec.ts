@@ -69,4 +69,10 @@ describe('trimStart', () => {
   it('should remove leading spaces and other characters when specified in an array', () => {
     expect(trimStart('   hello world', [' ', 'h'])).toEqual('ello world');
   });
+
+  it('should match String.prototype.trimStart for every whitespace character', () => {
+    const whitespace = '\t\n\v\f\r \u00a0\u1680\u2000\u200a\u2028\u2029\u202f\u205f\u3000\ufeff';
+    expect(trimStart(`${whitespace}abc`)).toEqual('abc');
+    expect(trimStart(whitespace)).toEqual('');
+  });
 });

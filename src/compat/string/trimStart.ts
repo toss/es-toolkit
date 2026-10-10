@@ -51,7 +51,7 @@ export function trimStart(str?: string, chars?: string | number, guard?: object)
   }
 
   if (guard != null || chars == null) {
-    return str.toString().trimStart();
+    return trimStartToolkit(str.toString());
   }
 
   return trimStartToolkit(str, chars.toString().split(''));

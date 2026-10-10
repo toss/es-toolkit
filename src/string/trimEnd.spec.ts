@@ -65,4 +65,17 @@ describe('trimEnd', () => {
   it('should throw an error when chars is a string with multiple characters', () => {
     expect(() => trimEnd('hello', 'ab')).toThrow(`The 'chars' parameter should be a single character string.`);
   });
+
+  it('should match String.prototype.trimEnd for every whitespace character', () => {
+    const whitespace = '\t\n\v\f\r \u00a0\u1680\u2000\u200a\u2028\u2029\u202f\u205f\u3000\ufeff';
+    expect(trimEnd(`abc${whitespace}`)).toEqual('abc');
+    expect(trimEnd(whitespace)).toEqual('');
+  });
+
+  it('should trim long runs of trailing whitespace in linear time', () => {
+    const str = `abc${' '.repeat(100_000)}x`;
+    const start = Date.now();
+    expect(trimEnd(str)).toEqual(str);
+    expect(Date.now() - start).toBeLessThan(1000);
+  });
 });

@@ -40,10 +40,13 @@ export function trim(str: any, chars?: any, guard?: any): string {
   switch (typeof chars) {
     case 'object': {
       if (Array.isArray(chars)) {
-        return trimToolkit(
-          str,
-          chars.flatMap(x => x.toString().split(''))
-        );
+        const charsToTrim: string[] = [];
+
+        for (let i = 0; i < chars.length; i++) {
+          charsToTrim.push(...chars[i].toString().split(''));
+        }
+
+        return trimToolkit(str, charsToTrim);
       } else {
         return trimToolkit(str, (chars as any).toString().split(''));
       }

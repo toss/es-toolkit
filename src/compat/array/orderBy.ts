@@ -8,6 +8,8 @@ import { ObjectIterator } from '../_internal/ObjectIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 
 /**
@@ -145,7 +147,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
   orders = guard ? undefined : orders;
 
   if (!Array.isArray(collection)) {
-    collection = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
+    collection = isArrayLike(collection) ? Array.from(collection) : Object.keys(collection).map(key => collection[key]);
   }
 
   if (!Array.isArray(criteria)) {
@@ -183,7 +185,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
     }
 
     if (typeof criterion === 'object' && 'key' in criterion) {
-      if (Object.hasOwn(object, criterion.key)) {
+      if (hasOwnProperty.call(object, criterion.key)) {
         return object[criterion.key as keyof typeof object];
       }
 

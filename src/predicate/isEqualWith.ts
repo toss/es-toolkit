@@ -32,6 +32,8 @@ import {
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /**
  * Compares two values for equality using a custom comparison function.
  *
@@ -185,7 +187,9 @@ function areObjectsEqual(
     }
   }
 
-  stack = stack ?? new Map();
+  if (stack == null) {
+    stack = new Map();
+  }
 
   const aStack = stack.get(a);
   const bStack = stack.get(b);
@@ -307,7 +311,7 @@ function areObjectsEqual(
           const propKey = aKeys[i];
           const aProp = a[propKey];
 
-          if (!Object.hasOwn(b, propKey)) {
+          if (!hasOwnProperty.call(b, propKey)) {
             return false;
           }
 
