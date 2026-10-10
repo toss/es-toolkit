@@ -53,8 +53,8 @@ update({}, 'a.b[0]', () => 'value');
 import { update } from 'es-toolkit/compat';
 
 const stats = { score: 100 };
-update(stats, 'score', score => score * 1.1); // 10% 증가
-// => { score: 110 }
+update(stats, 'score', score => score * 1.5); // 50% 증가
+// => { score: 150 }
 ```
 
 #### 파라미터
