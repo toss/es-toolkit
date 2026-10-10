@@ -1,6 +1,6 @@
-# stringify (クエリ文字列用)
+# stringify
 
-オブジェクトから、URL の末尾に付けるクエリ文字列を作ります。結果は `?a=1&b=2` のように `?` から始まります。
+オブジェクトを URL のクエリ文字列に変換します。
 
 ```typescript
 const search = stringify(query);
@@ -10,42 +10,44 @@ const search = stringify(query);
 
 ### `stringify(query)`
 
-URL にクエリパラメータを付けたいときは `stringify` を使用してください。結果が `?` から始まるので、パスの後ろにそのままつなげられます。
+検索語やページ番号などを URL に含めたいときは `stringify` を使用してください。結果は `?page=1&q=hello` のように `?` で始まるので、`/items` のようなパスの後ろにそのまま追加できます。変換する値がなければ空文字列を返します。
 
 ```typescript
 import { stringify } from 'es-toolkit/query-string';
 
-// オブジェクトからクエリ文字列を作ります。
+// オブジェクトをクエリ文字列に変換します。
 stringify({ page: 1, q: 'hello world' });
 // '?page=1&q=hello%20world' を返します
 
-// 配列は同じキーを繰り返して表します。空文字列は残り、空の配列は含まれません。
+// 配列の各要素は同じキーで追加します。空文字列は残し、空の配列は省略します。
 stringify({ tags: ['a', 'b'], q: '', ids: [] });
 // '?tags=a&tags=b&q=' を返します
 
-// パスの後ろにつなげます。値が `null` や `undefined` のキーは含まれません。
+// 結果をパスの後ろに追加します。値が null または undefined の項目は省略します。
 `/items${stringify({ page: 1, ref: undefined })}`;
 // '/items?page=1' を返します
 
-// 付ける値が一つもなければ、パスはそのままです。
+// すべての値が省略されると空文字列を返すため、パスは変わりません。
 `/items${stringify({ ref: undefined })}`;
 // '/items' を返します
 ```
 
-キーと値は `encodeURIComponent` でエンコードします。空白は `%20`、`+` は `%2B` になるので、結果を `URLSearchParams` で読んでも `decodeURIComponent` で読んでも同じ値が得られます。
+配列内の `null` と `undefined` も省略します。それ以外の値は `String()` で文字列に変換します。
 
-値にオブジェクトや `Date` を渡すと型エラーになります。`JSON.stringify()` や `toISOString()` で先に文字列にしてから渡してください。
+キーと値は `encodeURIComponent` でエンコードします。空白は `%20`、`+` は `%2B` に変換します。
+
+ネストしたオブジェクトや `Date` を値として渡すと、TypeScript の型チェックでエラーになります。`JSON.stringify()` や `toISOString()` で先に文字列に変換してください。
 
 先頭の `?` が不要な場合は、結果に `.slice(1)` を呼び出してください。
 
 #### パラメータ
 
-- `query` (`T`): クエリ文字列にするオブジェクト。各値は文字列、数値、真偽値、`BigInt`、`null`、`undefined`、またはそれらの配列です。
+- `query` (`T`): クエリ文字列に変換するオブジェクト。各値は文字列、数値、真偽値、`bigint`、`null`、`undefined`、またはこれらの値の配列です。
 
 #### 戻り値
 
-(`string`): `?` から始まるクエリ文字列。付ける値がなければ空文字列です。
+(`string`): `?` で始まるクエリ文字列。変換する値がなければ空文字列を返します。
 
 #### エラー
 
-(`URIError`): キーや値に `'😀'.slice(0, 1)` のような途中で切れた文字が含まれていると、エラーを投げます。
+(`URIError`): キーや値に `'😀'.slice(0, 1)` のような対になっていない UTF-16 サロゲートが含まれると、エラーをスローします。
