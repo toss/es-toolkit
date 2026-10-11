@@ -12,12 +12,12 @@ import { head as headToolkit } from '../../array/head.ts';
  * @example
  * import { head, pipe } from 'es-toolkit/fp';
  *
+ * pipe([1, 2, 3], head());
+ * // => 1
+ *
  * pipe([] as number[], head());
  * // => undefined
  */
-export function head<T>(): <A extends readonly T[]>(
-  array: A
-) => A extends readonly [unknown, ...unknown[]] ? A[number] : A[number] | undefined;
 export function head<T>(): (array: readonly T[]) => T | undefined {
   return function (array: readonly T[]): T | undefined {
     return headToolkit(array);

@@ -12,12 +12,12 @@ import { last as lastToolkit } from '../../array/last.ts';
  * @example
  * import { last, pipe } from 'es-toolkit/fp';
  *
+ * pipe([1, 2, 3], last());
+ * // => 3
+ *
  * pipe([] as number[], last());
  * // => undefined
  */
-export function last<T>(): <A extends readonly T[]>(
-  array: A
-) => A extends readonly [...unknown[], unknown] ? A[number] : A[number] | undefined;
 export function last<T>(): (array: readonly T[]) => T | undefined {
   return function (array: readonly T[]): T | undefined {
     return lastToolkit(array);
