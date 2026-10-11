@@ -37,6 +37,7 @@ const ENTRYPOINTS = [
   './object',
   './predicate',
   './promise',
+  './query-string',
   './set',
   './string',
   './types',

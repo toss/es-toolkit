@@ -40,6 +40,16 @@ deburr('niño'); // returns 'nino'
 deburr('mañana'); // returns 'manana'
 ```
 
+Only Latin letters are converted. Letters of other scripts, such as Hangul, Cyrillic, or Greek, are kept as they are, even if they carry diacritical marks.
+
+```typescript
+import { deburr } from 'es-toolkit/string';
+
+deburr('한국어'); // returns '한국어'
+deburr('йогурт'); // returns 'йогурт'
+deburr('Café Москва 한국어'); // returns 'Cafe Москва 한국어'
+```
+
 You can use it for URL generation or filename cleaning.
 
 ```typescript

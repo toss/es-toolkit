@@ -40,7 +40,7 @@ const charMap = mapValues(str, char => char.toUpperCase());
 
 // 배열을 객체로 변환
 const arr = [10, 20, 30];
-const arrMap = mapValues(arr, (value, index) => value + index);
+const arrMap = mapValues(arr, (value, index) => value + Number(index));
 // 결과: { '0': 10, '1': 21, '2': 32 }
 
 // 속성 경로로 값 추출

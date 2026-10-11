@@ -45,6 +45,12 @@ describe('camelCase', () => {
     expect(camelCase('Москва')).toBe('москва');
   });
 
+  it('should keep non-Latin letters as they are, identical to lodash', () => {
+    expect(camelCase('한국어 테스트')).toBe('한국어테스트');
+    expect(camelCase('Мой край')).toBe('мойКрай');
+    expect(camelCase('Tiếng Việt')).toBe('tiếngViệt');
+  });
+
   it('should handle double-converting strings', () => {
     const actual = strings.map(str => camelCase(camelCase(str)));
     const expected = strings.map(() => 'fooBar');

@@ -28,6 +28,7 @@
     "./object": "./src/object/index.ts",
     "./predicate": "./src/predicate/index.ts",
     "./promise": "./src/promise/index.ts",
+    "./query-string": "./src/query-string/index.ts",
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
     "./server": "./src/server/index.ts",
@@ -60,6 +61,7 @@
     "object.js",
     "predicate.js",
     "promise.js",
+    "query-string.js",
     "set.js",
     "string.js",
     "server.js",
@@ -286,6 +288,16 @@
         "require": {
           "types": "./dist/promise/index.d.ts",
           "default": "./dist/promise/index.js"
+        }
+      },
+      "./query-string": {
+        "import": {
+          "types": "./dist/query-string/index.d.mts",
+          "default": "./dist/query-string/index.mjs"
+        },
+        "require": {
+          "types": "./dist/query-string/index.d.ts",
+          "default": "./dist/query-string/index.js"
         }
       },
       "./set": {

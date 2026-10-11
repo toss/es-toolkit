@@ -96,4 +96,56 @@ describe('orderBy', () => {
       { name: 'c', value: 1 },
     ]);
   });
+
+  it('should place NaN values after other values when ascending', () => {
+    const items = [
+      { name: 'a', value: 3 },
+      { name: 'b', value: NaN },
+      { name: 'c', value: 1 },
+      { name: 'd', value: 2 },
+      { name: 'e', value: 0 },
+    ];
+
+    expect(orderBy(items, ['value'], ['asc'])).toEqual([
+      { name: 'e', value: 0 },
+      { name: 'c', value: 1 },
+      { name: 'd', value: 2 },
+      { name: 'a', value: 3 },
+      { name: 'b', value: NaN },
+    ]);
+  });
+
+  it('should place NaN values before other values when descending', () => {
+    const items = [
+      { name: 'a', value: 3 },
+      { name: 'b', value: NaN },
+      { name: 'c', value: 1 },
+      { name: 'd', value: 2 },
+      { name: 'e', value: 0 },
+    ];
+
+    expect(orderBy(items, ['value'], ['desc'])).toEqual([
+      { name: 'b', value: NaN },
+      { name: 'a', value: 3 },
+      { name: 'd', value: 2 },
+      { name: 'c', value: 1 },
+      { name: 'e', value: 0 },
+    ]);
+  });
+
+  it('should place NaN before null and undefined', () => {
+    const items = [
+      { name: 'a', value: undefined },
+      { name: 'b', value: null },
+      { name: 'c', value: NaN },
+      { name: 'd', value: 1 },
+    ];
+
+    expect(orderBy(items, ['value'], ['asc'])).toEqual([
+      { name: 'd', value: 1 },
+      { name: 'c', value: NaN },
+      { name: 'b', value: null },
+      { name: 'a', value: undefined },
+    ]);
+  });
 });

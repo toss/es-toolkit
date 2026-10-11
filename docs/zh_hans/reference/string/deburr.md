@@ -40,6 +40,16 @@ deburr('niño'); // returns 'nino'
 deburr('mañana'); // returns 'manana'
 ```
 
+只会转换拉丁字母。韩文、西里尔字母、希腊字母等其他文字体系的字母即使带有变音符号也会原样保留。
+
+```typescript
+import { deburr } from 'es-toolkit/string';
+
+deburr('한국어'); // returns '한국어'
+deburr('йогурт'); // returns 'йогурт'
+deburr('Café Москва 한국어'); // returns 'Cafe Москва 한국어'
+```
+
 可以用于URL生成或文件名清理。
 
 ```typescript

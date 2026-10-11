@@ -82,7 +82,7 @@ import { rearg } from 'es-toolkit/compat';
 const fn = (a, b, c, d) => [a, b, c, d];
 
 // 중첩된 배열 인덱스
-const rearranged = rearg(fn, [1, [2, 0]], 3);
+const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // Returns: ['b', 'c', 'a', 'd']
 ```

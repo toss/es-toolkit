@@ -1,3 +1,4 @@
+import { escapeRegExp } from '../../string/escapeRegExp.ts';
 import { regexMultiByte } from '../_internal/regexMultiByte.ts';
 import { isObject } from '../predicate/isObject.ts';
 
@@ -81,7 +82,7 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   }
 
   // Further truncate the string to the last separator using unicode regex
-  const search = separator instanceof RegExp ? separator.source : separator;
+  const search = separator instanceof RegExp ? separator.source : escapeRegExp(separator);
   const flags = 'u' + (separator instanceof RegExp ? separator.flags.replace('u', '') : '');
   const withoutSeparator = new RegExp(`(?<result>.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
 

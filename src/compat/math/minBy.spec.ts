@@ -90,4 +90,16 @@ describe('minBy', () => {
     expect(minBy([{ a: undefined }, { a: undefined }], 'a')).toBeUndefined();
     expect(minBy([{ a: null }, { a: null }], 'a')).toBeUndefined();
   });
+
+  it('should call the iteratee with only the element, like lodash', () => {
+    const args: unknown[][] = [];
+    minBy(['a', 'b'], (...rest: unknown[]) => {
+      args.push(rest);
+      return 0;
+    });
+    expect(args).toEqual([['a'], ['b']]);
+
+    // `parseInt` would treat an index as its radix
+    expect(minBy(['10', '9', '11'], parseInt)).toBe('9');
+  });
 });

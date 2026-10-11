@@ -121,4 +121,15 @@ describe('truncate', () => {
   it('should return base string with omission when separator is not found in truncated string', () => {
     expect(truncate('hello world test', { length: 10, separator: 'xyz' })).toEqual('hello w...');
   });
+
+  it('should support string separators containing RegExp special characters', () => {
+    expect(truncate('hello world? how are you doing?', { length: 20, separator: '?' })).toBe('hello world...');
+    expect(truncate('section [1] details and notes', { length: 20, separator: '[' })).toBe('section ...');
+    expect(truncate('part (A) overview notes', { length: 20, separator: '(' })).toBe('part ...');
+    expect(truncate('a + b + c + d + e', { length: 12, separator: '+' })).toBe('a + b ...');
+    expect(truncate('one*two*three*four', { length: 12, separator: '*' })).toBe('one*two...');
+    expect(truncate('hello.world.foo.bar', { length: 15, separator: '.' })).toBe('hello.world...');
+    expect(truncate('hello world foo bar', { length: 15, separator: '.' })).toBe('hello world ...');
+    expect(truncate('path\\to\\nested\\file', { length: 15, separator: '\\' })).toBe('path\\to...');
+  });
 });

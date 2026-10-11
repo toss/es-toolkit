@@ -40,7 +40,7 @@ const charMap = mapValues(str, char => char.toUpperCase());
 
 // 配列をオブジェクトに変換
 const arr = [10, 20, 30];
-const arrMap = mapValues(arr, (value, index) => value + index);
+const arrMap = mapValues(arr, (value, index) => value + Number(index));
 // 結果: { '0': 10, '1': 21, '2': 32 }
 
 // プロパティパスで値を抽出
