@@ -271,7 +271,16 @@ export function copyProperties<T>(
     const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
     if (descriptor == null || descriptor.writable) {
-      target[key] = cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue);
+      if (key === '__proto__') {
+        Object.defineProperty(target, key, {
+          value: cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue),
+          writable: true,
+          enumerable: true,
+          configurable: true,
+        });
+      } else {
+        target[key] = cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue);
+      }
     }
   }
 }

@@ -27,7 +27,17 @@ export function mapValues<T extends object, K extends keyof T, V>(
     const key = keys[i] as K;
     const value = object[key];
 
-    result[key] = getNewValue(value, key, object);
+    const mappedValue = getNewValue(value, key, object);
+    if (key === '__proto__') {
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: mappedValue,
+        writable: true,
+      });
+    } else {
+      result[key] = mappedValue;
+    }
   }
 
   return result;

@@ -202,7 +202,16 @@ function assignWithImpl(
     const newValue = getValueToAssign?.(objValue, srcValue, key, object, source) ?? srcValue;
 
     if (!(key in object) || !eq(objValue, newValue)) {
-      object[key] = newValue;
+      if (key === '__proto__') {
+        Object.defineProperty(object, key, {
+          configurable: true,
+          enumerable: true,
+          value: newValue,
+          writable: true,
+        });
+      } else {
+        object[key] = newValue;
+      }
     }
   }
 }

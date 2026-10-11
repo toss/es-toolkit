@@ -5,7 +5,7 @@ describe('fp/pick bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { pick } from "es-toolkit/fp"; console.log(pick)')
-    ).toMatchInlineSnapshot(`180`);
+    ).toMatchInlineSnapshot(`278`);
   });
 
   it('lodash/fp/pick', async () => {

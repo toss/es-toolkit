@@ -132,7 +132,16 @@ function shallowCloneInOmit<T extends object>(obj: T): Partial<T> {
 
   for (let i = 0; i < keysToCopy.length; i++) {
     const key = keysToCopy[i];
-    result[key] = obj[key];
+    if (key === '__proto__') {
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: obj[key],
+        writable: true,
+      });
+    } else {
+      result[key] = obj[key];
+    }
   }
 
   return result;
@@ -144,13 +153,24 @@ function deepCloneInOmit<T extends object>(obj: T): Partial<T> {
 
   for (let i = 0; i < keysToCopy.length; i++) {
     const key = keysToCopy[i];
-    result[key] = cloneDeepWith(obj[key], valueToClone => {
+    const clonedValue = cloneDeepWith(obj[key], valueToClone => {
       if (isPlainObject(valueToClone)) {
         return undefined;
       }
 
       return valueToClone;
     });
+
+    if (key === '__proto__') {
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: clonedValue,
+        writable: true,
+      });
+    } else {
+      result[key] = clonedValue;
+    }
   }
 
   return result;
