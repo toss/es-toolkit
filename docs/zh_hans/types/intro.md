@@ -32,7 +32,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | 递归地将所有键转换为常量命名法。`toConstantCaseKeys` 的返回类型。  |
 | [`Merge<T, S>`](./reference/objects/Merge.md)                        | 把一个对象类型深度合并进另一个对象类型的结果。`merge` 的返回类型。 |
 | [`ObjectKeys<T>`](./reference/objects/ObjectKeys.md)                 | 以 `Object.keys` 返回的形式创建键的联合。`ValueOf` 的键侧对应物。  |
-| [`DistributiveOmit<T, K>`](./reference/objects/DistributiveOmit.md) | 从联合类型的每个成员中移除键，同时保留成员特有的属性。 |
+| [`DistributiveOmit<T, K>`](./reference/objects/DistributiveOmit.md)  | 从联合类型的每个成员中移除键，同时保留成员特有的属性。             |
 
 ## 选定标准
 
