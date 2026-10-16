@@ -28,7 +28,15 @@ describe('DistributiveOmit', () => {
     type User = { id: number; name: string };
     expectTypeOf<DistributiveOmit<User, 'missing'>>().toEqualTypeOf<User>();
     expectTypeOf<DistributiveOmit<User, 'name' | 'missing'>>().toEqualTypeOf<{ id: number }>();
-    expectTypeOf<DistributiveOmit<User, unknown>>().toEqualTypeOf<Record<never, never>>();
+    expectTypeOf<DistributiveOmit<User, PropertyKey>>().toEqualTypeOf<Record<never, never>>();
+  });
+
+  it('rejects types that are not property keys', () => {
+    type User = { id: number; name: string };
+    // @ts-expect-error unknown is not assignable to PropertyKey
+    expectTypeOf<DistributiveOmit<User, unknown>>().toBeObject();
+    // @ts-expect-error boolean is not assignable to PropertyKey
+    expectTypeOf<DistributiveOmit<User, boolean>>().toBeObject();
   });
 
   it('preserves readonly and optional modifiers', () => {

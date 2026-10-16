@@ -33,4 +33,4 @@ type WithoutCardNo = DistributiveOmit<Card | Bank, 'note' | 'cardNo'>;
 #### 类型参数
 
 - `T`: 要移除属性的类型。联合类型会按成员分别处理。
-- `K`: 要移除的键。可以通过联合类型指定多个键，也可以指定仅存在于部分成员中的键。此参数没有约束，所有可赋值给 `K` 的键都会被移除。
+- `K`: 要移除的键。可以通过联合类型指定多个键，也可以指定仅存在于部分成员中的键。与内置的 `Omit` 一样，必须是可赋值给 `PropertyKey`（`string | number | symbol`）的类型。

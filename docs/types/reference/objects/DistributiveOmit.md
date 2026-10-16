@@ -33,4 +33,4 @@ Keys absent from a member are ignored. Remaining properties keep their `readonly
 #### Type Parameters
 
 - `T`: The type to remove properties from. Unions are processed member by member.
-- `K`: The keys to remove. Multiple keys can be specified as a union, including keys that exist in only some members. This parameter is unconstrained; each key assignable to `K` is removed.
+- `K`: The keys to remove. Multiple keys can be specified as a union, including keys that exist in only some members. Must extend `PropertyKey` (`string | number | symbol`), like the built-in `Omit`.
