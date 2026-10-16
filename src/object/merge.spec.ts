@@ -178,4 +178,12 @@ describe('merge', () => {
 
     expectTypeOf(result).toEqualTypeOf<{ a: number; b: string }>();
   });
+
+  it('returns a type assignable to the inputs when merging two objects of the same type', () => {
+    const stringOptions: { value: string & {} } = { value: 'a' };
+    expectTypeOf(merge(stringOptions, stringOptions)).toEqualTypeOf<{ value: string & {} }>();
+
+    const arrayOptions: { value: string[] | string[][] } = { value: ['a'] };
+    expectTypeOf(merge(arrayOptions, arrayOptions)).toEqualTypeOf<{ value: string[] | string[][] }>();
+  });
 });

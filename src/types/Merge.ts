@@ -1,3 +1,5 @@
+import type { IsEqual } from './IsEqual.ts';
+import type { Primitive } from './Primitive.ts';
 import type { Simplify } from './Simplify.ts';
 
 /**
@@ -26,7 +28,19 @@ import type { Simplify } from './Simplify.ts';
 // prettier-ignore
 export type Merge<T, S> =
   undefined extends S ? T | MergeDefined<T, Exclude<S, undefined>> :
-  MergeDefined<T, S>;
+  MergeSameArrays<T, S>;
+
+/**
+ * Merging an array type into the very same array type keeps that type.
+ * Without this check, a union of array shapes such as `string[] | string[][]`
+ * would be merged member by member and produce mixed arrays like
+ * `(string | string[])[]`, which are not assignable back to the original type.
+ */
+// prettier-ignore
+type MergeSameArrays<T, S> =
+  [T] extends [readonly unknown[]]
+    ? IsEqual<T, S> extends true ? T : MergeDefined<T, S>
+    : MergeDefined<T, S>;
 
 /**
  * Values `merge` does not merge into: everything that is not a plain object
@@ -41,6 +55,8 @@ type NonMergeable =
 
 // prettier-ignore
 type MergeDefined<T, S> =
+  // Primitives, including branded ones like `string & {}`, are never merged into.
+  S extends Primitive ? S :
   S extends readonly unknown[] ? (
     T extends readonly unknown[] ? MergeArrays<T, S> :
     T extends NonMergeable ? S :
@@ -49,6 +65,7 @@ type MergeDefined<T, S> =
   ) :
   S extends NonMergeable ? S :
   S extends object ? (
+    T extends Primitive ? S :
     T extends readonly unknown[] ? T & S :
     T extends NonMergeable ? S :
     T extends object ? MergeRecords<T, S> :

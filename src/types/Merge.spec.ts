@@ -55,4 +55,17 @@ describe('Merge', () => {
     expectTypeOf<Merge<string[], { a: number }>>().toEqualTypeOf<string[] & { a: number }>();
     expectTypeOf<Merge<{ a: number }, string[]>>().toEqualTypeOf<{ a: number } & string[]>();
   });
+
+  it('does not merge into branded primitives like `string & {}`', () => {
+    type Options = { value: string & {} };
+    expectTypeOf<Merge<Options, Options>>().toEqualTypeOf<{ value: string & {} }>();
+
+    type Literal = { value: 'a' | 'b' | (string & {}) };
+    expectTypeOf<Merge<Literal, Literal>>().toEqualTypeOf<{ value: 'a' | 'b' | (string & {}) }>();
+  });
+
+  it('keeps a union of array shapes when merging the same type', () => {
+    type Options = { value: string[] | string[][] };
+    expectTypeOf<Merge<Options, Options>>().toEqualTypeOf<{ value: string[] | string[][] }>();
+  });
 });
