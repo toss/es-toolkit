@@ -32,6 +32,7 @@ TypeScript に用意されていないために毎回自分で書いていた型
 | [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | すべてのキーを再帰的に定数ケースに変換します。`toConstantCaseKeys` の戻り値の型です。      |
 | [`Merge<T, S>`](./reference/objects/Merge.md)                        | あるオブジェクト型に別のオブジェクト型を深くマージした結果です。`merge` の戻り値の型です。 |
 | [`ObjectKeys<T>`](./reference/objects/ObjectKeys.md)                 | `Object.keys` が返す形でキーのユニオンを作ります。`ValueOf` のキー版です。                 |
+| [`DistributiveOmit<T, K>`](./reference/objects/DistributiveOmit.md) | ユニオンの各メンバーからキーを削除し、メンバー固有のプロパティを保持します。 |
 
 ## 選定基準
 
