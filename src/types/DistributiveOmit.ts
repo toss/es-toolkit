@@ -1,10 +1,10 @@
 /**
- * 유니온의 각 멤버에서 지정한 키를 제거하고 나머지 속성을 유지해요.
- * 기본 `Omit`과 달리 각 멤버에만 있는 속성도 유지해요.
- * 존재하지 않는 키는 무시하고, `readonly`와 선택적 속성은 그대로 유지해요.
+ * Removes the given keys from each union member while preserving its remaining properties.
+ * Unlike the built-in `Omit`, preserves properties specific to each member.
+ * Ignores missing keys and preserves readonly and optional modifiers.
  *
- * @template T - 속성을 제거할 타입.
- * @template K - 제거할 키.
+ * @template T - The type to remove properties from.
+ * @template K - The keys to remove.
  *
  * @example
  * type Card = { kind: 'card'; cardNo: string; note: string };
