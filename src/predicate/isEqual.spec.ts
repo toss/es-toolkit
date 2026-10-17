@@ -112,4 +112,30 @@ describe('isEqual', () => {
 
     expect(isEqual(buffer3, buffer4)).toBe(false);
   });
+
+  it('should compare maps by structural keys, not by reference', () => {
+    expect(isEqual(new Map([[{ a: 1 }, 'x']]), new Map([[{ a: 1 }, 'x']]))).toBe(true);
+    expect(isEqual(new Map([[{ a: 1 }, 'x']]), new Map([[{ a: 1 }, 'y']]))).toBe(false);
+    expect(isEqual(new Map([[{ a: 1 }, 'x']]), new Map([[{ a: 2 }, 'x']]))).toBe(false);
+  });
+
+  it('should compare maps with structurally equal keys as an unordered multiset', () => {
+    const a = new Map<object, number>([
+      [{}, 1],
+      [{}, 2],
+    ]);
+    const b = new Map<object, number>([
+      [{}, 2],
+      [{}, 1],
+    ]);
+    // Both hold the entries ({} -> 1) and ({} -> 2); a greedy key match would
+    // pair the first keys and fail on the values.
+    expect(isEqual(a, b)).toBe(true);
+
+    const c = new Map<object, number>([
+      [{}, 1],
+      [{}, 1],
+    ]);
+    expect(isEqual(a, c)).toBe(false);
+  });
 });
