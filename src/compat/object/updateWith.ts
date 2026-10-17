@@ -108,7 +108,7 @@ export function updateWith<T extends object, R>(
       newValue = updateValue;
     } else {
       const objValue = current[key];
-      const customizerResult = customizer?.(objValue, key as string, obj);
+      const customizerResult = customizer == null ? undefined : customizer(objValue, key as string, obj);
       newValue =
         customizerResult !== undefined
           ? customizerResult

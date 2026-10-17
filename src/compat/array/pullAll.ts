@@ -57,7 +57,7 @@ export function pullAll<L extends MutableList<any>>(array: RejectReadonly<L>, va
  * console.log(numbers); // [1, 3, 5]
  */
 export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
-  if (arr?.length == null || valuesToRemove?.length == null) {
+  if (arr == null || arr.length == null || valuesToRemove == null || valuesToRemove.length == null) {
     return arr;
   }
 

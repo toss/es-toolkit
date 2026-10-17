@@ -20,6 +20,20 @@ To support browsers older than the ones above, you can add build configuration. 
 
 Every es-toolkit release is verified to work correctly in the supported browsers: once statically with ESLint plugins like [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x), and again with real Playwright-based E2E tests.
 
+## Node.js support
+
+`es-toolkit` requires Node.js 20.12 or later, as shown in the table above.
+
+`es-toolkit/compat` is different. It exists to migrate code away from lodash, and that code often still runs in old environments, so `es-toolkit/compat` supports **Node.js 6 and later** as published: no transpilation and no polyfills are needed.
+
+```js
+// Works as-is on Node.js 6+
+const { get, cloneDeep } = require('es-toolkit/compat');
+const isEqual = require('es-toolkit/compat/isEqual');
+```
+
+This only applies to `es-toolkit/compat` and its per-function entrypoints (`es-toolkit/compat/*`). Every other entrypoint, such as `es-toolkit`, `es-toolkit/array`, or `es-toolkit/fp`, keeps the requirements in the table above. The Node.js 6 support is verified on every change by running the built package on a real Node.js 6.
+
 ## Supporting older browsers
 
 With the right bundler configuration, es-toolkit works correctly even in browsers as old as Chrome 51 or Safari 10.

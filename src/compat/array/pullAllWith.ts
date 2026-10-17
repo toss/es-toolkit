@@ -125,7 +125,7 @@ export function pullAllWith<T>(
   values?: T[] | ArrayLike<T>,
   comparator?: (a: T, b: T) => boolean
 ): T[] | ArrayLike<T> {
-  if (array?.length == null || values?.length == null) {
+  if (array == null || array.length == null || values == null || values.length == null) {
     return array;
   }
 

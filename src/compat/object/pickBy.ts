@@ -130,7 +130,7 @@ export function pickBy<T, S extends T>(
     return {};
   }
 
-  const predicate = createIteratee(shouldPick ?? identity);
+  const predicate = createIteratee(shouldPick == null ? identity : shouldPick);
 
   const result: Partial<T> = {};
 

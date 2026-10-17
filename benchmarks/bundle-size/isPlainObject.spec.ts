@@ -14,6 +14,6 @@ describe('isPlainObject bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'isPlainObject');
-    expect(bundleSize).toMatchInlineSnapshot(`435`);
+    expect(bundleSize).toMatchInlineSnapshot(`462`);
   });
 });

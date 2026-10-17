@@ -131,7 +131,7 @@ export function findLast<T>(
 
   const length = Array.isArray(collection) ? collection.length : Object.keys(collection).length;
 
-  fromIndex = toInteger(fromIndex ?? length - 1);
+  fromIndex = toInteger(fromIndex == null ? length - 1 : fromIndex);
 
   if (fromIndex < 0) {
     fromIndex = Math.max(length + fromIndex, 0);
@@ -156,5 +156,15 @@ export function findLast<T>(
     return undefined;
   }
 
-  return collection.slice(0, fromIndex + 1).findLast(doesMatch);
+  const subArray = collection.slice(0, fromIndex + 1);
+
+  for (let i = subArray.length - 1; i >= 0; i--) {
+    const value = subArray[i];
+
+    if (doesMatch(value, i, subArray)) {
+      return value;
+    }
+  }
+
+  return undefined;
 }

@@ -199,7 +199,8 @@ function assignInWithImpl(
     const objValue = object[key];
     const srcValue = source[key];
 
-    const newValue = getValueToAssign?.(objValue, srcValue, key, object, source) ?? srcValue;
+    const customized = getValueToAssign == null ? undefined : getValueToAssign(objValue, srcValue, key, object, source);
+    const newValue = customized == null ? srcValue : customized;
 
     if (!(key in object) || !eq(objValue, newValue)) {
       object[key] = newValue;

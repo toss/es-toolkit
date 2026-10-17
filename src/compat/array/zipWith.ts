@@ -143,7 +143,7 @@ export function zipWith<T, R>(...combine: Array<((...group: T[]) => R) | ArrayLi
     iteratee = undefined;
   }
 
-  if (!combine?.length) {
+  if (combine.length === 0) {
     return [];
   }
 

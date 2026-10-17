@@ -68,7 +68,7 @@ export function clone<T>(obj: T): T {
 
   if (obj instanceof Error) {
     let newError;
-    if (obj instanceof AggregateError) {
+    if (typeof AggregateError !== 'undefined' && obj instanceof AggregateError) {
       newError = new Constructor(obj.errors, obj.message, { cause: obj.cause });
     } else {
       newError = new Constructor(obj.message, { cause: obj.cause });

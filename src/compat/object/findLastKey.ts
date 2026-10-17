@@ -20,9 +20,17 @@ export function findLastKey<T>(obj: T | null | undefined, predicate?: ObjectIter
     return undefined;
   }
 
-  const iteratee = createIteratee(predicate ?? identity);
+  const iteratee = createIteratee(predicate == null ? identity : predicate);
 
   const keys = Object.keys(obj);
 
-  return keys.findLast(key => iteratee(obj[key as keyof T], key, obj));
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const key = keys[i];
+
+    if (iteratee(obj[key as keyof T], key, obj)) {
+      return key;
+    }
+  }
+
+  return undefined;
 }

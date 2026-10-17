@@ -92,7 +92,7 @@ export function some<T>(
     predicate = identity;
   }
 
-  const values = Array.isArray(source) ? source : Object.values(source);
+  const values = Array.isArray(source) ? source : Object.keys(source).map(key => (source as Record<string, any>)[key]);
 
   switch (typeof predicate) {
     case 'function': {
