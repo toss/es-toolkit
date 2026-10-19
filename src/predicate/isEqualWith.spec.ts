@@ -9,6 +9,13 @@ describe('isEqualWith', () => {
   const symbol1 = Symbol ? Symbol('a') : true;
   const symbol2 = Symbol ? Symbol('b') : false;
 
+  it('should allow customizers to reject shared map keys and set members', () => {
+    const shared = { id: 1 };
+    const rejectShared = (a: unknown, b: unknown) => (a === shared && b === shared ? false : undefined);
+    expect(isEqualWith(new Map([[shared, 1]]), new Map([[shared, 1]]), rejectShared)).toBe(false);
+    expect(isEqualWith(new Set([shared]), new Set([shared]), rejectShared)).toBe(false);
+  });
+
   it('should use the customizer function for string comparison', () => {
     const customizer = (a: any, b: any) => {
       if (typeof a === 'string' && typeof b === 'string') {

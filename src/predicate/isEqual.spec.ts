@@ -2,6 +2,44 @@ import { describe, expect, it } from 'vitest';
 import { isEqual } from './isEqual';
 
 describe('isEqual', () => {
+  it('should distinguish missing map keys from undefined values', () => {
+    expect(isEqual(new Map([['a', undefined]]), new Map([['b', undefined]]))).toBe(false);
+    expect(isEqual(new Map([['a', undefined]]), new Map([['a', undefined]]))).toBe(true);
+  });
+
+  it('should fall back to deep matching after a shared map entry', () => {
+    const shared = { id: 0 };
+    const left = new Map([
+      [shared, 0],
+      [{ id: 1 }, 1],
+      [{ id: 1 }, 2],
+    ]);
+    const right = new Map([
+      [shared, 0],
+      [{ id: 1 }, 2],
+      [{ id: 1 }, 1],
+    ]);
+    expect(isEqual(left, right)).toBe(true);
+    expect(left.size).toBe(3);
+    expect(right.size).toBe(3);
+    expect(
+      isEqual(
+        left,
+        new Map([
+          [shared, 0],
+          [{ id: 1 }, 1],
+          [{ id: 1 }, 1],
+        ])
+      )
+    ).toBe(false);
+  });
+
+  it('should fall back to deep matching after a shared set member', () => {
+    const shared = { id: 0 };
+    expect(isEqual(new Set([shared, { id: 1 }]), new Set([shared, { id: 1 }]))).toBe(true);
+    expect(isEqual(new Set([shared, { id: 1 }]), new Set([shared, { id: 2 }]))).toBe(false);
+  });
+
   it('should return true for equal primitive values', () => {
     expect(isEqual(1, 1)).toBe(true);
     expect(isEqual('hello', 'hello')).toBe(true);

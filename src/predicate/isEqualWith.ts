@@ -31,6 +31,7 @@ import {
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
+import { noop } from '../function/noop.ts';
 
 /**
  * Compares two values for equality using a custom comparison function.
@@ -204,6 +205,24 @@ function areObjectsEqual(
           return false;
         }
 
+        // Most maps can be compared without allocating a copy or matching keys deeply.
+        if (areValuesEqual === noop) {
+          let allEntriesMatch = true;
+          for (const [key, value] of a) {
+            const otherValue = b.get(key);
+            if (
+              (otherValue === undefined && !b.has(key)) ||
+              !isEqualWithImpl(value, otherValue, key, a, b, stack, areValuesEqual)
+            ) {
+              allEntriesMatch = false;
+              break;
+            }
+          }
+          if (allEntriesMatch) {
+            return true;
+          }
+        }
+
         const remainingBEntries = new Map(b);
         const remainingAEntries: Array<[any, any]> = [];
 
@@ -250,6 +269,19 @@ function areObjectsEqual(
       case setTag: {
         if (a.size !== b.size) {
           return false;
+        }
+
+        if (areValuesEqual === noop) {
+          let allValuesMatch = true;
+          for (const value of a) {
+            if (!b.has(value)) {
+              allValuesMatch = false;
+              break;
+            }
+          }
+          if (allValuesMatch) {
+            return true;
+          }
         }
 
         const remainingBValues = new Set(b);
