@@ -1,3 +1,4 @@
+export type { PropertyPath } from './_internal/PropertyPath.ts';
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
