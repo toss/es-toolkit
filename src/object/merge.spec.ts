@@ -185,5 +185,12 @@ describe('merge', () => {
 
     const arrayOptions: { value: string[] | string[][] } = { value: ['a'] };
     expectTypeOf(merge(arrayOptions, arrayOptions)).toEqualTypeOf<{ value: string[] | string[][] }>();
+
+    const literalOptions: { value: 'a' | 'b' | (string & {}) } = { value: 'a' };
+    expectTypeOf(merge(literalOptions, literalOptions)).toEqualTypeOf<{ value: 'a' | 'b' | (string & {}) }>();
+
+    type Color = string | number | Array<string | number> | Array<Array<string | number>>;
+    const colorOptions: { value: Color } = { value: 'red' };
+    expectTypeOf(merge(colorOptions, colorOptions)).toEqualTypeOf<{ value: Color }>();
   });
 });

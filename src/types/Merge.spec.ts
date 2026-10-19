@@ -68,4 +68,12 @@ describe('Merge', () => {
     type Options = { value: string[] | string[][] };
     expectTypeOf<Merge<Options, Options>>().toEqualTypeOf<{ value: string[] | string[][] }>();
   });
+
+  it('keeps a union of primitives and array shapes when merging the same type', () => {
+    type Color = string | number | Array<string | number> | Array<Array<string | number>>;
+    type Options = { value: Color };
+
+    expectTypeOf<Merge<Color, Color>>().toEqualTypeOf<Color>();
+    expectTypeOf<Merge<Options, Options>>().toEqualTypeOf<Options>();
+  });
 });

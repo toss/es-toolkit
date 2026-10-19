@@ -14,7 +14,9 @@ import type { Simplify } from './Simplify.ts';
  * (functions, `Date`, `RegExp`, `Map`, `Set`, etc.) are not merged into;
  * the source value replaces the target value. When an array meets a plain
  * object, `merge` keeps the target and assigns the source's properties onto
- * it, so both property sets are kept (`T & S`).
+ * it, so both property sets are kept (`T & S`). Merging a type with itself
+ * keeps that type, so branded primitives such as `string & {}` and unions of
+ * array shapes stay assignable to the input.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
@@ -27,20 +29,13 @@ import type { Simplify } from './Simplify.ts';
  */
 // prettier-ignore
 export type Merge<T, S> =
+  // The same type merged with itself is that type. Doing this before the
+  // distributive cases below stops a union such as
+  // `string | string[] | string[][]` from being merged member by member into
+  // a mixed array that is not assignable back to the input.
+  IsEqual<T, S> extends true ? T :
   undefined extends S ? T | MergeDefined<T, Exclude<S, undefined>> :
-  MergeSameArrays<T, S>;
-
-/**
- * Merging an array type into the very same array type keeps that type.
- * Without this check, a union of array shapes such as `string[] | string[][]`
- * would be merged member by member and produce mixed arrays like
- * `(string | string[])[]`, which are not assignable back to the original type.
- */
-// prettier-ignore
-type MergeSameArrays<T, S> =
-  [T] extends [readonly unknown[]]
-    ? IsEqual<T, S> extends true ? T : MergeDefined<T, S>
-    : MergeDefined<T, S>;
+  MergeDefined<T, S>;
 
 /**
  * Values `merge` does not merge into: everything that is not a plain object
