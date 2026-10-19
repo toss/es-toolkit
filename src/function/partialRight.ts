@@ -219,7 +219,7 @@ export function partialRight<T1, T2, T3, R>(
  * @returns Returns the new partially applied function.
  * @example
  * const createUser = (name: string, age: number, country: string) => `${name}, ${age} years old from ${country}`;
- * const createUserFromUSA = partialRight(createUser, 'USA', partialRight.placeholder);
+ * const createUserFromUSA = partialRight(createUser, 'USA');
  * console.log(createUserFromUSA('John', 30)); // => 'John, 30 years old from USA'
  */
 export function partialRight<T1, T2, T3, R>(
@@ -246,7 +246,7 @@ export function partialRight<T1, T2, T3, R>(
  * @returns Returns the new partially applied function.
  * @example
  * const logMessage = (level: string, message: string, timestamp: string) => `[${level}] ${message} at ${timestamp}`;
- * const logError = partialRight(logMessage, 'ERROR', '2023-10-01');
+ * const logError = partialRight(logMessage, 'ERROR', partialRight.placeholder, '2023-10-01');
  * console.log(logError('Something went wrong!')); // => '[ERROR] Something went wrong! at 2023-10-01'
  */
 export function partialRight<T1, T2, T3, R>(
@@ -325,7 +325,7 @@ export function partialRight<T1, T2, T3, R>(
  * @returns Returns the new partially applied function.
  * @example
  * const createProfile = (name: string, age: number, country: string) => `${name}, ${age} from ${country}`;
- * const createProfileFromCanada = partialRight(createProfile, 'Canada', 'John');
+ * const createProfileFromCanada = partialRight(createProfile, 'John', partialRight.placeholder, 'Canada');
  * console.log(createProfileFromCanada(30)); // => 'John, 30 from Canada'
  */
 export function partialRight<T1, T2, T3, R>(
@@ -758,9 +758,9 @@ export function partialRight<T1, T2, T3, T4, R>(
  * @param args The arguments to be partially applied.
  * @returns Returns the new partially applied function.
  * @example
- * const log = (...messages: string[]) => console.log(...messages);
+ * const log = (...messages: string[]) => messages.join(' ');
  * const logError = partialRight(log, 'Error:');
- * logError('Something went wrong!'); // => 'Error: Something went wrong!'
+ * logError('Something went wrong!'); // => 'Something went wrong! Error:'
  */
 export function partialRight(func: (...args: any[]) => any, ...args: any[]): (...args: any[]) => any;
 

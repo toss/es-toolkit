@@ -119,6 +119,10 @@ export function pullAllBy<L extends ArrayLike<any>, U>(
  * console.log(result); // [{ value: 2 }]
  */
 export function pullAllBy(arr: any, valuesToRemove: any, _getValue: any): any {
+  if (arr?.length == null || valuesToRemove?.length == null) {
+    return arr;
+  }
+
   const getValue = iteratee(_getValue);
   const valuesSet = new Set(Array.from(valuesToRemove).map(x => getValue(x)));
 

@@ -11,12 +11,12 @@ Instead, use the faster and more modern `Array.prototype.every()`.
 Checks if all values in an array or object meet the given condition.
 
 ```typescript
-const result = every(collection, predicate);
+const result = every(collection, doesMatch);
 ```
 
 ## Usage
 
-### `every(collection, predicate?)`
+### `every(collection, doesMatch?)`
 
 Use `every` when you want to check if all elements in an array or object satisfy a specific condition. The condition can be specified in various formats such as a function, partial object, property-value pair, property name, etc.
 
@@ -70,7 +70,7 @@ every(undefined);
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): The array or object to check.
-- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to check. Can use a function, partial object, property-value pair, or property name. Defaults to the `identity` function.
+- `doesMatch` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to check. Can use a function, partial object, property-value pair, or property name. Defaults to the `identity` function.
 
 #### Returns
 

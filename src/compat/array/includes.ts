@@ -33,7 +33,7 @@ export function includes<T>(
  *
  * The comparison uses SameValueZero to check for inclusion.
  *
- * @param source - The source to search in. It can be an array, an object, or a string.
+ * @param collection - The source to search in. It can be an array, an object, or a string.
  * @param [target] - The value to search for in the source.
  * @param [fromIndex=0] - The index to start searching from. If negative, it is treated as an offset from the end of the source.
  * @returns `true` if the value is found in the source, `false` otherwise.
@@ -45,12 +45,12 @@ export function includes<T>(
  * includes('hello world', 'test'); // false
  */
 export function includes(
-  source: readonly unknown[] | Record<string, any> | string | null | undefined,
+  collection: readonly unknown[] | Record<string, any> | string | null | undefined,
   target?: unknown,
   fromIndex?: number,
   guard?: unknown
 ): boolean {
-  if (source == null) {
+  if (collection == null) {
     return false;
   }
 
@@ -60,43 +60,43 @@ export function includes(
     fromIndex = toInteger(fromIndex);
   }
 
-  if (isString(source)) {
-    if (fromIndex > source.length || target instanceof RegExp) {
+  if (isString(collection)) {
+    if (fromIndex > collection.length || target instanceof RegExp) {
       return false;
     }
 
     if (fromIndex < 0) {
-      fromIndex = Math.max(0, source.length + fromIndex);
+      fromIndex = Math.max(0, collection.length + fromIndex);
     }
 
-    return source.includes(target as any, fromIndex);
+    return collection.includes(target as any, fromIndex);
   }
 
-  if (Array.isArray(source)) {
-    return source.includes(target, fromIndex);
+  if (Array.isArray(collection)) {
+    return collection.includes(target, fromIndex);
   }
 
-  if (isArrayLike(source)) {
+  if (isArrayLike(collection)) {
     if (fromIndex < 0) {
-      fromIndex = Math.max(0, source.length + fromIndex);
+      fromIndex = Math.max(0, collection.length + fromIndex);
     }
 
-    for (let i = fromIndex; i < source.length; i++) {
-      if (eq((source as unknown[])[i], target)) {
+    for (let i = fromIndex; i < collection.length; i++) {
+      if (eq((collection as unknown[])[i], target)) {
         return true;
       }
     }
     return false;
   }
 
-  const keys = Object.keys(source);
+  const keys = Object.keys(collection);
 
   if (fromIndex < 0) {
     fromIndex = Math.max(0, keys.length + fromIndex);
   }
 
   for (let i = fromIndex; i < keys.length; i++) {
-    const value = Reflect.get(source, keys[i]);
+    const value = Reflect.get(collection, keys[i]);
 
     if (eq(value, target)) {
       return true;

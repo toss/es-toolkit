@@ -2,7 +2,7 @@ import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { identity } from '../function/identity.ts';
 import { negate } from '../function/negate.ts';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -91,7 +91,7 @@ export function takeWhile<T>(
     | [keyof T, unknown]
     | PropertyKey
 ): T[] {
-  if (!isArrayLikeObject(array)) {
+  if (!isArrayLike(array)) {
     return [];
   }
 

@@ -47,7 +47,7 @@ sum([1, 2, 3]);
 es-toolkit 也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。使用以下命令安装 es-toolkit：
 
 ```sh
-deno add @es-toolkit/es-toolkit
+deno add jsr:@es-toolkit/es-toolkit
 ```
 
 请注意，根据 JSR 的限制，包名包含额外的作用域，与 npm 不同。

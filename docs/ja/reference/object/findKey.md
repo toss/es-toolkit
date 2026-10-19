@@ -81,8 +81,8 @@ console.log(highRamKey); // 'laptop'
 #### パラメータ
 
 - `obj` (`T extends Record<any, any>`): 検索するオブジェクトです。
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 各要素に対して実行する条件関数です。`true`を返す最初の要素のキーを見つけます。
+- `predicate` (`(value: T[keyof T], key: ObjectKeys<T>, obj: T) => boolean`): 各要素に対して実行する条件関数です。`true`を返す最初の要素のキーを見つけます([`ObjectKeys<T>`](/ja/types/reference/objects/ObjectKeys)を参照)。
 
 #### 戻り値
 
-(`keyof T | undefined`): 条件を満たす最初の要素のキーです。条件を満たす要素がない場合は`undefined`を返します。
+(`ObjectKeys<T> | undefined`): 条件を満たす最初の要素のキーです。条件を満たす要素がない場合は`undefined`を返します。

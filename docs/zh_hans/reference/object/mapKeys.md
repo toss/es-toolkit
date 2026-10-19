@@ -32,7 +32,7 @@ const uppercased = mapKeys(obj, (value, key) => key.toString().toUpperCase());
 #### 参数
 
 - `object` (`T extends Record<PropertyKey, any>`): 要转换键的对象。
-- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => K`): 生成新键的函数。接收值、键和整个对象作为参数。
+- `getNewKey` (`(value: T[keyof T], key: ObjectKeys<T>, object: T) => K`): 生成新键的函数。接收值、键和整个对象作为参数(参见 [`ObjectKeys<T>`](/zh_hans/types/reference/objects/ObjectKeys))。
 
 #### 返回值
 

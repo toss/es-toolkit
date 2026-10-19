@@ -15,6 +15,12 @@ describe('attempt', () => {
     ).toEqual([new Error('test'), null]);
   });
 
+  it('should accept a single type argument for the result type', () => {
+    const [error, names] = attempt<string[]>(() => ['Alice', 'Bob']);
+    expect(error).toBeNull();
+    expect(names).toEqual(['Alice', 'Bob']);
+  });
+
   it('should return the result of the promise', async () => {
     const [error, result] = attempt(async () => 1);
     expect(error).toBeNull();

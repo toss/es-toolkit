@@ -11,12 +11,12 @@
 在数组或对象中查找满足条件的最后一个元素。
 
 ```typescript
-const lastEven = findLast(array, predicate);
+const lastEven = findLast(array, doesMatch);
 ```
 
 ## 用法
 
-### `findLast(collection, predicate?, fromIndex?)`
+### `findLast(collection, doesMatch?, fromIndex?)`
 
 在数组或对象中查找满足给定条件的最后一个元素。从数组末尾开始逆序搜索,并返回满足条件的第一个元素。
 
@@ -67,7 +67,7 @@ findLast(undefined, x => x > 0); // undefined
 #### 参数
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 要搜索的数组或对象。
-- `predicate` (`ListIterateeCustom<T, boolean>`, 可选): 应用于每个元素的条件。可以使用函数、对象、键值对或属性名。默认为 `identity` 函数。
+- `doesMatch` (`ListIterateeCustom<T, boolean>`, 可选): 应用于每个元素的条件。可以使用函数、对象、键值对或属性名。默认为 `identity` 函数。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。负值从末尾计算。默认为数组的最后一个索引。
 
 #### 返回值

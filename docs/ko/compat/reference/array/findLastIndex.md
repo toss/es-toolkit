@@ -11,12 +11,12 @@
 배열에서 조건을 만족하는 마지막 요소의 인덱스를 찾아요.
 
 ```typescript
-const lastIndex = findLastIndex(array, predicate, fromIndex);
+const lastIndex = findLastIndex(array, doesMatch, fromIndex);
 ```
 
 ## 사용법
 
-### `findLastIndex(array, predicate?, fromIndex?)`
+### `findLastIndex(array, doesMatch?, fromIndex?)`
 
 배열의 끝에서부터 시작해서 주어진 조건과 일치하는 첫 번째 요소의 인덱스를 찾고 싶을 때 `findLastIndex`를 사용하세요. 조건을 만족하는 요소가 없으면 `-1`을 반환해요.
 
@@ -76,7 +76,7 @@ findLastIndex(undefined, n => n > 0); // -1
 #### 파라미터
 
 - `array` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 또는 프로퍼티 이름을 사용할 수 있어요. 기본값은 항등 함수예요.
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 각 요소를 테스트할 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 또는 프로퍼티 이름을 사용할 수 있어요. 기본값은 항등 함수예요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수면 배열의 끝에서부터 계산해요. 기본값은 `array.length - 1`이에요.
 
 #### 반환 값

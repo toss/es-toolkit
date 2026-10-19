@@ -83,7 +83,7 @@ describe('toUpper', () => {
 
   it('should handle mixed types in arrays', () => {
     const sym = Symbol('test');
-    expect((toUpper as any)([1, 'b', sym, null, undefined])).toBe('1,B,SYMBOL(TEST),,');
+    expect((toUpper as any)([1, 'b', sym, null, undefined])).toBe('1,B,SYMBOL(TEST),NULL,UNDEFINED');
   });
 
   it('should maintain proper TypeScript types', () => {

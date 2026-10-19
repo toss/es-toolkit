@@ -71,7 +71,7 @@ const byLength = sortBy(
 #### 파라미터
 
 - `arr` (`readonly T[]`): 정렬할 객체 배열이에요.
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 정렬 기준이에요. 객체 속성 이름이나 변환 함수의 배열로, 앞에 있는 기준이 우선순위가 높아요.
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): 정렬 기준이에요. 객체 속성 이름이나 변환 함수의 배열로, 앞에 있는 기준이 우선순위가 높아요.
 
 #### 반환 값
 

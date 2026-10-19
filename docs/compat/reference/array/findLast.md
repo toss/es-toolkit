@@ -11,12 +11,12 @@ Use the faster and more modern `Array.prototype.findLast` instead.
 Finds the last element in an array or object that satisfies a condition.
 
 ```typescript
-const lastEven = findLast(array, predicate);
+const lastEven = findLast(array, doesMatch);
 ```
 
 ## Usage
 
-### `findLast(collection, predicate?, fromIndex?)`
+### `findLast(collection, doesMatch?, fromIndex?)`
 
 Finds the last element in an array or object that satisfies the given condition. Searches in reverse order from the end of the array and returns the first element that satisfies the condition.
 
@@ -67,7 +67,7 @@ findLast(undefined, x => x > 0); // undefined
 #### Parameters
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to search.
-- `predicate` (`ListIterateeCustom<T, boolean>`, optional): The condition to apply to each element. Can be a function, object, key-value pair, or property name. Default is the `identity` function.
+- `doesMatch` (`ListIterateeCustom<T, boolean>`, optional): The condition to apply to each element. Can be a function, object, key-value pair, or property name. Default is the `identity` function.
 - `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end. Default is the last index of the array.
 
 #### Returns

@@ -5,8 +5,8 @@ import { uniqBy } from '../../array/uniqBy.ts';
 import { identity } from '../../function/identity.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
-import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
@@ -130,11 +130,14 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
   }
 
   const lastValue = last(values);
-  const count = isArrayLikeObject(lastValue) ? values.length : values.length - 1;
-  const iteratee = getIteratee(lastValue);
+  const hasIteratee = !isArrayLikeObject(lastValue);
+  const count = hasIteratee ? values.length - 1 : values.length;
+  const mapper = hasIteratee ? createIteratee(lastValue) : identity;
+  // Lodash invokes the iteratee with a single argument; only a user-supplied function can observe the extras.
+  const iteratee = typeof lastValue === 'function' ? (item: unknown) => mapper(item) : mapper;
 
   if (count <= 0) {
-    return uniqBy(toArray(array), iteratee ?? identity);
+    return uniqBy(toArray(array), iteratee);
   }
 
   // uniq normalizes `-0` to `0` to match Lodash; toArray alone would keep `-0`
@@ -147,23 +150,8 @@ export function intersectionBy<T>(array: any, ...values: any[]): T[] {
       return [];
     }
 
-    if (iteratee) {
-      result = intersectionByToolkit(result, toArray(value), iteratee);
-    }
+    result = intersectionByToolkit(result, toArray(value), iteratee);
   }
 
   return result;
-}
-
-function getIteratee(value: unknown) {
-  if (isArrayLikeObject(value)) {
-    return identity;
-  }
-  if (typeof value === 'function') {
-    return (item: unknown) => (value as (item: unknown) => unknown)(item);
-  }
-  if (typeof value === 'string') {
-    return property(value);
-  }
-  return null;
 }

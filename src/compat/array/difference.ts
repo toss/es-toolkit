@@ -1,4 +1,5 @@
 import { difference as differenceToolkit } from '../../array/difference.ts';
+import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
@@ -41,5 +42,5 @@ export function difference<T>(arr: ArrayLike<T> | undefined | null, ...values: A
     }
   }
 
-  return differenceToolkit(arr1, arr2);
+  return differenceToolkit(arr1, arr2).map(normalizeZero);
 }

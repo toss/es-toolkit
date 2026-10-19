@@ -48,7 +48,7 @@ export function unzipWith<T>(array: ArrayLike<ArrayLike<T>> | null | undefined):
  *
  * @example
  * const nestedArray = [[1, 2], [3, 4], [5, 6]];
- * const result = unzipWith(nestedArray, (a, b) => a + b);
+ * const result = unzipWith(nestedArray, (a, b, c) => a + b + c);
  * console.log(result); // [9, 12]
  */
 export function unzipWith<T>(

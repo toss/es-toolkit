@@ -60,6 +60,10 @@ assignInWith(target3, child, (objValue, srcValue, key) => {
 
 如果自定义函数返回 `undefined`,则使用默认的分配行为。与 `assignIn` 不同,此函数允许您对每个属性应用自定义逻辑。
 
+#### 别名
+
+`extendWith`
+
 #### 参数
 
 - `target` (`any`): 将接收属性的目标对象。

@@ -27,6 +27,15 @@ describe('toPath function', () => {
     expect(result).toEqual(['a', 'b.c', 'd']);
   });
 
+  it('splits unquoted, non-numeric dotted keys inside brackets, like lodash', () => {
+    expect(toPath('x[a.b.c]')).toEqual(['x', 'a', 'b', 'c']);
+    expect(toPath('metrics[cpu.usage]')).toEqual(['metrics', 'cpu', 'usage']);
+    expect(toPath('a.b[c.d].e')).toEqual(['a', 'b', 'c', 'd', 'e']);
+    // quoted content and numbers inside brackets are still kept whole
+    expect(toPath('a["b.c"]')).toEqual(['a', 'b.c']);
+    expect(toPath('a[-1.23]')).toEqual(['a', '-1.23']);
+  });
+
   it('handles empty input correctly', () => {
     const result = toPath('');
     expect(result).toEqual([]);

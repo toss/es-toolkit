@@ -219,4 +219,32 @@ describe('toMerged', () => {
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
     expect(target).toEqual({ a: { b: null, c: undefined, d: 'text' } });
   });
+
+  it('should behave like recursive Object.assign, applying the same logic to nested properties', () => {
+    const arrayTarget = ['1'];
+    const objectTarget = { a: 2 };
+
+    const topLevelArray = toMerged(arrayTarget, { a: 2 });
+    const topLevelObject = toMerged(objectTarget, ['1']);
+
+    const nestedArray = toMerged({ x: ['1'] }, { x: { a: 2 } });
+    const nestedObject = toMerged({ x: { a: 2 } }, { x: ['1'] });
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect((topLevelArray as any).a).toBe(2);
+    expect(arrayTarget).toEqual(['1']);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+    expect(objectTarget).toEqual({ a: 2 });
+
+    expect(typeof nestedObject.x).toBe('object');
+    expect(nestedObject.x).toEqual({ a: 2, 0: '1' });
+    expect(nestedObject.x[0]).toBe('1');
+
+    expect(Array.isArray(nestedArray.x)).toBe(true);
+    expect(nestedArray.x[0]).toBe('1');
+    expect((nestedArray.x as any).a).toBe(2);
+  });
 });

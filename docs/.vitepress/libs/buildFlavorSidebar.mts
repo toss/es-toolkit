@@ -40,7 +40,7 @@ export function buildFlavorSidebar({
       flavor.categories.length > 0
         ? sortByText(
             flavor.categories.map(category => ({
-              text: labels.categories[category] ?? category,
+              text: labels.categories[`${flavor.value}:${category}`] ?? labels.categories[category] ?? category,
               collapsed: true,
               items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', category),
             }))
@@ -59,6 +59,10 @@ export function buildFlavorSidebar({
         text: labels.reference,
         items: referenceItems,
       },
+      ...flavor.sections.map(section => ({
+        text: labels.categories[`${flavor.value}:${section}`] ?? labels.categories[section] ?? section,
+        items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', section),
+      })),
     ];
   }
 

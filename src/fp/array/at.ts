@@ -16,7 +16,7 @@ import { at as atToolkit } from '../../array/at.ts';
  * pipe([10, 20, 30, 40], at([1, -1]));
  * // => [20, 40]
  */
-export function at<T>(indices: number[]): (array: readonly T[]) => T[] {
+export function at<T>(indices: readonly number[]): (array: readonly T[]) => T[] {
   return function (array: readonly T[]): T[] {
     return atToolkit(array, indices);
   };

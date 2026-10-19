@@ -70,6 +70,14 @@ describe('size', () => {
     expect(size('a😀b')).toBe(3);
   });
 
+  it('should count combined Unicode symbols as a single character, matching lodash', () => {
+    expect(size('🇺🇸')).toBe(1); // regional-indicator flag pair
+    expect(size('👍🏽')).toBe(1); // emoji + Fitzpatrick skin-tone modifier
+    expect(size('👨‍👩‍👧‍👦')).toBe(1); // zero-width-joiner family sequence
+    expect(size('❤️')).toBe(1); // emoji + variation selector
+    expect(size('é')).toBe(1); // base letter + combining acute accent
+  });
+
   it('should return the `length` of array-like objects', () => {
     expect(size({ length: 3 })).toBe(3);
     expect(size({ 0: 'a', 1: 'b', length: 2 })).toBe(2);

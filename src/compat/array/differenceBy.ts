@@ -2,6 +2,7 @@ import { last } from './last.ts';
 import { difference as differenceToolkit } from '../../array/difference.ts';
 import { differenceBy as differenceByToolkit } from '../../array/differenceBy.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
+import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
@@ -172,8 +173,8 @@ export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ..._valu
   const values = flattenArrayLike<T>(_values);
 
   if (isArrayLikeObject(iteratee)) {
-    return differenceToolkit(Array.from(array), values);
+    return differenceToolkit(Array.from(array), values).map(normalizeZero);
   }
 
-  return differenceByToolkit(Array.from(array), values, createIteratee(iteratee));
+  return differenceByToolkit(Array.from(array), values, createIteratee(iteratee)).map(normalizeZero);
 }

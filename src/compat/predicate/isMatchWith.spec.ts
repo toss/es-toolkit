@@ -341,6 +341,12 @@ describe('isMatchWith', () => {
     expect(isMatchWith({ a: { b: 2 } }, { a: 1 }, () => undefined)).toBe(false);
   });
 
+  it('should not match nested empty object patterns against non-object targets', () => {
+    expect(isMatchWith({ value: 'bar' }, { value: {} }, () => undefined)).toBe(false);
+    expect(isMatchWith({ value: [] }, { value: {} }, () => undefined)).toBe(false);
+    expect(isMatchWith({ value: { b: 1 } }, { value: {} }, () => undefined)).toBe(true);
+  });
+
   it('should handle empty collections', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error

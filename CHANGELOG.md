@@ -5,6 +5,123 @@
 - Reduced the cost of comparing maps with matching keys and sets with matching
   members in `isEqual`. ([#1885](https://github.com/toss/es-toolkit/pull/1885)) by @xianjianlf2
 
+## Version v1.52.0
+
+Released on August 28th, 2026.
+
+- Added the `es-toolkit/iterator` entrypoint, a lazy iterator module with `chunk`,
+  `count`, `dropWhile`, `head`, `iterate`, `partition`, `range`, `scan`,
+  `takeWhile`, `uniqBy`, and `zip` ([#1815]), plus `cartesianProduct` ([#2031]).
+  The same functions are also available from `es-toolkit/fp/iterator`.
+- Added `defer` and `deferAsync` to `es-toolkit/util`. ([#2032])
+- Added `flowAsync` to `es-toolkit/fp`, a promise-aware left-to-right composition. ([#2033])
+- Added the `EmptyObject`, `IsEqual`, `JSONValue`, `Primitive`, `SetOptional`,
+  `SetRequired`, and `UnknownRecord` types. ([#2044])
+
+- Fixed `merge` to infer the deep merged return type, and exported the `Merge` type. ([#1959])
+- Fixed `omitBy` and `pickBy` to type numeric callback keys as strings, and
+  exported the `ObjectKeys` type. ([#2037])
+- Fixed `attempt` and `attemptAsync` to default their error type parameter to `unknown`. ([#2052])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/debounce` to skip the `maxWait` invocation when both `leading` and
+  `trailing` are `false`. ([#1678])
+- Fixed `compat/toString` to convert objects with a custom `valueOf`. ([#2034])
+- Fixed `compat/mergeWith` to assign `null` values in array sources. ([#1929])
+- Fixed `compat/has` and `compat/hasIn` to normalize the `-0` path key. ([#2035])
+- Fixed `compat/differenceWith` and `compat/without` to normalize `-0` to `0`. ([#2049])
+- Fixed `compat/findLastIndex` to convert `fromIndex` to an integer. ([#2047])
+- Fixed `compat/xorWith` to match Lodash when no comparator is given. ([#2057])
+
+- Covered the new iterator entrypoints in the dist and browser compatibility
+  checks. ([#2030])
+- Made the agent skills portable when installed on their own. ([#2054])
+- Fixed documentation typos and the Deno install commands. ([#2062])
+
+## Version v1.51.0
+
+Released on August 17th, 2026.
+
+- Added the `es-toolkit/bigint` entrypoint: `bigint` counterparts of the math
+  functions (`sum`, `sumBy`, `max`, `min`, `maxBy`, `minBy`, `clamp`, `inRange`,
+  `median`, `medianBy`, `percentile`, `range`, `rangeRight`), kept separate so
+  the `number` implementations stay unchanged. ([#1966])
+- Added `dedent`, which removes common leading whitespace from template strings. ([#1679])
+- Added `deepFreeze` for recursively freezing objects. ([#1680])
+- Added `mapValuesAsync` and `mapKeysAsync`. ([#1544])
+- Added `toPascalCaseKeys`, `toKebabCaseKeys`, and `toConstantCaseKeys`,
+  completing the object key casing family. ([#1984])
+- Exported the `ToCamelCaseKeys`, `ToPascalCaseKeys`, `ToSnakeCaseKeys`,
+  `ToKebabCaseKeys`, and `ToConstantCaseKeys` types. ([#1651])
+- Added a `preserveArrays` option to `flattenObject`. ([#974])
+
+- Fixed `retry` to pass the last error to the `delay` callback ([#1759]) and to
+  throw the last attempt's error without applying a final delay ([#1901]).
+- Fixed `mergeWith` and `toMerged` to handle mixed array/object types
+  consistently with `merge`. ([#2026])
+- Fixed `pullAt` to remove the correct elements with negative indices. ([#1613])
+- Fixed `at`, `pullAt`, `orderBy`, and `sortBy` to accept readonly arrays. ([#2016])
+- Moved `limitAsync` from the array to the promise category. ([#2022])
+- Included the NOTICE file in the published npm and JSR packages. ([#2020])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Added `entries` and `entriesIn`. ([#1874])
+- Fixed `compat/isMatch` and `compat/isMatchWith` to handle object source
+  patterns against primitive and non-plain-object targets like Lodash. ([#1432])
+- Fixed `compat/set` to block `constructor.prototype` paths, preventing
+  prototype pollution. ([#1904])
+- Fixed `compat/find` to respect array-like `length` ([#1958]) and to convert
+  `fromIndex` to an integer ([#1961]), and `compat/indexOf` to convert
+  `fromIndex` to an integer when searching for `NaN` ([#1951]).
+- Fixed `compat/orderBy` to resolve unresolved deep paths and nullish elements
+  to `undefined` ([#2010]), to exclude the `length` property from array-like
+  values ([#2002]), and to read the criterion property from primitive values ([#1903]).
+- Fixed `compat/toPath` to split unquoted dotted keys inside brackets. ([#1899])
+- Fixed `compat/omit` to treat a key array as a single deep path. ([#1902])
+- Fixed `compat/map` to make the iteratee optional with an identity default. ([#1928])
+- Fixed `compat/size` to count combined Unicode symbols as single characters. ([#1900])
+- Fixed `compat/intersectionBy` to support number, object, and nullish iteratee
+  shorthands ([#1993]), and `compat/intersectionWith` to apply the comparator
+  when deduplicating the first array ([#1953]).
+- Fixed `compat/difference`, `compat/differenceBy`, `compat/uniqBy`, and
+  `compat/unionBy` to normalize `-0` to `0`. ([#2007])
+- Fixed `compat/maxBy` and `compat/minBy` to skip nullish iteratee values ([#1927]),
+  and `compat/meanBy` to skip `undefined` values when averaging ([#1978]).
+- Fixed `compat/some`, `compat/template` ([#2009]), and `compat/fill` ([#1952])
+  to gate guard handling with `isIterateeCall`.
+- Fixed `compat/iteratee` to treat a boolean as a property shorthand. ([#1941])
+- Fixed `compat/reverse` to support array-like objects and `arguments`. ([#2008])
+- Fixed `compat/toArray` to convert non-array-like iterables. ([#1999])
+- Fixed `compat/toString` to render nested nullish values like Lodash. ([#1992])
+- Fixed `compat/zipObject` to treat `null` keys and values as empty arrays. ([#2005])
+- Fixed `compat/sampleSize` to clamp the default size to the collection length. ([#2003])
+- Fixed `compat/takeWhile`, `compat/takeRightWhile`, and `compat/uniqBy` to
+  support string inputs. ([#2004])
+- Fixed `compat/chunk` to return an empty array for an empty collection with an
+  `Infinity` size. ([#1995])
+- Fixed `compat/lastIndexOf` to read holes in sparse arrays as `undefined`. ([#1977])
+- Fixed `compat/last` to return `undefined` for empty array-like inputs. ([#1954])
+- Fixed `compat/pullAll` to return the array as-is when `values` is nullish. ([#1962])
+
+- Added a browser compatibility test suite. ([#2012])
+- Improved documentation, JSDoc accuracy, tests, and internal refactoring across
+  `compat` and the docs site. ([#1622], [#1789], [#1824], [#1844], [#1849],
+  [#1854], [#1855], [#1859], [#1860], [#1868], [#1871], [#1887], [#1898],
+  [#1933], [#1939], [#1947], [#1950], [#1955], [#1956], [#1957], [#1960],
+  [#1963], [#1964], [#1968], [#1969], [#1970], [#1972], [#1979], [#1985],
+  [#2000], [#2001], [#2021], [#2025], [#2027])
+
+We sincerely thank @Antoliny0919, @D-Sketon, @kojesung, @chuenchen309,
+@mariazuheros, @DongEun02, @raon0211, @sukvvon, @racgoo, @dayongkr, @Kropiunig,
+@ssi02014, @sarathfrancis90, @mym0404, @mlnwns, @kdelay, @gwagjiug, @dohwi,
+@blro0319, @benedictleejh, @amir-rezaei, @ianzone, @sen2y, @rossyman,
+@eunwoo-levi, @ramong26, @Gdm0714, and everyone else who contributed.
+We appreciate your great efforts!
+
 ## Version v1.50.0
 
 Released on July 24th, 2026.
@@ -142,7 +259,7 @@ We sincerely thank @SrAnthony and @umsungjun for their contributions. We appreci
 
 ## Version v1.46.0
 
-Released on April 22th, 2026.
+Released on April 22nd, 2026.
 
 - Changed `AbortError` and `TimeoutError` to extend `DOMException`. ([#1660])
 - Added `keyBy` to the `map` entrypoint exports. ([#1650])
@@ -313,7 +430,7 @@ We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contr
 
 ## Version v1.39.6
 
-Released on July 2th, 2025.
+Released on July 2nd, 2025.
 
 - Fixed handling of null/undefined values in `values` function.
 - Fixed type safety in `compat/get` by adding GetFieldType utility type.
@@ -938,4 +1055,4 @@ Released on June 3rd, 2024.
 
 ## Version v1.0.2
 
-Initial release. Released on May 31th, 2024.
+Initial release. Released on May 31st, 2024.

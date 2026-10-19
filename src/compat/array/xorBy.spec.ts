@@ -75,4 +75,14 @@ describe('xorBy', () => {
 
     expect(args).not.toEqual([1.2, 3.4]);
   });
+  it('should ignore the `iteratee` when given a single array like lodash', () => {
+    expect(xorBy([2.1, 2.3], Math.floor)).toEqual([2.1, 2.3]);
+    expect(xorBy([{ x: 1 }, { x: 1 }], 'x')).toEqual([{ x: 1 }, { x: 1 }]);
+    // @ts-expect-error - lodash accepts an iteratee with no arrays
+    expect(xorBy(Math.floor)).toEqual([]);
+
+    expect(xorBy([1, 1, 2], Math.floor)).toEqual([1, 2]);
+    expect(xorBy([NaN, NaN], Math.floor)).toEqual([NaN]);
+    expect(xorBy([-0], Math.floor)).toEqual([0]);
+  });
 });

@@ -28,7 +28,7 @@ console.log(result); // { 1: 'b', 2: 'c' } (나중에 나오는 'b'가 키 1의 
 // 문자열 키와 숫자 값
 const grades = { alice: 85, bob: 92, charlie: 88 };
 const invertedGrades = invert(grades);
-console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
+console.log(invertedGrades); // { 85: 'alice', 88: 'charlie', 92: 'bob' }
 ```
 
 다양한 타입의 키와 값으로 사용할 수 있어요.

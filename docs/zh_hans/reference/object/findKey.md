@@ -81,8 +81,8 @@ console.log(highRamKey); // 'laptop'
 #### 参数
 
 - `obj` (`T extends Record<any, any>`): 要搜索的对象。
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 对每个元素执行的条件函数。查找返回 `true` 的第一个元素的键。
+- `predicate` (`(value: T[keyof T], key: ObjectKeys<T>, obj: T) => boolean`): 对每个元素执行的条件函数。查找返回 `true` 的第一个元素的键(参见 [`ObjectKeys<T>`](/zh_hans/types/reference/objects/ObjectKeys))。
 
 #### 返回值
 
-(`keyof T | undefined`): 满足条件的第一个元素的键。如果没有满足条件的元素,则返回 `undefined`。
+(`ObjectKeys<T> | undefined`): 满足条件的第一个元素的键。如果没有满足条件的元素,则返回 `undefined`。

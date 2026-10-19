@@ -47,7 +47,7 @@ export function flowRight<A extends any[], R1, R2, R3, R4, R5, R6, R7>(
  * const length = (s: string) => s.length;
  *
  * const combined = flowRight(length, append, toString, double, square, add);
- * console.log(combined(1, 2)); // 7
+ * console.log(combined(1, 2)); // 3
  */
 export function flowRight<A extends any[], R1, R2, R3, R4, R5, R6>(
   f6: (a: R5) => R6,

@@ -93,6 +93,22 @@ console.log(envStyle);
 // }
 ```
 
+Using the `preserveArrays` option, you can keep arrays as values instead of flattening them into index keys.
+
+```typescript
+// Keep arrays as values
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
 Empty objects and special cases are handled appropriately.
 
 ```typescript
@@ -108,7 +124,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +136,7 @@ console.log(result);
 - `object` (`object`): The object to flatten.
 - `options` (`FlattenObjectOptions`, optional): Flattening options.
   - `delimiter` (`string`, optional): The delimiter to connect nested keys. Defaults to `'.'`.
+  - `preserveArrays` (`boolean`, optional): If `true`, arrays are kept as values instead of being flattened. Defaults to `false`.
 
 #### Returns
 

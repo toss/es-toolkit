@@ -1,4 +1,5 @@
 import { identity } from '../../function/identity.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Iterates over an object in reverse order and invokes the `iteratee` function for each property.
@@ -95,6 +96,8 @@ export function forInRight<T>(
   if (object == null) {
     return object;
   }
+
+  iteratee = createIteratee(iteratee);
 
   const keys: string[] = [];
 

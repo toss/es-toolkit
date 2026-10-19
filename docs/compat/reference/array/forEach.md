@@ -16,7 +16,7 @@ forEach(collection, callback);
 
 ## Usage
 
-### `forEach(collection, callback)`
+### `forEach(collection, callback?)`
 
 Use `forEach` when you want to iterate over all elements of an array or object and execute a callback function for each element. The iteration stops if the callback returns `false`.
 
@@ -76,11 +76,15 @@ forEach(undefined, value => {
 });
 ```
 
+#### Alias
+
+`each`
+
 #### Parameters
 
-- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to iterate over.
-- `callback` (`(value: T, index: number | string, collection: any) => void | false`): The function to execute for each element. Returns `false` to stop iteration.
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The array or object to iterate over.
+- `callback` (`(item: any, index: any, collection: any) => unknown`, optional): The function to execute for each element. Default is the `identity` function.
 
 #### Returns
 
-(`T`): Returns the original collection that was iterated over.
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): Returns the original collection.

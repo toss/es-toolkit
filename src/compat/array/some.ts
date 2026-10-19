@@ -1,4 +1,5 @@
 import { identity } from '../../function/identity.ts';
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { property } from '../object/property.ts';
@@ -83,7 +84,7 @@ export function some<T>(
   if (!source) {
     return false;
   }
-  if (guard != null) {
+  if (guard && isIterateeCall(source, predicate, guard)) {
     predicate = undefined;
   }
 
@@ -145,9 +146,7 @@ export function some<T>(
         return values.some(matchFunc);
       }
     }
-    case 'number':
-    case 'symbol':
-    case 'string': {
+    default: {
       const propFunc = property(predicate);
       if (Array.isArray(source)) {
         for (let i = 0; i < source.length; i++) {

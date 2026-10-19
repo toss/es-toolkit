@@ -66,4 +66,34 @@ describe('xorWith', () => {
 
     expect(actual).toEqual([objects[1], others[0]]);
   });
+
+  it('should match `NaN` like lodash when no `comparator` is given', () => {
+    expect(xorWith([NaN], [NaN])).toEqual([]);
+    expect(xorWith([1, NaN], [2, NaN])).toEqual([1, 2]);
+    expect(xorWith([NaN, NaN], [1])).toEqual([NaN, 1]);
+  });
+
+  it('should normalize `-0` to `0` like lodash when no `comparator` is given', () => {
+    expect(xorWith([-0, 1], [1])).toEqual([0]);
+    expect(xorWith([-0])).toEqual([0]);
+  });
+
+  it('should keep the `comparator` semantics when one is given', () => {
+    const eq = (a: number, b: number) => a === b;
+
+    expect(xorWith([NaN], [NaN], eq)).toEqual([NaN, NaN]);
+    expect(xorWith([-0, 1], [1], eq)).toEqual([-0]);
+  });
+  it('should ignore the `comparator` when given a single array like lodash', () => {
+    const eq = (a: number, b: number) => a === b;
+
+    expect(xorWith([{ a: 1 }, { a: 1 }], isEqual)).toEqual([{ a: 1 }, { a: 1 }]);
+    expect(xorWith([1, 2, 3], eq)).toEqual([1, 2, 3]);
+    // @ts-expect-error - lodash accepts a comparator with no arrays
+    expect(xorWith(eq)).toEqual([]);
+
+    expect(xorWith([1, 1, 2], eq)).toEqual([1, 2]);
+    expect(xorWith([NaN, NaN], eq)).toEqual([NaN]);
+    expect(xorWith([-0], eq)).toEqual([0]);
+  });
 });

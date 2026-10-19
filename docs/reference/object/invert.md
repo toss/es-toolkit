@@ -28,7 +28,7 @@ console.log(result); // { 1: 'b', 2: 'c' } (later appearing 'b' is used as the v
 // String keys and number values
 const grades = { alice: 85, bob: 92, charlie: 88 };
 const invertedGrades = invert(grades);
-console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
+console.log(invertedGrades); // { 85: 'alice', 88: 'charlie', 92: 'bob' }
 ```
 
 Can be used with various types of keys and values.

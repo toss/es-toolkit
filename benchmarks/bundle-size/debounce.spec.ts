@@ -14,6 +14,6 @@ describe('debounce bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'debounce');
-    expect(bundleSize).toMatchInlineSnapshot(`961`);
+    expect(bundleSize).toMatchInlineSnapshot(`971`);
   });
 });

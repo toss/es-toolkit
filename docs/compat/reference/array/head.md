@@ -52,6 +52,10 @@ head(null); // undefined
 head(undefined); // undefined
 ```
 
+#### Alias
+
+`first`
+
 #### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array or array-like object to get the first element from.

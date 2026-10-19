@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { omitBy } from './omitBy';
 
 describe('omitBy', () => {
@@ -35,5 +35,35 @@ describe('omitBy', () => {
     const shouldOmit = (_: number | { nested: string }, key: string) => key === 'b';
     const result = omitBy(obj, shouldOmit);
     expect(result).toEqual({ a: 1, c: 3 });
+  });
+
+  it('should pass numeric keys as strings', () => {
+    const obj = { 1: 'keep', 2: 'omit' };
+    const keys: string[] = [];
+
+    const result = omitBy(obj, (value, key) => {
+      expectTypeOf(key).toEqualTypeOf<'1' | '2'>();
+      keys.push(key);
+      return value === 'omit';
+    });
+
+    expect(keys).toEqual(['1', '2']);
+    expect(result).toEqual({ 1: 'keep' });
+  });
+
+  it('should type number index signature keys as numeric strings', () => {
+    const obj: Record<number, string> = { 1: 'keep', 2: 'omit' };
+
+    omitBy(obj, (_value, key) => {
+      expectTypeOf(key).toEqualTypeOf<`${number}`>();
+      return key === '2';
+    });
+  });
+
+  it('should preserve string literal key types', () => {
+    omitBy({ a: 1, b: 2 }, (_value, key) => {
+      expectTypeOf(key).toEqualTypeOf<'a' | 'b'>();
+      return false;
+    });
   });
 });

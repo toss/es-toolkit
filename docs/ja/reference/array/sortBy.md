@@ -71,7 +71,7 @@ const byLength = sortBy(
 #### パラメータ
 
 - `arr` (`readonly T[]`): ソートするオブジェクト配列です。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): ソート基準です。オブジェクトのプロパティ名または変換関数の配列で、前にある基準が優先順位が高くなります。
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): ソート基準です。オブジェクトのプロパティ名または変換関数の配列で、前にある基準が優先順位が高くなります。
 
 #### 戻り値
 

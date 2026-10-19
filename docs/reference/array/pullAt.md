@@ -42,7 +42,7 @@ console.log(items); // [2]
 #### Parameters
 
 - `arr` (`T[]`): The array from which to remove elements.
-- `indicesToRemove` (`number[]`): An array of indices of elements to remove. Negative indices count from the end of the array.
+- `indicesToRemove` (`readonly number[]`): An array of indices of elements to remove. Negative indices count from the end of the array.
 
 #### Returns
 

@@ -125,4 +125,29 @@ describe('mergeWith', () => {
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
   });
+
+  it('should behave like recursive Object.assign, applying the same logic to nested properties', () => {
+    const noop = () => undefined;
+
+    const topLevelArray = mergeWith(['1'], { a: 2 }, noop);
+    const topLevelObject = mergeWith({ a: 2 }, ['1'], noop);
+
+    const nestedArray = mergeWith({ x: ['1'] }, { x: { a: 2 } }, noop);
+    const nestedObject = mergeWith({ x: { a: 2 } }, { x: ['1'] }, noop);
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect((topLevelArray as any).a).toBe(2);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+
+    expect(typeof nestedObject.x).toBe('object');
+    expect(nestedObject.x).toEqual({ a: 2, 0: '1' });
+    expect(nestedObject.x[0]).toBe('1');
+
+    expect(Array.isArray(nestedArray.x)).toBe(true);
+    expect(nestedArray.x[0]).toBe('1');
+    expect((nestedArray.x as any).a).toBe(2);
+  });
 });

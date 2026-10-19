@@ -1,4 +1,5 @@
 import { escape } from './escape.ts';
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { attempt } from '../function/attempt.ts';
 import { defaults } from '../object/defaults.ts';
 import { toString } from '../util/toString.ts';
@@ -122,7 +123,7 @@ export function template(string?: string, options?: TemplateOptions): TemplateEx
 export function template(string?: string, options?: TemplateOptions, guard?: object): TemplateExecutor {
   string = toString(string);
 
-  if (guard) {
+  if (guard && isIterateeCall(string, options, guard)) {
     options = templateSettings;
   }
 

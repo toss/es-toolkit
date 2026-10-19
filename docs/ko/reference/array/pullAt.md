@@ -42,7 +42,7 @@ console.log(items); // [2]
 #### 파라미터
 
 - `arr` (`T[]`): 요소를 제거할 배열이에요.
-- `indicesToRemove` (`number[]`): 제거할 요소들의 인덱스 배열이에요. 음수 인덱스는 배열의 끝에서부터 계산돼요.
+- `indicesToRemove` (`readonly number[]`): 제거할 요소들의 인덱스 배열이에요. 음수 인덱스는 배열의 끝에서부터 계산돼요.
 
 #### 반환 값
 

@@ -60,6 +60,10 @@ assignInWith(target3, child, (objValue, srcValue, key) => {
 
 カスタマイザー関数が `undefined` を返す場合、デフォルトの割り当て動作が使用されます。この関数は、`assignIn`とは異なり、各プロパティにカスタムロジックを適用できます。
 
+#### エイリアス
+
+`extendWith`
+
 #### パラメータ
 
 - `target` (`any`): プロパティがコピーされるターゲットオブジェクトです。

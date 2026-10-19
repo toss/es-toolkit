@@ -84,4 +84,19 @@ describe('reverse', () => {
     expect(result).toEqual(['four', 3, 'two', 1]);
     expect(result).toBe(array);
   });
+
+  it('should work with array-like objects and `arguments`', () => {
+    const arrayLike = { 0: 'a', 1: 'b', 2: 'c', length: 3 };
+    const result = reverse(arrayLike);
+
+    expect(result).toBe(arrayLike);
+    expect(result).toEqual({ 0: 'c', 1: 'b', 2: 'a', length: 3 });
+  });
+
+  it('should return primitives unchanged', () => {
+    // @ts-expect-error - type mismatch
+    expect(Number(reverse(42))).toBe(42);
+    // @ts-expect-error - type mismatch
+    expect(Boolean(reverse(true))).toBe(true);
+  });
 });

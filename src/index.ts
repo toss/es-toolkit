@@ -63,3 +63,7 @@ export * from './predicate/index.ts';
 export * from './promise/index.ts';
 export * from './string/index.ts';
 export * from './util/index.ts';
+
+// `limitAsync` is exported from both `./array` (deprecated alias) and `./promise`;
+// an ambiguous name is dropped from star exports, so re-export the canonical one explicitly.
+export { limitAsync } from './promise/limitAsync.ts';

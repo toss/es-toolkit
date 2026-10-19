@@ -1,3 +1,4 @@
+import { isMergeableValue } from '../_internal/isMergeableValue.ts';
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -70,18 +71,12 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
 
     if (merged !== undefined) {
       target[key] = merged;
+    } else if (isMergeableValue(sourceValue) && isMergeableValue(targetValue)) {
+      target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
     } else if (Array.isArray(sourceValue)) {
-      if (Array.isArray(targetValue)) {
-        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
-      } else {
-        target[key] = mergeWith<any, S[keyof T]>([], sourceValue, merge);
-      }
+      target[key] = mergeWith<any, S[keyof T]>([], sourceValue, merge);
     } else if (isPlainObject(sourceValue)) {
-      if (isPlainObject(targetValue)) {
-        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
-      } else {
-        target[key] = mergeWith<any, S[keyof T]>({}, sourceValue, merge);
-      }
+      target[key] = mergeWith<any, S[keyof T]>({}, sourceValue, merge);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }

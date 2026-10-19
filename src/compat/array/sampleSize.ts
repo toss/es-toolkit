@@ -59,8 +59,10 @@ export function sampleSize<T>(
   if (guard ? isIterateeCall(collection, size, guard) : size === undefined) {
     size = 1;
   } else {
-    size = clamp(toInteger(size), 0, arrayCollection.length);
+    size = toInteger(size);
   }
+
+  size = clamp(size, 0, arrayCollection.length);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error

@@ -100,6 +100,14 @@ describe('find', () => {
     expect(find(array, x => x === 1, -0.5)).toBe(1);
   });
 
+  it('should truncate non-integer `fromIndex` values like lodash', () => {
+    const array = [10, 20, 30, 40];
+
+    expect(find(array, value => value > 0, 1.5)).toBe(20);
+    expect(find(array, value => value > 0, -1.5)).toBe(40);
+    expect(find(array, value => value > 0, NaN)).toBe(10);
+  });
+
   it('should return `undefined` when provided `null` or `undefined`', () => {
     expect(find(null, 'a')).toBe(undefined);
     expect(find(undefined, 'a')).toBe(undefined);
@@ -118,6 +126,12 @@ describe('find', () => {
     expect(find({ 0: 1, 1: 2, 2: 3, length: 3 }, i => i === 3)).toBe(3);
     expect(find('123', i => i === '3')).toBe('3');
     expect(find(args, i => i === 3)).toBe(3);
+  });
+
+  it('should not treat the `length` property of a plain array-like object as an element', () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+
+    expect(find(arrayLike, (value: unknown) => value === 2)).toBe(undefined);
   });
 
   it('should use identity when no _doesMatch is provided', () => {

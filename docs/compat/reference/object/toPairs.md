@@ -64,6 +64,10 @@ toPairs(undefined);
 // => []
 ```
 
+#### Alias
+
+`entries`
+
 #### Parameters
 
 - `object` (`object`): The object, Map, or Set to convert.

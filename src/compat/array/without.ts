@@ -1,4 +1,4 @@
-import { without as withoutToolkit } from '../../array/without.ts';
+import { normalizeZero } from '../_internal/normalizeZero.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
@@ -25,5 +25,17 @@ export function without<T>(array: ArrayLike<T> | null | undefined, ...values: T[
   if (!isArrayLikeObject(array)) {
     return [];
   }
-  return withoutToolkit(Array.from(array), ...values);
+
+  const valuesSet = new Set(values);
+  const result: T[] = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i];
+
+    if (!valuesSet.has(value)) {
+      result.push(normalizeZero(value));
+    }
+  }
+
+  return result;
 }

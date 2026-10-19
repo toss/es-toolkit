@@ -1,5 +1,5 @@
+import { sumBy } from './sumBy.ts';
 import { identity } from '../../function/identity.ts';
-import { meanBy as meanByToolkit } from '../../math/meanBy.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -8,6 +8,9 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * the `iteratee` function to each element.
  *
  * If the array is empty, this function returns `NaN`.
+ *
+ * If the key is missing or the value is `undefined`, it is treated as `0`.
+ * However, if every value is `undefined`, the result is `NaN`.
  *
  * @template T - The type of elements in the array.
  * @param items An array to calculate the average.
@@ -24,11 +27,14 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * meanBy([], x => x.a); // Returns: NaN
  * meanBy([[2], [3], [1]], 0); // Returns: 2
  * meanBy([{ a: 2 }, { a: 3 }, { a: 1 }], 'a'); // Returns: 2
+ * meanBy([{ a: 1 }, {}], 'a'); // Returns: 0.5
  */
 export function meanBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): number {
-  if (items == null) {
+  const length = items == null ? 0 : items.length;
+
+  if (!length) {
     return NaN;
   }
 
-  return meanByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
+  return sumBy(items, iterateeToolkit(iteratee ?? identity)) / length;
 }

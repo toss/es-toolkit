@@ -213,4 +213,13 @@ describe('has', () => {
   it(`should return \`false\` for empty paths`, () => {
     expect(has({ a: null }, [])).toBe(false);
   });
+
+  it(`should treat \`-0\` as the key \`'-0'\`, matching lodash`, () => {
+    expect(has({ 0: 'a' }, -0)).toBe(false);
+    expect(has({ 0: 'a' }, [-0])).toBe(false);
+    expect(has([1, 2], -0)).toBe(false);
+    expect(has({ '-0': 'a' }, -0)).toBe(true);
+    expect(has({ a: { '-0': 1 } }, ['a', -0])).toBe(true);
+    expect(has({ 0: 'a' }, 0)).toBe(true);
+  });
 });

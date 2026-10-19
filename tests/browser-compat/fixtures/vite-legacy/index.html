@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>es-toolkit browser-compat: vite-legacy</title>
+  </head>
+  <body>
+    <script>
+      window.__FIXTURE__ = 'vite-legacy';
+      window.addEventListener('error', function (event) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/__results', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(
+          JSON.stringify({
+            fixture: window.__FIXTURE__,
+            loadError: String((event && event.message) || 'unknown load error'),
+            done: false,
+          })
+        );
+      });
+    </script>
+    <script type="module" src="./main.mjs"></script>
+  </body>
+</html>

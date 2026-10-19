@@ -22,6 +22,13 @@ describe('kebabCase', () => {
     expect(kebabCase('Москва')).toBe('москва');
   });
 
+  it('should keep non-Latin letters as they are, identical to lodash', () => {
+    expect(kebabCase('한국어')).toBe('한국어');
+    expect(kebabCase('한국어 테스트')).toBe('한국어-테스트');
+    expect(kebabCase('Мой край')).toBe('мой-край');
+    expect(kebabCase('Tiếng Việt')).toBe('tiếng-việt');
+  });
+
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => kebabCase(kebabCase(string)));
 

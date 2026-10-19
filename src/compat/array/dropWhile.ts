@@ -30,12 +30,12 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * dropWhile([{ a: 1, b: 2 }, { a: 1, b: 3 }], 'a')
  * // => []
  */
-export function dropWhile<T>(array: ArrayLike<T> | null | undefined, predicate: ListIteratee<T> = identity): T[] {
+export function dropWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[] {
   if (!isArrayLike(array)) {
     return [];
   }
 
-  return dropWhileImpl(toArray(array), predicate);
+  return dropWhileImpl(toArray(array), predicate ?? identity);
 }
 
 function dropWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {
@@ -53,9 +53,7 @@ function dropWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {
         return dropWhileToolkit(arr, matches(predicate));
       }
     }
-    case 'number':
-    case 'symbol':
-    case 'string': {
+    default: {
       return dropWhileToolkit(arr, property(predicate));
     }
   }

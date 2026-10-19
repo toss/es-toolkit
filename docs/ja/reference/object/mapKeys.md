@@ -32,7 +32,7 @@ const uppercased = mapKeys(obj, (value, key) => key.toString().toUpperCase());
 #### パラメータ
 
 - `object` (`T extends Record<PropertyKey, any>`): キーを変換するオブジェクトです。
-- `getNewKey` (`(value: T[keyof T], key: keyof T, object: T) => K`): 新しいキーを生成する関数です。値、キー、全体のオブジェクトをパラメータとして受け取ります。
+- `getNewKey` (`(value: T[keyof T], key: ObjectKeys<T>, object: T) => K`): 新しいキーを生成する関数です。値、キー、全体のオブジェクトをパラメータとして受け取ります([`ObjectKeys<T>`](/ja/types/reference/objects/ObjectKeys)を参照)。
 
 #### 戻り値
 

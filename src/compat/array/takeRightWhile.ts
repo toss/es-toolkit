@@ -2,7 +2,7 @@ import { identity } from '../../function/identity.ts';
 import { negate } from '../../function/negate.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
@@ -91,7 +91,7 @@ export function takeRightWhile<T>(
     | [keyof T, unknown]
     | PropertyKey
 ): T[] {
-  if (!isArrayLikeObject(_array)) {
+  if (!isArrayLike(_array)) {
     return [];
   }
 

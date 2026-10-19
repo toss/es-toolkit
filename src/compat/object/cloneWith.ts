@@ -41,7 +41,7 @@ export function cloneWith<T, R extends object | string | number | boolean | null
  *     return value * 2;
  *   }
  * });
- * // => { a: 2, b: 4 }
+ * // => { a: 1, b: 2 } (customizer returns undefined for objects, so the default shallow clone is used)
  */
 export function cloneWith<T, R>(value: T, customizer: CloneWithCustomizer<T, R | undefined>): R | T;
 
@@ -102,7 +102,7 @@ export function cloneWith<T>(value: T): T;
  *   }
  *   // Returning undefined uses the default cloning
  * });
- * console.log(clonedObj); // { a: 2, b: 4 }
+ * console.log(clonedObj); // { a: 1, b: 2 } (customizer returns undefined for objects, so the default shallow clone is used)
  */
 export function cloneWith(value: any, customizer?: any): any {
   if (!customizer) {

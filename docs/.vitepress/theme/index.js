@@ -19,7 +19,24 @@ import FpLazySimulation from '../components/FpLazySimulation.vue';
 /** @type {import('vitepress').Theme} */
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app }) {
+  enhanceApp({ app, router }) {
+    if (typeof window !== 'undefined') {
+      // Alias pages (e.g. `each`, `first`) declare a `redirect` frontmatter field
+      // pointing to their canonical page. Server-side redirects in vercel.json only
+      // cover full page loads, so client-side navigations are handled here.
+      const redirectIfAlias = () => {
+        const target = router.route.data?.frontmatter?.redirect;
+        if (typeof target === 'string' && target !== router.route.path) {
+          router.go(target);
+        }
+      };
+      const onAfterRouteChanged = router.onAfterRouteChanged;
+      router.onAfterRouteChanged = to => {
+        redirectIfAlias();
+        return onAfterRouteChanged?.(to);
+      };
+      queueMicrotask(redirectIfAlias);
+    }
     app.component(
       'Sandpack',
       defineAsyncComponent(() => import('../components/Sandpack.vue'))

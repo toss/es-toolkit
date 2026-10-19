@@ -1,3 +1,5 @@
+import type { ObjectKeys } from '../types/ObjectKeys.ts';
+
 /**
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
@@ -8,7 +10,7 @@
  * @param obj - The object to pick properties from.
  * @param shouldPick - A predicate function that determines
  * whether a property should be picked. It takes the property's key and value as arguments and returns `true`
- * if the property should be picked, and `false` otherwise.
+ * if the property should be picked, and `false` otherwise. Numeric keys are passed as strings.
  * @returns A new object with the properties that satisfy the predicate function.
  *
  * @example
@@ -19,17 +21,18 @@
  */
 export function pickBy<T extends Record<string, any>>(
   obj: T,
-  shouldPick: (value: T[keyof T], key: keyof T) => boolean
+  shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  const keys = Object.keys(obj) as Array<keyof T>;
+  const keys = Object.keys(obj) as Array<ObjectKeys<T>>;
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const value = obj[key];
+    const objectKey = key as keyof T;
+    const value = obj[objectKey];
 
     if (shouldPick(value, key)) {
-      result[key] = value;
+      result[objectKey] = value;
     }
   }
 

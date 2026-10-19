@@ -63,7 +63,7 @@ console.log(logWithTime('INFO', 'Application started'));
 // 与数组一起使用
 const numbers = [1, 2, 3, 4, 5];
 const appendSuffix = partialRight((num: number, suffix: string) => `${num}${suffix}`, 'th');
-const result = numbers.map(appendSuffix);
+const result = numbers.map(num => appendSuffix(num));
 console.log(result); // ['1th', '2th', '3th', '4th', '5th']
 ```
 

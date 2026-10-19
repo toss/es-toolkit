@@ -91,4 +91,36 @@ describe('round', () => {
     expect(round(5e-324, 323)).toBe(0);
     expect(round(5e-324, -323)).toBe(0);
   });
+
+  it(`\`round\` should coerce \`precision\` with \`toInteger\` like lodash`, () => {
+    // Values that `toInteger` resolves to `0`, so no decimal adjustment happens.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, [1, 2, 3])).toBe(4);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, '2px')).toBe(4);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, true)).toBe(4);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, '0x2')).toBe(4.02);
+
+    // Capped at `292`.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, '1e3')).toBe(4.016);
+    expect(round(4.016, Infinity)).toBe(4.016);
+  });
+
+  it(`\`round\` should coerce \`number\` with \`toNumber\` like lodash`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(Symbol('a'))).toBe(NaN);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(round(4.016, Symbol('a'))).toBe(4);
+  });
 });

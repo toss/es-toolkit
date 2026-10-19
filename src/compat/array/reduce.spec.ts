@@ -210,4 +210,14 @@ describe('reduce', () => {
 
     expect(count).toBe(1);
   });
+  it('should resolve a non-function `iteratee` like lodash instead of throwing', () => {
+    // @ts-expect-error - lodash accepts a nullish iteratee
+    expect(reduce([1, 2, 3], null)).toBe(1);
+    // @ts-expect-error - lodash accepts a nullish iteratee
+    expect(reduce({ a: 1, b: 2 }, null)).toBe(1);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(reduce([{ a: 1 }, 2], 'a')).toBe(1);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(reduce([{ a: 1 }, { a: 1 }], { a: 1 })).toBe(true);
+  });
 });

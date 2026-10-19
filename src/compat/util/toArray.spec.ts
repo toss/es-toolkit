@@ -13,6 +13,18 @@ describe('toArray', () => {
     }
   });
 
+  it('should convert non-array-like iterables to arrays', () => {
+    const iterable = {
+      *[Symbol.iterator]() {
+        yield 1;
+        yield 2;
+      },
+    };
+    expect(toArray(iterable)).toEqual([1, 2]);
+    expect(toArray(new Map([['a', 1]]).entries())).toEqual([['a', 1]]);
+    expect(toArray(new Set([1, 2]).values())).toEqual([1, 2]);
+  });
+
   it('should convert maps to arrays', () => {
     if (Map) {
       const map = new Map();

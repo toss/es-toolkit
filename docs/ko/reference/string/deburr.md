@@ -40,6 +40,16 @@ deburr('niño'); // returns 'nino'
 deburr('mañana'); // returns 'manana'
 ```
 
+라틴 문자만 변환해요. 한글, 키릴 문자, 그리스 문자처럼 다른 문자 체계의 글자는 발음 기호가 붙어 있어도 그대로 유지돼요.
+
+```typescript
+import { deburr } from 'es-toolkit/string';
+
+deburr('한국어'); // returns '한국어'
+deburr('йогурт'); // returns 'йогурт'
+deburr('Café Москва 한국어'); // returns 'Cafe Москва 한국어'
+```
+
 URL 생성이나 파일명 정리에 활용할 수 있어요.
 
 ```typescript

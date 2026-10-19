@@ -157,7 +157,7 @@ export function curry<T1, T2, T3, T4, T5, R>(
  * @param arity - The arity of func.
  * @returns Returns the new curried function.
  * @example
- * const sum = (...args: number[]) => args.reduce((a, b) => a + b, 0);
+ * const sum = (a: number, b: number, c: number) => a + b + c;
  * const curriedSum = curry(sum);
  * curriedSum(1, 2, 3); // => 6
  * curriedSum(1)(2, 3); // => 6

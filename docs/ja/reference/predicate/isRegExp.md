@@ -168,7 +168,7 @@ const text = 'Hello world! Hello everyone!';
 
 console.log(searchText(text, /hello/gi)); // 2 (正規表現)
 console.log(searchText(text, 'Hello')); // 2 (文字列、エスケープ済み)
-console.log(searchText(text, /h.llo/i)); // 2 (パターンマッチング)
+console.log(searchText(text, /h.llo/gi)); // 2 (パターンマッチング)
 
 // 動的フィルタリング
 function createFilter(patterns: unknown[]) {
@@ -181,7 +181,7 @@ function createFilter(patterns: unknown[]) {
 
 // スパムフィルターの例
 const spamPatterns = [
-  /\b(広告|宣伝)\b/,
+  /(広告|宣伝)/,
   /\d{3}-\d{4}-\d{4}/, // 電話番号パターン
   'invalid', // RegExp ではない、フィルターから除外
   /\$\d+/, // 価格パターン

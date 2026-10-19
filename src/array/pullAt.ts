@@ -16,9 +16,9 @@ import { at } from './at.ts';
  * console.log(removed); // [20, 40, 50]
  * console.log(numbers); // [10, 30]
  */
-export function pullAt<T>(arr: T[], indicesToRemove: number[]): T[] {
+export function pullAt<T>(arr: T[], indicesToRemove: readonly number[]): T[] {
   const removed = at(arr, indicesToRemove);
-  const indices = new Set(indicesToRemove.slice().sort((x, y) => y - x));
+  const indices = new Set(indicesToRemove.map(index => (index < 0 ? index + arr.length : index)).sort((x, y) => y - x));
 
   for (const index of indices) {
     arr.splice(index, 1);

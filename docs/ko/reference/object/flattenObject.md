@@ -93,6 +93,22 @@ console.log(envStyle);
 // }
 ```
 
+`preserveArrays` 옵션을 사용하면 배열을 인덱스 키로 평탄화하지 않고 값 그대로 유지할 수 있어요.
+
+```typescript
+// 배열을 값 그대로 유지
+const preserved = flattenObject(config, { preserveArrays: true });
+console.log(preserved);
+// {
+//   'database.host': 'localhost',
+//   'database.port': 5432,
+//   'database.credentials.username': 'admin',
+//   'database.credentials.password': 'secret',
+//   'features': ['auth', 'logging'],
+//   'debug': true
+// }
+```
+
 빈 객체와 특수한 경우들도 적절히 처리해요.
 
 ```typescript
@@ -108,7 +124,7 @@ const result = flattenObject(emptyCase);
 console.log(result);
 // {
 //   'empty': {},
-//   'emptyArray: [],
+//   'emptyArray': [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
@@ -120,6 +136,7 @@ console.log(result);
 - `object` (`object`): 평탄화할 객체예요.
 - `options` (`FlattenObjectOptions`, 선택): 평탄화 옵션이에요.
   - `delimiter` (`string`, 선택): 중첩된 키를 연결할 구분자예요. 기본값은 `'.'`예요.
+  - `preserveArrays` (`boolean`, 선택): `true`면 배열을 평탄화하지 않고 값 그대로 유지해요. 기본값은 `false`예요.
 
 #### 반환 값
 

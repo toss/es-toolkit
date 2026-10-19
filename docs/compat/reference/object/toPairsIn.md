@@ -59,6 +59,10 @@ toPairsIn(set);
 // => [[1, 1], [2, 2], [3, 3]]
 ```
 
+#### Alias
+
+`entriesIn`
+
 #### Parameters
 
 - `object` (`object`): The object, Map, or Set to convert.

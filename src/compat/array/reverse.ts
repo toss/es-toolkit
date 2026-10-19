@@ -41,5 +41,5 @@ export function reverse<T>(array: T[] | null | undefined): T[] | null | undefine
     return array;
   }
 
-  return array.reverse();
+  return Array.prototype.reverse.call(array);
 }

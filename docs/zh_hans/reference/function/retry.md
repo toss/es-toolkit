@@ -50,6 +50,27 @@ const data4 = await retry(
     delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
   }
 );
+
+// 基于错误的重试间隔 (如: 使用 Retry-After 响应头)
+class RateLimitError extends Error {
+  constructor(public retryAfter: number) {
+    super('Rate limited');
+  }
+}
+
+const data5 = await retry(
+  async () => {
+    const response = await fetch('/api/data');
+    if (response.status === 429) {
+      throw new RateLimitError(Number(response.headers.get('Retry-After') ?? 1));
+    }
+    return response.json();
+  },
+  {
+    retries: 3,
+    delay: (_attempts, error) => (error instanceof RateLimitError ? error.retryAfter * 1000 : 1000),
+  }
+);
 ```
 
 当只想在特定错误时重试时,可以使用 `shouldRetry` 选项。
@@ -64,7 +85,7 @@ class NetworkError extends Error {
 }
 
 // 仅在 500+ 错误时重试
-const data5 = await retry(
+const data6 = await retry(
   async () => {
     const response = await fetch('/api/data');
     if (!response.ok) {
@@ -111,7 +132,7 @@ try {
 - `func` (`() => Promise<T>`): 要重试的异步函数。
 - `options` (`number | RetryOptions`, 可选): 重试次数或选项对象。
   - `retries` (`number`, 可选): 重试次数。默认值为 `Infinity`,无限重试。
-  - `delay` (`number | (attempts: number) => number`, 可选): 重试间隔(毫秒)。可以使用数字或函数。默认值为 `0`。
+  - `delay` (`number | (attempts: number, error: unknown) => number`, 可选): 重试间隔(毫秒)。可以使用数字或函数。函数接收尝试次数和错误对象。默认值为 `0`。
   - `signal` (`AbortSignal`, 可选): 可以取消重试的信号。
   - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 可选): 决定是否重试的函数。如果返回 `false`,则立即抛出错误。
     - `error`: 发生的错误对象。

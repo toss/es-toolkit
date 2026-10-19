@@ -112,7 +112,7 @@ The traversal is interrupted when the `iteratee` function returns `false`.
  * @example
  * // Transform an array
  * const array = [2, 3, 4];
- * transform(array, (acc, value) => { acc += value; return value % 2 === 0; }, 0) // => 5
+ * transform(array, (acc, value) => { acc.sum += value; return value % 2 === 0; }, { sum: 0 }) // => { sum: 5 }
  *
  * @example
  * // Transform an object

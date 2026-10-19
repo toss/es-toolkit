@@ -11,12 +11,12 @@
 查找数组中满足条件的最后一个元素的索引。
 
 ```typescript
-const lastIndex = findLastIndex(array, predicate, fromIndex);
+const lastIndex = findLastIndex(array, doesMatch, fromIndex);
 ```
 
 ## 用法
 
-### `findLastIndex(array, predicate?, fromIndex?)`
+### `findLastIndex(array, doesMatch?, fromIndex?)`
 
 当您想要从数组末尾开始查找满足给定条件的第一个元素的索引时,使用 `findLastIndex`。如果没有元素满足条件,则返回 `-1`。
 
@@ -76,7 +76,7 @@ findLastIndex(undefined, n => n > 0); // -1
 #### 参数
 
 - `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
-- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 测试每个元素的条件。可以是函数、部分对象、属性值对或属性名。默认为恒等函数。
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 测试每个元素的条件。可以是函数、部分对象、属性值对或属性名。默认为恒等函数。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数,则从数组末尾开始计算。默认为 `array.length - 1`。
 
 #### 返回值

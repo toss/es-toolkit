@@ -60,9 +60,9 @@ orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
 
 #### 파라미터
 
-- `arr` (`T[]`): 정렬할 객체 배열이에요.
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 정렬할 기준들이에요. 객체의 속성 이름이나 값을 반환하는 함수를 사용할 수 있어요.
-- `orders` (`Array<'asc' | 'desc'>`): 각 기준에 대한 정렬 방향 배열이에요. `'asc'`는 오름차순, `'desc'`는 내림차순을 의미해요.
+- `arr` (`readonly T[]`): 정렬할 객체 배열이에요.
+- `criteria` (`ReadonlyArray<((item: T) => unknown) | keyof T>`): 정렬할 기준들이에요. 객체의 속성 이름이나 값을 반환하는 함수를 사용할 수 있어요.
+- `orders` (`ReadonlyArray<'asc' | 'desc'>`): 각 기준에 대한 정렬 방향 배열이에요. `'asc'`는 오름차순, `'desc'`는 내림차순을 의미해요.
 
 #### 반환 값
 

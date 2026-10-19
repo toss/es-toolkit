@@ -255,4 +255,34 @@ describe('forEach', () => {
 
     expect(keys).toEqual(['a']);
   });
+  it('should resolve a non-function `iteratee` like lodash instead of throwing', () => {
+    const array = [{ a: 1 }, { a: 2 }];
+
+    // @ts-expect-error - lodash accepts a nullish iteratee
+    expect(forEach(array, null)).toBe(array);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forEach(array, 'a')).toBe(array);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forEach(array, { a: 1 })).toBe(array);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forEach(array, ['a', 1])).toBe(array);
+  });
+
+  it('should stop when a property shorthand returns `false` like lodash', () => {
+    let visited = 0;
+    const array = [
+      { a: false },
+      {
+        get a() {
+          visited++;
+          return true;
+        },
+      },
+    ];
+
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    forEach(array, 'a');
+
+    expect(visited).toBe(0);
+  });
 });

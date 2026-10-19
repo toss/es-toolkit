@@ -36,8 +36,8 @@ import { compareValues } from '../_internal/compareValues.ts';
  */
 export function orderBy<T extends object>(
   arr: readonly T[],
-  criteria: Array<((item: T) => unknown) | keyof T>,
-  orders: Array<'asc' | 'desc'>
+  criteria: ReadonlyArray<((item: T) => unknown) | keyof T>,
+  orders: ReadonlyArray<'asc' | 'desc'>
 ): T[] {
   return arr.slice().sort((a, b) => {
     const ordersLength = orders.length;

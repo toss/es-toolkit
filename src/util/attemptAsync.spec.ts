@@ -38,6 +38,12 @@ describe('attemptAsync', () => {
     expect(result).toBe(30);
   });
 
+  it('should accept a single type argument for the result type', async () => {
+    const [error, result] = await attemptAsync<number[]>(async () => [1, 2, 3]);
+    expect(error).toBeNull();
+    expect(result).toEqual([1, 2, 3]);
+  });
+
   it('should work with non-Error thrown objects', async () => {
     const [error, result] = await attemptAsync(async () => {
       throw 'string error'; // Not an Error instance

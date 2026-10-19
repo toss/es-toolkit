@@ -64,23 +64,3 @@ console.log(spreadMultiply.call(calculator, [2, 3, 4])); // 24
 #### 返回值
 
 (`(args: Parameters<F>) => ReturnType<F>`): 返回一个接收参数数组并以展开形式传递给原始函数的新函数。
-
-## 与 Lodash 的兼容性
-
-从 `es-toolkit/compat` 导入 `spread` 可与 lodash 兼容。
-
-- `spread` 额外接收一个名为 `argsIndex` 的数字参数。此参数表示要展开的参数数组的给定索引。
-  - 如果 `argsIndex` 为负数或 `NaN`,则视为默认值 `0`。如果是小数,则向下舍入到最接近的整数。
-
-```typescript
-import { spread } from 'es-toolkit/compat';
-
-function fn(a: unknown, b: unknown, c: unknown) {
-  return Array.from(arguments);
-}
-
-spread(fn, -1)([1, 2]); // Returns [1, 2]
-spread(fn, NaN)([1, 2]); // Returns [1, 2]
-spread(fn, 'a')([1, 2]); // Returns [1, 2]
-spread(fn, 1.6)(1, [2, 3]); // Returns [1, 2, 3]
-```

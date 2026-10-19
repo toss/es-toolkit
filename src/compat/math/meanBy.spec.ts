@@ -38,4 +38,19 @@ describe('meanBy', () => {
 
     expect(meanBy(numbers)).toBe(2);
   });
+
+  it('should skip `undefined` values when summing, but still count them in the divisor', () => {
+    expect(meanBy([{ a: 1 }, {}], 'a')).toBe(0.5);
+    expect(meanBy([{ a: 1 }, { a: undefined }, { a: 3 }], 'a')).toBe(4 / 3);
+    expect(meanBy([1, undefined, 2])).toBe(1);
+    expect(meanBy([{ a: { b: 1 } }, {}], 'a.b')).toBe(0.5);
+  });
+
+  it('should return `NaN` when every value is `undefined`', () => {
+    expect(meanBy([{}, {}], 'a')).toBe(NaN);
+  });
+
+  it('should work with array-like objects', () => {
+    expect(meanBy({ 0: { a: 1 }, 1: {}, length: 2 }, 'a')).toBe(0.5);
+  });
 });

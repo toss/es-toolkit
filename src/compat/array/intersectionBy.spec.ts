@@ -139,12 +139,44 @@ describe('intersectionBy', () => {
     ]);
   });
 
-  it('should handle non-function, non-string, non-array iteratee', () => {
+  it('should support number iteratee shorthands', () => {
     const array1 = [1, 2, 3];
     const array2 = [2, 3, 4];
 
+    // Matches lodash: `123` is a property shorthand, so every element maps to `undefined`.
     const actual = intersectionBy(array1, array2, 123);
-    expect(actual).toEqual([1, 2, 3]);
+    expect(actual).toEqual([1]);
+
+    expect(
+      intersectionBy(
+        [
+          [1, 'a'],
+          [2, 'b'],
+          [3, 'c'],
+        ],
+        [
+          [1, 'x'],
+          [3, 'y'],
+        ],
+        0
+      )
+    ).toEqual([
+      [1, 'a'],
+      [3, 'c'],
+    ]);
+  });
+
+  it('should treat a nullish iteratee as identity', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(intersectionBy([1, 2], [2, 3], null)).toEqual([2]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(intersectionBy([2.1, 1.2], [2.3, 3.4], undefined)).toEqual([]);
+  });
+
+  it('should support object iteratee shorthands', () => {
+    expect(intersectionBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], { x: 1 })).toEqual([{ x: 1 }]);
   });
 
   it('should dedupe a single array by the iteratee', () => {

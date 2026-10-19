@@ -1,6 +1,8 @@
 import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
+import { getTag } from '../_internal/getTag.ts';
 import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
+import { argumentsTag, objectTag } from '../_internal/tags.ts';
 import { eq } from '../util/eq.ts';
 
 /**
@@ -46,7 +48,8 @@ export function isMatchWith(target: object, source: object, compare: IsMatchWith
  * - **Primitives**: Matches using strict equality
  *
  * Special cases:
- * - Empty objects, arrays, Maps, and Sets always match any target
+ * - Empty arrays, Maps, and Sets always match any target
+ * - An empty object matches any target at the top level, but at nested levels it only matches object targets
  * - `null` and `undefined` source values have specific matching rules
  * - Circular references are handled using an internal stack to prevent infinite recursion
  *
@@ -151,7 +154,7 @@ function isMatchWithInternal(
 
   switch (typeof source) {
     case 'object': {
-      return isObjectMatch(target, source, compare, stack);
+      return isObjectMatch(target, source, compare, stack, isRoot);
     }
     case 'function': {
       const sourceKeys = Object.keys(source);
@@ -191,7 +194,8 @@ function isObjectMatch(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack: Map<any, any> | undefined
+  stack: Map<any, any> | undefined,
+  isRoot = false
 ): boolean {
   if (source == null) {
     return true;
@@ -211,8 +215,21 @@ function isObjectMatch(
 
   const keys = Object.keys(source as any);
 
-  if (target == null || isPrimitive(target)) {
-    return keys.length === 0;
+  if (target == null) {
+    return isRoot && keys.length === 0;
+  }
+
+  if (isRoot) {
+    if (isPrimitive(target)) {
+      target = Object(target);
+    }
+  } else {
+    // Nested object patterns only match plain object-like targets, like lodash's tag comparison.
+    const tag = getTag(target);
+
+    if (tag !== objectTag && tag !== argumentsTag) {
+      return false;
+    }
   }
 
   if (keys.length === 0) {
@@ -229,7 +246,7 @@ function isObjectMatch(
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
-      if (!isPrimitive(target) && !(key in target)) {
+      if (!(key in target)) {
         return false;
       }
 

@@ -36,4 +36,34 @@ describe('forIn', () => {
 
     expect(obj).toEqual({ a: 3, b: 2 });
   });
+  it('should resolve a non-function `iteratee` like lodash instead of throwing', () => {
+    const object = { a: { a: 1 }, b: { a: 2 } };
+
+    // @ts-expect-error - lodash accepts a nullish iteratee
+    expect(forIn(object, null)).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forIn(object, 'a')).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forIn(object, { a: 1 })).toBe(object);
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    expect(forIn(object, ['a', 1])).toBe(object);
+  });
+
+  it('should stop when a property shorthand returns `false` like lodash', () => {
+    let visited = 0;
+    const object = {
+      x: { a: false },
+      y: {
+        get a() {
+          visited++;
+          return true;
+        },
+      },
+    };
+
+    // @ts-expect-error - lodash accepts iteratee shorthands
+    forIn(object, 'a');
+
+    expect(visited).toBe(0);
+  });
 });

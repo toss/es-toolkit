@@ -54,4 +54,9 @@ describe('takeRightWhile', () => {
     expect(takeRightWhile({ 0: 1, 1: 2, 2: 3, length: 3 }, value => value > 1)).toEqual([2, 3]);
     expect(takeRightWhile(toArgs([1, 2, 3]), value => value > 1)).toEqual([2, 3]);
   });
+
+  it('should treat strings as arrays of characters', () => {
+    expect(takeRightWhile('hello', char => char !== 'h')).toEqual(['e', 'l', 'l', 'o']);
+    expect(takeRightWhile('hello')).toEqual(['h', 'e', 'l', 'l', 'o']);
+  });
 });

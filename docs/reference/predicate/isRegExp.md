@@ -168,7 +168,7 @@ const text = 'Hello world! Hello everyone!';
 
 console.log(searchText(text, /hello/gi)); // 2 (regex)
 console.log(searchText(text, 'Hello')); // 2 (string, escaped)
-console.log(searchText(text, /h.llo/i)); // 2 (pattern matching)
+console.log(searchText(text, /h.llo/gi)); // 2 (pattern matching)
 
 // Dynamic filtering
 function createFilter(patterns: unknown[]) {
@@ -181,7 +181,7 @@ function createFilter(patterns: unknown[]) {
 
 // Spam filter example
 const spamPatterns = [
-  /\b(ad|promo)\b/,
+  /(ad|promo)/,
   /\d{3}-\d{4}-\d{4}/, // Phone number pattern
   'invalid', // Not a RegExp, excluded from filter
   /\$\d+/, // Price pattern

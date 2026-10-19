@@ -167,6 +167,34 @@ describe('flattenObject', function () {
     });
   });
 
+  it('preserves arrays when preserveArrays is true', () => {
+    const result = flattenObject(
+      {
+        a: [1, 2, 3],
+      },
+      { preserveArrays: true }
+    );
+
+    expect(result).toEqual({
+      a: [1, 2, 3],
+    });
+  });
+
+  it('preserves nested arrays and their contents when preserveArrays is true', () => {
+    const result = flattenObject(
+      {
+        a: {
+          b: [1, { c: 2 }],
+        },
+      },
+      { preserveArrays: true }
+    );
+
+    expect(result).toEqual({
+      'a.b': [1, { c: 2 }],
+    });
+  });
+
   describe('custom delimiters', () => {
     it('handles forward slash delimiter', () => {
       const result = flattenObject(

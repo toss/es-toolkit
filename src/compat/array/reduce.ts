@@ -3,6 +3,7 @@ import { range } from '../../math/range.ts';
 import { MemoListIterator } from '../_internal/MemoListIterator.ts';
 import { MemoObjectIterator } from '../_internal/MemoObjectIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Reduces an array to a single value using an iteratee function.
@@ -136,6 +137,8 @@ export function reduce(
   if (!collection) {
     return accumulator;
   }
+
+  iteratee = createIteratee(iteratee);
 
   let keys: any[];
   let startIndex = 0;

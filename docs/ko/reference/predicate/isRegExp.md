@@ -168,7 +168,7 @@ const text = 'Hello world! Hello everyone!';
 
 console.log(searchText(text, /hello/gi)); // 2 (정규식)
 console.log(searchText(text, 'Hello')); // 2 (문자열, 이스케이프됨)
-console.log(searchText(text, /h.llo/i)); // 2 (패턴 매칭)
+console.log(searchText(text, /h.llo/gi)); // 2 (패턴 매칭)
 
 // 동적 필터링
 function createFilter(patterns: unknown[]) {
@@ -181,7 +181,7 @@ function createFilter(patterns: unknown[]) {
 
 // 스팸 필터 예시
 const spamPatterns = [
-  /\b(광고|홍보)\b/,
+  /(광고|홍보)/,
   /\d{3}-\d{4}-\d{4}/, // 전화번호 패턴
   'invalid', // RegExp가 아님, 필터에서 제외
   /\$\d+/, // 가격 패턴

@@ -1,10 +1,12 @@
+import type { Primitive } from './Primitive.ts';
+
 /**
  * Makes all properties of `T` readonly recursively, unlike the built-in
  * `Readonly` which only affects the first level.
  *
  * Arrays and tuples become readonly, and `Map`/`Set` become
- * `ReadonlyMap`/`ReadonlySet`. Functions, `Date`, and `RegExp` pass through
- * unchanged.
+ * `ReadonlyMap`/`ReadonlySet`. Primitive types (including branded primitives),
+ * functions, `Date`, and `RegExp` pass through unchanged.
  *
  * @template T - The type to make deeply readonly.
  *
@@ -18,7 +20,7 @@
  */
 // prettier-ignore
 export type DeepReadonly<T> =
-  T extends ((...args: any[]) => unknown) | Date | RegExp ? T :
+  T extends Primitive | ((...args: never[]) => unknown) | Date | RegExp ? T :
   T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>> :
   T extends ReadonlySet<infer U> ? ReadonlySet<DeepReadonly<U>> :
   T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } :

@@ -25,7 +25,7 @@ describe('difference', () => {
 
     expect(actual).toEqual([[], []]);
 
-    expect(difference([-0, 1], [1])).toEqual([-0]);
+    expect(difference([-0, 1], [1])).toEqual([0]);
   });
 
   it(`should match \`NaN\``, () => {
@@ -58,7 +58,7 @@ describe('difference', () => {
     expect(actual).toEqual([[], []]);
 
     const largeArray = Array.from({ length: LARGE_ARRAY_SIZE }).map(() => 1);
-    expect(difference([-0, 1], largeArray)).toEqual([-0]);
+    expect(difference([-0, 1], largeArray)).toEqual([0]);
   });
 
   it(`should work with large arrays of \`NaN\``, () => {
@@ -102,5 +102,10 @@ describe('difference', () => {
 
   it('should filter out values that are not arrays or array-like objects', () => {
     expect(difference(['2', '3'], '2', ['3'])).toEqual(['2']);
+  });
+
+  it('should normalize `-0` to `0` like lodash', () => {
+    expect(difference([-0, 1], [1])).toEqual([0]);
+    expect(difference([-0], [])).toEqual([0]);
   });
 });
