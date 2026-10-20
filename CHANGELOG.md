@@ -1,5 +1,12 @@
 # es-toolkit Changelog
 
+## Unreleased
+
+- Fixed `fp/intersectionBy` to keep the first value for each mapped key in lazy
+  pipelines, matching eager evaluation. ([#2146]) by @poketopa.
+
+[#2146]: https://github.com/toss/es-toolkit/pull/2146
+
 ## Version v1.52.0
 
 Released on August 28th, 2026.
