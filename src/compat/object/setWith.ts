@@ -1,5 +1,5 @@
 import { updateWith } from './updateWith.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 
 /**
  * Sets the value at the specified path of the given object using a customizer function.

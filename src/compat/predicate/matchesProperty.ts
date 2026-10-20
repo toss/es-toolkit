@@ -1,9 +1,9 @@
 import { isMatch } from './isMatch.ts';
-import type { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { cloneDeep } from '../object/cloneDeep.ts';
 import { get } from '../object/get.ts';
 import { has } from '../object/has.ts';
+import type { PropertyPath } from '../types/PropertyPath.ts';
 
 /**
  * Creates a function that checks if a given target object matches a specific property value.

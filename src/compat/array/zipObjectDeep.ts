@@ -1,7 +1,7 @@
 import { zip } from '../../array/zip.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { set } from '../object/set.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 
 /**
  * Creates a deeply nested object given arrays of paths and values.
