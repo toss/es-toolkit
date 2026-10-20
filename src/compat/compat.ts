@@ -1,4 +1,3 @@
-export type { PropertyPath } from './_internal/PropertyPath.ts';
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
@@ -69,6 +68,7 @@ export { sortedIndexOf } from './array/sortedIndexOf.ts';
 export { sortedLastIndex } from './array/sortedLastIndex.ts';
 export { sortedLastIndexBy } from './array/sortedLastIndexBy.ts';
 export { sortedLastIndexOf } from './array/sortedLastIndexOf.ts';
+export type { PropertyPath } from './types/PropertyPath.ts';
 // export { sortedUniq } from './array/sortedUniq.ts';
 // export { sortedUniqBy } from './array/sortedUniqBy.ts';
 export { tail } from './array/tail.ts';
