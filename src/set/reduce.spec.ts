@@ -159,6 +159,67 @@ describe('reduce', () => {
     expect(result).toBe(false);
   });
 
+  it('should use null as the initial accumulator', () => {
+    const set = new Set(['x', 'y']);
+
+    const result = reduce(set, (acc: string | null, value) => String(acc) + value, null);
+
+    expect(result).toBe('nullxy');
+  });
+
+  it('should keep calling the callback after it returns null or undefined', () => {
+    const set = new Set([1, 2, 3]);
+    const values: number[] = [];
+
+    const result = reduce(
+      set,
+      (_acc: number | null | undefined, value) => {
+        values.push(value);
+        return value === 2 ? undefined : null;
+      },
+      0
+    );
+
+    expect(values).toEqual([1, 2, 3]);
+    expect(result).toBeNull();
+  });
+
+  it('should return null for an empty Set when null is the initial value', () => {
+    const set = new Set<number>();
+
+    expect(reduce(set, (acc: number | null, value) => (acc ?? 0) + value, null)).toBeNull();
+  });
+
+  it('should use an explicit undefined initial value', () => {
+    const set = new Set([1, 2]);
+    const values: number[] = [];
+
+    const result = reduce(
+      set,
+      (acc: number | undefined, value) => {
+        values.push(value);
+        return (acc ?? 0) + value;
+      },
+      undefined
+    );
+
+    expect(values).toEqual([1, 2]);
+    expect(result).toBe(3);
+  });
+
+  it('should use a null first element when no initial value is provided', () => {
+    const set = new Set<number | null>([null, 2, 3]);
+    const values: Array<number | null> = [];
+
+    const result = reduce(set, (acc: number | null, value) => {
+      values.push(value);
+      return (acc === null ? 100 : acc) + (value ?? 0);
+    });
+
+    expect(values).toEqual([2, 3]);
+    expect(result).toBe(105);
+  });
+
   it('should work with multiplication', () => {
     const set = new Set([2, 3, 4]);
 

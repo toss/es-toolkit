@@ -81,14 +81,16 @@ export async function reduceAsync<T, U>(
   reducer: (accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>,
   initialValue?: U
 ): Promise<U> {
+  // `null` and `undefined` are valid accumulator values, so only a missing
+  // argument means "start from the first element".
+  const hasInitialValue = arguments.length >= 3;
   let startIndex = 0;
+  let accumulator = initialValue as U;
 
-  if (initialValue == null) {
-    initialValue = array[0] as unknown as U;
+  if (!hasInitialValue) {
+    accumulator = array[0] as unknown as U;
     startIndex = 1;
   }
-
-  let accumulator: U = initialValue!;
 
   for (let i = startIndex; i < array.length; i++) {
     accumulator = await reducer(accumulator, array[i], i, array);
