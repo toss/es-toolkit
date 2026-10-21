@@ -77,22 +77,26 @@ describe('Merge', () => {
     }>();
   });
 
-  it('keeps the wider type when one side is assignable to the other', () => {
+  it('keeps the target array type when the source array fits into it', () => {
     type Color = string | number | string[] | string[][];
 
     expectTypeOf<Merge<Color, string[]>>().toEqualTypeOf<Color>();
     expectTypeOf<Merge<string[], Color>>().toEqualTypeOf<Color>();
     expectTypeOf<Merge<string[] | string[][], string[]>>().toEqualTypeOf<string[] | string[][]>();
     expectTypeOf<Merge<number[], Array<1 | 2>>>().toEqualTypeOf<number[]>();
-    expectTypeOf<Merge<{ a: number }, { a: 2 }>>().toEqualTypeOf<{ a: number }>();
-    expectTypeOf<Merge<{ a: 2 }, { a: number }>>().toEqualTypeOf<{ a: number }>();
+    expectTypeOf<Merge<Color, string | string[]>>().toEqualTypeOf<Color>();
   });
 
-  it('keeps the target type when both sides are assignable to each other', () => {
+  it('uses the source type when the source replaces the target value', () => {
+    type Color = string | number | string[] | string[][];
     type LiteralUnion = 'a' | 'b' | (string & {});
 
-    expectTypeOf<Merge<LiteralUnion, string>>().toEqualTypeOf<LiteralUnion>();
-    expectTypeOf<Merge<string, LiteralUnion>>().toEqualTypeOf<string>();
+    expectTypeOf<Merge<{ a: number }, { a: 2 }>>().toEqualTypeOf<{ a: 2 }>();
+    expectTypeOf<Merge<{ a: string | null }, { a: string }>>().toEqualTypeOf<{ a: string }>();
+    expectTypeOf<Merge<{ a: Date | null }, { a: Date }>>().toEqualTypeOf<{ a: Date }>();
+    expectTypeOf<Merge<Color, 'red'>>().toEqualTypeOf<'red'>();
+    expectTypeOf<Merge<LiteralUnion, string>>().toEqualTypeOf<string>();
+    expectTypeOf<Merge<string, LiteralUnion>>().toEqualTypeOf<LiteralUnion>();
   });
 
   it('keeps the target type when the source is a partial of the same type', () => {
