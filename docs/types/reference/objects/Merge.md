@@ -49,30 +49,35 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number becomes never)
 ```
 
-### How the result type is decided
-
-The result is decided by the first rule that applies. The same rules are applied again to each key that both objects share.
-
-1. If both types are exactly the same, that type is returned as-is.
-2. If both are plain objects, they are merged key by key. Keys present on only one side are kept.
-3. If one type is assignable to the other, the wider type is used. When both are assignable to each other, the first type wins.
-4. Otherwise, tuples are merged index by index, other arrays become an array of both element types, and any other value (primitives, `Date`, `Map`, functions, ...) is replaced by the second value.
-
-Rule 1 and rule 3 keep unions intact. Without them, a union such as `string | string[] | string[][]` would be merged member by member, and the result would be wider than the input.
+Merging a type with itself gives back the same type. This matters for unions such as `string | string[] | string[][]`: TypeScript would otherwise merge every pair of union members and produce a type wider than the input, so the result would no longer be assignable to the original.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
 type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
 
-type Same = Merge<Options, Options>;
-// => Options (rule 1)
+type Result = Merge<Options, Options>;
+// => Options
+```
 
-type Override = Merge<Options, { color: string[] }>;
-// => Options (rule 3: string[] is assignable to Options['color'])
+When the two value types are related, the wider one is kept. Overriding a default with a narrower value keeps the default's type, so a merged configuration stays assignable to the original options type.
 
-type Extra = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string } (rule 2 runs before rule 3, so `b` is kept)
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { color: string | string[] | string[][]; size: number };
+
+type Result = Merge<Options, { color: string[]; size: 12 }>;
+// => Options
+```
+
+Keys that exist only on the second object are always kept, even when that object is a subtype of the first. Plain objects are merged key by key before the two types are compared as a whole.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ a: number }, { a: number; b: string }>;
+// => { a: number; b: string }
 ```
 
 #### Type Parameters

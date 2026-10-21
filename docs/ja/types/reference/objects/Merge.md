@@ -49,30 +49,35 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number は never になります)
 ```
 
-### 結果の型が決まる規則
-
-次の規則のうち、最初に当てはまるものが適用されます。2つのオブジェクトが共有するキーごとに、同じ規則がもう一度適用されます。
-
-1. 2つの型が完全に同じなら、その型をそのまま返します。
-2. 両方がプレーンなオブジェクトなら、キーごとにマージします。片方にしかないキーは保持されます。
-3. 片方の型がもう片方に代入できるなら、広い方の型を使います。互いに代入できる場合は、1つ目の型を使います。
-4. それ以外は、タプルはインデックスごとにマージし、通常の配列は両方の要素型の配列になり、その他の値(プリミティブ、`Date`、`Map`、関数など)は2つ目の値で置き換えられます。
-
-規則1と規則3によってユニオン型がそのまま保たれます。これらの規則がないと、`string | string[] | string[][]` のようなユニオンがメンバーごとにマージされ、入力より広い型になってしまいます。
+同じ型どうしをマージすると、その型がそのまま返ります。これは `string | string[] | string[][]` のようなユニオン型で特に重要です。そうでなければ TypeScript はユニオンメンバーのあらゆる組み合わせをマージして入力より広い型を作り、結果を元の型に代入できなくなります。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
 type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
 
-type Same = Merge<Options, Options>;
-// => Options (規則1)
+type Result = Merge<Options, Options>;
+// => Options
+```
 
-type Override = Merge<Options, { color: string[] }>;
-// => Options (規則3: string[] は Options['color'] に代入できます)
+2つの値の型に関係がある場合は、広い方が保たれます。デフォルト値をより狭い値で上書きしてもデフォルトの型が保たれるため、マージした設定を元のオプション型にそのまま代入できます。
 
-type Extra = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string } (規則2が規則3より先に適用されるため `b` が保持されます)
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { color: string | string[] | string[][]; size: number };
+
+type Result = Merge<Options, { color: string[]; size: 12 }>;
+// => Options
+```
+
+2番目のオブジェクトにしかないキーは常に保持されます。2番目のオブジェクトが1番目のサブタイプであっても同じです。プレーンなオブジェクトどうしは、型全体を比較する前にキーごとにマージされるためです。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ a: number }, { a: number; b: string }>;
+// => { a: number; b: string }
 ```
 
 #### 型パラメータ
