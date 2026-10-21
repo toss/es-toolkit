@@ -49,7 +49,7 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number 会变成 never)
 ```
 
-把一个类型与它自身合并,会得到同一个类型。即使其中包含 `string[] | string[][]` 这样的联合类型也是如此。
+合并两个类型相同的对象,会得到同一个类型。即使其中包含 `string[] | string[][]` 这样的联合类型也是如此。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-当源数组能放进目标的数组类型时,保留目标类型。用 `string[]` 覆盖 `string[] | string[][]` 后仍然是 `string[] | string[][]`,因此合并后的配置可以直接赋值给原来的选项类型。字符串、数字等不会被合并的值,则如上所示采用源类型。
+当第二个对象的数组能放进第一个对象的数组类型时,保留第一个对象的类型。把 `string[]` 合并进 `string[] | string[][]` 后仍然是 `string[] | string[][]`,因此合并后的配置可以直接赋值给原来的选项类型。字符串、数字等不会被合并的值,则如上所示采用第二个对象的类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -71,7 +71,7 @@ type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
 ```
 
-只存在于第二个对象上的键总会被保留,即使第二个对象是第一个对象的子类型。普通对象会先逐键合并,然后才把两个类型作为整体进行比较。
+只存在于第二个对象上的键总会被保留,即使第二个对象拥有第一个对象的全部键。普通对象会先逐键合并,然后才把两个类型作为整体进行比较。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';

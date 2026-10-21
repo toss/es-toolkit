@@ -49,7 +49,7 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number は never になります)
 ```
 
-同じ型どうしをマージすると、その型がそのまま返ります。`string[] | string[][]` のようなユニオン型が含まれていても同じです。
+同じ型の2つのオブジェクトをマージすると、その型がそのまま返ります。`string[] | string[][]` のようなユニオン型が含まれていても同じです。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-ソースの配列がターゲットの配列型に収まる場合は、ターゲットの型が保たれます。`string[] | string[][]` を `string[]` で上書きしても `string[] | string[][]` のままなので、マージした設定を元のオプション型にそのまま代入できます。文字列や数値のようにマージされない値は、上で見たようにソースの型になります。
+2番目のオブジェクトの配列が1番目のオブジェクトの配列型に収まる場合は、1番目のオブジェクトの型が保たれます。`string[] | string[][]` に `string[]` をマージしても `string[] | string[][]` のままなので、マージした設定を元のオプション型にそのまま代入できます。文字列や数値のようにマージされない値は、上で見たように2番目のオブジェクトの型になります。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -71,7 +71,7 @@ type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
 ```
 
-2番目のオブジェクトにしかないキーは常に保持されます。2番目のオブジェクトが1番目のサブタイプであっても同じです。プレーンなオブジェクトどうしは、型全体を比較する前にキーごとにマージされるためです。
+2番目のオブジェクトにしかないキーは常に保持されます。2番目のオブジェクトが1番目のキーをすべて持っていても同じです。プレーンなオブジェクトどうしは、型全体を比較する前にキーごとにマージされるためです。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
