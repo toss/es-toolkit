@@ -49,7 +49,7 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number becomes never)
 ```
 
-Merging a type with itself gives back the same type, including when it contains a union such as `string[] | string[][]`.
+Merging two objects of the same type gives back that type, including when it contains a union such as `string[] | string[][]`.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-When a source array fits the target's array type, the target type is kept. Overriding `string[] | string[][]` with `string[]` keeps `string[] | string[][]`, so a merged configuration stays assignable to the original options type. Values that are not merged, such as strings and numbers, take the source type as shown above.
+When an array in the second object fits the array type of the first object, the first object's type is kept. Merging `string[]` into `string[] | string[][]` keeps `string[] | string[][]`, so a merged configuration stays assignable to the original options type. Values that are not merged, such as strings and numbers, take the second object's type as shown above.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -71,7 +71,7 @@ type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
 ```
 
-Keys that exist only on the second object are always kept, even when that object is a subtype of the first. Plain objects are merged key by key before the two types are compared as a whole.
+Keys that exist only on the second object are always kept, even when the second object has every key of the first one. Plain objects are merged key by key before the two types are compared as a whole.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
