@@ -8,28 +8,27 @@ import type { Simplify } from './Simplify.ts';
  * The result of deeply merging the source type `S` into the target type `T`,
  * matching what `merge(target, source)` returns at runtime.
  *
- * The result is decided by the first rule that applies:
+ * Merging a type with itself gives back the same type, so a union such as
+ * `string | string[] | string[][]` stays intact instead of expanding into a
+ * merge of every pair of its members.
  *
- * 1. If `T` and `S` are exactly the same type, the result is `T`.
- * 2. If both are plain objects, they are merged key by key: keys present on
- *    only one side are kept, and these rules are applied again to each key
- *    present on both sides.
- * 3. If one side is assignable to the other, the wider side is used. When both
- *    are assignable to each other, `T` wins.
- * 4. Otherwise, tuples merge index by index, other arrays merge into an array
- *    of both element types, and any other source value (primitives, `Date`,
- *    `RegExp`, `Map`, `Set`, functions, ...) replaces the target value.
+ * Plain objects are merged key by key: keys present on only one side are
+ * kept, and keys present on both sides are merged the same way. A key that
+ * exists only on the source is kept even when the source is a subtype of
+ * the target.
  *
- * Rule 3 keeps unions of arrays and primitives, such as
- * `string | string[] | string[][]`, intact: without it, every pair of union
- * members would be merged and the result would be wider than the input.
- * Rule 2 comes first so that keys present only on the source are never
- * dropped, even when the source is a subtype of the target.
+ * When two value types are related, the wider one is kept. Overriding a
+ * default with a narrower value keeps the default's type, so a merged
+ * configuration stays assignable to the original options type. When both
+ * sides are assignable to each other, the target type is kept.
  *
- * A source value that can be `undefined` keeps the target type as well,
- * because `merge` skips `undefined` source values. When an array meets a plain
- * object, `merge` keeps the target and assigns the source's properties onto
- * it, so both property sets are kept (`T & S`).
+ * Otherwise, tuples merge index by index, other arrays merge into an array
+ * of both element types, and a source value that is not a plain object or an
+ * array (primitives, `Date`, `RegExp`, `Map`, `Set`, functions, ...) replaces
+ * the target value. A source value that can be `undefined` keeps the target
+ * type as well, because `merge` skips `undefined` source values. When an
+ * array meets a plain object, `merge` keeps the target and assigns the
+ * source's properties onto it, so both property sets are kept (`T & S`).
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
@@ -42,10 +41,12 @@ import type { Simplify } from './Simplify.ts';
  *
  * @example
  * type Options = { color: string | string[] | string[][] };
- * type A = Merge<Options, Options>;                 // => Options           (rule 1)
- * type B = Merge<Options, { color: string[] }>;     // => Options           (rule 3)
- * type C = Merge<{ a: number }, { a: number; b: string }>;
- * // => { a: number; b: string }                                            (rule 2)
+ * type Same = Merge<Options, Options>;
+ * // => Options
+ * type Override = Merge<Options, { color: string[] }>;
+ * // => Options
+ * type Extra = Merge<{ a: number }, { a: number; b: string }>;
+ * // => { a: number; b: string }
  */
 // prettier-ignore
 export type Merge<T, S> =
