@@ -17,15 +17,17 @@ import type { Simplify } from './Simplify.ts';
  * exists only on the source is kept even when the source is a subtype of
  * the target.
  *
- * When two value types are related, the wider one is kept. Overriding a
- * default with a narrower value keeps the default's type, so a merged
- * configuration stays assignable to the original options type. When both
- * sides are assignable to each other, the target type is kept.
+ * A source value that is not a plain object or an array (primitives, `Date`,
+ * `RegExp`, `Map`, `Set`, functions, ...) replaces the target value, so the
+ * source type is used.
  *
- * Otherwise, tuples merge index by index, other arrays merge into an array
- * of both element types, and a source value that is not a plain object or an
- * array (primitives, `Date`, `RegExp`, `Map`, `Set`, functions, ...) replaces
- * the target value. A source value that can be `undefined` keeps the target
+ * When a source array fits the target's array type, the target type is kept:
+ * overriding `string[] | string[][]` with `string[]` stays
+ * `string[] | string[][]`. If instead the target fits the source type, the
+ * source type is kept. Otherwise, tuples merge index by index and other
+ * arrays merge into an array of both element types.
+ *
+ * A source value that can be `undefined` keeps the target
  * type as well, because `merge` skips `undefined` source values. When an
  * array meets a plain object, `merge` keeps the target and assigns the
  * source's properties onto it, so both property sets are kept (`T & S`).
@@ -94,8 +96,12 @@ type MergeDefined<T, S> =
   ) :
   MergeAssignable<T, S>;
 
+// A source that `merge` replaces the target with (primitives, `Date`, ...)
+// keeps its own type. The assignability checks below only apply to sources
+// that are merged into the target, i.e. arrays or unions containing arrays.
 // prettier-ignore
 type MergeAssignable<T, S> =
+  [S] extends [Primitive | NonMergeable] ? S :
   [S] extends [T] ? T :
   [T] extends [S] ? S :
   MergeFallback<T, S>;

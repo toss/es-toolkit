@@ -60,15 +60,15 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-두 값의 타입이 서로 관련 있으면 더 넓은 쪽이 유지돼요. 기본값을 더 좁은 값으로 덮어써도 기본값의 타입이 유지되기 때문에, 병합된 설정을 원래 옵션 타입에 그대로 대입할 수 있어요.
+소스 배열이 타깃의 배열 타입에 들어맞으면 타깃 타입이 유지돼요. `string[] | string[][]`를 `string[]`으로 덮어써도 `string[] | string[][]`가 유지되기 때문에, 병합된 설정을 원래 옵션 타입에 그대로 대입할 수 있어요. 문자열이나 숫자처럼 병합되지 않는 값은 위에서 본 것처럼 소스 타입을 사용해요.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; size: number };
+type Options = { value: string[] | string[][] };
 
-type Result = Merge<Options, { color: string[]; size: 12 }>;
-// => Options
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
 ```
 
 두 번째 객체에만 있는 키는 항상 유지돼요. 두 번째 객체가 첫 번째 객체의 서브타입이어도 마찬가지예요. 평범한 객체끼리는 타입 전체를 비교하기 전에 키 단위로 먼저 병합하기 때문이에요.

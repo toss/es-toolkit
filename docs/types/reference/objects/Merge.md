@@ -60,15 +60,15 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-When the two value types are related, the wider one is kept. Overriding a default with a narrower value keeps the default's type, so a merged configuration stays assignable to the original options type.
+When a source array fits the target's array type, the target type is kept. Overriding `string[] | string[][]` with `string[]` keeps `string[] | string[][]`, so a merged configuration stays assignable to the original options type. Values that are not merged, such as strings and numbers, take the source type as shown above.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; size: number };
+type Options = { value: string[] | string[][] };
 
-type Result = Merge<Options, { color: string[]; size: 12 }>;
-// => Options
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
 ```
 
 Keys that exist only on the second object are always kept, even when that object is a subtype of the first. Plain objects are merged key by key before the two types are compared as a whole.

@@ -60,15 +60,15 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-2つの値の型に関係がある場合は、広い方が保たれます。デフォルト値をより狭い値で上書きしてもデフォルトの型が保たれるため、マージした設定を元のオプション型にそのまま代入できます。
+ソースの配列がターゲットの配列型に収まる場合は、ターゲットの型が保たれます。`string[] | string[][]` を `string[]` で上書きしても `string[] | string[][]` のままなので、マージした設定を元のオプション型にそのまま代入できます。文字列や数値のようにマージされない値は、上で見たようにソースの型になります。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; size: number };
+type Options = { value: string[] | string[][] };
 
-type Result = Merge<Options, { color: string[]; size: 12 }>;
-// => Options
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
 ```
 
 2番目のオブジェクトにしかないキーは常に保持されます。2番目のオブジェクトが1番目のサブタイプであっても同じです。プレーンなオブジェクトどうしは、型全体を比較する前にキーごとにマージされるためです。
