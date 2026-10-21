@@ -1,16 +1,33 @@
+import type { IsAny } from './IsAny.ts';
+import type { IsEqual } from './IsEqual.ts';
+import type { IsUnknown } from './IsUnknown.ts';
+import type { Primitive } from './Primitive.ts';
 import type { Simplify } from './Simplify.ts';
 
 /**
  * The result of deeply merging the source type `S` into the target type `T`,
  * matching what `merge(target, source)` returns at runtime.
  *
- * Keys present on only one side are kept as-is. When both sides have a plain
- * object at the same key, the merge recurses; tuples merge index by index, and
- * other arrays merge into an array of both element types. If the source value
- * can be `undefined`, the target type is kept because `merge` skips
- * `undefined` source values. Values that are not plain objects or arrays
- * (functions, `Date`, `RegExp`, `Map`, `Set`, etc.) are not merged into;
- * the source value replaces the target value. When an array meets a plain
+ * The result is decided by the first rule that applies:
+ *
+ * 1. If `T` and `S` are exactly the same type, the result is `T`.
+ * 2. If both are plain objects, they are merged key by key: keys present on
+ *    only one side are kept, and these rules are applied again to each key
+ *    present on both sides.
+ * 3. If one side is assignable to the other, the wider side is used. When both
+ *    are assignable to each other, `T` wins.
+ * 4. Otherwise, tuples merge index by index, other arrays merge into an array
+ *    of both element types, and any other source value (primitives, `Date`,
+ *    `RegExp`, `Map`, `Set`, functions, ...) replaces the target value.
+ *
+ * Rule 3 keeps unions of arrays and primitives, such as
+ * `string | string[] | string[][]`, intact: without it, every pair of union
+ * members would be merged and the result would be wider than the input.
+ * Rule 2 comes first so that keys present only on the source are never
+ * dropped, even when the source is a subtype of the target.
+ *
+ * A source value that can be `undefined` keeps the target type as well,
+ * because `merge` skips `undefined` source values. When an array meets a plain
  * object, `merge` keeps the target and assigns the source's properties onto
  * it, so both property sets are kept (`T & S`).
  *
@@ -22,6 +39,13 @@ import type { Simplify } from './Simplify.ts';
  * type Source = { b: { y: string; z: boolean }; c: string };
  * type Result = Merge<Target, Source>;
  * // => { a: number; b: { x: number; y: string; z: boolean }; c: string }
+ *
+ * @example
+ * type Options = { color: string | string[] | string[][] };
+ * type A = Merge<Options, Options>;                 // => Options           (rule 1)
+ * type B = Merge<Options, { color: string[] }>;     // => Options           (rule 3)
+ * type C = Merge<{ a: number }, { a: number; b: string }>;
+ * // => { a: number; b: string }                                            (rule 2)
  */
 // prettier-ignore
 export type Merge<T, S> =
@@ -39,18 +63,55 @@ type NonMergeable =
   | ReadonlyMap<unknown, unknown> | ReadonlySet<unknown>
   | WeakMap<object, unknown> | WeakSet<object>;
 
+/**
+ * `true` when every member of `T` is a plain object type that `merge`
+ * recurses into. Primitives are excluded explicitly because an intersection
+ * like `string & {}` satisfies `extends object` even though it is a string at
+ * runtime.
+ */
+// prettier-ignore
+type IsPlainRecord<T> =
+  T extends Primitive ? false :
+  T extends readonly unknown[] ? false :
+  T extends NonMergeable ? false :
+  T extends object ? true :
+  false;
+
+// The `[X] extends [Y]` checks are deliberately non-distributive: they compare
+// a union as a whole, which is what keeps `Merge<X, X>` and
+// `Merge<A | B, A>` from expanding into every pair of union members.
 // prettier-ignore
 type MergeDefined<T, S> =
+  IsEqual<T, S> extends true ? T :
+  IsAny<T> extends true ? any :
+  IsAny<S> extends true ? any :
+  IsUnknown<T> extends true ? S :
+  [T] extends [never] ? S :
+  [S] extends [never] ? T :
+  IsPlainRecord<T> extends true ? (
+    IsPlainRecord<S> extends true ? MergeRecords<T, S> : MergeAssignable<T, S>
+  ) :
+  MergeAssignable<T, S>;
+
+// prettier-ignore
+type MergeAssignable<T, S> =
+  [S] extends [T] ? T :
+  [T] extends [S] ? S :
+  MergeFallback<T, S>;
+
+// prettier-ignore
+type MergeFallback<T, S> =
+  S extends Primitive ? S :
   S extends readonly unknown[] ? (
     T extends readonly unknown[] ? MergeArrays<T, S> :
-    T extends NonMergeable ? S :
+    T extends Primitive | NonMergeable ? S :
     T extends object ? T & S :
     S
   ) :
   S extends NonMergeable ? S :
   S extends object ? (
     T extends readonly unknown[] ? T & S :
-    T extends NonMergeable ? S :
+    T extends Primitive | NonMergeable ? S :
     T extends object ? MergeRecords<T, S> :
     S
   ) :
@@ -67,7 +128,7 @@ type MergeArrays<T extends readonly unknown[], S extends readonly unknown[]> =
     : Array<T[number] | S[number]>;
 
 // prettier-ignore
-type MergeRecords<T extends object, S extends object> = Simplify<
+type MergeRecords<T, S> = Simplify<
   Omit<T, keyof S> &
   Omit<S, keyof T> &
   { [K in keyof T & keyof S]: Merge<T[K], S[K]> }

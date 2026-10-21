@@ -49,6 +49,32 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number は never になります)
 ```
 
+### 結果の型が決まる規則
+
+次の規則のうち、最初に当てはまるものが適用されます。2つのオブジェクトが共有するキーごとに、同じ規則がもう一度適用されます。
+
+1. 2つの型が完全に同じなら、その型をそのまま返します。
+2. 両方がプレーンなオブジェクトなら、キーごとにマージします。片方にしかないキーは保持されます。
+3. 片方の型がもう片方に代入できるなら、広い方の型を使います。互いに代入できる場合は、1つ目の型を使います。
+4. それ以外は、タプルはインデックスごとにマージし、通常の配列は両方の要素型の配列になり、その他の値(プリミティブ、`Date`、`Map`、関数など)は2つ目の値で置き換えられます。
+
+規則1と規則3によってユニオン型がそのまま保たれます。これらの規則がないと、`string | string[] | string[][]` のようなユニオンがメンバーごとにマージされ、入力より広い型になってしまいます。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+
+type Same = Merge<Options, Options>;
+// => Options (規則1)
+
+type Override = Merge<Options, { color: string[] }>;
+// => Options (規則3: string[] は Options['color'] に代入できます)
+
+type Extra = Merge<{ a: number }, { a: number; b: string }>;
+// => { a: number; b: string } (規則2が規則3より先に適用されるため `b` が保持されます)
+```
+
 #### 型パラメータ
 
 - `T`: ターゲットオブジェクトの型です。
