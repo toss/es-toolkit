@@ -49,15 +49,15 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number는 never가 돼요)
 ```
 
-같은 타입끼리 병합하면 그 타입이 그대로 나와요. `string | string[] | string[][]` 같은 유니온 타입에서 특히 중요해요. 그렇지 않으면 TypeScript가 유니온 멤버의 모든 조합을 병합해서 입력보다 넓은 타입을 만들고, 결과를 원래 타입에 다시 대입할 수 없게 돼요.
+같은 타입끼리 병합하면 그 타입이 그대로 나와요. `string[] | string[][]` 같은 유니온 타입이 들어 있어도 마찬가지예요.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, Options>;
-// => Options
+// => { value: string[] | string[][] }
 ```
 
 두 값의 타입이 서로 관련 있으면 더 넓은 쪽이 유지돼요. 기본값을 더 좁은 값으로 덮어써도 기본값의 타입이 유지되기 때문에, 병합된 설정을 원래 옵션 타입에 그대로 대입할 수 있어요.

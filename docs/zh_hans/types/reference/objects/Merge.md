@@ -49,15 +49,15 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number 会变成 never)
 ```
 
-把一个类型与它自身合并,会得到同一个类型。这对 `string | string[] | string[][]` 这样的联合类型尤其重要:否则 TypeScript 会把联合成员的每一对组合都合并一遍,产生比输入更宽的类型,结果就无法再赋值回原来的类型。
+把一个类型与它自身合并,会得到同一个类型。即使其中包含 `string[] | string[][]` 这样的联合类型也是如此。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, Options>;
-// => Options
+// => { value: string[] | string[][] }
 ```
 
 当两个值的类型相关时,保留更宽的那个。用更窄的值覆盖默认值时仍保留默认值的类型,因此合并后的配置可以直接赋值给原来的选项类型。

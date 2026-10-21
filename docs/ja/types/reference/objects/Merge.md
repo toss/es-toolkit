@@ -49,15 +49,15 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number は never になります)
 ```
 
-同じ型どうしをマージすると、その型がそのまま返ります。これは `string | string[] | string[][]` のようなユニオン型で特に重要です。そうでなければ TypeScript はユニオンメンバーのあらゆる組み合わせをマージして入力より広い型を作り、結果を元の型に代入できなくなります。
+同じ型どうしをマージすると、その型がそのまま返ります。`string[] | string[][]` のようなユニオン型が含まれていても同じです。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, Options>;
-// => Options
+// => { value: string[] | string[][] }
 ```
 
 2つの値の型に関係がある場合は、広い方が保たれます。デフォルト値をより狭い値で上書きしてもデフォルトの型が保たれるため、マージした設定を元のオプション型にそのまま代入できます。
