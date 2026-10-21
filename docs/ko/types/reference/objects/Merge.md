@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-두 번째 객체의 배열이 첫 번째 객체의 배열 타입에 들어맞으면 첫 번째 객체의 타입이 유지돼요. `string[] | string[][]`에 `string[]`을 병합해도 `string[] | string[][]`가 유지되기 때문에, 병합된 설정을 원래 옵션 타입에 그대로 대입할 수 있어요. 문자열이나 숫자처럼 병합되지 않는 값은 위에서 본 것처럼 두 번째 객체의 타입을 사용해요.
+두 번째 객체의 배열이 첫 번째 객체의 배열 타입과 호환되면 첫 번째 객체의 타입이 유지돼요.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -69,15 +69,6 @@ type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
-```
-
-두 번째 객체에만 있는 키는 항상 유지돼요. 두 번째 객체가 첫 번째 객체의 키를 모두 가지고 있어도 마찬가지예요. 평범한 객체끼리는 타입 전체를 비교하기 전에 키 단위로 먼저 병합하기 때문이에요.
-
-```typescript
-import type { Merge } from 'es-toolkit/types';
-
-type Result = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string }
 ```
 
 #### 타입 파라미터

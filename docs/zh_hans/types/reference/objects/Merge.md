@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-当第二个对象的数组能放进第一个对象的数组类型时,保留第一个对象的类型。把 `string[]` 合并进 `string[] | string[][]` 后仍然是 `string[] | string[][]`,因此合并后的配置可以直接赋值给原来的选项类型。字符串、数字等不会被合并的值,则如上所示采用第二个对象的类型。
+当第二个对象的数组与第一个对象的数组类型兼容时,保留第一个对象的类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -69,15 +69,6 @@ type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
-```
-
-只存在于第二个对象上的键总会被保留,即使第二个对象拥有第一个对象的全部键。普通对象会先逐键合并,然后才把两个类型作为整体进行比较。
-
-```typescript
-import type { Merge } from 'es-toolkit/types';
-
-type Result = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string }
 ```
 
 #### 类型参数

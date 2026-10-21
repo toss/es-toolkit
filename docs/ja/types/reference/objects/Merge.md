@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-2番目のオブジェクトの配列が1番目のオブジェクトの配列型に収まる場合は、1番目のオブジェクトの型が保たれます。`string[] | string[][]` に `string[]` をマージしても `string[] | string[][]` のままなので、マージした設定を元のオプション型にそのまま代入できます。文字列や数値のようにマージされない値は、上で見たように2番目のオブジェクトの型になります。
+2番目のオブジェクトの配列が1番目のオブジェクトの配列型と互換性があれば、1番目のオブジェクトの型が保たれます。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -69,15 +69,6 @@ type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
-```
-
-2番目のオブジェクトにしかないキーは常に保持されます。2番目のオブジェクトが1番目のキーをすべて持っていても同じです。プレーンなオブジェクトどうしは、型全体を比較する前にキーごとにマージされるためです。
-
-```typescript
-import type { Merge } from 'es-toolkit/types';
-
-type Result = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string }
 ```
 
 #### 型パラメータ
