@@ -49,15 +49,15 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number becomes never)
 ```
 
-Merging a type with itself gives back the same type. This matters for unions such as `string | string[] | string[][]`: TypeScript would otherwise merge every pair of union members and produce a type wider than the input, so the result would no longer be assignable to the original.
+Merging a type with itself gives back the same type, including when it contains a union such as `string[] | string[][]`.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, Options>;
-// => Options
+// => { value: string[] | string[][] }
 ```
 
 When the two value types are related, the wider one is kept. Overriding a default with a narrower value keeps the default's type, so a merged configuration stays assignable to the original options type.
