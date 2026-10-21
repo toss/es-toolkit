@@ -60,7 +60,7 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-When an array in the second object fits the array type of the first object, the first object's type is kept. Merging `string[]` into `string[] | string[][]` keeps `string[] | string[][]`, so a merged configuration stays assignable to the original options type. Values that are not merged, such as strings and numbers, take the second object's type as shown above.
+When an array in the second object is compatible with the array type of the first object, the first object's type is kept.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
@@ -69,15 +69,6 @@ type Options = { value: string[] | string[][] };
 
 type Result = Merge<Options, { value: string[] }>;
 // => { value: string[] | string[][] }
-```
-
-Keys that exist only on the second object are always kept, even when the second object has every key of the first one. Plain objects are merged key by key before the two types are compared as a whole.
-
-```typescript
-import type { Merge } from 'es-toolkit/types';
-
-type Result = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string }
 ```
 
 #### Type Parameters
