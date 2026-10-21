@@ -49,6 +49,32 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number는 never가 돼요)
 ```
 
+### 결과 타입이 정해지는 규칙
+
+아래 규칙 중 먼저 해당하는 것이 적용돼요. 두 객체가 공유하는 키마다 같은 규칙이 다시 적용돼요.
+
+1. 두 타입이 완전히 같으면 그 타입을 그대로 돌려줘요.
+2. 둘 다 평범한 객체면 키 단위로 병합해요. 한쪽에만 있는 키는 유지돼요.
+3. 한쪽 타입이 다른 쪽에 대입할 수 있으면 더 넓은 타입을 사용해요. 양쪽 모두 서로 대입할 수 있으면 첫 번째 타입을 사용해요.
+4. 그 외에는 튜플은 인덱스별로 병합하고, 일반 배열은 두 원소 타입의 배열이 되고, 나머지 값(원시 타입, `Date`, `Map`, 함수 등)은 두 번째 값으로 교체돼요.
+
+1번과 3번 규칙 덕분에 유니온 타입이 그대로 유지돼요. 이 규칙이 없으면 `string | string[] | string[][]` 같은 유니온이 멤버별로 병합되어 입력보다 넓은 타입이 나와요.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
+
+type Same = Merge<Options, Options>;
+// => Options (규칙 1)
+
+type Override = Merge<Options, { color: string[] }>;
+// => Options (규칙 3: string[]은 Options['color']에 대입할 수 있어요)
+
+type Extra = Merge<{ a: number }, { a: number; b: string }>;
+// => { a: number; b: string } (규칙 2가 규칙 3보다 먼저 적용되어 `b`가 유지돼요)
+```
+
 #### 타입 파라미터
 
 - `T`: 타깃 객체의 타입이에요.

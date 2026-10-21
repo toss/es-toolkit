@@ -55,4 +55,69 @@ describe('Merge', () => {
     expectTypeOf<Merge<string[], { a: number }>>().toEqualTypeOf<string[] & { a: number }>();
     expectTypeOf<Merge<{ a: number }, string[]>>().toEqualTypeOf<{ a: number } & string[]>();
   });
+
+  it('rule 1: returns the same type when both sides are identical', () => {
+    type Branded = { value: string & {} };
+    type ArrayUnion = { value: string[] | string[][] };
+    type LiteralUnion = { value: 'a' | 'b' | (string & {}) };
+    type Nested = { color: string | number | string[] | string[][]; axis: { title: 'x' | 'y' | (string & {}) } };
+
+    expectTypeOf<Merge<Branded, Branded>>().toEqualTypeOf<Branded>();
+    expectTypeOf<Merge<ArrayUnion, ArrayUnion>>().toEqualTypeOf<ArrayUnion>();
+    expectTypeOf<Merge<LiteralUnion, LiteralUnion>>().toEqualTypeOf<LiteralUnion>();
+    expectTypeOf<Merge<Nested, Nested>>().toEqualTypeOf<Nested>();
+  });
+
+  it('rule 2: merges plain objects key by key even when one is a subtype of the other', () => {
+    expectTypeOf<Merge<{ a: number }, { a: number; b: string }>>().toEqualTypeOf<{ a: number; b: string }>();
+    expectTypeOf<Merge<{ a: number; b: string }, { a: number }>>().toEqualTypeOf<{ a: number; b: string }>();
+    expectTypeOf<Merge<{ a: number }, { a: number; b?: string }>>().toEqualTypeOf<{ a: number; b?: string }>();
+    expectTypeOf<Merge<{ a: { x: number } }, { a: { x: number; y: string } }>>().toEqualTypeOf<{
+      a: { x: number; y: string };
+    }>();
+  });
+
+  it('rule 3: uses the wider side when one side is assignable to the other', () => {
+    type Color = string | number | string[] | string[][];
+
+    expectTypeOf<Merge<Color, string[]>>().toEqualTypeOf<Color>();
+    expectTypeOf<Merge<string[], Color>>().toEqualTypeOf<Color>();
+    expectTypeOf<Merge<string[] | string[][], string[]>>().toEqualTypeOf<string[] | string[][]>();
+    expectTypeOf<Merge<number[], Array<1 | 2>>>().toEqualTypeOf<number[]>();
+    expectTypeOf<Merge<{ a: number }, { a: 2 }>>().toEqualTypeOf<{ a: number }>();
+    expectTypeOf<Merge<{ a: 2 }, { a: number }>>().toEqualTypeOf<{ a: number }>();
+  });
+
+  it('rule 3: prefers the target when both sides are assignable to each other', () => {
+    type LiteralUnion = 'a' | 'b' | (string & {});
+
+    expectTypeOf<Merge<LiteralUnion, string>>().toEqualTypeOf<LiteralUnion>();
+    expectTypeOf<Merge<string, LiteralUnion>>().toEqualTypeOf<string>();
+  });
+
+  it('keeps the target type when the source is a partial of the same type', () => {
+    type Options = { value: string[] | string[][]; label: 'a' | 'b' | (string & {}); nested: { flag: boolean } };
+
+    expectTypeOf<Merge<Options, Partial<Options>>>().toMatchTypeOf<Options>();
+    expectTypeOf<Merge<Options, { value: string[] }>>().toEqualTypeOf<Options>();
+    expectTypeOf<Merge<Options, { nested: { flag: boolean } }>>().toEqualTypeOf<Options>();
+  });
+
+  it('treats branded primitives as primitives, not as objects', () => {
+    expectTypeOf<Merge<string & {}, string & {}>>().toEqualTypeOf<string & {}>();
+    expectTypeOf<Merge<{ a: string & {} }, { a: { x: number } }>>().toEqualTypeOf<{ a: { x: number } }>();
+    expectTypeOf<Merge<{ a: { x: number } }, { a: string & {} }>>().toEqualTypeOf<{ a: string & {} }>();
+    expectTypeOf<Merge<{ a: string & {} }, { a: number[] }>>().toEqualTypeOf<{ a: number[] }>();
+    expectTypeOf<Merge<{ a: number[] }, { a: string & {} }>>().toEqualTypeOf<{ a: string & {} }>();
+  });
+
+  it('handles any, unknown, and never', () => {
+    expectTypeOf<Merge<any, { a: 1 }>>().toBeAny();
+    expectTypeOf<Merge<{ a: 1 }, any>>().toBeAny();
+    expectTypeOf<Merge<{ a: any }, { a: 1 }>>().toEqualTypeOf<{ a: any }>();
+    expectTypeOf<Merge<unknown, { a: 1 }>>().toEqualTypeOf<{ a: 1 }>();
+    expectTypeOf<Merge<{ a: unknown }, { a: 1 }>>().toEqualTypeOf<{ a: 1 }>();
+    expectTypeOf<Merge<{ a: string }, { a: never }>>().toEqualTypeOf<{ a: string }>();
+    expectTypeOf<Merge<{ a: never }, { a: string }>>().toEqualTypeOf<{ a: string }>();
+  });
 });
