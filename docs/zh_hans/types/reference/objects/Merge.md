@@ -49,30 +49,35 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number 会变成 never)
 ```
 
-### 结果类型的决定规则
-
-按顺序应用第一条匹配的规则。两个对象共有的每个键都会再次应用同样的规则。
-
-1. 如果两个类型完全相同,则原样返回该类型。
-2. 如果两者都是普通对象,则逐键合并。只存在于一侧的键会被保留。
-3. 如果一个类型可以赋值给另一个,则使用更宽的类型。如果两者可以互相赋值,则使用第一个类型。
-4. 否则,元组按索引合并,普通数组会变成包含两种元素类型的数组,其他值(原始类型、`Date`、`Map`、函数等)会被第二个值替换。
-
-规则 1 和规则 3 能保持联合类型不变。如果没有这两条规则,`string | string[] | string[][]` 这样的联合类型会被逐成员合并,结果会比输入更宽。
+把一个类型与它自身合并,会得到同一个类型。这对 `string | string[] | string[][]` 这样的联合类型尤其重要:否则 TypeScript 会把联合成员的每一对组合都合并一遍,产生比输入更宽的类型,结果就无法再赋值回原来的类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
 type Options = { color: string | string[] | string[][]; label: 'a' | 'b' | (string & {}) };
 
-type Same = Merge<Options, Options>;
-// => Options (规则 1)
+type Result = Merge<Options, Options>;
+// => Options
+```
 
-type Override = Merge<Options, { color: string[] }>;
-// => Options (规则 3: string[] 可以赋值给 Options['color'])
+当两个值的类型相关时,保留更宽的那个。用更窄的值覆盖默认值时仍保留默认值的类型,因此合并后的配置可以直接赋值给原来的选项类型。
 
-type Extra = Merge<{ a: number }, { a: number; b: string }>;
-// => { a: number; b: string } (规则 2 先于规则 3 应用,因此保留了 `b`)
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { color: string | string[] | string[][]; size: number };
+
+type Result = Merge<Options, { color: string[]; size: 12 }>;
+// => Options
+```
+
+只存在于第二个对象上的键总会被保留,即使第二个对象是第一个对象的子类型。普通对象会先逐键合并,然后才把两个类型作为整体进行比较。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ a: number }, { a: number; b: string }>;
+// => { a: number; b: string }
 ```
 
 #### 类型参数
