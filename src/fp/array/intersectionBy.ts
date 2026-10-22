@@ -30,7 +30,6 @@ export function intersectionBy<T, U>(
   }
 
   const intersectionByLazy = (emit: Sink<T>): Sink<T> => {
-    // Copy the set for each run so that a reused function starts with every value unmatched.
     const unmatched = new Set(mappedSecondSet);
 
     return (value: T): boolean => {
