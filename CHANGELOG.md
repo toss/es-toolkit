@@ -1,5 +1,10 @@
 # es-toolkit Changelog
 
+## Unreleased
+
+- Reduced the cost of comparing maps with matching keys and sets with matching
+  members in `isEqual`. ([#1885](https://github.com/toss/es-toolkit/pull/1885)) by @xianjianlf2
+
 ## Version v1.52.0
 
 Released on August 28th, 2026.

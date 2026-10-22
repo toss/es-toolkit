@@ -9,6 +9,13 @@ describe('isEqualWith', () => {
   const symbol1 = Symbol ? Symbol('a') : true;
   const symbol2 = Symbol ? Symbol('b') : false;
 
+  it('should allow customizers to reject shared map keys and set members', () => {
+    const shared = { id: 1 };
+    const rejectShared = (a: unknown, b: unknown) => (a === shared && b === shared ? false : undefined);
+    expect(isEqualWith(new Map([[shared, 1]]), new Map([[shared, 1]]), rejectShared)).toBe(false);
+    expect(isEqualWith(new Set([shared]), new Set([shared]), rejectShared)).toBe(false);
+  });
+
   it('should use the customizer function for string comparison', () => {
     const customizer = (a: any, b: any) => {
       if (typeof a === 'string' && typeof b === 'string') {
@@ -651,6 +658,28 @@ describe('isEqualWith', () => {
     expect(isEqualWith(map1, map2, noop)).toBe(false);
   });
 
+  it('should use native map key matching before structural fallback', () => {
+    const size = 50;
+    const map1 = new Map<string, number>();
+    const map2 = new Map<string, number>();
+
+    for (let i = 0; i < size; i++) {
+      map1.set(`key-${i}`, i);
+    }
+
+    for (let i = size - 1; i >= 0; i--) {
+      map2.set(`key-${i}`, i);
+    }
+
+    let calls = 0;
+    const customizer = () => {
+      calls++;
+    };
+
+    expect(isEqualWith(map1, map2, customizer)).toBe(true);
+    expect(calls).toBeLessThan(size * 3);
+  });
+
   it('should compare promises by reference when customizer returns undefined', () => {
     [[Promise.resolve(1), Promise.resolve(1)]].forEach(promises => {
       const promise1 = promises[0];
@@ -717,6 +746,28 @@ describe('isEqualWith', () => {
     set1.add(1);
     set2.add(2);
     expect(isEqualWith(set1, set2, noop)).toBe(false);
+  });
+
+  it('should use native set value matching before structural fallback', () => {
+    const size = 50;
+    const set1 = new Set<string>();
+    const set2 = new Set<string>();
+
+    for (let i = 0; i < size; i++) {
+      set1.add(`value-${i}`);
+    }
+
+    for (let i = size - 1; i >= 0; i--) {
+      set2.add(`value-${i}`);
+    }
+
+    let calls = 0;
+    const customizer = () => {
+      calls++;
+    };
+
+    expect(isEqualWith(set1, set2, customizer)).toBe(true);
+    expect(calls).toBeLessThan(size * 3);
   });
 
   it('should compare symbol properties when customizer returns undefined', () => {

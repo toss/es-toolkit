@@ -31,6 +31,7 @@ import {
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
+import { noop } from '../function/noop.ts';
 
 /**
  * Compares two values for equality using a custom comparison function.
@@ -204,10 +205,62 @@ function areObjectsEqual(
           return false;
         }
 
-        for (const [key, value] of a.entries()) {
-          if (!b.has(key) || !isEqualWithImpl(value, b.get(key), key, a, b, stack, areValuesEqual)) {
+        // Most maps can be compared without allocating a copy or matching keys deeply.
+        if (areValuesEqual === noop) {
+          let allEntriesMatch = true;
+          for (const [key, value] of a) {
+            const otherValue = b.get(key);
+            if (
+              (otherValue === undefined && !b.has(key)) ||
+              !isEqualWithImpl(value, otherValue, key, a, b, stack, areValuesEqual)
+            ) {
+              allEntriesMatch = false;
+              break;
+            }
+          }
+          if (allEntriesMatch) {
+            return true;
+          }
+        }
+
+        const remainingBEntries = new Map(b);
+        const remainingAEntries: Array<[any, any]> = [];
+
+        for (const [aKey, aValue] of a) {
+          const bValue = remainingBEntries.get(aKey);
+
+          if (
+            remainingBEntries.has(aKey) &&
+            isEqualWithImpl(aKey, aKey, undefined, a, b, stack, areValuesEqual) &&
+            isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
+          ) {
+            remainingBEntries.delete(aKey);
+            continue;
+          }
+
+          remainingAEntries.push([aKey, aValue]);
+        }
+
+        if (remainingAEntries.length === 0) {
+          return true;
+        }
+
+        const remainingBEntriesArray = Array.from(remainingBEntries.entries()) as Array<[any, any]>;
+
+        for (let i = 0; i < remainingAEntries.length; i++) {
+          const [aKey, aValue] = remainingAEntries[i];
+
+          const index = remainingBEntriesArray.findIndex(
+            ([bKey, bValue]: [any, any]) =>
+              isEqualWithImpl(aKey, bKey, undefined, a, b, stack, areValuesEqual) &&
+              isEqualWithImpl(aValue, bValue, aKey, a, b, stack, areValuesEqual)
+          );
+
+          if (index === -1) {
             return false;
           }
+
+          remainingBEntriesArray.splice(index, 1);
         }
 
         return true;
@@ -218,12 +271,40 @@ function areObjectsEqual(
           return false;
         }
 
-        const aValues = Array.from(a.values());
-        const bValues = Array.from(b.values());
+        if (areValuesEqual === noop) {
+          let allValuesMatch = true;
+          for (const value of a) {
+            if (!b.has(value)) {
+              allValuesMatch = false;
+              break;
+            }
+          }
+          if (allValuesMatch) {
+            return true;
+          }
+        }
 
-        for (let i = 0; i < aValues.length; i++) {
-          const aValue = aValues[i];
-          const index = bValues.findIndex(bValue => {
+        const remainingBValues = new Set(b);
+        const remainingAValues: any[] = [];
+
+        for (const aValue of a) {
+          if (remainingBValues.has(aValue) && isEqualWithImpl(aValue, aValue, undefined, a, b, stack, areValuesEqual)) {
+            remainingBValues.delete(aValue);
+            continue;
+          }
+
+          remainingAValues.push(aValue);
+        }
+
+        if (remainingAValues.length === 0) {
+          return true;
+        }
+
+        const remainingBValuesArray = Array.from(remainingBValues.values());
+
+        for (let i = 0; i < remainingAValues.length; i++) {
+          const aValue = remainingAValues[i];
+          const index = remainingBValuesArray.findIndex(bValue => {
             return isEqualWithImpl(aValue, bValue, undefined, a, b, stack, areValuesEqual);
           });
 
@@ -231,7 +312,7 @@ function areObjectsEqual(
             return false;
           }
 
-          bValues.splice(index, 1);
+          remainingBValuesArray.splice(index, 1);
         }
 
         return true;
