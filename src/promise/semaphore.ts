@@ -1,3 +1,8 @@
+interface DeferredTask {
+  resolve: () => void;
+  next: DeferredTask | undefined;
+}
+
 /**
  * A counting semaphore for async functions that manages available permits.
  * Semaphores are mainly used to limit the number of concurrent async tasks.
@@ -35,7 +40,11 @@ export class Semaphore {
    * @type {number}
    */
   public available: number;
-  private deferredTasks: Array<() => void> = [];
+
+  // Waiting tasks form a linked list because `Array#shift` is O(n) on large arrays in V8,
+  // which made draining a long queue quadratic.
+  private head: DeferredTask | undefined;
+  private tail: DeferredTask | undefined;
 
   /**
    * Creates an instance of Semaphore.
@@ -72,7 +81,15 @@ export class Semaphore {
     }
 
     return new Promise<void>(resolve => {
-      this.deferredTasks.push(resolve);
+      const deferredTask: DeferredTask = { resolve, next: undefined };
+
+      if (this.tail != null) {
+        this.tail.next = deferredTask;
+      } else {
+        this.head = deferredTask;
+      }
+
+      this.tail = deferredTask;
     });
   }
 
@@ -92,10 +109,16 @@ export class Semaphore {
    * }
    */
   release(): void {
-    const deferredTask = this.deferredTasks.shift();
+    const deferredTask = this.head;
 
     if (deferredTask != null) {
-      deferredTask();
+      this.head = deferredTask.next;
+
+      if (this.head == null) {
+        this.tail = undefined;
+      }
+
+      deferredTask.resolve();
       return;
     }
 
