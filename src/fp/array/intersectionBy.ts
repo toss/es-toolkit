@@ -1,5 +1,5 @@
 import { intersectionBy as intersectionByToolkit } from '../../array/intersectionBy.ts';
-import { combineEagerAndLazyFunctions, createLazyFunction } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions, type Sink } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that keeps values whose mapped identity appears in another array.
@@ -29,11 +29,19 @@ export function intersectionBy<T, U>(
     return intersectionByToolkit(array, secondArray, mapper);
   }
 
-  const intersectionByLazy = createLazyFunction<T, T>((value, _index, emit) => {
-    if (mappedSecondSet.has(mapper(value))) {
-      emit(value);
-    }
-  });
+  const intersectionByLazy = (emit: Sink<T>): Sink<T> => {
+    const unmatched = new Set(mappedSecondSet);
+
+    return (value: T): boolean => {
+      const mappedValue = mapper(value);
+      if (!unmatched.has(mappedValue)) {
+        return true;
+      }
+
+      unmatched.delete(mappedValue);
+      return emit(value);
+    };
+  };
 
   return combineEagerAndLazyFunctions(intersectionByEager, intersectionByLazy);
 }
