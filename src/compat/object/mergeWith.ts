@@ -4,6 +4,7 @@ import { clone } from '../../object/clone.ts';
 import { isBuffer } from '../../predicate/isBuffer.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
+import { noop } from '../function/noop.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
@@ -148,7 +149,7 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3, TSource4>(
  * Merges the properties of one or more source objects into the target object.
  *
  * @param object - The target object into which the source object properties will be merged.
- * @param otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
+ * @param otherArgs - Additional source objects to merge into the target object, optionally followed by the custom `merge` function.
  * @returns The updated target object with properties from the source object(s) merged in.
  *
  * @example
@@ -158,6 +159,14 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3, TSource4>(
  * const result = mergeWith(target, source, (objValue, srcValue) => {
  *   if (typeof objValue === 'number' && typeof srcValue === 'number') {
  *     return objValue + srcValue;
+ *   }
+ * });
+ * // => { a: 1, b: 5, c: 4 }
+ *
+ * @example
+ * // The last argument is only treated as the customizer when it is callable.
+ * const result = mergeWith({ a: 1 }, { b: 2 }, { c: 3 });
+ * // => { a: 1, b: 2, c: 3 }
  */
 export function mergeWith(object: any, ...otherArgs: any[]): any;
 
@@ -179,10 +188,13 @@ export function mergeWith(object: any, ...otherArgs: any[]): any;
  *
  * The `merge` function should return the value to be set in the target object. If it returns `undefined`, a default deep merge will be applied for arrays and objects.
  *
+ * The `merge` function is optional. It is only treated as a customizer when the last argument is callable;
+ * otherwise the last argument is merged as another source and the default deep merge is applied.
+ *
  * The function can handle multiple source objects and will merge them all into the target object.
  *
  * @param object - The target object into which the source object properties will be merged. This object is modified in place.
- * @param otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
+ * @param otherArgs - Additional source objects to merge into the target object, optionally followed by the custom `merge` function.
  * @returns The updated target object with properties from the source object(s) merged in.
  *
  * @example
@@ -206,10 +218,17 @@ export function mergeWith(object: any, ...otherArgs: any[]): any;
  * });
  *
  * expect(result).toEqual({ a: [1, 3], b: [2, 4] });
+ *
+ * @example
+ * // Without a customizer, every argument after the target is merged as a source.
+ * const result = mergeWith({ a: 1 }, { b: 2 }, { c: 3 });
+ * // Returns { a: 1, b: 2, c: 3 }
  */
 export function mergeWith(object: any, ...otherArgs: any[]): any {
-  const sources = otherArgs.slice(0, -1);
-  const merge = otherArgs[otherArgs.length - 1] as (
+  const last = otherArgs[otherArgs.length - 1];
+  const hasCustomizer = typeof last === 'function';
+  const sources = hasCustomizer ? otherArgs.slice(0, -1) : otherArgs;
+  const merge = (hasCustomizer ? last : noop) as (
     targetValue: any,
     sourceValue: any,
     key: string | symbol,

@@ -16,7 +16,7 @@ const result = mergeWith(target, ...sources, customizer);
 
 ## 사용법
 
-### `mergeWith(object, ...sources, customizer)`
+### `mergeWith(object, ...sources, customizer?)`
 
 대상 객체에 하나 이상의 소스 객체를 깊게 병합하되, 커스터마이저 함수로 병합 방식을 제어해요. 커스터마이저 함수가 `undefined`를 반환하면 기본 병합 로직이 사용돼요. 배열 합치기나 특별한 병합 규칙이 필요할 때 유용해요.
 
@@ -83,11 +83,24 @@ const customizer = (objValue, srcValue, key, object, source, stack) => {
 };
 ```
 
+커스터마이저는 선택 사항이에요. 마지막 인수는 함수일 때만 커스터마이저로 취급되고, 그렇지 않으면 또 다른 소스 객체로 병합돼요.
+
+```typescript
+import { mergeWith } from 'es-toolkit/compat';
+
+// 커스터마이저가 없으면 대상 객체 뒤의 모든 인수가 소스 객체예요
+const result = mergeWith({ a: 1 }, { b: 2 });
+// 결과: { a: 1, b: 2 }
+
+const merged = mergeWith({}, { a: 1 }, { b: 2 }, { c: 3 });
+// 결과: { a: 1, b: 2, c: 3 }
+```
+
 #### 파라미터
 
 - `object` (`any`): 병합 대상이 되는 객체예요. 이 객체가 수정돼요.
 - `...sources` (`any[]`): 병합할 소스 객체들이에요.
-- `customizer` (`MergeWithCustomizer`): 값 할당을 커스터마이즈하는 함수예요. `(objValue, srcValue, key, object, source, stack) => any` 형태예요.
+- `customizer` (`MergeWithCustomizer`, 선택): 값 할당을 커스터마이즈하는 함수예요. `(objValue, srcValue, key, object, source, stack) => any` 형태예요. 마지막 인수가 함수가 아니면 또 다른 소스 객체로 취급돼요.
 
 #### 반환 값
 
