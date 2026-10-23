@@ -1,13 +1,14 @@
 import { serializeValue } from './serialize.ts';
 
+const OTHER = 4;
+
 /**
  * Compares two values for sorting `Set` values and `Map` keys.
  *
- * Values are first grouped by type: strings, then numbers, then bigints, then
- * everything else. Strings are compared by code unit, numbers and bigints
- * numerically with `NaN` after every other number, and any other values by the
- * code unit order of their serialized form. Comparing by type first keeps the
- * order total, so the result does not depend on the insertion order.
+ * Values are ordered by type first: strings, numbers, `NaN`, bigints, then
+ * everything else. Within a type, strings are compared by code unit, numbers
+ * and bigints numerically, and other values by the code unit order of their
+ * serialized form, so the order is total and independent of insertion order.
  *
  * @param a - The first value to compare.
  * @param b - The second value to compare.
@@ -16,89 +17,50 @@ import { serializeValue } from './serialize.ts';
  *   `a` sorts after `b`, and `0` if they are equal.
  */
 export function compareValues(a: unknown, b: unknown, refs: Map<object, string>): number {
-  const rankA = typeRank(a);
-  const rankB = typeRank(b);
+  const rankA = rankOf(a);
+  const rankB = rankOf(b);
 
   if (rankA !== rankB) {
     return rankA - rankB;
   }
 
-  if (typeof a === 'string' && typeof b === 'string') {
-    return compareStrings(a, b);
+  let left = a as string | number | bigint;
+  let right = b as string | number | bigint;
+
+  if (rankA === OTHER) {
+    left = serializeValue(a, refs);
+    right = serializeValue(b, refs);
   }
 
-  if (typeof a === 'number' && typeof b === 'number') {
-    return compareNumbers(a, b);
+  if (left < right) {
+    return -1;
   }
 
-  if (typeof a === 'bigint' && typeof b === 'bigint') {
-    return compareBigInts(a, b);
+  if (left > right) {
+    return 1;
   }
 
-  return compareStrings(serializeValue(a, refs), serializeValue(b, refs));
+  return 0;
 }
 
-function typeRank(value: unknown): number {
+function rankOf(value: unknown): number {
   switch (typeof value) {
     case 'string': {
       return 0;
     }
     case 'number': {
+      // NaN is neither smaller nor larger than any number, so it gets a rank of its own.
+      if (Number.isNaN(value)) {
+        return 2;
+      }
+
       return 1;
     }
     case 'bigint': {
-      return 2;
-    }
-    default: {
       return 3;
     }
-  }
-}
-
-function compareStrings(a: string, b: string): number {
-  if (a < b) {
-    return -1;
-  }
-
-  if (a > b) {
-    return 1;
-  }
-
-  return 0;
-}
-
-function compareNumbers(a: number, b: number): number {
-  if (Number.isNaN(a)) {
-    if (Number.isNaN(b)) {
-      return 0;
+    default: {
+      return OTHER;
     }
-
-    return 1;
   }
-
-  if (Number.isNaN(b)) {
-    return -1;
-  }
-
-  if (a < b) {
-    return -1;
-  }
-
-  if (a > b) {
-    return 1;
-  }
-
-  return 0;
-}
-
-function compareBigInts(a: bigint, b: bigint): number {
-  if (a < b) {
-    return -1;
-  }
-
-  if (a > b) {
-    return 1;
-  }
-
-  return 0;
 }

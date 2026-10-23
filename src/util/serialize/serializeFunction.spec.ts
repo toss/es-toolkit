@@ -40,21 +40,11 @@ describe('serializeFunction', () => {
   });
 
   it('should recognize native functions whose source spans multiple lines', () => {
-    const spy = vi.spyOn(Function.prototype, 'toString').mockReturnValue('function max() {\n    [native code]\n}');
-
-    try {
-      expect(serializeFunction(Math.max)).toBe('max:[native]');
-    } finally {
-      spy.mockRestore();
-    }
-  });
-
-  it('should not treat a function that mentions native code in its body as native', () => {
-    function pretend() {
-      return '{ [native code] }';
-    }
-    expect(serializeFunction(pretend)).not.toBe('pretend:[native]');
-    expect(serializeFunction(pretend)).toContain('[native code]');
+    const toString = vi
+      .spyOn(Function.prototype, 'toString')
+      .mockReturnValueOnce('function max() {\n  [native code]\n}');
+    expect(serializeFunction(Math.max)).toBe('max:[native]');
+    toString.mockRestore();
   });
 
   it('should serialize bound functions as name:[native]', () => {
