@@ -14,4 +14,5 @@
  * const keys = Object.keys(obj) as Array<ObjectKeys<typeof obj>>;
  * // => Array<'a' | 'b'>
  */
-export type ObjectKeys<T> = Extract<keyof T, string> | `${Extract<keyof T, number>}`;
+// The always-true conditional makes editors show the resolved keys instead of `ObjectKeys<...>`.
+export type ObjectKeys<T> = [T] extends [unknown] ? Extract<keyof T, string> | `${Extract<keyof T, number>}` : never;
