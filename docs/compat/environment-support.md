@@ -32,11 +32,3 @@ Support for these environments is verified on every change, in two ways.
 
 - **Statically with ESLint**: [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) restricts the code of `es-toolkit/compat` to ES2015 syntax and built-ins (optional chaining and `??` are allowed because the build converts them to older syntax), and [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat) checks it against a Node.js 6 target.
 - **On a real Node.js 6 in CI**: every `es-toolkit/compat/*` entry point of the built package is loaded, and every `@example` of the compat functions is executed.
-
-## Caveats
-
-### 1. `words` and case functions use lodash's patterns on engines without Unicode property escapes
-
-Some older engines cannot parse Unicode property escapes (`\p{…}`) in regular expressions, such as Node.js 6–9, Chrome before 64, and Safari before 11.1.
-On these engines, [`words`](/compat/reference/string/words) and the case functions (`camelCase`, `kebabCase`, `snakeCase`, `startCase`, `lowerCase`, `upperCase`) fall back to lodash's own ES5 word patterns, so their results match lodash exactly.
-Modern engines use a Unicode-aware pattern instead.

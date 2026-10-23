@@ -1,103 +1,13 @@
 /**
  * Splits strings into words for `words` and the case functions in `es-toolkit/compat`.
  *
- * Modern engines use a pattern built on Unicode property escapes (`\p{...}`). Engines that
- * cannot parse them, such as Node.js 6 and browsers from the ES2015 era, fall back to lodash's
- * own ES5-compatible word patterns, so `words` behaves exactly like lodash there.
+ * The patterns are lodash's own. They only use ES5 regular expression features, so they also
+ * work on engines without Unicode property escapes (`\p{...}`), such as Node.js 6.
  *
- * The fallback patterns are taken from lodash:
  * @link https://github.com/lodash/lodash/blob/4.17.21-es/_unicodeWords.js
  * @link https://github.com/lodash/lodash/blob/4.17.21-es/_asciiWords.js
  * @link https://github.com/lodash/lodash/blob/4.17.21-es/_hasUnicodeWord.js
  */
-
-const rNonCharLatin = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\xd7\\xf7';
-
-const rUnicodeUpper = '(?:\\p{Lu}\\p{M}*)';
-const rUnicodeLower = '(?:\\p{Ll}\\p{M}*)';
-
-const rEmojiPict = '(?:\\p{Emoji_Presentation}|\\p{Extended_Pictographic})';
-
-const rMisc = `(?:(?:[\\p{Lm}\\p{Lo}\\p{Lt}]|(?![${rNonCharLatin}0-9]|${rEmojiPict})[\\p{N}\\p{S}])\\p{M}*)`;
-
-const rNumber = '\\d';
-
-const rUnicodeOptContrLower = "(?:['\u2019](?:d|ll|m|re|s|t|ve))?";
-const rUnicodeOptContrUpper = "(?:['\u2019](?:D|LL|M|RE|S|T|VE))?";
-const rUnicodeBreak = `[\\p{Z}\\p{P}${rNonCharLatin}]`;
-
-const rUnicodeMiscUpper = `(?:${rUnicodeUpper}|${rMisc})`;
-const rUnicodeMiscLower = `(?:${rUnicodeLower}|${rMisc})`;
-
-const rEmojiMod = '\\uFE0F?\\p{Emoji_Modifier}?';
-const rEmojiAtom = `(?:\\p{Regional_Indicator}{2}|${rEmojiPict}${rEmojiMod})`;
-const rEmojiSeq = `${rEmojiAtom}(?:\\u200D${rEmojiAtom})*`;
-
-// `null` once compiling the pattern has failed, so the fallback is used without retrying.
-let rUnicodeWord: RegExp | null | undefined;
-
-// The pattern uses Unicode property escapes, which engines older than
-// Chrome 64 / Safari 11.1 cannot parse. Since it is assembled from strings,
-// transpilers cannot rewrite it either, so it is compiled lazily: merely
-// importing this module never throws, only calling `words` without a custom
-// pattern requires engine support.
-function getUnicodeWordPattern(): RegExp | null {
-  if (rUnicodeWord === undefined) {
-    rUnicodeWord = compileUnicodeWordPattern();
-  }
-  return rUnicodeWord;
-}
-
-function compileUnicodeWordPattern(): RegExp | null {
-  try {
-    // eslint-disable-next-line es-x/no-regexp-unicode-property-escapes, es-x/no-regexp-unicode-property-escapes-2019 -- compiled inside try/catch; `lodashWords` is the fallback for engines without property escapes
-    return RegExp(
-      [
-        `${rUnicodeUpper}?${rUnicodeLower}+${rUnicodeOptContrLower}(?=${rUnicodeBreak}|${rUnicodeUpper}|$)`,
-
-        `${rUnicodeMiscUpper}+${rUnicodeOptContrUpper}(?=${rUnicodeBreak}|${rUnicodeUpper}${rUnicodeMiscLower}|$)`,
-
-        `${rUnicodeUpper}?${rUnicodeMiscLower}+${rUnicodeOptContrLower}`,
-
-        `${rUnicodeUpper}+${rUnicodeOptContrUpper}`,
-
-        `${rNumber}*(?:1ST|2ND|3RD|(?![123])${rNumber}TH)(?=\\b|[a-z_])`,
-
-        `${rNumber}*(?:1st|2nd|3rd|(?![123])${rNumber}th)(?=\\b|[A-Z_])`,
-
-        rEmojiSeq,
-
-        `${rNumber}+`,
-      ].join('|'),
-      'gu'
-    );
-  } catch (e) {
-    // Engines without Unicode property escapes (e.g. Node.js 6) throw a
-    // SyntaxError here; use lodash's ES5-compatible word patterns instead.
-    return null;
-  }
-}
-
-/**
- * Splits `string` into words with the default word pattern.
- *
- * @param string - The string to split.
- * @returns The words of `string`.
- */
-export function unicodeWords(string: string): string[] {
-  const pattern = getUnicodeWordPattern();
-
-  if (pattern == null) {
-    return lodashWords(string);
-  }
-
-  const matched = string.match(pattern);
-  const words = matched == null ? [] : Array.from(matched);
-
-  return words.filter(x => x !== '');
-}
-
-// Fallback for engines without Unicode property escapes: lodash's ES5 word patterns.
 
 /** Used to compose unicode character classes. */
 const rsAstralRange = '\\ud800-\\udfff';
@@ -152,12 +62,12 @@ const reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[
 // eslint-disable-next-line no-control-regex
 const reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
 
-let reLodashUnicodeWord: RegExp | undefined;
+let reUnicodeWord: RegExp | undefined;
 
 /** Used to match complex or compound words. */
-function getLodashUnicodeWordPattern(): RegExp {
-  if (reLodashUnicodeWord == null) {
-    reLodashUnicodeWord = RegExp(
+function getUnicodeWordPattern(): RegExp {
+  if (reUnicodeWord == null) {
+    reUnicodeWord = RegExp(
       [
         `${rsUpper}?${rsLower}+${rsOptContrLower}(?=${[rsBreak, rsUpper, '$'].join('|')})`,
         `${rsMiscUpper}+${rsOptContrUpper}(?=${[rsBreak, rsUpper + rsMiscLower, '$'].join('|')})`,
@@ -172,18 +82,18 @@ function getLodashUnicodeWordPattern(): RegExp {
     );
   }
 
-  return reLodashUnicodeWord;
+  return reUnicodeWord;
 }
 
 /**
- * Splits `string` into words with lodash's own ES5-compatible patterns. Used on engines that
- * cannot parse Unicode property escapes, so that `words` matches lodash exactly there.
+ * Splits `string` into words with lodash's own word patterns, so that `words` and the case
+ * functions match lodash exactly on every engine.
  *
  * @param string - The string to split.
  * @returns The words of `string`.
  */
 export function lodashWords(string: string): string[] {
-  const pattern = reHasUnicodeWord.test(string) ? getLodashUnicodeWordPattern() : reAsciiWord;
+  const pattern = reHasUnicodeWord.test(string) ? getUnicodeWordPattern() : reAsciiWord;
   const matched = string.match(pattern);
 
   return matched == null ? [] : Array.from(matched);

@@ -1,4 +1,4 @@
-import { unicodeWords } from '../_internal/words.ts';
+import { lodashWords } from '../_internal/words.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -43,7 +43,7 @@ export function words(str?: string, pattern?: string | number | RegExp, guard?: 
   const input = toString(str);
 
   if (guard || pattern === undefined) {
-    return unicodeWords(input);
+    return lodashWords(input);
   }
 
   if (typeof pattern === 'number') {

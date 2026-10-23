@@ -32,11 +32,3 @@ description: es-toolkit/compat이 트랜스파일이나 폴리필 없이 배포�
 
 - **ESLint로 정적 검증**: [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x)로 `es-toolkit/compat`의 코드가 ES2015 문법과 내장 기능만 사용하도록 제한하고(옵셔널 체이닝과 `??`는 빌드 과정에서 오래된 문법으로 변환되기 때문에 허용해요), [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat)으로 Node.js 6을 대상으로 검사해요.
 - **CI에서 실제 Node.js 6으로 검증**: 빌드된 패키지의 모든 `es-toolkit/compat/*` 진입점을 불러오고, compat 함수의 모든 `@example`을 실행해요.
-
-## 주의 사항
-
-### 1. 유니코드 속성 이스케이프를 지원하지 않는 엔진에서는 `words`와 케이스 변환 함수가 lodash의 패턴을 사용해요
-
-Node.js 6–9, Chrome 64 미만, Safari 11.1 미만처럼 일부 오래된 엔진은 정규식의 유니코드 속성 이스케이프(`\p{…}`)를 해석하지 못해요.
-이런 엔진에서는 [`words`](/ko/compat/reference/string/words)와 케이스 변환 함수(`camelCase`, `kebabCase`, `snakeCase`, `startCase`, `lowerCase`, `upperCase`)가 lodash의 ES5 단어 패턴을 그대로 사용하기 때문에, 결과가 lodash와 정확히 같아요.
-최신 엔진에서는 유니코드를 인식하는 패턴을 사용해요.

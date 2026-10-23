@@ -32,11 +32,3 @@ description: es-toolkit/compat 无需转译或 polyfill、按发布原样即可�
 
 - **通过 ESLint 进行静态验证**:使用 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 将 `es-toolkit/compat` 的代码限制为 ES2015 语法和内置功能(可选链和 `??` 会在构建时转换为旧语法,因此允许使用),并使用 [`eslint-plugin-compat`](https://github.com/amilajack/eslint-plugin-compat) 以 Node.js 6 为目标进行检查。
 - **在 CI 中使用真实的 Node.js 6 进行验证**:加载构建后包的每个 `es-toolkit/compat/*` 入口,并执行 compat 函数的每个 `@example`。
-
-## 注意事项
-
-### 1. 在不支持 Unicode 属性转义的引擎中,`words` 和大小写转换函数使用 lodash 的模式
-
-一些旧引擎无法解析正则表达式中的 Unicode 属性转义(`\p{…}`),例如 Node.js 6–9、Chrome 64 以下以及 Safari 11.1 以下。
-在这些引擎中,[`words`](/zh_hans/compat/reference/string/words) 和大小写转换函数(`camelCase`、`kebabCase`、`snakeCase`、`startCase`、`lowerCase`、`upperCase`)会回退到 lodash 自身的 ES5 单词模式,因此结果与 lodash 完全一致。
-现代引擎则使用支持 Unicode 的模式。
