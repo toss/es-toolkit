@@ -1,6 +1,9 @@
+// Field names are short because minifiers don't rename properties.
 interface QueueNode<T> {
-  value: T;
-  next: QueueNode<T> | undefined;
+  /** The item. */
+  v: T;
+  /** The next node, or `null` if this is the last one. */
+  n: QueueNode<T> | null;
 }
 
 /**
@@ -28,8 +31,8 @@ interface QueueNode<T> {
  * console.log(queue.dequeue()); // undefined
  */
 export class Queue<T> implements Iterable<T> {
-  #head: QueueNode<T> | undefined = undefined;
-  #tail: QueueNode<T> | undefined = undefined;
+  #head: QueueNode<T> | null = null;
+  #tail: QueueNode<T> | null = null;
   #size = 0;
 
   /**
@@ -56,12 +59,12 @@ export class Queue<T> implements Iterable<T> {
    * console.log([...queue]); // [1, 2]
    */
   enqueue(value: T): void {
-    const node: QueueNode<T> = { value, next: undefined };
+    const node: QueueNode<T> = { v: value, n: null };
 
-    if (this.#tail === undefined) {
+    if (this.#tail === null) {
       this.#head = node;
     } else {
-      this.#tail.next = node;
+      this.#tail.n = node;
     }
 
     this.#tail = node;
@@ -82,19 +85,19 @@ export class Queue<T> implements Iterable<T> {
   dequeue(): T | undefined {
     const node = this.#head;
 
-    if (node === undefined) {
+    if (node === null) {
       return undefined;
     }
 
-    this.#head = node.next;
+    this.#head = node.n;
 
-    if (this.#head === undefined) {
-      this.#tail = undefined;
+    if (this.#head === null) {
+      this.#tail = null;
     }
 
     this.#size--;
 
-    return node.value;
+    return node.v;
   }
 
   /**
@@ -109,7 +112,7 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.size); // 1
    */
   peek(): T | undefined {
-    return this.#head?.value;
+    return this.#head?.v;
   }
 
   /**
@@ -122,8 +125,8 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.size); // 0
    */
   clear(): void {
-    this.#head = undefined;
-    this.#tail = undefined;
+    this.#head = null;
+    this.#tail = null;
     this.#size = 0;
   }
 
@@ -141,9 +144,9 @@ export class Queue<T> implements Iterable<T> {
   *[Symbol.iterator](): Generator<T, void, undefined> {
     let node = this.#head;
 
-    while (node !== undefined) {
-      yield node.value;
-      node = node.next;
+    while (node !== null) {
+      yield node.v;
+      node = node.n;
     }
   }
 }
