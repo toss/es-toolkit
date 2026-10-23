@@ -1,7 +1,4 @@
-interface DeferredTask {
-  resolve: () => void;
-  next: DeferredTask | undefined;
-}
+import { Queue } from '../util/queue.ts';
 
 /**
  * A counting semaphore for async functions that manages available permits.
@@ -41,10 +38,8 @@ export class Semaphore {
    */
   public available: number;
 
-  // Waiting tasks form a linked list because `Array#shift` is O(n) on large arrays in V8,
-  // which made draining a long queue quadratic.
-  private head: DeferredTask | undefined;
-  private tail: DeferredTask | undefined;
+  // `Array#shift` is O(n) on large arrays in V8, which made draining a long queue quadratic.
+  private deferredTasks = new Queue<() => void>();
 
   /**
    * Creates an instance of Semaphore.
@@ -81,15 +76,7 @@ export class Semaphore {
     }
 
     return new Promise<void>(resolve => {
-      const deferredTask: DeferredTask = { resolve, next: undefined };
-
-      if (this.tail != null) {
-        this.tail.next = deferredTask;
-      } else {
-        this.head = deferredTask;
-      }
-
-      this.tail = deferredTask;
+      this.deferredTasks.enqueue(resolve);
     });
   }
 
@@ -109,16 +96,10 @@ export class Semaphore {
    * }
    */
   release(): void {
-    const deferredTask = this.head;
+    const deferredTask = this.deferredTasks.dequeue();
 
     if (deferredTask != null) {
-      this.head = deferredTask.next;
-
-      if (this.head == null) {
-        this.tail = undefined;
-      }
-
-      deferredTask.resolve();
+      deferredTask();
       return;
     }
 
