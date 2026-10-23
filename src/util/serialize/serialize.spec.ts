@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { serialize } from './serialize';
 
 describe('serialize', () => {
@@ -36,6 +36,27 @@ describe('serialize', () => {
 
     it('should serialize functions', () => {
       expect(serialize(Math.max)).toBe('max:[native]');
+      expect(serialize(Array.prototype.push)).toBe('push:[native]');
+      expect(
+        serialize(function add(a: number, b: number) {
+          return a + b;
+        })
+      ).toBe('add:function add(a, b) {return a + b;}');
+    });
+
+    it('should detect native functions regardless of how the engine formats them', () => {
+      // Safari formats native functions as `function max() {\n    [native code]\n}`.
+      const max = function max() {};
+      const original = Function.prototype.toString;
+      const spy = vi.spyOn(Function.prototype, 'toString').mockImplementation(function (this: unknown) {
+        return this === max ? 'function max() {\n    [native code]\n}' : original.call(this);
+      });
+
+      try {
+        expect(serialize(max)).toBe('max:[native]');
+      } finally {
+        spy.mockRestore();
+      }
     });
 
     it('should distinguish undefined from the string "undefined"', () => {
@@ -85,6 +106,52 @@ describe('serialize', () => {
           ])
         )
       );
+    });
+
+    it('should sort NaN and mixed numbers and bigints regardless of insertion order', () => {
+      expect(serialize(new Set([NaN, 1, -1, 2]))).toBe('Set[-1,1,2,NaN]');
+      expect(serialize(new Set([1, NaN, -1, 2]))).toBe('Set[-1,1,2,NaN]');
+      expect(serialize(new Set([-1, 1, 2, NaN]))).toBe('Set[-1,1,2,NaN]');
+      expect(serialize(new Set([NaN, Infinity, -Infinity, 0]))).toBe('Set[-Infinity,0,Infinity,NaN]');
+      expect(serialize(new Set([0, Infinity, NaN, -Infinity]))).toBe('Set[-Infinity,0,Infinity,NaN]');
+
+      expect(serialize(new Set([10, 9n, 2, 11n]))).toBe('Set[2,9n,10,11n]');
+      expect(serialize(new Set([11n, 2, 10, 9n]))).toBe('Set[2,9n,10,11n]');
+      expect(serialize(new Set([1n, 1, NaN, 2n]))).toBe('Set[1,1n,2n,NaN]');
+      expect(serialize(new Set([NaN, 2n, 1, 1n]))).toBe('Set[1,1n,2n,NaN]');
+
+      expect(
+        serialize(
+          new Map<number | bigint, number>([
+            [NaN, 1],
+            [10, 2],
+            [9n, 3],
+            [2, 4],
+          ])
+        )
+      ).toBe('Map{2:4,9n:3,10:2,NaN:1}');
+      expect(
+        serialize(
+          new Map<number | bigint, number>([
+            [9n, 3],
+            [2, 4],
+            [NaN, 1],
+            [10, 2],
+          ])
+        )
+      ).toBe('Map{2:4,9n:3,10:2,NaN:1}');
+    });
+
+    it('should sort mixed types regardless of insertion order', () => {
+      const values = [2, 'a', 10, null, true, 1n, [1], { k: 1 }, undefined, Symbol.for('s')];
+      const expected = serialize(new Set(values));
+
+      expect(expected).toBe("Set['a',1n,2,10,Symbol('s'),[1],null,true,{'k':1},undefined]");
+
+      for (let i = 1; i < values.length; i++) {
+        expect(serialize(new Set([...values.slice(i), ...values.slice(0, i)]))).toBe(expected);
+        expect(serialize(new Set([...values.slice(0, i).reverse(), ...values.slice(i).reverse()]))).toBe(expected);
+      }
     });
 
     it('should produce the same output for structurally equal values', () => {
