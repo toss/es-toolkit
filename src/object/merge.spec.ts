@@ -193,7 +193,10 @@ describe('merge', () => {
     const overrides: Partial<Options> = { title: 'custom' };
 
     expectTypeOf(merge(defaults, overrides)).toMatchTypeOf<Options>();
-    expectTypeOf(merge(defaults, { color: ['red'] })).toEqualTypeOf<Options>();
+    expectTypeOf(merge(defaults, { color: ['red'] })).toEqualTypeOf<{
+      color: string[] | Array<string | string[]>;
+      title: 'x' | 'y' | (string & {});
+    }>();
   });
 
   it('keeps keys that exist only on the source even when the source is a subtype of the target', () => {
@@ -201,5 +204,32 @@ describe('merge', () => {
     const source: { a: number; b: string } = { a: 2, b: 'x' };
 
     expectTypeOf(merge(target, source)).toEqualTypeOf<{ a: number; b: string }>();
+  });
+
+  it('drops optional and nullable defaults that a defined override replaces', () => {
+    interface Options {
+      retry?: { count: number };
+      onError: ((error: Error) => void) | null;
+      name: string | undefined;
+      tags: string[] | null;
+    }
+    const defaults: Options = { onError: null, name: undefined, tags: null };
+    const overrides: { retry: { count: number }; onError: (error: Error) => void; name: string; tags: string[] } = {
+      retry: { count: 3 },
+      onError: () => {},
+      name: 'x',
+      tags: ['a'],
+    };
+
+    const result = merge(defaults, overrides);
+
+    expect(result).toEqual({ retry: { count: 3 }, onError: overrides.onError, name: 'x', tags: ['a'] });
+    expectTypeOf(result.retry.count).toEqualTypeOf<number>();
+    expectTypeOf(result.onError).toEqualTypeOf<(error: Error) => void>();
+    expectTypeOf(result.name).toEqualTypeOf<string>();
+    expectTypeOf(result.tags).toEqualTypeOf<string[]>();
+
+    const partial: Partial<{ a: { x: number } }> = {};
+    expectTypeOf(merge(partial, { a: { x: 1 } }).a.x).toEqualTypeOf<number>();
   });
 });

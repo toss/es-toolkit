@@ -34,6 +34,18 @@ type Result = Merge<Target, Source>;
 // => { server: { host: string; port: number; tls: boolean } }
 ```
 
+2つの配列型をマージすると、タプルはインデックスごとにマージされ、それ以外の配列は両方の要素型を含む配列型になります。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ list: number[] }, { list: string[] }>;
+// => { list: Array<string | number> }
+
+type Tuple = Merge<[1, 2, 3], ['a']>;
+// => ['a', 2, 3]
+```
+
 キーが重なる場合は、2番目のオブジェクトの値の型が使われます。TypeScript標準のマージ型 `T & S` では重なったキーの値が `never` と表示されることがありますが、`Merge` 型を使うと2番目のオブジェクトの値の型が使われます。
 
 ```typescript
@@ -60,15 +72,30 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-2番目のオブジェクトの配列が1番目のオブジェクトの配列型と互換性があれば、1番目のオブジェクトの型が保たれます。
+同じキーがある場合、2番目のオブジェクトの型がそのまま結果になります。
+
+プリミティブ、`Date`、`Map`、`Set`、関数など、プレーンなオブジェクトではない型をマージすると、2番目の値の型が使われます。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { value: string[] | string[][] };
+type Target = { createdAt: Date; onChange: () => void; label: string };
+type Source = { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' };
 
-type Result = Merge<Options, { value: string[] }>;
-// => { value: string[] | string[][] }
+type Result = Merge<Target, Source>;
+// => { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' }
+```
+
+1番目のオブジェクトで`null`や`undefined`になりえた値も、2番目のオブジェクトに値があれば結果の型からは消えます。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Defaults = { retry?: { count: number }; tags: string[] | null };
+type Overrides = { retry: { count: number }; tags: string[] };
+
+type Result = Merge<Defaults, Overrides>;
+// => { retry: { count: number }; tags: string[] }
 ```
 
 #### 型パラメータ

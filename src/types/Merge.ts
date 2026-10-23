@@ -8,47 +8,40 @@ import type { Simplify } from './Simplify.ts';
  * The result of deeply merging the source type `S` into the target type `T`,
  * matching what `merge(target, source)` returns at runtime.
  *
- * Merging a type with itself gives back the same type, so a union such as
- * `string | string[] | string[][]` stays intact instead of expanding into a
- * merge of every pair of its members.
- *
- * Plain objects are merged key by key: keys present on only one side are
- * kept, and keys present on both sides are merged the same way. A key that
- * exists only on the source is kept even when the source is a subtype of
- * the target.
- *
- * A source value that is not a plain object or an array (primitives, `Date`,
- * `RegExp`, `Map`, `Set`, functions, ...) replaces the target value, so the
- * source type is used.
- *
- * When a source array fits the target's array type, the target type is kept:
- * overriding `string[] | string[][]` with `string[]` stays
- * `string[] | string[][]`. If instead the target fits the source type, the
- * source type is kept. Otherwise, tuples merge index by index and other
- * arrays merge into an array of both element types.
- *
- * A source value that can be `undefined` keeps the target
- * type as well, because `merge` skips `undefined` source values. When an
- * array meets a plain object, `merge` keeps the target and assigns the
- * source's properties onto it, so both property sets are kept (`T & S`).
+ * Two plain objects are merged key by key, and two arrays are merged index by
+ * index: tuples element by element, other arrays into an array of both element
+ * types. For every other key present in both objects the second object's type
+ * becomes the result: primitives, `Date`, `Map`, `Set`, functions and other
+ * values that are not plain objects use the second value's type, and a value
+ * that could be `null` or `undefined` in the first object disappears when the
+ * second object has a value for it. A source value that can be `undefined`
+ * keeps the target type, because `merge` skips `undefined` source values.
+ * Merging a type with itself gives back the same type.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
  *
  * @example
- * type Target = { a: number; b: { x: number; y: number } };
- * type Source = { b: { y: string; z: boolean }; c: string };
- * type Result = Merge<Target, Source>;
- * // => { a: number; b: { x: number; y: string; z: boolean }; c: string }
+ * // Nested plain objects are merged key by key.
+ * type Result = Merge<{ a: number; b: { x: number } }, { b: { y: string } }>;
+ * // => { a: number; b: { x: number; y: string } }
  *
  * @example
- * type Options = { color: string | string[] | string[][] };
- * type Same = Merge<Options, Options>;
- * // => Options
- * type Override = Merge<Options, { color: string[] }>;
- * // => Options
- * type Extra = Merge<{ a: number }, { a: number; b: string }>;
- * // => { a: number; b: string }
+ * // Arrays are merged index by index.
+ * type Tuple = Merge<[1, 2, 3], ['a']>;
+ * // => ['a', 2, 3]
+ * type List = Merge<{ list: number[] }, { list: string[] }>;
+ * // => { list: Array<string | number> }
+ *
+ * @example
+ * // Values that are not plain objects use the second value's type.
+ * type Result = Merge<{ createdAt: Date; label: string }, { createdAt: string; label: 'a' | 'b' }>;
+ * // => { createdAt: string; label: 'a' | 'b' }
+ *
+ * @example
+ * // A nullable value in the first object disappears when the second object has a value.
+ * type Result = Merge<{ retry?: { count: number }; tags: string[] | null }, { retry: { count: number }; tags: string[] }>;
+ * // => { retry: { count: number }; tags: string[] }
  */
 // prettier-ignore
 export type Merge<T, S> =
@@ -67,9 +60,9 @@ type NonMergeable =
   | WeakMap<object, unknown> | WeakSet<object>;
 
 /**
- * `true` when every member of `T` is a plain object type that `merge`
- * recurses into. Primitives are excluded explicitly because an intersection
- * like `string & {}` satisfies `extends object` even though it is a string at
+ * `true` when `T` is a plain object type that `merge` recurses into.
+ * Primitives are excluded explicitly because an intersection like
+ * `string & {}` satisfies `extends object` even though it is a string at
  * runtime.
  */
 // prettier-ignore
@@ -80,9 +73,6 @@ type IsPlainRecord<T> =
   T extends object ? true :
   false;
 
-// The `[X] extends [Y]` checks are deliberately non-distributive: they compare
-// a union as a whole, which is what keeps `Merge<X, X>` and
-// `Merge<A | B, A>` from expanding into every pair of union members.
 // prettier-ignore
 type MergeDefined<T, S> =
   IsEqual<T, S> extends true ? T :
@@ -91,39 +81,35 @@ type MergeDefined<T, S> =
   IsUnknown<T> extends true ? S :
   [T] extends [never] ? S :
   [S] extends [never] ? T :
-  IsPlainRecord<T> extends true ? (
-    IsPlainRecord<S> extends true ? MergeRecords<T, S> : MergeAssignable<T, S>
-  ) :
-  MergeAssignable<T, S>;
+  MergeEach<T, S>;
 
-// A source that `merge` replaces the target with (primitives, `Date`, ...)
-// keeps its own type. The assignability checks below only apply to sources
-// that are merged into the target, i.e. arrays or unions containing arrays.
+// Both conditions test a naked type parameter, so every member of `S` is
+// merged into every member of `T` and the results are unioned.
 // prettier-ignore
-type MergeAssignable<T, S> =
-  [S] extends [Primitive | NonMergeable] ? S :
-  [S] extends [T] ? T :
-  [T] extends [S] ? S :
-  MergeFallback<T, S>;
+type MergeEach<T, S> =
+  S extends unknown ? (T extends unknown ? MergePair<T, S> : never) : never;
 
+// `T` and `S` are single union members here, and `S` is defined because
+// `Merge` handles `undefined` sources. Two plain objects merge key by key, an
+// array and a plain object keep both property sets, and everything else
+// (including a `null` or `undefined` target) is replaced by the source.
 // prettier-ignore
-type MergeFallback<T, S> =
-  S extends Primitive ? S :
-  S extends readonly unknown[] ? (
-    T extends readonly unknown[] ? MergeArrays<T, S> :
-    T extends Primitive | NonMergeable ? S :
-    T extends object ? T & S :
+type MergePair<T, S> =
+  IsPlainRecord<S> extends true ? (
+    IsPlainRecord<T> extends true ? CollapseInto<MergeRecords<T, S>, S> :
+    T extends readonly unknown[] ? T & S :
     S
   ) :
-  S extends NonMergeable ? S :
-  S extends object ? (
-    T extends readonly unknown[] ? T & S :
-    T extends Primitive | NonMergeable ? S :
-    T extends object ? MergeRecords<T, S> :
+  S extends readonly unknown[] ? (
+    IsPlainRecord<T> extends true ? T & S :
+    T extends readonly unknown[] ? MergeArrays<T, S> :
     S
   ) :
   S;
 
+// Tuples are merged index by index. Any other pair of arrays becomes an array
+// of both element types, because `merge` overwrites the leading indices with
+// the source and keeps the target's remaining elements.
 // prettier-ignore
 type MergeArrays<T extends readonly unknown[], S extends readonly unknown[]> =
   T extends readonly [] ? S :
@@ -133,6 +119,13 @@ type MergeArrays<T extends readonly unknown[], S extends readonly unknown[]> =
       ? [Merge<TH, SH>, ...MergeArrays<TR, SR>]
       : Array<T[number] | S[number]>
     : Array<T[number] | S[number]>;
+
+// A merged object that is identical to the source becomes `S` itself, so
+// that `Merge<X | string, X>` is `X` instead of a union of two structurally
+// identical object types.
+// prettier-ignore
+type CollapseInto<R, S> =
+  IsEqual<R, S> extends true ? S : R;
 
 // prettier-ignore
 type MergeRecords<T, S> = Simplify<

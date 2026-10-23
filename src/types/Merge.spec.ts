@@ -29,13 +29,13 @@ describe('Merge', () => {
     expectTypeOf<Merge<{ a: number }, { b?: string }>>().toEqualTypeOf<{ a: number; b?: string }>();
   });
 
-  it('merges tuples index by index', () => {
+  it('merges arrays index by index', () => {
     expectTypeOf<Merge<[1, 2, 3], ['a']>>().toEqualTypeOf<['a', 2, 3]>();
     expectTypeOf<Merge<{ a: [1, 2] }, { a: [3] }>>().toEqualTypeOf<{ a: [3, 2] }>();
-  });
-
-  it('merges non-tuple arrays into an array of both element types', () => {
-    expectTypeOf<Merge<number[], string[]>>().toEqualTypeOf<Array<number | string>>();
+    expectTypeOf<Merge<number[], string[]>>().toEqualTypeOf<Array<string | number>>();
+    expectTypeOf<Merge<number[], Array<1 | 2>>>().toEqualTypeOf<number[]>();
+    expectTypeOf<Merge<number[], [3]>>().toEqualTypeOf<number[]>();
+    expectTypeOf<Merge<[1, 2], number[]>>().toEqualTypeOf<number[]>();
   });
 
   it('replaces the target when the source is not a plain object', () => {
@@ -77,14 +77,13 @@ describe('Merge', () => {
     }>();
   });
 
-  it('keeps the target array type when the source array fits into it', () => {
+  it('merges each array member of a union target with the source array', () => {
     type Color = string | number | string[] | string[][];
 
-    expectTypeOf<Merge<Color, string[]>>().toEqualTypeOf<Color>();
-    expectTypeOf<Merge<string[], Color>>().toEqualTypeOf<Color>();
-    expectTypeOf<Merge<string[] | string[][], string[]>>().toEqualTypeOf<string[] | string[][]>();
-    expectTypeOf<Merge<number[], Array<1 | 2>>>().toEqualTypeOf<number[]>();
-    expectTypeOf<Merge<Color, string | string[]>>().toEqualTypeOf<Color>();
+    expectTypeOf<Merge<Color, string[]>>().toEqualTypeOf<string[] | Array<string | string[]>>();
+    expectTypeOf<Merge<string[], Color>>().toEqualTypeOf<string | number | string[] | Array<string | string[]>>();
+    expectTypeOf<Merge<string[] | string[][], string[]>>().toEqualTypeOf<string[] | Array<string | string[]>>();
+    expectTypeOf<Merge<Color, string | string[]>>().toEqualTypeOf<string | string[] | Array<string | string[]>>();
   });
 
   it('uses the source type when the source replaces the target value', () => {
@@ -103,7 +102,11 @@ describe('Merge', () => {
     type Options = { value: string[] | string[][]; label: 'a' | 'b' | (string & {}); nested: { flag: boolean } };
 
     expectTypeOf<Merge<Options, Partial<Options>>>().toMatchTypeOf<Options>();
-    expectTypeOf<Merge<Options, { value: string[] }>>().toEqualTypeOf<Options>();
+    expectTypeOf<Merge<Options, { value: string[] }>>().toEqualTypeOf<{
+      value: string[] | Array<string | string[]>;
+      label: 'a' | 'b' | (string & {});
+      nested: { flag: boolean };
+    }>();
     expectTypeOf<Merge<Options, { nested: { flag: boolean } }>>().toEqualTypeOf<Options>();
   });
 
@@ -113,6 +116,32 @@ describe('Merge', () => {
     expectTypeOf<Merge<{ a: { x: number } }, { a: string & {} }>>().toEqualTypeOf<{ a: string & {} }>();
     expectTypeOf<Merge<{ a: string & {} }, { a: number[] }>>().toEqualTypeOf<{ a: number[] }>();
     expectTypeOf<Merge<{ a: number[] }, { a: string & {} }>>().toEqualTypeOf<{ a: string & {} }>();
+  });
+
+  it('drops null and undefined from the target when the source is defined', () => {
+    expectTypeOf<Merge<{ count: number } | undefined, { count: number }>>().toEqualTypeOf<{ count: number }>();
+    expectTypeOf<Merge<{ count: number } | null, { count: number }>>().toEqualTypeOf<{ count: number }>();
+    expectTypeOf<Merge<number[] | undefined, number[]>>().toEqualTypeOf<number[]>();
+    expectTypeOf<Merge<number[] | null, Array<1 | 2>>>().toEqualTypeOf<Array<1 | 2> | number[]>();
+    expectTypeOf<Merge<string[] | string[][] | undefined, string[]>>().toEqualTypeOf<
+      string[] | Array<string | string[]>
+    >();
+    expectTypeOf<Merge<undefined, { a: number }>>().toEqualTypeOf<{ a: number }>();
+
+    type Options = { retry?: { count: number }; list: number[] | null };
+    type Overrides = { retry: { count: number }; list: number[] };
+    expectTypeOf<Merge<Options, Overrides>>().toEqualTypeOf<{ retry: { count: number }; list: number[] }>();
+  });
+
+  it('replaces non-object target members with a plain object source', () => {
+    expectTypeOf<Merge<{ x: number } | string, { x: number }>>().toEqualTypeOf<{ x: number }>();
+    expectTypeOf<Merge<{ x: number } | Date, { x: number; y: string }>>().toEqualTypeOf<{ x: number; y: string }>();
+    expectTypeOf<Merge<{ a: number } | undefined, { b: string }>>().toEqualTypeOf<
+      { a: number; b: string } | { b: string }
+    >();
+    expectTypeOf<Merge<{ a: number } | { b: string }, { c: boolean }>>().toEqualTypeOf<
+      { a: number; c: boolean } | { b: string; c: boolean }
+    >();
   });
 
   it('handles any, unknown, and never', () => {

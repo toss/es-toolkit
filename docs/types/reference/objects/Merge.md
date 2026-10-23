@@ -34,6 +34,18 @@ type Result = Merge<Target, Source>;
 // => { server: { host: string; port: number; tls: boolean } }
 ```
 
+Merging two array types merges tuples index by index, and turns any other pair of arrays into an array of both element types.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ list: number[] }, { list: string[] }>;
+// => { list: Array<string | number> }
+
+type Tuple = Merge<[1, 2, 3], ['a']>;
+// => ['a', 2, 3]
+```
+
 When keys overlap, the value type of the second object is used. With TypeScript's built-in merge type `T & S`, the value of an overlapping key can show up as `never`, but with the `Merge` type the second object's value type is used.
 
 ```typescript
@@ -60,15 +72,30 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-When an array in the second object is compatible with the array type of the first object, the first object's type is kept.
+When both objects have the same key, the second object's type becomes the result.
+
+Merging types that are not plain objects, such as primitives, `Date`, `Map`, `Set`, and functions, uses the second value's type.
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { value: string[] | string[][] };
+type Target = { createdAt: Date; onChange: () => void; label: string };
+type Source = { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' };
 
-type Result = Merge<Options, { value: string[] }>;
-// => { value: string[] | string[][] }
+type Result = Merge<Target, Source>;
+// => { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' }
+```
+
+A value that could be `null` or `undefined` in the first object disappears from the result type when the second object has a value for it.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Defaults = { retry?: { count: number }; tags: string[] | null };
+type Overrides = { retry: { count: number }; tags: string[] };
+
+type Result = Merge<Defaults, Overrides>;
+// => { retry: { count: number }; tags: string[] }
 ```
 
 #### Type Parameters
