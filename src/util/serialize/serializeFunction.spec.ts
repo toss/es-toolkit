@@ -39,19 +39,48 @@ describe('serializeFunction', () => {
     expect(serializeFunction(parseInt)).toBe('parseInt:[native]');
   });
 
-  it('should recognize native functions whose source spans multiple lines', () => {
-    const toString = vi
-      .spyOn(Function.prototype, 'toString')
-      .mockReturnValueOnce('function max() {\n  [native code]\n}');
-    expect(serializeFunction(Math.max)).toBe('max:[native]');
-    toString.mockRestore();
+  it('should serialize native accessors and methods as name:[native]', () => {
+    const size = Object.getOwnPropertyDescriptor(Map.prototype, 'size')!.get!;
+    expect(serializeFunction(size)).toBe('get size:[native]');
+    expect(serializeFunction([][Symbol.iterator])).toBe('values:[native]');
   });
 
-  it('should serialize bound functions as name:[native]', () => {
+  it('should serialize bound functions and callable proxies as name:[native]', () => {
     function original(a: number) {
       return a;
     }
     expect(serializeFunction(original.bind(null))).toBe('bound original:[native]');
+    expect(serializeFunction(new Proxy(original, {}))).toBe('original:[native]');
+  });
+
+  it.each([
+    ['JavaScriptCore and SpiderMonkey', 'function max() {\n    [native code]\n}'],
+    ['tab indentation', 'function max() {\n\t[native code]\n}'],
+    ['CRLF line endings', 'function max() {\r\n    [native code]\r\n}'],
+    ['no whitespace', 'function max(){[native code]}'],
+  ])('should recognize the native source format of %s', (_, source) => {
+    const toString = vi.spyOn(Function.prototype, 'toString').mockReturnValueOnce(source);
+    expect(serializeFunction(Math.max)).toBe('max:[native]');
+    toString.mockRestore();
+  });
+
+  it('should not treat user functions that merely contain the native marker as native', () => {
+    const inString = () => '{ [native code] }';
+    const inComment = () => {
+      // [native code]
+    };
+    const inArray = () => {
+      const native = 1;
+      const code = 2;
+      return [native, code];
+    };
+    const inTemplate = () => `function f() {
+      [native code]
+    }`;
+
+    for (const fn of [inString, inComment, inArray, inTemplate]) {
+      expect(serializeFunction(fn)).not.toContain(':[native]');
+    }
   });
 
   it('should distinguish functions with identical sources by name', () => {
