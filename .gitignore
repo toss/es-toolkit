@@ -38,6 +38,7 @@ umd
 /object.js
 /predicate.js
 /promise.js
+/query-string.js
 /server.js
 /set.js
 /string.js

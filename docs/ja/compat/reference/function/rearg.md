@@ -74,14 +74,14 @@ rearranged('a', 'b', 'c');
 // 戻り値: [undefined, 'b', 'a']
 ```
 
-ネストされた配列も平坦化して処理されます。
+インデックスの引数は 1 段階だけ平坦化されるため、インデックスを複数の配列に分けて渡すことができます。
 
 ```typescript
 import { rearg } from 'es-toolkit/compat';
 
 const fn = (a, b, c, d) => [a, b, c, d];
 
-// ネストされた配列インデックス
+// 複数の配列に分けたインデックス
 const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // 戻り値: ['b', 'c', 'a', 'd']

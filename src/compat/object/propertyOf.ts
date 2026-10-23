@@ -1,5 +1,5 @@
 import { get } from './get.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function propertyOf<T extends {}>(object: T): (path: PropertyPath) => any;

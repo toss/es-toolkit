@@ -49,6 +49,28 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number 会变成 never)
 ```
 
+合并两个类型相同的对象,会得到同一个类型。即使其中包含 `string[] | string[][]` 这样的联合类型也是如此。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, Options>;
+// => { value: string[] | string[][] }
+```
+
+当第二个对象的数组与第一个对象的数组类型兼容时,保留第一个对象的类型。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
+```
+
 #### 类型参数
 
 - `T`: 目标对象的类型。

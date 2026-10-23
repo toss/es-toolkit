@@ -74,14 +74,14 @@ rearranged('a', 'b', 'c');
 // Returns: [undefined, 'b', 'a']
 ```
 
-중첩된 배열도 평탄화해서 처리해요.
+인덱스 인자는 한 단계만 평탄화돼요. 그래서 인덱스를 여러 배열로 나눠서 전달할 수 있어요.
 
 ```typescript
 import { rearg } from 'es-toolkit/compat';
 
 const fn = (a, b, c, d) => [a, b, c, d];
 
-// 중첩된 배열 인덱스
+// 여러 배열로 나눈 인덱스
 const rearranged = rearg(fn, [1, 2], [0, 3]);
 rearranged('a', 'b', 'c', 'd');
 // Returns: ['b', 'c', 'a', 'd']

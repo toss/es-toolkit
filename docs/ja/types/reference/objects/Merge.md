@@ -49,6 +49,28 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number は never になります)
 ```
 
+同じ型の2つのオブジェクトをマージすると、その型がそのまま返ります。`string[] | string[][]` のようなユニオン型が含まれていても同じです。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, Options>;
+// => { value: string[] | string[][] }
+```
+
+2番目のオブジェクトの配列が1番目のオブジェクトの配列型と互換性があれば、1番目のオブジェクトの型が保たれます。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
+```
+
 #### 型パラメータ
 
 - `T`: ターゲットオブジェクトの型です。

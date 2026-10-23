@@ -32,6 +32,7 @@ import type { DeepPartial, ValueOf } from 'es-toolkit/types';
 | [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | 모든 키를 재귀적으로 상수 표기법으로 변환해요. `toConstantCaseKeys`의 반환 타입이에요.  |
 | [`Merge<T, S>`](./reference/objects/Merge.md)                        | 한 객체 타입에 다른 객체 타입을 깊게 합친 결과예요. `merge`의 반환 타입이에요.          |
 | [`ObjectKeys<T>`](./reference/objects/ObjectKeys.md)                 | `Object.keys`가 돌려주는 형태로 키를 유니온으로 만들어요. `ValueOf`의 키 버전이에요.    |
+| [`DistributiveOmit<T, K>`](./reference/objects/DistributiveOmit.md)  | 유니온의 각 멤버에서 키를 제거하고 멤버별 고유 속성을 유지해요.                         |
 
 ## 선정 기준
 

@@ -32,6 +32,7 @@ We picked only the types you'd otherwise have to write by hand because TypeScrip
 | [`ToConstantCaseKeys<T>`](./reference/objects/ToConstantCaseKeys.md) | Converts every key to CONSTANT_CASE recursively. The return type of `toConstantCaseKeys`.         |
 | [`Merge<T, S>`](./reference/objects/Merge.md)                        | The result of deeply merging one object type into another. The return type of `merge`.            |
 | [`ObjectKeys<T>`](./reference/objects/ObjectKeys.md)                 | A union of an object's keys as `Object.keys` returns them. The key-side counterpart to `ValueOf`. |
+| [`DistributiveOmit<T, K>`](./reference/objects/DistributiveOmit.md)  | Removes keys from each union member while preserving member-specific properties.                  |
 
 ## Selection criteria
 

@@ -49,6 +49,28 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number는 never가 돼요)
 ```
 
+같은 타입의 두 객체를 병합하면 그 타입이 그대로 나와요. `string[] | string[][]` 같은 유니온 타입이 들어 있어도 마찬가지예요.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, Options>;
+// => { value: string[] | string[][] }
+```
+
+두 번째 객체의 배열이 첫 번째 객체의 배열 타입과 호환되면 첫 번째 객체의 타입이 유지돼요.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
+```
+
 #### 타입 파라미터
 
 - `T`: 타깃 객체의 타입이에요.
