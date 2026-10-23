@@ -18,4 +18,13 @@ describe('mapValues', () => {
       })
     ).toEqual({ a: 11, b: 22, c: 33 });
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const result = mapValues(parsed, v => v);
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect((result as any).isAdmin).toBeUndefined();
+  });
 });

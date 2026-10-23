@@ -20,4 +20,13 @@ describe('assignInWith', () => {
     const result = assignInWith(target, source);
     expect(result).toEqual({ a: 1, b: 2 });
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const result = assignInWith({}, parsed);
+
+    expect(Object.hasOwn(result as any, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect((result as any).isAdmin).toBeUndefined();
+  });
 });

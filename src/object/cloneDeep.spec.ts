@@ -504,4 +504,13 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(arr);
     expect(cloned).toBeInstanceOf(Int32Array);
   });
+
+  it('should preserve own __proto__ property and not set as prototype', () => {
+    const parsed = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const cloned = cloneDeep(parsed);
+
+    expect(Object.hasOwn(cloned, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect((cloned as any).isAdmin).toBeUndefined();
+  });
 });
