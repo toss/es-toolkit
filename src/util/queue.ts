@@ -28,9 +28,9 @@ interface QueueNode<T> {
  * console.log(queue.dequeue()); // undefined
  */
 export class Queue<T> implements Iterable<T> {
-  private head: QueueNode<T> | undefined = undefined;
-  private tail: QueueNode<T> | undefined = undefined;
-  private length = 0;
+  #head: QueueNode<T> | undefined = undefined;
+  #tail: QueueNode<T> | undefined = undefined;
+  #size = 0;
 
   /**
    * The number of items in the queue.
@@ -41,7 +41,7 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.size); // 1
    */
   get size(): number {
-    return this.length;
+    return this.#size;
   }
 
   /**
@@ -58,14 +58,14 @@ export class Queue<T> implements Iterable<T> {
   enqueue(value: T): void {
     const node: QueueNode<T> = { value, next: undefined };
 
-    if (this.tail === undefined) {
-      this.head = node;
+    if (this.#tail === undefined) {
+      this.#head = node;
     } else {
-      this.tail.next = node;
+      this.#tail.next = node;
     }
 
-    this.tail = node;
-    this.length++;
+    this.#tail = node;
+    this.#size++;
   }
 
   /**
@@ -80,19 +80,19 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.dequeue()); // undefined
    */
   dequeue(): T | undefined {
-    const node = this.head;
+    const node = this.#head;
 
     if (node === undefined) {
       return undefined;
     }
 
-    this.head = node.next;
+    this.#head = node.next;
 
-    if (this.head === undefined) {
-      this.tail = undefined;
+    if (this.#head === undefined) {
+      this.#tail = undefined;
     }
 
-    this.length--;
+    this.#size--;
 
     return node.value;
   }
@@ -109,7 +109,7 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.size); // 1
    */
   peek(): T | undefined {
-    return this.head?.value;
+    return this.#head?.value;
   }
 
   /**
@@ -122,31 +122,9 @@ export class Queue<T> implements Iterable<T> {
    * console.log(queue.size); // 0
    */
   clear(): void {
-    this.head = undefined;
-    this.tail = undefined;
-    this.length = 0;
-  }
-
-  /**
-   * Returns an iterator that removes items from the front of the queue as you consume it.
-   *
-   * @returns An iterator over the removed items.
-   *
-   * @example
-   * const queue = new Queue<number>();
-   * queue.enqueue(1);
-   * queue.enqueue(2);
-   *
-   * for (const value of queue.drain()) {
-   *   console.log(value); // 1, then 2
-   * }
-   *
-   * console.log(queue.size); // 0
-   */
-  *drain(): Generator<T, void, undefined> {
-    while (this.head !== undefined) {
-      yield this.dequeue() as T;
-    }
+    this.#head = undefined;
+    this.#tail = undefined;
+    this.#size = 0;
   }
 
   /**
@@ -161,7 +139,7 @@ export class Queue<T> implements Iterable<T> {
    * console.log([...queue]); // [1, 2]
    */
   *[Symbol.iterator](): Generator<T, void, undefined> {
-    let node = this.head;
+    let node = this.#head;
 
     while (node !== undefined) {
       yield node.value;

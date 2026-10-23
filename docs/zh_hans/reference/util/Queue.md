@@ -34,7 +34,7 @@ queue.size;
 // Returns: 2
 ```
 
-队列是可迭代的,因此可以用 `for...of` 遍历,或用展开语法转换为数组。遍历不会从队列中移除值。如果希望在遍历时取出值,请使用 `drain`。
+队列是可迭代的,因此可以用 `for...of` 遍历,或用展开语法转换为数组。遍历不会从队列中移除值。
 
 ```typescript
 import { Queue } from 'es-toolkit/util';
@@ -43,17 +43,17 @@ const queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 
-// 从开头依次遍历,不取出值。
+// 从开头依次遍历。
+for (const value of queue) {
+  console.log(value); // 1, 2
+}
+
+// 将队列转换为数组。
 [...queue];
 // Returns: [1, 2]
 
-// 遍历时逐个取出值。
-for (const value of queue.drain()) {
-  console.log(value); // 1,然后是 2
-}
-
 queue.size;
-// Returns: 0
+// Returns: 2
 ```
 
 #### 属性
@@ -66,5 +66,4 @@ queue.size;
 - `dequeue` (`() => T | undefined`): 取出并返回队列开头的值。队列为空时返回 `undefined`。
 - `peek` (`() => T | undefined`): 返回队列开头的值但不取出。队列为空时返回 `undefined`。
 - `clear` (`() => void`): 移除队列中的所有值。
-- `drain` (`() => Generator<T>`): 返回一个迭代器,每消费一个值就从队列开头取出该值。
 - `[Symbol.iterator]` (`() => Generator<T>`): 返回一个从开头依次遍历且不取出值的迭代器。

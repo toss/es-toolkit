@@ -34,7 +34,7 @@ queue.size;
 // Returns: 2
 ```
 
-큐는 이터러블이라서 `for...of`로 순회하거나 전개 구문으로 배열로 바꿀 수 있어요. 순회해도 값은 큐에서 사라지지 않아요. 순회하면서 값을 꺼내고 싶다면 `drain`을 사용하세요.
+큐는 이터러블이라서 `for...of`로 순회하거나 전개 구문으로 배열로 바꿀 수 있어요. 순회해도 값은 큐에서 사라지지 않아요.
 
 ```typescript
 import { Queue } from 'es-toolkit/util';
@@ -43,17 +43,17 @@ const queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 
-// 값을 꺼내지 않고 앞에서부터 순회해요.
+// 앞에서부터 순회해요.
+for (const value of queue) {
+  console.log(value); // 1, 2
+}
+
+// 큐를 배열로 바꿔요.
 [...queue];
 // Returns: [1, 2]
 
-// 순회하면서 값을 하나씩 꺼내요.
-for (const value of queue.drain()) {
-  console.log(value); // 1, 그다음 2
-}
-
 queue.size;
-// Returns: 0
+// Returns: 2
 ```
 
 #### 프로퍼티
@@ -66,5 +66,4 @@ queue.size;
 - `dequeue` (`() => T | undefined`): 큐의 맨 앞에 있는 값을 꺼내서 반환해요. 큐가 비어 있으면 `undefined`를 반환해요.
 - `peek` (`() => T | undefined`): 큐의 맨 앞에 있는 값을 꺼내지 않고 반환해요. 큐가 비어 있으면 `undefined`를 반환해요.
 - `clear` (`() => void`): 큐의 모든 값을 지워요.
-- `drain` (`() => Generator<T>`): 순회할 때마다 큐의 맨 앞에서 값을 꺼내는 이터레이터를 반환해요.
 - `[Symbol.iterator]` (`() => Generator<T>`): 값을 꺼내지 않고 앞에서부터 순회하는 이터레이터를 반환해요.

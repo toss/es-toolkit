@@ -34,7 +34,7 @@ queue.size;
 // Returns: 2
 ```
 
-キューはイテラブルなので、`for...of` でループしたり、スプレッド構文で配列に変換したりできます。ループしても値はキューから削除されません。ループしながら値を取り出したい場合は `drain` を使用してください。
+キューはイテラブルなので、`for...of` でループしたり、スプレッド構文で配列に変換したりできます。ループしても値はキューから削除されません。
 
 ```typescript
 import { Queue } from 'es-toolkit/util';
@@ -43,17 +43,17 @@ const queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 
-// 値を取り出さずに先頭から順にループします。
+// 先頭から順にループします。
+for (const value of queue) {
+  console.log(value); // 1, 2
+}
+
+// キューを配列に変換します。
 [...queue];
 // Returns: [1, 2]
 
-// ループしながら値を一つずつ取り出します。
-for (const value of queue.drain()) {
-  console.log(value); // 1、次に 2
-}
-
 queue.size;
-// Returns: 0
+// Returns: 2
 ```
 
 #### プロパティ
@@ -66,5 +66,4 @@ queue.size;
 - `dequeue` (`() => T | undefined`): キューの先頭の値を取り出して返します。キューが空の場合は `undefined` を返します。
 - `peek` (`() => T | undefined`): キューの先頭の値を取り出さずに返します。キューが空の場合は `undefined` を返します。
 - `clear` (`() => void`): キューのすべての値を削除します。
-- `drain` (`() => Generator<T>`): 値を消費するたびにキューの先頭から取り出すイテレーターを返します。
 - `[Symbol.iterator]` (`() => Generator<T>`): 値を取り出さずに先頭から順にループするイテレーターを返します。

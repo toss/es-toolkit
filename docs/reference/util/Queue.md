@@ -34,7 +34,7 @@ queue.size;
 // Returns: 2
 ```
 
-The queue is iterable, so you can loop over it with `for...of` or spread it into an array. Iterating does not remove items. If you want to remove items as you go, use `drain`.
+The queue is iterable, so you can loop over it with `for...of` or spread it into an array. Iterating does not remove items.
 
 ```typescript
 import { Queue } from 'es-toolkit/util';
@@ -43,17 +43,17 @@ const queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 
-// Iterates from front to back without removing items.
+// Loops from front to back.
+for (const value of queue) {
+  console.log(value); // 1, 2
+}
+
+// Spreads the queue into an array.
 [...queue];
 // Returns: [1, 2]
 
-// Removes each item as it is consumed.
-for (const value of queue.drain()) {
-  console.log(value); // 1, then 2
-}
-
 queue.size;
-// Returns: 0
+// Returns: 2
 ```
 
 #### Properties
@@ -66,5 +66,4 @@ queue.size;
 - `dequeue` (`() => T | undefined`): Removes and returns the item at the front of the queue. Returns `undefined` if the queue is empty.
 - `peek` (`() => T | undefined`): Returns the item at the front of the queue without removing it. Returns `undefined` if the queue is empty.
 - `clear` (`() => void`): Removes all items from the queue.
-- `drain` (`() => Generator<T>`): Returns an iterator that removes items from the front of the queue as you consume it.
 - `[Symbol.iterator]` (`() => Generator<T>`): Returns an iterator over the items from front to back, without removing them.

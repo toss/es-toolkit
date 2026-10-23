@@ -77,6 +77,20 @@ describe('Queue', () => {
     expect([...queue]).toEqual([3]);
   });
 
+  it('should handle falsy and undefined items', () => {
+    const queue = new Queue<number | undefined>();
+
+    queue.enqueue(0);
+    queue.enqueue(undefined);
+    queue.enqueue(1);
+
+    expect(queue.size).toBe(3);
+    expect([...queue]).toEqual([0, undefined, 1]);
+    expect(queue.dequeue()).toBe(0);
+    expect(queue.dequeue()).toBeUndefined();
+    expect(queue.size).toBe(1);
+  });
+
   it('should iterate from front to back without removing items', () => {
     const queue = new Queue<number>();
 
@@ -93,33 +107,5 @@ describe('Queue', () => {
     expect(values).toEqual([1, 2, 3]);
     expect(Array.from(queue)).toEqual([1, 2, 3]);
     expect(queue.size).toBe(3);
-  });
-
-  it('should drain items from the queue', () => {
-    const queue = new Queue<number>();
-
-    queue.enqueue(1);
-    queue.enqueue(2);
-    queue.enqueue(3);
-
-    const iterator = queue.drain();
-
-    expect(iterator.next()).toEqual({ value: 1, done: false });
-    expect(queue.size).toBe(2);
-
-    expect([...iterator]).toEqual([2, 3]);
-    expect(queue.size).toBe(0);
-  });
-
-  it('should drain falsy and undefined items', () => {
-    const queue = new Queue<number | undefined>();
-
-    queue.enqueue(0);
-    queue.enqueue(undefined);
-    queue.enqueue(1);
-
-    expect(queue.size).toBe(3);
-    expect([...queue.drain()]).toEqual([0, undefined, 1]);
-    expect(queue.size).toBe(0);
   });
 });
