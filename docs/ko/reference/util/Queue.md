@@ -1,6 +1,6 @@
 # Queue
 
-먼저 넣은 값을 먼저 꺼내는(FIFO) 큐예요. 값을 넣고 꺼내는 데 항상 일정한 시간이 걸려요.
+먼저 넣은 값을 먼저 꺼내는(FIFO) 큐를 만들어요.
 
 ```typescript
 const queue = new Queue<T>();

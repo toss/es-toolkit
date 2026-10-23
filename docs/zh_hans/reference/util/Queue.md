@@ -1,6 +1,6 @@
 # Queue
 
-先进先出(FIFO)的队列,添加和取出值的耗时始终保持不变。
+创建一个先进先出(FIFO)的队列。
 
 ```typescript
 const queue = new Queue<T>();

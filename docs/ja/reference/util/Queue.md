@@ -1,6 +1,6 @@
 # Queue
 
-先に入れた値を先に取り出す(FIFO)キューです。値の追加と取り出しは常に一定の時間で行われます。
+先に入れた値を先に取り出す(FIFO)キューを作成します。
 
 ```typescript
 const queue = new Queue<T>();

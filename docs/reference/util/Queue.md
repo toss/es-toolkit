@@ -1,6 +1,6 @@
 # Queue
 
-A first-in, first-out (FIFO) queue that adds and removes items in constant time.
+Creates a first-in, first-out (FIFO) queue.
 
 ```typescript
 const queue = new Queue<T>();
