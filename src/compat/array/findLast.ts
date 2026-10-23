@@ -131,7 +131,7 @@ export function findLast<T>(
 
   const length = Array.isArray(collection) ? collection.length : Object.keys(collection).length;
 
-  fromIndex = toInteger(fromIndex == null ? length - 1 : fromIndex);
+  fromIndex = toInteger(fromIndex ?? length - 1);
 
   if (fromIndex < 0) {
     fromIndex = Math.max(length + fromIndex, 0);

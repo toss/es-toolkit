@@ -1,9 +1,8 @@
+import { hasOwn } from '../_internal/hasOwn.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Removes all specified values from an array using an iteratee function.
@@ -121,7 +120,7 @@ export function pullAllBy<L extends ArrayLike<any>, U>(
  * console.log(result); // [{ value: 2 }]
  */
 export function pullAllBy(arr: any, valuesToRemove: any, _getValue: any): any {
-  if (arr == null || arr.length == null || valuesToRemove == null || valuesToRemove.length == null) {
+  if (arr?.length == null || valuesToRemove?.length == null) {
     return arr;
   }
 
@@ -138,7 +137,7 @@ export function pullAllBy(arr: any, valuesToRemove: any, _getValue: any): any {
     }
 
     // For handling sparse arrays
-    if (!hasOwnProperty.call(arr, i)) {
+    if (!hasOwn(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }

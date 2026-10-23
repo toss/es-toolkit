@@ -21,7 +21,7 @@ export function findKey<T>(obj: T | null | undefined, predicate?: ObjectIteratee
     return undefined;
   }
 
-  const iteratee = createIteratee(predicate == null ? identity : predicate);
+  const iteratee = createIteratee(predicate ?? identity);
 
   return findKeyToolkit(obj, iteratee) as string | undefined;
 }

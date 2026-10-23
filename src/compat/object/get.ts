@@ -1,11 +1,10 @@
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import type { GetFieldType } from '../_internal/GetFieldType.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
@@ -468,7 +467,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
       const result = object[path];
 
       if (result === undefined) {
-        if (isDeepKey(path) && !hasOwnProperty.call(object, path)) {
+        if (isDeepKey(path) && !hasOwn(object, path)) {
           return get(object, toPath(path), defaultValue);
         } else {
           return defaultValue;
@@ -496,7 +495,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
         return getWithPath(object, path, defaultValue);
       }
 
-      if (path != null && Object.is(path.valueOf(), -0)) {
+      if (Object.is(path?.valueOf(), -0)) {
         path = '-0';
       } else {
         path = String(path);

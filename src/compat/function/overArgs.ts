@@ -63,9 +63,8 @@ export function overArgs(
     const transformedArgs = [...args];
 
     for (let i = 0; i < length; i++) {
-      const transform = transforms[i];
-      const transformFn = iteratee(transform == null ? identity : transform);
-      transformedArgs[i] = transformFn.call(this, args[i]);
+      const transform = iteratee(transforms[i] ?? identity);
+      transformedArgs[i] = transform.call(this, args[i]);
     }
 
     return func.apply(this, transformedArgs);

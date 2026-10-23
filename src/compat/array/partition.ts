@@ -1,4 +1,5 @@
 import { identity } from '../../function/identity.ts';
+import { objectValues } from '../_internal/objectValues.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { ValueIteratorTypeGuard } from '../_internal/ValueIteratorTypeGuard.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
@@ -89,7 +90,7 @@ export function partition<T>(
     return [[], []];
   }
 
-  const values = isArrayLike(collection) ? collection : Object.keys(collection).map(key => (collection as any)[key]);
+  const values = isArrayLike(collection) ? collection : objectValues(collection);
 
   predicate = iteratee(predicate);
 

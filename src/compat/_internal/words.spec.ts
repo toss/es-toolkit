@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { legacyWords } from './legacyWords';
-import { words } from '../string/words';
+import { lodashWords, unicodeWords } from './words';
 
-describe('legacyWords', () => {
+describe('words', () => {
   // Inputs on which the ES5 fallback (lodash's patterns) and the default
   // Unicode-property pattern must agree, so engines without `\p{...}` support
   // (Node.js 6) get the same results as modern ones.
@@ -37,18 +36,18 @@ describe('legacyWords', () => {
   ];
 
   it.each(inputs)('splits %j like the default pattern', input => {
-    expect(legacyWords(input)).toEqual(words(input));
+    expect(lodashWords(input)).toEqual(unicodeWords(input));
   });
 
   it('keeps emoji sequences together like lodash', () => {
     // lodash treats skin-tone modifiers and regional indicator pairs as part
     // of the emoji; the default pattern currently splits them.
-    expect(legacyWords('👍🏽 thumbs')).toEqual(['👍🏽', 'thumbs']);
-    expect(legacyWords('🇰🇷 flag')).toEqual(['🇰🇷', 'flag']);
+    expect(lodashWords('👍🏽 thumbs')).toEqual(['👍🏽', 'thumbs']);
+    expect(lodashWords('🇰🇷 flag')).toEqual(['🇰🇷', 'flag']);
   });
 
   it('returns an empty array when nothing matches', () => {
-    expect(legacyWords('')).toEqual([]);
-    expect(legacyWords('   ')).toEqual([]);
+    expect(lodashWords('')).toEqual([]);
+    expect(lodashWords('   ')).toEqual([]);
   });
 });

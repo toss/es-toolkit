@@ -1,10 +1,9 @@
 import { toPath } from './toPath.ts';
 import { flatten } from '../../array/flatten.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Invokes the method at `path` of `object` with the given arguments.
@@ -35,7 +34,7 @@ export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], 
 
   switch (typeof path) {
     case 'string': {
-      if (typeof object === 'object' && hasOwnProperty.call(object, path)) {
+      if (typeof object === 'object' && hasOwn(object, path)) {
         return invokeImpl(object, [path], args);
       }
       return invokeImpl(object, toPath(path), args);
@@ -64,7 +63,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
   }
 
   let lastKey = last(path);
-  const lastValue = lastKey == null ? undefined : lastKey.valueOf();
+  const lastValue = lastKey?.valueOf();
 
   if (typeof lastValue === 'number') {
     lastKey = toKey(lastValue);
@@ -74,5 +73,5 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
 
   const func = get(parent, lastKey as PropertyKey);
 
-  return func == null ? undefined : func.apply(parent, args);
+  return func?.apply(parent, args);
 }

@@ -33,7 +33,7 @@ import { eq } from '../util/eq.ts';
  * sortedIndexOf(arrayLike, 20); // Return value: 1
  */
 export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number {
-  if (array == null || !array.length) {
+  if (!array?.length) {
     return -1;
   }
 

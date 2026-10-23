@@ -95,13 +95,9 @@ function deburrChar(char: string): string {
   let result = '';
 
   for (let index = 0; index < decomposed.length; index++) {
-    if (isCombiningMark(decomposed.charCodeAt(index))) {
-      continue;
+    if (!isCombiningMark(decomposed.charCodeAt(index))) {
+      result += deburrMap.get(decomposed[index]) ?? decomposed[index];
     }
-
-    const mapped = deburrMap.get(decomposed[index]);
-
-    result += mapped == null ? decomposed[index] : mapped;
   }
 
   return result;

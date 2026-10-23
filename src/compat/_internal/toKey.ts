@@ -9,12 +9,8 @@ export function toKey(value: unknown): string | symbol {
   if (typeof value === 'string' || typeof value === 'symbol') {
     return value;
   }
-  if (value != null) {
-    const valueOf = (value as any).valueOf;
-
-    if (valueOf != null && Object.is(valueOf.call(value), -0)) {
-      return '-0';
-    }
+  if (Object.is(value?.valueOf?.(), -0)) {
+    return '-0';
   }
   return String(value);
 }

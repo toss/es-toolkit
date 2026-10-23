@@ -1,8 +1,7 @@
 import { isNil } from '../../predicate/isNil.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { eq } from '../util/eq.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -163,10 +162,7 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
       const key = keys[j];
       const value = (object as any)[key];
 
-      if (
-        value === undefined ||
-        (!hasOwnProperty.call(object, key) && eq(value, objectProto[key as keyof typeof objectProto]))
-      ) {
+      if (value === undefined || (!hasOwn(object, key) && eq(value, objectProto[key as keyof typeof objectProto]))) {
         (object as any)[key] = source[key];
       }
     }

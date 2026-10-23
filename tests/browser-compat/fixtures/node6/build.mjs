@@ -1,7 +1,7 @@
 // Node.js 6 fixture for es-toolkit/compat.
 //
 // es-toolkit/compat is published for Node.js 6+ as-is: no transpilation and
-// no polyfills (docs/browser-support.md). The dist therefore runs untouched;
+// no polyfills (docs/compat/environment-support.md). The dist therefore runs untouched;
 // only the generated cases are transpiled (their @example sources use modern
 // syntax) so that Node.js 6 can parse them.
 //

@@ -133,7 +133,7 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   const debounced = function (this: any, ...args: Parameters<F>) {
-    if (signal != null && signal.aborted) {
+    if (signal?.aborted) {
       return;
     }
 
@@ -154,9 +154,7 @@ export function debounce<F extends (...args: any[]) => void>(
   debounced.cancel = cancel;
   debounced.flush = flush;
 
-  if (signal != null) {
-    signal.addEventListener('abort', cancel, { once: true });
-  }
+  signal?.addEventListener('abort', cancel, { once: true });
 
   return debounced;
 }

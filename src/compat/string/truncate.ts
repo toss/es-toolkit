@@ -72,10 +72,10 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   }
 
   // Use string.slice for non-unicode strings for performance
-  let base = strArray === undefined ? string.slice(0, lengthBase) : strArray.slice(0, lengthBase).join('');
+  let base = strArray === undefined ? string.slice(0, lengthBase) : strArray?.slice(0, lengthBase).join('');
 
   // Return truncated string with omission appended when there is no separator to check for
-  const separator = options == null ? undefined : options.separator;
+  const separator = options?.separator;
   if (!separator) {
     base += omission;
     return base;

@@ -1,10 +1,9 @@
 import { get } from './get.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Removes the property at the given path of the object.
@@ -39,7 +38,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       if (typeof path === 'number') {
         path = toKey(path);
       } else if (typeof path === 'object') {
-        if (path != null && Object.is(path.valueOf(), -0)) {
+        if (Object.is(path?.valueOf(), -0)) {
           path = '-0';
         } else {
           path = String(path);
@@ -50,7 +49,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         return false;
       }
 
-      if (obj[path as PropertyKey] === undefined) {
+      if (obj?.[path as PropertyKey] === undefined) {
         return true;
       }
 
@@ -62,7 +61,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       }
     }
     case 'string': {
-      if (obj[path] === undefined && isDeepKey(path) && !hasOwnProperty.call(obj, path)) {
+      if (obj?.[path] === undefined && isDeepKey(path) && !hasOwn(obj, path)) {
         return unsetWithPath(obj, toPath(path));
       }
 
@@ -84,7 +83,7 @@ function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
   const parent = path.length === 1 ? obj : get(obj, path.slice(0, -1));
   const lastKey = path[path.length - 1];
 
-  if (parent == null || parent[lastKey] === undefined) {
+  if (parent?.[lastKey] === undefined) {
     return true;
   }
 

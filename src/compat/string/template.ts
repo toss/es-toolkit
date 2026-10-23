@@ -13,12 +13,6 @@ const unEscapedRegExp = /['\n\r\u2028\u2029\\]/g;
 // A regular expression for matching no match.
 const noMatchExp = /($^)/;
 
-function getSource(regexp: RegExp | null | undefined): string {
-  const source = regexp == null ? undefined : regexp.source;
-
-  return source == null ? noMatchExp.source : source;
-}
-
 const escapeMap = new Map([
   ['\\', '\\'],
   ["'", "'"],
@@ -137,10 +131,10 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
 
   const delimitersRegExp = new RegExp(
     [
-      getSource(options.escape),
-      getSource(options.interpolate),
+      options.escape?.source ?? noMatchExp.source,
+      options.interpolate?.source ?? noMatchExp.source,
       options.interpolate === defaultInterpolateRegExp ? esTemplateRegExp.source : noMatchExp.source,
-      getSource(options.evaluate),
+      options.evaluate?.source ?? noMatchExp.source,
       '$',
     ].join('|'),
     'g'

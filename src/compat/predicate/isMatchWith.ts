@@ -236,13 +236,11 @@ function isObjectMatch(
     return true;
   }
 
-  if (stack != null && stack.has(source)) {
+  if (stack?.has(source)) {
     return stack.get(source) === target;
   }
 
-  if (stack != null) {
-    stack.set(source, target);
-  }
+  stack?.set(source, target);
 
   try {
     for (let i = 0; i < keys.length; i++) {
@@ -269,9 +267,7 @@ function isObjectMatch(
 
     return true;
   } finally {
-    if (stack != null) {
-      stack.delete(source);
-    }
+    stack?.delete(source);
   }
 }
 

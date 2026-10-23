@@ -1,5 +1,3 @@
-import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
-
 /**
  * Removes trailing whitespace or specified characters from a string.
  *
@@ -51,8 +49,26 @@ export function trimEnd(str?: string, chars?: string | number, guard?: object): 
   }
 
   if (guard != null || chars == null) {
-    return trimEndToolkit(str.toString());
+    return trimEndImpl(str.toString());
   }
 
-  return trimEndToolkit(str, chars.toString().split(''));
+  return trimEndImpl(str.toString(), chars.toString().split(''));
+}
+
+// A copy of `trimEnd` from `es-toolkit/string` that does not rely on `String.prototype.trimEnd`,
+// which is not available on ES2015 engines. `\s` matches the same characters as the native method.
+function trimEndImpl(str: string, chars?: string[]): string {
+  let endIndex = str.length;
+
+  if (chars === undefined) {
+    while (endIndex > 0 && /\s/.test(str[endIndex - 1])) {
+      endIndex--;
+    }
+  } else {
+    while (endIndex > 0 && chars.includes(str[endIndex - 1])) {
+      endIndex--;
+    }
+  }
+
+  return str.substring(0, endIndex);
 }

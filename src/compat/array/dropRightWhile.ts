@@ -64,7 +64,7 @@ export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
     return [];
   }
 
-  return dropRightWhileImpl(toArray(array), predicate == null ? identity : predicate);
+  return dropRightWhileImpl(toArray(array), predicate ?? identity);
 }
 
 function dropRightWhileImpl<T>(arr: readonly T[], predicate: ListIteratee<T>): T[] {

@@ -15,15 +15,11 @@
  * const trimmedStr4 = trimStart('xxxtrimmed', 'x') // returns 'trimmed'
  */
 export function trimStart(str: string, chars?: string | string[]): string {
-  let startIndex = 0;
-
   if (chars === undefined) {
-    while (startIndex < str.length && /\s/.test(str[startIndex])) {
-      startIndex++;
-    }
-
-    return str.substring(startIndex);
+    return str.trimStart();
   }
+
+  let startIndex = 0;
 
   switch (typeof chars) {
     case 'string': {

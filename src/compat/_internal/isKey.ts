@@ -1,6 +1,5 @@
+import { hasOwn } from './hasOwn.ts';
 import { isSymbol } from '../predicate/isSymbol.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**  Matches any deep property path. (e.g. `a.b[0].c`)*/
 const regexIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
@@ -31,6 +30,6 @@ export function isKey(value?: unknown, object?: unknown): value is PropertyKey {
 
   return (
     (typeof value === 'string' && (regexIsPlainProp.test(value) || !regexIsDeepProp.test(value))) ||
-    (object != null && hasOwnProperty.call(object, value as PropertyKey))
+    (object != null && hasOwn(object, value as PropertyKey))
   );
 }

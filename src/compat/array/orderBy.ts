@@ -1,14 +1,14 @@
 import { compareValues } from '../_internal/compareValues.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isKey } from '../_internal/isKey.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
 import { Many } from '../_internal/Many.ts';
 import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { objectValues } from '../_internal/objectValues.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 
@@ -147,7 +147,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
   orders = guard ? undefined : orders;
 
   if (!Array.isArray(collection)) {
-    collection = isArrayLike(collection) ? Array.from(collection) : Object.keys(collection).map(key => collection[key]);
+    collection = isArrayLike(collection) ? Array.from(collection) : objectValues(collection);
   }
 
   if (!Array.isArray(criteria)) {
@@ -185,7 +185,7 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
     }
 
     if (typeof criterion === 'object' && 'key' in criterion) {
-      if (hasOwnProperty.call(object, criterion.key)) {
+      if (hasOwn(object, criterion.key)) {
         return object[criterion.key as keyof typeof object];
       }
 

@@ -1,5 +1,5 @@
-import { remove as removeToolkit } from '../../array/remove.ts';
 import { identity } from '../../function/identity.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
@@ -63,9 +63,37 @@ export function remove<T>(
     | [keyof T, unknown]
     | keyof T = identity as any
 ): T[] {
-  if (arr == null || arr.length == null) {
+  if (arr?.length == null) {
     return [];
   }
 
-  return removeToolkit(arr as T[], iteratee(shouldRemoveElement));
+  return removeImpl(arr as T[], iteratee(shouldRemoveElement));
+}
+
+// A copy of `remove` from `es-toolkit/array` that only relies on ES2015 built-ins.
+function removeImpl<T>(arr: T[], shouldRemoveElement: (value: T, index: number, array: T[]) => boolean): T[] {
+  const originalArr = arr.slice();
+  const removed = [];
+
+  let resultIndex = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (shouldRemoveElement(arr[i], i, originalArr)) {
+      removed.push(arr[i]);
+
+      continue;
+    }
+
+    // For handling sparse arrays
+    if (!hasOwn(arr, i)) {
+      delete arr[resultIndex++];
+      continue;
+    }
+
+    arr[resultIndex++] = arr[i];
+  }
+
+  arr.length = resultIndex;
+
+  return removed;
 }

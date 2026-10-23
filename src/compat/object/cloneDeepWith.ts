@@ -1,6 +1,7 @@
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { getTag } from '../_internal/getTag.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import {
   argumentsTag,
   arrayBufferTag,
@@ -27,8 +28,6 @@ import {
 } from '../_internal/tags.ts';
 import { isBuffer } from '../predicate/isBuffer.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 type CloneDeepWithCustomizer<TObject> = (
   value: any,
@@ -148,10 +147,10 @@ function cloneDeepWithImpl<T>(
     }
 
     // For RegExpArrays
-    if (hasOwnProperty.call(valueToClone, 'index')) {
+    if (hasOwn(valueToClone, 'index')) {
       result.index = (valueToClone as any).index;
     }
-    if (hasOwnProperty.call(valueToClone, 'input')) {
+    if (hasOwn(valueToClone, 'input')) {
       result.input = (valueToClone as any).input;
     }
 
@@ -321,7 +320,7 @@ function copyProperties<T>(
   stack: Map<any, any>,
   customizer: CloneDeepWithCustomizer<T> | undefined
 ): void {
-  const keys: PropertyKey[] = (Object.keys(source) as PropertyKey[]).concat(getSymbols(source));
+  const keys: PropertyKey[] = [...Object.keys(source), ...getSymbols(source)];
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];

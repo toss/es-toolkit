@@ -96,7 +96,7 @@ export function takeWhile<T>(
   }
 
   const _array = toArray(array);
-  const index = _array.findIndex(negate(iteratee(predicate == null ? identity : predicate)));
+  const index = _array.findIndex(negate(iteratee(predicate ?? identity)));
 
   return index === -1 ? _array : _array.slice(0, index);
 }

@@ -87,7 +87,7 @@ jobs:
 
   compat-node6:
     # es-toolkit/compat is published for Node.js 6+ as-is (no transpilation, no
-    # polyfills; see docs/browser-support.md). ESLint only enforces that floor
+    # polyfills; see docs/compat/environment-support.md). ESLint only enforces that floor
     # inside src/compat, so this lane also guards the main-library files compat
     # imports: it runs the built package on a real Node.js 6 on every change.
     runs-on: ubuntu-latest

@@ -1,10 +1,10 @@
 import { identity } from '../../function/identity.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
+import { objectValues } from '../_internal/objectValues.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**
  * Creates an object composed of keys generated from the results of running each element of collection through iteratee.
@@ -87,7 +87,7 @@ export function groupBy<T, K extends PropertyKey>(
     return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source) ? toArray(source) : Object.keys(source).map(key => source[key]);
+  const items = isArrayLike(source) ? toArray(source) : objectValues(source);
   const getKeyFromItem = createIteratee(_getKeyFromItem);
 
   const result = {} as Record<K, T[]>;
@@ -98,7 +98,7 @@ export function groupBy<T, K extends PropertyKey>(
     // which also passes the index and array (e.g. `groupBy(['10', '11'], parseInt)`).
     const key = getKeyFromItem(item) as K;
 
-    if (!hasOwnProperty.call(result, key)) {
+    if (!hasOwn(result, key)) {
       result[key] = [];
     }
 

@@ -95,7 +95,7 @@ export function takeRightWhile<T>(
   }
 
   const array = toArray(_array);
-  const shouldTake = createIteratee(predicate == null ? identity : predicate);
+  const shouldTake = createIteratee(predicate ?? identity);
 
   let index = array.length - 1;
 

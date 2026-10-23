@@ -1,5 +1,6 @@
 import { isFunction } from '../../predicate/isFunction.ts';
 import { isNil } from '../../predicate/isNil.ts';
+import { objectValues } from '../_internal/objectValues.ts';
 import { get } from '../object/get.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';
@@ -58,9 +59,7 @@ export function invokeMap<T, R>(
     return [];
   }
 
-  const values = isArrayLike(collection)
-    ? (Array.from(collection) as T[])
-    : Object.keys(collection).map(key => collection[key]);
+  const values = isArrayLike(collection) ? (Array.from(collection) as T[]) : objectValues(collection);
   const result: Array<R | undefined> = [];
 
   for (let i = 0; i < values.length; i++) {
