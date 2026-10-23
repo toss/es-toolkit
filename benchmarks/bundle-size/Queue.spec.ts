@@ -4,7 +4,7 @@ import { getBundleSize, getBundleSizeFromScript } from './utils/getBundleSize';
 describe('Queue bundle size', () => {
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'Queue');
-    expect(bundleSize).toMatchInlineSnapshot(`458`);
+    expect(bundleSize).toMatchInlineSnapshot(`410`);
   });
 
   it('yocto-queue', async () => {
