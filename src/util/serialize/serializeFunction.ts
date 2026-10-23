@@ -20,7 +20,7 @@
 export function serializeFunction(value: Function): string {
   const source = Function.prototype.toString.call(value);
 
-  if (source.endsWith('[native code] }')) {
+  if (/\{\s*\[native code\]\s*\}$/.test(source)) {
     return `${value.name}:[native]`;
   }
 

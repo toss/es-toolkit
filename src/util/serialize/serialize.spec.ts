@@ -119,3 +119,42 @@ describe('serialize', () => {
     });
   });
 });
+
+describe('serialize ordering', () => {
+  function permutations<T>(values: T[]): T[][] {
+    if (values.length <= 1) {
+      return [values];
+    }
+
+    return values.flatMap((value, index) =>
+      permutations([...values.slice(0, index), ...values.slice(index + 1)]).map(rest => [value, ...rest])
+    );
+  }
+
+  it('should serialize a Set with NaN the same way regardless of insertion order', () => {
+    const outputs = new Set(permutations([3, NaN, 1]).map(values => serialize(new Set(values))));
+    expect([...outputs]).toEqual(['Set[1,3,NaN]']);
+  });
+
+  it('should serialize a Set with numbers and bigints the same way regardless of insertion order', () => {
+    const outputs = new Set(permutations([10, 9, 2n, 100]).map(values => serialize(new Set(values))));
+    expect([...outputs]).toEqual(['Set[9,10,100,2n]']);
+  });
+
+  it('should serialize a Map with NaN keys the same way regardless of insertion order', () => {
+    const outputs = new Set(permutations([3, NaN, 1]).map(keys => serialize(new Map(keys.map(key => [key, 0])))));
+    expect([...outputs]).toEqual(['Map{1:0,3:0,NaN:0}']);
+  });
+
+  it('should order Map entries with equal keys by their values', () => {
+    const first = new Map([
+      [{ a: 1 }, 1],
+      [{ a: 1 }, 2],
+    ]);
+    const second = new Map([
+      [{ a: 1 }, 2],
+      [{ a: 1 }, 1],
+    ]);
+    expect(serialize(first)).toBe(serialize(second));
+  });
+});

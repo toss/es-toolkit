@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { serializeFunction } from './serializeFunction';
 
 describe('serializeFunction', () => {
@@ -37,6 +37,24 @@ describe('serializeFunction', () => {
     expect(serializeFunction(Math.max)).toBe('max:[native]');
     expect(serializeFunction(Array)).toBe('Array:[native]');
     expect(serializeFunction(parseInt)).toBe('parseInt:[native]');
+  });
+
+  it('should recognize native functions whose source spans multiple lines', () => {
+    const spy = vi.spyOn(Function.prototype, 'toString').mockReturnValue('function max() {\n    [native code]\n}');
+
+    try {
+      expect(serializeFunction(Math.max)).toBe('max:[native]');
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('should not treat a function that mentions native code in its body as native', () => {
+    function pretend() {
+      return '{ [native code] }';
+    }
+    expect(serializeFunction(pretend)).not.toBe('pretend:[native]');
+    expect(serializeFunction(pretend)).toContain('[native code]');
   });
 
   it('should serialize bound functions as name:[native]', () => {

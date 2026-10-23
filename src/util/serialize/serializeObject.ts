@@ -117,7 +117,15 @@ function serializeArray(array: readonly unknown[], refs: Map<object, string>): s
 }
 
 function serializeEntries(tag: string, entries: Iterable<[unknown, unknown]>, refs: Map<object, string>): string {
-  const sortedEntries = Array.from(entries).sort((a, b) => compareValues(a[0], b[0], refs));
+  const sortedEntries = Array.from(entries).sort((a, b) => {
+    const keyOrder = compareValues(a[0], b[0], refs);
+
+    if (keyOrder !== 0) {
+      return keyOrder;
+    }
+
+    return compareValues(a[1], b[1], refs);
+  });
 
   let result = `${tag}{`;
 
