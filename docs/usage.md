@@ -16,7 +16,7 @@ You can also use es-toolkit in browsers by [importing them in CDNs](#browsers).
 
 ## Node.js
 
-es-toolkit supports Node.js 18 or later. Install es-toolkit with the following command:
+es-toolkit supports Node.js 20.12 or later. Install es-toolkit with the following command:
 
 ::: code-group
 

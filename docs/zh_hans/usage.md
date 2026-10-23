@@ -16,7 +16,7 @@ es-toolkit 可通过 [npm](https://npmjs.com/package/es-toolkit) 安装，适用
 
 ## Node.js
 
-es-toolkit 支持 Node.js 18及更高版本。使用以下命令安装 es-toolkit：
+es-toolkit 支持 Node.js 20.12及更高版本。使用以下命令安装 es-toolkit：
 
 ::: code-group
 

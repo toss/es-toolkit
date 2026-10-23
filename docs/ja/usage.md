@@ -16,7 +16,7 @@ Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolk
 
 ## Node.js
 
-es-toolkitはNode.js 18以降のバージョンをサポートしています。es-toolkitをインストールするには、以下のコマンドを使用してください。
+es-toolkitはNode.js 20.12以降のバージョンをサポートしています。es-toolkitをインストールするには、以下のコマンドを使用してください。
 
 ::: code-group
 
