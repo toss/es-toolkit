@@ -30,7 +30,7 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 
 // Update with array path
 update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 16 } }] }
 ```
 
 If the path doesn't exist, the necessary nested structure is created automatically.
@@ -53,8 +53,8 @@ You can calculate new values based on existing values.
 import { update } from 'es-toolkit/compat';
 
 const stats = { score: 100 };
-update(stats, 'score', score => score * 1.1); // Increase by 10%
-// => { score: 110 }
+update(stats, 'score', score => score * 1.5); // Increase by 50%
+// => { score: 150 }
 ```
 
 #### Parameters

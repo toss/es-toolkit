@@ -1,5 +1,5 @@
 import { after } from '../../function/after.ts';
-import { isEqualWith as isEqualWithToolkit } from '../../predicate/isEqualWith.ts';
+import { baseIsEqualWith } from '../_internal/baseIsEqualWith.ts';
 import type { IsEqualCustomizer } from '../_internal/IsEqualCustomizer.ts';
 
 /**
@@ -42,7 +42,7 @@ export function isEqualWith(a: any, b: any, areValuesEqual?: IsEqualCustomizer):
     areValuesEqual = () => undefined;
   }
 
-  return isEqualWithToolkit(a, b, (...args): boolean | void => {
+  return baseIsEqualWith(a, b, (...args): boolean | void => {
     const result = areValuesEqual(...args);
 
     if (result !== undefined) {

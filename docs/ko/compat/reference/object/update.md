@@ -30,7 +30,7 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 
 // 배열 경로로 업데이트
 update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 16 } }] }
 ```
 
 경로가 존재하지 않으면 필요한 중첩 구조를 자동으로 생성해요.
@@ -53,8 +53,8 @@ update({}, 'a.b[0]', () => 'value');
 import { update } from 'es-toolkit/compat';
 
 const stats = { score: 100 };
-update(stats, 'score', score => score * 1.1); // 10% 증가
-// => { score: 110 }
+update(stats, 'score', score => score * 1.5); // 50% 증가
+// => { score: 150 }
 ```
 
 #### 파라미터

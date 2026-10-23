@@ -8,7 +8,7 @@ const taken = takeRight(arr, count);
 
 ## 사용법
 
-### `takeRight(arr, count?)`
+### `takeRight(arr, count)`
 
 배열의 끝에서 몇 개의 요소만 필요할 때 `takeRight`를 사용하세요. 요청한 개수가 배열 길이보다 크면 전체 배열을 반환해요.
 
@@ -33,19 +33,10 @@ takeRight([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-`count`를 생략하면 마지막 요소만 가져와요.
-
-```typescript
-import { takeRight } from 'es-toolkit/array';
-
-takeRight([1, 2, 3]);
-// Returns: [3]
-```
-
 #### 파라미터
 
 - `arr` (`T[]`): 요소를 가져올 배열이에요.
-- `count` (`number`, 선택): 가져올 요소의 개수예요. 기본값은 `1`이에요.
+- `count` (`number`): 가져올 요소의 개수예요.
 
 #### 반환 값
 

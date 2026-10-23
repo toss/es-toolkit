@@ -48,11 +48,11 @@ const nested = {
 };
 const nestedResult = toKebabCaseKeys(nested);
 // nestedResult는 {
-//   user_data: {
-//     user_id: 1,
-//     contact_info: {
-//       email_address: 'john@example.com',
-//       phone_number: '123-456-7890'
+//   'user-data': {
+//     'user-id': 1,
+//     'contact-info': {
+//       'email-address': 'john@example.com',
+//       'phone-number': '123-456-7890'
 //     }
 //   }
 // }가 돼요

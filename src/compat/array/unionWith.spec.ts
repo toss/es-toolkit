@@ -58,4 +58,12 @@ describe('unionWith', () => {
 
     expect(actual).toEqual([{ x: 1, y: 1 }]);
   });
+
+  it('should not emit duplicates with an asymmetric `comparator`', () => {
+    const greaterThan = (a: number, b: number) => a > b;
+
+    expect(unionWith([1, 2, 3], [2, 3, 4], greaterThan)).toEqual([1]);
+    expect(unionWith([2, 4], [1, 2], greaterThan)).toEqual([2, 1]);
+    expect(unionWith([3, 1, 2], [2, 6], greaterThan)).toEqual([3, 1]);
+  });
 });

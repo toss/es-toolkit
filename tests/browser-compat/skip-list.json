@@ -46,6 +46,10 @@
   "nodeSkip": {
     "compat:compat/predicate/isElement#0": "uses DOM (document); still runs in browsers"
   },
+  "node6Skip": {
+    "compat:compat/function/debounce#0": "example itself constructs an AbortController, which Node.js 6 does not have",
+    "compat:compat/function/debounce#1": "example itself constructs an AbortController, which Node.js 6 does not have"
+  },
   "browserSkipNote": "predicate:predicate/isPlainObject#0 is overridden below to drop its node:vm cross-realm line, which cannot run in browsers. util/defer#0 and util/deferAsync#0 are overridden to dispose manually, because no browser in the matrix parses `using` declarations.",
   "overrides": {
     "util:util/defer#0": "const logs = [];\nconst disposable = defer(() => logs.push('cleanup'));\n__assertEq(logs, []);\ndisposable[Symbol.dispose]();\n__assertEq(logs, ['cleanup']);",

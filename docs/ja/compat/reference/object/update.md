@@ -30,7 +30,7 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 
 // 配列パスで更新
 update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 16 } }] }
 ```
 
 パスが存在しない場合、必要なネストされた構造が自動的に作成されます。
@@ -53,8 +53,8 @@ update({}, 'a.b[0]', () => 'value');
 import { update } from 'es-toolkit/compat';
 
 const stats = { score: 100 };
-update(stats, 'score', score => score * 1.1); // 10% 増加
-// => { score: 110 }
+update(stats, 'score', score => score * 1.5); // 50% 増加
+// => { score: 150 }
 ```
 
 #### パラメータ

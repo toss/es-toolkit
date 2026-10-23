@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## 用法
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 当您只需要数组前面的几个元素时,请使用 `take`。如果请求的数量大于数组长度,则返回整个数组。
 
@@ -33,19 +33,10 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-如果省略 `count`,则只获取第一个元素。
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。
-- `count` (`number`, 可选): 要获取的元素数量。默认值为 `1`。
+- `count` (`number`): 要获取的元素数量。
 
 #### 返回值
 

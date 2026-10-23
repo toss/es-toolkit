@@ -35,7 +35,7 @@ const list = dedent`
 `;
 // listは'Items:\n  - First\n  - Second'になります
 
-// 補間された値はインデントを削除する前に挿入されます
+// 補間された値はインデントを削除した後に挿入されるため、値の中の改行やインデントはそのまま保たれます
 const name = 'es-toolkit';
 const greeting = dedent`
   Hello, ${name}!

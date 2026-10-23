@@ -1,8 +1,8 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
-import { clone } from '../../object/clone.ts';
 import { isBuffer } from '../../predicate/isBuffer.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
+import { baseClone } from '../_internal/baseClone.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
@@ -251,7 +251,7 @@ function mergeWithDeep(
   }
 
   if (stack.has(source)) {
-    return clone(stack.get(source));
+    return baseClone(stack.get(source));
   }
 
   stack.set(source, target);
@@ -278,11 +278,11 @@ function mergeWithDeep(
     let targetValue = target[key];
 
     if (isArguments(sourceValue)) {
-      sourceValue = { ...sourceValue };
+      sourceValue = Object.assign({}, sourceValue);
     }
 
     if (isArguments(targetValue)) {
-      targetValue = { ...targetValue };
+      targetValue = Object.assign({}, targetValue);
     }
 
     if (isBuffer(sourceValue)) {

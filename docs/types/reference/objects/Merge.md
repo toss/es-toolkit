@@ -49,6 +49,28 @@ type Broken = Target & Source;
 // => { id: string; value: never } (string & number becomes never)
 ```
 
+Merging two objects of the same type gives back that type, including when it contains a union such as `string[] | string[][]`.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, Options>;
+// => { value: string[] | string[][] }
+```
+
+When an array in the second object is compatible with the array type of the first object, the first object's type is kept.
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Options = { value: string[] | string[][] };
+
+type Result = Merge<Options, { value: string[] }>;
+// => { value: string[] | string[][] }
+```
+
 #### Type Parameters
 
 - `T`: Type of the target object.

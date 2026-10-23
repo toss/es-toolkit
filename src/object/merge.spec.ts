@@ -178,4 +178,28 @@ describe('merge', () => {
 
     expectTypeOf(result).toEqualTypeOf<{ a: number; b: string }>();
   });
+
+  it('returns the same type when merging two objects of the same type', () => {
+    const stringOptions: { value: string & {} } = { value: 'a' };
+    const arrayOptions: { value: string[] | string[][] } = { value: ['a'] };
+
+    expectTypeOf(merge(stringOptions, stringOptions)).toEqualTypeOf<typeof stringOptions>();
+    expectTypeOf(merge(arrayOptions, arrayOptions)).toEqualTypeOf<typeof arrayOptions>();
+  });
+
+  it('keeps the target type when merging a partial of the same type', () => {
+    type Options = { color: string | number | string[] | string[][]; title: 'x' | 'y' | (string & {}) };
+    const defaults: Options = { color: 'red', title: 'x' };
+    const overrides: Partial<Options> = { title: 'custom' };
+
+    expectTypeOf(merge(defaults, overrides)).toMatchTypeOf<Options>();
+    expectTypeOf(merge(defaults, { color: ['red'] })).toEqualTypeOf<Options>();
+  });
+
+  it('keeps keys that exist only on the source even when the source is a subtype of the target', () => {
+    const target: { a: number } = { a: 1 };
+    const source: { a: number; b: string } = { a: 2, b: 'x' };
+
+    expectTypeOf(merge(target, source)).toEqualTypeOf<{ a: number; b: string }>();
+  });
 });

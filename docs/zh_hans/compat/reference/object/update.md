@@ -30,7 +30,7 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 
 // 使用数组路径更新
 update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
-// => { a: [{ b: { c: 13 } }] }
+// => { a: [{ b: { c: 16 } }] }
 ```
 
 如果路径不存在，将自动创建必要的嵌套结构。
@@ -53,8 +53,8 @@ update({}, 'a.b[0]', () => 'value');
 import { update } from 'es-toolkit/compat';
 
 const stats = { score: 100 };
-update(stats, 'score', score => score * 1.1); // 增加 10%
-// => { score: 110 }
+update(stats, 'score', score => score * 1.5); // 增加 50%
+// => { score: 150 }
 ```
 
 #### 参数

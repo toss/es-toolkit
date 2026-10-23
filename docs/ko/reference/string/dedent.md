@@ -35,7 +35,7 @@ const list = dedent`
 `;
 // list는 'Items:\n  - First\n  - Second'가 돼요
 
-// 삽입된 값은 들여쓰기를 제거하기 전에 채워져요
+// 삽입된 값은 들여쓰기를 제거한 후에 채워져요. 값 안의 줄바꿈과 들여쓰기는 그대로 유지돼요
 const name = 'es-toolkit';
 const greeting = dedent`
   Hello, ${name}!

@@ -35,7 +35,8 @@ const list = dedent`
 `;
 // list is 'Items:\n  - First\n  - Second'
 
-// Interpolated values are inserted before the indentation is removed
+// Interpolated values are inserted after the indentation is removed, so line breaks
+// and indentation inside a value are kept as they are
 const name = 'es-toolkit';
 const greeting = dedent`
   Hello, ${name}!

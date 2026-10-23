@@ -1,8 +1,8 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { isArguments } from '../predicate/isArguments.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**

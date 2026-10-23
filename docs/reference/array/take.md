@@ -8,7 +8,7 @@ const taken = take(arr, count);
 
 ## Usage
 
-### `take(arr, count?)`
+### `take(arr, count)`
 
 Use `take` when you only need a few elements from the front of an array. If the requested count is greater than the array length, it returns the entire array.
 
@@ -33,19 +33,10 @@ take([1, 2, 3], 5);
 // Returns: [1, 2, 3]
 ```
 
-If you omit `count`, it takes only the first element.
-
-```typescript
-import { take } from 'es-toolkit/array';
-
-take([1, 2, 3]);
-// Returns: [1]
-```
-
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
-- `count` (`number`, optional): The number of elements to take. Default is `1`.
+- `count` (`number`): The number of elements to take.
 
 #### Returns
 
