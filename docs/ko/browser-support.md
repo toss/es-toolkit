@@ -20,19 +20,9 @@ es-toolkit은 현대적인 JavaScript를 적극적으로 활용해서 작고 효
 
 es-toolkit은 새 버전을 릴리스할 때마다 지원하는 브라우저에서 올바르게 동작하는지 검증하고 있어요. 먼저 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 같은 ESLint 플러그인으로 정적으로 검증하고, 실제 브라우저에서 Playwright 기반 E2E 테스트를 실행해 다시 한번 검증해요.
 
-## Node.js 지원
-
-`es-toolkit`은 위 표처럼 Node.js 20.12 이상이 필요해요.
-
-`es-toolkit/compat`은 달라요. lodash 코드를 옮기기 위한 모듈인데, 그런 코드는 오래된 환경에서 실행되는 경우가 많아서, `es-toolkit/compat`은 배포된 그대로 **Node.js 6 이상**을 지원해요. 트랜스파일이나 폴리필이 필요 없어요.
-
-```js
-// Node.js 6 이상에서 그대로 동작해요
-const { get, cloneDeep } = require('es-toolkit/compat');
-const isEqual = require('es-toolkit/compat/isEqual');
-```
-
-이 지원 범위는 `es-toolkit/compat`과 함수별 진입점(`es-toolkit/compat/*`)에만 적용돼요. `es-toolkit`, `es-toolkit/array`, `es-toolkit/fp` 같은 다른 진입점은 위 표의 요구 사항을 그대로 따라요. Node.js 6 지원은 변경이 있을 때마다 빌드된 패키지를 실제 Node.js 6에서 실행해 검증하고 있어요.
+::: tip `es-toolkit/compat`을 사용하고 있나요?
+`es-toolkit/compat`은 트랜스파일이나 폴리필 없이도 Node.js 6, ES2015 브라우저처럼 훨씬 오래된 환경에서 동작해요. 자세한 내용은 [브라우저 및 Node.js 지원](/ko/compat/environment-support)을 참고하세요.
+:::
 
 ## 오래된 브라우저 지원하기
 
@@ -41,7 +31,7 @@ const isEqual = require('es-toolkit/compat/isEqual');
 
 ### 1. 최신 문법을 오래된 문법으로 바꾸기 (트랜스파일)
 
-es-toolkit은 Optional Chaining(`foo?.bar`)이나 클래스 필드 같은 최신 문법을 그대로 사용해서 배포돼요.
+es-toolkit은 객체 스프레드(`{ ...obj }`)나 async 함수 같은 ES2019 문법을 그대로 사용해서 배포돼요.
 
 그런데 번들러는 일반적으로 의존성(`node_modules`)을 트랜스파일하지 않아요.
 그래서 es-toolkit이 사용하는 최신 문법을 오래된 브라우저에서도 지원되는 문법으로 바꾸도록, 다음 설정을 추가해 주세요.
