@@ -43,4 +43,19 @@ describe('countBy', () => {
       large: 3,
     });
   });
+
+  it('should preserve own __proto__ key without setting the prototype', () => {
+    const result = countBy(
+      [{ k: '__proto__' }, { k: '__proto__' }, { k: 'ok' }],
+      item => item.k
+    );
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect(Array.isArray(Object.getPrototypeOf(result))).toBe(false);
+    expect(Object.keys(result)).toEqual(['__proto__', 'ok']);
+    expect(result['__proto__']).toBe(2);
+    expect(result.ok).toBe(1);
+  });
+
 });
