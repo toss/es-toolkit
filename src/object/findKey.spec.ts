@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { findKey } from './findKey';
 
 describe('findKey', () => {
@@ -35,6 +35,19 @@ describe('findKey', () => {
     };
 
     expect(findKey(data, value => typeof value === 'string')).toBe('str');
+  });
+
+  it('should keep string enum keys as the enum type', () => {
+    enum Status {
+      Active = 'active',
+      Inactive = 'inactive',
+    }
+    const counts: Record<Status, number> = { [Status.Active]: 1, [Status.Inactive]: 2 };
+
+    const key = findKey(counts, value => value === 2);
+
+    expectTypeOf(key).toEqualTypeOf<Status | undefined>();
+    expect(key).toBe(Status.Inactive);
   });
 
   it('should pass the key and object to the predicate function', () => {

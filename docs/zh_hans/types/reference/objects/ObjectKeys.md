@@ -23,6 +23,13 @@ type KeyofKeys = keyof { a: number; 1: string }; // 'a' | 1
 const obj = { a: 1, b: 2 };
 const keys = Object.keys(obj) as Array<ObjectKeys<typeof obj>>; // Array<'a' | 'b'>
 
+// 字符串枚举成员会保持为枚举类型，而不会被拓宽为字符串字面量。
+enum Status {
+  Active = 'active',
+  Inactive = 'inactive',
+}
+type EnumKeys = ObjectKeys<Record<Status, number>>; // Status
+
 // 索引签名会解析为其字符串形式。
 type StringKeys = ObjectKeys<Record<string, number>>; // string
 type NumberKeys = ObjectKeys<Record<number, string>>; // `${number}`
