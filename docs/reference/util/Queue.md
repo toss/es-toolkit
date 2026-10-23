@@ -10,7 +10,7 @@ const queue = new Queue<T>();
 
 ### `Queue()`
 
-Use `Queue` when you process items in the order they arrive, such as task lists or breadth-first search. Removing the first item with `Array.prototype.shift` gets slower as the array grows, but `dequeue` stays fast no matter how many items are in the queue.
+Use `Queue` when you process items in the order they arrive, such as task lists or breadth-first search. The `dequeue` and `enqueue` methods stay fast no matter how many items are in the queue.
 
 ```typescript
 import { Queue } from 'es-toolkit/util';

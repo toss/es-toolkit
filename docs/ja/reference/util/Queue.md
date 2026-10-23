@@ -10,7 +10,7 @@ const queue = new Queue<T>();
 
 ### `Queue()`
 
-タスクリストや幅優先探索のように、届いた順に値を処理したいときに `Queue` を使用してください。`Array.prototype.shift` で先頭の値を取り出すと配列が大きくなるほど遅くなりますが、`dequeue` はキューにどれだけ値があっても高速に動作します。
+タスクリストや幅優先探索のように、届いた順に値を処理したいときに `Queue` を使用してください。`dequeue`、`enqueue` メソッドはキューにどれだけ値があっても高速に動作します。
 
 ```typescript
 import { Queue } from 'es-toolkit/util';

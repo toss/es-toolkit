@@ -10,7 +10,7 @@ const queue = new Queue<T>();
 
 ### `Queue()`
 
-当需要按照到达顺序处理值时(例如任务列表或广度优先搜索),请使用 `Queue`。使用 `Array.prototype.shift` 取出第一个值时,数组越大速度越慢,而 `dequeue` 无论队列中有多少值都能保持快速。
+当需要按照到达顺序处理值时(例如任务列表或广度优先搜索),请使用 `Queue`。`dequeue` 和 `enqueue` 方法无论队列中有多少值都能保持快速。
 
 ```typescript
 import { Queue } from 'es-toolkit/util';

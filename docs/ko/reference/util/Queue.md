@@ -10,7 +10,7 @@ const queue = new Queue<T>();
 
 ### `Queue()`
 
-작업 목록이나 너비 우선 탐색처럼 들어온 순서대로 값을 처리해야 할 때 `Queue`를 사용하세요. `Array.prototype.shift`로 첫 번째 값을 꺼내면 배열이 커질수록 느려지지만, `dequeue`는 큐에 값이 아무리 많아도 빠르게 동작해요.
+작업 목록이나 너비 우선 탐색처럼 들어온 순서대로 값을 처리해야 할 때 `Queue`를 사용하세요. `dequeue`, `enqueue` 메서드는 큐에 값이 아무리 많아도 빠르게 동작해요.
 
 ```typescript
 import { Queue } from 'es-toolkit/util';
