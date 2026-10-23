@@ -137,5 +137,4 @@ describe('groupBy', () => {
     ]);
     expect(result.ok).toEqual([{ k: 'ok', v: 3 }]);
   });
-
 });

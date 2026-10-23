@@ -84,5 +84,4 @@ describe('keyBy', () => {
     expect(result['__proto__']).toEqual({ k: '__proto__', v: 2 });
     expect(result.ok).toEqual({ k: 'ok', v: 3 });
   });
-
 });
