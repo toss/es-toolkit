@@ -20,6 +20,10 @@ es-toolkit はモダンな JavaScript を積極的に活用し、小さく効率
 
 es-toolkit は新しいバージョンをリリースするたびに、サポートするブラウザで正しく動作することを検証しています。[`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) などの ESLint プラグインによる静的検証を行い、さらに実際の Playwright ベースの E2E テストで再検証しています。
 
+::: tip `es-toolkit/compat` を使っていますか？
+`es-toolkit/compat` は、トランスパイルやポリフィルなしで、Node.js 6 や ES2015 対応ブラウザといったはるかに古い環境でも動作します。詳しくは[`es-toolkit/compat` のブラウザと Node.js のサポート](/ja/compat/environment-support)を参照してください。
+:::
+
 ## 古いブラウザをサポートする
 
 バンドラーを正しく設定すれば、es-toolkit は Chrome 51 や Safari 10 のような古いブラウザでも正しく動作します。
@@ -27,7 +31,7 @@ es-toolkit は新しいバージョンをリリースするたびに、サポー
 
 ### 1. 最新の構文を古い構文に変換する(トランスパイル)
 
-es-toolkit は、オプショナルチェーン(`foo?.bar`)やクラスフィールドといった最新の構文を積極的に使った状態で配布されています。
+es-toolkit は、オブジェクトスプレッド(`{ ...obj }`)や async 関数といった ES2019 の構文を使った状態で配布されています。
 
 バンドラーは一般的に依存関係(`node_modules`)をトランスパイルしません。
 そのため、es-toolkit が使う最新の構文を古いブラウザでもサポートされる構文に変換する、次の設定を追加してください。

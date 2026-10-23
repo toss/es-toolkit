@@ -464,35 +464,13 @@ async function main() {
     fs.writeFileSync(path.join(OUT_DIR, fileName), `${header}\n${caseList.map(c => `${c.source},`).join('\n')}\n];\n`);
   };
   emit('cases.mjs', CATEGORIES, cases);
-  // Legacy variant for the ES2015 tier: BigInt literals cannot be transpiled,
-  // so the bigint category and any example that passes BigInt values are left
-  // out (they would be a parse error in ES2015-era browsers). compat's
-  // word-splitting functions build their Unicode-property regex from strings
-  // at call time, which transpilers cannot rewrite either, so their cases are
-  // excluded as well (documented in docs/browser-support.md).
+  // Legacy variant for the ES2015 tier (Chrome 51 / Safari 10 via
+  // @vitejs/plugin-legacy, and es-toolkit/compat on Node.js 6): BigInt
+  // literals cannot be transpiled, so the bigint category and any example
+  // that passes BigInt values are left out (they would be a parse error in
+  // ES2015-era engines).
   const usesBigIntLiteral = source => /[^\w$."'`]\d+n\b/.test(source);
-  const COMPAT_UNICODE_FNS = new Set([
-    'words',
-    'camelCase',
-    'kebabCase',
-    'lowerCase',
-    'snakeCase',
-    'startCase',
-    'upperCase',
-  ]);
-  const usesCompatUnicodeFn = source => {
-    for (const match of source.matchAll(/const \{ ([^}]+) \} = __ns\.compat;/g)) {
-      for (const name of match[1].split(',').map(s => s.trim())) {
-        if (COMPAT_UNICODE_FNS.has(name)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  const legacyCases = cases.filter(
-    c => !c.id.startsWith('bigint:') && !usesBigIntLiteral(c.source) && !usesCompatUnicodeFn(c.source)
-  );
+  const legacyCases = cases.filter(c => !c.id.startsWith('bigint:') && !usesBigIntLiteral(c.source));
   emit(
     'cases-legacy.mjs',
     CATEGORIES.filter(c => c !== 'bigint'),

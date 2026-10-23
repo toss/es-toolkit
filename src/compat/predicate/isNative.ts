@@ -1,3 +1,5 @@
+import { globalThis } from '../../_internal/globalThis.ts';
+
 const functionToString = Function.prototype.toString;
 
 /**
