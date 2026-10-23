@@ -117,7 +117,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
     "tar": "^6",
-    "tsdown": "^0.22.0",
+    "tsdown": "^0.23.1",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",

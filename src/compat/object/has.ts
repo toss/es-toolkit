@@ -1,3 +1,4 @@
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { toKey } from '../_internal/toKey.ts';
@@ -106,7 +107,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
     const key = toKey(resolvedPath[i]);
 
     // Check if the current key is a direct property of the current object
-    if (current == null || !Object.hasOwn(current, key)) {
+    if (current == null || !hasOwn(current, key)) {
       const isSparseIndex =
         (Array.isArray(current) || isArguments(current)) && isIndex(key) && Number(key) < current.length;
 

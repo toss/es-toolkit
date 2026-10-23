@@ -92,4 +92,17 @@ describe('trimEnd', () => {
     // @ts-expect-error
     expect(func(string, ['d', 'l', 'r'])).toBe(expected);
   });
+
+  it('should match String.prototype.trimEnd for every whitespace character', () => {
+    const chars = '\t\n\v\f\r \u00a0\u1680\u2000\u200a\u2028\u2029\u202f\u205f\u3000\ufeff';
+    expect(trimEnd(`abc${chars}`)).toBe('abc');
+    expect(trimEnd(chars)).toBe('');
+  });
+
+  it('should trim long runs of trailing whitespace in linear time', () => {
+    const str = `abc${' '.repeat(100_000)}x`;
+    const start = Date.now();
+    expect(trimEnd(str)).toBe(str);
+    expect(Date.now() - start).toBeLessThan(1000);
+  });
 });

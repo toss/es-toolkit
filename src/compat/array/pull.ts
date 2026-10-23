@@ -1,4 +1,4 @@
-import { pull as pullToolkit } from '../../array/pull.ts';
+import { basePull } from '../_internal/basePull.ts';
 
 /**
  * Removes all provided values from array using SameValueZero for equality comparisons.
@@ -59,5 +59,5 @@ export function pull<T>(arr: T[], ...valuesToRemove: readonly unknown[]): T[] {
     return arr;
   }
 
-  return pullToolkit(arr, valuesToRemove);
+  return basePull(arr, valuesToRemove);
 }
