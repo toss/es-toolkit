@@ -21,7 +21,7 @@ es-toolkit はモダンな JavaScript を積極的に活用し、小さく効率
 es-toolkit は新しいバージョンをリリースするたびに、サポートするブラウザで正しく動作することを検証しています。[`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) などの ESLint プラグインによる静的検証を行い、さらに実際の Playwright ベースの E2E テストで再検証しています。
 
 ::: tip `es-toolkit/compat` を使っていますか？
-`es-toolkit/compat` は、トランスパイルやポリフィルなしで、Node.js 6 や ES2015 対応ブラウザといったはるかに古い環境でも動作します。詳しくは[ブラウザと Node.js のサポート](/ja/compat/environment-support)を参照してください。
+`es-toolkit/compat` は、トランスパイルやポリフィルなしで、Node.js 6 や ES2015 対応ブラウザといったはるかに古い環境でも動作します。詳しくは[`es-toolkit/compat` のブラウザと Node.js のサポート](/ja/compat/environment-support)を参照してください。
 :::
 
 ## 古いブラウザをサポートする
