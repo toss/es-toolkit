@@ -66,4 +66,15 @@ describe('startCase', () => {
     expect(startCase('top10th')).toBe('Top 10th');
     expect(startCase('1st place 2nd 3rd 4th')).toBe('1st Place 2nd 3rd 4th');
   });
+
+  it('should only uppercase the first letter of each word', () => {
+    expect(startCase('ПриветМир')).toBe('ПриветМир');
+    expect(startCase('αβγΔεζ')).toBe('ΑβγΔεζ');
+    expect(startCase('fooBAR')).toBe('Foo BAR');
+    expect(startCase('mIxEd CaSe')).toBe('M Ix Ed Ca Se');
+  });
+
+  it('should uppercase a first letter outside the Basic Multilingual Plane', () => {
+    expect(startCase('𐐨𐐩 deseret')).toBe('𐐀 𐐁 Deseret');
+  });
 });
