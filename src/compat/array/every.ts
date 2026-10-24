@@ -2,8 +2,8 @@ import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
-import { iteratee } from '../compat.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Checks if all elements in a collection pass the predicate check.

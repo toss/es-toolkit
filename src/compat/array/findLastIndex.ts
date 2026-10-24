@@ -1,10 +1,10 @@
 import { identity } from '../../function/identity.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { toArray } from '../_internal/toArray.ts';
-import { toInteger } from '../compat.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Finds the index of the last element in the array that satisfies the predicate.
