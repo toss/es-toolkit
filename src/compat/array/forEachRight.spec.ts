@@ -190,19 +190,19 @@ describe('forEachRight', () => {
     expect(forEachRight(array, ['a', 1])).toBe(array);
   });
 
-  it('should stop when a property shorthand returns `false` like lodash', () => {
+  it('should treat a non-function `iteratee` as `identity`', () => {
     let visited = 0;
-    const array = [
-      {
-        get a() {
-          visited++;
-          return true;
-        },
+    const array: unknown[] = [];
+    Object.defineProperty(array, 0, {
+      enumerable: true,
+      get() {
+        visited++;
+        return true;
       },
-      { a: false },
-    ];
+    });
+    array[1] = false;
 
-    // @ts-expect-error - lodash accepts iteratee shorthands
+    // @ts-expect-error - a non-function iteratee falls back to identity
     forEachRight(array, 'a');
 
     expect(visited).toBe(0);
