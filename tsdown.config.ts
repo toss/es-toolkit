@@ -19,10 +19,11 @@ const allEntrypoints = Object.values(packageJson.exports).filter(
 // build below.
 const neutralEntrypoints = [...allEntrypoints.filter(f => f !== SERVER_ENTRY), './src/util/hash/browser.ts'];
 
-/**
- * Lowers `es-toolkit/compat` and every module it imports to ES2019 so that it runs on Node.js 6,
- * and leaves the rest of the library as written.
- */
+// `es-toolkit/compat` and every module it imports are lowered to ES2019, so that `?.` and `??`
+// can be used freely in the source while `es-toolkit/compat` still loads on ES2015 engines such
+// as Node.js 6. The rest of the library is published as written.
+// TODO: lower only the syntax compat needs once Oxc supports per-feature lowering
+// (https://github.com/oxc-project/oxc/issues/15373).
 function lowerCompatToES2019(): Plugin {
   const compatModules = new Set<string>();
 
