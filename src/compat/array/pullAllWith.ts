@@ -45,6 +45,7 @@ export function pullAllWith<T>(array: T[], values?: ArrayLike<T>, comparator?: (
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Match Lodash's generic constraint for type compatibility.
 export function pullAllWith<L extends MutableList<any>>(
   array: RejectReadonly<L>,
   values?: ArrayLike<L[0]>,
@@ -93,6 +94,7 @@ export function pullAllWith<T, U>(array: T[], values: ArrayLike<U>, comparator: 
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Match Lodash's generic constraint for type compatibility.
 export function pullAllWith<L1 extends MutableList<any>, L2>(
   array: RejectReadonly<L1>,
   values: ArrayLike<L2>,
@@ -121,7 +123,7 @@ export function pullAllWith<L1 extends MutableList<any>, L2>(
  * console.log(array);  // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
  */
 export function pullAllWith<T>(
-  array: T[] | ArrayLike<T>,
+  array: MutableList<T>,
   values?: T[] | ArrayLike<T>,
   comparator?: (a: T, b: T) => boolean
 ): T[] | ArrayLike<T> {
@@ -134,32 +136,51 @@ export function pullAllWith<T>(
   }
 
   let resultLength = 0;
+  const isDefaultComparator = comparator == null;
 
   if (comparator == null) {
     comparator = (a, b) => eq(a, b);
   }
 
   const valuesArray = Array.isArray(values) ? values : Array.from(values);
-  const hasUndefined = valuesArray.includes(undefined as any);
+  const valuesLength = valuesArray.length;
+  const hasUndefined = isDefaultComparator && valuesArray.includes(undefined as T);
 
   for (let i = 0; i < array.length; i++) {
-    if (i in array) {
-      const shouldRemove = valuesArray.some(value => comparator(array[i], value));
-
-      if (!shouldRemove) {
-        (array as any)[resultLength++] = array[i];
+    if (isDefaultComparator && !(i in array)) {
+      if (!hasUndefined) {
+        delete array[resultLength++];
       }
-
       continue;
     }
 
-    // For handling sparse arrays
-    if (!hasUndefined) {
-      delete (array as any)[resultLength++];
+    let shouldRemove = false;
+    if (valuesArray.length === valuesLength) {
+      // Unlike some, findIndex also visits holes and snapshots the length.
+      shouldRemove = valuesArray.findIndex(value => comparator(array[i], value)) !== -1;
+    } else {
+      // A comparator may have changed values.length while processing an earlier element.
+      for (let j = 0; j < valuesLength; j++) {
+        if (comparator(array[i], valuesArray[j])) {
+          shouldRemove = true;
+          break;
+        }
+      }
+    }
+
+    if (shouldRemove) {
+      continue;
+    }
+
+    if (i in array) {
+      array[resultLength++] = array[i];
+    } else {
+      // Preserve unmatched holes in sparse arrays.
+      delete array[resultLength++];
     }
   }
 
-  (array as any).length = resultLength;
+  array.length = resultLength;
 
   return array;
 }
