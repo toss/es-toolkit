@@ -25,7 +25,7 @@ const compatModules = new Set<string>();
 const lowerCompatModules: Plugin = {
   name: 'lower-compat-modules',
   buildEnd() {
-    const pending = [path.resolve('src/compat/index.ts')];
+    const pending = [path.resolve(packageJson.exports['./compat'])];
 
     while (pending.length > 0) {
       const id = pending.pop()!;
