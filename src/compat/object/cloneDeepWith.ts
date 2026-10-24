@@ -9,6 +9,7 @@ import {
   booleanTag,
   dataViewTag,
   dateTag,
+  errorTag,
   float32ArrayTag,
   float64ArrayTag,
   int8ArrayTag,
@@ -245,33 +246,15 @@ function cloneDeepWithImpl<T>(
     return result;
   }
 
-  if (valueToClone instanceof Error) {
-    const result = Object.create(Object.getPrototypeOf(valueToClone));
-    stack.set(valueToClone, result);
+  const tag = getTag(valueToClone);
 
-    // Native errors keep these as own non-enumerable properties, so mirror
-    // that shape instead of turning them into enumerable keys.
-    const errorKeys = ['message', 'stack', 'cause'];
-
-    for (let i = 0; i < errorKeys.length; i++) {
-      const key = errorKeys[i];
-
-      if (key in valueToClone) {
-        Object.defineProperty(result, key, {
-          value: (valueToClone as any)[key],
-          writable: true,
-          configurable: true,
-          enumerable: false,
-        });
-      }
+  if (tag === errorTag) {
+    if (valueToClone === objectToClone) {
+      return {};
     }
 
-    copyProperties(result, valueToClone, objectToClone, stack, customizer);
-
-    return result;
+    return valueToClone;
   }
-
-  const tag = getTag(valueToClone);
 
   switch (tag) {
     case numberTag:
