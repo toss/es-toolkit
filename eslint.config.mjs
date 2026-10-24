@@ -101,7 +101,7 @@ export default defineConfig(
   // on the packed artifact.
   {
     files: ['src/**/*.ts'],
-    ignores: ['src/util/hash/**'],
+    ignores: ['src/util/hash/**', '**/*.spec.ts'],
     rules: {
       'no-restricted-imports': [
         'error',
@@ -111,6 +111,11 @@ export default defineConfig(
               group: ['es-toolkit/util/hash', '**/util/hash', '**/util/hash/**'],
               message:
                 'hash is opt-in only; it must never be reachable from es-toolkit entrypoints. Consumers import it explicitly via es-toolkit/util/hash.',
+            },
+            {
+              group: ['**/compat.ts', '!./compat.ts'],
+              message:
+                'Import the module itself. The compat barrel re-exports every function, so importing it creates an import cycle that CommonJS consumers see as a circular dependency warning.',
             },
           ],
         },
