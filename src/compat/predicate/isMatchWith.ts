@@ -2,7 +2,7 @@ import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getTag } from '../_internal/getTag.ts';
 import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
-import { argumentsTag, objectTag } from '../_internal/tags.ts';
+import { argumentsTag, errorTag, objectTag } from '../_internal/tags.ts';
 import { eq } from '../util/eq.ts';
 
 /**
@@ -224,6 +224,10 @@ function isObjectMatch(
       target = Object(target);
     }
   } else {
+    if (getTag(source) === errorTag) {
+      return getTag(target) === errorTag && target.name === source.name && target.message === source.message;
+    }
+
     // Nested object patterns only match plain object-like targets, like lodash's tag comparison.
     const tag = getTag(target);
 
