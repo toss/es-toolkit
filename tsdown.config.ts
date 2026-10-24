@@ -1,4 +1,7 @@
 import { createRequire } from 'node:module';
+import path from 'node:path';
+import type { Plugin } from 'rolldown';
+import { transformSync } from 'rolldown/experimental';
 import { defineConfig } from 'tsdown';
 
 const packageJson = createRequire(import.meta.url)('./package.json') as {
@@ -18,17 +21,45 @@ const neutralEntrypoints = [...allEntrypoints.filter(f => f !== SERVER_ENTRY), '
 
 // Published code is lowered to ES2019 syntax, so that `?.` and `??` can be used freely
 // in the source while `es-toolkit/compat` still loads on ES2015 engines such as Node.js 6.
+// Only the modules `es-toolkit/compat` reaches are lowered; the rest is published as written.
 // TODO: lower only the syntax compat needs once Oxc supports per-feature lowering
 // (https://github.com/oxc-project/oxc/issues/15373).
-const target = 'es2019';
+function lowerCompatToES2019(): Plugin {
+  const compatModules = new Set<string>();
+
+  return {
+    name: 'lower-compat-to-es2019',
+
+    // 1. Once the module graph is complete, collect every module the compat entry reaches.
+    buildEnd() {
+      const queue = [path.resolve(packageJson.exports['./compat'])];
+
+      for (const id of queue) {
+        if (!compatModules.has(id)) {
+          compatModules.add(id);
+          queue.push(...(this.getModuleInfo(id)?.importedIds ?? []));
+        }
+      }
+    },
+
+    // 2. Lower only the output files that come from those modules.
+    renderChunk(code, chunk) {
+      if (!chunk.moduleIds.some(id => compatModules.has(id))) {
+        return null;
+      }
+
+      return transformSync(chunk.fileName, code, { target: 'es2019' }).code;
+    },
+  };
+}
 
 export default defineConfig([
   {
-    target,
     entry: neutralEntrypoints,
     format: ['esm', 'cjs'],
     outDir: 'dist',
     platform: 'neutral',
+    plugins: [lowerCompatToES2019()],
     unbundle: true,
     fixedExtension: false,
     dts: true,
@@ -40,7 +71,6 @@ export default defineConfig([
     publint: false,
   },
   {
-    target,
     entry: [SERVER_ENTRY],
     format: ['esm', 'cjs'],
     outDir: 'dist/server',
@@ -59,7 +89,6 @@ export default defineConfig([
     // The node implementation of `es-toolkit/util/hash` imports `node:crypto`,
     // so it cannot be part of the neutral build. It is bundled (not unbundled)
     // so that its `serialize` dependency does not escape the outDir.
-    target,
     entry: ['./src/util/hash/node.ts'],
     format: ['esm', 'cjs'],
     outDir: 'dist/util/hash',
@@ -74,7 +103,6 @@ export default defineConfig([
     publint: false,
   },
   {
-    target,
     entry: { 'browser.global': './src/browser.ts' },
     format: 'umd',
     outDir: 'dist',
