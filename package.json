@@ -116,6 +116,7 @@
     "packlint": "^0.2.4",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
+    "rolldown": "~1.2.13",
     "tar": "^6",
     "tsdown": "^0.23.1",
     "tslib": "^2.6.3",

@@ -8735,6 +8735,7 @@ __metadata:
     packlint: "npm:^0.2.4"
     prettier: "npm:^3.2.5"
     prettier-plugin-sort-re-exports: "npm:^0.1.0"
+    rolldown: "npm:~1.2.13"
     tar: "npm:^6"
     tsdown: "npm:^0.23.1"
     tslib: "npm:^2.6.3"
