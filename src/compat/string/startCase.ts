@@ -27,11 +27,13 @@ export function startCase(str?: string): string {
       result += ' ';
     }
 
-    if (word === word.toUpperCase()) {
-      result += word;
-    } else {
-      result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+    let firstLength = 1;
+
+    if (word.codePointAt(0)! > 0xffff) {
+      firstLength = 2;
     }
+
+    result += word.slice(0, firstLength).toUpperCase() + word.slice(firstLength);
   }
 
   return result;
