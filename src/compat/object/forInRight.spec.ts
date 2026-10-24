@@ -50,7 +50,7 @@ describe('forInRight', () => {
     expect(forInRight(object, ['a', 1])).toBe(object);
   });
 
-  it('should treat a non-function `iteratee` as `identity` like lodash-es', () => {
+  it('should treat a non-function `iteratee` as `identity`', () => {
     let visited = 0;
     const object: Record<string, unknown> = {};
     Object.defineProperty(object, 'y', {

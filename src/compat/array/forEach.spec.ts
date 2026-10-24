@@ -268,7 +268,7 @@ describe('forEach', () => {
     expect(forEach(array, ['a', 1])).toBe(array);
   });
 
-  it('should treat a non-function `iteratee` as `identity` like lodash-es', () => {
+  it('should treat a non-function `iteratee` as `identity`', () => {
     let visited = 0;
     const array: unknown[] = [false];
     Object.defineProperty(array, 1, {
