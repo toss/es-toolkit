@@ -89,7 +89,16 @@ export function keyBy<T>(
     collection as ArrayLike<T>,
     (result, value) => {
       const key = keyFn(value);
-      result[key] = value;
+      if (key === '__proto__') {
+        Object.defineProperty(result, key, {
+          configurable: true,
+          enumerable: true,
+          value,
+          writable: true,
+        });
+      } else {
+        result[key] = value;
+      }
       return result;
     },
     {} as Record<string, T>

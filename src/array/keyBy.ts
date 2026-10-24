@@ -40,7 +40,16 @@ export function keyBy<T, K extends PropertyKey>(
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
     const key = getKeyFromItem(item, i, arr);
-    result[key] = item;
+    if (key === '__proto__') {
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: item,
+        writable: true,
+      });
+    } else {
+      result[key] = item;
+    }
   }
 
   return result;

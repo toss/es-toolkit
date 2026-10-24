@@ -117,4 +117,24 @@ describe('groupBy', () => {
       ],
     });
   });
+
+  it('should preserve own __proto__ key without setting the prototype', () => {
+    const array = [
+      { k: '__proto__', v: 1 },
+      { k: '__proto__', v: 2 },
+      { k: 'ok', v: 3 },
+    ];
+
+    const result = groupBy(array, item => item.k);
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect(Array.isArray(Object.getPrototypeOf(result))).toBe(false);
+    expect(Object.keys(result)).toEqual(['__proto__', 'ok']);
+    expect(result['__proto__']).toEqual([
+      { k: '__proto__', v: 1 },
+      { k: '__proto__', v: 2 },
+    ]);
+    expect(result.ok).toEqual([{ k: 'ok', v: 3 }]);
+  });
 });
