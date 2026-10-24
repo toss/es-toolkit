@@ -31,7 +31,7 @@ This requires two pieces of configuration.
 
 ### 1. Converting modern syntax to older syntax (transpilation)
 
-es-toolkit is published using ES2019 syntax such as object spread (`{ ...obj }`) and async functions.
+es-toolkit is published using modern syntax such as optional chaining (`foo?.bar`) and class fields.
 
 Bundlers generally do not transpile dependencies (`node_modules`).
 Add the following configuration so that the modern syntax es-toolkit uses is converted to syntax that older browsers also support.
