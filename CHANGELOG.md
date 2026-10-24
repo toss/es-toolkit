@@ -1,5 +1,86 @@
 # es-toolkit Changelog
 
+## Version v1.53.0
+
+Released on October 24th, 2026.
+
+- Added `serialize` to `es-toolkit/util`, and `hash` in the new `es-toolkit/util/hash`
+  entrypoint. ([#2067], [#2154])
+- Added `Queue` to `es-toolkit/util`. ([#2150], [#2153])
+- Added `stringify` to `es-toolkit/query-string`. ([#2121])
+- Added `sentenceCase`. ([#2079])
+- Added `lerp` and `inverseLerp`. ([#2078])
+- Added the `DistributiveOmit` type. ([#2142])
+- `es-toolkit/compat` now runs on Node.js 6 and ES2015 environments without
+  transpilation or polyfills. ([#2097], [#2161])
+
+- Fixed `deepFreeze` to freeze symbol and non-enumerable properties. ([#2143])
+- Fixed `Semaphore` to keep `release` fast when many tasks are waiting. ([#2149])
+- Fixed `DeepPartial` and `DeepReadonly` to preserve branded primitive types. ([#2074])
+- Fixed the `Merge` type to keep the input type when merging a type with itself or a
+  narrower type, and to use the source type when a defined source replaces a nullable
+  or primitive value. ([#2148], [#2155])
+- Fixed the `fp` `intersectionBy` to match each mapped value at most once in lazy
+  pipes. ([#2146])
+
+The following change results or types that v1.52.0 produced, so review them if you
+relied on the previous behavior.
+
+- `dedent` now leaves interpolated values out of the indentation calculation ([#2099]),
+  and throws a `TypeError` for a malformed template literal, like `String.dedent` ([#2100]).
+- `deburr` now keeps letters of non-Latin scripts as they are. ([#2124])
+- `orderBy` and `sortBy` now sort `NaN` in a consistent position. ([#2133])
+- `once` now calls the function with the caller's `this`. ([#2069])
+- `findKey` and `mapKeys` now type keys like `Object.keys`, so numeric keys are
+  strings. ([#2077], [#2156])
+- The `fp` `head`, `last`, `maxBy`, and `minBy` now always return `T | undefined`.
+  ([#2113])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/add`, `compat/subtract`, `compat/multiply`, and `compat/divide` to
+  match Lodash on `null` operands. ([#2056])
+- Fixed `compat/ceil`, `compat/floor`, and `compat/round` to coerce arguments like
+  Lodash. ([#2064])
+- Fixed `compat/toString` to read sparse array holes as `undefined`. ([#2091])
+- Fixed `compat/dropWhile`, `compat/dropRightWhile`, and `compat/some` to normalize
+  the predicate. ([#2072])
+- Fixed `compat/countBy` to return a plain object. ([#2090])
+- Fixed `compat/pull`, `compat/pullAll`, `compat/pullAllBy`, and `compat/remove` to
+  handle nullish inputs. ([#2095])
+- Fixed `compat/xorBy` and `compat/xorWith` to ignore the iteratee and comparator for
+  a single array. ([#2098])
+- Fixed `compat/reduce` and `compat/reduceRight` to resolve the iteratee like Lodash,
+  and `compat/forEach`, `compat/forEachRight`, `compat/forIn`, `compat/forInRight`,
+  `compat/forOwn`, and `compat/forOwnRight` to treat a non-function iteratee as
+  `identity`. ([#2101], [#2158])
+- Fixed `compat/words` to match titlecase letters, emoji sequences, and non-ASCII
+  numerals and symbols, and to keep combining marks attached to their letter.
+  ([#2102], [#2103], [#2110])
+- Fixed `compat/unionWith` to pass comparator arguments in Lodash's order. ([#2114])
+- Fixed `compat/groupBy`, `compat/maxBy`, and `compat/minBy` to call the iteratee
+  with only the element. ([#2122])
+- Fixed `compat/deburr` to only deburr Latin letters. ([#2123])
+- Fixed `compat/truncate` to escape a string `separator`. ([#2130])
+- Fixed `compat/cloneDeep` and `compat/cloneDeepWith` to keep errors uncloned, and
+  `compat/isMatch` and `compat/matches` to compare errors like Lodash. ([#2159])
+- Fixed `compat/startCase` to only uppercase the first letter of each word. ([#2160])
+- Exported the `PropertyPath` type from `es-toolkit/compat`. ([#2145])
+
+- Reduced the CommonJS bundle size of `compat/every` and `compat/findLastIndex`. ([#2162])
+- Fixed documentation examples whose results did not match the code. ([#2071],
+  [#2109], [#2132], [#2136], [#2138])
+- Listed the iterator docs under the es-toolkit and fp tabs. ([#2137])
+- Clarified which compat behavior fixes the contributing guide accepts. ([#2107],
+  [#2108], [#2125])
+
+We sincerely thank @arba-octo, @Archibald1948, @cyclomati, @D-Sketon, @dayongkr,
+@HyoYoonNam, @jaideeppyne, @jeonghoon11, @jeynes-log, @JonghwanWon, @mariazuheros,
+@MFA-G, @minseonkkim, @minsoo-web, @Patrick-SCH03, @poketopa, @raon0211, @ssi02014,
+@TalhaHunter101, and @Tnalxmsk for their contributions. We appreciate your great
+efforts!
+
 ## Version v1.52.0
 
 Released on August 28th, 2026.
