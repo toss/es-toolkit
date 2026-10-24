@@ -75,6 +75,12 @@ edge cases now matches Lodash, so results may differ if you relied on the previo
 - Clarified which compat behavior fixes the contributing guide accepts. ([#2107],
   [#2108], [#2125])
 
+We sincerely thank @arba-octo, @Archibald1948, @cyclomati, @D-Sketon, @dayongkr,
+@HyoYoonNam, @jaideeppyne, @jeonghoon11, @jeynes-log, @JonghwanWon, @mariazuheros,
+@MFA-G, @minseonkkim, @minsoo-web, @Patrick-SCH03, @poketopa, @raon0211, @ssi02014,
+@TalhaHunter101, and @Tnalxmsk for their contributions. We appreciate your great
+efforts!
+
 ## Version v1.52.0
 
 Released on August 28th, 2026.
