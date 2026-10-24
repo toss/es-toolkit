@@ -19,31 +19,38 @@ const allEntrypoints = Object.values(packageJson.exports).filter(
 // build below.
 const neutralEntrypoints = [...allEntrypoints.filter(f => f !== SERVER_ENTRY), './src/util/hash/browser.ts'];
 
-// `es-toolkit/compat` must run on Node.js 6, so only the modules it reaches are lowered to ES2019.
-const compatModules = new Set<string>();
+/**
+ * Lowers `es-toolkit/compat` and every module it imports to ES2019 so that it runs on Node.js 6,
+ * and leaves the rest of the library as written.
+ */
+function lowerCompatToES2019(): Plugin {
+  const compatModules = new Set<string>();
 
-const lowerCompatModules: Plugin = {
-  name: 'lower-compat-modules',
-  buildEnd() {
-    const pending = [path.resolve(packageJson.exports['./compat'])];
+  return {
+    name: 'lower-compat-to-es2019',
 
-    for (const id of pending) {
-      if (compatModules.has(id)) {
-        continue;
+    // 1. Once the module graph is complete, collect every module the compat entry reaches.
+    buildEnd() {
+      const queue = [path.resolve(packageJson.exports['./compat'])];
+
+      for (const id of queue) {
+        if (!compatModules.has(id)) {
+          compatModules.add(id);
+          queue.push(...(this.getModuleInfo(id)?.importedIds ?? []));
+        }
+      }
+    },
+
+    // 2. Lower only the output files that come from those modules.
+    renderChunk(code, chunk) {
+      if (!chunk.moduleIds.some(id => compatModules.has(id))) {
+        return null;
       }
 
-      compatModules.add(id);
-      pending.push(...(this.getModuleInfo(id)?.importedIds ?? []));
-    }
-  },
-  renderChunk(code, chunk) {
-    if (/\.d\.[cm]?ts$/.test(chunk.fileName) || !chunk.moduleIds.some(id => compatModules.has(id))) {
-      return null;
-    }
-
-    return transformSync(chunk.fileName, code, { target: 'es2019' }).code;
-  },
-};
+      return transformSync(chunk.fileName, code, { target: 'es2019' }).code;
+    },
+  };
+}
 
 export default defineConfig([
   {
@@ -51,7 +58,7 @@ export default defineConfig([
     format: ['esm', 'cjs'],
     outDir: 'dist',
     platform: 'neutral',
-    plugins: [lowerCompatModules],
+    plugins: [lowerCompatToES2019()],
     unbundle: true,
     fixedExtension: false,
     dts: true,
