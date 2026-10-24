@@ -34,6 +34,18 @@ type Result = Merge<Target, Source>;
 // => { server: { host: string; port: number; tls: boolean } }
 ```
 
+合并两个数组类型时,元组会按索引合并,其他数组则会变成同时包含两边元素类型的数组类型。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Result = Merge<{ list: number[] }, { list: string[] }>;
+// => { list: Array<string | number> }
+
+type Tuple = Merge<[1, 2, 3], ['a']>;
+// => ['a', 2, 3]
+```
+
 当存在重叠的键时,使用第二个对象的值类型。TypeScript 内置的合并类型 `T & S` 会把重叠键的值显示为 `never`,而使用 `Merge` 类型时,会使用第二个对象的值类型。
 
 ```typescript
@@ -60,15 +72,30 @@ type Result = Merge<Options, Options>;
 // => { value: string[] | string[][] }
 ```
 
-当第二个对象的数组与第一个对象的数组类型兼容时,保留第一个对象的类型。
+如果存在相同的键,第二个对象的类型会直接成为结果。
+
+合并原始值、`Date`、`Map`、`Set`、函数等非普通对象的类型时,会使用第二个值的类型。
 
 ```typescript
 import type { Merge } from 'es-toolkit/types';
 
-type Options = { value: string[] | string[][] };
+type Target = { createdAt: Date; onChange: () => void; label: string };
+type Source = { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' };
 
-type Result = Merge<Options, { value: string[] }>;
-// => { value: string[] | string[][] }
+type Result = Merge<Target, Source>;
+// => { createdAt: string; onChange: (value: string) => void; label: 'a' | 'b' }
+```
+
+第一个对象中可能为 `null` 或 `undefined` 的值,只要第二个对象中有值,就会从结果类型中消失。
+
+```typescript
+import type { Merge } from 'es-toolkit/types';
+
+type Defaults = { retry?: { count: number }; tags: string[] | null };
+type Overrides = { retry: { count: number }; tags: string[] };
+
+type Result = Merge<Defaults, Overrides>;
+// => { retry: { count: number }; tags: string[] }
 ```
 
 #### 类型参数
