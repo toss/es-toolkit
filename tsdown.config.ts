@@ -27,13 +27,13 @@ const lowerCompatModules: Plugin = {
   buildEnd() {
     const pending = [path.resolve(packageJson.exports['./compat'])];
 
-    while (pending.length > 0) {
-      const id = pending.pop()!;
-
-      if (!compatModules.has(id)) {
-        compatModules.add(id);
-        pending.push(...this.getModuleInfo(id)!.importedIds);
+    for (const id of pending) {
+      if (compatModules.has(id)) {
+        continue;
       }
+
+      compatModules.add(id);
+      pending.push(...(this.getModuleInfo(id)?.importedIds ?? []));
     }
   },
   renderChunk(code, chunk) {
