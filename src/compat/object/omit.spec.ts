@@ -117,4 +117,15 @@ describe('omit', () => {
     expect('3' in result).toBe(false);
     expect('4' in result).toBe(false);
   });
+
+  it('should treat a `null` key as the property name `null`', () => {
+    const obj = { a: 1, null: 2, undefined: 3 };
+
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(omit(obj, null)).toEqual({ a: 1, undefined: 3 });
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(omit(obj, 'a', null)).toEqual({ undefined: 3 });
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(omit(obj, ['a', null])).toEqual({ undefined: 3 });
+  });
 });

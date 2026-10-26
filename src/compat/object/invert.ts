@@ -1,4 +1,5 @@
 import { invert as invertToolkit } from '../../object/invert.ts';
+import { isNil } from '../../predicate/isNil.ts';
 
 /**
  * Inverts the keys and values of an object.
@@ -10,7 +11,7 @@ import { invert as invertToolkit } from '../../object/invert.ts';
  * invert({ a: 1, b: 2, c: 3 });
  * // => { '1': 'a', '2': 'b', '3': 'c' }
  */
-export function invert(object: object): Record<string, string>;
+export function invert(object: object | null | undefined): Record<string, string>;
 
 /**
  * Inverts the keys and values of an object. The keys of the input object become the values of the output object and vice versa.
@@ -30,6 +31,10 @@ export function invert(object: object): Record<string, string>;
  * invert({ a: 1, 2: 'b', c: 3, 4: 'd' }); // { 1: 'a', b: '2', 3: 'c', d: '4' }
  * invert({ a: Symbol('sym1'), b: Symbol('sym2') }); // { [Symbol('sym1')]: 'a', [Symbol('sym2')]: 'b' }
  */
-export function invert(obj: object): Record<string, string> {
+export function invert(obj: object | null | undefined): Record<string, string> {
+  if (isNil(obj)) {
+    return {};
+  }
+
   return invertToolkit(obj);
 }

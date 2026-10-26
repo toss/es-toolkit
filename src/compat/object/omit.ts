@@ -91,7 +91,10 @@ export function omit<T extends object>(obj: T | null | undefined, ...keysArr: Ar
 
     switch (typeof keys) {
       case 'object': {
-        if (Array.isArray(keys)) {
+        if (keys === null) {
+          // lodash treats a `null` key as the property name `'null'`.
+          unset(result, 'null');
+        } else if (Array.isArray(keys)) {
           // A key array is a single deep path (e.g. `['a', 'b']` targets `a.b`), matching lodash.
           unset(result, keys);
         } else {

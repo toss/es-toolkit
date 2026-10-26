@@ -19,4 +19,9 @@ describe('invert', () => {
     const object = { 0: 'a', 1: 'b', length: 2 };
     expect(invert(object)).toEqual({ a: '0', b: '1', 2: 'length' });
   });
+
+  it('should return an empty object for `null` and `undefined`', () => {
+    expect(invert(null)).toEqual({});
+    expect(invert(undefined)).toEqual({});
+  });
 });

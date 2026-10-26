@@ -92,7 +92,8 @@ export function pick<T extends object, U extends keyof T>(
       }
       case 'string':
       case 'symbol':
-      case 'number': {
+      case 'number':
+      case 'undefined': {
         keys = [keys];
         break;
       }

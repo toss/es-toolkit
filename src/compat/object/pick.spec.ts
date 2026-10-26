@@ -143,4 +143,15 @@ describe('compat/pick', () => {
 
     expect(Reflect.ownKeys(result)).toEqual([]);
   });
+
+  it('should treat an `undefined` key as the property name `undefined`', () => {
+    const obj = { a: 1, null: 2, undefined: 3 };
+
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(pick(obj, undefined)).toEqual({ undefined: 3 });
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(pick(obj, 'a', undefined)).toEqual({ a: 1, undefined: 3 });
+    // @ts-expect-error - lodash accepts a nullish key
+    expect(pick({ a: 1 }, null, undefined)).toEqual({});
+  });
 });
