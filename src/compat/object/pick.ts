@@ -1,10 +1,11 @@
 import { get } from './get.ts';
 import { has } from './has.ts';
 import { set } from './set.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { Many } from '../_internal/Many.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 
 /**
  * Creates a new object composed of the picked object properties.
@@ -104,7 +105,7 @@ export function pick<T extends object, U extends keyof T>(
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(object, key)) {
+      if (typeof key === 'string' && hasOwn(object, key)) {
         result[key] = object[key];
       } else {
         set(result, key, value);

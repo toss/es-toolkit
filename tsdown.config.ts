@@ -1,4 +1,7 @@
 import { createRequire } from 'node:module';
+import path from 'node:path';
+import type { Plugin } from 'rolldown';
+import { transformSync } from 'rolldown/experimental';
 import { defineConfig } from 'tsdown';
 
 const packageJson = createRequire(import.meta.url)('./package.json') as {
@@ -16,12 +19,47 @@ const allEntrypoints = Object.values(packageJson.exports).filter(
 // build below.
 const neutralEntrypoints = [...allEntrypoints.filter(f => f !== SERVER_ENTRY), './src/util/hash/browser.ts'];
 
+// Published code is lowered to ES2019 syntax, so that `?.` and `??` can be used freely
+// in the source while `es-toolkit/compat` still loads on ES2015 engines such as Node.js 6.
+// Only the modules `es-toolkit/compat` reaches are lowered; the rest is published as written.
+// TODO: lower only the syntax compat needs once Oxc supports per-feature lowering
+// (https://github.com/oxc-project/oxc/issues/15373).
+function lowerCompatToES2019(): Plugin {
+  const compatModules = new Set<string>();
+
+  return {
+    name: 'lower-compat-to-es2019',
+
+    // 1. Once the module graph is complete, collect every module the compat entry reaches.
+    buildEnd() {
+      const queue = [path.resolve(packageJson.exports['./compat'])];
+
+      for (const id of queue) {
+        if (!compatModules.has(id)) {
+          compatModules.add(id);
+          queue.push(...(this.getModuleInfo(id)?.importedIds ?? []));
+        }
+      }
+    },
+
+    // 2. Lower only the output files that come from those modules.
+    renderChunk(code, chunk) {
+      if (!chunk.moduleIds.some(id => compatModules.has(id))) {
+        return null;
+      }
+
+      return transformSync(chunk.fileName, code, { target: 'es2019' }).code;
+    },
+  };
+}
+
 export default defineConfig([
   {
     entry: neutralEntrypoints,
     format: ['esm', 'cjs'],
     outDir: 'dist',
     platform: 'neutral',
+    plugins: [lowerCompatToES2019()],
     unbundle: true,
     fixedExtension: false,
     dts: true,

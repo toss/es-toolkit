@@ -66,6 +66,7 @@ es-toolkit values **performance**, **simplicity**, and **detailed documentation*
 - **Don't reimplement modern JS**: skip functions that are already covered by built-ins (`Array.isArray`, `Number.isNaN`, `Math.min`, `typeof value === 'number'`, etc.) or by TC39 proposals at Stage 3 or above.
 - **Accurate types**: match the inference behavior of TypeScript's `strict` mode.
 - **Two entry points, two policies**: `es-toolkit` is the opinionated API; `es-toolkit/compat` mirrors Lodash for migration. Compat is feature-complete — only behavior fixes against Lodash are accepted, not new functions.
+- **compat runs on Node.js 6**: `es-toolkit/compat` is published for Node.js 6+ (no transpilation or polyfills needed by users), so `src/compat/**` is limited to ES2015 built-ins and ES2015 syntax, plus `?.` and `??`, which the build lowers (enforced by ESLint). Do not change main-library files for compat: if a main-library file compat imports needs a newer built-in, add an ES2015 copy under `src/compat` instead. The `compat-node6` CI job runs the built package on a real Node.js 6.
 
 For the full text, see [Section 1 of CONTRIBUTING.md](./.github/CONTRIBUTING.md#1-our-design-principles).
 

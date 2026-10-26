@@ -1,3 +1,3 @@
-import { Many } from './Many.ts';
+import { Many } from '../_internal/Many.ts';
 
 export type PropertyPath = Many<PropertyKey>;

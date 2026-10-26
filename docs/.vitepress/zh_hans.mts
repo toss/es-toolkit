@@ -10,6 +10,7 @@ const labels: SidebarLabels = {
     bundleSize: '包体积',
     performance: '性能',
     browserSupport: '浏览器支持',
+    environmentSupport: '浏览器和 Node.js 支持',
     aiIntegration: 'AI 集成',
   },
   categories: {

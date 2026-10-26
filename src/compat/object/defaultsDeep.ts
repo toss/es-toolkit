@@ -1,3 +1,4 @@
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
@@ -38,7 +39,7 @@ function defaultsDeepRecursive(target: any, source: any, stack: WeakMap<any, any
     const sourceValue = source[key];
     const targetValue = target[key];
 
-    if (targetValue === undefined || !Object.hasOwn(target, key)) {
+    if (targetValue === undefined || !hasOwn(target, key)) {
       target[key] = handleMissingProperty(sourceValue, stack);
       continue;
     }

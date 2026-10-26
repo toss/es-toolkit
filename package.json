@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.52.0",
+  "version": "1.53.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -116,8 +116,9 @@
     "packlint": "^0.2.4",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
+    "rolldown": "^1.2.15",
     "tar": "^6",
-    "tsdown": "^0.22.0",
+    "tsdown": "^0.23.1",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",

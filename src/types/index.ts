@@ -1,7 +1,10 @@
 export type { DeepPartial } from './DeepPartial.ts';
 export type { DeepReadonly } from './DeepReadonly.ts';
+export type { DistributiveOmit } from './DistributiveOmit.ts';
 export type { EmptyObject } from './EmptyObject.ts';
+export type { IsAny } from './IsAny.ts';
 export type { IsEqual } from './IsEqual.ts';
+export type { IsUnknown } from './IsUnknown.ts';
 export type { JSONValue } from './JSONValue.ts';
 export type { Merge } from './Merge.ts';
 export type { NonEmptyArray } from './NonEmptyArray.ts';

@@ -1,4 +1,6 @@
 import { toPath } from './toPath.ts';
+import { flatten } from '../../array/flatten.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';
@@ -24,7 +26,7 @@ import { get } from '../object/get.ts';
  * invoke(object, ['a', 'b'], [1, 2]); // => 3
  */
 export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], ...args: any[]): any {
-  args = args.flat(1);
+  args = flatten(args, 1);
 
   if (object == null) {
     return;
@@ -32,7 +34,7 @@ export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], 
 
   switch (typeof path) {
     case 'string': {
-      if (typeof object === 'object' && Object.hasOwn(object, path)) {
+      if (typeof object === 'object' && hasOwn(object, path)) {
         return invokeImpl(object, [path], args);
       }
       return invokeImpl(object, toPath(path), args);

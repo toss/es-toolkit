@@ -142,7 +142,7 @@ export { subtract } from './compat/math/subtract.ts';
 export { sum } from './compat/math/sum.ts';
 export { sumBy } from './compat/math/sumBy.ts';
 
-export { isEqual } from './predicate/isEqual.ts';
+export { isEqual } from './compat/predicate/isEqual.ts';
 export { identity } from './compat/function/identity.ts';
 export { noop } from './compat/function/noop.ts';
 export { assign } from './compat/object/assign.ts';

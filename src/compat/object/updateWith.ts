@@ -3,9 +3,9 @@ import { isUnsafeToWriteProperty } from '../../_internal/isUnsafeToWriteProperty
 import { assignValue } from '../_internal/assignValue.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
-import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { isObject } from '../predicate/isObject.ts';
+import { PropertyPath } from '../types/PropertyPath.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**

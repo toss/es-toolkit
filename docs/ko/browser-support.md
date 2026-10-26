@@ -20,6 +20,10 @@ es-toolkit은 현대적인 JavaScript를 적극적으로 활용해서 작고 효
 
 es-toolkit은 새 버전을 릴리스할 때마다 지원하는 브라우저에서 올바르게 동작하는지 검증하고 있어요. 먼저 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 같은 ESLint 플러그인으로 정적으로 검증하고, 실제 브라우저에서 Playwright 기반 E2E 테스트를 실행해 다시 한번 검증해요.
 
+::: tip `es-toolkit/compat`을 사용하고 있나요?
+`es-toolkit/compat`은 트랜스파일이나 폴리필 없이도 Node.js 6, ES2015 브라우저처럼 훨씬 오래된 환경에서 동작해요. 자세한 내용은 [`es-toolkit/compat`의 브라우저 및 Node.js 지원](/ko/compat/environment-support)을 참고하세요.
+:::
+
 ## 오래된 브라우저 지원하기
 
 번들러를 올바르게 설정하면 es-toolkit을 Chrome 51이나 Safari 10처럼 오래된 브라우저에서도 사용할 수 있어요.

@@ -1,3 +1,5 @@
+import { Queue } from '../util/queue.ts';
+
 /**
  * A counting semaphore for async functions that manages available permits.
  * Semaphores are mainly used to limit the number of concurrent async tasks.
@@ -35,7 +37,9 @@ export class Semaphore {
    * @type {number}
    */
   public available: number;
-  private deferredTasks: Array<() => void> = [];
+
+  // `Array#shift` is O(n) on large arrays in V8, which made draining a long queue quadratic.
+  private deferredTasks = new Queue<() => void>();
 
   /**
    * Creates an instance of Semaphore.
@@ -72,7 +76,7 @@ export class Semaphore {
     }
 
     return new Promise<void>(resolve => {
-      this.deferredTasks.push(resolve);
+      this.deferredTasks.enqueue(resolve);
     });
   }
 
@@ -92,7 +96,7 @@ export class Semaphore {
    * }
    */
   release(): void {
-    const deferredTask = this.deferredTasks.shift();
+    const deferredTask = this.deferredTasks.dequeue();
 
     if (deferredTask != null) {
       deferredTask();

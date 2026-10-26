@@ -2,7 +2,8 @@
  * Serializes a function into a string of the form `name:source`.
  *
  * Native functions have no meaningful source, so they are serialized as
- * `name:[native]`. For other functions, newlines and their surrounding
+ * `name:[native]`. The whitespace inside `{ [native code] }` differs between
+ * engines, so it is matched loosely to keep the output platform independent. For other functions, newlines and their surrounding
  * whitespace are collapsed so that formatting differences do not change
  * the output.
  *
@@ -20,7 +21,7 @@
 export function serializeFunction(value: Function): string {
   const source = Function.prototype.toString.call(value);
 
-  if (source.endsWith('[native code] }')) {
+  if (/\{\s*\[native code\]\s*\}$/.test(source)) {
     return `${value.name}:[native]`;
   }
 

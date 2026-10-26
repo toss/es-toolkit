@@ -20,6 +20,10 @@ To support browsers older than the ones above, you can add build configuration. 
 
 Every es-toolkit release is verified to work correctly in the supported browsers: once statically with ESLint plugins like [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x), and again with real Playwright-based E2E tests.
 
+::: tip Using `es-toolkit/compat`?
+`es-toolkit/compat` runs on much older environments, down to Node.js 6 and ES2015 browsers, without any transpilation or polyfills. See [Browser & Node.js Support for `es-toolkit/compat`](/compat/environment-support).
+:::
+
 ## Supporting older browsers
 
 With the right bundler configuration, es-toolkit works correctly even in browsers as old as Chrome 51 or Safari 10.

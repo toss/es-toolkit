@@ -1,6 +1,7 @@
 /**
  * Creates a union of the keys of `T` as they are returned by `Object.keys`:
- * numeric keys are converted to strings and symbol keys are excluded. The key-side
+ * numeric keys are converted to strings and symbol keys are excluded, while
+ * string keys, including enum members, are kept as they are. The key-side
  * counterpart to `ValueOf`.
  *
  * @template T - The object type to read keys from.
@@ -13,4 +14,4 @@
  * const keys = Object.keys(obj) as Array<ObjectKeys<typeof obj>>;
  * // => Array<'a' | 'b'>
  */
-export type ObjectKeys<T> = `${Exclude<keyof T, symbol>}`;
+export type ObjectKeys<T> = [T] extends [unknown] ? Extract<keyof T, string> | `${Extract<keyof T, number>}` : never;

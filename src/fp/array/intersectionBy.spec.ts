@@ -27,4 +27,15 @@ describe('intersectionBy', () => {
     ).toEqual([{ id: 3 }]);
     expect(spy).toHaveBeenCalledTimes(3);
   });
+
+  it('matches each mapped value at most once when evaluated lazily', () => {
+    expect(pipe([2.1, 2.2], intersectionBy([2.3, 3.4], Math.floor), take(2))).toEqual([2.1]);
+  });
+
+  it('returns the same result when the same function is reused across lazy runs', () => {
+    const intersectionByFloor = intersectionBy([2.3, 3.4], Math.floor);
+
+    expect(pipe([2.1, 3.5], intersectionByFloor, take(2))).toEqual([2.1, 3.5]);
+    expect(pipe([2.1, 3.5], intersectionByFloor, take(2))).toEqual([2.1, 3.5]);
+  });
 });

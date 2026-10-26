@@ -19,11 +19,35 @@ describe('compareValues', () => {
     expect(compareValues('chz', 'hz', new Map())).toBeLessThan(0);
   });
 
-  it('should compare mixed types by their serialized form', () => {
+  it('should sort NaN after every other number', () => {
+    expect(compareValues(NaN, Infinity, new Map())).toBeGreaterThan(0);
+    expect(compareValues(-Infinity, NaN, new Map())).toBeLessThan(0);
+    expect(compareValues(NaN, NaN, new Map())).toBe(0);
+    expect(compareValues(NaN, 1n, new Map())).toBeGreaterThan(0);
+  });
+
+  it('should compare numbers and bigints numerically', () => {
+    expect(compareValues(2, 10n, new Map())).toBeLessThan(0);
+    expect(compareValues(11n, 10, new Map())).toBeGreaterThan(0);
+    expect(compareValues(9n, 10n, new Map())).toBeLessThan(0);
+    // A number sorts before a bigint of the same value.
+    expect(compareValues(1, 1n, new Map())).toBeLessThan(0);
+    expect(compareValues(1n, 1, new Map())).toBeGreaterThan(0);
+  });
+
+  it('should sort strings before numbers and numbers before other values', () => {
+    expect(compareValues(3, 'a', new Map())).toBeGreaterThan(0);
+    expect(compareValues('a', 3n, new Map())).toBeLessThan(0);
+    expect(compareValues(3, null, new Map())).toBeLessThan(0);
+    expect(compareValues(true, 3n, new Map())).toBeGreaterThan(0);
+  });
+
+  it('should compare other types by their serialized form', () => {
     // "'a'" vs "{'b':1}"
     expect(compareValues('a', { b: 1 }, new Map())).toBeLessThan(0);
-    // "3" vs "'a'" — the quote sorts before digits, so strings come first
-    expect(compareValues(3, 'a', new Map())).toBeGreaterThan(0);
+    // "[1]" vs "null"
+    expect(compareValues([1], null, new Map())).toBeLessThan(0);
+    expect(compareValues({ a: 1 }, { a: 1 }, new Map())).toBe(0);
   });
 
   it('should sort in a stable order usable by Array.prototype.sort', () => {
