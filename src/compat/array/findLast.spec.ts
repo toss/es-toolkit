@@ -158,6 +158,14 @@ describe('findLast', () => {
     }
   );
 
+  it('should not treat the `length` property of a plain array-like object as an element', () => {
+    const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+
+    expect(findLast(arrayLike, (value: unknown) => value !== 'b')).toBe('a');
+    expect(findLast(arrayLike)).toBe('b');
+    expect(findLast({ length: 2, w: 9 }, (value: unknown) => (value as number) > 1)).toBe(undefined);
+  });
+
   it('should use identity when no _doesMatch is provided', () => {
     expect(findLast([0, 1, 2])).toBe(2);
     expect(findLast([false, true, false])).toBe(true);

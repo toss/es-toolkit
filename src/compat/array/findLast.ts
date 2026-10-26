@@ -1,8 +1,10 @@
 import { identity } from '../../function/identity.ts';
+import { range } from '../../math/range.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -129,7 +131,12 @@ export function findLast<T>(
     return undefined;
   }
 
-  const length = Array.isArray(collection) ? collection.length : Object.keys(collection).length;
+  const keys: PropertyKey[] = isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
+  const length = keys.length;
+
+  if (length === 0) {
+    return undefined;
+  }
 
   fromIndex = toInteger(fromIndex ?? length - 1);
 
@@ -141,27 +148,11 @@ export function findLast<T>(
 
   const doesMatch = iteratee(_doesMatch);
 
-  if (!Array.isArray(collection)) {
-    const keys = Object.keys(collection) as Array<keyof T>;
+  for (let i = fromIndex; i >= 0; i--) {
+    const key = keys[i];
+    const value = (collection as Record<PropertyKey, T>)[key];
 
-    for (let i = fromIndex; i >= 0; i--) {
-      const key = keys[i];
-      const value = collection[key] as T;
-
-      if (doesMatch(value, key as number, collection)) {
-        return value;
-      }
-    }
-
-    return undefined;
-  }
-
-  const subArray = collection.slice(0, fromIndex + 1);
-
-  for (let i = subArray.length - 1; i >= 0; i--) {
-    const value = subArray[i];
-
-    if (doesMatch(value, i, subArray)) {
+    if (doesMatch(value, key, collection)) {
       return value;
     }
   }
