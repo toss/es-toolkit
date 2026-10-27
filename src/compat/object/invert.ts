@@ -11,7 +11,7 @@ import { isNil } from '../../predicate/isNil.ts';
  * invert({ a: 1, b: 2, c: 3 });
  * // => { '1': 'a', '2': 'b', '3': 'c' }
  */
-export function invert(object: object | null | undefined): Record<string, string>;
+export function invert(object: object): Record<string, string>;
 
 /**
  * Inverts the keys and values of an object. The keys of the input object become the values of the output object and vice versa.

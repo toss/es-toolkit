@@ -21,7 +21,9 @@ describe('invert', () => {
   });
 
   it('should return an empty object for `null` and `undefined`', () => {
+    // @ts-expect-error - lodash's type only accepts an object, but it returns `{}` at runtime
     expect(invert(null)).toEqual({});
+    // @ts-expect-error - lodash's type only accepts an object, but it returns `{}` at runtime
     expect(invert(undefined)).toEqual({});
   });
 });
