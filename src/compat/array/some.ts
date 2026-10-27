@@ -2,10 +2,8 @@ import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
-import { objectValues } from '../_internal/objectValues.ts';
-import { property } from '../object/property.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Checks if predicate returns truthy for any element of collection.
@@ -89,75 +87,27 @@ export function some<T>(
     predicate = undefined;
   }
 
-  if (predicate == null) {
-    predicate = identity;
+  const doesMatch = iteratee(predicate ?? identity);
+
+  if (!isArrayLike(source)) {
+    const keys = Object.keys(source) as Array<keyof typeof source>;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
+      if (doesMatch(source[key], key, source)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
-  const values = Array.isArray(source) ? source : objectValues(source);
-
-  switch (typeof predicate) {
-    case 'function': {
-      if (!Array.isArray(source)) {
-        const keys = Object.keys(source) as Array<keyof T>;
-
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          const value = source[key];
-
-          if (predicate(value as T, key as number, source)) {
-            return true;
-          }
-        }
-
-        return false;
-      }
-
-      for (let i = 0; i < source.length; i++) {
-        if (predicate(source[i] as T, i, source)) {
-          return true;
-        }
-      }
-      return false;
-    }
-    case 'object': {
-      if (Array.isArray(predicate) && predicate.length === 2) {
-        const key = predicate[0];
-        const value = predicate[1];
-
-        const matchFunc = matchesProperty(key, value);
-        if (Array.isArray(source)) {
-          for (let i = 0; i < source.length; i++) {
-            if (matchFunc(source[i])) {
-              return true;
-            }
-          }
-          return false;
-        }
-        return values.some(matchFunc);
-      } else {
-        const matchFunc = matches(predicate);
-        if (Array.isArray(source)) {
-          for (let i = 0; i < source.length; i++) {
-            if (matchFunc(source[i])) {
-              return true;
-            }
-          }
-          return false;
-        }
-        return values.some(matchFunc);
-      }
-    }
-    default: {
-      const propFunc = property(predicate);
-      if (Array.isArray(source)) {
-        for (let i = 0; i < source.length; i++) {
-          if (propFunc(source[i])) {
-            return true;
-          }
-        }
-        return false;
-      }
-      return values.some(propFunc);
+  for (let i = 0; i < source.length; i++) {
+    if (doesMatch((source as ArrayLike<T>)[i], i, source)) {
+      return true;
     }
   }
+
+  return false;
 }
