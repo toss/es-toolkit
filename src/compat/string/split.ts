@@ -1,5 +1,5 @@
 import { regexMultiByte } from '../_internal/regexMultiByte.ts';
-import { unicodeToArray } from '../_internal/unicodeSize.ts';
+import { unicodeToArray } from '../_internal/unicodeToArray.ts';
 import { toString } from '../util/toString.ts';
 
 /**
