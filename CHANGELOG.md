@@ -1,5 +1,31 @@
 # es-toolkit Changelog
 
+## Version v1.53.1
+
+Released on October 31st, 2026.
+
+This release includes security fixes for `es-toolkit/compat`, and we recommend upgrading.
+The fixes match Lodash, so results may differ if you relied on the previous behavior.
+
+- Fixed `compat/template` to reject `variable` values and `imports` keys that are not
+  plain parameter names, and to replace all whitespace in `sourceURL`, preventing code injection.
+- Fixed `compat/defaultsDeep` to ignore `__proto__` keys, preventing prototype pollution.
+- Fixed `compat/unset`, `compat/omit`, and `compat/pullAt` to stop when `__proto__`,
+  `constructor`, or `prototype` appears before the last path key, preventing the deletion
+  of built-in prototype properties.
+
+The following are other fixes in this release.
+
+- Fixed `clone` to preserve the offset and length of a `DataView`. ([#2166])
+- Fixed `split` to keep surrogate pairs and combining marks together for an empty separator. ([#2171])
+- Fixed `withTimeout` to clear its timer after the operation completes. ([#2170])
+- Fixed `compat/pickBy` to not treat objects with a numeric length as array-like. ([#2165])
+- Fixed `compat/findLast` and `compat/some` to not treat `length` as an element of
+  array-likes. ([#2168])
+
+We sincerely thank @arba-octo, @dayongkr, @frogscooper, and @KooYS for their contributions.
+We appreciate your great efforts!
+
 ## Version v1.53.0
 
 Released on October 24th, 2026.
