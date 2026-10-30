@@ -240,4 +240,43 @@ describe('defaultsDeep', () => {
 
     expect(defaultsDeep(target, source)).toEqual(expected);
   });
+
+  it('should not replace the prototype of `target` through a `__proto__` key', () => {
+    const actual: any = defaultsDeep({}, JSON.parse('{"__proto__":{"isAdmin":true}}'));
+
+    expect(actual.isAdmin).toBeUndefined();
+    expect(Object.getPrototypeOf(actual)).toBe(Object.prototype);
+  });
+
+  it('should ignore a `__proto__` key in nested objects', () => {
+    const existing: any = defaultsDeep({ a: {} }, JSON.parse('{"a":{"__proto__":{"isAdmin":true}}}'));
+    const missing: any = defaultsDeep({}, JSON.parse('{"a":{"__proto__":{"isAdmin":true}}}'));
+
+    expect(existing.a.isAdmin).toBeUndefined();
+    expect(missing.a.isAdmin).toBeUndefined();
+    expect(Object.getPrototypeOf(existing.a)).toBe(Object.prototype);
+    expect(Object.getPrototypeOf(missing.a)).toBe(Object.prototype);
+  });
+
+  it('should ignore a `__proto__` key in objects inside arrays', () => {
+    const actual: any = defaultsDeep({ a: [{}] }, JSON.parse('{"a":[{"__proto__":{"isAdmin":true}}]}'));
+
+    expect(actual.a[0].isAdmin).toBeUndefined();
+  });
+
+  it('should keep copying `constructor` and `prototype` keys as plain data', () => {
+    const source = JSON.parse('{"constructor":{"a":1},"prototype":{"b":2}}');
+    const actual: any = defaultsDeep({}, source);
+
+    expect(Object.keys(actual).sort()).toEqual(['constructor', 'prototype']);
+    expect(actual.constructor).toEqual({ a: 1 });
+    expect(actual.prototype).toEqual({ b: 2 });
+    expect(({} as any).a).toBeUndefined();
+  });
+
+  it('should keep the properties next to a `__proto__` key', () => {
+    const actual = defaultsDeep({ a: 1 }, JSON.parse('{"__proto__":{"x":1},"b":2}'));
+
+    expect(actual).toEqual({ a: 1, b: 2 });
+  });
 });

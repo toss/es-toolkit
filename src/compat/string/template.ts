@@ -1,4 +1,5 @@
 import { escape } from './escape.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { attempt } from '../function/attempt.ts';
 import { defaults } from '../object/defaults.ts';
@@ -12,6 +13,9 @@ const unEscapedRegExp = /['\n\r\u2028\u2029\\]/g;
 
 // A regular expression for matching no match.
 const noMatchExp = /($^)/;
+
+// A regular expression for matching characters that could end a parameter name in the generated function.
+const forbiddenIdentifierCharsRegExp = /[()=,{}[\]/\s]/;
 
 const escapeMap = new Map([
   ['\\', '\\'],
@@ -75,6 +79,7 @@ export function template(string?: string, options?: TemplateOptions): TemplateEx
  * @param [options.sourceURL] - The source URL of the template.
  * @param [guard] - The guard to detect if the function is called with `options`.
  * @returns Returns the compiled template function.
+ * @throws {Error} If the `variable` option or an `imports` key contains characters that are not allowed in a parameter name.
  *
  * @example
  * // Use the "escape" delimiter to escape data properties.
@@ -181,15 +186,31 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
   const importsKeys = Object.keys(imports);
   const importValues = importsKeys.map(key => imports[key]);
 
-  const sourceURL = `//# sourceURL=${
-    options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`
-  }\n`;
+  for (let i = 0; i < importsKeys.length; i++) {
+    if (forbiddenIdentifierCharsRegExp.test(importsKeys[i])) {
+      throw new Error('Invalid `imports` option passed into `template`');
+    }
+  }
 
-  const compiledFunction = `function(${options.variable || 'obj'}) {
+  const variable = String(options.variable || '');
+
+  if (forbiddenIdentifierCharsRegExp.test(variable)) {
+    throw new Error('Invalid `variable` option passed into `template`');
+  }
+
+  let sourceName = `es-toolkit.templateSource[${Date.now()}]`;
+
+  if (hasOwn(options, 'sourceURL') && options.sourceURL) {
+    sourceName = String(options.sourceURL).replace(/\s/g, ' ');
+  }
+
+  const sourceURL = `//# sourceURL=${sourceName}\n`;
+
+  const compiledFunction = `function(${variable || 'obj'}) {
     let __p = '';
-    ${options.variable ? '' : 'if (obj == null) { obj = {}; }'}
+    ${variable ? '' : 'if (obj == null) { obj = {}; }'}
     ${isEvaluated ? `function print() { __p += Array.prototype.join.call(arguments, ''); }` : ''}
-    ${options.variable ? source : `with(obj) {\n${source}\n}`}
+    ${variable ? source : `with(obj) {\n${source}\n}`}
     return __p;
   }`;
 

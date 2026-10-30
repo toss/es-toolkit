@@ -117,4 +117,30 @@ describe('omit', () => {
     expect('3' in result).toBe(false);
     expect('4' in result).toBe(false);
   });
+
+  it('should not delete properties from a built-in prototype', () => {
+    const key = 'omitBuiltInPrototypeProbe';
+
+    (Object.prototype as any)[key] = 1;
+
+    try {
+      omit({}, [`constructor.prototype.${key}`]);
+
+      expect((Object.prototype as any)[key]).toBe(1);
+    } finally {
+      delete (Object.prototype as any)[key];
+    }
+  });
+
+  it('should keep values behind `constructor` or `prototype` path segments', () => {
+    const object = { prototype: { a: 1, b: 2 }, constructor: { c: 3 } };
+
+    expect(omit(object, ['prototype.a', 'constructor.c'])).toEqual(object);
+  });
+
+  it('should still omit `constructor` and `prototype` at the end of a path', () => {
+    const object = { a: { constructor: 1, prototype: 2, b: 3 } };
+
+    expect(omit(object, ['a.constructor', 'a.prototype'])).toEqual({ a: { b: 3 } });
+  });
 });

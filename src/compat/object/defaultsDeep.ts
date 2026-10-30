@@ -1,3 +1,4 @@
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -36,6 +37,10 @@ export function defaultsDeep(target: any, ...sources: any[]): any {
 
 function defaultsDeepRecursive(target: any, source: any, stack: WeakMap<any, any>): void {
   for (const key in source) {
+    if (isUnsafeProperty(key)) {
+      continue;
+    }
+
     const sourceValue = source[key];
     const targetValue = target[key];
 
