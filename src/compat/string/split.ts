@@ -1,3 +1,5 @@
+import { regexMultiByte } from '../_internal/regexMultiByte.ts';
+import { unicodeToArray } from '../_internal/unicodeToArray.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -37,5 +39,11 @@ export function split(string: string | null | undefined, separator?: RegExp | st
 export function split(string: string | null | undefined, index: string | number, guard: object): string[];
 
 export function split(string: any, separator?: any, limit?: any): string[] {
-  return toString(string).split(separator as string, limit);
+  const str = toString(string);
+
+  if (separator === '' && regexMultiByte.test(str)) {
+    return unicodeToArray(str).slice(0, limit === undefined ? undefined : limit >>> 0);
+  }
+
+  return str.split(separator as string, limit);
 }
