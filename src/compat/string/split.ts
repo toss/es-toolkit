@@ -41,7 +41,6 @@ export function split(string: string | null | undefined, index: string | number,
 export function split(string: any, separator?: any, limit?: any): string[] {
   const str = toString(string);
 
-  // Split into visible symbols so surrogate pairs and combining marks stay together, like lodash
   if (separator === '' && regexMultiByte.test(str)) {
     return unicodeToArray(str).slice(0, limit === undefined ? undefined : limit >>> 0);
   }
