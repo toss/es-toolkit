@@ -47,19 +47,18 @@ export async function withTimeout<T>(
   ms: number,
   { signal }: WithTimeoutOptions = {}
 ): Promise<T> {
+  // Disarms the timeout once the caller's signal aborts or the race settles. The
+  // listener is bound to the controller's signal so it is removed automatically.
   const controller = new AbortController();
-  const abort = () => controller.abort();
 
   if (signal?.aborted) {
     controller.abort();
-  } else {
-    signal?.addEventListener('abort', abort, { once: true });
   }
+  signal?.addEventListener('abort', () => controller.abort(), { once: true, signal: controller.signal });
 
   try {
     return await Promise.race([run(), timeout(ms, { signal: controller.signal })]);
   } finally {
     controller.abort();
-    signal?.removeEventListener('abort', abort);
   }
 }
