@@ -10,11 +10,13 @@ next:
 
 # インストールと使用方法
 
+## インストール
+
 Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolkit)からインストールできます。Denoでは[JSR](https://jsr.io/@es-toolkit/es-toolkit)からインストールできます。
 
 ブラウザで直接使用する場合は、[CDNから取得](#ブラウザ)できます。
 
-## Node.js
+### Node.js
 
 es-toolkitはNode.js 18以降のバージョンをサポートしています。es-toolkitをインストールするには、以下のコマンドを使用してください。
 
@@ -34,15 +36,7 @@ yarn add es-toolkit
 
 :::
 
-es-toolkitの関数を使うには、以下のように`import`して使用できます。
-
-```typescript
-import { sum } from 'es-toolkit';
-
-sum([1, 2, 3]);
-```
-
-## Deno
+### Deno
 
 es-toolkitはDenoでも使用できます。[JSR](https://jsr.io/@es-toolkit/es-toolkit)から以下のコマンドでインストールしてください。
 
@@ -58,7 +52,7 @@ import { sum } from '@es-toolkit/es-toolkit';
 sum([1, 2, 3]);
 ```
 
-## Bun
+### Bun
 
 es-toolkitはBunでも使用できます。以下のコマンドを使用してください。
 
@@ -66,7 +60,7 @@ es-toolkitはBunでも使用できます。以下のコマンドを使用して�
 bun add es-toolkit
 ```
 
-## ブラウザ
+### ブラウザ
 
 [jsdelivr](https://www.jsdelivr.com)や[unpkg](https://unpkg.com)などのCDNからes-toolkitを使用できます。Lodashと同様に、`_`変数にすべての関数が含まれています。
 
@@ -108,3 +102,26 @@ bun add es-toolkit
 ```
 
 :::
+
+## 使用法
+
+### メインライブラリからインポートする
+
+ほとんどの場合は、`es-toolkit` のメインライブラリから関数をインポートしてください。
+
+```typescript
+import { chunk, debounce } from 'es-toolkit';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```
+
+### 個別のファイルからインポートする
+
+関数を個別のファイルからインポートしたい場合は、`es-toolkit/{category}/{function}` から直接インポートしてください。パスは [`/reference/array/chunk`](./reference/array/chunk.md) のように、関数のリファレンスページのパスと同じです。
+
+```typescript
+import { chunk } from 'es-toolkit/array/chunk';
+import { debounce } from 'es-toolkit/function/debounce';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```
