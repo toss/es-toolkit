@@ -47,8 +47,6 @@ export async function withTimeout<T>(
   ms: number,
   { signal }: WithTimeoutOptions = {}
 ): Promise<T> {
-  // Disarms the timeout once the caller's signal aborts or the race settles. The
-  // listener is bound to the controller's signal so it is removed automatically.
   const controller = new AbortController();
 
   if (signal?.aborted) {
