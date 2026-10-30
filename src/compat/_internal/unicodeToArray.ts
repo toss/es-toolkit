@@ -1,4 +1,4 @@
-import { reUnicode } from './unicodeSize.ts';
+import { regexUnicode } from './regexUnicode.ts';
 
 /**
  * Splits a Unicode `string` into an array of its visible symbols (grapheme clusters).
@@ -7,5 +7,5 @@ import { reUnicode } from './unicodeSize.ts';
  * @link https://github.com/lodash/lodash/blob/4.17.21-es/_unicodeToArray.js
  */
 export function unicodeToArray(str: string): string[] {
-  return str.match(reUnicode) || [];
+  return str.match(regexUnicode) || [];
 }
