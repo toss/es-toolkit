@@ -1,0 +1,40 @@
+import { describe, expectTypeOf, it } from 'vitest';
+import * as toolkit from 'es-toolkit';
+import { chunk } from 'es-toolkit/array/chunk';
+import * as bigint from 'es-toolkit/bigint';
+import { clamp as clampBigInt } from 'es-toolkit/bigint/clamp';
+import { AbortError } from 'es-toolkit/error/AbortError';
+import { debounce } from 'es-toolkit/function/debounce';
+import * as iterator from 'es-toolkit/iterator';
+import { chunk as chunkIterator } from 'es-toolkit/iterator/chunk';
+import * as map from 'es-toolkit/map';
+import { mapValues as mapValuesMap } from 'es-toolkit/map/mapValues';
+import { sum } from 'es-toolkit/math/sum';
+import { pick } from 'es-toolkit/object/pick';
+import { isPlainObject } from 'es-toolkit/predicate/isPlainObject';
+import { delay } from 'es-toolkit/promise/delay';
+import * as set from 'es-toolkit/set';
+import { filter as filterSet } from 'es-toolkit/set/filter';
+import { camelCase } from 'es-toolkit/string/camelCase';
+import type * as types from 'es-toolkit/types';
+import type { DeepPartial } from 'es-toolkit/types/DeepPartial';
+import { attempt } from 'es-toolkit/util/attempt';
+
+describe('es-toolkit/<category>/<fn>', () => {
+  it('matches the type of the category entry', () => {
+    expectTypeOf(chunk).toEqualTypeOf<typeof toolkit.chunk>();
+    expectTypeOf(clampBigInt).toEqualTypeOf<typeof bigint.clamp>();
+    expectTypeOf(AbortError).toEqualTypeOf<typeof toolkit.AbortError>();
+    expectTypeOf(debounce).toEqualTypeOf<typeof toolkit.debounce>();
+    expectTypeOf(chunkIterator).toEqualTypeOf<typeof iterator.chunk>();
+    expectTypeOf(mapValuesMap).toEqualTypeOf<typeof map.mapValues>();
+    expectTypeOf(sum).toEqualTypeOf<typeof toolkit.sum>();
+    expectTypeOf(pick).toEqualTypeOf<typeof toolkit.pick>();
+    expectTypeOf(isPlainObject).toEqualTypeOf<typeof toolkit.isPlainObject>();
+    expectTypeOf(delay).toEqualTypeOf<typeof toolkit.delay>();
+    expectTypeOf(filterSet).toEqualTypeOf<typeof set.filter>();
+    expectTypeOf(camelCase).toEqualTypeOf<typeof toolkit.camelCase>();
+    expectTypeOf<DeepPartial<{ a: number }>>().toEqualTypeOf<types.DeepPartial<{ a: number }>>();
+    expectTypeOf(attempt).toEqualTypeOf<typeof toolkit.attempt>();
+  });
+});

@@ -10,11 +10,13 @@ next:
 
 # Installation & Usage
 
+## Installation
+
 es-toolkit is available via [npm](https://npmjs.com/package/es-toolkit) for Node.js and Bun, and through [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno.
 
 You can also use es-toolkit in browsers by [importing them in CDNs](#browsers).
 
-## Node.js
+### Node.js
 
 es-toolkit supports Node.js 18 or later. Install es-toolkit with the following command:
 
@@ -34,15 +36,7 @@ yarn add es-toolkit
 
 :::
 
-To use a function from es-toolkit, simply import it and use as shown below.
-
-```typescript
-import { sum } from 'es-toolkit';
-
-sum([1, 2, 3]);
-```
-
-## Deno
+### Deno
 
 es-toolkit is also available via [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno. To install es-toolkit, use the following command:
 
@@ -58,7 +52,7 @@ import { sum } from '@es-toolkit/es-toolkit';
 sum([1, 2, 3]);
 ```
 
-## Bun
+### Bun
 
 es-toolkit is also available on Bun. You can install it via the following command:
 
@@ -66,7 +60,7 @@ es-toolkit is also available on Bun. You can install it via the following comman
 bun add es-toolkit
 ```
 
-## Browsers
+### Browsers
 
 You can find es-toolkit on CDNs such as [jsdelivr](https://www.jsdelivr.com), [unpkg](https://unpkg.com). We define `_` to include all functions, similar to Lodash.
 
@@ -108,3 +102,26 @@ es-toolkit is also available on [esm.sh](https://esm.sh) for modern browsers.
 ```
 
 :::
+
+## Usage
+
+### Importing from the Main Library
+
+In most cases, import functions from the main `es-toolkit` library.
+
+```typescript
+import { chunk, debounce } from 'es-toolkit';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```
+
+### Importing Individual Files
+
+If you want to import each function from its own file, import it from `es-toolkit/{category}/{function}`. The path is the same as the function's reference page, such as [`/reference/array/chunk`](./reference/array/chunk.md).
+
+```typescript
+import { chunk } from 'es-toolkit/array/chunk';
+import { debounce } from 'es-toolkit/function/debounce';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```

@@ -10,8 +10,10 @@ const packageJson = createRequire(import.meta.url)('./package.json') as {
 
 const SERVER_ENTRY = './src/server/index.ts';
 
+// Per-function subpaths ("./array/*") are wildcards, not entries: the unbundled build
+// already emits one file per module reached from the category entry.
 const allEntrypoints = Object.values(packageJson.exports).filter(
-  (f): f is string => typeof f === 'string' && /^(\.\/)?src\//.test(f) && f.endsWith('.ts')
+  (f): f is string => typeof f === 'string' && /^(\.\/)?src\//.test(f) && f.endsWith('.ts') && !f.includes('*')
 );
 // "./util/hash" is a conditional export (node/default), so its entries are not
 // collected above and are wired explicitly: the browser implementation builds
