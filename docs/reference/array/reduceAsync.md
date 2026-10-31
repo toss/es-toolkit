@@ -12,6 +12,8 @@ const result = await reduceAsync(array, reducer, initialValue);
 
 Use `reduceAsync` to reduce an array to a single value by processing each element sequentially. The reducer function is applied sequentially to each element from left to right, passing the accumulated result from one call to the next.
 
+When you provide an initial value, including `null` or `undefined`, it is used as the accumulator and the reducer starts at the first element. If the array is empty, the initial value is returned. Only omitting the third argument uses the first array element as the initial value.
+
 ```typescript
 import { reduceAsync } from 'es-toolkit/array';
 

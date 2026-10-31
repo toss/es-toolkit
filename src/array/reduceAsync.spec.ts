@@ -32,6 +32,30 @@ describe('reduceAsync', () => {
     expect(reducer).toHaveBeenCalledTimes(0);
   });
 
+  it.each([null, undefined])('uses an explicitly provided %s initial value', async initialValue => {
+    const arr = [1, 2];
+    const reducer = vi.fn(async (acc: number | null | undefined, n: number) => (acc ?? 0) + n * 10);
+
+    const result = await reduceAsync(arr, reducer, initialValue);
+
+    expect(result).toBe(30);
+    expect(reducer).toHaveBeenCalledTimes(arr.length);
+    expect(reducer.mock.calls[0]).toEqual([initialValue, 1, 0, arr]);
+    expect(reducer.mock.calls[1]).toEqual([10, 2, 1, arr]);
+  });
+
+  it.each([null, undefined])(
+    'preserves an explicitly provided %s initial value for an empty array',
+    async initialValue => {
+      const reducer = vi.fn(async (acc: number | null | undefined, n: number) => (acc ?? 0) + n);
+
+      const result = await reduceAsync([], reducer, initialValue);
+
+      expect(result).toBe(initialValue);
+      expect(reducer).not.toHaveBeenCalled();
+    }
+  );
+
   it('can reduce to different type', async () => {
     const arr = [1, 2, 3];
     const reducer = async (acc: string, n: number) => {

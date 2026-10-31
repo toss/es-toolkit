@@ -6,6 +6,10 @@
  * array methods, reduce must process elements sequentially and does not support
  * concurrency limiting.
  *
+ * An explicitly provided initial value, including `null` or `undefined`, is used
+ * as the accumulator, and reduction starts from the first element. If the array
+ * is empty, the initial value is returned.
+ *
  * @template T - The type of elements in the array.
  * @template U - The type of the accumulated result.
  * @param array The array to reduce.
@@ -83,7 +87,7 @@ export async function reduceAsync<T, U>(
 ): Promise<U> {
   let startIndex = 0;
 
-  if (initialValue == null) {
+  if (arguments.length < 3) {
     initialValue = array[0] as unknown as U;
     startIndex = 1;
   }
