@@ -99,7 +99,16 @@ export function groupBy<T, K extends PropertyKey>(
     const key = getKeyFromItem(item) as K;
 
     if (!hasOwn(result, key)) {
-      result[key] = [];
+      if (key === '__proto__') {
+        Object.defineProperty(result, key, {
+          configurable: true,
+          enumerable: true,
+          value: [],
+          writable: true,
+        });
+      } else {
+        result[key] = [];
+      }
     }
 
     result[key].push(item);
