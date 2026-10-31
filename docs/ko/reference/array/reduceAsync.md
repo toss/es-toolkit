@@ -12,6 +12,8 @@ const result = await reduceAsync(array, reducer, initialValue);
 
 배열의 각 요소를 순차적으로 처리해서 하나의 값으로 합칠 때 `reduceAsync`를 사용하세요. 리듀서 함수는 왼쪽에서 오른쪽으로 각 요소에 순차적으로 적용되며, 이전 호출의 누적 결과를 다음 호출로 전달해요.
 
+초기값을 전달하면 `null`이나 `undefined`도 누적 값의 초기값으로 사용하고, 첫 번째 요소부터 리듀서 함수를 실행해요. 배열이 비어 있으면 전달한 초기값을 반환해요. 세 번째 인자를 생략했을 때만 배열의 첫 번째 요소를 초기값으로 사용해요.
+
 ```typescript
 import { reduceAsync } from 'es-toolkit/array';
 
