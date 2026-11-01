@@ -1,4 +1,3 @@
-import { escapeRegExp } from '../../string/escapeRegExp.ts';
 import { regexMultiByte } from '../_internal/regexMultiByte.ts';
 import { isObject } from '../predicate/isObject.ts';
 
@@ -81,13 +80,35 @@ export function truncate(string?: string, options?: TruncateOptions): string {
     return base;
   }
 
-  // Further truncate the string to the last separator using unicode regex
-  const search = separator instanceof RegExp ? separator.source : escapeRegExp(separator);
-  const flags = 'u' + (separator instanceof RegExp ? separator.flags.replace('u', '') : '');
-  const withoutSeparator = new RegExp(`(.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
+  const separatorAtBoundary =
+    separator instanceof RegExp
+      ? string.slice(base.length).search(separator) === 0
+      : string.indexOf(separator, base.length) === base.length;
+  if (separatorAtBoundary) {
+    return base + omission;
+  }
+
+  let lastSeparator = -1;
+  if (typeof separator === 'string') {
+    lastSeparator = base.lastIndexOf(separator);
+  } else {
+    const flags = separator.flags.includes('g') ? separator.flags : separator.flags + 'g';
+    const pattern = new RegExp(separator.source, flags);
+    let match: RegExpExecArray | null;
+    while ((match = pattern.exec(base)) !== null) {
+      lastSeparator = match.index;
+      if (match[0].length === 0) {
+        const unicode = pattern.unicode || pattern.flags.includes('v');
+        pattern.lastIndex = match.index + (unicode && (base.codePointAt(match.index) ?? 0) > 0xffff ? 2 : 1);
+      }
+    }
+  }
+  if (lastSeparator !== -1) {
+    base = base.slice(0, lastSeparator);
+  }
 
   // Return the final truncated string with the omission string appended
-  return (withoutSeparator == null ? base : withoutSeparator[1]) + omission;
+  return base + omission;
 }
 
 function parseLength(length: number | undefined) {

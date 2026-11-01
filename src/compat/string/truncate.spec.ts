@@ -7,6 +7,25 @@ import { constant } from '../util/constant.ts';
 describe('truncate', () => {
   const string = 'hi-diddly-ho there, neighborino';
 
+  it.each([
+    ['a-bc-d', { length: 4, omission: '', separator: '-' }, 'a-bc'],
+    ['a bc d', { length: 4, omission: '', separator: / / }, 'a bc'],
+    ['a bc d', { length: 4, omission: '', separator: / /g }, 'a bc'],
+    ['-abcdef', { length: 5, separator: '-' }, '...'],
+    [' abcdef', { length: 5, separator: / / }, '...'],
+    ['a--bc--d', { length: 5, omission: '', separator: '--' }, 'a--bc'],
+    ['🤓 ab cd', { length: 4, omission: '', separator: ' ' }, '🤓 ab'],
+  ] as const)('should match Lodash at separator boundaries for %s', (input, options, expected) => {
+    expect(truncate(input, options)).toBe(expected);
+  });
+
+  it.each(['g', 'gu', 'gv'])('should advance past empty separator matches with %s flags', flags => {
+    const separator = new RegExp('(?=🤓|b)', flags);
+    separator.lastIndex = 1;
+    expect(truncate('🤓ab cde', { length: 4, omission: '', separator })).toBe('🤓a');
+    expect(separator.lastIndex).toBe(1);
+  });
+
   it('should use a default `length` of `30`', () => {
     expect(truncate(string)).toBe('hi-diddly-ho there, neighbo...');
   });
