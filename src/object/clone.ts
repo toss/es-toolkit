@@ -85,6 +85,12 @@ export function clone<T>(obj: T): T {
     return newFile;
   }
 
+  if (typeof Blob === 'function' && obj instanceof Blob) {
+    const newBlob = new Blob([obj], { type: obj.type });
+    Object.setPrototypeOf(newBlob, prototype);
+    return Object.assign(newBlob, obj);
+  }
+
   if (typeof obj === 'object') {
     const newObject = Object.create(prototype);
     return Object.assign(newObject, obj);

@@ -6,6 +6,17 @@
  */
 export const manualCases = [
   {
+    id: 'manual:main/clone-blob',
+    async: true,
+    browserOnly: true,
+    run: async function (__ns, __assertEq) {
+      const { clone } = __ns.main;
+      const clonedBlob = clone(new Blob(['Hello']));
+
+      __assertEq(await new Response(clonedBlob).text(), 'Hello');
+    },
+  },
+  {
     id: 'manual:main/lowerFirst',
     async: false,
     run: function (__ns, __assertEq) {
