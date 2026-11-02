@@ -59,6 +59,17 @@ export default defineConfig(
       'vitest/no-conditional-expect': 'warn',
       'vitest/no-commented-out-tests': 'warn',
       'vitest/valid-expect': 'warn',
+      // Tests call the function directly inside it() instead of using
+      // it.each(), test.for(), describe.each(), or their modifiers such as
+      // it.skip.each() and it.skipIf(condition).each().
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'MemberExpression[property.name=/^(each|for)$/]:matches([object.name=/^(it|test|describe|suite)$/], [object.object.name=/^(it|test|describe|suite)$/], [object.object.object.name=/^(it|test|describe|suite)$/], [object.callee.object.name=/^(it|test|describe|suite)$/])',
+          message: 'Do not use .each() or .for(). Write a separate it() that calls the function directly.',
+        },
+      ],
     },
   },
   prettier,
