@@ -1,10 +1,5 @@
 # es-toolkit Changelog
 
-## Unreleased
-
-- Fixed `compat/truncate` to preserve text when a separator starts at the
-  truncation boundary and to handle a separator at the start of the string.
-
 ## Version v1.53.1
 
 Released on October 31st, 2026.
