@@ -6,9 +6,9 @@
  * array methods, reduce must process elements sequentially and does not support
  * concurrency limiting.
  *
- * An explicitly provided initial value, including `null` or `undefined`, is used
- * as the accumulator, and reduction starts from the first element. If the array
- * is empty, the initial value is returned.
+ * If no initial value is provided, the first element is used as the initial value
+ * and the reducer is applied starting from the second element. `null` and
+ * `undefined` can also be used as the initial value.
  *
  * @template T - The type of elements in the array.
  * @template U - The type of the accumulated result.

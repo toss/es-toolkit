@@ -12,7 +12,7 @@ const result = await reduceAsync(array, reducer, initialValue);
 
 各要素を順次処理して配列を1つの値に縮約する場合は、`reduceAsync`を使用してください。リデューサー関数は左から右へ各要素に順次適用され、前の呼び出しの累積結果を次の呼び出しに渡します。
 
-初期値を渡すと、`null`や`undefined`も累積値の初期値として使用され、最初の要素からリデューサー関数が実行されます。配列が空の場合は、渡した初期値を返します。第3引数を省略した場合にのみ、配列の最初の要素を初期値として使用します。
+初期値を渡さない場合は、配列の最初の要素が初期値として使用され、2番目の要素からリデューサー関数が適用されます。初期値として`null`や`undefined`も使用できます。
 
 ```typescript
 import { reduceAsync } from 'es-toolkit/array';
