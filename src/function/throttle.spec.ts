@@ -14,7 +14,7 @@ describe('throttle', () => {
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should execute the function immediately if not called within the wait time', async () => {
+  it('should execute a pending trailing call before the next throttle period', async () => {
     const func = vi.fn();
     const throttleMs = 500;
     const throttledFunc = throttle(func, throttleMs);
@@ -29,9 +29,9 @@ describe('throttle', () => {
     expect(func).toHaveBeenCalledTimes(1);
 
     await delay(throttleMs / 2 + 1);
-    expect(func).toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledTimes(2);
 
-    throttledFunc(); // should be executed
+    throttledFunc(); // should be scheduled for the next period
     expect(func).toHaveBeenCalledTimes(2);
 
     await delay(throttleMs / 2 - 1);
@@ -41,9 +41,6 @@ describe('throttle', () => {
     expect(func).toHaveBeenCalledTimes(2);
 
     await delay(throttleMs / 2 + 1);
-    expect(func).toHaveBeenCalledTimes(2);
-
-    throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(3);
   });
 
@@ -83,6 +80,45 @@ describe('throttle', () => {
 
     await delay(throttleMs + 1);
     expect(func).toBeCalledTimes(2);
+  });
+
+  it('should invoke at each throttle period during repeated calls', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    try {
+      const calls: Array<[number, number]> = [];
+      const throttleMs = 50;
+      const throttled = throttle((value: number) => {
+        calls.push([value, Date.now()]);
+      }, throttleMs);
+
+      throttled(0);
+      vi.advanceTimersByTime(20);
+      throttled(20);
+      vi.advanceTimersByTime(20);
+      throttled(40);
+      vi.advanceTimersByTime(10);
+
+      expect(calls).toEqual([
+        [0, 0],
+        [40, 50],
+      ]);
+
+      vi.advanceTimersByTime(10);
+      throttled(60);
+      vi.advanceTimersByTime(20);
+      throttled(80);
+      vi.advanceTimersByTime(20);
+
+      expect(calls).toEqual([
+        [0, 0],
+        [40, 50],
+        [80, 100],
+      ]);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('should be able to abort initial invocation', async () => {
