@@ -158,6 +158,8 @@ You can raise your own pull request. The title of your pull request should match
 > We do not care about the number, or style of commits in your history, because we squash merge every PR into main. <br/>
 > Feel free to commit in whatever style you feel comfortable with.
 
+Please do not edit `CHANGELOG.md` in your pull request. Maintainers update it at every release.
+
 ### 4.1 What we accept
 
 Anything we merge has to be maintained for as long as the library exists, and we already have a long queue of open pull requests waiting for review. So we accept a narrow set of changes, and we would rather tell you which ones up front than let you find out after the work is done.
