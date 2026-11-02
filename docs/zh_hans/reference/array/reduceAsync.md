@@ -12,6 +12,8 @@ const result = await reduceAsync(array, reducer, initialValue);
 
 当需要通过顺序处理每个元素将数组归约为单个值时，使用 `reduceAsync`。归约函数从左到右顺序应用于每个元素，将一个调用的累积结果传递给下一个调用。
 
+如果不传入初始值，则使用数组的第一个元素作为初始值，并从第二个元素开始应用归约函数。也可以使用 `null` 或 `undefined` 作为初始值。
+
 ```typescript
 import { reduceAsync } from 'es-toolkit/array';
 
