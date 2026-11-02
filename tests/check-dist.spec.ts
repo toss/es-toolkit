@@ -20,6 +20,22 @@ async function getPackageJsonOfTarball(tarballPath: string) {
   throw new Error(`package.json not found.`);
 }
 
+/**
+ * Picks one module served by a wildcard entrypoint such as `./array/*`, e.g. `es-toolkit/array/chunk`,
+ * by looking at the files that its ESM target (e.g. `./dist/array/*.mjs`) points to.
+ */
+async function pickWildcardModule(packageDir: string, esmTarget: string, entrypoint: string) {
+  const targetDir = path.join(packageDir, path.dirname(esmTarget));
+  const files = await fs.promises.readdir(targetDir, { withFileTypes: true });
+  const module = files.find(file => file.isFile() && file.name.endsWith('.mjs') && file.name !== 'index.mjs');
+
+  if (module == null) {
+    throw new Error(`No module found for ${entrypoint} in ${targetDir}.`);
+  }
+
+  return path.join('es-toolkit', entrypoint.replace('*', module.name.slice(0, -'.mjs'.length)));
+}
+
 const ENTRYPOINTS = [
   '.',
   './array',
@@ -62,6 +78,16 @@ const ENTRYPOINTS = [
   './util/hash',
 ];
 
+// Internal subdirectories are excluded from the package with a `null` export.
+const BLOCKED_ENTRYPOINTS = ['./iterator/_internal/*', './util/hash/*', './util/serialize/*'];
+
+// One module under each blocked subpath. They exist in `dist`, but must not be resolvable.
+const BLOCKED_MODULES = [
+  'es-toolkit/iterator/_internal/iterator',
+  'es-toolkit/util/hash/node',
+  'es-toolkit/util/serialize/serialize',
+];
+
 describe(`es-toolkit's package tarball`, () => {
   let tarball: { path: string };
 
@@ -74,6 +100,9 @@ describe(`es-toolkit's package tarball`, () => {
     const entrypoints = Object.keys(packageJson.exports);
 
     expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
+
+    const blockedEntrypoints = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
+    expect(blockedEntrypoints).toEqual(BLOCKED_ENTRYPOINTS);
   });
 
   it('exports identical functions in CJS and ESM', { timeout: 120_000 }, async () => {
@@ -88,32 +117,43 @@ describe(`es-toolkit's package tarball`, () => {
     await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
     await execa('npm', ['install'], { cwd: tmpdir });
 
+    const packageDir = path.join(tmpdir, 'node_modules', 'es-toolkit');
+    const packageJsonOfTarball = await getPackageJsonOfTarball(tarball.path);
+
     for (const entrypoint of ENTRYPOINTS) {
-      // `./types` is declaration-only (no runtime export), so it can't be required or imported.
-      if (entrypoint.includes('*') || entrypoint === './types') {
+      // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
+      // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
+      // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
+      // so it can't be compared the same way. Blocked subpaths are covered by a separate test.
+      if (entrypoint.startsWith('./types') || entrypoint === './compat/*' || BLOCKED_ENTRYPOINTS.includes(entrypoint)) {
         continue;
       }
 
+      // Wildcard entrypoints are exercised through one module that they expose.
+      const specifier = entrypoint.includes('*')
+        ? await pickWildcardModule(packageDir, packageJsonOfTarball.exports[entrypoint].import.default, entrypoint)
+        : path.join('es-toolkit', entrypoint);
+
       const cjsScript = `
-const toolkit = require("${path.join('es-toolkit', entrypoint)}");
+const toolkit = require("${specifier}");
 
 const exported = Object.entries(toolkit)
   .map(([k, v]) => [k, typeof v])
   .sort((x, y) => x[0].localeCompare(y[0]));
 
-console.log("${path.join('es-toolkit', entrypoint)}");
+console.log("${specifier}");
 console.log(exported);
       `.trim();
       const cjsScriptPath = path.join(tmpdir, 'script.cjs');
 
       const esmScript = `
-const toolkit = await import("${path.join('es-toolkit', entrypoint)}");
+const toolkit = await import("${specifier}");
 
 const exported = Object.entries(toolkit)
   .map(([k, v]) => [k, typeof v])
   .sort((x, y) => x[0].localeCompare(y[0]));
 
-console.log("${path.join('es-toolkit', entrypoint)}");
+console.log("${specifier}");
 console.log(exported);
       `.trim();
       const esmScriptPath = path.join(tmpdir, 'script.mjs');
@@ -126,6 +166,65 @@ console.log(exported);
 
       expect(cjsResult.stdout).toEqual(esmResult.stdout);
     }
+  });
+
+  it('does not expose internal modules through blocked subpaths', { timeout: 120_000 }, async () => {
+    const tmpdir = await createTmpDir();
+
+    const packageJson = {
+      dependencies: {
+        'es-toolkit': tarball.path,
+      },
+    };
+
+    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
+    await execa('npm', ['install'], { cwd: tmpdir });
+
+    const distDir = path.join(tmpdir, 'node_modules', 'es-toolkit', 'dist');
+
+    // The modules must exist on disk, so that failing to resolve them proves the `null` export works.
+    for (const specifier of BLOCKED_MODULES) {
+      const distFile = path.join(distDir, `${specifier.slice('es-toolkit/'.length)}.mjs`);
+      expect(fs.existsSync(distFile), `${distFile} should exist`).toBe(true);
+    }
+
+    const cjsScript = `
+for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
+  try {
+    require(specifier);
+    console.log(specifier + ": loaded");
+  } catch (error) {
+    console.log(specifier + ": " + error.code);
+  }
+}
+    `.trim();
+    const cjsScriptPath = path.join(tmpdir, 'blocked.cjs');
+
+    const esmScript = `
+for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
+  try {
+    await import(specifier);
+    console.log(specifier + ": loaded");
+  } catch (error) {
+    console.log(specifier + ": " + error.code);
+  }
+}
+    `.trim();
+    const esmScriptPath = path.join(tmpdir, 'blocked.mjs');
+
+    await fs.promises.writeFile(cjsScriptPath, cjsScript);
+    await fs.promises.writeFile(esmScriptPath, esmScript);
+
+    const expected = BLOCKED_MODULES.map(specifier => `${specifier}: ERR_PACKAGE_PATH_NOT_EXPORTED`).join('\n');
+
+    // Yarn's PnP hooks (injected through NODE_OPTIONS under `yarn vitest`) report the failure as
+    // MODULE_NOT_FOUND, so run plain Node.js to get the error code it gives to users.
+    const options = { cwd: tmpdir, env: { NODE_OPTIONS: '' } };
+    const cjsResult = await execa('node', [cjsScriptPath], options);
+    const esmResult = await execa('node', [esmScriptPath], options);
+
+    expect(cjsResult.stdout).toBe(expected);
+    expect(esmResult.stdout).toBe(expected);
   });
 
   it('does not reach util/hash from any other entrypoint', { timeout: 120_000 }, async () => {
