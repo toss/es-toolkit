@@ -92,7 +92,7 @@ console.log(todayLoginAction('John'));
 
 // Fix time first
 const morningFormat = curriedFormat('9 AM');
-console.log(morningFormat('comment', 'Jane'));
+console.log(morningFormat('Jane', 'comment'));
 // "Jane did comment at 9 AM"
 ```
 
@@ -111,15 +111,14 @@ const curriedTake = curryRight(takeFromEnd);
 // Create function that separates with comma
 const takeWithComma = curriedTake(', ');
 
-// Get last 3 items
-const takeLast3 = takeWithComma(3);
-
 const fruits = ['apple', 'banana', 'orange', 'grape', 'kiwi'];
-console.log(takeLast3(fruits)); // "orange, grape, kiwi"
+
+// Get last 3 items
+console.log(takeWithComma(fruits, 3)); // "orange, grape, kiwi"
 
 // Use different separator
 const takeWithDash = curriedTake(' - ');
-console.log(takeWithDash(2, fruits)); // "grape - kiwi"
+console.log(takeWithDash(fruits, 2)); // "grape - kiwi"
 ```
 
 Using in function composition:
