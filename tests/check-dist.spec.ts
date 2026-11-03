@@ -53,7 +53,6 @@ const ENTRYPOINTS = [
   './function/*',
   './iterator',
   './iterator/*',
-  './iterator/_internal/*',
   './map',
   './map/*',
   './math',
@@ -73,12 +72,11 @@ const ENTRYPOINTS = [
   './types/*',
   './util',
   './util/*',
-  './util/hash/*',
-  './util/serialize/*',
   './util/hash',
 ];
 
 // Internal subdirectories are excluded from the package with a `null` export.
+// These are disjoint from ENTRYPOINTS, which only lists what can be loaded.
 const BLOCKED_ENTRYPOINTS = ['./iterator/_internal/*', './util/hash/*', './util/serialize/*'];
 
 // One module under each blocked subpath. They exist in `dist`, but must not be resolvable.
@@ -99,10 +97,11 @@ describe(`es-toolkit's package tarball`, () => {
     const packageJson = await getPackageJsonOfTarball(tarball.path);
     const entrypoints = Object.keys(packageJson.exports);
 
-    expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
+    const exported = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] !== null);
+    const blocked = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
 
-    const blockedEntrypoints = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
-    expect(blockedEntrypoints).toEqual(BLOCKED_ENTRYPOINTS);
+    expect(exported).toEqual([...ENTRYPOINTS, './package.json']);
+    expect(blocked).toEqual(BLOCKED_ENTRYPOINTS);
   });
 
   it('exports identical functions in CJS and ESM', { timeout: 120_000 }, async () => {
@@ -124,8 +123,8 @@ describe(`es-toolkit's package tarball`, () => {
       // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
       // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
       // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
-      // so it can't be compared the same way. Blocked subpaths are covered by a separate test.
-      if (entrypoint.startsWith('./types') || entrypoint === './compat/*' || BLOCKED_ENTRYPOINTS.includes(entrypoint)) {
+      // so it can't be compared the same way.
+      if (entrypoint.startsWith('./types') || entrypoint === './compat/*') {
         continue;
       }
 
