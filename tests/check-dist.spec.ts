@@ -2,40 +2,10 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { execa } from 'execa';
 import fs from 'node:fs';
 import path from 'node:path';
-import { Readable } from 'node:stream';
+import { Fixture, type FixturePlugin } from '@fixture-kit/core';
 import { createPackageTarball } from './utils/createPackageTarball';
-import { createTmpDir } from './utils/createTmpDir';
-import { parseTar } from './utils/parseTar';
-import { streamToBuffer } from './utils/streamToBuffer';
 
-async function getPackageJsonOfTarball(tarballPath: string) {
-  for await (const entry of parseTar(await fs.promises.readFile(tarballPath))) {
-    if (entry.path === 'package/package.json') {
-      const json = (await streamToBuffer(entry as unknown as Readable)).toString('utf-8');
-
-      return JSON.parse(json);
-    }
-  }
-
-  throw new Error(`package.json not found.`);
-}
-
-/**
- * Picks one module served by a wildcard entrypoint such as `./array/*`, e.g. `es-toolkit/array/chunk`,
- * by looking at the files that its ESM target (e.g. `./dist/array/*.mjs`) points to.
- */
-async function pickWildcardModule(packageDir: string, esmTarget: string, entrypoint: string) {
-  const targetDir = path.join(packageDir, path.dirname(esmTarget));
-  const files = await fs.promises.readdir(targetDir, { withFileTypes: true });
-  const module = files.find(file => file.isFile() && file.name.endsWith('.mjs') && file.name !== 'index.mjs');
-
-  if (module == null) {
-    throw new Error(`No module found for ${entrypoint} in ${targetDir}.`);
-  }
-
-  return path.join('es-toolkit', entrypoint.replace('*', module.name.slice(0, -'.mjs'.length)));
-}
-
+// Entrypoints that can be loaded from the package.
 const ENTRYPOINTS = [
   '.',
   './array',
@@ -86,6 +56,71 @@ const BLOCKED_MODULES = [
   'es-toolkit/util/serialize/serialize',
 ];
 
+interface InstalledPackage {
+  fixture: Fixture;
+  /** `node_modules/es-toolkit` inside the fixture. */
+  packageDir: string;
+}
+
+/**
+ * Installs the packed `es-toolkit` tarball into a fresh fixture directory, so that `run` can load
+ * the package exactly as users do: through npm, `node_modules`, and the published `exports`.
+ * The fixture directory is removed afterwards, even if `run` fails.
+ * (`await using` is not used because Prettier's import-sorting plugin cannot parse it yet.)
+ */
+async function withPackage<T>(tarballPath: string, run: (installed: InstalledPackage) => Promise<T>) {
+  const fixture = await Fixture.create(
+    {
+      'package.json': JSON.stringify({ dependencies: { 'es-toolkit': tarballPath } }, null, 2),
+    },
+    { plugins: [npmInstall()] }
+  );
+
+  try {
+    return await run({ fixture, packageDir: path.join(fixture.root, 'node_modules', 'es-toolkit') });
+  } finally {
+    await fixture.cleanup();
+  }
+}
+
+function npmInstall(): FixturePlugin {
+  return {
+    async setup({ root }) {
+      await execa('npm', ['install'], { cwd: root });
+    },
+  };
+}
+
+/**
+ * Writes a script into the fixture and runs it with plain Node.js. Yarn's PnP hooks (injected
+ * through NODE_OPTIONS under `yarn vitest`) are dropped so that resolution behaves as it does for
+ * users. The script must print a single JSON value, which is returned parsed.
+ */
+async function runScript(fixture: Fixture, filename: string, source: string) {
+  const scriptPath = path.join(fixture.root, filename);
+  await fs.promises.writeFile(scriptPath, source.trim());
+
+  const { stdout } = await execa('node', [scriptPath], { cwd: fixture.root, env: { NODE_OPTIONS: '' } });
+
+  return JSON.parse(stdout);
+}
+
+/**
+ * Picks one module served by a wildcard entrypoint such as `./array/*`, e.g. `es-toolkit/array/chunk`,
+ * by looking at the files that its ESM target (e.g. `./dist/array/*.mjs`) points to.
+ */
+async function pickWildcardModule(packageDir: string, esmTarget: string, entrypoint: string) {
+  const targetDir = path.join(packageDir, path.dirname(esmTarget));
+  const files = await fs.promises.readdir(targetDir, { withFileTypes: true });
+  const module = files.find(file => file.isFile() && file.name.endsWith('.mjs') && file.name !== 'index.mjs');
+
+  if (module == null) {
+    throw new Error(`No module found for ${entrypoint} in ${targetDir}.`);
+  }
+
+  return path.posix.join('es-toolkit', entrypoint.replace('*', module.name.slice(0, -'.mjs'.length)));
+}
+
 describe(`es-toolkit's package tarball`, () => {
   let tarball: { path: string };
 
@@ -94,184 +129,171 @@ describe(`es-toolkit's package tarball`, () => {
   }, 300000);
 
   it('configures all entrypoints correctly', { timeout: 240_000 }, async () => {
-    const packageJson = await getPackageJsonOfTarball(tarball.path);
-    const entrypoints = Object.keys(packageJson.exports);
+    await withPackage(tarball.path, async ({ packageDir }) => {
+      const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
+      const entrypoints = Object.keys(packageJson.exports);
 
-    const exported = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] !== null);
-    const blocked = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
+      const exported = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] !== null);
+      const blocked = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
 
-    expect(exported).toEqual([...ENTRYPOINTS, './package.json']);
-    expect(blocked).toEqual(BLOCKED_ENTRYPOINTS);
+      expect(exported).toEqual([...ENTRYPOINTS, './package.json']);
+      expect(blocked).toEqual(BLOCKED_ENTRYPOINTS);
+    });
   });
 
-  it('exports identical functions in CJS and ESM', { timeout: 120_000 }, async () => {
-    const tmpdir = await createTmpDir();
+  it('can be required and imported from every entrypoint', { timeout: 120_000 }, async () => {
+    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
+      const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
+      const specifiers: string[] = [];
 
-    const packageJson = {
-      dependencies: {
-        'es-toolkit': tarball.path,
-      },
-    };
+      for (const entrypoint of ENTRYPOINTS) {
+        // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
+        // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
+        // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
+        // so it can't be compared the same way.
+        if (entrypoint.startsWith('./types') || entrypoint === './compat/*') {
+          continue;
+        }
 
-    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
-    await execa('npm', ['install'], { cwd: tmpdir });
-
-    const packageDir = path.join(tmpdir, 'node_modules', 'es-toolkit');
-    const packageJsonOfTarball = await getPackageJsonOfTarball(tarball.path);
-
-    for (const entrypoint of ENTRYPOINTS) {
-      // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
-      // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
-      // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
-      // so it can't be compared the same way.
-      if (entrypoint.startsWith('./types') || entrypoint === './compat/*') {
-        continue;
+        // Wildcard entrypoints are exercised through one module that they expose.
+        specifiers.push(
+          entrypoint.includes('*')
+            ? await pickWildcardModule(packageDir, packageJson.exports[entrypoint].import.default, entrypoint)
+            : path.posix.join('es-toolkit', entrypoint)
+        );
       }
 
-      // Wildcard entrypoints are exercised through one module that they expose.
-      const specifier = entrypoint.includes('*')
-        ? await pickWildcardModule(packageDir, packageJsonOfTarball.exports[entrypoint].import.default, entrypoint)
-        : path.join('es-toolkit', entrypoint);
+      // Both scripts print `{ [specifier]: [[exportName, typeof export], ...] }`.
+      const describeExports = `
+  const exported = Object.entries(toolkit)
+    .map(([k, v]) => [k, typeof v])
+    .sort((x, y) => x[0].localeCompare(y[0]));
+      `;
 
-      const cjsScript = `
-const toolkit = require("${specifier}");
+      const cjsExports = await runScript(
+        fixture,
+        'entrypoints.cjs',
+        `
+  const result = {};
+  for (const specifier of ${JSON.stringify(specifiers)}) {
+    const toolkit = require(specifier);
+    ${describeExports}
+    result[specifier] = exported;
+  }
+  console.log(JSON.stringify(result));
+        `
+      );
 
-const exported = Object.entries(toolkit)
-  .map(([k, v]) => [k, typeof v])
-  .sort((x, y) => x[0].localeCompare(y[0]));
+      const esmExports = await runScript(
+        fixture,
+        'entrypoints.mjs',
+        `
+  const result = {};
+  for (const specifier of ${JSON.stringify(specifiers)}) {
+    const toolkit = await import(specifier);
+    ${describeExports}
+    result[specifier] = exported;
+  }
+  console.log(JSON.stringify(result));
+        `
+      );
 
-console.log("${specifier}");
-console.log(exported);
-      `.trim();
-      const cjsScriptPath = path.join(tmpdir, 'script.cjs');
-
-      const esmScript = `
-const toolkit = await import("${specifier}");
-
-const exported = Object.entries(toolkit)
-  .map(([k, v]) => [k, typeof v])
-  .sort((x, y) => x[0].localeCompare(y[0]));
-
-console.log("${specifier}");
-console.log(exported);
-      `.trim();
-      const esmScriptPath = path.join(tmpdir, 'script.mjs');
-
-      await fs.promises.writeFile(cjsScriptPath, cjsScript);
-      await fs.promises.writeFile(esmScriptPath, esmScript);
-
-      const cjsResult = await execa('node', [cjsScriptPath]);
-      const esmResult = await execa('node', [esmScriptPath]);
-
-      expect(cjsResult.stdout).toEqual(esmResult.stdout);
-    }
+      for (const specifier of specifiers) {
+        expect(cjsExports[specifier], `${specifier} should export something`).not.toEqual([]);
+        expect(cjsExports[specifier], `${specifier} should export the same in CJS and ESM`).toEqual(
+          esmExports[specifier]
+        );
+      }
+    });
   });
 
   it('does not expose internal modules through blocked subpaths', { timeout: 120_000 }, async () => {
-    const tmpdir = await createTmpDir();
+    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
+      // The modules must exist on disk, so that failing to resolve them proves the `null` export works.
+      for (const specifier of BLOCKED_MODULES) {
+        const distFile = path.join(packageDir, 'dist', `${specifier.slice('es-toolkit/'.length)}.mjs`);
+        expect(fs.existsSync(distFile), `${distFile} should exist`).toBe(true);
+      }
 
-    const packageJson = {
-      dependencies: {
-        'es-toolkit': tarball.path,
-      },
-    };
-
-    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
-    await execa('npm', ['install'], { cwd: tmpdir });
-
-    const distDir = path.join(tmpdir, 'node_modules', 'es-toolkit', 'dist');
-
-    // The modules must exist on disk, so that failing to resolve them proves the `null` export works.
-    for (const specifier of BLOCKED_MODULES) {
-      const distFile = path.join(distDir, `${specifier.slice('es-toolkit/'.length)}.mjs`);
-      expect(fs.existsSync(distFile), `${distFile} should exist`).toBe(true);
+      // Both scripts print `{ [specifier]: "loaded" | errorCode }`.
+      const cjsResult = await runScript(
+        fixture,
+        'blocked.cjs',
+        `
+  const result = {};
+  for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
+    try {
+      require(specifier);
+      result[specifier] = 'loaded';
+    } catch (error) {
+      result[specifier] = error.code;
     }
-
-    const cjsScript = `
-for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
-  try {
-    require(specifier);
-    console.log(specifier + ": loaded");
-  } catch (error) {
-    console.log(specifier + ": " + error.code);
   }
-}
-    `.trim();
-    const cjsScriptPath = path.join(tmpdir, 'blocked.cjs');
+  console.log(JSON.stringify(result));
+        `
+      );
 
-    const esmScript = `
-for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
-  try {
-    await import(specifier);
-    console.log(specifier + ": loaded");
-  } catch (error) {
-    console.log(specifier + ": " + error.code);
+      const esmResult = await runScript(
+        fixture,
+        'blocked.mjs',
+        `
+  const result = {};
+  for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
+    try {
+      await import(specifier);
+      result[specifier] = 'loaded';
+    } catch (error) {
+      result[specifier] = error.code;
+    }
   }
-}
-    `.trim();
-    const esmScriptPath = path.join(tmpdir, 'blocked.mjs');
+  console.log(JSON.stringify(result));
+        `
+      );
 
-    await fs.promises.writeFile(cjsScriptPath, cjsScript);
-    await fs.promises.writeFile(esmScriptPath, esmScript);
+      const expected = Object.fromEntries(
+        BLOCKED_MODULES.map(specifier => [specifier, 'ERR_PACKAGE_PATH_NOT_EXPORTED'])
+      );
 
-    const expected = BLOCKED_MODULES.map(specifier => `${specifier}: ERR_PACKAGE_PATH_NOT_EXPORTED`).join('\n');
-
-    // Yarn's PnP hooks (injected through NODE_OPTIONS under `yarn vitest`) report the failure as
-    // MODULE_NOT_FOUND, so run plain Node.js to get the error code it gives to users.
-    const options = { cwd: tmpdir, env: { NODE_OPTIONS: '' } };
-    const cjsResult = await execa('node', [cjsScriptPath], options);
-    const esmResult = await execa('node', [esmScriptPath], options);
-
-    expect(cjsResult.stdout).toBe(expected);
-    expect(esmResult.stdout).toBe(expected);
+      expect(cjsResult).toEqual(expected);
+      expect(esmResult).toEqual(expected);
+    });
   });
 
   it('does not reach util/hash from any other entrypoint', { timeout: 120_000 }, async () => {
-    const tmpdir = await createTmpDir();
+    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
+      // Static check: dist modules are unbundled 1:1 with static import strings,
+      // so no dist file outside dist/util/hash may reference util/hash.
+      const distDir = path.join(packageDir, 'dist');
+      const distFiles = (await fs.promises.readdir(distDir, { recursive: true })) as string[];
 
-    const packageJson = {
-      dependencies: {
-        'es-toolkit': tarball.path,
-      },
-    };
+      for (const file of distFiles) {
+        const posixPath = file.split(path.sep).join('/');
 
-    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
-    await execa('npm', ['install'], { cwd: tmpdir });
+        if (posixPath.startsWith('util/hash/') || !/\.(js|mjs|cjs|d\.ts|d\.mts)$/.test(posixPath)) {
+          continue;
+        }
 
-    // Static check: dist modules are unbundled 1:1 with static import strings,
-    // so no dist file outside dist/util/hash may reference util/hash.
-    const distDir = path.join(tmpdir, 'node_modules', 'es-toolkit', 'dist');
-    const distFiles = (await fs.promises.readdir(distDir, { recursive: true })) as string[];
-
-    for (const file of distFiles) {
-      const posixPath = file.split(path.sep).join('/');
-
-      if (posixPath.startsWith('util/hash/') || !/\.(js|mjs|cjs|d\.ts|d\.mts)$/.test(posixPath)) {
-        continue;
+        const content = await fs.promises.readFile(path.join(distDir, file), 'utf-8');
+        expect(content.includes('util/hash'), `dist/${posixPath} must not reference util/hash`).toBe(false);
       }
 
-      const content = await fs.promises.readFile(path.join(distDir, file), 'utf-8');
-      expect(content.includes('util/hash'), `dist/${posixPath} must not reference util/hash`).toBe(false);
-    }
+      // Runtime check: loading the main entrypoints must not load any module
+      // under dist/util/hash.
+      const loaded = await runScript(
+        fixture,
+        'isolation.cjs',
+        `
+  const path = require('node:path');
 
-    // Runtime check: loading the main entrypoints must not load any module
-    // under dist/util/hash.
-    const script = `
-const path = require('node:path');
+  require('es-toolkit');
+  require('es-toolkit/util');
 
-require('es-toolkit');
-require('es-toolkit/util');
+  const loaded = Object.keys(require.cache).map((p) => p.split(path.sep).join('/'));
+  console.log(JSON.stringify(loaded.filter((p) => p.includes('dist/util/hash'))));
+        `
+      );
 
-const loaded = Object.keys(require.cache).map((p) => p.split(path.sep).join('/'));
-if (loaded.some((p) => p.includes('dist/util/hash'))) {
-  throw new Error('util/hash was loaded from a main entrypoint');
-}
-console.log('isolated');
-    `.trim();
-    const scriptPath = path.join(tmpdir, 'isolation.cjs');
-    await fs.promises.writeFile(scriptPath, script);
-
-    const result = await execa('node', [scriptPath], { cwd: tmpdir });
-    expect(result.stdout).toBe('isolated');
+      expect(loaded).toEqual([]);
+    });
   });
 });

@@ -3406,6 +3406,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fixture-kit/core@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@fixture-kit/core@npm:1.1.0"
+  dependenciesMeta:
+    oxfmt@0.34.0:
+      unplugged: true
+    oxlint@1.49.0:
+      unplugged: true
+  checksum: 10c0/0f939fc026be550026b67c7dfc2ffd2922d38f3351ccbdb14ca02450e04e2b3e5459c97d16592ee1e72608c8fb7508f80f2298414e01e9322cdb6cf7f21052b1
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -5234,16 +5246,6 @@ __metadata:
   dependencies:
     ts-toolbelt: "npm:^6.15.1"
   checksum: 10c0/4abb7c8539eadb11a62ddd80072363870bb33b189096a1dc71d2351ccba9796c26a43b79435312b8e1f3335ac7d5a77fc4deb2f5b747217bfdf262f519c9caf3
-  languageName: node
-  linkType: hard
-
-"@types/tar@npm:^6.1.13":
-  version: 6.1.13
-  resolution: "@types/tar@npm:6.1.13"
-  dependencies:
-    "@types/node": "npm:*"
-    minipass: "npm:^4.0.0"
-  checksum: 10c0/98cc72d444fa622049e86e457a64d859c6effd7c7518d36e7b40b4ab1e7aa9e2412cc868cbef396650485dae07d50d98f662e8a53bb45f4a70eb6c61f80a63c7
   languageName: node
   linkType: hard
 
@@ -8823,10 +8825,10 @@ __metadata:
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.27.1"
     "@eslint/js": "npm:^9.39.2"
+    "@fixture-kit/core": "npm:^1.1.0"
     "@types/broken-link-checker": "npm:0.7.3"
     "@types/jscodeshift": "npm:^0.12.0"
     "@types/node": "npm:^24.10.9"
-    "@types/tar": "npm:^6.1.13"
     "@typescript-eslint/parser": "npm:^8.26.1"
     "@vitest/coverage-istanbul": "npm:^4.1.10"
     "@vitest/eslint-plugin": "npm:^1.6.6"
@@ -8846,7 +8848,6 @@ __metadata:
     oxfmt: "npm:^0.76.0"
     packlint: "npm:^0.2.4"
     rolldown: "npm:^1.2.15"
-    tar: "npm:^6"
     tsdown: "npm:^0.23.1"
     tslib: "npm:^2.6.3"
     tsx: "npm:^4.19.0"
@@ -12432,13 +12433,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass@npm:^4.0.0":
-  version: 4.2.8
-  resolution: "minipass@npm:4.2.8"
-  checksum: 10c0/4ea76b030d97079f4429d6e8a8affd90baf1b6a1898977c8ccce4701c5a2ba2792e033abc6709373f25c2c4d4d95440d9d5e9464b46b7b76ca44d2ce26d939ce
-  languageName: node
-  linkType: hard
-
 "minipass@npm:^5.0.0":
   version: 5.0.0
   resolution: "minipass@npm:5.0.0"
@@ -15293,7 +15287,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^6, tar@npm:^6.1.11, tar@npm:^6.1.2":
+"tar@npm:^6.1.11, tar@npm:^6.1.2":
   version: 6.2.1
   resolution: "tar@npm:6.2.1"
   dependencies:
