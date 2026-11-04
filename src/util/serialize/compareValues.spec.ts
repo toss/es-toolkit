@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { compareValues } from './compareValues';
+import { compareValues } from './serialize';
 
 describe('compareValues', () => {
   it('should compare numbers numerically', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { serializeObject } from './serializeObject';
+import { serializeObject } from './serialize';
 
 function serialize(value: object | null): string {
   return serializeObject(value, new Map());

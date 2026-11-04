@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { serializePlainObject } from './serializePlainObject';
+import { serializePlainObject } from './serialize';
 
 describe('serializePlainObject', () => {
   it("should serialize plain objects as {'key':value}", () => {
