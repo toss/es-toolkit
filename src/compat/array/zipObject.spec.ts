@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { each } from '..';
 import { zipObject } from './zipObject';
+import { each } from '..';
 
 describe('zipObject', () => {
   const object = { barney: 36, fred: 40 };
