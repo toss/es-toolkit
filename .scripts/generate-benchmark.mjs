@@ -112,4 +112,7 @@ async function main() {
   await fs.writeFile(OUT_JSON, JSON.stringify(allResults, null, 2), 'utf8');
 }
 
-main();
+main().catch(error => {
+  console.error(error);
+  process.exitCode = 1;
+});

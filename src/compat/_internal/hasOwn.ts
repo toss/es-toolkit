@@ -1,3 +1,4 @@
+// oxlint-disable-next-line typescript/unbound-method -- always invoked through .call below
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 /**

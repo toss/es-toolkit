@@ -66,7 +66,7 @@ export function pick<T>(object: T | null | undefined, ...props: Array<Many<Prope
  * // result will be { 'a.b': 1 }
  */
 export function pick<T extends object, U extends keyof T>(
-  object: T | any | null | undefined,
+  object: any,
   ...keysArr: Array<Many<U>> | Array<Many<PropertyPath>>
 ): Pick<T, U> | Partial<T> {
   if (isNil(object)) {

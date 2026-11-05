@@ -164,6 +164,7 @@ function asExpression(text) {
   const trimmed = text.trim().replace(/[;.]$/, '');
   try {
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- evaluates generated test snippets on purpose
     new Function(`return (${trimmed});`);
     return trimmed;
   } catch {
@@ -356,6 +357,7 @@ function buildCase({ id, ns, body, assertions, namespaces, placeholderFn }) {
   const fullBody = `'use strict';\n${bindings.join('\n')}\n${body}`;
   try {
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- evaluates generated test snippets on purpose
     new Function('__ns', '__assertEq', isAsync ? `return (async () => {\n${fullBody}\n})();` : fullBody);
   } catch (error) {
     return { id, error: String(error) };
@@ -482,7 +484,9 @@ async function main() {
     total: cases.length,
     skipped: skipped.length,
     failures,
-    covered: Object.fromEntries(Object.entries(coveredNames).map(([k, v]) => [k, [...v].sort()])),
+    covered: Object.fromEntries(
+      Object.entries(coveredNames).map(([k, v]) => [k, [...v].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))])
+    ),
   };
   fs.writeFileSync(path.join(OUT_DIR, 'report.json'), JSON.stringify(report, null, 2));
 
