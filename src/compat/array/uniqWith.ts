@@ -1,4 +1,3 @@
-import { uniqWith as uniqWithToolkit } from '../../array/uniqWith.ts';
 import { uniq as uniqToolkit } from '../array/uniq.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
@@ -33,11 +32,26 @@ export function uniqWith<T>(arr: ArrayLike<T> | null | undefined, comparator?: C
   }
 
   if (typeof comparator !== 'function') {
-    return uniqToolkit(Array.from(arr));
+    return uniqToolkit(arr);
   }
 
-  // `es-toolkit`'s `uniqWith` invokes the comparator as `(kept, candidate)`, but
-  // lodash documents and invokes it as `(candidate, kept)`. Swap the arguments so
-  // that asymmetric comparators behave the same as in lodash.
-  return uniqWithToolkit(Array.from(arr), (kept, candidate) => comparator(candidate, kept));
+  const result: T[] = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
+    let isUniq = true;
+
+    for (let j = 0; j < result.length; j++) {
+      if (comparator(item, result[j])) {
+        isUniq = false;
+        break;
+      }
+    }
+
+    if (isUniq) {
+      result.push(item);
+    }
+  }
+
+  return result;
 }
