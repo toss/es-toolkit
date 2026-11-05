@@ -53,7 +53,7 @@ jobs:
         if: steps.check.outcome == 'failure'
         run: |
           yarn workspace benchmarks vitest run --update bundle-size
-          yarn prettier --write 'benchmarks/bundle-size/**/*.spec.ts'
+          yarn oxfmt 'benchmarks/bundle-size/**/*.spec.ts'
       - name: Verify updated snapshots
         if: steps.check.outcome == 'failure'
         run: yarn workspace benchmarks vitest run bundle-size

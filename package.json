@@ -93,14 +93,15 @@
   "scripts": {
     "bench": "yarn workspace benchmarks bench",
     "build": "tsdown && ./.scripts/postbuild.sh",
-    "format": "prettier --write .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "gen:benchmark": "node ./.scripts/generate-benchmark.mjs",
     "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
     "lint": "eslint --config eslint.config.mjs --concurrency=auto",
     "packlint": "packlint sort -R",
     "prepack": "yarn build",
     "test": "vitest --coverage",
-    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
+    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && oxfmt $0",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -108,7 +109,6 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.39.2",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/broken-link-checker": "0.7.3",
     "@types/jscodeshift": "^0.12.0",
     "@types/node": "^24.10.9",
@@ -119,20 +119,18 @@
     "@vue/compiler-sfc": "^3.5.10",
     "broken-link-checker": "0.7.8",
     "eslint": "^9.39.2",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-compat": "^7.0.2",
     "eslint-plugin-es-x": "^10.0.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
-    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-perfectionist": "^5.13.0",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "fast-check": "4.8.0",
     "globals": "^15.9.0",
     "happy-dom": "20.9.0",
     "jscodeshift": "^17.0.0",
+    "oxfmt": "^0.76.0",
     "packlint": "^0.2.4",
-    "prettier": "^3.2.5",
-    "prettier-plugin-sort-re-exports": "^0.1.0",
     "rolldown": "^1.2.15",
     "tar": "^6",
     "tsdown": "^0.23.1",
@@ -524,12 +522,6 @@
     "types": "./dist/index.d.ts"
   },
   "dependenciesMeta": {
-    "@trivago/prettier-plugin-sort-imports@4.3.0": {
-      "unplugged": true
-    },
-    "prettier-plugin-sort-re-exports@0.0.1": {
-      "unplugged": true
-    },
     "vitepress-plugin-sandpack@1.1.4": {
       "unplugged": true
     }
