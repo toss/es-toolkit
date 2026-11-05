@@ -33,4 +33,26 @@ describe('isError', () => {
     const realm = { error: new Error() };
     expect(isError(realm.error)).toBe(true);
   });
+
+  it('should return `true` for DOMException values', () => {
+    expect(isError(new DOMException('x'))).toBe(true);
+    const controller = new AbortController();
+    controller.abort();
+    expect(isError(controller.signal.reason)).toBe(true);
+  });
+
+  it('should return `true` for error-like objects that are not plain objects', () => {
+    expect(isError(Object.create(Error.prototype))).toBe(true);
+    class ErrorLike {
+      name = 'E';
+      message = 'm';
+    }
+    expect(isError(new ErrorLike())).toBe(true);
+  });
+
+  it('should return `false` for plain objects with a `Symbol.toStringTag` of `Error`', () => {
+    expect(isError({ [Symbol.toStringTag]: 'Error' })).toBe(false);
+    expect(isError({ name: 'a', message: 'b' })).toBe(false);
+    expect(isError('Error')).toBe(false);
+  });
 });
