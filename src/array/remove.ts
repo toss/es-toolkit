@@ -29,6 +29,7 @@ export function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: numbe
 
     // For handling sparse arrays
     if (!Object.hasOwn(arr, i)) {
+      // oxlint-disable-next-line typescript/no-array-delete -- keeps the hole so the array can be compacted in place below
       delete arr[resultIndex++];
       continue;
     }

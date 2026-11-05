@@ -45,7 +45,7 @@ function waitForDone() {
   const started = Date.now();
   return new Promise(function (resolve) {
     function poll() {
-      fetchStatus().then(function (done) {
+      void fetchStatus().then(function (done) {
         if (done) {
           resolve(true);
         } else if (Date.now() - started > TIMEOUT_MS) {

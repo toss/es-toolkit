@@ -29,7 +29,7 @@ export async function allKeyed<T extends Record<string, unknown>>(
   tasks: T
 ): Promise<{ [K in keyof T]: Awaited<T[K]> }> {
   const keys = Object.keys(tasks) as Array<keyof T>;
-  const values = await Promise.all(keys.map(key => tasks[key]));
+  const values = await Promise.all(keys.map((key): unknown => tasks[key]));
 
   const result = {} as { [K in keyof T]: Awaited<T[K]> };
 

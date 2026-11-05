@@ -47,14 +47,14 @@ describe('percentile', () => {
   });
 
   it('throws when percentile is NaN', () => {
-    expect(() => percentile([1, 2, 3], Number.NaN)).toThrow();
+    expect(() => percentile([1, 2, 3], Number.NaN)).toThrow('Expected percentile to be a number but got "NaN".');
   });
 
   it('throws when percentile is less than 0', () => {
-    expect(() => percentile([1, 2, 3], -1)).toThrow();
+    expect(() => percentile([1, 2, 3], -1)).toThrow('Expected percentile to be >= 0 but got "-1".');
   });
 
   it('throws when percentile is greater than 100', () => {
-    expect(() => percentile([1, 2, 3], 101)).toThrow();
+    expect(() => percentile([1, 2, 3], 101)).toThrow('Expected percentile to be <= 100 but got "101".');
   });
 });

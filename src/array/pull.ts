@@ -25,6 +25,7 @@ export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
 
     // For handling sparse arrays
     if (!Object.hasOwn(arr, i)) {
+      // oxlint-disable-next-line typescript/no-array-delete -- keeps the hole so the array can be compacted in place below
       delete arr[resultIndex++];
       continue;
     }

@@ -86,6 +86,7 @@ function removeImpl<T>(arr: T[], shouldRemoveElement: (value: T, index: number, 
 
     // For handling sparse arrays
     if (!hasOwn(arr, i)) {
+      // oxlint-disable-next-line typescript/no-array-delete -- keeps the hole so the array can be compacted in place below
       delete arr[resultIndex++];
       continue;
     }
