@@ -56,31 +56,24 @@ const BLOCKED_MODULES = [
   'es-toolkit/util/serialize/serialize',
 ];
 
-interface InstalledPackage {
-  fixture: Fixture;
-  /** `node_modules/es-toolkit` inside the fixture. */
-  packageDir: string;
-}
-
 /**
- * Installs the packed `es-toolkit` tarball into a fresh fixture directory, so that `run` can load
+ * Installs the packed `es-toolkit` tarball into a fresh fixture directory, so that tests can load
  * the package exactly as users do: through npm, `node_modules`, and the published `exports`.
- * The fixture directory is removed afterwards, even if `run` fails.
- * (`await using` is not used because Prettier's import-sorting plugin cannot parse it yet.)
+ * The returned fixture is `AsyncDisposable`; declare it with `await using` so that the directory
+ * is removed when the test finishes, even if it fails.
  */
-async function withPackage<T>(tarballPath: string, run: (installed: InstalledPackage) => Promise<T>) {
-  const fixture = await Fixture.create(
+async function installPackage(tarballPath: string) {
+  return Fixture.create(
     {
       'package.json': JSON.stringify({ dependencies: { 'es-toolkit': tarballPath } }, null, 2),
     },
     { plugins: [npmInstall()] }
   );
+}
 
-  try {
-    return await run({ fixture, packageDir: path.join(fixture.root, 'node_modules', 'es-toolkit') });
-  } finally {
-    await fixture.cleanup();
-  }
+/** `node_modules/es-toolkit` inside the fixture. */
+function packageDirOf(fixture: Fixture) {
+  return path.join(fixture.root, 'node_modules', 'es-toolkit');
 }
 
 function npmInstall(): FixturePlugin {
@@ -129,51 +122,54 @@ describe(`es-toolkit's package tarball`, () => {
   }, 300000);
 
   it('configures all entrypoints correctly', { timeout: 240_000 }, async () => {
-    await withPackage(tarball.path, async ({ packageDir }) => {
-      const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
-      const entrypoints = Object.keys(packageJson.exports);
+    await using fixture = await installPackage(tarball.path);
+    const packageDir = packageDirOf(fixture);
 
-      const exported = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] !== null);
-      const blocked = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
+    const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
+    const entrypoints = Object.keys(packageJson.exports);
 
-      expect(exported).toEqual([...ENTRYPOINTS, './package.json']);
-      expect(blocked).toEqual(BLOCKED_ENTRYPOINTS);
-    });
+    const exported = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] !== null);
+    const blocked = entrypoints.filter(entrypoint => packageJson.exports[entrypoint] === null);
+
+    expect(exported).toEqual([...ENTRYPOINTS, './package.json']);
+    expect(blocked).toEqual(BLOCKED_ENTRYPOINTS);
   });
 
   it('can be required and imported from every entrypoint', { timeout: 120_000 }, async () => {
-    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
-      const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
-      const specifiers: string[] = [];
+    await using fixture = await installPackage(tarball.path);
+    const packageDir = packageDirOf(fixture);
 
-      for (const entrypoint of ENTRYPOINTS) {
-        // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
-        // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
-        // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
-        // so it can't be compared the same way.
-        if (entrypoint.startsWith('./types') || entrypoint === './compat/*') {
-          continue;
-        }
+    const packageJson = JSON.parse(await fs.promises.readFile(path.join(packageDir, 'package.json'), 'utf-8'));
+    const specifiers: string[] = [];
 
-        // Wildcard entrypoints are exercised through one module that they expose.
-        specifiers.push(
-          entrypoint.includes('*')
-            ? await pickWildcardModule(packageDir, packageJson.exports[entrypoint].import.default, entrypoint)
-            : path.posix.join('es-toolkit', entrypoint)
-        );
+    for (const entrypoint of ENTRYPOINTS) {
+      // `./types` and `./types/*` are declaration-only (no runtime export), so they can't be
+      // required or imported. `./compat/*` is served by generated shims whose CJS build exports the
+      // function itself (checked by .scripts/check-compat-entrypoints-loadable.mjs at build time),
+      // so it can't be compared the same way.
+      if (entrypoint.startsWith('./types') || entrypoint === './compat/*') {
+        continue;
       }
 
-      // Both scripts print `{ [specifier]: [[exportName, typeof export], ...] }`.
-      const describeExports = `
+      // Wildcard entrypoints are exercised through one module that they expose.
+      specifiers.push(
+        entrypoint.includes('*')
+          ? await pickWildcardModule(packageDir, packageJson.exports[entrypoint].import.default, entrypoint)
+          : path.posix.join('es-toolkit', entrypoint)
+      );
+    }
+
+    // Both scripts print `{ [specifier]: [[exportName, typeof export], ...] }`.
+    const describeExports = `
   const exported = Object.entries(toolkit)
     .map(([k, v]) => [k, typeof v])
     .sort((x, y) => x[0].localeCompare(y[0]));
       `;
 
-      const cjsExports = await runScript(
-        fixture,
-        'entrypoints.cjs',
-        `
+    const cjsExports = await runScript(
+      fixture,
+      'entrypoints.cjs',
+      `
   const result = {};
   for (const specifier of ${JSON.stringify(specifiers)}) {
     const toolkit = require(specifier);
@@ -182,12 +178,12 @@ describe(`es-toolkit's package tarball`, () => {
   }
   console.log(JSON.stringify(result));
         `
-      );
+    );
 
-      const esmExports = await runScript(
-        fixture,
-        'entrypoints.mjs',
-        `
+    const esmExports = await runScript(
+      fixture,
+      'entrypoints.mjs',
+      `
   const result = {};
   for (const specifier of ${JSON.stringify(specifiers)}) {
     const toolkit = await import(specifier);
@@ -196,30 +192,31 @@ describe(`es-toolkit's package tarball`, () => {
   }
   console.log(JSON.stringify(result));
         `
-      );
+    );
 
-      for (const specifier of specifiers) {
-        expect(cjsExports[specifier], `${specifier} should export something`).not.toEqual([]);
-        expect(cjsExports[specifier], `${specifier} should export the same in CJS and ESM`).toEqual(
-          esmExports[specifier]
-        );
-      }
-    });
+    for (const specifier of specifiers) {
+      expect(cjsExports[specifier], `${specifier} should export something`).not.toEqual([]);
+      expect(cjsExports[specifier], `${specifier} should export the same in CJS and ESM`).toEqual(
+        esmExports[specifier]
+      );
+    }
   });
 
   it('does not expose internal modules through blocked subpaths', { timeout: 120_000 }, async () => {
-    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
-      // The modules must exist on disk, so that failing to resolve them proves the `null` export works.
-      for (const specifier of BLOCKED_MODULES) {
-        const distFile = path.join(packageDir, 'dist', `${specifier.slice('es-toolkit/'.length)}.mjs`);
-        expect(fs.existsSync(distFile), `${distFile} should exist`).toBe(true);
-      }
+    await using fixture = await installPackage(tarball.path);
+    const packageDir = packageDirOf(fixture);
 
-      // Both scripts print `{ [specifier]: "loaded" | errorCode }`.
-      const cjsResult = await runScript(
-        fixture,
-        'blocked.cjs',
-        `
+    // The modules must exist on disk, so that failing to resolve them proves the `null` export works.
+    for (const specifier of BLOCKED_MODULES) {
+      const distFile = path.join(packageDir, 'dist', `${specifier.slice('es-toolkit/'.length)}.mjs`);
+      expect(fs.existsSync(distFile), `${distFile} should exist`).toBe(true);
+    }
+
+    // Both scripts print `{ [specifier]: "loaded" | errorCode }`.
+    const cjsResult = await runScript(
+      fixture,
+      'blocked.cjs',
+      `
   const result = {};
   for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
     try {
@@ -231,12 +228,12 @@ describe(`es-toolkit's package tarball`, () => {
   }
   console.log(JSON.stringify(result));
         `
-      );
+    );
 
-      const esmResult = await runScript(
-        fixture,
-        'blocked.mjs',
-        `
+    const esmResult = await runScript(
+      fixture,
+      'blocked.mjs',
+      `
   const result = {};
   for (const specifier of ${JSON.stringify(BLOCKED_MODULES)}) {
     try {
@@ -248,41 +245,40 @@ describe(`es-toolkit's package tarball`, () => {
   }
   console.log(JSON.stringify(result));
         `
-      );
+    );
 
-      const expected = Object.fromEntries(
-        BLOCKED_MODULES.map(specifier => [specifier, 'ERR_PACKAGE_PATH_NOT_EXPORTED'])
-      );
+    const expected = Object.fromEntries(BLOCKED_MODULES.map(specifier => [specifier, 'ERR_PACKAGE_PATH_NOT_EXPORTED']));
 
-      expect(cjsResult).toEqual(expected);
-      expect(esmResult).toEqual(expected);
-    });
+    expect(cjsResult).toEqual(expected);
+    expect(esmResult).toEqual(expected);
   });
 
   it('does not reach util/hash from any other entrypoint', { timeout: 120_000 }, async () => {
-    await withPackage(tarball.path, async ({ fixture, packageDir }) => {
-      // Static check: dist modules are unbundled 1:1 with static import strings,
-      // so no dist file outside dist/util/hash may reference util/hash.
-      const distDir = path.join(packageDir, 'dist');
-      const distFiles = (await fs.promises.readdir(distDir, { recursive: true })) as string[];
+    await using fixture = await installPackage(tarball.path);
+    const packageDir = packageDirOf(fixture);
 
-      for (const file of distFiles) {
-        const posixPath = file.split(path.sep).join('/');
+    // Static check: dist modules are unbundled 1:1 with static import strings,
+    // so no dist file outside dist/util/hash may reference util/hash.
+    const distDir = path.join(packageDir, 'dist');
+    const distFiles = (await fs.promises.readdir(distDir, { recursive: true })) as string[];
 
-        if (posixPath.startsWith('util/hash/') || !/\.(js|mjs|cjs|d\.ts|d\.mts)$/.test(posixPath)) {
-          continue;
-        }
+    for (const file of distFiles) {
+      const posixPath = file.split(path.sep).join('/');
 
-        const content = await fs.promises.readFile(path.join(distDir, file), 'utf-8');
-        expect(content.includes('util/hash'), `dist/${posixPath} must not reference util/hash`).toBe(false);
+      if (posixPath.startsWith('util/hash/') || !/\.(js|mjs|cjs|d\.ts|d\.mts)$/.test(posixPath)) {
+        continue;
       }
 
-      // Runtime check: loading the main entrypoints must not load any module
-      // under dist/util/hash.
-      const loaded = await runScript(
-        fixture,
-        'isolation.cjs',
-        `
+      const content = await fs.promises.readFile(path.join(distDir, file), 'utf-8');
+      expect(content.includes('util/hash'), `dist/${posixPath} must not reference util/hash`).toBe(false);
+    }
+
+    // Runtime check: loading the main entrypoints must not load any module
+    // under dist/util/hash.
+    const loaded = await runScript(
+      fixture,
+      'isolation.cjs',
+      `
   const path = require('node:path');
 
   require('es-toolkit');
@@ -291,9 +287,8 @@ describe(`es-toolkit's package tarball`, () => {
   const loaded = Object.keys(require.cache).map((p) => p.split(path.sep).join('/'));
   console.log(JSON.stringify(loaded.filter((p) => p.includes('dist/util/hash'))));
         `
-      );
+    );
 
-      expect(loaded).toEqual([]);
-    });
+    expect(loaded).toEqual([]);
   });
 });
