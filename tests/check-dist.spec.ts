@@ -111,7 +111,9 @@ async function pickWildcardModule(packageDir: string, esmTarget: string, entrypo
     throw new Error(`No module found for ${entrypoint} in ${targetDir}.`);
   }
 
-  return path.posix.join('es-toolkit', entrypoint.replace('*', module.name.slice(0, -'.mjs'.length)));
+  // Subpath patterns contain a single `*`; `replaceAll` is used only to keep CodeQL from flagging
+  // `replace` as incomplete sanitization.
+  return path.posix.join('es-toolkit', entrypoint.replaceAll('*', module.name.slice(0, -'.mjs'.length)));
 }
 
 describe(`es-toolkit's package tarball`, () => {
