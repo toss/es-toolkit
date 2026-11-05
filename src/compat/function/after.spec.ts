@@ -43,6 +43,7 @@ describe('after', () => {
   it('should throw an error if `func` is not a function', () => {
     expect(() => {
       after(1, 42 as any);
+      // oxlint-disable-next-line vitest/require-to-throw-message
     }).toThrow();
   });
 });

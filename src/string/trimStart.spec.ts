@@ -47,7 +47,7 @@ describe('trimStart', () => {
   });
 
   it('should throw an error when chars is a multi-character string', () => {
-    expect(() => trimStart('---hello', '--')).toThrow();
+    expect(() => trimStart('---hello', '--')).toThrow("The 'chars' parameter should be a single character string.");
   });
 
   it('should remove leading characters when chars is an array', () => {

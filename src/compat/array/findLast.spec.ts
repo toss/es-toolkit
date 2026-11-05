@@ -20,6 +20,7 @@ describe('findLast', () => {
     expect(func(objects, object => object.a)).toEqual(expected[0]);
   });
 
+  // oxlint-disable-next-line typescript/no-base-to-string, typescript/restrict-template-expressions
   it(`should return \`${expected[1]}\` if value is not found`, () => {
     expect(func(objects, object => object.a === 3)).toEqual(expected[1]);
   });
@@ -36,6 +37,7 @@ describe('findLast', () => {
     expect(func(objects, 'b')).toBe(expected[0]);
   });
 
+  // oxlint-disable-next-line typescript/no-base-to-string, typescript/restrict-template-expressions
   it(`should return \`${expected[1]}\` for empty collections`, () => {
     const emptyValues = empties;
     const expecting = lodashStable.map(emptyValues, lodashStable.constant(expected[1]));

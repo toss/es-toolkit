@@ -16,6 +16,7 @@ import { toPlainObject } from '../util/toPlainObject';
 
 const freeGlobal = typeof global === 'object' && global && global.Object === Object && global;
 const freeSelf = typeof self === 'object' && self && self.Object === Object && self;
+// oxlint-disable-next-line typescript/no-implied-eval
 const root = freeGlobal || freeSelf || Function('return this')();
 
 function square(n: number): number {

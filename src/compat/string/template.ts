@@ -214,6 +214,7 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
     return __p;
   }`;
 
+  // oxlint-disable-next-line typescript/no-implied-eval -- compiling the template into a function is the feature
   const result = attempt(() => new Function(...importsKeys, `${sourceURL}return ${compiledFunction}`)(...importValues));
 
   result.source = compiledFunction;

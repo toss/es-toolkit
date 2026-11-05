@@ -13,7 +13,9 @@ describe('shuffle', () => {
   });
 
   it('should contain the same elements after a collection is shuffled', () => {
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     expect(shuffle(array).sort()).toEqual(array);
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     expect(shuffle(object).sort()).toEqual(array);
   });
 
