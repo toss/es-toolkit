@@ -27,6 +27,7 @@ describe('once', () => {
       throw new Error();
     });
 
+    // oxlint-disable-next-line vitest/require-to-throw-message
     expect(resultFunc).toThrow();
     expect(resultFunc).not.toThrow();
   });

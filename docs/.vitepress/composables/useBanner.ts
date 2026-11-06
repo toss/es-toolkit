@@ -77,6 +77,7 @@ export function useBanner() {
 
     window.addEventListener('popstate', updateCurrentLang);
 
+    // oxlint-disable-next-line typescript/unbound-method -- saved to restore the original later; always invoked with .apply
     originalPushState = history.pushState;
     history.pushState = function (...args) {
       originalPushState!.apply(this, args);
