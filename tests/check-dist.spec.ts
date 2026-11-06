@@ -50,10 +50,7 @@ const ENTRYPOINTS = [
 const BLOCKED_ENTRYPOINTS = ['./iterator/_internal/*', './util/hash/*'];
 
 // One module under each blocked subpath. They exist in `dist`, but must not be resolvable.
-const BLOCKED_MODULES = [
-  'es-toolkit/iterator/_internal/iterator',
-  'es-toolkit/util/hash/node',
-];
+const BLOCKED_MODULES = ['es-toolkit/iterator/_internal/iterator', 'es-toolkit/util/hash/node'];
 
 /**
  * Installs the packed `es-toolkit` tarball into a fresh fixture directory, so that tests can load

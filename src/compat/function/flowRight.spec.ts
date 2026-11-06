@@ -53,6 +53,7 @@ describe('flowRight', () => {
   it(`\`flowRight\` should throw an error if a function is not passed`, () => {
     expect(() => {
       flowRight(null as any);
+      // oxlint-disable-next-line vitest/require-to-throw-message
     }).toThrow();
   });
 

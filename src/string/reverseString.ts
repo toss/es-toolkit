@@ -12,5 +12,5 @@
  * const reversedStr3 = reverseString('foo 😄 bar') // returns 'rab 😄 oof'
  */
 export function reverseString(value: string): string {
-  return [...value].reverse().join('');
+  return Array.from(value).reverse().join('');
 }
