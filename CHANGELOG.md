@@ -4,32 +4,16 @@
 
 Released on November 6th, 2026.
 
-- Added per-function imports, so each function can be imported from its own subpath
-  like `es-toolkit/array/chunk` or `es-toolkit/string/camelCase`. ([#2173])
+- Added support for per-function imports like `es-toolkit/array/chunk`. ([#2173](https://github.com/toss/es-toolkit/pull/2173))
+- Fixed `reduceAsync` to preserve explicitly provided `null` and `undefined` initial values. ([#2176](https://github.com/toss/es-toolkit/pull/2176))
+- Fixed circular dependency warnings in bundlers when importing `orderBy` or `sortBy`. ([#2187](https://github.com/toss/es-toolkit/pull/2187))
+- Fixed `truncate` in `es-toolkit/compat` to preserve separator boundaries, matching Lodash's behavior. ([#2180](https://github.com/toss/es-toolkit/pull/2180))
+- Fixed `isError` in `es-toolkit/compat` to return `true` for `DOMException` and error-like objects, matching Lodash's behavior. ([#2188](https://github.com/toss/es-toolkit/pull/2188))
+- Fixed incorrect example outputs in the documentation for `random`, `keysIn`, `setWith`, and `curryRight`. ([#2183](https://github.com/toss/es-toolkit/pull/2183))
+- Replaced Prettier and ESLint with oxfmt and oxlint, and forbade circular imports. ([#2185](https://github.com/toss/es-toolkit/pull/2185), [#2189](https://github.com/toss/es-toolkit/pull/2189), [#2190](https://github.com/toss/es-toolkit/pull/2190))
+- Enhanced the dist and browser compatibility checks to verify the packed tarball and only exported functions. ([#2182](https://github.com/toss/es-toolkit/pull/2182), [#2192](https://github.com/toss/es-toolkit/pull/2192))
 
-- Fixed `reduceAsync` to use `null` and `undefined` as the initial value when they are
-  passed explicitly, instead of starting from the first element. ([#2176])
-- Fixed `serialize` to no longer trigger circular dependency warnings in bundlers such
-  as Rollup when importing `orderBy` or `sortBy`. ([#2187])
-
-The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
-edge cases now matches Lodash, so results may differ if you relied on the previous output.
-
-- Fixed `compat/truncate` to keep the text before a `separator` that starts exactly at
-  the truncation boundary, and to handle a `separator` at the start of the string.
-  ([#2180])
-- Fixed `compat/isError` to return `true` for `DOMException` and for error-like objects
-  with a string `name` and `message`. ([#2188])
-
-- Fixed documentation examples in `compat/random`, `compat/keysIn`, `compat/setWith`,
-  and `compat/curryRight`. ([#2183])
-- Moved formatting and linting to `oxfmt` and `oxlint`, and made circular imports a
-  lint error. ([#2185], [#2189], [#2190])
-- Made the dist and browser compatibility checks run against the packed tarball and
-  only exported functions. ([#2182], [#2192])
-
-We sincerely thank @D-Sketon, @frogscooper, @MycroCosmo, @raon0211, @subotac, and
-@ys0v9 for their contributions. We appreciate your great efforts!
+We sincerely thank @D-Sketon, @frogscooper, @MycroCosmo, @raon0211, @subotac, and @ys0v9 for their contributions. We appreciate your great efforts!
 
 ## Version v1.53.1
 
