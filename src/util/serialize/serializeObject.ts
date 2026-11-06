@@ -1,5 +1,8 @@
+// oxlint-disable-next-line import/no-cycle -- serializeValue and serializeObject recurse into each other; the imports are only used at call time
 import { compareValues } from './compareValues.ts';
+// oxlint-disable-next-line import/no-cycle -- serializeValue and serializeObject recurse into each other; the imports are only used at call time
 import { serializeValue } from './serialize.ts';
+// oxlint-disable-next-line import/no-cycle -- serializeValue and serializeObject recurse into each other; the imports are only used at call time
 import { serializePlainObject } from './serializePlainObject.ts';
 import { serializeString } from './serializeString.ts';
 import { isArrayBuffer } from '../../predicate/isArrayBuffer.ts';

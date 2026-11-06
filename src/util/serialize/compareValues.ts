@@ -1,3 +1,4 @@
+// oxlint-disable-next-line import/no-cycle -- serializeValue and serializeObject recurse into each other; the imports are only used at call time
 import { serializeValue } from './serialize.ts';
 
 /**
