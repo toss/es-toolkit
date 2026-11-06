@@ -1,5 +1,5 @@
 {
-  "plugins": ["eslint", "typescript"],
+  "plugins": ["eslint", "typescript", "import"],
   // ESLint plugins run through oxlint's JS plugin support. They are re-exported from
   // .scripts/oxlint so that they resolve under Yarn PnP; local-plugin.mjs holds project rules.
   "jsPlugins": [
@@ -39,6 +39,7 @@
     "curly": ["error", "all"],
     "eqeqeq": ["error", "always", { "null": "ignore" }],
     "prefer-object-has-own": "error",
+    "import/no-cycle": ["error", { "ignoreTypes": true }],
     "typescript/no-explicit-any": "warn",
     "typescript/no-require-imports": "warn",
     "typescript/no-non-null-asserted-optional-chain": "warn",

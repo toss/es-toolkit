@@ -1,6 +1,7 @@
 import { serializeBigInt } from './serializeBigInt.ts';
 import { serializeFunction } from './serializeFunction.ts';
 import { serializeNumber } from './serializeNumber.ts';
+// oxlint-disable-next-line import/no-cycle -- serializeValue and serializeObject recurse into each other; the imports are only used at call time
 import { serializeObject } from './serializeObject.ts';
 import { serializeString } from './serializeString.ts';
 import { serializeSymbol } from './serializeSymbol.ts';
