@@ -123,16 +123,16 @@ interface MemoizedFunction {
  * const object = { a: 1, b: 2 };
  * const other = { c: 3, d: 4 };
  *
- * const values = memoize(Object.values);
- * values(object); // => [1, 2]
- * values(other); // => [3, 4]
+ * const keys = memoize(Object.keys);
+ * keys(object); // => ['a', 'b']
+ * keys(other); // => ['c', 'd']
  *
- * object.a = 2;
- * values(object); // => [1, 2]
+ * object.e = 5;
+ * keys(object); // => ['a', 'b']
  *
  * // Modify the result cache.
- * values.cache.set(object, ['a', 'b']);
- * values(object); // => ['a', 'b']
+ * keys.cache.set(object, ['x']);
+ * keys(object); // => ['x']
  *
  * // memoize.Cache is the constructor used for the cache. It defaults to Map.
  * const cache = new memoize.Cache();
