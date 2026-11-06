@@ -1,5 +1,36 @@
 # es-toolkit Changelog
 
+## Version v1.53.2
+
+Released on November 6th, 2026.
+
+- Added per-function imports, so each function can be imported from its own subpath
+  like `es-toolkit/array/chunk` or `es-toolkit/string/camelCase`. ([#2173])
+
+- Fixed `reduceAsync` to use `null` and `undefined` as the initial value when they are
+  passed explicitly, instead of starting from the first element. ([#2176])
+- Fixed `serialize` to no longer trigger circular dependency warnings in bundlers such
+  as Rollup when importing `orderBy` or `sortBy`. ([#2187])
+
+The following bring `es-toolkit/compat` closer to Lodash. Behavior for the affected
+edge cases now matches Lodash, so results may differ if you relied on the previous output.
+
+- Fixed `compat/truncate` to keep the text before a `separator` that starts exactly at
+  the truncation boundary, and to handle a `separator` at the start of the string.
+  ([#2180])
+- Fixed `compat/isError` to return `true` for `DOMException` and for error-like objects
+  with a string `name` and `message`. ([#2188])
+
+- Fixed documentation examples in `compat/random`, `compat/keysIn`, `compat/setWith`,
+  and `compat/curryRight`. ([#2183])
+- Moved formatting and linting to `oxfmt` and `oxlint`, and made circular imports a
+  lint error. ([#2185], [#2189], [#2190])
+- Made the dist and browser compatibility checks run against the packed tarball and
+  only exported functions. ([#2182], [#2192])
+
+We sincerely thank @D-Sketon, @frogscooper, @MycroCosmo, @raon0211, @subotac, and
+@ys0v9 for their contributions. We appreciate your great efforts!
+
 ## Version v1.53.1
 
 Released on October 31st, 2026.
