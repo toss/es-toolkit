@@ -5,4 +5,4 @@ export { deferAsync } from './deferAsync.ts';
 export { invariant } from './invariant.ts';
 export { invariant as assert } from './invariant.ts';
 export { Queue } from './queue.ts';
-export { serialize } from './serialize/serialize.ts';
+export { serialize } from './serialize.ts';

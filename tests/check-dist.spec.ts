@@ -47,14 +47,10 @@ const ENTRYPOINTS = [
 
 // Internal subdirectories are excluded from the package with a `null` export.
 // These are disjoint from ENTRYPOINTS, which only lists what can be loaded.
-const BLOCKED_ENTRYPOINTS = ['./iterator/_internal/*', './util/hash/*', './util/serialize/*'];
+const BLOCKED_ENTRYPOINTS = ['./iterator/_internal/*', './util/hash/*'];
 
 // One module under each blocked subpath. They exist in `dist`, but must not be resolvable.
-const BLOCKED_MODULES = [
-  'es-toolkit/iterator/_internal/iterator',
-  'es-toolkit/util/hash/node',
-  'es-toolkit/util/serialize/serialize',
-];
+const BLOCKED_MODULES = ['es-toolkit/iterator/_internal/iterator', 'es-toolkit/util/hash/node'];
 
 /**
  * Installs the packed `es-toolkit` tarball into a fresh fixture directory, so that tests can load
