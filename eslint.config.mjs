@@ -1,7 +1,7 @@
 import compatPlugin from 'eslint-plugin-compat';
 import esXPlugin from 'eslint-plugin-es-x';
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
-import prettier from 'eslint-plugin-prettier/recommended';
+import perfectionist from 'eslint-plugin-perfectionist';
 import pluginVue from 'eslint-plugin-vue';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
@@ -72,7 +72,17 @@ export default defineConfig(
       ],
     },
   },
-  prettier,
+  // Keep the re-export lists in the package entrypoints alphabetised.
+  {
+    files: ['src/**/index.ts', 'src/**/compat.ts'],
+    plugins: { perfectionist },
+    rules: {
+      'perfectionist/sort-exports': [
+        'error',
+        { type: 'natural', ignoreCase: true, partitionByNewLine: true, partitionByComment: true },
+      ],
+    },
+  },
   ...pluginVue.configs['flat/recommended'],
   {
     files: ['src/**/*.ts'],

@@ -33,15 +33,8 @@ jobs:
           else
             echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn lint
           fi
-      - name: Prettier
-        run: |
-          changed_files=$(git diff --name-only --diff-filter=ACMRUXB ${{ github.event.pull_request.base.sha }})
-
-          if echo "$changed_files" | grep -q -E "^\.prettierrc$|^\.prettierignore$"; then
-            yarn prettier -c .
-          else
-            echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
-          fi
+      - name: oxfmt
+        run: yarn format:check
   typecheck:
     runs-on: ubuntu-latest
     steps:

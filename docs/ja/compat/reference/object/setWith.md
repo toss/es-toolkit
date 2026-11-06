@@ -42,7 +42,7 @@ setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
   return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
 });
 console.log(obj3);
-// 結果: { a: { '0': { b: { c: 'nested' } } } }
+// 結果: { a: [{ b: { c: 'nested' } }] }
 
 // Object コンストラクタをカスタマイザーとして使用
 const obj4 = {};

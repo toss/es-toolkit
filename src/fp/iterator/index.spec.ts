@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { pipe } from '../pipe.ts';
 import {
   cartesianProduct,
   chunk,
@@ -22,7 +23,6 @@ import {
   uniqBy,
   zip,
 } from './index.ts';
-import { pipe } from '../pipe.ts';
 
 describe('es-toolkit/fp/iterator', () => {
   it('exports every Phase 1 operator', () => {
