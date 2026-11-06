@@ -16,7 +16,7 @@ import { getTag } from '../_internal/getTag.ts';
  * ```
  */
 export function isError(value: any): value is Error {
-  if (!isObjectLike(value) || isPlainObject(value)) {
+  if (!isObjectLike(value)) {
     return false;
   }
 
@@ -25,6 +25,6 @@ export function isError(value: any): value is Error {
   return (
     tag === '[object Error]' ||
     tag === '[object DOMException]' ||
-    (typeof value.message === 'string' && typeof value.name === 'string')
+    (typeof value.message === 'string' && typeof value.name === 'string' && !isPlainObject(value))
   );
 }

@@ -50,8 +50,7 @@ describe('isError', () => {
     expect(isError(new ErrorLike())).toBe(true);
   });
 
-  it('should return `false` for plain objects with a `Symbol.toStringTag` of `Error`', () => {
-    expect(isError({ [Symbol.toStringTag]: 'Error' })).toBe(false);
+  it('should return `false` for plain objects with `name` and `message`', () => {
     expect(isError({ name: 'a', message: 'b' })).toBe(false);
     expect(isError('Error')).toBe(false);
   });
