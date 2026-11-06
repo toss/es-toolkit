@@ -1,16 +1,11 @@
-import { serializeBigInt } from './serializeBigInt.ts';
-import { serializeFunction } from './serializeFunction.ts';
-import { serializeNumber } from './serializeNumber.ts';
-import { serializeString } from './serializeString.ts';
-import { serializeSymbol } from './serializeSymbol.ts';
-import { isArrayBuffer } from '../../predicate/isArrayBuffer.ts';
-import { isDate } from '../../predicate/isDate.ts';
-import { isError } from '../../predicate/isError.ts';
-import { isMap } from '../../predicate/isMap.ts';
-import { isPlainObject } from '../../predicate/isPlainObject.ts';
-import { isRegExp } from '../../predicate/isRegExp.ts';
-import { isSet } from '../../predicate/isSet.ts';
-import { isTypedArray } from '../../predicate/isTypedArray.ts';
+import { isArrayBuffer } from '../predicate/isArrayBuffer.ts';
+import { isDate } from '../predicate/isDate.ts';
+import { isError } from '../predicate/isError.ts';
+import { isMap } from '../predicate/isMap.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
+import { isRegExp } from '../predicate/isRegExp.ts';
+import { isSet } from '../predicate/isSet.ts';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
 
 /**
  * Serializes any value into a stable string.
@@ -55,7 +50,7 @@ export function serialize(value: unknown): string {
  *   mapped to their back-reference placeholder or completed serialization.
  * @returns The serialized string.
  */
-export function serializeValue(value: unknown, refs: Map<object, string>): string {
+function serializeValue(value: unknown, refs: Map<object, string>): string {
   switch (typeof value) {
     case 'string': {
       return serializeString(value);
@@ -85,6 +80,104 @@ export function serializeValue(value: unknown, refs: Map<object, string>): strin
 }
 
 /**
+ * Serializes a string into a single-quoted string literal.
+ *
+ * The string is not escaped; the output is intended for hashing and
+ * change detection, not for parsing or re-evaluation.
+ *
+ * @param value - The string to serialize.
+ * @returns The serialized string.
+ *
+ * @example
+ * serializeString('abc'); // "'abc'"
+ */
+function serializeString(value: string): string {
+  return `'${value}'`;
+}
+
+/**
+ * Serializes a number into a string.
+ *
+ * `-0` is serialized as `0`, and `NaN` and `Infinity` are serialized
+ * as their string representations.
+ *
+ * @param value - The number to serialize.
+ * @returns The serialized string.
+ *
+ * @example
+ * serializeNumber(1); // "1"
+ * serializeNumber(-0); // "0"
+ * serializeNumber(NaN); // "NaN"
+ * serializeNumber(Infinity); // "Infinity"
+ */
+function serializeNumber(value: number): string {
+  return String(value);
+}
+
+/**
+ * Serializes a bigint into a string with an `n` suffix, like a bigint literal.
+ *
+ * @param value - The bigint to serialize.
+ * @returns The serialized string.
+ *
+ * @example
+ * serializeBigInt(123n); // "123n"
+ */
+function serializeBigInt(value: bigint): string {
+  return `${value}n`;
+}
+
+/**
+ * Serializes a symbol into a string using its description.
+ *
+ * The description is quoted like any other string, so a symbol without a
+ * description (`Symbol()`) is distinguishable from one with an empty
+ * description (`Symbol('')`). Note that two different symbols with the same
+ * description still serialize to the same string, since a symbol's identity
+ * cannot be captured in a string.
+ *
+ * @param value - The symbol to serialize.
+ * @returns The serialized string.
+ *
+ * @example
+ * serializeSymbol(Symbol('test')); // "Symbol('test')"
+ * serializeSymbol(Symbol()); // "Symbol()"
+ */
+function serializeSymbol(value: symbol): string {
+  return value.description === undefined ? 'Symbol()' : `Symbol(${serializeString(value.description)})`;
+}
+
+/**
+ * Serializes a function into a string of the form `name:source`.
+ *
+ * Native functions have no meaningful source, so they are serialized as
+ * `name:[native]`. The whitespace inside `{ [native code] }` differs between
+ * engines, so it is matched loosely to keep the output platform independent. For other functions, newlines and their surrounding
+ * whitespace are collapsed so that formatting differences do not change
+ * the output.
+ *
+ * @param value - The function to serialize.
+ * @returns The serialized string.
+ *
+ * @example
+ * function sum(a, b) {
+ *   return a + b;
+ * }
+ * serializeFunction(sum); // "sum:function sum(a, b) {return a + b;}"
+ * serializeFunction(Math.max); // "max:[native]"
+ */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+function serializeFunction(value: Function): string {
+  const source = Function.prototype.toString.call(value);
+
+  if (/\{\s*\[native code\]\s*\}$/.test(source)) {
+    return `${value.name}:[native]`;
+  }
+
+  return `${value.name}:${source.replace(/\s*\n\s*/g, '')}`;
+}
+
+/**
  * Serializes an object, handling circular references and repeated references.
  *
  * The first time an object is visited, it is registered as `#ref{n}` where `n`
@@ -98,7 +191,7 @@ export function serializeValue(value: unknown, refs: Map<object, string>): strin
  * @returns The serialized string.
  * @throws {TypeError} If the object cannot be serialized.
  */
-export function serializeObject(value: object | null, refs: Map<object, string>): string {
+function serializeObject(value: object | null, refs: Map<object, string>): string {
   if (value === null) {
     return 'null';
   }
@@ -240,7 +333,7 @@ function serializeClassInstance(value: object, refs: Map<object, string>): strin
  * @example
  * serializePlainObject({ b: 2, a: 1 }, new Map()); // "{'a':1,'b':2}"
  */
-export function serializePlainObject(object: object, refs: Map<object, string>): string {
+function serializePlainObject(object: object, refs: Map<object, string>): string {
   const keys = Object.keys(object).sort();
 
   let result = '{';
@@ -275,7 +368,7 @@ export function serializePlainObject(object: object, refs: Map<object, string>):
  * @returns A negative number if `a` sorts before `b`, a positive number if
  *   `a` sorts after `b`, and `0` if they are equal.
  */
-export function compareValues(a: unknown, b: unknown, refs: Map<object, string>): number {
+function compareValues(a: unknown, b: unknown, refs: Map<object, string>): number {
   const rankA = getTypeRank(a);
   const rankB = getTypeRank(b);
 
