@@ -118,6 +118,9 @@ describe('es-toolkit/compat', () => {
     expectTypeOf(compat.flowRight).toEqualTypeOf<typeof lodash.flowRight>();
     expectTypeOf(compat.identity).toEqualTypeOf<typeof lodash.identity>();
     expectTypeOf(compat.memoize).toEqualTypeOf<typeof lodash.memoize>();
+    expectTypeOf<compat.MemoizedFunction>().toEqualTypeOf<lodash.MemoizedFunction>();
+    expectTypeOf<compat.MapCache>().toEqualTypeOf<lodash.MapCache>();
+    expectTypeOf<compat.MapCacheConstructor>().toEqualTypeOf<lodash.MapCacheConstructor>();
     expectTypeOf(compat.negate).toEqualTypeOf<typeof lodash.negate>();
     expectTypeOf(compat.noop).toEqualTypeOf<typeof lodash.noop>();
     expectTypeOf(compat.nthArg).toEqualTypeOf<typeof lodash.nthArg>();
