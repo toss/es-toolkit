@@ -52,7 +52,7 @@ Foo.prototype.c = 3;
 keysIn(new Foo());
 // => ['a', 'b', 'c'] (プロトタイプのプロパティ 'c' も含む)
 
-// constructor は除外されます
+// constructor と列挙不可のメソッドは除外されます
 class MyClass {
   constructor() {
     this.prop = 1;
@@ -62,7 +62,7 @@ class MyClass {
 MyClass.prototype.inherited = 2;
 
 keysIn(new MyClass());
-// => ['prop', 'method', 'inherited'] (constructor は除外される)
+// => ['prop', 'inherited'] (constructor と列挙不可の method は除外される)
 ```
 
 配列のようなオブジェクトを特別に処理します。

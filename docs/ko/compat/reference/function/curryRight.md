@@ -92,7 +92,7 @@ console.log(todayLoginAction('김철수'));
 
 // 시간을 먼저 고정
 const morningFormat = curriedFormat('아침 9시');
-console.log(morningFormat('댓글 작성', '이영희'));
+console.log(morningFormat('이영희', '댓글 작성'));
 // "이영희님이 댓글 작성을 아침 9시에 했습니다"
 ```
 
@@ -111,15 +111,14 @@ const curriedTake = curryRight(takeFromEnd);
 // 쉼표로 구분하는 함수 생성
 const takeWithComma = curriedTake(', ');
 
-// 마지막 3개 가져오기
-const takeLast3 = takeWithComma(3);
-
 const fruits = ['사과', '바나나', '오렌지', '포도', '키위'];
-console.log(takeLast3(fruits)); // "오렌지, 포도, 키위"
+
+// 마지막 3개 가져오기
+console.log(takeWithComma(fruits, 3)); // "오렌지, 포도, 키위"
 
 // 다른 구분자 사용
 const takeWithDash = curriedTake(' - ');
-console.log(takeWithDash(2, fruits)); // "포도 - 키위"
+console.log(takeWithDash(fruits, 2)); // "포도 - 키위"
 ```
 
 함수 합성에서 활용:
