@@ -118,6 +118,27 @@ interface MemoizedFunction {
  * @param func The function to have its output memoized.
  * @param [resolver] The function to resolve the cache key.
  * @return {MemoizedFunction<T>} Returns the new memoizing function.
+ *
+ * @example
+ * const object = { a: 1, b: 2 };
+ * const other = { c: 3, d: 4 };
+ *
+ * const values = memoize(Object.values);
+ * values(object); // => [1, 2]
+ * values(other); // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object); // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object); // => ['a', 'b']
+ *
+ * // memoize.Cache is the constructor used for the cache. It defaults to Map.
+ * const cache = new memoize.Cache();
+ * cache.set('a', 1);
+ * cache.get('a'); // => 1
+ * cache.has('b'); // => false
  */
 export function memoize<T extends (...args: any) => any>(
   func: T,

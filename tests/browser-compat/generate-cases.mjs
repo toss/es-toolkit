@@ -95,10 +95,60 @@ function listSourceFiles() {
   return files.sort();
 }
 
-/** Extracts every `@example` section body from all JSDoc blocks of a file. */
-function extractExampleBlocks(source) {
+/**
+ * Returns the JSDoc comments attached to the exported top-level declarations
+ * of a file. Module-private helpers may document themselves with `@example`
+ * too, but those examples call functions that consumers cannot import, so
+ * they are not runnable test cases.
+ */
+function exportedJsDocs(fileName, source) {
+  const sourceFile = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true);
+  const locallyExported = new Set();
+  for (const statement of sourceFile.statements) {
+    if (
+      ts.isExportDeclaration(statement) &&
+      statement.moduleSpecifier == null &&
+      statement.exportClause != null &&
+      ts.isNamedExports(statement.exportClause)
+    ) {
+      for (const element of statement.exportClause.elements) {
+        locallyExported.add((element.propertyName ?? element.name).text);
+      }
+    }
+  }
+  const isExported = statement => {
+    if (
+      ts.canHaveModifiers(statement) &&
+      ts.getModifiers(statement)?.some(m => m.kind === ts.SyntaxKind.ExportKeyword)
+    ) {
+      return true;
+    }
+    if (ts.isVariableStatement(statement)) {
+      return statement.declarationList.declarations.some(
+        d => ts.isIdentifier(d.name) && locallyExported.has(d.name.text)
+      );
+    }
+    return statement.name != null && ts.isIdentifier(statement.name) && locallyExported.has(statement.name.text);
+  };
+  const docs = [];
+  for (const statement of sourceFile.statements) {
+    if (!isExported(statement)) {
+      continue;
+    }
+    for (const range of ts.getLeadingCommentRanges(source, statement.pos) ?? []) {
+      const text = source.slice(range.pos, range.end);
+      if (text.startsWith('/**')) {
+        docs.push(text);
+      }
+    }
+  }
+  return docs;
+}
+
+/** Extracts every `@example` section body from the JSDoc blocks of a file's exported declarations. */
+function extractExampleBlocks(fileName, source) {
   const blocks = [];
-  for (const doc of source.match(/\/\*\*[\s\S]*?\*\//g) ?? []) {
+  for (const doc of exportedJsDocs(fileName, source)) {
     const sections = doc.split(/^\s*\*\s*@example[^\n]*$/m).slice(1);
     for (const section of sections) {
       const lines = [];
@@ -397,7 +447,7 @@ async function main() {
       continue;
     }
     const source = fs.readFileSync(file, 'utf8');
-    const blocks = extractExampleBlocks(source);
+    const blocks = extractExampleBlocks(file, source);
     blocks.forEach((block, index) => {
       const id = `${ns}:${rel.replace(/\.ts$/, '')}#${index}`;
       if (SKIP_LIST.skip[id] != null) {
