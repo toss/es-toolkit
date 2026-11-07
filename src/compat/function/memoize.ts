@@ -1,4 +1,15 @@
-interface MapCache {
+/**
+ * A cache object used by a memoized function to store previously computed results.
+ * Any object conforming to this interface, including the built-in `Map`, can be used as a cache.
+ *
+ * @example
+ * ```typescript
+ * const cache: MapCache = new Map();
+ * cache.set('key', 'value');
+ * cache.get('key'); // Returns 'value'
+ * ```
+ */
+export interface MapCache {
   /**
    * Removes the value associated with the specified key from the cache.
    *
@@ -89,19 +100,22 @@ interface MapCache {
  * const cache = new CacheConstructor();
  * ```
  */
-interface MapCacheConstructor {
+export interface MapCacheConstructor {
   new (): MapCache;
 }
 
 /**
  * Represents a function that has been memoized.
  * A memoized function maintains the same signature as the original function
- * but adds a cache property to store previously computed results.
+ * but adds a `cache` property to store previously computed results.
  *
- * @template T - The type of the original function being memoized
+ * @example
+ * ```typescript
+ * const memoized: ((value: string) => string) & MemoizedFunction = memoize((value: string) => value);
+ * memoized.cache; // MapCache
+ * ```
  */
-
-interface MemoizedFunction {
+export interface MemoizedFunction {
   /**
    * The cache storing previously computed results
    */
@@ -117,7 +131,7 @@ interface MemoizedFunction {
  * @template T - The type of the original function being memoized
  * @param func The function to have its output memoized.
  * @param [resolver] The function to resolve the cache key.
- * @return {MemoizedFunction<T>} Returns the new memoizing function.
+ * @returns Returns the new memoizing function.
  *
  * @example
  * const object = { a: 1, b: 2 };
