@@ -41,7 +41,17 @@ export function countBy<T, K extends PropertyKey>(
     const item = arr[i];
     const key = mapper(item, i, arr);
 
-    result[key] = (result[key] ?? 0) + 1;
+    if (key === '__proto__') {
+      const next = (Object.hasOwn(result, key) ? result[key] : 0) + 1;
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: next,
+        writable: true,
+      });
+    } else {
+      result[key] = (result[key] ?? 0) + 1;
+    }
   }
 
   return result;
