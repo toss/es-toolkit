@@ -35,24 +35,16 @@ export function reduce<K, V, A = V>(
   callback: (accumulator: A, value: V, key: K, map: Map<K, V>) => A,
   initialValue?: A
 ): A {
-  // `null` and `undefined` are valid accumulator values, so only a missing
-  // argument means "start from the first entry".
   const hasInitialValue = arguments.length >= 3;
 
   if (!hasInitialValue && map.size === 0) {
     throw new TypeError('Reduce of empty map with no initial value');
   }
 
-  let accumulator = initialValue as A;
-  let isFirstEntry = !hasInitialValue;
+  const entries = map.entries();
+  let accumulator = hasInitialValue ? initialValue! : (entries.next().value![1] as unknown as A);
 
-  for (const [key, value] of map) {
-    if (isFirstEntry) {
-      accumulator = value as unknown as A;
-      isFirstEntry = false;
-      continue;
-    }
-
+  for (const [key, value] of entries) {
     accumulator = callback(accumulator, value, key, map);
   }
 

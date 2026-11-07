@@ -28,24 +28,16 @@ export function reduce<T, A = T>(
   callback: (accumulator: A, value: T, value2: T, set: Set<T>) => A,
   initialValue?: A
 ): A {
-  // `null` and `undefined` are valid accumulator values, so only a missing
-  // argument means "start from the first element".
   const hasInitialValue = arguments.length >= 3;
 
   if (!hasInitialValue && set.size === 0) {
     throw new TypeError('Reduce of empty set with no initial value');
   }
 
-  let accumulator = initialValue as A;
-  let isFirstElement = !hasInitialValue;
+  const values = set.values();
+  let accumulator = hasInitialValue ? initialValue! : (values.next().value! as unknown as A);
 
-  for (const value of set) {
-    if (isFirstElement) {
-      accumulator = value as unknown as A;
-      isFirstElement = false;
-      continue;
-    }
-
+  for (const value of values) {
     accumulator = callback(accumulator, value, value, set);
   }
 
