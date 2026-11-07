@@ -164,6 +164,81 @@ describe('reduce', () => {
     expect(result).toBe(425); // 100*2 + 50*3 + 75*1 = 200 + 150 + 75
   });
 
+  it('should use null as the initial accumulator', () => {
+    const map = new Map([
+      ['a', 'x'],
+      ['b', 'y'],
+    ]);
+
+    const result = reduce(map, (acc: string | null, value) => String(acc) + value, null);
+
+    expect(result).toBe('nullxy');
+  });
+
+  it('should keep calling the callback after it returns null or undefined', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+      ['c', 3],
+    ]);
+    const values: number[] = [];
+
+    const result = reduce(
+      map,
+      (_acc: number | null | undefined, value) => {
+        values.push(value);
+        return value === 2 ? undefined : null;
+      },
+      0
+    );
+
+    expect(values).toEqual([1, 2, 3]);
+    expect(result).toBeNull();
+  });
+
+  it('should return null for an empty Map when null is the initial value', () => {
+    const map = new Map<string, number>();
+
+    expect(reduce(map, (acc: number | null, value) => (acc ?? 0) + value, null)).toBeNull();
+  });
+
+  it('should use an explicit undefined initial value', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const values: number[] = [];
+
+    const result = reduce(
+      map,
+      (acc: number | undefined, value) => {
+        values.push(value);
+        return (acc ?? 0) + value;
+      },
+      undefined
+    );
+
+    expect(values).toEqual([1, 2]);
+    expect(result).toBe(3);
+  });
+
+  it('should use a null first value when no initial value is provided', () => {
+    const map = new Map<string, number | null>([
+      ['a', null],
+      ['b', 2],
+      ['c', 3],
+    ]);
+    const values: Array<number | null> = [];
+
+    const result = reduce(map, (acc: number | null, value) => {
+      values.push(value);
+      return (acc === null ? 100 : acc) + (value ?? 0);
+    });
+
+    expect(values).toEqual([2, 3]);
+    expect(result).toBe(105);
+  });
+
   it('should return the last value when no initial value provided', () => {
     const map = new Map([
       ['a', 5],

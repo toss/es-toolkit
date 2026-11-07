@@ -211,6 +211,67 @@ describe('reduceAsync', () => {
     });
   });
 
+  it('uses null as the initial accumulator', async () => {
+    const arr = ['x', 'y'];
+
+    const result = await reduceAsync(arr, async (acc: string | null, value) => String(acc) + value, null);
+
+    expect(result).toBe('nullxy');
+  });
+
+  it('keeps calling the reducer after it returns null or undefined', async () => {
+    const arr = [1, 2, 3];
+    const values: number[] = [];
+
+    const result = await reduceAsync(
+      arr,
+      async (_acc: number | null | undefined, value) => {
+        values.push(value);
+        return value === 2 ? undefined : null;
+      },
+      0
+    );
+
+    expect(values).toEqual([1, 2, 3]);
+    expect(result).toBeNull();
+  });
+
+  it('returns null for an empty array when null is the initial value', async () => {
+    const arr: number[] = [];
+
+    await expect(reduceAsync(arr, async (acc: number | null, value) => (acc ?? 0) + value, null)).resolves.toBeNull();
+  });
+
+  it('uses an explicit undefined initial value', async () => {
+    const arr = [1, 2];
+    const values: number[] = [];
+
+    const result = await reduceAsync(
+      arr,
+      async (acc: number | undefined, value) => {
+        values.push(value);
+        return (acc ?? 0) + value;
+      },
+      undefined
+    );
+
+    expect(values).toEqual([1, 2]);
+    expect(result).toBe(3);
+  });
+
+  it('uses a null first element when no initial value is provided', async () => {
+    const arr = [null, 2, 3];
+    const values: Array<number | null> = [];
+
+    const result = await reduceAsync(arr, async (acc: number | null, value) => {
+      values.push(value);
+      return (acc === null ? 100 : acc) + (value ?? 0);
+    });
+
+    expect(values).toEqual([2, 3]);
+    expect(result).toBe(105);
+  });
+
   it('can build complex objects', async () => {
     const arr = [
       { key: 'a', value: 1 },
