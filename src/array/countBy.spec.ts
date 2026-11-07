@@ -43,4 +43,28 @@ describe('countBy', () => {
       large: 3,
     });
   });
+
+  it('should count keys that exist on Object.prototype', () => {
+    // A plain object inherits from `Object.prototype`, so reading `result[key]` for a key such as
+    // `constructor` finds the inherited function instead of `undefined`. `??` lets it through and
+    // `function + 1` becomes a string.
+    expect(countBy(['constructor', 'constructor'], x => x)).toEqual({ constructor: 2 });
+    expect(countBy(['toString', 'valueOf', 'toString'], x => x)).toEqual({ toString: 2, valueOf: 1 });
+    expect(countBy(['hasOwnProperty'], x => x)).toEqual({ hasOwnProperty: 1 });
+  });
+
+  it('should count the `__proto__` key', () => {
+    // `__proto__` is an accessor on `Object.prototype`, so assigning to it on a plain object calls
+    // the setter instead of creating an own property.
+    const result = countBy(['__proto__', '__proto__'], x => x);
+
+    expect(Object.hasOwn(result, '__proto__')).toBe(true);
+    expect(result['__proto__' as keyof typeof result]).toBe(2);
+  });
+
+  it('should return an object that inherits from Object.prototype', () => {
+    const result = countBy(['a'], x => x);
+
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+  });
 });
