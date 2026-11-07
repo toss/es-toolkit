@@ -61,12 +61,11 @@ export function merge(target: Record<PropertyKey, any>, source: Record<PropertyK
     const sourceValue = source[key];
     const targetValue = target[key];
 
-    if (isMergeableValue(sourceValue) && isMergeableValue(targetValue)) {
-      target[key] = merge(targetValue, sourceValue);
-    } else if (Array.isArray(sourceValue)) {
-      target[key] = merge([], sourceValue);
+    // Check each kind of `sourceValue` once. Arrays are never plain objects, so the order does not matter.
+    if (Array.isArray(sourceValue)) {
+      target[key] = merge(isMergeableValue(targetValue) ? targetValue : [], sourceValue);
     } else if (isPlainObject(sourceValue)) {
-      target[key] = merge({}, sourceValue);
+      target[key] = merge(isMergeableValue(targetValue) ? targetValue : {}, sourceValue);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }
