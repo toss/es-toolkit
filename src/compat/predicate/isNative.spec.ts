@@ -90,6 +90,7 @@ describe('isNative', () => {
     try {
       expect(() => {
         isNative(noop);
+        // oxlint-disable-next-line vitest/require-to-throw-message
       }).toThrow();
     } finally {
       delete (globalThis as any)['__core-js_shared__'];

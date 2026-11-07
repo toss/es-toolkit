@@ -52,6 +52,28 @@ describe('cloneDeep', () => {
 
   const set = new Set([1, 2]);
 
+  it('should not clone errors', () => {
+    const errors = [
+      new Error(),
+      new EvalError(),
+      new RangeError(),
+      new ReferenceError(),
+      new SyntaxError(),
+      new TypeError(),
+      new URIError(),
+    ];
+
+    for (const error of errors) {
+      const object = { a: error, b: { c: error } };
+      const actual = cloneDeep(object);
+
+      expect(actual).not.toBe(object);
+      expect(actual.a).toBe(error);
+      expect(actual.b.c).toBe(error);
+      expect(cloneDeep(error)).toStrictEqual({});
+    }
+  });
+
   it(`should clone arguments objects`, () => {
     const actual = cloneDeep(args);
 

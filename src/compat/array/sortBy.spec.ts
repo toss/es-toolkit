@@ -10,8 +10,11 @@ describe('sortBy', () => {
       public b: number,
       public c: number
     ) {
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.a = a;
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.b = b;
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.c = c;
     }
   }
@@ -134,6 +137,7 @@ describe('sortBy', () => {
   it('should work with `_.property` shorthands', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
+    // oxlint-disable-next-line typescript/no-misused-spread
     expect(sortBy({ ...objects, undefined }, 'b').map(object => object?.b)).toEqual([1, 2, 3, 4, undefined]);
   });
 

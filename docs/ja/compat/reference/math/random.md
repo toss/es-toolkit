@@ -24,7 +24,7 @@ const result = random(min, max, floating);
 import { random } from 'es-toolkit/compat';
 
 random();
-// Returns: 0.123456789 (0~1の間の小数)
+// Returns: 0 または 1 (デフォルトで整数を返す)
 
 random(true);
 // Returns: 0.987654321 (小数で返す)
@@ -41,7 +41,7 @@ random(false);
 import { random } from 'es-toolkit/compat';
 
 random(5);
-// Returns: 3.456789 (0~5の間の小数)
+// Returns: 2 (0~5の間の整数)
 
 random(10, true);
 // Returns: 7.123456 (0~10の間の小数)
@@ -58,7 +58,7 @@ minからmaxまでのランダムな数値を生成します。
 import { random } from 'es-toolkit/compat';
 
 random(1, 5);
-// Returns: 3.456789 (1~5の間の小数)
+// Returns: 3 (1~5の間の整数)
 
 random(0, 10, true);
 // Returns: 6.789012 (0~10の間の小数)
@@ -73,7 +73,7 @@ random(1, 6, false);
 import { random } from 'es-toolkit/compat';
 
 random(5, 1);
-// Returns: 3.456789 (範囲が1~5に変更される)
+// Returns: 3 (範囲が1~5に変更され、整数を返す)
 ```
 
 guardオブジェクトで特別なケースを処理します。
@@ -83,12 +83,12 @@ import { random } from 'es-toolkit/compat';
 
 const guard = { 5: 5 };
 random(5, 5, guard);
-// Returns: 2.345678 (0~5の間の小数)
+// Returns: 5 (0~5の間の整数)
 ```
 
 #### パラメータ
 
-- `floating` (`boolean`, オプション): 小数を返すかどうかを決定します。デフォルトは `true` です。
+- `floating` (`boolean`, オプション): 小数を返すかどうかを決定します。デフォルトは `false` です。
 - `max` (`number`): 範囲の最大値です（含まれません）。
 - `min` (`number`): 範囲の最小値です（含まれます）。
 - `index` (`string | number`): guardオブジェクトで確認するキーです。

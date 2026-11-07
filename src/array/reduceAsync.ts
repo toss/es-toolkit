@@ -6,6 +6,10 @@
  * array methods, reduce must process elements sequentially and does not support
  * concurrency limiting.
  *
+ * If no initial value is provided, the first element is used as the initial value
+ * and the reducer is applied starting from the second element. `null` and
+ * `undefined` can also be used as the initial value.
+ *
  * @template T - The type of elements in the array.
  * @template U - The type of the accumulated result.
  * @param array The array to reduce.

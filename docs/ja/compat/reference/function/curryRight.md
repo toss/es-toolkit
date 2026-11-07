@@ -92,7 +92,7 @@ console.log(todayLoginAction('田中'));
 
 // 時間を先に固定
 const morningFormat = curriedFormat('朝9時');
-console.log(morningFormat('コメント作成', '佐藤'));
+console.log(morningFormat('佐藤', 'コメント作成'));
 // "佐藤さんがコメント作成を朝9時に行いました"
 ```
 
@@ -111,15 +111,14 @@ const curriedTake = curryRight(takeFromEnd);
 // カンマ区切りの関数を作成
 const takeWithComma = curriedTake(', ');
 
-// 最後の3つを取得
-const takeLast3 = takeWithComma(3);
-
 const fruits = ['りんご', 'バナナ', 'オレンジ', 'ぶどう', 'キウイ'];
-console.log(takeLast3(fruits)); // "オレンジ, ぶどう, キウイ"
+
+// 最後の3つを取得
+console.log(takeWithComma(fruits, 3)); // "オレンジ, ぶどう, キウイ"
 
 // 異なる区切り文字を使用
 const takeWithDash = curriedTake(' - ');
-console.log(takeWithDash(2, fruits)); // "ぶどう - キウイ"
+console.log(takeWithDash(fruits, 2)); // "ぶどう - キウイ"
 ```
 
 関数合成での活用:

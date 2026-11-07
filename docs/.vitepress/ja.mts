@@ -10,6 +10,7 @@ const labels: SidebarLabels = {
     bundleSize: 'バンドルサイズ',
     performance: 'パフォーマンス',
     browserSupport: 'ブラウザサポート',
+    environmentSupport: 'ブラウザと Node.js のサポート',
     aiIntegration: 'AI 連携',
   },
   categories: {

@@ -89,4 +89,10 @@ describe('trimStart', () => {
     // @ts-expect-error
     expect(func(string, ['l', 'e', 'h'])).toBe(expected);
   });
+
+  it('should match String.prototype.trimStart for every whitespace character', () => {
+    const chars = '\t\n\v\f\r \u00a0\u1680\u2000\u200a\u2028\u2029\u202f\u205f\u3000\ufeff';
+    expect(trimStart(`${chars}abc`)).toBe('abc');
+    expect(trimStart(chars)).toBe('');
+  });
 });

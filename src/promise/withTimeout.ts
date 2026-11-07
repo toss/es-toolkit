@@ -47,5 +47,16 @@ export async function withTimeout<T>(
   ms: number,
   { signal }: WithTimeoutOptions = {}
 ): Promise<T> {
-  return Promise.race([run(), timeout(ms, { signal })]);
+  const controller = new AbortController();
+
+  if (signal?.aborted) {
+    controller.abort();
+  }
+  signal?.addEventListener('abort', () => controller.abort(), { once: true, signal: controller.signal });
+
+  try {
+    return await Promise.race([run(), timeout(ms, { signal: controller.signal })]);
+  } finally {
+    controller.abort();
+  }
 }

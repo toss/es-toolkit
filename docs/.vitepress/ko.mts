@@ -10,6 +10,7 @@ const labels: SidebarLabels = {
     bundleSize: '번들 사이즈',
     performance: '성능',
     browserSupport: '브라우저 지원',
+    environmentSupport: '브라우저 및 Node.js 지원',
     aiIntegration: 'AI 활용',
   },
   categories: {

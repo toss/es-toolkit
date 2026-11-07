@@ -1,5 +1,7 @@
 import { get } from './get.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
+import { isUnsafeToWriteProperty } from '../../_internal/isUnsafeToWriteProperty.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
@@ -55,12 +57,12 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       try {
         delete obj[path as PropertyKey];
         return true;
-      } catch {
+      } catch (e) {
         return false;
       }
     }
     case 'string': {
-      if (obj?.[path] === undefined && isDeepKey(path) && !Object.hasOwn(obj, path)) {
+      if (obj?.[path] === undefined && isDeepKey(path) && !hasOwn(obj, path)) {
         return unsetWithPath(obj, toPath(path));
       }
 
@@ -71,16 +73,23 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
       try {
         delete obj[path];
         return true;
-      } catch {
+      } catch (e) {
         return false;
       }
     }
   }
 }
 
-function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
-  const parent = path.length === 1 ? obj : get(obj, path.slice(0, -1));
-  const lastKey = path[path.length - 1];
+function unsetWithPath(obj: any, path: readonly PropertyKey[]): boolean {
+  const keys = path.map(key => toKey(key));
+  const parentKeys = keys.slice(0, -1);
+  const lastKey = keys[keys.length - 1];
+
+  if (parentKeys.some(key => isUnsafeToWriteProperty(key))) {
+    return false;
+  }
+
+  const parent = keys.length === 1 ? obj : get(obj, parentKeys);
 
   if (parent?.[lastKey] === undefined) {
     return true;
@@ -93,7 +102,7 @@ function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
   try {
     delete parent[lastKey];
     return true;
-  } catch {
+  } catch (e) {
     return false;
   }
 }

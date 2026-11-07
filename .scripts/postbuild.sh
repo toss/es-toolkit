@@ -109,12 +109,12 @@ for func in capitalize; do
 done
 
 # Predicate functions
-for func in conforms conformsTo isArguments isArray isArrayBuffer isArrayLike isArrayLikeObject isBoolean isBuffer isDate isElement isEmpty isEqualWith isError isFinite isInteger isMap isMatch isMatchWith isNaN isNative isNil isNumber isObject isObjectLike isPlainObject isRegExp isSafeInteger isSet isString isSymbol isTypedArray isWeakMap isWeakSet matches matchesProperty; do
+for func in conforms conformsTo isArguments isArray isArrayBuffer isArrayLike isArrayLikeObject isBoolean isBuffer isDate isElement isEmpty isEqual isEqualWith isError isFinite isInteger isMap isMatch isMatchWith isNaN isNative isNil isNumber isObject isObjectLike isPlainObject isRegExp isSafeInteger isSet isString isSymbol isTypedArray isWeakMap isWeakSet matches matchesProperty; do
     create_compat_export "predicate" "$func"
 done
 
 # Predicate reexports (from main src)
-for func in isEqual isFunction isLength isNull isUndefined; do
+for func in isFunction isLength isNull isUndefined; do
     create_compat_reexport "predicate" "$func"
 done
 
@@ -132,3 +132,6 @@ create_compat_alias "object" "assignInWith" "extendWith"
 
 # Verify that every generated compat entry point is actually importable
 node ./.scripts/check-compat-entrypoints-loadable.mjs
+
+# Verify that every per-function entry point (es-toolkit/<category>/<fn>) is importable
+node ./.scripts/check-subpath-entrypoints.mjs

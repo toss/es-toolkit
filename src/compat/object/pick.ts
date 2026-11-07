@@ -1,6 +1,7 @@
 import { get } from './get.ts';
 import { has } from './has.ts';
 import { set } from './set.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { Many } from '../_internal/Many.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
@@ -65,7 +66,7 @@ export function pick<T>(object: T | null | undefined, ...props: Array<Many<Prope
  * // result will be { 'a.b': 1 }
  */
 export function pick<T extends object, U extends keyof T>(
-  object: T | any | null | undefined,
+  object: any,
   ...keysArr: Array<Many<U>> | Array<Many<PropertyPath>>
 ): Pick<T, U> | Partial<T> {
   if (isNil(object)) {
@@ -104,7 +105,7 @@ export function pick<T extends object, U extends keyof T>(
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(object, key)) {
+      if (typeof key === 'string' && hasOwn(object, key)) {
         result[key] = object[key];
       } else {
         set(result, key, value);

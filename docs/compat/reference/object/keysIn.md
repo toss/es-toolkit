@@ -52,7 +52,7 @@ Foo.prototype.c = 3;
 keysIn(new Foo());
 // => ['a', 'b', 'c'] (includes prototype property 'c')
 
-// constructor is excluded
+// constructor and non-enumerable methods are excluded
 class MyClass {
   constructor() {
     this.prop = 1;
@@ -62,7 +62,7 @@ class MyClass {
 MyClass.prototype.inherited = 2;
 
 keysIn(new MyClass());
-// => ['prop', 'method', 'inherited'] (constructor is excluded)
+// => ['prop', 'inherited'] (constructor and non-enumerable method are excluded)
 ```
 
 It specially handles array-like objects.

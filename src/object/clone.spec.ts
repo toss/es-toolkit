@@ -176,12 +176,15 @@ describe('clone', () => {
 
   it('should clone Data views', () => {
     const buffer = new ArrayBuffer(8);
-    const dataView = new DataView(buffer);
+    const dataView = new DataView(buffer, 1, 2);
     const clonedDataView = clone(dataView);
 
     expect(clonedDataView).toEqual(dataView);
     expect(clonedDataView).not.toBe(dataView);
     expect(clonedDataView).toBeInstanceOf(DataView);
+
+    expect(clonedDataView.byteOffset).toBe(1);
+    expect(clonedDataView.byteLength).toBe(2);
   });
 
   it('should clone File', async () => {

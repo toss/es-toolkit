@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
 import { pickBy } from './pickBy';
+import { args } from '../_internal/args';
 import { symbol } from '../_internal/symbol';
 import { stubTrue } from '../util/stubTrue';
 
@@ -217,5 +218,22 @@ describe('pickBy', () => {
     });
 
     expect(count).toBe(1);
+  });
+
+  it('should not treat plain objects with a numeric `length` property as array-like', () => {
+    const object = { length: 10, width: 5 };
+    const isNumber = (value: unknown) => typeof value === 'number';
+
+    expect(pickBy(object, isNumber)).toEqual({ length: 10, width: 5 });
+  });
+
+  it('should pick the `length` key of array-like plain objects', () => {
+    const object = { 0: 'a', length: 1 };
+
+    expect(pickBy(object, stubTrue)).toEqual({ 0: 'a', length: 1 });
+  });
+
+  it('should work with an `arguments` object', () => {
+    expect(pickBy(args, stubTrue)).toEqual({ 0: 1, 1: 2, 2: 3 });
   });
 });

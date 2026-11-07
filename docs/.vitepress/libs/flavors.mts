@@ -132,7 +132,10 @@ export const flavors = [
       zh_hans: 'Lodash 兼容性',
     },
     prefix: 'compat',
-    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    guideItems: [
+      { labelKey: 'introduction', slug: 'intro' },
+      { labelKey: 'environmentSupport', slug: 'environment-support' },
+    ],
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],
     sections: [],
     icon: ARROW_LEFT_RIGHT_ICON,

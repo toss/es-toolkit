@@ -9,6 +9,13 @@ describe('deepFreeze', () => {
     expect(Object.isFrozen(obj.user)).toBe(true);
   });
 
+  it('should freeze objects stored in symbol properties', () => {
+    const key = Symbol('user');
+    const obj = deepFreeze({ [key]: { name: 'Alex' } });
+
+    expect(Object.isFrozen(obj[key])).toBe(true);
+  });
+
   it('should freeze nested arrays', () => {
     const obj = deepFreeze({ items: [1, 2, { nested: true }] });
 
@@ -74,10 +81,10 @@ describe('deepFreeze', () => {
 
     expect(() => {
       (obj as any).user = {};
-    }).toThrow();
+    }).toThrow(TypeError);
 
     expect(() => {
       (obj as any).user.age = 22;
-    }).toThrow();
+    }).toThrow(TypeError);
   });
 });

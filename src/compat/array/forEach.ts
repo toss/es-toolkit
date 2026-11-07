@@ -5,7 +5,6 @@ import { ListIterator } from '../_internal/ListIterator.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
 import { StringIterator } from '../_internal/StringIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
-import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Iterates over elements of array and invokes iteratee for each element.
@@ -153,7 +152,9 @@ export function forEach<T>(
     return collection;
   }
 
-  callback = iteratee(callback);
+  if (typeof callback !== 'function') {
+    callback = identity;
+  }
 
   const keys: PropertyKey[] = isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
 

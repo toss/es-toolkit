@@ -1,6 +1,5 @@
 import { keys as keysToolkit } from './keys.ts';
 import { identity } from '../../function/identity.ts';
-import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Iterates over an object's properties and calls the `iteratee` function for each property.
@@ -92,7 +91,9 @@ export function forOwn<T>(
     return object;
   }
 
-  iteratee = createIteratee(iteratee);
+  if (typeof iteratee !== 'function') {
+    iteratee = identity;
+  }
 
   const iterable = Object(object);
   const keys = keysToolkit(object);

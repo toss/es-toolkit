@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { delay } from './delay.ts';
 import { withTimeout } from './withTimeout.ts';
 
@@ -10,6 +10,18 @@ describe('withTimeout', () => {
     }, 100);
 
     expect(result).toEqual('foo');
+  });
+
+  it('clears the timeout when the operation completes', async () => {
+    const spy = vi.spyOn(global, 'clearTimeout');
+
+    try {
+      await withTimeout(async () => 'foo', 100);
+
+      expect(spy).toHaveBeenCalledOnce();
+    } finally {
+      spy.mockRestore();
+    }
   });
 
   it('returns a reason if a response is received after the specified wait time', () => {

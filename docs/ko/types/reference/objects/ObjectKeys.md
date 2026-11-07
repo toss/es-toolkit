@@ -23,6 +23,13 @@ type KeyofKeys = keyof { a: number; 1: string }; // 'a' | 1
 const obj = { a: 1, b: 2 };
 const keys = Object.keys(obj) as Array<ObjectKeys<typeof obj>>; // Array<'a' | 'b'>
 
+// 문자열 enum 멤버는 문자열 리터럴로 넓어지지 않고 enum 그대로 유지돼요.
+enum Status {
+  Active = 'active',
+  Inactive = 'inactive',
+}
+type EnumKeys = ObjectKeys<Record<Status, number>>; // Status
+
 // 인덱스 시그니처는 문자열 형태로 결정돼요.
 type StringKeys = ObjectKeys<Record<string, number>>; // string
 type NumberKeys = ObjectKeys<Record<number, string>>; // `${number}`

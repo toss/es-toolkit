@@ -1,4 +1,4 @@
-import { pull as pullToolkit } from '../../array/pull.ts';
+import { basePull } from '../_internal/basePull.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
@@ -61,5 +61,5 @@ export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
     return arr;
   }
 
-  return pullToolkit(arr, Array.from(valuesToRemove));
+  return basePull(arr, Array.from(valuesToRemove));
 }

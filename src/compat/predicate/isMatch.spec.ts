@@ -428,4 +428,13 @@ describe('isMatch', () => {
     // @ts-expect-error
     expect(isMatch(true, { anyKey: undefined })).toBe(false);
   });
+
+  it('should compare nested errors by name and message like lodash', () => {
+    const error = new TypeError('x');
+
+    expect(isMatch({ a: new TypeError('x') }, { a: error })).toBe(true);
+    expect(isMatch({ a: new TypeError('y') }, { a: error })).toBe(false);
+    expect(isMatch({ a: new RangeError('x') }, { a: error })).toBe(false);
+    expect(isMatch({ a: { anything: 1 } }, { a: error })).toBe(false);
+  });
 });

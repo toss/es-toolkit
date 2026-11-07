@@ -1,5 +1,6 @@
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getTag } from '../_internal/getTag.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import {
   argumentsTag,
   arrayBufferTag,
@@ -69,7 +70,7 @@ export function clone<T>(obj: T): T {
   if (isArray(obj)) {
     const result = Array.from(obj as any) as any;
 
-    if (obj.length > 0 && typeof obj[0] === 'string' && Object.hasOwn(obj, 'index')) {
+    if (obj.length > 0 && typeof obj[0] === 'string' && hasOwn(obj, 'index')) {
       result.index = (obj as any).index;
       result.input = (obj as any).input;
     }
@@ -206,7 +207,7 @@ function isCloneableObject(object: any): boolean {
 
 function copyOwnProperties(target: any, source: any): void {
   for (const key in source) {
-    if (Object.hasOwn(source, key)) {
+    if (hasOwn(source, key)) {
       target[key] = source[key];
     }
   }
@@ -226,7 +227,7 @@ function cloneStringObjectProperties(target: any, source: any): void {
   const stringLength = source.valueOf().length;
 
   for (const key in source) {
-    if (Object.hasOwn(source, key) && (Number.isNaN(Number(key)) || Number(key) >= stringLength)) {
+    if (hasOwn(source, key) && (Number.isNaN(Number(key)) || Number(key) >= stringLength)) {
       target[key] = source[key];
     }
   }

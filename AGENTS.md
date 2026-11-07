@@ -2,6 +2,10 @@
 
 This file gives LLM coding agents the context they need to contribute to es-toolkit. Read it before making changes, and follow it together with [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md) (and its translations).
 
+## Language
+
+This is a global project with users speaking various languages. When producing non-code output (explanations, reviews, reports), respond in the user's preferred language.
+
 ## Project overview
 
 es-toolkit is a modern, high-performance JavaScript utility library with a small bundle size and strong type annotations. It provides a curated set of utilities that are difficult to write with built-in JavaScript methods but are commonly needed in real-world projects, such as [`delay`](https://es-toolkit.dev/reference/promise/delay.html), [`windowed`](https://es-toolkit.dev/reference/array/windowed.html), [`keyBy`](https://es-toolkit.dev/reference/array/keyBy.html), [`mapValues`](https://es-toolkit.dev/reference/object/mapValues.html), [`camelCase`](https://es-toolkit.dev/reference/string/camelCase.html), and [`toSnakeCaseKeys`](https://es-toolkit.dev/reference/object/toSnakeCaseKeys.html).
@@ -31,7 +35,7 @@ Common commands:
 ```bash
 yarn vitest run                   # Run all tests
 yarn vitest run src/array/chunk   # Run tests for a specific function
-yarn lint                         # ESLint
+yarn lint                         # oxlint (type-aware, see .oxlintrc.json)
 tsc --noEmit                      # Typecheck
 ```
 
@@ -52,7 +56,7 @@ docs/
 benchmarks/                   Vitest benchmark suite
 tests/types/                  Type tests comparing `es-toolkit/compat` with `@types/lodash` (run with `yarn workspace type-tests test`)
 .github/CONTRIBUTING.md       Contribution guide (English / Korean / Simplified Chinese)
-CHANGELOG.md                  User-facing changelog
+CHANGELOG.md                  User-facing changelog (updated by maintainers at release time)
 ```
 
 Categories include `array`, `bigint`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, and `map`.
@@ -66,6 +70,7 @@ es-toolkit values **performance**, **simplicity**, and **detailed documentation*
 - **Don't reimplement modern JS**: skip functions that are already covered by built-ins (`Array.isArray`, `Number.isNaN`, `Math.min`, `typeof value === 'number'`, etc.) or by TC39 proposals at Stage 3 or above.
 - **Accurate types**: match the inference behavior of TypeScript's `strict` mode.
 - **Two entry points, two policies**: `es-toolkit` is the opinionated API; `es-toolkit/compat` mirrors Lodash for migration. Compat is feature-complete — only behavior fixes against Lodash are accepted, not new functions.
+- **compat runs on Node.js 6**: `es-toolkit/compat` is published for Node.js 6+ (no transpilation or polyfills needed by users), so `src/compat/**` is limited to ES2015 built-ins and ES2015 syntax, plus `?.` and `??`, which the build lowers (enforced by ESLint). Do not change main-library files for compat: if a main-library file compat imports needs a newer built-in, add an ES2015 copy under `src/compat` instead. The `compat-node6` CI job runs the built package on a real Node.js 6.
 
 For the full text, see [Section 1 of CONTRIBUTING.md](./.github/CONTRIBUTING.md#1-our-design-principles).
 
@@ -76,6 +81,7 @@ For the full text, see [Section 1 of CONTRIBUTING.md](./.github/CONTRIBUTING.md#
 - Use short type parameter names: `T` for elements, `K` for keys, `E` for errors.
 - Use `readonly T[]` for array parameters that are not mutated.
 - Write detailed JSDoc with `@template`, `@param`, `@returns`, `@throws`, and `@example` blocks.
+- In tests, call the function directly inside `it()` instead of using `it.each()`, `test.for()`, or `describe.each()`. ESLint enforces this in `*.spec.ts` files.
 
 For the full text, see [Section 2 of CONTRIBUTING.md](./.github/CONTRIBUTING.md#2-coding-conventions).
 
@@ -130,15 +136,17 @@ Use the following template for the PR body:
 
 Do not paste test output into the PR body. CI runs the test suite on every pull request, so the results are already visible there. Benchmarks are the exception—nothing in CI runs them, so a performance change has to bring its own numbers.
 
+Do not edit `CHANGELOG.md` in a pull request. Maintainers update it at every release. See [Changelog](#changelog).
+
 ## Adding dependencies
 
 es-toolkit is a **zero-dependency** library. Do not add anything to `dependencies` or `peerDependencies`. Only `devDependencies` are acceptable, and even there, prefer to avoid new packages unless they are clearly necessary for tooling.
 
 ## Changelog
 
-User-facing changes go into [`CHANGELOG.md`](./CHANGELOG.md). Keep the file readable as a release notes document for users, not as a commit log.
+[`CHANGELOG.md`](./CHANGELOG.md) is updated by maintainers at every release. **Do not edit it in pull requests**, even for user-facing changes; describe the change in the PR body instead.
 
-Conventions:
+Keep the file readable as a release notes document for users, not as a commit log. When preparing a release, follow these conventions:
 
 - **Reverse chronological order** — newest version at the top.
 - Each version is a heading: `## Version v{version}`, followed by a `Released on {date}.` line.

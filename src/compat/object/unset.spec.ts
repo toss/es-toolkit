@@ -99,8 +99,8 @@ describe('unset', () => {
       numberProto.a = 1;
 
       const actual = unset(0, path);
-      expect(actual).toBe(true);
-      expect('a' in numberProto).toBe(false);
+      expect(actual).toBe(false);
+      expect('a' in numberProto).toBe(true);
 
       delete numberProto.a;
     });
@@ -190,5 +190,79 @@ describe('unset', () => {
     expect(unset(object, '__proto__')).toBe(false);
     expect(unset(object, { toString: () => '__proto__' } as any)).toBe(false);
     expect(unset(object, ['a', '__proto__'])).toBe(false);
+  });
+
+  it('should not reach a built-in prototype through a deep path', () => {
+    const key = 'unsetBuiltInPrototypeProbe';
+    const paths = [
+      `constructor.prototype.${key}`,
+      ['constructor', 'prototype', key],
+      [['constructor'], ['prototype'], key],
+      `a.constructor.prototype.${key}`,
+      ['a', 'constructor', 'prototype', key],
+      [['__proto__'], key],
+      [{ toString: () => '__proto__' }, key],
+    ];
+
+    (Object.prototype as any)[key] = 1;
+
+    try {
+      for (const path of paths) {
+        expect(unset({ a: {} }, path as any)).toBe(false);
+        expect((Object.prototype as any)[key]).toBe(1);
+      }
+    } finally {
+      delete (Object.prototype as any)[key];
+    }
+  });
+
+  it('should read each path segment only once', () => {
+    const key = 'unsetSegmentProbe';
+    let calls = 0;
+    const segment = {
+      toString() {
+        calls += 1;
+
+        if (calls === 1) {
+          return 'safe';
+        }
+
+        return 'constructor';
+      },
+    };
+
+    (Object.prototype as any)[key] = 1;
+
+    try {
+      unset({ safe: {} }, [segment, 'prototype', key] as any);
+
+      expect((Object.prototype as any)[key]).toBe(1);
+    } finally {
+      delete (Object.prototype as any)[key];
+    }
+  });
+
+  it('should still delete own `constructor` and `prototype` properties at the end of a path', () => {
+    const object = { a: { constructor: 1, prototype: 2 } };
+
+    expect(unset(object, 'a.constructor')).toBe(true);
+    expect(unset(object, ['a', 'prototype'])).toBe(true);
+    expect(object).toEqual({ a: {} });
+  });
+
+  it('should not delete through `constructor` or `prototype` segments even when the keys are own properties', () => {
+    const object = { constructor: { a: 1 }, prototype: { b: 2 } };
+
+    expect(unset(object, 'constructor.a')).toBe(false);
+    expect(unset(object, ['prototype', 'b'])).toBe(false);
+    expect(object).toEqual({ constructor: { a: 1 }, prototype: { b: 2 } });
+  });
+
+  it('should not delete from the `prototype` of a function', () => {
+    function Foo() {}
+    Foo.prototype.method = () => 1;
+
+    expect(unset(Foo, 'prototype.method')).toBe(false);
+    expect(Foo.prototype.method).toBeDefined();
   });
 });

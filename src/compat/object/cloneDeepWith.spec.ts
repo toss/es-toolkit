@@ -110,7 +110,7 @@ describe('cloneDeepWith', function () {
     expect(actual).toEqual({ a: 1, b: null });
   });
 
-  Object.entries(uncloneable).forEach(([value, key]) => {
+  Object.entries(uncloneable).forEach(([key, value]) => {
     it(`\`_.${methodName}\` should work with a \`customizer\` callback and ${key}`, () => {
       const customizer = function (value: any) {
         return isPlainObject(value) ? undefined : value;
@@ -125,6 +125,18 @@ describe('cloneDeepWith', function () {
       expect(actual).toEqual(object);
       expect(actual).not.toBe(object);
     });
+  });
+
+  it(`\`_.${methodName}\` should not clone errors`, () => {
+    for (const error of errors) {
+      const object = { a: error, b: { c: error } };
+      const actual = func(object, noop);
+
+      expect(actual).not.toBe(object);
+      expect(actual.a).toBe(error);
+      expect(actual.b.c).toBe(error);
+      expect(func(error, noop)).toStrictEqual({});
+    }
   });
 
   it('should clone objects created with Object.create(null) as regular objects with Object.prototype', () => {

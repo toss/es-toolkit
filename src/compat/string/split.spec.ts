@@ -32,4 +32,11 @@ describe('split', () => {
     const result = split('abc', 'b').join(',');
     expect(result).toBe('a,c');
   });
+
+  it('should split unicode strings into symbols when `separator` is an empty string', () => {
+    expect(split('Ame\u0301lie', '')).toEqual(['A', 'm', 'e\u0301', 'l', 'i', 'e']);
+    expect(split('a😀b', '')).toEqual(['a', '😀', 'b']);
+    expect(split('👨‍👩‍👧🇰🇷', '')).toEqual(['👨‍👩‍👧', '🇰🇷']);
+    expect(split('a😀b', '', 2)).toEqual(['a', '😀']);
+  });
 });

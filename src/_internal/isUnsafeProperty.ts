@@ -1,7 +1,7 @@
 /**
  * Checks if a property key is unsafe to access or copy directly.
  *
- * This function is used in functions like `get`, `unset`, and `merge` to prevent
+ * This function is used in functions like `get` and `merge` to prevent
  * prototype pollution attacks by identifying `__proto__`, which modifies the object's
  * prototype chain. `constructor` and `prototype` stay accessible here because lodash
  * keeps reads of them unrestricted; write paths use `isUnsafeToWriteProperty` instead,

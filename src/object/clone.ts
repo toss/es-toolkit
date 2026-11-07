@@ -63,7 +63,7 @@ export function clone<T>(obj: T): T {
   }
 
   if (obj instanceof DataView) {
-    return new Constructor(obj.buffer.slice(0));
+    return new Constructor(obj.buffer.slice(0), obj.byteOffset, obj.byteLength);
   }
 
   if (obj instanceof Error) {

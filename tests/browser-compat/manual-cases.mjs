@@ -78,6 +78,24 @@ export const manualCases = [
     },
   },
   {
+    id: 'manual:main/Queue',
+    async: false,
+    run: function (__ns, __assertEq) {
+      const { Queue } = __ns.main;
+      const queue = new Queue();
+      queue.enqueue(1);
+      queue.enqueue(2);
+      queue.enqueue(3);
+      __assertEq(queue.size, 3);
+      __assertEq(queue.peek(), 1);
+      __assertEq(queue.dequeue(), 1);
+      __assertEq(Array.from(queue), [2, 3]);
+      queue.clear();
+      __assertEq(queue.size, 0);
+      __assertEq(queue.dequeue(), undefined);
+    },
+  },
+  {
     id: 'manual:main/filterAsync',
     async: true,
     run: async function (__ns, __assertEq) {

@@ -32,6 +32,50 @@ describe('reduceAsync', () => {
     expect(reducer).toHaveBeenCalledTimes(0);
   });
 
+  it('uses null as initial value', async () => {
+    const arr = [1, 2];
+    const reducer = vi.fn(async (acc: number | null, n: number) => (acc ?? 0) + n);
+
+    const result = await reduceAsync(arr, reducer, null);
+
+    expect(result).toBe(3);
+    expect(reducer).toHaveBeenCalledTimes(arr.length);
+    expect(reducer.mock.calls[0]).toEqual([null, 1, 0, arr]);
+    expect(reducer.mock.calls[1]).toEqual([1, 2, 1, arr]);
+  });
+
+  it('uses undefined as initial value', async () => {
+    const arr = [1, 2];
+    const reducer = vi.fn(async (acc: number | undefined, n: number) => (acc ?? 0) + n);
+
+    const result = await reduceAsync(arr, reducer, undefined);
+
+    expect(result).toBe(3);
+    expect(reducer).toHaveBeenCalledTimes(arr.length);
+    expect(reducer.mock.calls[0]).toEqual([undefined, 1, 0, arr]);
+    expect(reducer.mock.calls[1]).toEqual([1, 2, 1, arr]);
+  });
+
+  it('returns null initial value for empty array', async () => {
+    const arr: number[] = [];
+    const reducer = vi.fn(async (acc: number | null, n: number) => (acc ?? 0) + n);
+
+    const result = await reduceAsync(arr, reducer, null);
+    expect(result).toBeNull();
+
+    expect(reducer).toHaveBeenCalledTimes(0);
+  });
+
+  it('returns undefined initial value for empty array', async () => {
+    const arr: number[] = [];
+    const reducer = vi.fn(async (acc: number | undefined, n: number) => (acc ?? 0) + n);
+
+    const result = await reduceAsync(arr, reducer, undefined);
+    expect(result).toBeUndefined();
+
+    expect(reducer).toHaveBeenCalledTimes(0);
+  });
+
   it('can reduce to different type', async () => {
     const arr = [1, 2, 3];
     const reducer = async (acc: string, n: number) => {

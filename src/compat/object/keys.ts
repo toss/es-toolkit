@@ -1,4 +1,5 @@
 import { isBuffer } from '../../predicate/isBuffer.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
@@ -61,5 +62,5 @@ function arrayLikeKeys(object: ArrayLike<any>): string[] {
     return [...indices, ...inheritedKeys];
   }
 
-  return [...indices.filter(index => Object.hasOwn(object, index)), ...inheritedKeys];
+  return [...indices.filter(index => hasOwn(object, index)), ...inheritedKeys];
 }

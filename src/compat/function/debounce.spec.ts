@@ -359,6 +359,7 @@ describe('debounce', () => {
   });
 
   // FIXME: flaky test
+  // oxlint-disable-next-line vitest/no-disabled-tests
   it.skip('should queue a trailing call for subsequent debounced calls after `maxWait`', async () => {
     let callCount = 0;
 

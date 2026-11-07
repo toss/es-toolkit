@@ -6,9 +6,9 @@
  * `update`, and `zipObjectDeep` abort when a path segment matches one of
  * these keys, matching lodash's behavior.
  *
- * Read paths like `get` and `unset` use `isUnsafeProperty` instead, which
- * only blocks `__proto__`; lodash keeps reads of `constructor` and
- * `prototype` unrestricted.
+ * Read paths like `get` use `isUnsafeProperty` instead, which only blocks
+ * `__proto__`; lodash keeps reads of `constructor` and `prototype`
+ * unrestricted. `unset` applies this check to every key but the last one.
  *
  * @param key - The property key to check
  * @returns `true` if the property is unsafe to write to, `false` otherwise

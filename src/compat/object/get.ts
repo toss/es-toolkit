@@ -1,5 +1,6 @@
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import type { GetFieldType } from '../_internal/GetFieldType.ts';
+import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { PropertyPath } from '../types/PropertyPath.ts';
@@ -466,7 +467,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
       const result = object[path];
 
       if (result === undefined) {
-        if (isDeepKey(path) && !Object.hasOwn(object, path)) {
+        if (isDeepKey(path) && !hasOwn(object, path)) {
           return get(object, toPath(path), defaultValue);
         } else {
           return defaultValue;

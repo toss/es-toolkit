@@ -13,7 +13,8 @@
     "object-hash": "3.0.0",
     "ohash": "2.0.11",
     "remeda": "^2.39.0",
-    "vitest": "4.1.10"
+    "vitest": "4.1.10",
+    "yocto-queue": "1.2.2"
   },
   "devDependencies": {
     "@types/lodash": "4.17.20",

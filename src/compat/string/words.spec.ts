@@ -139,4 +139,14 @@ describe('words', () => {
     expect(words(nfcStr)).toEqual([nfcStr]);
     expect(words(nfdStr)).toEqual([nfdStr]);
   });
+
+  it('splits non-Latin letters, symbols, and emoji like lodash', () => {
+    expect(words('ПриветМир')).toEqual(['ПриветМир']);
+    expect(words('foo©bar')).toEqual(['foo', 'bar']);
+    expect(words('foo™bar')).toEqual(['foo™bar']);
+    expect(words('DžDž dž')).toEqual(['DžDž', 'dž']);
+    expect(words('𝒳𝒴 math')).toEqual(['𝒳', '𝒴', 'math']);
+    expect(words('👍🏽 thumbs')).toEqual(['👍🏽', 'thumbs']);
+    expect(words('🇰🇷 flag')).toEqual(['🇰🇷', 'flag']);
+  });
 });
