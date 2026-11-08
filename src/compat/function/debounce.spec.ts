@@ -607,6 +607,24 @@ describe('debounce', () => {
 
     debounced.cancel();
   });
+
+  it('should not throw when `setTimeout` returns a timer without a callable `unref`', () => {
+    const func = vi.fn();
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+
+    setTimeoutSpy.mockReturnValueOnce(undefined as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    setTimeoutSpy.mockReturnValueOnce(null as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    setTimeoutSpy.mockReturnValueOnce({ unref: true } as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    expect(func).toHaveBeenCalledTimes(3);
+
+    setTimeoutSpy.mockRestore();
+  });
 });
 
 describe('debounce with fake timers', () => {

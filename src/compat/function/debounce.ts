@@ -311,15 +311,19 @@ export function debounce<F extends (...args: any[]) => any>(
     const cappedDelayMs = Math.min(delayMs, MAX_SET_TIMEOUT_DELAY);
     const dueAt = now + cappedDelayMs;
 
-    const nextTimer = setTimeout(() => onTimerExpired(dueAt), cappedDelayMs) as ReturnType<typeof setTimeout> & {
-      unref?: () => void;
-    };
-
-    timer = nextTimer;
+    timer = setTimeout(() => onTimerExpired(dueAt), cappedDelayMs);
 
     // Without a trailing call the timer only tracks time, so it should not keep Node.js running.
-    if (!trailing) {
-      nextTimer.unref?.();
+    const timerHandle: unknown = timer;
+
+    if (
+      !trailing &&
+      typeof timerHandle === 'object' &&
+      timerHandle !== null &&
+      'unref' in timerHandle &&
+      typeof timerHandle.unref === 'function'
+    ) {
+      timerHandle.unref();
     }
   }
 
