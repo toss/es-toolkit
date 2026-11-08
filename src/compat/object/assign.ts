@@ -132,6 +132,8 @@ export function assign(object: any, ...otherArgs: any[]): any;
  * console.log(result); // Output: { a: 1, b: 2, c: 3 }
  */
 export function assign(object: any, ...sources: any[]): any {
+  object = Object(object);
+
   for (let i = 0; i < sources.length; i++) {
     assignImpl(object, sources[i]);
   }
