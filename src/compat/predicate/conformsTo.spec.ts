@@ -31,6 +31,23 @@ describe('conformsTo', () => {
     expect(actual).toEqual([objects[2]]);
   });
 
+  it(`\`conformsTo\` should invoke predicates in reverse key order`, () => {
+    const calls: string[] = [];
+    const source = {
+      a: () => {
+        calls.push('a');
+        return false;
+      },
+      b: () => {
+        calls.push('b');
+        return true;
+      },
+    };
+
+    expect(conformsTo({ a: 1, b: 2 }, source)).toBe(false);
+    expect(calls).toEqual(['b', 'a']);
+  });
+
   it(`\`conformsTo\` should not match by inherited \`source\` properties`, () => {
     class Foo {
       [key: PropertyKey]: (value: number) => boolean;
