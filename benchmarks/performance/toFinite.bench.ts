@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { toFinite as toFiniteToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toFinite: toFiniteLodash } = lodash;
-
-describe('toFinite', () => {
+group('toFinite', () => {
   bench('es-toolkit/compat/toFinite', () => {
-    toFiniteToolkitCompat({ valueOf: () => 1 });
-    toFiniteToolkitCompat({ valueOf: () => 2 });
-    toFiniteToolkitCompat({ toString: () => '3' });
-    toFiniteToolkitCompat('0b101010');
-    toFiniteToolkitCompat('0o12345');
-    toFiniteToolkitCompat('0x1a2b3c');
-    toFiniteToolkitCompat('1.1');
+    do_not_optimize(toFiniteToolkitCompat({ valueOf: () => 1 }));
+    do_not_optimize(toFiniteToolkitCompat({ valueOf: () => 2 }));
+    do_not_optimize(toFiniteToolkitCompat({ toString: () => '3' }));
+    do_not_optimize(toFiniteToolkitCompat('0b101010'));
+    do_not_optimize(toFiniteToolkitCompat('0o12345'));
+    do_not_optimize(toFiniteToolkitCompat('0x1a2b3c'));
+    do_not_optimize(toFiniteToolkitCompat('1.1'));
   });
 
   bench('lodash/toFinite', () => {
-    toFiniteLodash({ valueof: () => 1 });
-    toFiniteLodash({ valueof: () => 2 });
-    toFiniteLodash({ toString: () => '3' });
-    toFiniteLodash('0b101010');
-    toFiniteLodash('0o12345');
-    toFiniteLodash('0x1a2b3c');
-    toFiniteLodash('1.1');
+    do_not_optimize(lodash.toFinite({ valueof: () => 1 }));
+    do_not_optimize(lodash.toFinite({ valueof: () => 2 }));
+    do_not_optimize(lodash.toFinite({ toString: () => '3' }));
+    do_not_optimize(lodash.toFinite('0b101010'));
+    do_not_optimize(lodash.toFinite('0o12345'));
+    do_not_optimize(lodash.toFinite('0x1a2b3c'));
+    do_not_optimize(lodash.toFinite('1.1'));
   });
 });

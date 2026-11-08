@@ -42,7 +42,7 @@ setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
   return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
 });
 console.log(obj3);
-// 结果: { a: { '0': { b: { c: 'nested' } } } }
+// 结果: { a: [{ b: { c: 'nested' } }] }
 
 // 使用 Object 构造函数作为自定义函数
 const obj4 = {};

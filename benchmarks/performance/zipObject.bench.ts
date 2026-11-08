@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { zipObject as zipObjectToolkit } from 'es-toolkit';
 import { zipObject as zipObjectToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { zipObject: zipObjectLodash } = lodash;
-
-describe('zipObject', () => {
+group('zipObject', () => {
   bench('es-toolkit/zipObject', () => {
-    zipObjectToolkit([1, 2, 3, 4], ['a', 'b', 'c', 'd']);
+    do_not_optimize(zipObjectToolkit([1, 2, 3, 4], ['a', 'b', 'c', 'd']));
   });
 
   bench('es-toolkit/compat/zipObject', () => {
-    zipObjectToolkitCompat([1, 2, 3, 4], ['a', 'b', 'c', 'd']);
+    do_not_optimize(zipObjectToolkitCompat([1, 2, 3, 4], ['a', 'b', 'c', 'd']));
   });
 
   bench('lodash/zipObject', () => {
-    zipObjectLodash([1, 2, 3, 4], ['a', 'b', 'c', 'd']);
+    do_not_optimize(lodash.zipObject([1, 2, 3, 4], ['a', 'b', 'c', 'd']));
   });
 });
 
-describe('zipObject/largeArray', () => {
+group('zipObject/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/zipObject', () => {
-    zipObjectToolkit(largeArray, largeArray);
+    do_not_optimize(zipObjectToolkit(largeArray, largeArray));
   });
 
   bench('es-toolkit/compat/zipObject', () => {
-    zipObjectToolkitCompat(largeArray, largeArray);
+    do_not_optimize(zipObjectToolkitCompat(largeArray, largeArray));
   });
 
   bench('lodash/zipObject', () => {
-    zipObjectLodash(largeArray, largeArray);
+    do_not_optimize(lodash.zipObject(largeArray, largeArray));
   });
 });

@@ -1,4 +1,5 @@
-import { debounce, DebouncedFunc, DebouncedFuncLeading } from './debounce.ts';
+import type { DebouncedFunc, DebouncedFuncLeading } from './debounce.ts';
+import { debounce } from './debounce.ts';
 
 interface ThrottleSettings {
   /**

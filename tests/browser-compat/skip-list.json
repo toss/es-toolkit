@@ -35,13 +35,11 @@
     "object:object/mergeWith#1": "uses testing pseudo-API (expect)",
     "compat:compat/object/mergeWith#6": "uses testing pseudo-API (expect)",
     "string:string/words#0": "references internal constant (CASE_SPLIT_PATTERN)",
-    "function:function/retry#0": "option-fragment snippet, not runnable code",
-    "function:function/retry#1": "option-fragment snippet, not runnable code",
+    "function:function/retry#0": "references undefined placeholder function (fetchData)",
+    "function:function/retry#1": "references undefined placeholder function (fetchData)",
     "function:function/retry#2": "references undefined placeholder function (fetchData)",
     "function:function/retry#3": "references undefined placeholder function (fetchData)",
-    "function:function/retry#4": "references undefined placeholder function (fetchData)",
-    "function:function/retry#5": "references undefined placeholder function (fetchData)",
-    "function:function/retry#6": "references undefined placeholder function (fetchData)"
+    "function:function/retry#4": "references undefined placeholder function (fetchData)"
   },
   "nodeSkip": {
     "compat:compat/predicate/isElement#0": "uses DOM (document); still runs in browsers"
@@ -72,11 +70,6 @@
     "compat:compat/string/startsWith#0": "__assertEq(startsWith('fooBar', 'foo'), true);\n__assertEq(startsWith('fooBar', 'bar'), false);\n__assertEq(startsWith('fooBar', 'abc'), false);\n__assertEq(startsWith('fooBar', 'Bar', 3), true);\n__assertEq(startsWith('fooBar', 'Bar', 5), false);",
     "compat:compat/util/iteratee#2": "const func1 = iteratee();\n__assertEq([{ a: 1 }, { a: 2 }, { a: 3 }].map(func1), [{ a: 1 }, { a: 2 }, { a: 3 }]);\nconst func2 = iteratee(object => object.a);\n__assertEq([{ a: 1 }, { a: 2 }, { a: 3 }].map(func2), [1, 2, 3]);\nconst func3 = iteratee('a');\n__assertEq([{ a: 1 }, { a: 2 }, { a: 3 }].map(func3), [1, 2, 3]);\nconst func4 = iteratee({ a: 1 });\n__assertEq([{ a: 1 }, { a: 2 }, { a: 3 }].find(func4), { a: 1 });\nconst func5 = iteratee(['a', 1]);\n__assertEq([{ a: 1 }, { a: 2 }, { a: 3 }].find(func5), { a: 1 });",
     "compat:compat/util/over#0": "const func1 = over([Math.max, Math.min]);\nconst func2 = over(Math.max, Math.min);\n__assertEq(func1(1, 2, 3, 4), [4, 1]);\n__assertEq(func2(1, 2, 3, 4), [4, 1]);\nconst func3 = over(['a', 'b']);\n__assertEq(func3({ a: 1, b: 2 }), [1, 2]);\nconst func4 = over([{ a: 1 }, { b: 2 }]);\n__assertEq(func4({ a: 1, b: 2 }), [true, true]);\nconst func5 = over([['a', 1], ['b', 2]]);\n__assertEq(func5({ a: 1, b: 2 }), [true, true]);",
-    "compat:compat/function/memoize#0": "const cache = new memoize.Cache();\ncache.set('user', { id: 123, name: 'John' });\n__assertEq(cache.delete('user'), true);\n__assertEq(cache.delete('unknown'), false);",
-    "compat:compat/function/memoize#1": "const cache = new memoize.Cache();\ncache.set('key', 'value');\n__assertEq(cache.get('key'), 'value');\n__assertEq(cache.get('unknown'), undefined);",
-    "compat:compat/function/memoize#2": "const cache = new memoize.Cache();\ncache.set('user', { id: 123 });\n__assertEq(cache.has('user'), true);\n__assertEq(cache.has('unknown'), false);",
-    "compat:compat/function/memoize#3": "const cache = new memoize.Cache();\n__assertEq(cache.set('a', 1), cache);\n__assertEq(cache.get('a'), 1);",
-    "compat:compat/function/memoize#4": "const cache = new memoize.Cache();\ncache.set('a', 1);\ncache.set('b', 2);\n__assertEq(cache.size, 2);",
     "compat:compat/array/takeWhile#1": "const users = [\n  { user: 'barney', active: false },\n  { user: 'fred', active: false },\n  { user: 'pebbles', active: true },\n];\n__assertEq(takeWhile(users, { user: 'barney', active: false }), [{ user: 'barney', active: false }]);",
     "compat:compat/array/takeWhile#2": "const users = [\n  { user: 'barney', active: false },\n  { user: 'fred', active: false },\n  { user: 'pebbles', active: true },\n];\n__assertEq(takeWhile(users, ['active', false]), [\n  { user: 'barney', active: false },\n  { user: 'fred', active: false },\n]);",
     "compat:compat/array/takeWhile#3": "const users = [\n  { user: 'barney', active: false },\n  { user: 'fred', active: false },\n  { user: 'pebbles', active: true },\n];\n__assertEq(takeWhile(users, 'active'), []);",

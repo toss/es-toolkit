@@ -1,17 +1,15 @@
-import { bench, describe } from 'vitest';
 import { unset as unsetToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { unset: unsetLodash } = lodash;
-
-describe('unset', () => {
+group('unset', () => {
   bench('es-toolkit/unset', () => {
     const object = { a: { b: { c: null } } };
-    unsetToolkitCompat(object, 'a.b.c');
+    do_not_optimize(unsetToolkitCompat(object, 'a.b.c'));
   });
 
   bench('lodash/unset', () => {
     const object = { a: { b: { c: null } } };
-    unsetLodash(object, 'a.b.c');
+    do_not_optimize(lodash.unset(object, 'a.b.c'));
   });
 });

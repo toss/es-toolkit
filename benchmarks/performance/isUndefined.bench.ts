@@ -1,29 +1,27 @@
-import { bench, describe } from 'vitest';
 import { isUndefined as isUndefinedToolkit } from 'es-toolkit';
 import { isUndefined as isUndefinedToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isUndefined: isUndefinedLodash } = lodash;
-
-describe('isUndefined', () => {
+group('isUndefined', () => {
   bench('es-toolkit/isUndefined', () => {
-    isUndefinedToolkit(undefined);
-    isUndefinedToolkit(null);
-    isUndefinedToolkit('');
-    isUndefinedToolkit(123);
+    do_not_optimize(isUndefinedToolkit(undefined));
+    do_not_optimize(isUndefinedToolkit(null));
+    do_not_optimize(isUndefinedToolkit(''));
+    do_not_optimize(isUndefinedToolkit(123));
   });
 
   bench('es-toolkit/compat/isUndefined', () => {
-    isUndefinedToolkitCompat(undefined);
-    isUndefinedToolkitCompat(null);
-    isUndefinedToolkitCompat('');
-    isUndefinedToolkitCompat(123);
+    do_not_optimize(isUndefinedToolkitCompat(undefined));
+    do_not_optimize(isUndefinedToolkitCompat(null));
+    do_not_optimize(isUndefinedToolkitCompat(''));
+    do_not_optimize(isUndefinedToolkitCompat(123));
   });
 
   bench('lodash/isUndefined', () => {
-    isUndefinedLodash(undefined);
-    isUndefinedLodash(null);
-    isUndefinedLodash('');
-    isUndefinedLodash(123);
+    do_not_optimize(lodash.isUndefined(undefined));
+    do_not_optimize(lodash.isUndefined(null));
+    do_not_optimize(lodash.isUndefined(''));
+    do_not_optimize(lodash.isUndefined(123));
   });
 });

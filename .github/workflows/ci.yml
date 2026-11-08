@@ -17,31 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - run: git fetch origin ${{ github.event.pull_request.base.sha }} --depth=1
       - run: corepack enable
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: 'yarn'
       - run: yarn install
-      - name: ESLint
-        run: |
-          changed_files=$(git diff --name-only --diff-filter=ACMRUXB ${{ github.event.pull_request.base.sha }})
-
-          if echo "$changed_files" | grep -q "^eslint.config.mjs$"; then
-            yarn lint
-          else
-            echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn lint
-          fi
-      - name: Prettier
-        run: |
-          changed_files=$(git diff --name-only --diff-filter=ACMRUXB ${{ github.event.pull_request.base.sha }})
-
-          if echo "$changed_files" | grep -q -E "^\.prettierrc$|^\.prettierignore$"; then
-            yarn prettier -c .
-          else
-            echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
-          fi
+      - name: oxlint
+        run: yarn lint
+      - name: oxfmt
+        run: yarn format:check
   typecheck:
     runs-on: ubuntu-latest
     steps:

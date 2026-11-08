@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { head as headToolkit } from 'es-toolkit';
 import { head as headCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { head: headLodash } = lodash;
-
-describe('head', () => {
+group('head', () => {
   bench('es-toolkit/head', () => {
-    headToolkit([1, 2, 3, 4]);
+    do_not_optimize(headToolkit([1, 2, 3, 4]));
   });
 
   bench('es-toolkit/compat/head', () => {
-    headCompatToolkit([1, 2, 3, 4]);
+    do_not_optimize(headCompatToolkit([1, 2, 3, 4]));
   });
 
   bench('lodash/head', () => {
-    headLodash([1, 2, 3, 4]);
+    do_not_optimize(lodash.head([1, 2, 3, 4]));
   });
 });
 
-describe('head/largeArray', () => {
+group('head/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/head', () => {
-    headToolkit(largeArray);
+    do_not_optimize(headToolkit(largeArray));
   });
 
   bench('es-toolkit/compat/head', () => {
-    headCompatToolkit(largeArray);
+    do_not_optimize(headCompatToolkit(largeArray));
   });
 
   bench('lodash/head', () => {
-    headLodash(largeArray);
+    do_not_optimize(lodash.head(largeArray));
   });
 });

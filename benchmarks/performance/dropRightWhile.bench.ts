@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { dropRightWhile as dropRightWhileToolkit } from 'es-toolkit';
 import { dropRightWhile as dropRightWhileToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { dropRightWhile: dropRightWhileLodash } = lodash;
-
-describe('dropRightWhile', () => {
+group('dropRightWhile', () => {
   bench('es-toolkit/dropRightWhile', () => {
-    dropRightWhileToolkit([1.2, 2.3, 3.4], x => x < 2);
+    do_not_optimize(dropRightWhileToolkit([1.2, 2.3, 3.4], x => x < 2));
   });
 
   bench('es-toolkit (compat)/dropRightWhile', () => {
-    dropRightWhileToolkitCompat([1.2, 2.3, 3.4], x => x < 2);
+    do_not_optimize(dropRightWhileToolkitCompat([1.2, 2.3, 3.4], x => x < 2));
   });
 
   bench('lodash/dropRightWhile', () => {
-    dropRightWhileLodash([1.2, 2.3, 3.4], x => x < 2);
+    do_not_optimize(lodash.dropRightWhile([1.2, 2.3, 3.4], x => x < 2));
   });
 });
 
-describe('dropRightWhile/largeArray', () => {
+group('dropRightWhile/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/dropRightWhile', () => {
-    dropRightWhileToolkit(largeArray, x => x < 5000);
+    do_not_optimize(dropRightWhileToolkit(largeArray, x => x < 5000));
   });
 
   bench('es-toolkit (compat)/dropRightWhile', () => {
-    dropRightWhileToolkitCompat(largeArray, x => x < 5000);
+    do_not_optimize(dropRightWhileToolkitCompat(largeArray, x => x < 5000));
   });
 
   bench('lodash/dropRightWhile', () => {
-    dropRightWhileLodash(largeArray, x => x < 5000);
+    do_not_optimize(lodash.dropRightWhile(largeArray, x => x < 5000));
   });
 });

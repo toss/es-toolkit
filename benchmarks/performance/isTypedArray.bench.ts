@@ -1,50 +1,48 @@
-import { bench, describe } from 'vitest';
 import { isTypedArray as isTypedArrayToolkit } from 'es-toolkit';
 import { isTypedArray as isTypedArrayCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isTypedArray: isTypedArrayLodash } = lodash;
-
-describe('isTypedArrayToolkit', () => {
+group('isTypedArrayToolkit', () => {
   bench('es-toolkit/isTypedArray', () => {
-    isTypedArrayToolkit(new Uint8Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Uint8ClampedArray(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Uint16Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Uint32Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new BigUint64Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Int8Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Int16Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Int32Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new BigInt64Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Float32Array(new ArrayBuffer(8)));
-    isTypedArrayToolkit(new Float64Array(new ArrayBuffer(8)));
+    do_not_optimize(isTypedArrayToolkit(new Uint8Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Uint8ClampedArray(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Uint16Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Uint32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new BigUint64Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Int8Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Int16Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Int32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new BigInt64Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Float32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayToolkit(new Float64Array(new ArrayBuffer(8))));
   });
 
   bench('es-toolkit/compat/isTypedArray', () => {
-    isTypedArrayCompatToolkit(new Uint8Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Uint8ClampedArray(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Uint16Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Uint32Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new BigUint64Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Int8Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Int16Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Int32Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new BigInt64Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Float32Array(new ArrayBuffer(8)));
-    isTypedArrayCompatToolkit(new Float64Array(new ArrayBuffer(8)));
+    do_not_optimize(isTypedArrayCompatToolkit(new Uint8Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Uint8ClampedArray(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Uint16Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Uint32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new BigUint64Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Int8Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Int16Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Int32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new BigInt64Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Float32Array(new ArrayBuffer(8))));
+    do_not_optimize(isTypedArrayCompatToolkit(new Float64Array(new ArrayBuffer(8))));
   });
 
   bench('lodash/isTypedArray', () => {
-    isTypedArrayLodash(new Uint8Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint8ClampedArray(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint16Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new BigUint64Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int8Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int16Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new BigInt64Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Float32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Float64Array(new ArrayBuffer(8)));
+    do_not_optimize(lodash.isTypedArray(new Uint8Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Uint8ClampedArray(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Uint16Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Uint32Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new BigUint64Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Int8Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Int16Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Int32Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new BigInt64Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Float32Array(new ArrayBuffer(8))));
+    do_not_optimize(lodash.isTypedArray(new Float64Array(new ArrayBuffer(8))));
   });
 });

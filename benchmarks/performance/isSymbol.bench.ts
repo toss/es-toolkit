@@ -1,35 +1,33 @@
-import { bench, describe } from 'vitest';
 import { isSymbol as isSymbolToolkit } from 'es-toolkit';
 import { isSymbol as isSymbolToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isSymbol: isSymbolLodash } = lodash;
-
-describe('isSymbol', () => {
+group('isSymbol', () => {
   bench('es-toolkit/isSymbol', () => {
-    isSymbolToolkit(Symbol('a'));
-    isSymbolToolkit(Symbol.for('a'));
-    isSymbolToolkit(Symbol.iterator);
-    isSymbolToolkit('');
-    isSymbolToolkit({});
-    isSymbolToolkit(123);
+    do_not_optimize(isSymbolToolkit(Symbol('a')));
+    do_not_optimize(isSymbolToolkit(Symbol.for('a')));
+    do_not_optimize(isSymbolToolkit(Symbol.iterator));
+    do_not_optimize(isSymbolToolkit(''));
+    do_not_optimize(isSymbolToolkit({}));
+    do_not_optimize(isSymbolToolkit(123));
   });
 
   bench('es-toolkit/compat/isSymbol', () => {
-    isSymbolToolkitCompat(Symbol('a'));
-    isSymbolToolkitCompat(Symbol.for('a'));
-    isSymbolToolkitCompat(Symbol.iterator);
-    isSymbolToolkitCompat('');
-    isSymbolToolkitCompat({});
-    isSymbolToolkitCompat(123);
+    do_not_optimize(isSymbolToolkitCompat(Symbol('a')));
+    do_not_optimize(isSymbolToolkitCompat(Symbol.for('a')));
+    do_not_optimize(isSymbolToolkitCompat(Symbol.iterator));
+    do_not_optimize(isSymbolToolkitCompat(''));
+    do_not_optimize(isSymbolToolkitCompat({}));
+    do_not_optimize(isSymbolToolkitCompat(123));
   });
 
   bench('lodash/isSymbol', () => {
-    isSymbolLodash(Symbol('a'));
-    isSymbolLodash(Symbol.for('a'));
-    isSymbolLodash(Symbol.iterator);
-    isSymbolLodash('');
-    isSymbolLodash({});
-    isSymbolLodash(123);
+    do_not_optimize(lodash.isSymbol(Symbol('a')));
+    do_not_optimize(lodash.isSymbol(Symbol.for('a')));
+    do_not_optimize(lodash.isSymbol(Symbol.iterator));
+    do_not_optimize(lodash.isSymbol(''));
+    do_not_optimize(lodash.isSymbol({}));
+    do_not_optimize(lodash.isSymbol(123));
   });
 });

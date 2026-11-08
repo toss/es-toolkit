@@ -2,7 +2,7 @@ import { identity } from '../../function/identity.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { objectValues } from '../_internal/objectValues.ts';
 import { toArray } from '../_internal/toArray.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 

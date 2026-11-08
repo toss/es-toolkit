@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toPlainObject as toPlainObjectCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toPlainObject: toPlainObjectLodash } = lodash;
-
-describe('toPlainObject', () => {
+group('toPlainObject', () => {
   class Foo {
     b = 2;
   }
@@ -12,10 +10,10 @@ describe('toPlainObject', () => {
   const foo = new Foo();
 
   bench('es-toolkit/compat/toPlainObject', () => {
-    toPlainObjectCompatToolkit(foo);
+    do_not_optimize(toPlainObjectCompatToolkit(foo));
   });
 
   bench('lodash/toPlainObject', () => {
-    toPlainObjectLodash(foo);
+    do_not_optimize(lodash.toPlainObject(foo));
   });
 });

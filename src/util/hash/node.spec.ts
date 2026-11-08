@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
 import { hash } from './node';
-import { serialize } from '../serialize/serialize';
+import { serialize } from '../serialize';
 
 describe('hash (node)', () => {
   it('should hash the serialized value with SHA-256 in Base64URL format', () => {

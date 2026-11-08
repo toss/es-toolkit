@@ -1,11 +1,11 @@
 import { compareValues } from '../_internal/compareValues.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { isKey } from '../_internal/isKey.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
-import { ListIterator } from '../_internal/ListIterator.ts';
-import { Many } from '../_internal/Many.ts';
-import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
-import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import type { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { ListIterator } from '../_internal/ListIterator.ts';
+import type { Many } from '../_internal/Many.ts';
+import type { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+import type { ObjectIterator } from '../_internal/ObjectIterator.ts';
 import { objectValues } from '../_internal/objectValues.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toPath } from '../util/toPath.ts';

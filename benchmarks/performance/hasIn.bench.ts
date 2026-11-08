@@ -1,38 +1,36 @@
-import { bench, describe } from 'vitest';
 import { hasIn as hasInToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { hasIn: hasInLodash } = lodash;
-
-describe('hasIn', () => {
+group('hasIn', () => {
   // 기본 객체 경로 테스트 (문자열)
-  describe('with string path', () => {
+  group('with string path', () => {
     const obj = { a: { b: 3 } };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'a.b');
+      do_not_optimize(hasInToolkit(obj, 'a.b'));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(obj, 'a.b');
+      do_not_optimize(lodash.hasIn(obj, 'a.b'));
     });
   });
 
   // 기본 객체 경로 테스트 (배열)
-  describe('with array path', () => {
+  group('with array path', () => {
     const obj = { a: { b: 3 } };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, ['a', 'b']);
+      do_not_optimize(hasInToolkit(obj, ['a', 'b']));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(obj, ['a', 'b']);
+      do_not_optimize(lodash.hasIn(obj, ['a', 'b']));
     });
   });
 
   // 상속된 속성 테스트 (문자열)
-  describe('with inherited property (string)', () => {
+  group('with inherited property (string)', () => {
     class Rectangle {
       area() {
         return 0;
@@ -41,45 +39,45 @@ describe('hasIn', () => {
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(rect, 'area');
+      do_not_optimize(hasInToolkit(rect, 'area'));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(rect, 'area');
+      do_not_optimize(lodash.hasIn(rect, 'area'));
     });
   });
 
   // 상속된 중첩 속성 테스트 (배열)
-  describe('with inherited nested property (array)', () => {
+  group('with inherited nested property (array)', () => {
     class Rectangle {
       dimensions = { width: 10, height: 5 };
     }
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(rect, ['dimensions', 'width']);
+      do_not_optimize(hasInToolkit(rect, ['dimensions', 'width']));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(rect, ['dimensions', 'width']);
+      do_not_optimize(lodash.hasIn(rect, ['dimensions', 'width']));
     });
   });
 
   // Object.prototype 상속 속성 테스트
-  describe('with Object.prototype property', () => {
+  group('with Object.prototype property', () => {
     const obj = {};
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'toString');
+      do_not_optimize(hasInToolkit(obj, 'toString'));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(obj, 'toString');
+      do_not_optimize(lodash.hasIn(obj, 'toString'));
     });
   });
 
   // 깊은 상속 체인 테스트
-  describe('with deep inheritance chain', () => {
+  group('with deep inheritance chain', () => {
     class GrandParent {
       method() {}
     }
@@ -91,45 +89,45 @@ describe('hasIn', () => {
     const child = new Child();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(child, 'method');
+      do_not_optimize(hasInToolkit(child, 'method'));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(child, 'method');
+      do_not_optimize(lodash.hasIn(child, 'method'));
     });
   });
 
   // 존재하지 않는 속성 테스트
-  describe('with non-existent property', () => {
+  group('with non-existent property', () => {
     const obj = { a: 1 };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'nonExistent');
+      do_not_optimize(hasInToolkit(obj, 'nonExistent'));
     });
 
     bench('lodash/hasIn', () => {
-      hasInLodash(obj, 'nonExistent');
+      do_not_optimize(lodash.hasIn(obj, 'nonExistent'));
     });
   });
 
   // 깊은 중첩 경로 테스트
-  describe('with deep nested path', () => {
+  group('with deep nested path', () => {
     const deepObj = { a: { b: { c: { d: { e: { f: 1 } } } } } };
 
     bench('es-toolkit/hasIn deep path (string)', () => {
-      hasInToolkit(deepObj, 'a.b.c.d.e.f');
+      do_not_optimize(hasInToolkit(deepObj, 'a.b.c.d.e.f'));
     });
 
     bench('lodash/hasIn deep path (string)', () => {
-      hasInLodash(deepObj, 'a.b.c.d.e.f');
+      do_not_optimize(lodash.hasIn(deepObj, 'a.b.c.d.e.f'));
     });
 
     bench('es-toolkit/hasIn deep path (array)', () => {
-      hasInToolkit(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']);
+      do_not_optimize(hasInToolkit(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']));
     });
 
     bench('lodash/hasIn deep path (array)', () => {
-      hasInLodash(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']);
+      do_not_optimize(lodash.hasIn(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']));
     });
   });
 });

@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { isObjectLike as isObjectLikeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isObjectLike: isObjectLikeLodash } = lodash;
-
-describe('isObjectLike', () => {
+group('isObjectLike', () => {
   bench('es-toolkit/isObjectLike', () => {
-    isObjectLikeToolkit([1, 2, 3]);
-    isObjectLikeToolkit(true);
-    isObjectLikeToolkit(new Date());
-    isObjectLikeToolkit(new Error());
-    isObjectLikeToolkit(1);
-    isObjectLikeToolkit(/x/);
-    isObjectLikeToolkit('a');
+    do_not_optimize(isObjectLikeToolkit([1, 2, 3]));
+    do_not_optimize(isObjectLikeToolkit(true));
+    do_not_optimize(isObjectLikeToolkit(new Date()));
+    do_not_optimize(isObjectLikeToolkit(new Error()));
+    do_not_optimize(isObjectLikeToolkit(1));
+    do_not_optimize(isObjectLikeToolkit(/x/));
+    do_not_optimize(isObjectLikeToolkit('a'));
   });
 
   bench('lodash/isObjectLike', () => {
-    isObjectLikeLodash([1, 2, 3]);
-    isObjectLikeLodash(true);
-    isObjectLikeLodash(new Date());
-    isObjectLikeLodash(new Error());
-    isObjectLikeLodash(1);
-    isObjectLikeLodash(/x/);
-    isObjectLikeLodash('a');
+    do_not_optimize(lodash.isObjectLike([1, 2, 3]));
+    do_not_optimize(lodash.isObjectLike(true));
+    do_not_optimize(lodash.isObjectLike(new Date()));
+    do_not_optimize(lodash.isObjectLike(new Error()));
+    do_not_optimize(lodash.isObjectLike(1));
+    do_not_optimize(lodash.isObjectLike(/x/));
+    do_not_optimize(lodash.isObjectLike('a'));
   });
 });

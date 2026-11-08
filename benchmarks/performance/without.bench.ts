@@ -1,42 +1,40 @@
-import { bench, describe } from 'vitest';
 import { without as withoutEsToolkit } from 'es-toolkit';
 import { without as withoutToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { without: withoutLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const generateArray = (length: number, max: number) => Array.from({ length }, () => Math.floor(Math.random() * max));
 
-describe('without, small arrays', () => {
+group('without, small arrays', () => {
   const array = [1, 2, 3, 4, 5];
   const values = [2, 4];
 
   bench('es-toolkit/without', () => {
-    withoutEsToolkit(array, ...values);
+    do_not_optimize(withoutEsToolkit(array, ...values));
   });
 
   bench('es-toolkit/compat/without', () => {
-    withoutToolkitCompat(array, ...values);
+    do_not_optimize(withoutToolkitCompat(array, ...values));
   });
 
   bench('lodash/without', () => {
-    withoutLodash(array, ...values);
+    do_not_optimize(lodash.without(array, ...values));
   });
 });
 
-describe('without, large arrays', () => {
+group('without, large arrays', () => {
   const array = generateArray(10000, 1000);
   const values = generateArray(100, 1000);
 
   bench('es-toolkit/without', () => {
-    withoutEsToolkit(array, ...values);
+    do_not_optimize(withoutEsToolkit(array, ...values));
   });
 
   bench('es-toolkit/compat/without', () => {
-    withoutToolkitCompat(array, ...values);
+    do_not_optimize(withoutToolkitCompat(array, ...values));
   });
 
   bench('lodash/without', () => {
-    withoutLodash(array, ...values);
+    do_not_optimize(lodash.without(array, ...values));
   });
 });

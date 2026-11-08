@@ -1,28 +1,26 @@
-import { bench, describe } from 'vitest';
 import { isArrayLikeObject as isArrayLikeObjectToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isArrayLikeObject: isArrayLikeObjectLodash } = lodash;
-
-describe('isArrayLikeObject', () => {
+group('isArrayLikeObject', () => {
   bench('es-toolkit/isArrayLikeObject', () => {
-    isArrayLikeObjectToolkit(true);
-    isArrayLikeObjectToolkit(new Date());
-    isArrayLikeObjectToolkit(new Error());
-    isArrayLikeObjectToolkit({ a: 1 });
-    isArrayLikeObjectToolkit(1);
-    isArrayLikeObjectToolkit(/x/);
-    isArrayLikeObjectToolkit(Array.from({ length: 10000 }));
-    isArrayLikeObjectToolkit({ length: 1000 });
+    do_not_optimize(isArrayLikeObjectToolkit(true));
+    do_not_optimize(isArrayLikeObjectToolkit(new Date()));
+    do_not_optimize(isArrayLikeObjectToolkit(new Error()));
+    do_not_optimize(isArrayLikeObjectToolkit({ a: 1 }));
+    do_not_optimize(isArrayLikeObjectToolkit(1));
+    do_not_optimize(isArrayLikeObjectToolkit(/x/));
+    do_not_optimize(isArrayLikeObjectToolkit(Array.from({ length: 10000 })));
+    do_not_optimize(isArrayLikeObjectToolkit({ length: 1000 }));
   });
   bench('lodash/isArrayLikeObject', () => {
-    isArrayLikeObjectLodash(true);
-    isArrayLikeObjectLodash(new Date());
-    isArrayLikeObjectLodash(new Error());
-    isArrayLikeObjectLodash({ a: 1 });
-    isArrayLikeObjectLodash(1);
-    isArrayLikeObjectLodash(/x/);
-    isArrayLikeObjectLodash(Array.from({ length: 10000 }));
-    isArrayLikeObjectLodash({ length: 1000 });
+    do_not_optimize(lodash.isArrayLikeObject(true));
+    do_not_optimize(lodash.isArrayLikeObject(new Date()));
+    do_not_optimize(lodash.isArrayLikeObject(new Error()));
+    do_not_optimize(lodash.isArrayLikeObject({ a: 1 }));
+    do_not_optimize(lodash.isArrayLikeObject(1));
+    do_not_optimize(lodash.isArrayLikeObject(/x/));
+    do_not_optimize(lodash.isArrayLikeObject(Array.from({ length: 10000 })));
+    do_not_optimize(lodash.isArrayLikeObject({ length: 1000 }));
   });
 });

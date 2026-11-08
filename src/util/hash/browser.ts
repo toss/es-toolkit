@@ -1,5 +1,5 @@
 import { sha256 } from './sha256.ts';
-import { serialize } from '../serialize/serialize.ts';
+import { serialize } from '../serialize.ts';
 
 /**
  * Hashes any value into a stable 43-character string.

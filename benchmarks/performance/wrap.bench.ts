@@ -1,39 +1,41 @@
-import { bench, describe } from 'vitest';
 import { wrap as wrapToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { wrap: wrapLodash } = lodash;
-
-describe('wrap', () => {
+group('wrap', () => {
   bench('es-toolkit/compat/wrap', () => {
-    wrapToolkit(
-      (x: any) => x,
-      (value, x) => value(x)
+    do_not_optimize(
+      wrapToolkit(
+        (x: any) => x,
+        (value, x) => value(x)
+      )
     );
   });
 
   bench('lodash/wrap', () => {
-    wrapLodash(
-      (x: any) => x,
-      (value, x) => value(x)
+    do_not_optimize(
+      lodash.wrap(
+        (x: any) => x,
+        (value, x) => value(x)
+      )
     );
   });
 });
 
-describe('wrap/invoked', () => {
+group('wrap/invoked', () => {
   bench('es-toolkit/compat/wrap', () => {
     const wrapped = wrapToolkit(
       (x: string) => x.toUpperCase(),
       (value, x: string) => `<p>${value(x)}</p>`
     );
-    wrapped('hello');
+    do_not_optimize(wrapped('hello'));
   });
 
   bench('lodash/wrap', () => {
-    const wrapped = wrapLodash(
+    const wrapped = lodash.wrap(
       (x: string) => x.toUpperCase(),
       (value, x: string) => `<p>${value(x)}</p>`
     );
-    wrapped('hello');
+    do_not_optimize(wrapped('hello'));
   });
 });

@@ -1,17 +1,15 @@
-import { bench, describe } from 'vitest';
 import { defer as deferToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { defer: deferLodash } = lodash;
-
-describe('defer', () => {
+group('defer', () => {
   bench('es-toolkit/defer', () => {
     const id = deferToolkit(() => {});
-    clearTimeout(id);
+    do_not_optimize(clearTimeout(id));
   });
 
   bench('lodash/defer', () => {
-    const id = deferLodash(() => {});
-    clearTimeout(id);
+    const id = lodash.defer(() => {});
+    do_not_optimize(clearTimeout(id));
   });
 });

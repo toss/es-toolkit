@@ -1,6 +1,6 @@
-import { bench, describe } from 'vitest';
 import { serialize as serializeToolkit } from 'es-toolkit/util';
 import { serialize as serializeOhash } from 'ohash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const smallObject = { id: 1, name: 'Alice', active: true };
 
@@ -16,32 +16,32 @@ const largeArray = Array.from({ length: 1000 }, (_, i) => ({
   meta: { createdAt: i * 1000, priority: i % 5 },
 }));
 
-describe('serialize: small object', () => {
+group('serialize: small object', () => {
   bench('es-toolkit/serialize', () => {
-    serializeToolkit(smallObject);
+    do_not_optimize(serializeToolkit(smallObject));
   });
 
   bench('ohash/serialize', () => {
-    serializeOhash(smallObject);
+    do_not_optimize(serializeOhash(smallObject));
   });
 });
 
-describe('serialize: medium object (100 keys)', () => {
+group('serialize: medium object (100 keys)', () => {
   bench('es-toolkit/serialize', () => {
-    serializeToolkit(mediumObject);
+    do_not_optimize(serializeToolkit(mediumObject));
   });
 
   bench('ohash/serialize', () => {
-    serializeOhash(mediumObject);
+    do_not_optimize(serializeOhash(mediumObject));
   });
 });
 
-describe('serialize: large array (1,000 objects)', () => {
+group('serialize: large array (1,000 objects)', () => {
   bench('es-toolkit/serialize', () => {
-    serializeToolkit(largeArray);
+    do_not_optimize(serializeToolkit(largeArray));
   });
 
   bench('ohash/serialize', () => {
-    serializeOhash(largeArray);
+    do_not_optimize(serializeOhash(largeArray));
   });
 });

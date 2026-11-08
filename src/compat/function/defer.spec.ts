@@ -33,6 +33,7 @@ describe('defer', () => {
   });
 
   it('should throw an error if `func` is not a function', () => {
+    // oxlint-disable-next-line vitest/require-to-throw-message
     expect(() => defer(1 as any)).toThrow();
   });
 });

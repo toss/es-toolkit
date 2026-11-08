@@ -1,9 +1,9 @@
 import { orderBy } from './orderBy.ts';
 import { flatten } from '../../array/flatten.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
-import { Many } from '../_internal/Many.ts';
-import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+import type { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { Many } from '../_internal/Many.ts';
+import type { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.

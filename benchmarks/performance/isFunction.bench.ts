@@ -1,56 +1,54 @@
-import { bench, describe } from 'vitest';
 import { isFunction as isFunctionToolkit } from 'es-toolkit';
 import { isFunction as isFunctionToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isFunction: isFunctionLodash } = lodash;
-
-describe('isFunction', () => {
+group('isFunction', () => {
   bench('es-toolkit/isFunction', () => {
-    isFunctionToolkit(true);
-    isFunctionToolkit(new Date());
-    isFunctionToolkit(new Error());
-    isFunctionToolkit({ a: 1 });
-    isFunctionToolkit(1);
-    isFunctionToolkit(/x/);
-    isFunctionToolkit(Array.from({ length: 10000 }));
-    isFunctionToolkit(async function () {});
-    isFunctionToolkit(function* () {});
-    isFunctionToolkit(Proxy);
-    isFunctionToolkit(Int8Array);
-    isFunctionToolkit(() => {});
-    isFunctionToolkit(Array.prototype.slice);
+    do_not_optimize(isFunctionToolkit(true));
+    do_not_optimize(isFunctionToolkit(new Date()));
+    do_not_optimize(isFunctionToolkit(new Error()));
+    do_not_optimize(isFunctionToolkit({ a: 1 }));
+    do_not_optimize(isFunctionToolkit(1));
+    do_not_optimize(isFunctionToolkit(/x/));
+    do_not_optimize(isFunctionToolkit(Array.from({ length: 10000 })));
+    do_not_optimize(isFunctionToolkit(async function () {}));
+    do_not_optimize(isFunctionToolkit(function* () {}));
+    do_not_optimize(isFunctionToolkit(Proxy));
+    do_not_optimize(isFunctionToolkit(Int8Array));
+    do_not_optimize(isFunctionToolkit(() => {}));
+    do_not_optimize(isFunctionToolkit(Array.prototype.slice));
   });
 
   bench('es-toolkit/compat/isFunction', () => {
-    isFunctionToolkitCompat(true);
-    isFunctionToolkitCompat(new Date());
-    isFunctionToolkitCompat(new Error());
-    isFunctionToolkitCompat({ a: 1 });
-    isFunctionToolkitCompat(1);
-    isFunctionToolkitCompat(/x/);
-    isFunctionToolkitCompat(Array.from({ length: 10000 }));
-    isFunctionToolkitCompat(async function () {});
-    isFunctionToolkitCompat(function* () {});
-    isFunctionToolkitCompat(Proxy);
-    isFunctionToolkitCompat(Int8Array);
-    isFunctionToolkitCompat(() => {});
-    isFunctionToolkitCompat(Array.prototype.slice);
+    do_not_optimize(isFunctionToolkitCompat(true));
+    do_not_optimize(isFunctionToolkitCompat(new Date()));
+    do_not_optimize(isFunctionToolkitCompat(new Error()));
+    do_not_optimize(isFunctionToolkitCompat({ a: 1 }));
+    do_not_optimize(isFunctionToolkitCompat(1));
+    do_not_optimize(isFunctionToolkitCompat(/x/));
+    do_not_optimize(isFunctionToolkitCompat(Array.from({ length: 10000 })));
+    do_not_optimize(isFunctionToolkitCompat(async function () {}));
+    do_not_optimize(isFunctionToolkitCompat(function* () {}));
+    do_not_optimize(isFunctionToolkitCompat(Proxy));
+    do_not_optimize(isFunctionToolkitCompat(Int8Array));
+    do_not_optimize(isFunctionToolkitCompat(() => {}));
+    do_not_optimize(isFunctionToolkitCompat(Array.prototype.slice));
   });
 
   bench('lodash/isFunction', () => {
-    isFunctionLodash(true);
-    isFunctionLodash(new Date());
-    isFunctionLodash(new Error());
-    isFunctionLodash({ a: 1 });
-    isFunctionLodash(1);
-    isFunctionLodash(/x/);
-    isFunctionLodash(Array.from({ length: 10000 }));
-    isFunctionLodash(async function () {});
-    isFunctionLodash(function* () {});
-    isFunctionLodash(Proxy);
-    isFunctionLodash(Int8Array);
-    isFunctionLodash(() => {});
-    isFunctionLodash(Array.prototype.slice);
+    do_not_optimize(lodash.isFunction(true));
+    do_not_optimize(lodash.isFunction(new Date()));
+    do_not_optimize(lodash.isFunction(new Error()));
+    do_not_optimize(lodash.isFunction({ a: 1 }));
+    do_not_optimize(lodash.isFunction(1));
+    do_not_optimize(lodash.isFunction(/x/));
+    do_not_optimize(lodash.isFunction(Array.from({ length: 10000 })));
+    do_not_optimize(lodash.isFunction(async function () {}));
+    do_not_optimize(lodash.isFunction(function* () {}));
+    do_not_optimize(lodash.isFunction(Proxy));
+    do_not_optimize(lodash.isFunction(Int8Array));
+    do_not_optimize(lodash.isFunction(() => {}));
+    do_not_optimize(lodash.isFunction(Array.prototype.slice));
   });
 });

@@ -1,5 +1,5 @@
 import { objectValues } from '../_internal/objectValues.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 

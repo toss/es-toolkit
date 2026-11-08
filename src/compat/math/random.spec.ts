@@ -7,6 +7,7 @@ describe('random', () => {
   const array = Array.from({ length: 100 });
 
   it('should return `0` or `1` when no arguments are given', () => {
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = uniq(array.map(() => random())).sort();
 
     expect(actual).toEqual([0, 1]);
@@ -41,6 +42,7 @@ describe('random', () => {
     const max = 2;
     const expected = [2, 3, 4];
 
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = uniq(array.map(() => random(min, max))).sort();
 
     expect(actual).toEqual(expected);

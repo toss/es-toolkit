@@ -1,3 +1,3 @@
-import { PartialShallow } from './PartialShallow.ts';
+import type { PartialShallow } from './PartialShallow.ts';
 
 export type IterateeShorthand<T> = PropertyKey | [PropertyKey, any] | PartialShallow<T>;
