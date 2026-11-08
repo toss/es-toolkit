@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { groupBy as groupByToolkit } from 'es-toolkit';
 import { groupBy as groupByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { groupBy: groupByLodash } = lodash;
-
-describe('groupBy', () => {
+group('groupBy', () => {
   bench('es-toolkit/groupBy', () => {
     const array = [
       { category: 'fruit', name: 'apple' },
@@ -15,7 +13,7 @@ describe('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    groupByToolkit(array, item => item.category);
+    do_not_optimize(groupByToolkit(array, item => item.category));
   });
 
   bench('es-toolkit/compat/groupBy', () => {
@@ -27,7 +25,7 @@ describe('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    groupByToolkitCompat(array, item => item.category);
+    do_not_optimize(groupByToolkitCompat(array, item => item.category));
   });
 
   bench('lodash/groupBy', () => {
@@ -39,21 +37,21 @@ describe('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    groupByLodash(array, item => item.category);
+    do_not_optimize(lodash.groupBy(array, item => item.category));
   });
 });
 
-describe('groupBy/largeArray', () => {
+group('groupBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({
     category: i % 2 === 0 ? 'even' : 'odd',
     value: i,
   }));
 
   bench('es-toolkit/groupBy', () => {
-    groupByToolkit(largeArray, item => item.category);
+    do_not_optimize(groupByToolkit(largeArray, item => item.category));
   });
 
   bench('lodash/groupBy', () => {
-    groupByLodash(largeArray, item => item.category);
+    do_not_optimize(lodash.groupBy(largeArray, item => item.category));
   });
 });

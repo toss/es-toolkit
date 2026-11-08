@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { concat as concatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { concat: concatLodash } = lodash;
-
-describe('concat', () => {
+group('concat', () => {
   bench('es-toolkit/concat', () => {
-    concatToolkit([1, [2, 3]], 4);
+    do_not_optimize(concatToolkit([1, [2, 3]], 4));
   });
 
   bench('lodash/concat', () => {
-    concatLodash([1, [2, 3]], 4);
+    do_not_optimize(lodash.concat([1, [2, 3]], 4));
   });
 });
 
-describe('concat/largeArray', () => {
+group('concat/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/concat', () => {
-    concatToolkit(largeArray, largeArray);
+    do_not_optimize(concatToolkit(largeArray, largeArray));
   });
 
   bench('lodash/concat', () => {
-    concatLodash(largeArray, largeArray);
+    do_not_optimize(lodash.concat(largeArray, largeArray));
   });
 });

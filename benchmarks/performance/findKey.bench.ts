@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { findKey as findKeyToolkit } from 'es-toolkit';
 import { findKey as findKeyCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { findKey: findKeyLodash } = lodash;
-
-describe('findKey', () => {
+group('findKey', () => {
   const users = {
     pebbles: { age: 24, active: true },
     barney: { age: 36, active: true },
@@ -13,33 +11,33 @@ describe('findKey', () => {
   };
 
   bench('es-toolkit/findKey', () => {
-    findKeyToolkit(users, o => o.age < 40);
+    do_not_optimize(findKeyToolkit(users, o => o.age < 40));
   });
 
   bench('lodash/findKey', () => {
-    findKeyLodash(users, o => o.age < 40);
+    do_not_optimize(lodash.findKey(users, o => o.age < 40));
   });
 
   bench('es-toolkit/compat/findKey', () => {
-    findKeyCompatToolkit(users, o => o.age < 40);
+    do_not_optimize(findKeyCompatToolkit(users, o => o.age < 40));
   });
 });
 
-describe('findKey/largeObject', () => {
+group('findKey/largeObject', () => {
   const largeUsers: Record<string, { age: number }> = {};
   for (let i = 0; i < 10000; i++) {
     largeUsers[`user${i}`] = { age: Number(i) };
   }
 
   bench('es-toolkit/findKey', () => {
-    findKeyToolkit(largeUsers, o => o.age === 7000);
+    do_not_optimize(findKeyToolkit(largeUsers, o => o.age === 7000));
   });
 
   bench('lodash/findKey', () => {
-    findKeyLodash(largeUsers, o => o.age === 7000);
+    do_not_optimize(lodash.findKey(largeUsers, o => o.age === 7000));
   });
 
   bench('es-toolkit/compat/findKey', () => {
-    findKeyCompatToolkit(largeUsers, o => o.age === 7000);
+    do_not_optimize(findKeyCompatToolkit(largeUsers, o => o.age === 7000));
   });
 });

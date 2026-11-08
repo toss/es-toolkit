@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { isElement as isElementToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { isElement: isElementLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 class ElementLike {
   nodeType = 1;
@@ -10,22 +8,22 @@ class ElementLike {
 
 const NotElementLike = { nodeType: 1 };
 
-describe('isElement - true', () => {
+group('isElement - true', () => {
   bench('es-toolkit/isElement', () => {
-    isElementToolkit(ElementLike);
+    do_not_optimize(isElementToolkit(ElementLike));
   });
 
   bench('lodash/isElement', () => {
-    isElementLodash(ElementLike);
+    do_not_optimize(lodash.isElement(ElementLike));
   });
 });
 
-describe('isElement - false', () => {
+group('isElement - false', () => {
   bench('es-toolkit/isElement', () => {
-    isElementToolkit(NotElementLike);
+    do_not_optimize(isElementToolkit(NotElementLike));
   });
 
   bench('lodash/isElement', () => {
-    isElementLodash(NotElementLike);
+    do_not_optimize(lodash.isElement(NotElementLike));
   });
 });

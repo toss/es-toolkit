@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { isFinite as isFiniteToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isFinite: isFiniteLodash } = lodash;
-
-describe('isFinite', () => {
+group('isFinite', () => {
   bench('es-toolkit/isFinite', () => {
-    isFiniteToolkit(1);
-    isFiniteToolkit(1.12);
-    isFiniteToolkit(Infinity);
-    isFiniteToolkit(-Infinity);
-    isFiniteToolkit([]);
-    isFiniteToolkit({});
-    isFiniteToolkit('1');
+    do_not_optimize(isFiniteToolkit(1));
+    do_not_optimize(isFiniteToolkit(1.12));
+    do_not_optimize(isFiniteToolkit(Infinity));
+    do_not_optimize(isFiniteToolkit(-Infinity));
+    do_not_optimize(isFiniteToolkit([]));
+    do_not_optimize(isFiniteToolkit({}));
+    do_not_optimize(isFiniteToolkit('1'));
   });
 
   bench('lodash/isFinite', () => {
-    isFiniteLodash(1);
-    isFiniteLodash(1.12);
-    isFiniteLodash(Infinity);
-    isFiniteLodash(-Infinity);
-    isFiniteLodash([]);
-    isFiniteLodash({});
-    isFiniteLodash('1');
+    do_not_optimize(lodash.isFinite(1));
+    do_not_optimize(lodash.isFinite(1.12));
+    do_not_optimize(lodash.isFinite(Infinity));
+    do_not_optimize(lodash.isFinite(-Infinity));
+    do_not_optimize(lodash.isFinite([]));
+    do_not_optimize(lodash.isFinite({}));
+    do_not_optimize(lodash.isFinite('1'));
   });
 });

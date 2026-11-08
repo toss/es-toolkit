@@ -1,115 +1,113 @@
-import { bench, describe } from 'vitest';
 import { isEqual as isEqualToolkit } from 'es-toolkit';
 import { isEqual as isEqualToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isEqual: isEqualLodash } = lodash;
-
-describe('isEqual primitives', () => {
+group('isEqual primitives', () => {
   bench('es-toolkit/isEqual', () => {
-    isEqualToolkit(1, 1);
-    isEqualToolkit(NaN, NaN);
-    isEqualToolkit(+0, -0);
+    do_not_optimize(isEqualToolkit(1, 1));
+    do_not_optimize(isEqualToolkit(NaN, NaN));
+    do_not_optimize(isEqualToolkit(+0, -0));
 
-    isEqualToolkit(true, true);
-    isEqualToolkit(true, false);
+    do_not_optimize(isEqualToolkit(true, true));
+    do_not_optimize(isEqualToolkit(true, false));
 
-    isEqualToolkit('hello', 'hello');
-    isEqualToolkit('hello', 'world');
+    do_not_optimize(isEqualToolkit('hello', 'hello'));
+    do_not_optimize(isEqualToolkit('hello', 'world'));
   });
 
   bench('es-toolkit/compat/isEqual', () => {
-    isEqualToolkitCompat(1, 1);
-    isEqualToolkitCompat(NaN, NaN);
-    isEqualToolkitCompat(+0, -0);
+    do_not_optimize(isEqualToolkitCompat(1, 1));
+    do_not_optimize(isEqualToolkitCompat(NaN, NaN));
+    do_not_optimize(isEqualToolkitCompat(+0, -0));
 
-    isEqualToolkitCompat(true, true);
-    isEqualToolkitCompat(true, false);
+    do_not_optimize(isEqualToolkitCompat(true, true));
+    do_not_optimize(isEqualToolkitCompat(true, false));
 
-    isEqualToolkitCompat('hello', 'hello');
-    isEqualToolkitCompat('hello', 'world');
+    do_not_optimize(isEqualToolkitCompat('hello', 'hello'));
+    do_not_optimize(isEqualToolkitCompat('hello', 'world'));
   });
 
   bench('lodash/isEqual', () => {
-    isEqualLodash(1, 1);
-    isEqualLodash(NaN, NaN);
-    isEqualLodash(+0, -0);
+    do_not_optimize(lodash.isEqual(1, 1));
+    do_not_optimize(lodash.isEqual(NaN, NaN));
+    do_not_optimize(lodash.isEqual(+0, -0));
 
-    isEqualLodash(true, true);
-    isEqualLodash(true, false);
+    do_not_optimize(lodash.isEqual(true, true));
+    do_not_optimize(lodash.isEqual(true, false));
 
-    isEqualLodash('hello', 'hello');
-    isEqualLodash('hello', 'world');
+    do_not_optimize(lodash.isEqual('hello', 'hello'));
+    do_not_optimize(lodash.isEqual('hello', 'world'));
   });
 });
 
-describe('isEqual dates', () => {
+group('isEqual dates', () => {
   bench('es-toolkit/isEqual', () => {
-    isEqualToolkit(new Date('2020-01-01'), new Date('2020-01-01'));
-    isEqualToolkit(new Date('2020-01-01'), new Date('2021-01-01'));
+    do_not_optimize(isEqualToolkit(new Date('2020-01-01'), new Date('2020-01-01')));
+    do_not_optimize(isEqualToolkit(new Date('2020-01-01'), new Date('2021-01-01')));
   });
 
   bench('es-toolkit/compat/isEqual', () => {
-    isEqualToolkitCompat(new Date('2020-01-01'), new Date('2020-01-01'));
-    isEqualToolkitCompat(new Date('2020-01-01'), new Date('2021-01-01'));
+    do_not_optimize(isEqualToolkitCompat(new Date('2020-01-01'), new Date('2020-01-01')));
+    do_not_optimize(isEqualToolkitCompat(new Date('2020-01-01'), new Date('2021-01-01')));
   });
 
   bench('lodash', () => {
-    isEqualLodash(new Date('2020-01-01'), new Date('2020-01-01'));
-    isEqualLodash(new Date('2020-01-01'), new Date('2021-01-01'));
+    do_not_optimize(lodash.isEqual(new Date('2020-01-01'), new Date('2020-01-01')));
+    do_not_optimize(lodash.isEqual(new Date('2020-01-01'), new Date('2021-01-01')));
   });
 });
 
-describe('isEqual RegExps', () => {
+group('isEqual RegExps', () => {
   bench('es-toolkit/isEqual', () => {
-    isEqualToolkit(/hello/g, /hello/g);
-    isEqualToolkit(/hello/g, /hello/i);
+    do_not_optimize(isEqualToolkit(/hello/g, /hello/g));
+    do_not_optimize(isEqualToolkit(/hello/g, /hello/i));
   });
 
   bench('es-toolkit/compat/isEqual', () => {
-    isEqualToolkitCompat(/hello/g, /hello/g);
-    isEqualToolkitCompat(/hello/g, /hello/i);
+    do_not_optimize(isEqualToolkitCompat(/hello/g, /hello/g));
+    do_not_optimize(isEqualToolkitCompat(/hello/g, /hello/i));
   });
 
   bench('lodash', () => {
-    isEqualLodash(/hello/g, /hello/g);
-    isEqualLodash(/hello/g, /hello/i);
+    do_not_optimize(lodash.isEqual(/hello/g, /hello/g));
+    do_not_optimize(lodash.isEqual(/hello/g, /hello/i));
   });
 });
 
-describe('isEqual objects', () => {
+group('isEqual objects', () => {
   bench('es-toolkit/isEqual', () => {
-    isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
-    isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
-    isEqualToolkit({ a: 1, b: 2 }, { a: 1, b: 2 });
+    do_not_optimize(isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }));
+    do_not_optimize(isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } }));
+    do_not_optimize(isEqualToolkit({ a: 1, b: 2 }, { a: 1, b: 2 }));
   });
 
   bench('es-toolkit/compat/isEqual', () => {
-    isEqualToolkitCompat({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
-    isEqualToolkitCompat({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
-    isEqualToolkitCompat({ a: 1, b: 2 }, { a: 1, b: 2 });
+    do_not_optimize(isEqualToolkitCompat({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }));
+    do_not_optimize(isEqualToolkitCompat({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } }));
+    do_not_optimize(isEqualToolkitCompat({ a: 1, b: 2 }, { a: 1, b: 2 }));
   });
 
   bench('lodash', () => {
-    isEqualLodash({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
-    isEqualLodash({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
-    isEqualLodash({ a: 1, b: 2 }, { a: 1, b: 2 });
+    do_not_optimize(lodash.isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }));
+    do_not_optimize(lodash.isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } }));
+    do_not_optimize(lodash.isEqual({ a: 1, b: 2 }, { a: 1, b: 2 }));
   });
 });
 
-describe('isEqual arrays', () => {
+group('isEqual arrays', () => {
   bench('es-toolkit/isEqual', () => {
-    isEqualToolkit([1, 2, 3], [1, 2, 3]);
-    isEqualToolkit([1, 2, 3], [1, 2, 4]);
+    do_not_optimize(isEqualToolkit([1, 2, 3], [1, 2, 3]));
+    do_not_optimize(isEqualToolkit([1, 2, 3], [1, 2, 4]));
   });
 
   bench('es-toolkit/compat/isEqual', () => {
-    isEqualToolkitCompat([1, 2, 3], [1, 2, 3]);
-    isEqualToolkitCompat([1, 2, 3], [1, 2, 4]);
+    do_not_optimize(isEqualToolkitCompat([1, 2, 3], [1, 2, 3]));
+    do_not_optimize(isEqualToolkitCompat([1, 2, 3], [1, 2, 4]));
   });
 
   bench('lodash', () => {
-    isEqualLodash([1, 2, 3], [1, 2, 3]);
-    isEqualLodash([1, 2, 3], [1, 2, 4]);
+    do_not_optimize(lodash.isEqual([1, 2, 3], [1, 2, 3]));
+    do_not_optimize(lodash.isEqual([1, 2, 3], [1, 2, 4]));
   });
 });

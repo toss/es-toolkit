@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const mockCreatePackageTarball = () => {
   return new Promise(resolve => {
@@ -16,7 +16,7 @@ const mockProcessTarball = () => {
   });
 };
 
-describe('check-dist performance comparison (mocked)', () => {
+group('check-dist performance comparison (mocked)', () => {
   bench('Original approach: Duplicate tarball creation', async () => {
     await mockCreatePackageTarball();
     await mockProcessTarball();
@@ -34,23 +34,23 @@ describe('check-dist performance comparison (mocked)', () => {
   });
 });
 
-describe('function call overhead comparison', () => {
+group('function call overhead comparison', () => {
   const createTarball = () => ({ path: '/tmp/test.tgz' });
   const processTarball = () => ({ exports: {} });
 
   bench('Original: Function calls with recreation', () => {
-    createTarball();
-    processTarball();
+    do_not_optimize(createTarball());
+    do_not_optimize(processTarball());
 
-    createTarball();
-    processTarball();
+    do_not_optimize(createTarball());
+    do_not_optimize(processTarball());
   });
 
   bench('Optimized: Function calls with reuse', () => {
     const sharedTarball = createTarball();
     void sharedTarball;
 
-    processTarball();
-    processTarball();
+    do_not_optimize(processTarball());
+    do_not_optimize(processTarball());
   });
 });

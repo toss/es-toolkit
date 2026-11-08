@@ -2,7 +2,7 @@
   "name": "benchmarks",
   "private": true,
   "scripts": {
-    "bench": "vitest bench --root performance",
+    "bench": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON performance/run.ts",
     "check-bundle-size": "vitest run --update bundle-size"
   },
   "dependencies": {
@@ -10,6 +10,7 @@
     "esbuild": "0.28.0",
     "lodash": "4.18.1",
     "lodash-es": "4.18.1",
+    "mitata": "^1.0.34",
     "object-hash": "3.0.0",
     "ohash": "2.0.11",
     "remeda": "^2.39.0",

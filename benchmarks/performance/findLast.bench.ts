@@ -1,38 +1,36 @@
-import { bench, describe } from 'vitest';
 import { findLast as findLastToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { findLast: findLastLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
 
-describe('findLast', () => {
+group('findLast', () => {
   bench('es-toolkit/compat/findLast', () => {
-    findLastToolkitCompat(items, x => x.name === 'Bob');
-    findLastToolkitCompat(items, { name: 'Bob' });
-    findLastToolkitCompat(items, ['name', 'Bob']);
-    findLastToolkitCompat(items, 'name');
+    do_not_optimize(findLastToolkitCompat(items, x => x.name === 'Bob'));
+    do_not_optimize(findLastToolkitCompat(items, { name: 'Bob' }));
+    do_not_optimize(findLastToolkitCompat(items, ['name', 'Bob']));
+    do_not_optimize(findLastToolkitCompat(items, 'name'));
   });
 
   bench('lodash/findLast', () => {
-    findLastLodash(items, x => x.name === 'Bob');
-    findLastLodash(items, { name: 'Bob' });
-    findLastLodash(items, ['name', 'Bob']);
-    findLastLodash(items, 'name');
+    do_not_optimize(lodash.findLast(items, x => x.name === 'Bob'));
+    do_not_optimize(lodash.findLast(items, { name: 'Bob' }));
+    do_not_optimize(lodash.findLast(items, ['name', 'Bob']));
+    do_not_optimize(lodash.findLast(items, 'name'));
   });
 });
 
-describe('findLast/largeArray', () => {
+group('findLast/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Name ${i}` }));
 
   bench('es-toolkit/compat/findLast', () => {
-    findLastToolkitCompat(largeArray, x => x.name === 'Name 5000');
+    do_not_optimize(findLastToolkitCompat(largeArray, x => x.name === 'Name 5000'));
   });
 
   bench('lodash/findLast', () => {
-    findLastLodash(largeArray, x => x.name === 'Name 5000');
+    do_not_optimize(lodash.findLast(largeArray, x => x.name === 'Name 5000'));
   });
 });

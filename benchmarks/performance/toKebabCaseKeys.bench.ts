@@ -1,6 +1,6 @@
-import { bench, describe } from 'vitest';
 import { toKebabCaseKeys as toKebabCaseKeysToolkit } from 'es-toolkit';
-import lodashFp from 'lodash/fp';
+import lodashFp from 'lodash/fp.js';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const toKebabCaseKeysLodash = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.kebabCase)(obj);
@@ -24,12 +24,12 @@ const testObject = {
   ],
 };
 
-describe('toKebabCaseKeys', () => {
+group('toKebabCaseKeys', () => {
   bench('es-toolkit/toKebabCaseKeys (deep nested)', () => {
-    toKebabCaseKeysToolkit(testObject);
+    do_not_optimize(toKebabCaseKeysToolkit(testObject));
   });
 
   bench('lodash/fp/toKebabCaseKeys (shallow comparison)', () => {
-    toKebabCaseKeysLodash(testObject);
+    do_not_optimize(toKebabCaseKeysLodash(testObject));
   });
 });

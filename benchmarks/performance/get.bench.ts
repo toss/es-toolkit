@@ -1,35 +1,33 @@
-import { bench, describe } from 'vitest';
 import { get as getToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { get: getLodash } = lodash;
-
-describe('get with simple string', () => {
+group('get with simple string', () => {
   bench('es-toolkit/get', () => {
-    getToolkit({ a: 1, b: 2 }, 'a');
+    do_not_optimize(getToolkit({ a: 1, b: 2 }, 'a'));
   });
 
   bench('lodash/get', () => {
-    getLodash({ a: 1, b: 2 }, 'a');
+    do_not_optimize(lodash.get({ a: 1, b: 2 }, 'a'));
   });
 });
 
-describe('get with string', () => {
+group('get with string', () => {
   bench('es-toolkit/get', () => {
-    getToolkit({ a: { b: 3 } }, 'a.b');
+    do_not_optimize(getToolkit({ a: { b: 3 } }, 'a.b'));
   });
 
   bench('lodash/get', () => {
-    getLodash({ a: { b: 3 } }, 'a.b');
+    do_not_optimize(lodash.get({ a: { b: 3 } }, 'a.b'));
   });
 });
 
-describe('get with string array', () => {
+group('get with string array', () => {
   bench('es-toolkit/get', () => {
-    getToolkit({ a: { b: 3 } }, ['a', 'b']);
+    do_not_optimize(getToolkit({ a: { b: 3 } }, ['a', 'b']));
   });
 
   bench('lodash/get', () => {
-    getLodash({ a: { b: 3 } }, ['a', 'b']);
+    do_not_optimize(lodash.get({ a: { b: 3 } }, ['a', 'b']));
   });
 });
