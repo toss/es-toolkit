@@ -1,5 +1,5 @@
-import { IterateeShorthand } from './IterateeShorthand';
-import { ObjectIterator } from './ObjectIterator';
+import type { IterateeShorthand } from './IterateeShorthand';
+import type { ObjectIterator } from './ObjectIterator';
 
 export type ObjectIterateeCustom<TObject, TResult> =
   | ObjectIterator<TObject, TResult>

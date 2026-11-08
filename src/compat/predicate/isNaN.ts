@@ -1,4 +1,4 @@
-import { isNumber } from './isNumber';
+import { isNumber } from './isNumber.ts';
 
 /**
  * Checks if the value is NaN.

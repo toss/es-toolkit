@@ -4,7 +4,7 @@ import { uniqBy } from '../../array/uniqBy.ts';
 import { ary } from '../../function/ary.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { normalizeZero } from '../_internal/normalizeZero.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
 

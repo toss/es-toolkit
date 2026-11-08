@@ -1,6 +1,6 @@
 import { flatten } from '../../array/flatten.ts';
 import { flow as flowToolkit } from '../../function/flow.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 
 /**
  * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.

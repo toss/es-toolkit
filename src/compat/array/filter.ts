@@ -1,9 +1,9 @@
 import { identity } from '../../function/identity.ts';
-import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
-import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
-import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
-import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
-import { StringIterator } from '../_internal/StringIterator.ts';
+import type { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import type { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
+import type { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
+import type { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
+import type { StringIterator } from '../_internal/StringIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 

@@ -1,5 +1,5 @@
 import { isFunction } from '../../predicate/isFunction.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { toString } from '../util/toString.ts';

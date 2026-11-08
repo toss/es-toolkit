@@ -1,6 +1,7 @@
-import { ChildProcess, spawn, SpawnOptions } from 'node:child_process';
+import type { ChildProcess, SpawnOptions } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { normalize as normalizePath } from 'node:path';
-import { Readable } from 'node:stream';
+import type { Readable } from 'node:stream';
 
 interface ExecOptions {
   signal?: AbortSignal;
@@ -106,8 +107,11 @@ export async function exec(_command: string, args: string[] = [], options: ExecO
  * @param result - The captured process result.
  */
 export class ExecError extends Error {
-  constructor(public readonly result: ExecResult) {
+  readonly result: ExecResult;
+
+  constructor(result: ExecResult) {
     super(`Process exited with non-zero exit code (${result.exitCode})`);
+    this.result = result;
     this.name = 'ExecError';
   }
 }

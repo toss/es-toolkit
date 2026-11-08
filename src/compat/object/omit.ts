@@ -3,7 +3,7 @@ import { keysIn } from './keysIn.ts';
 import { unset } from './unset.ts';
 import { getSymbolsIn } from '../_internal/getSymbolsIn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 import { flatten } from '../array/flatten.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
