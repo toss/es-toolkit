@@ -20,12 +20,14 @@ describe('rest', () => {
 
   it('should treat `start` as `0` for `NaN` or negative values', () => {
     let restFn = rest(fn, -1);
-    expect(restFn(1, 2, 3, 4)).toEqual([1, 2, [3, 4]]);
+    expect(restFn(1, 2, 3, 4)).toEqual([[1, 2, 3, 4]]);
     restFn = rest(fn, NaN);
-    expect(restFn(1, 2, 3, 4)).toEqual([1, 2, [3, 4]]);
-    // @ts-expect-error - intentionally passing a string
-    restFn = rest(fn, 'a');
-    expect(restFn(1, 2, 3, 4)).toEqual([1, 2, [3, 4]]);
+    expect(restFn(1, 2, 3, 4)).toEqual([[1, 2, 3, 4]]);
+  });
+
+  it('should treat `start` as `0` for functions with no parameters', () => {
+    const restFn = rest((...args: unknown[]) => args);
+    expect(restFn(1, 2, 3)).toEqual([[1, 2, 3]]);
   });
 
   it('should coerce `start` to an integer', () => {

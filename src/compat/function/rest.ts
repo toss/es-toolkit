@@ -33,7 +33,7 @@ export function rest(func: (...args: any[]) => any, start: number = func.length 
   start = Number.parseInt(start as any, 10);
 
   if (Number.isNaN(start) || start < 0) {
-    start = func.length - 1;
+    start = 0;
   }
 
   return restToolkit(func, start);
