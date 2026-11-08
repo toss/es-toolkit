@@ -95,10 +95,60 @@ function listSourceFiles() {
   return files.sort();
 }
 
-/** Extracts every `@example` section body from all JSDoc blocks of a file. */
-function extractExampleBlocks(source) {
+/**
+ * Returns the JSDoc comments attached to the exported top-level declarations
+ * of a file. Module-private helpers may document themselves with `@example`
+ * too, but those examples call functions that consumers cannot import, so
+ * they are not runnable test cases.
+ */
+function exportedJsDocs(fileName, source) {
+  const sourceFile = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true);
+  const locallyExported = new Set();
+  for (const statement of sourceFile.statements) {
+    if (
+      ts.isExportDeclaration(statement) &&
+      statement.moduleSpecifier == null &&
+      statement.exportClause != null &&
+      ts.isNamedExports(statement.exportClause)
+    ) {
+      for (const element of statement.exportClause.elements) {
+        locallyExported.add((element.propertyName ?? element.name).text);
+      }
+    }
+  }
+  const isExported = statement => {
+    if (
+      ts.canHaveModifiers(statement) &&
+      ts.getModifiers(statement)?.some(m => m.kind === ts.SyntaxKind.ExportKeyword)
+    ) {
+      return true;
+    }
+    if (ts.isVariableStatement(statement)) {
+      return statement.declarationList.declarations.some(
+        d => ts.isIdentifier(d.name) && locallyExported.has(d.name.text)
+      );
+    }
+    return statement.name != null && ts.isIdentifier(statement.name) && locallyExported.has(statement.name.text);
+  };
+  const docs = [];
+  for (const statement of sourceFile.statements) {
+    if (!isExported(statement)) {
+      continue;
+    }
+    for (const range of ts.getLeadingCommentRanges(source, statement.pos) ?? []) {
+      const text = source.slice(range.pos, range.end);
+      if (text.startsWith('/**')) {
+        docs.push(text);
+      }
+    }
+  }
+  return docs;
+}
+
+/** Extracts every `@example` section body from the JSDoc blocks of a file's exported declarations. */
+function extractExampleBlocks(fileName, source) {
   const blocks = [];
-  for (const doc of source.match(/\/\*\*[\s\S]*?\*\//g) ?? []) {
+  for (const doc of exportedJsDocs(fileName, source)) {
     const sections = doc.split(/^\s*\*\s*@example[^\n]*$/m).slice(1);
     for (const section of sections) {
       const lines = [];
@@ -164,6 +214,7 @@ function asExpression(text) {
   const trimmed = text.trim().replace(/[;.]$/, '');
   try {
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- evaluates generated test snippets on purpose
     new Function(`return (${trimmed});`);
     return trimmed;
   } catch {
@@ -356,6 +407,7 @@ function buildCase({ id, ns, body, assertions, namespaces, placeholderFn }) {
   const fullBody = `'use strict';\n${bindings.join('\n')}\n${body}`;
   try {
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- evaluates generated test snippets on purpose
     new Function('__ns', '__assertEq', isAsync ? `return (async () => {\n${fullBody}\n})();` : fullBody);
   } catch (error) {
     return { id, error: String(error) };
@@ -395,7 +447,7 @@ async function main() {
       continue;
     }
     const source = fs.readFileSync(file, 'utf8');
-    const blocks = extractExampleBlocks(source);
+    const blocks = extractExampleBlocks(file, source);
     blocks.forEach((block, index) => {
       const id = `${ns}:${rel.replace(/\.ts$/, '')}#${index}`;
       if (SKIP_LIST.skip[id] != null) {
@@ -482,7 +534,9 @@ async function main() {
     total: cases.length,
     skipped: skipped.length,
     failures,
-    covered: Object.fromEntries(Object.entries(coveredNames).map(([k, v]) => [k, [...v].sort()])),
+    covered: Object.fromEntries(
+      Object.entries(coveredNames).map(([k, v]) => [k, [...v].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))])
+    ),
   };
   fs.writeFileSync(path.join(OUT_DIR, 'report.json'), JSON.stringify(report, null, 2));
 

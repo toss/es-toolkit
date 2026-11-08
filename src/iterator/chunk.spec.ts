@@ -30,9 +30,9 @@ describe('chunk', () => {
   });
 
   it('throws when size is not a positive integer', () => {
-    expect(() => chunk([1].values(), 0)).toThrow();
-    expect(() => chunk([1].values(), -1)).toThrow();
-    expect(() => chunk([1].values(), 1.5)).toThrow();
+    expect(() => chunk([1].values(), 0)).toThrow('Size must be an integer greater than zero.');
+    expect(() => chunk([1].values(), -1)).toThrow('Size must be an integer greater than zero.');
+    expect(() => chunk([1].values(), 1.5)).toThrow('Size must be an integer greater than zero.');
   });
 
   it('is lazy and bounded by take over an infinite source', () => {

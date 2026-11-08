@@ -16,6 +16,7 @@ describe('sampleSize', () => {
   });
 
   it('should contain elements of the collection', () => {
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = sampleSize(array, array.length).sort();
 
     expect(actual).toEqual(array);
@@ -39,6 +40,7 @@ describe('sampleSize', () => {
 
   it('should return all elements when `n` >= `length`', () => {
     lodashStable.each([3, 4, 2 ** 32, Infinity], n => {
+      // oxlint-disable-next-line typescript/require-array-sort-compare
       const actual = sampleSize(array, n).sort();
       expect(actual).toEqual(array);
     });

@@ -1,0 +1,35 @@
+{
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "jsxSingleQuote": false,
+  "printWidth": 120,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "sortPackageJson": false,
+  "ignorePatterns": [".yarn/**", "esm/**", "**/*.d.ts", "**/*.tgz", "es-toolkit-plugin/skills/*/docs/**"],
+  "sortImports": {
+    "ignoreCase": true,
+    "newlinesBetween": false,
+    "groups": ["vitest", "es-toolkit", ["builtin", "external"], "scoped", "sibling", "parent"],
+    "customGroups": [
+      {
+        "groupName": "vitest",
+        "elementNamePattern": ["vitest", "vitest/**"]
+      },
+      {
+        "groupName": "es-toolkit",
+        "elementNamePattern": ["es-toolkit", "es-toolkit/**"]
+      },
+      {
+        "groupName": "scoped",
+        "elementNamePattern": ["@*/**", "@*"]
+      }
+    ]
+  }
+}

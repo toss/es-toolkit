@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import _ from '..';
 import { curry } from './curry';
 import { partial } from './partial';
+import _ from '..';
 import { identity } from '../../function';
 
 describe('partial', () => {

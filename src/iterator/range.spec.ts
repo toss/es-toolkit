@@ -28,8 +28,8 @@ describe('range', () => {
   });
 
   it('throws when the step is not a non-zero integer', () => {
-    expect(() => range(0, 10, 0)).toThrow();
-    expect(() => range(0, 10, 1.5)).toThrow();
+    expect(() => range(0, 10, 0)).toThrow('The step value must be a non-zero integer, but got 0.');
+    expect(() => range(0, 10, 1.5)).toThrow('The step value must be a non-zero integer, but got 1.5.');
   });
 
   it('is single-shot once consumed', () => {
