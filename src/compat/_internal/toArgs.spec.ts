@@ -5,6 +5,7 @@ describe('toArgs', () => {
   it('converts an array to an arguments object', () => {
     const result = toArgs([1, 2, 3]);
 
+    // oxlint-disable-next-line typescript/no-base-to-string
     expect(result.toString()).toBe('[object Arguments]');
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

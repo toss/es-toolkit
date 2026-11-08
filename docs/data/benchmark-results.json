@@ -1,55 +1,55 @@
 {
   "labels": {
-    "esToolkit": "es-toolkit@1.52.0",
+    "esToolkit": "es-toolkit@1.53.2",
     "lodash": "lodash@4.18.1"
   },
   "environment": {
-    "node": "v22.23.2",
+    "node": "v24.21.0",
     "platform": "darwin arm64",
-    "cpu": "Apple M4",
-    "cpuCores": 10,
-    "memory": "16.00 GB"
+    "cpu": "Apple M3 Max",
+    "cpuCores": 16,
+    "memory": "64.00 GB"
   },
   "data": {
     "omit": {
-      "esToolkit": 3973624,
-      "lodash": 1306896
+      "esToolkit": 9504932,
+      "lodash": 2077902
     },
     "pick": {
-      "esToolkit": 9038224,
-      "lodash": 2220822
+      "esToolkit": 23920081,
+      "lodash": 3512838
     },
     "differenceWith": {
-      "esToolkit": 12169353,
-      "lodash": 4009328
+      "esToolkit": 30693655,
+      "lodash": 7715669
     },
     "difference": {
-      "esToolkit": 9097445,
-      "lodash": 5122555
+      "esToolkit": 26301898,
+      "lodash": 7412163
     },
     "intersectionWith": {
-      "esToolkit": 11220380,
-      "lodash": 3022015
+      "esToolkit": 27049443,
+      "lodash": 5581531
     },
     "intersection": {
-      "esToolkit": 8431475,
-      "lodash": 4348418
+      "esToolkit": 22074609,
+      "lodash": 6382767
     },
     "unionBy": {
-      "esToolkit": 4422940,
-      "lodash": 3558872
+      "esToolkit": 8892267,
+      "lodash": 5949608
     },
     "union": {
-      "esToolkit": 4092678,
-      "lodash": 4331186
+      "esToolkit": 8139412,
+      "lodash": 6472566
     },
     "dropRightWhile": {
-      "esToolkit": 12852312,
-      "lodash": 8392579
+      "esToolkit": 57109091,
+      "lodash": 25190531
     },
     "groupBy": {
-      "esToolkit": 4540652,
-      "lodash": 3557114
+      "esToolkit": 7326617,
+      "lodash": 4891205
     }
   }
 }

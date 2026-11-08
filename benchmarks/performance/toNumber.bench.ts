@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { toNumber as toNumberToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toNumber: toNumberLodash } = lodash;
-
-describe('toNumber', () => {
+group('toNumber', () => {
   bench('es-toolkit/compat/toNumber', () => {
-    toNumberToolkitCompat({ valueOf: () => 1 });
-    toNumberToolkitCompat({ valueOf: () => 2 });
-    toNumberToolkitCompat({ toString: () => '3' });
-    toNumberToolkitCompat('0b101010');
-    toNumberToolkitCompat('0o12345');
-    toNumberToolkitCompat('0x1a2b3c');
-    toNumberToolkitCompat('1.1');
+    do_not_optimize(toNumberToolkitCompat({ valueOf: () => 1 }));
+    do_not_optimize(toNumberToolkitCompat({ valueOf: () => 2 }));
+    do_not_optimize(toNumberToolkitCompat({ toString: () => '3' }));
+    do_not_optimize(toNumberToolkitCompat('0b101010'));
+    do_not_optimize(toNumberToolkitCompat('0o12345'));
+    do_not_optimize(toNumberToolkitCompat('0x1a2b3c'));
+    do_not_optimize(toNumberToolkitCompat('1.1'));
   });
 
   bench('lodash/toNumber', () => {
-    toNumberLodash({ valueof: () => 1 });
-    toNumberLodash({ valueof: () => 2 });
-    toNumberLodash({ toString: () => '3' });
-    toNumberLodash('0b101010');
-    toNumberLodash('0o12345');
-    toNumberLodash('0x1a2b3c');
-    toNumberLodash('1.1');
+    do_not_optimize(lodash.toNumber({ valueof: () => 1 }));
+    do_not_optimize(lodash.toNumber({ valueof: () => 2 }));
+    do_not_optimize(lodash.toNumber({ toString: () => '3' }));
+    do_not_optimize(lodash.toNumber('0b101010'));
+    do_not_optimize(lodash.toNumber('0o12345'));
+    do_not_optimize(lodash.toNumber('0x1a2b3c'));
+    do_not_optimize(lodash.toNumber('1.1'));
   });
 });

@@ -1,33 +1,31 @@
-import { bench, describe } from 'vitest';
 import { nth as nthToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { nth: nthLodash } = lodash;
-
-describe('nth', () => {
+group('nth', () => {
   const array = [1, 2, 3];
 
   bench('es-toolkit/compat/nth', () => {
-    nthToolkitCompat(array, 1);
-    nthToolkitCompat(array, -1);
+    do_not_optimize(nthToolkitCompat(array, 1));
+    do_not_optimize(nthToolkitCompat(array, -1));
   });
 
   bench('lodash/nth', () => {
-    nthLodash(array, 1);
-    nthLodash(array, -1);
+    do_not_optimize(lodash.nth(array, 1));
+    do_not_optimize(lodash.nth(array, -1));
   });
 });
 
-describe('nth/largeArray', () => {
+group('nth/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/compat/nth', () => {
-    nthToolkitCompat(largeArray, 1);
-    nthToolkitCompat(largeArray, -1);
+    do_not_optimize(nthToolkitCompat(largeArray, 1));
+    do_not_optimize(nthToolkitCompat(largeArray, -1));
   });
 
   bench('lodash/nth', () => {
-    nthLodash(largeArray, 1);
-    nthLodash(largeArray, -1);
+    do_not_optimize(lodash.nth(largeArray, 1));
+    do_not_optimize(lodash.nth(largeArray, -1));
   });
 });

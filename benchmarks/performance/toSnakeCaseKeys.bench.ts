@@ -1,6 +1,6 @@
-import { bench, describe } from 'vitest';
 import { toSnakeCaseKeys as toSnakeCaseKeysToolkit } from 'es-toolkit';
-import lodashFp from 'lodash/fp';
+import lodashFp from 'lodash/fp.js';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const toSnakeCaseKeysLodash = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.snakeCase)(obj);
@@ -24,12 +24,12 @@ const testObject = {
   ],
 };
 
-describe('toSnakeCaseKeys', () => {
+group('toSnakeCaseKeys', () => {
   bench('es-toolkit/toSnakeCaseKeys (deep nested)', () => {
-    toSnakeCaseKeysToolkit(testObject);
+    do_not_optimize(toSnakeCaseKeysToolkit(testObject));
   });
 
   bench('lodash/fp/toSnakeCaseKeys (shallow comparison)', () => {
-    toSnakeCaseKeysLodash(testObject);
+    do_not_optimize(toSnakeCaseKeysLodash(testObject));
   });
 });

@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { compact as compactToolkit } from 'es-toolkit';
 import { compact as compactToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { compact: compactLodash } = lodash;
-
-describe('compact', () => {
+group('compact', () => {
   bench('es-toolkit', () => {
-    compactToolkit([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+    do_not_optimize(compactToolkit([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]));
   });
 
   bench('es-toolkit/compat', () => {
-    compactToolkitCompat([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+    do_not_optimize(compactToolkitCompat([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]));
   });
 
   bench('lodash', () => {
-    compactLodash([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+    do_not_optimize(lodash.compact([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]));
   });
 });
 
-describe('compact/largeArray', () => {
+group('compact/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => (i % 10 === 0 ? undefined : i));
 
   bench('es-toolkit', () => {
-    compactToolkit(largeArray);
+    do_not_optimize(compactToolkit(largeArray));
   });
 
   bench('es-toolkit/compat', () => {
-    compactToolkitCompat(largeArray);
+    do_not_optimize(compactToolkitCompat(largeArray));
   });
 
   bench('lodash', () => {
-    compactLodash(largeArray);
+    do_not_optimize(lodash.compact(largeArray));
   });
 });

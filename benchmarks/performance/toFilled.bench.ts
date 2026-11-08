@@ -1,37 +1,35 @@
-import { bench, describe } from 'vitest';
 import { toFilled as toFilledToolkit } from 'es-toolkit';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { fill: fillLodash } = lodash;
-
-describe('fill function performance comparison', () => {
+group('fill function performance comparison', () => {
   bench('es-toolkit/toFilled', () => {
-    toFilledToolkit([1, 2, 3, 4, 5], '*');
+    do_not_optimize(toFilledToolkit([1, 2, 3, 4, 5], '*'));
   });
 
   bench('lodash/fill', () => {
-    fillLodash([1, 2, 3, 4, 5], '*');
+    do_not_optimize(lodash.fill([1, 2, 3, 4, 5], '*'));
   });
 });
 
-describe('fill function performance with custom start and end', () => {
+group('fill function performance with custom start and end', () => {
   bench('es-toolkit/toFilled', () => {
-    toFilledToolkit([1, 2, 3, 4, 5], '*', 1, 3);
+    do_not_optimize(toFilledToolkit([1, 2, 3, 4, 5], '*', 1, 3));
   });
 
   bench('lodash/fill', () => {
-    fillLodash([1, 2, 3, 4, 5], '*', 1, 3);
+    do_not_optimize(lodash.fill([1, 2, 3, 4, 5], '*', 1, 3));
   });
 });
 
-describe('fill function performance with large array', () => {
+group('fill function performance with large array', () => {
   const largeArray = Array.from({ length: 10000 }, (_, index) => index);
 
   bench('es-toolkit/toFilled', () => {
-    toFilledToolkit(largeArray, '*');
+    do_not_optimize(toFilledToolkit(largeArray, '*'));
   });
 
   bench('lodash/fill', () => {
-    fillLodash(largeArray, '*');
+    do_not_optimize(lodash.fill(largeArray, '*'));
   });
 });

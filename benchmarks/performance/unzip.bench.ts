@@ -1,45 +1,49 @@
-import { bench, describe } from 'vitest';
 import { unzip as unzipToolkit } from 'es-toolkit';
 import { unzip as unzipToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { unzip: unzipLodash } = lodash;
-
-describe('unzip, small arrays', () => {
+group('unzip, small arrays', () => {
   bench('es-toolkit/unzip', () => {
-    unzipToolkit([
-      ['a', 1, true],
-      ['b', 2, false],
-    ]);
+    do_not_optimize(
+      unzipToolkit([
+        ['a', 1, true],
+        ['b', 2, false],
+      ])
+    );
   });
 
   bench('es-toolkit/compat/unzip', () => {
-    unzipToolkitCompat([
-      ['a', 1, true],
-      ['b', 2, false],
-    ]);
+    do_not_optimize(
+      unzipToolkitCompat([
+        ['a', 1, true],
+        ['b', 2, false],
+      ])
+    );
   });
 
   bench('lodash/unzip', () => {
-    unzipLodash([
-      ['a', 1, true],
-      ['b', 2, false],
-    ]);
+    do_not_optimize(
+      lodash.unzip([
+        ['a', 1, true],
+        ['b', 2, false],
+      ])
+    );
   });
 });
 
-describe('unzip, large arrays', () => {
+group('unzip, large arrays', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ['a', i, true]);
 
   bench('es-toolkit/unzip', () => {
-    unzipToolkit(largeArray);
+    do_not_optimize(unzipToolkit(largeArray));
   });
 
   bench('es-toolkit/compat/unzip', () => {
-    unzipToolkitCompat(largeArray);
+    do_not_optimize(unzipToolkitCompat(largeArray));
   });
 
   bench('lodash/unzip', () => {
-    unzipLodash(largeArray);
+    do_not_optimize(lodash.unzip(largeArray));
   });
 });

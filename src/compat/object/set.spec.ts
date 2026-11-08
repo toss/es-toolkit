@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { constant, each, map, toString, unset } from '..';
 import { set } from './set';
+import { constant, each, map, toString, unset } from '..';
 import { symbol } from '../_internal/symbol';
 
 describe('set', () => {

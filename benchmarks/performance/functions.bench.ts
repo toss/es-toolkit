@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { functions as functionsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { functions: functionsLodash } = lodash;
-
-describe('functions', () => {
+group('functions', () => {
   const testObject = {
     a: 'a',
     b: () => 'b',
@@ -14,24 +12,24 @@ describe('functions', () => {
   };
 
   bench('es-toolkit/functions', () => {
-    functionsToolkit(testObject);
+    do_not_optimize(functionsToolkit(testObject));
   });
 
   bench('lodash/functions', () => {
-    functionsLodash(testObject);
+    do_not_optimize(lodash.functions(testObject));
   });
 });
 
-describe('functions/largeObject', () => {
+group('functions/largeObject', () => {
   const largeObject = Object.fromEntries(
     Array.from({ length: 1000 }, (_, i) => [`key${i}`, i % 2 === 0 ? () => i : i])
   );
 
   bench('es-toolkit/functions', () => {
-    functionsToolkit(largeObject);
+    do_not_optimize(functionsToolkit(largeObject));
   });
 
   bench('lodash/functions', () => {
-    functionsLodash(largeObject);
+    do_not_optimize(lodash.functions(largeObject));
   });
 });

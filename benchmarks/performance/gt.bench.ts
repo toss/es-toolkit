@@ -1,19 +1,17 @@
-import { bench, describe } from 'vitest';
 import { gt as gtToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { gt: gtLodash } = lodash;
-
-describe('gt', () => {
+group('gt', () => {
   bench('es-toolkit/compat/gt', () => {
-    gtToolkitCompat(3, 1);
-    gtToolkitCompat(3, 3);
-    gtToolkitCompat(1, 3);
+    do_not_optimize(gtToolkitCompat(3, 1));
+    do_not_optimize(gtToolkitCompat(3, 3));
+    do_not_optimize(gtToolkitCompat(1, 3));
   });
 
   bench('lodash/gt', () => {
-    gtLodash(3, 1);
-    gtLodash(3, 3);
-    gtLodash(1, 3);
+    do_not_optimize(lodash.gt(3, 1));
+    do_not_optimize(lodash.gt(3, 3));
+    do_not_optimize(lodash.gt(1, 3));
   });
 });

@@ -14,4 +14,12 @@ Designed with performance in mind, es-toolkit provides an average of 2× perform
 
 <BenchmarkTable />
 
-Refer to our [benchmark code](https://github.com/toss/es-toolkit/tree/main/benchmarks).
+## Measurement Method
+
+Each benchmark runs in its own Node.js process with [mitata](https://github.com/evanwashere/mitata), and the numbers above are the median of five runs. To run a benchmark yourself:
+
+```bash
+yarn bench omit.bench.ts
+```
+
+See [`benchmarks/performance`](https://github.com/toss/es-toolkit/tree/main/benchmarks/performance) for the benchmark code.

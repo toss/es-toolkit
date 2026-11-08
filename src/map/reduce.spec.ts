@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { reduce } from './reduce';
 
 describe('reduce', () => {
@@ -162,6 +162,80 @@ describe('reduce', () => {
     const result = reduce(map, (acc, value) => acc + value.price * value.quantity, 0);
 
     expect(result).toBe(425); // 100*2 + 50*3 + 75*1 = 200 + 150 + 75
+  });
+
+  it('should use null as the initial value', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const callback = vi.fn((acc: number | null, value: number) => (acc ?? 0) + value);
+
+    const result = reduce(map, callback, null);
+
+    expect(result).toBe(3);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[0]).toEqual([null, 1, 'a', map]);
+    expect(callback.mock.calls[1]).toEqual([1, 2, 'b', map]);
+  });
+
+  it('should use undefined as the initial value', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const callback = vi.fn((acc: number | undefined, value: number) => (acc ?? 0) + value);
+
+    const result = reduce(map, callback, undefined);
+
+    expect(result).toBe(3);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[0]).toEqual([undefined, 1, 'a', map]);
+    expect(callback.mock.calls[1]).toEqual([1, 2, 'b', map]);
+  });
+
+  it('should return null initial value for an empty Map', () => {
+    const map = new Map<string, number>();
+    const callback = vi.fn((acc: number | null, value: number) => (acc ?? 0) + value);
+
+    expect(reduce(map, callback, null)).toBeNull();
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should return undefined initial value for an empty Map', () => {
+    const map = new Map<string, number>();
+    const callback = vi.fn((acc: number | undefined, value: number) => (acc ?? 0) + value);
+
+    expect(reduce(map, callback, undefined)).toBeUndefined();
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should pass a null value returned by the callback to the next call', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const callback = vi.fn((acc: number | null, value: number) => (acc === null ? value : null));
+
+    const result = reduce(map, callback, 0);
+
+    expect(result).toBe(2);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[1]).toEqual([null, 2, 'b', map]);
+  });
+
+  it('should use a null first value as the initial value', () => {
+    const map = new Map<string, number | null>([
+      ['a', null],
+      ['b', 2],
+    ]);
+    const callback = vi.fn((acc: number | null, value: number | null) => acc ?? value);
+
+    const result = reduce(map, callback);
+
+    expect(result).toBe(2);
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback.mock.calls[0]).toEqual([null, 2, 'b', map]);
   });
 
   it('should return the last value when no initial value provided', () => {

@@ -1,26 +1,24 @@
-import { bench, describe } from 'vitest';
 import { isRegExp as isRegExpToolkit } from 'es-toolkit';
 import { isRegExp as isRegExpToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isRegExp: isRegExpLodash } = lodash;
-
-describe('isRegExp', () => {
+group('isRegExp', () => {
   bench('es-toolkit/isRegExp', () => {
-    isRegExpToolkit(new RegExp(''));
-    isRegExpToolkit(/abc/);
-    isRegExpToolkit('/abc/');
+    do_not_optimize(isRegExpToolkit(new RegExp('')));
+    do_not_optimize(isRegExpToolkit(/abc/));
+    do_not_optimize(isRegExpToolkit('/abc/'));
   });
 
   bench('es-toolkit/compat/isRegExp', () => {
-    isRegExpToolkitCompat(new RegExp(''));
-    isRegExpToolkitCompat(/abc/);
-    isRegExpToolkitCompat('/abc/');
+    do_not_optimize(isRegExpToolkitCompat(new RegExp('')));
+    do_not_optimize(isRegExpToolkitCompat(/abc/));
+    do_not_optimize(isRegExpToolkitCompat('/abc/'));
   });
 
   bench('lodash/isRegExp', () => {
-    isRegExpLodash(new RegExp(''));
-    isRegExpLodash(/abc/);
-    isRegExpLodash('/abc/');
+    do_not_optimize(lodash.isRegExp(new RegExp('')));
+    do_not_optimize(lodash.isRegExp(/abc/));
+    do_not_optimize(lodash.isRegExp('/abc/'));
   });
 });

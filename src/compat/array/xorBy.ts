@@ -5,7 +5,7 @@ import { unionBy } from './unionBy.ts';
 import { uniq } from './uniq.ts';
 import { windowed } from '../../array/windowed.ts';
 import { identity } from '../../function/identity.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
 

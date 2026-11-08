@@ -3,7 +3,7 @@ import { difference as differenceToolkit } from '../../array/difference.ts';
 import { differenceBy as differenceByToolkit } from '../../array/differenceBy.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { normalizeZero } from '../_internal/normalizeZero.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 

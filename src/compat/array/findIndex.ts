@@ -1,4 +1,4 @@
-import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import type { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { identity } from '../function/identity.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 import { toInteger } from '../util/toInteger.ts';

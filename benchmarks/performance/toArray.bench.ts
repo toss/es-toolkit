@@ -1,33 +1,35 @@
-import { bench, describe } from 'vitest';
 import { toArray as toArrayToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toArray: toArrayLodash } = lodash;
-
-describe('toArray', () => {
+group('toArray', () => {
   bench('es-toolkit/compat/toArray', () => {
-    toArrayToolkitCompat({ a: 1, b: 2 });
-    toArrayToolkitCompat('abc');
-    toArrayToolkitCompat(1);
-    toArrayToolkitCompat(null);
-    toArrayToolkitCompat(
-      new Map([
-        ['a', 1],
-        ['b', 2],
-      ])
+    do_not_optimize(toArrayToolkitCompat({ a: 1, b: 2 }));
+    do_not_optimize(toArrayToolkitCompat('abc'));
+    do_not_optimize(toArrayToolkitCompat(1));
+    do_not_optimize(toArrayToolkitCompat(null));
+    do_not_optimize(
+      toArrayToolkitCompat(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
     );
   });
 
   bench('lodash/toArray', () => {
-    toArrayLodash({ a: 1, b: 2 });
-    toArrayLodash('abc');
-    toArrayLodash(1);
-    toArrayLodash(null);
-    toArrayLodash(
-      new Map([
-        ['a', 1],
-        ['b', 2],
-      ])
+    do_not_optimize(lodash.toArray({ a: 1, b: 2 }));
+    do_not_optimize(lodash.toArray('abc'));
+    do_not_optimize(lodash.toArray(1));
+    do_not_optimize(lodash.toArray(null));
+    do_not_optimize(
+      lodash.toArray(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
     );
   });
 });

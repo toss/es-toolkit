@@ -1,4 +1,4 @@
-import { sumBy } from './sumBy';
+import { sumBy } from './sumBy.ts';
 
 /**
  * Calculates the average of an array of numbers when applying

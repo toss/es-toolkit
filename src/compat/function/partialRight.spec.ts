@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { identity, isObject, mergeWith } from '..';
 import { curry } from './curry';
 import { partialRight } from './partialRight';
+import { identity, isObject, mergeWith } from '..';
 import _ from '../index';
 
 describe('partialRight', () => {

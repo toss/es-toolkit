@@ -12,10 +12,10 @@
 
 ## Measurement Method
 
-The numbers above were measured on this branch with Vitest:
+Each benchmark runs in its own Node.js process with [mitata](https://github.com/evanwashere/mitata), and the numbers above are the median of five runs. To run the benchmark yourself:
 
 ```bash
-yarn vitest bench performance/fp/pipe.bench.ts --run
+yarn bench fp/pipe
 ```
 
 See `benchmarks/performance/fp/pipe.bench.ts` for the exact benchmark code.

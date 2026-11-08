@@ -1,17 +1,15 @@
-import { bench, describe } from 'vitest';
 import { defaults as defaultsToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { defaults: defaultsLodash } = lodash;
-
-describe('defaults', () => {
+group('defaults', () => {
   bench('es-toolkit/compat/defaults', () => {
-    defaultsToolkitCompat({ a: 1 }, { a: 2, b: 2 });
-    defaultsToolkitCompat({ a: 1, b: 2 }, { b: 3 }, { c: 3 });
+    do_not_optimize(defaultsToolkitCompat({ a: 1 }, { a: 2, b: 2 }));
+    do_not_optimize(defaultsToolkitCompat({ a: 1, b: 2 }, { b: 3 }, { c: 3 }));
   });
 
   bench('lodash/defaults', () => {
-    defaultsLodash({ a: 1 }, { a: 2, b: 2 });
-    defaultsLodash({ a: 1, b: 2 }, { b: 3 }, { c: 3 });
+    do_not_optimize(lodash.defaults({ a: 1 }, { a: 2, b: 2 }));
+    do_not_optimize(lodash.defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }));
   });
 });

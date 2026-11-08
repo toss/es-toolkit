@@ -1,19 +1,17 @@
-import { bench, describe } from 'vitest';
 import { startsWith as startsWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { startsWith: startsWithLodash } = lodash;
-
-describe('startsWith', () => {
+group('startsWith', () => {
   bench('es-toolkit/startsWith', () => {
     const str = 'fooBar';
-    startsWithToolkit(str, 'foo');
-    startsWithToolkit(str, 'Bar', 3);
+    do_not_optimize(startsWithToolkit(str, 'foo'));
+    do_not_optimize(startsWithToolkit(str, 'Bar', 3));
   });
 
   bench('lodash/startsWith', () => {
     const str = 'fooBar';
-    startsWithLodash(str, 'foo');
-    startsWithLodash(str, 'Bar', 3);
+    do_not_optimize(lodash.startsWith(str, 'foo'));
+    do_not_optimize(lodash.startsWith(str, 'Bar', 3));
   });
 });

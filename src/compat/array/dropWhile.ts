@@ -1,6 +1,6 @@
 import { dropWhile as dropWhileToolkit } from '../../array/dropWhile.ts';
 import { identity } from '../../function/identity.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';

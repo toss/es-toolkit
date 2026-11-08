@@ -1,33 +1,31 @@
-import { bench, describe } from 'vitest';
 import { uniqueId as uniqueIdToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { uniqueId: uniqueIdLodash } = lodash;
-
-describe('uniqueId', () => {
+group('uniqueId', () => {
   bench('es-toolkit/compat/uniqueId', () => {
-    uniqueIdToolkitCompat();
-    uniqueIdToolkitCompat();
-    uniqueIdToolkitCompat();
-    uniqueIdToolkitCompat();
-    uniqueIdToolkitCompat();
-    uniqueIdToolkitCompat('prefix_');
-    uniqueIdToolkitCompat('prefix_');
-    uniqueIdToolkitCompat('prefix_');
-    uniqueIdToolkitCompat('prefix_');
-    uniqueIdToolkitCompat('prefix_');
+    do_not_optimize(uniqueIdToolkitCompat());
+    do_not_optimize(uniqueIdToolkitCompat());
+    do_not_optimize(uniqueIdToolkitCompat());
+    do_not_optimize(uniqueIdToolkitCompat());
+    do_not_optimize(uniqueIdToolkitCompat());
+    do_not_optimize(uniqueIdToolkitCompat('prefix_'));
+    do_not_optimize(uniqueIdToolkitCompat('prefix_'));
+    do_not_optimize(uniqueIdToolkitCompat('prefix_'));
+    do_not_optimize(uniqueIdToolkitCompat('prefix_'));
+    do_not_optimize(uniqueIdToolkitCompat('prefix_'));
   });
 
   bench('lodash/uniqueId', () => {
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
+    do_not_optimize(lodash.uniqueId());
+    do_not_optimize(lodash.uniqueId());
+    do_not_optimize(lodash.uniqueId());
+    do_not_optimize(lodash.uniqueId());
+    do_not_optimize(lodash.uniqueId());
+    do_not_optimize(lodash.uniqueId('prefix_'));
+    do_not_optimize(lodash.uniqueId('prefix_'));
+    do_not_optimize(lodash.uniqueId('prefix_'));
+    do_not_optimize(lodash.uniqueId('prefix_'));
+    do_not_optimize(lodash.uniqueId('prefix_'));
   });
 });

@@ -1,4 +1,4 @@
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 import { flatten } from '../array/flatten.ts';
 
 /**

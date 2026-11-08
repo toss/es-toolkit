@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { max as maxToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { max: maxLodash } = lodash;
-
-describe('max', () => {
+group('max', () => {
   bench('es-toolkit/max', () => {
-    maxToolkit([1, 2, 3]);
+    do_not_optimize(maxToolkit([1, 2, 3]));
   });
 
   bench('lodash/max', () => {
-    maxLodash([1, 2, 3]);
+    do_not_optimize(lodash.max([1, 2, 3]));
   });
 });
 
-describe('max/largeArray', () => {
+group('max/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/max', () => {
-    maxToolkit(largeArray);
+    do_not_optimize(maxToolkit(largeArray));
   });
 
   bench('lodash/max', () => {
-    maxLodash(largeArray);
+    do_not_optimize(lodash.max(largeArray));
   });
 });

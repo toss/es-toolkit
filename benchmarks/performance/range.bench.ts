@@ -1,20 +1,18 @@
-import { bench, describe } from 'vitest';
 import { range as rangeToolkit } from 'es-toolkit';
 import { range as rangeCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { range: rangeLodash } = lodash;
-
-describe('range', () => {
+group('range', () => {
   bench('es-toolkit/range', () => {
-    rangeToolkit(0, 100, 1);
+    do_not_optimize(rangeToolkit(0, 100, 1));
   });
 
   bench('es-toolkit/compat/range', () => {
-    rangeCompatToolkit(0, 100, 1);
+    do_not_optimize(rangeCompatToolkit(0, 100, 1));
   });
 
   bench('lodash/range', () => {
-    rangeLodash(0, 100, 1);
+    do_not_optimize(lodash.range(0, 100, 1));
   });
 });

@@ -1,5 +1,5 @@
 import { sortedIndexBy } from './sortedIndexBy.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 
 type PropertyName = string | number | symbol;
 

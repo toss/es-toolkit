@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { bindKey as bindKeyToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { bindKey: bindKeyLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const object = {
   user: 'fred',
@@ -11,22 +9,22 @@ const object = {
   },
 };
 
-describe('bindKey - without placeholder', () => {
+group('bindKey - without placeholder', () => {
   bench('es-toolkit/bindKey - without placeholder', () => {
-    bindKeyToolkit(object, 'greet', 'hi');
+    do_not_optimize(bindKeyToolkit(object, 'greet', 'hi'));
   });
 
   bench('lodash/bindKey - without placeholder', () => {
-    bindKeyLodash(object, 'greet', 'hi');
+    do_not_optimize(lodash.bindKey(object, 'greet', 'hi'));
   });
 });
 
-describe('bindKey - with placeholder', () => {
+group('bindKey - with placeholder', () => {
   bench('es-toolkit/bindKey - with placeholder', () => {
-    bindKeyToolkit(object, 'greet', bindKeyToolkit.placeholder);
+    do_not_optimize(bindKeyToolkit(object, 'greet', bindKeyToolkit.placeholder));
   });
 
   bench('lodash/bindKey - with placeholder', () => {
-    bindKeyLodash(object, 'greet', bindKeyLodash.placeholder);
+    do_not_optimize(lodash.bindKey(object, 'greet', lodash.bindKey.placeholder));
   });
 });

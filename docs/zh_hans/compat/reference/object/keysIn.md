@@ -52,7 +52,7 @@ Foo.prototype.c = 3;
 keysIn(new Foo());
 // => ['a', 'b', 'c'] (包括原型属性 'c')
 
-// 排除 constructor
+// 排除 constructor 和不可枚举的方法
 class MyClass {
   constructor() {
     this.prop = 1;
@@ -62,7 +62,7 @@ class MyClass {
 MyClass.prototype.inherited = 2;
 
 keysIn(new MyClass());
-// => ['prop', 'method', 'inherited'] (排除了 constructor)
+// => ['prop', 'inherited'] (constructor 和不可枚举的 method 被排除)
 ```
 
 它特殊处理类数组对象。

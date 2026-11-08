@@ -1,7 +1,7 @@
-import { bench, describe } from 'vitest';
 import { limitAsync as limitAsyncToolkit } from 'es-toolkit';
+import { bench, group } from './harness.ts';
 
-describe('limitAsync', () => {
+group('limitAsync', () => {
   const ids = Array.from({ length: 100 }, (_, i) => i);
   const identity = limitAsyncToolkit(async (id: number) => id, 10);
 
@@ -10,7 +10,7 @@ describe('limitAsync', () => {
   });
 });
 
-describe('limitAsync/largeArray', () => {
+group('limitAsync/largeArray', () => {
   const ids = Array.from({ length: 30_000 }, (_, i) => i);
   const identity = limitAsyncToolkit(async (id: number) => id, 10);
 

@@ -1,3 +1,4 @@
+// oxlint-disable-next-line no-shadow-restricted-names -- deliberately shadows the global with the polyfilled one
 import { globalThis } from './globalThis.ts';
 
 // Falls back to `Error` on runtimes without `DOMException` (e.g. Hermes / React Native).

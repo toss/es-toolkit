@@ -11,8 +11,11 @@ describe('orderBy', () => {
       public b: number,
       public c: number
     ) {
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.a = a;
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.b = b;
+      // oxlint-disable-next-line typescript/no-unnecessary-parameter-property-assignment
       this.c = c;
     }
   }

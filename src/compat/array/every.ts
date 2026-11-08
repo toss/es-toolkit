@@ -1,7 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
-import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
-import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
+import type { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import type { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 

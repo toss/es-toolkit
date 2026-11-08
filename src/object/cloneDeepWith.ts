@@ -82,7 +82,7 @@ export function cloneDeepWithImpl<T>(
   keyToClone: PropertyKey | undefined,
   objectToClone: T,
   stack = new Map<any, any>(),
-  cloneValue: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined = undefined
+  cloneValue?: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T {
   const cloned = cloneValue?.(valueToClone, keyToClone, objectToClone, stack);
 
@@ -261,8 +261,8 @@ export function copyProperties<T>(
   target: any,
   source: any,
   objectToClone: T = target,
-  stack?: Map<any, any> | undefined,
-  cloneValue?: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined
+  stack?: Map<any, any>,
+  cloneValue?: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): void {
   const keys = [...Object.keys(source), ...getSymbols(source)];
 

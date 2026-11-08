@@ -1,38 +1,36 @@
-import { bench, describe } from 'vitest';
 import { setWith as setWithToolkitCompat } from 'es-toolkit/compat';
 import { isObject } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { setWith: setWithLodash } = lodash;
-
-describe('setWith - simple path', () => {
+group('setWith - simple path', () => {
   bench('es-toolkit/setWith', () => {
-    setWithToolkitCompat({}, 'a.b.c', 1);
+    do_not_optimize(setWithToolkitCompat({}, 'a.b.c', 1));
   });
 
   bench('lodash/setWith', () => {
-    setWithLodash({}, 'a.b.c', 1);
+    do_not_optimize(lodash.setWith({}, 'a.b.c', 1));
   });
 });
 
-describe('setWith - with customizer', () => {
+group('setWith - with customizer', () => {
   const customizer = (value: unknown) => (isObject(value) ? undefined : {});
 
   bench('es-toolkit/setWith', () => {
-    setWithToolkitCompat({}, '[0][1][2]', 3, customizer);
+    do_not_optimize(setWithToolkitCompat({}, '[0][1][2]', 3, customizer));
   });
 
   bench('lodash/setWith', () => {
-    setWithLodash({}, '[0][1][2]', 3, customizer);
+    do_not_optimize(lodash.setWith({}, '[0][1][2]', 3, customizer));
   });
 });
 
-describe('setWith - complex path', () => {
+group('setWith - complex path', () => {
   bench('es-toolkit/setWith', () => {
-    setWithToolkitCompat({}, 'a[0].b.c[0][1].d', 4);
+    do_not_optimize(setWithToolkitCompat({}, 'a[0].b.c[0][1].d', 4));
   });
 
   bench('lodash/setWith', () => {
-    setWithLodash({}, 'a[0].b.c[0][1].d', 4);
+    do_not_optimize(lodash.setWith({}, 'a[0].b.c[0][1].d', 4));
   });
 });
