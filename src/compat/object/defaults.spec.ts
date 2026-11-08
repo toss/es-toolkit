@@ -19,6 +19,33 @@ describe('defaults', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should assign inherited source properties', () => {
+    const source = Object.create({ inherited: 1 });
+
+    expect(defaults({}, source)).toEqual({ inherited: 1 });
+    expect(defaults({ inherited: undefined }, source)).toEqual({ inherited: 1 });
+  });
+
+  it('should not assign an inherited `constructor` property', () => {
+    const source = Object.create({ constructor: 1, inherited: 2 });
+
+    expect(defaults({}, source)).toEqual({ inherited: 2 });
+  });
+
+  it('should treat sparse array sources as dense', () => {
+    const source = [1, 2, 3];
+    delete source[1];
+
+    expect(defaults({}, source)).toEqual({ 0: 1, 1: undefined, 2: 3 });
+  });
+
+  it('should assign inherited array-like properties', () => {
+    const source: any = Object.create({ 0: 'a', constructor: 1, inherited: 2 });
+    source.length = 1;
+
+    expect(defaults({}, source)).toEqual({ 0: 'a', length: 1, constructor: 1, inherited: 2 });
+  });
+
   it('should not overwrite `null` values', () => {
     const actual = defaults({ a: null }, { a: 1 });
     expect((actual as any).a).toBe(null);

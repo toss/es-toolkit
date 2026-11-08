@@ -1,3 +1,4 @@
+import { keysIn } from './keysIn.ts';
 import { isNil } from '../../predicate/isNil.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
@@ -156,7 +157,7 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
     }
 
     const source = sources[i];
-    const keys = Object.keys(source) as Array<keyof S>;
+    const keys = keysIn(source) as Array<keyof S>;
 
     for (let j = 0; j < keys.length; j++) {
       const key = keys[j];
