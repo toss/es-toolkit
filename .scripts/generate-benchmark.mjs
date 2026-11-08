@@ -17,6 +17,7 @@ const funcNames = [
   'groupBy',
 ];
 
+const FP_FILE = 'fp/pipe.bench.ts';
 const fpGroups = ['pipe/map', 'pipe/filter + map', 'pipe/uniq'];
 
 const RUNS = 5;
@@ -30,17 +31,17 @@ const FP_OUT_JSON = path.join(ROOT, 'docs', 'data', 'fp-benchmark-results.json')
 async function main() {
   const packageJson = JSON.parse(await fs.readFile(path.join(ROOT, 'package.json'), 'utf8'));
   const environment = getEnvironment();
+  const rounds = runRounds([...funcNames.map(funcName => `${funcName}.bench.ts`), FP_FILE]);
 
   const data = {};
   for (const funcName of funcNames) {
-    console.log(`Running benchmark: ${funcName}`);
-    const results = runBenchmark(`${funcName}.bench.ts`);
-    const firstGroup = results.filter(result => result.group === results[0].group && !result.name.includes('compat'));
+    const file = `${funcName}.bench.ts`;
+    const group = rounds[0].get(file)[0].group;
+    const esToolkit = collect(rounds, file, group, name => name.includes('es-toolkit') && !name.includes('compat'));
+    const lodash = collect(rounds, file, group, name => name.includes('lodash'));
 
-    data[funcName] = {
-      esToolkit: toOpsPerSecond(firstGroup.find(result => result.name.includes('es-toolkit'))),
-      lodash: toOpsPerSecond(firstGroup.find(result => result.name.includes('lodash'))),
-    };
+    data[funcName] = { esToolkit: toOpsPerSecond(median(esToolkit)), lodash: toOpsPerSecond(median(lodash)) };
+    logRatio(funcName, esToolkit, lodash);
   }
 
   await writeJson(OUT_JSON, {
@@ -52,15 +53,13 @@ async function main() {
     data,
   });
 
-  console.log('Running benchmark: fp/pipe');
-  const fpResults = runBenchmark('fp/pipe.bench.ts');
   const fpData = {};
   for (const group of fpGroups) {
-    const groupResults = fpResults.filter(result => result.group === group);
-    fpData[group] = {
-      esToolkit: toOpsPerSecond(groupResults.find(result => result.name === 'es-toolkit/fp')),
-      remeda: toOpsPerSecond(groupResults.find(result => result.name === 'remeda')),
-    };
+    const esToolkit = collect(rounds, FP_FILE, group, name => name === 'es-toolkit/fp');
+    const remeda = collect(rounds, FP_FILE, group, name => name === 'remeda');
+
+    fpData[group] = { esToolkit: toOpsPerSecond(median(esToolkit)), remeda: toOpsPerSecond(median(remeda)) };
+    logRatio(group, esToolkit, remeda);
   }
 
   await writeJson(FP_OUT_JSON, {
@@ -73,18 +72,30 @@ async function main() {
   });
 }
 
-function runBenchmark(file) {
-  const runs = [];
-  for (let i = 0; i < RUNS; i++) {
-    const args = [...process.execArgv, '--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', 'run.ts', file, '--json'];
-    const stdout = execFileSync(process.execPath, args, {
-      cwd: PERFORMANCE_DIR,
-      encoding: 'utf8',
-    });
-    runs.push(JSON.parse(stdout.trim().split('\n').at(-1)).results);
+function runRounds(files) {
+  const rounds = [];
+  for (let round = 1; round <= RUNS; round++) {
+    console.log(`Round ${round}/${RUNS}`);
+    const args = [...process.execArgv, '--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', 'run.ts', '--json', ...files];
+    const stdout = execFileSync(process.execPath, args, { cwd: PERFORMANCE_DIR, encoding: 'utf8' });
+    const lines = stdout
+      .trim()
+      .split('\n')
+      .map(line => JSON.parse(line));
+    rounds.push(new Map(lines.map(({ file, results }) => [file, results])));
   }
+  return rounds;
+}
 
-  return runs[0].map((result, index) => ({ ...result, ns: median(runs.map(run => run[index].ns)) }));
+function collect(rounds, file, group, matches) {
+  return rounds.map(round => round.get(file).find(result => result.group === group && matches(result.name)).ns);
+}
+
+function logRatio(label, esToolkit, other) {
+  const ratios = esToolkit.map((ns, index) => other[index] / ns);
+  const min = Math.min(...ratios).toFixed(2);
+  const max = Math.max(...ratios).toFixed(2);
+  console.log(`${label}: ${median(ratios).toFixed(2)}x faster (${min}x - ${max}x across ${RUNS} runs)`);
 }
 
 function median(values) {
@@ -96,8 +107,8 @@ function median(values) {
   return (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
-function toOpsPerSecond(result) {
-  return Math.round(1e9 / result.ns);
+function toOpsPerSecond(ns) {
+  return Math.round(1e9 / ns);
 }
 
 function getEnvironment() {
