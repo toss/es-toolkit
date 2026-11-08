@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { startCase as startCaseToolkit } from 'es-toolkit';
 import { startCase as startCaseToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { startCase: startCaseLodash } = lodash;
-
-describe('startCase', () => {
+group('startCase', () => {
   bench('es-toolkit/startCase', () => {
     startCaseToolkit('hello world');
     startCaseToolkit('--foo--bar__baz 123');
@@ -23,10 +21,10 @@ describe('startCase', () => {
   });
 
   bench('lodash/startCase', () => {
-    startCaseLodash('hello world');
-    startCaseLodash('--foo--bar__baz 123');
-    startCaseLodash('123numericValues');
-    startCaseLodash('XMLHttpRequest');
-    startCaseLodash('hello-World_of XML_httpRequest');
+    lodash.startCase('hello world');
+    lodash.startCase('--foo--bar__baz 123');
+    lodash.startCase('123numericValues');
+    lodash.startCase('XMLHttpRequest');
+    lodash.startCase('hello-World_of XML_httpRequest');
   });
 });

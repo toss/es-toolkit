@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { camelCase as camelCaseToolkit } from 'es-toolkit';
 import { camelCase as camelCaseToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { camelCase: camelCaseLodash } = lodash;
-
-describe('camelCase', () => {
+group('camelCase', () => {
   bench('es-toolkit/camelCase', () => {
     const str = 'kebab-case';
     camelCaseToolkit(str);
@@ -18,6 +16,6 @@ describe('camelCase', () => {
 
   bench('lodash/camelCase', () => {
     const str = 'kebab-case';
-    camelCaseLodash(str);
+    lodash.camelCase(str);
   });
 });

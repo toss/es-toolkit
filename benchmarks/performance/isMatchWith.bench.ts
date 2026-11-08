@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { isMatchWith as isMatchWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { isMatchWith: isMatchWithLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const customizer = (objValue: unknown, srcValue: unknown) => {
   if (typeof objValue === 'string' && typeof srcValue === 'string') {
@@ -10,17 +8,17 @@ const customizer = (objValue: unknown, srcValue: unknown) => {
   }
 };
 
-describe('isMatchWith', () => {
+group('isMatchWith', () => {
   bench('es-toolkit/compat/isMatchWith', () => {
     isMatchWithToolkitCompat({ a: 'A' }, { a: 'a' }, customizer);
   });
 
   bench('lodash/isMatchWith', () => {
-    isMatchWithLodash({ a: 'A' }, { a: 'a' }, customizer);
+    lodash.isMatchWith({ a: 'A' }, { a: 'a' }, customizer);
   });
 });
 
-describe('isMatchWith - complex objects', () => {
+group('isMatchWith - complex objects', () => {
   const targetObject = {
     user: {
       name: 'Minsu',
@@ -50,11 +48,11 @@ describe('isMatchWith - complex objects', () => {
   });
 
   bench('lodash/isMatchWith', () => {
-    isMatchWithLodash(targetObject, sourceObject, customizer);
+    lodash.isMatchWith(targetObject, sourceObject, customizer);
   });
 });
 
-describe('isMatchWith - arrays', () => {
+group('isMatchWith - arrays', () => {
   const targetArray = [
     { id: 1, name: 'ITEM 1' },
     { id: 2, name: 'ITEM 2' },
@@ -71,6 +69,6 @@ describe('isMatchWith - arrays', () => {
   });
 
   bench('lodash/isMatchWith', () => {
-    isMatchWithLodash(targetArray, sourceArray, customizer);
+    lodash.isMatchWith(targetArray, sourceArray, customizer);
   });
 });

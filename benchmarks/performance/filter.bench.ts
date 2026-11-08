@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { filter as filterToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { filter: filterLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const arr = [
   { a: 0, b: true },
@@ -10,7 +8,7 @@ const arr = [
   { a: 0, b: false },
 ];
 
-describe('filter', () => {
+group('filter', () => {
   bench('es-toolkit/filter', () => {
     filterToolkit([1, 2, 3], number => number % 2 === 0);
     filterToolkit(arr, { b: true });
@@ -20,15 +18,15 @@ describe('filter', () => {
   });
 
   bench('lodash/filter', () => {
-    filterLodash([1, 2, 3], number => number % 2 === 0);
-    filterLodash(arr, { b: true });
-    filterLodash(arr, ['a', 1]);
-    filterLodash(arr, items => items.b);
-    filterLodash({ a: 1, b: 2, c: 3 }, 'b');
+    lodash.filter([1, 2, 3], number => number % 2 === 0);
+    lodash.filter(arr, { b: true });
+    lodash.filter(arr, ['a', 1]);
+    lodash.filter(arr, items => items.b);
+    lodash.filter({ a: 1, b: 2, c: 3 }, 'b');
   });
 });
 
-describe('filter/largeArray', () => {
+group('filter/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i, b: i % 2 === 0 }));
 
   bench('es-toolkit/filter', () => {
@@ -36,6 +34,6 @@ describe('filter/largeArray', () => {
   });
 
   bench('lodash/filter', () => {
-    filterLodash(largeArray, { b: true });
+    lodash.filter(largeArray, { b: true });
   });
 });

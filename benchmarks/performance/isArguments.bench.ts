@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isArguments as isArgumentsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isArguments: isArgumentsLodash } = lodash;
-
-describe('isArguments', () => {
+group('isArguments', () => {
   bench('es-toolkit/isArguments', () => {
     isArgumentsToolkit([1, 2, 3]);
     isArgumentsToolkit(true);
@@ -16,12 +14,12 @@ describe('isArguments', () => {
   });
 
   bench('lodash/isArguments', () => {
-    isArgumentsLodash([1, 2, 3]);
-    isArgumentsLodash(true);
-    isArgumentsLodash(new Date());
-    isArgumentsLodash(new Error());
-    isArgumentsLodash(1);
-    isArgumentsLodash(/x/);
-    isArgumentsLodash('a');
+    lodash.isArguments([1, 2, 3]);
+    lodash.isArguments(true);
+    lodash.isArguments(new Date());
+    lodash.isArguments(new Error());
+    lodash.isArguments(1);
+    lodash.isArguments(/x/);
+    lodash.isArguments('a');
   });
 });

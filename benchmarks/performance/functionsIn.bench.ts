@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { functionsIn as functionsInToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { functionsIn: functionsInLodash } = lodash;
-
-describe('functionsIn', () => {
+group('functionsIn', () => {
   class Foo {
     a = function () {
       return 'a';
@@ -36,9 +34,9 @@ describe('functionsIn', () => {
   });
 
   bench('lodash/functionsIn', () => {
-    functionsInLodash(foo);
-    functionsInLodash(plainObject);
-    functionsInLodash(null);
-    functionsInLodash(undefined);
+    lodash.functionsIn(foo);
+    lodash.functionsIn(plainObject);
+    lodash.functionsIn(null);
+    lodash.functionsIn(undefined);
   });
 });

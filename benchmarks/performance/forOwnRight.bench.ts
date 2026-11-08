@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { forOwnRight as forOwnRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { forOwnRight: forOwnRightLodash } = lodash;
-
-describe('forOwnRight', () => {
+group('forOwnRight', () => {
   const obj = { a: 1, b: 2, c: 3 };
   const iteratee = (value: number, key: string, object: typeof obj) => [value, key, object];
 
@@ -13,6 +11,6 @@ describe('forOwnRight', () => {
   });
 
   bench('lodash/forOwnRight', () => {
-    forOwnRightLodash(obj, iteratee);
+    lodash.forOwnRight(obj, iteratee);
   });
 });

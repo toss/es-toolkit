@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isEqual as isEqualToolkit } from 'es-toolkit';
 import { isEqual as isEqualToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isEqual: isEqualLodash } = lodash;
-
-describe('isEqual primitives', () => {
+group('isEqual primitives', () => {
   bench('es-toolkit/isEqual', () => {
     isEqualToolkit(1, 1);
     isEqualToolkit(NaN, NaN);
@@ -31,19 +29,19 @@ describe('isEqual primitives', () => {
   });
 
   bench('lodash/isEqual', () => {
-    isEqualLodash(1, 1);
-    isEqualLodash(NaN, NaN);
-    isEqualLodash(+0, -0);
+    lodash.isEqual(1, 1);
+    lodash.isEqual(NaN, NaN);
+    lodash.isEqual(+0, -0);
 
-    isEqualLodash(true, true);
-    isEqualLodash(true, false);
+    lodash.isEqual(true, true);
+    lodash.isEqual(true, false);
 
-    isEqualLodash('hello', 'hello');
-    isEqualLodash('hello', 'world');
+    lodash.isEqual('hello', 'hello');
+    lodash.isEqual('hello', 'world');
   });
 });
 
-describe('isEqual dates', () => {
+group('isEqual dates', () => {
   bench('es-toolkit/isEqual', () => {
     isEqualToolkit(new Date('2020-01-01'), new Date('2020-01-01'));
     isEqualToolkit(new Date('2020-01-01'), new Date('2021-01-01'));
@@ -55,12 +53,12 @@ describe('isEqual dates', () => {
   });
 
   bench('lodash', () => {
-    isEqualLodash(new Date('2020-01-01'), new Date('2020-01-01'));
-    isEqualLodash(new Date('2020-01-01'), new Date('2021-01-01'));
+    lodash.isEqual(new Date('2020-01-01'), new Date('2020-01-01'));
+    lodash.isEqual(new Date('2020-01-01'), new Date('2021-01-01'));
   });
 });
 
-describe('isEqual RegExps', () => {
+group('isEqual RegExps', () => {
   bench('es-toolkit/isEqual', () => {
     isEqualToolkit(/hello/g, /hello/g);
     isEqualToolkit(/hello/g, /hello/i);
@@ -72,12 +70,12 @@ describe('isEqual RegExps', () => {
   });
 
   bench('lodash', () => {
-    isEqualLodash(/hello/g, /hello/g);
-    isEqualLodash(/hello/g, /hello/i);
+    lodash.isEqual(/hello/g, /hello/g);
+    lodash.isEqual(/hello/g, /hello/i);
   });
 });
 
-describe('isEqual objects', () => {
+group('isEqual objects', () => {
   bench('es-toolkit/isEqual', () => {
     isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
     isEqualToolkit({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
@@ -91,13 +89,13 @@ describe('isEqual objects', () => {
   });
 
   bench('lodash', () => {
-    isEqualLodash({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
-    isEqualLodash({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
-    isEqualLodash({ a: 1, b: 2 }, { a: 1, b: 2 });
+    lodash.isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
+    lodash.isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
+    lodash.isEqual({ a: 1, b: 2 }, { a: 1, b: 2 });
   });
 });
 
-describe('isEqual arrays', () => {
+group('isEqual arrays', () => {
   bench('es-toolkit/isEqual', () => {
     isEqualToolkit([1, 2, 3], [1, 2, 3]);
     isEqualToolkit([1, 2, 3], [1, 2, 4]);
@@ -109,7 +107,7 @@ describe('isEqual arrays', () => {
   });
 
   bench('lodash', () => {
-    isEqualLodash([1, 2, 3], [1, 2, 3]);
-    isEqualLodash([1, 2, 3], [1, 2, 4]);
+    lodash.isEqual([1, 2, 3], [1, 2, 3]);
+    lodash.isEqual([1, 2, 3], [1, 2, 4]);
   });
 });

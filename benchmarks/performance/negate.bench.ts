@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { negate as negateToolkit } from 'es-toolkit';
 import { negate as negateCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { negate: negateLodash } = lodash;
-
-describe('compact', () => {
+group('compact', () => {
   bench('es-toolkit', () => {
     negateToolkit(() => true)();
   });
@@ -15,6 +13,6 @@ describe('compact', () => {
   });
 
   bench('lodash', () => {
-    negateLodash(() => true)();
+    lodash.negate(() => true)();
   });
 });

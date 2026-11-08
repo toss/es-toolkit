@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { head as headToolkit } from 'es-toolkit';
 import { head as headCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { head: headLodash } = lodash;
-
-describe('head', () => {
+group('head', () => {
   bench('es-toolkit/head', () => {
     headToolkit([1, 2, 3, 4]);
   });
@@ -15,11 +13,11 @@ describe('head', () => {
   });
 
   bench('lodash/head', () => {
-    headLodash([1, 2, 3, 4]);
+    lodash.head([1, 2, 3, 4]);
   });
 });
 
-describe('head/largeArray', () => {
+group('head/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/head', () => {
@@ -31,6 +29,6 @@ describe('head/largeArray', () => {
   });
 
   bench('lodash/head', () => {
-    headLodash(largeArray);
+    lodash.head(largeArray);
   });
 });

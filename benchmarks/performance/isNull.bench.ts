@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isNull as isNullToolkit } from 'es-toolkit';
 import { isNull as isNullToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isNull: isNullLodash } = lodash;
-
-describe('isNull', () => {
+group('isNull', () => {
   bench('es-toolkit/isNull', () => {
     isNullToolkit(null);
     isNullToolkit(undefined);
@@ -21,9 +19,9 @@ describe('isNull', () => {
   });
 
   bench('lodash/isNull', () => {
-    isNullLodash(null);
-    isNullLodash(undefined);
-    isNullLodash('');
-    isNullLodash(123);
+    lodash.isNull(null);
+    lodash.isNull(undefined);
+    lodash.isNull('');
+    lodash.isNull(123);
   });
 });

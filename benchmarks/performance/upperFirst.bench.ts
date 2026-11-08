@@ -1,12 +1,10 @@
-import { bench, describe } from 'vitest';
 import { upperFirst as upperFirstToolkit } from 'es-toolkit';
 import { upperFirst as upperFirstCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { upperFirst: upperFirstLodash } = lodash;
-
-describe('upperFirst', () => {
-  describe('short string', () => {
+group('upperFirst', () => {
+  group('short string', () => {
     bench('es-toolkit/upperFirst', () => {
       const str = 'camelCase';
       upperFirstToolkit(str);
@@ -19,11 +17,11 @@ describe('upperFirst', () => {
 
     bench('lodash/upperFirst', () => {
       const str = 'camelCase';
-      upperFirstLodash(str);
+      lodash.upperFirst(str);
     });
   });
 
-  describe('long string', () => {
+  group('long string', () => {
     const LONG_STR = 'camelCaseLongString'.repeat(1000);
     bench('es-toolkit/upperFirst', () => {
       upperFirstToolkit(LONG_STR);
@@ -34,7 +32,7 @@ describe('upperFirst', () => {
     });
 
     bench('lodash/upperFirst', () => {
-      upperFirstLodash(LONG_STR);
+      lodash.upperFirst(LONG_STR);
     });
   });
 });

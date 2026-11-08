@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { defaultTo as defaultToToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { defaultTo: defaultToLodash } = lodash;
-
-describe('defaultTo', () => {
+group('defaultTo', () => {
   bench('es-toolkit/compat/defaultTo', () => {
     defaultToToolkitCompat(null, 123);
     defaultToToolkitCompat(undefined, '64');
@@ -14,10 +12,10 @@ describe('defaultTo', () => {
   });
 
   bench('lodash/defaultTo', () => {
-    defaultToLodash(null, 123);
-    defaultToLodash(undefined, '64');
-    defaultToLodash(NaN, 0);
-    defaultToLodash(true, 0);
-    defaultToLodash(123, 0);
+    lodash.defaultTo(null, 123);
+    lodash.defaultTo(undefined, '64');
+    lodash.defaultTo(NaN, 0);
+    lodash.defaultTo(true, 0);
+    lodash.defaultTo(123, 0);
   });
 });

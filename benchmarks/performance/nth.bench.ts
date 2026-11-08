@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { nth as nthToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { nth: nthLodash } = lodash;
-
-describe('nth', () => {
+group('nth', () => {
   const array = [1, 2, 3];
 
   bench('es-toolkit/compat/nth', () => {
@@ -13,12 +11,12 @@ describe('nth', () => {
   });
 
   bench('lodash/nth', () => {
-    nthLodash(array, 1);
-    nthLodash(array, -1);
+    lodash.nth(array, 1);
+    lodash.nth(array, -1);
   });
 });
 
-describe('nth/largeArray', () => {
+group('nth/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/compat/nth', () => {
@@ -27,7 +25,7 @@ describe('nth/largeArray', () => {
   });
 
   bench('lodash/nth', () => {
-    nthLodash(largeArray, 1);
-    nthLodash(largeArray, -1);
+    lodash.nth(largeArray, 1);
+    lodash.nth(largeArray, -1);
   });
 });

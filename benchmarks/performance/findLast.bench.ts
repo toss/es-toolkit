@@ -1,15 +1,13 @@
-import { bench, describe } from 'vitest';
 import { findLast as findLastToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { findLast: findLastLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
 
-describe('findLast', () => {
+group('findLast', () => {
   bench('es-toolkit/compat/findLast', () => {
     findLastToolkitCompat(items, x => x.name === 'Bob');
     findLastToolkitCompat(items, { name: 'Bob' });
@@ -18,14 +16,14 @@ describe('findLast', () => {
   });
 
   bench('lodash/findLast', () => {
-    findLastLodash(items, x => x.name === 'Bob');
-    findLastLodash(items, { name: 'Bob' });
-    findLastLodash(items, ['name', 'Bob']);
-    findLastLodash(items, 'name');
+    lodash.findLast(items, x => x.name === 'Bob');
+    lodash.findLast(items, { name: 'Bob' });
+    lodash.findLast(items, ['name', 'Bob']);
+    lodash.findLast(items, 'name');
   });
 });
 
-describe('findLast/largeArray', () => {
+group('findLast/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Name ${i}` }));
 
   bench('es-toolkit/compat/findLast', () => {
@@ -33,6 +31,6 @@ describe('findLast/largeArray', () => {
   });
 
   bench('lodash/findLast', () => {
-    findLastLodash(largeArray, x => x.name === 'Name 5000');
+    lodash.findLast(largeArray, x => x.name === 'Name 5000');
   });
 });

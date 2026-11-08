@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { cloneWith as cloneWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { cloneWith: cloneWithLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const obj = {
   number: 29,
@@ -21,16 +19,16 @@ function customizer(value: any) {
   }
 }
 
-describe('cloneWith', () => {
+group('cloneWith', () => {
   bench('lodash/cloneWith', () => {
-    cloneWithLodash(obj);
+    lodash.cloneWith(obj);
   });
   bench('es-toolkit/compat/cloneWith', () => {
     cloneWithToolkitCompat(obj);
   });
 
   bench('lodash/cloneWith (with customizer)', () => {
-    cloneWithLodash(obj, customizer);
+    lodash.cloneWith(obj, customizer);
   });
   bench('es-toolkit/compat/cloneWith (with customizer)', () => {
     cloneWithToolkitCompat(obj, customizer);

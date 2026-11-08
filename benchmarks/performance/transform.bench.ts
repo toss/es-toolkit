@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { transform as transformToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { transform: transformLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const bigObject = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => [i, i]));
 const bigArray = Array.from({ length: 1000 }, (_, i) => i);
@@ -12,42 +10,42 @@ const iteratee = (acc: any, value: number, key: any) => {
   acc[key] = value * value;
 };
 
-describe('transform (small object)', () => {
+group('transform (small object)', () => {
   bench('es-toolkit/compat/transform', () => {
     transformToolkitCompat(smallObject, iteratee);
   });
 
   bench('lodash/transform', () => {
-    transformLodash(smallObject, iteratee);
+    lodash.transform(smallObject, iteratee);
   });
 });
 
-describe('transform (big object)', () => {
+group('transform (big object)', () => {
   bench('es-toolkit/compat/transform', () => {
     transformToolkitCompat(bigObject, iteratee);
   });
 
   bench('lodash/transform', () => {
-    transformLodash(bigObject, iteratee);
+    lodash.transform(bigObject, iteratee);
   });
 });
 
-describe('transform (big array)', () => {
+group('transform (big array)', () => {
   bench('es-toolkit/compat/transform', () => {
     transformToolkitCompat(bigArray, iteratee);
   });
 
   bench('lodash/transform', () => {
-    transformLodash(bigArray, iteratee);
+    lodash.transform(bigArray, iteratee);
   });
 });
 
-describe('transform (small array)', () => {
+group('transform (small array)', () => {
   bench('es-toolkit/compat/transform', () => {
     transformToolkitCompat(smallArray, iteratee);
   });
 
   bench('lodash/transform', () => {
-    transformLodash(smallArray, iteratee);
+    lodash.transform(smallArray, iteratee);
   });
 });

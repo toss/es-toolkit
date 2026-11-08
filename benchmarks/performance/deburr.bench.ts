@@ -1,14 +1,12 @@
-import { bench, describe } from 'vitest';
 import { deburr as deburrToolkit } from 'es-toolkit';
 import { deburr as deburrCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { deburr: deburrLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const longWord = 'déjà vu'.repeat(1000);
-describe('deburr', () => {
+group('deburr', () => {
   bench('lodash/deburr', () => {
-    deburrLodash('déjà vu');
+    lodash.deburr('déjà vu');
   });
 
   bench('es-toolkit/compat/deburr', () => {
@@ -20,7 +18,7 @@ describe('deburr', () => {
   });
 
   bench('lodash/deburr - long words', () => {
-    deburrLodash(longWord);
+    lodash.deburr(longWord);
   });
 
   bench('es-toolkit/compat/deburr - long words', () => {

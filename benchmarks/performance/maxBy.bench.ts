@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { maxBy as maxByToolkit } from 'es-toolkit';
 import { maxBy as maxByCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { maxBy: maxByLodash } = lodash;
-
-describe('maxBy', () => {
+group('maxBy', () => {
   bench('es-toolkit/maxBy', () => {
     const people = [
       { name: 'Mark', age: 25 },
@@ -30,11 +28,11 @@ describe('maxBy', () => {
       { name: 'Nunu', age: 30 },
       { name: 'Overmars', age: 20 },
     ];
-    maxByLodash(people, person => person.age);
+    lodash.maxBy(people, person => person.age);
   });
 });
 
-describe('maxBy/largeArray', () => {
+group('maxBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/maxBy', () => {
@@ -46,6 +44,6 @@ describe('maxBy/largeArray', () => {
   });
 
   bench('lodash/maxBy', () => {
-    maxByLodash(largeArray, person => person.age);
+    lodash.maxBy(largeArray, person => person.age);
   });
 });

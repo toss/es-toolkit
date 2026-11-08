@@ -1,13 +1,11 @@
-import { bench, describe } from 'vitest';
 import { map as mapToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { map: mapLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const generateArray = (length: number) => Array.from({ length }, (_, i) => i);
 const generateObject = (length: number) => Object.fromEntries(generateArray(length).map(i => [`key${i}`, i]));
 
-describe('map/array', () => {
+group('map/array', () => {
   const array = [1, 2, 3, 4, 5];
 
   bench('es-toolkit/map', () => {
@@ -15,11 +13,11 @@ describe('map/array', () => {
   });
 
   bench('lodash/map', () => {
-    mapLodash(array, value => value * 2);
+    lodash.map(array, value => value * 2);
   });
 });
 
-describe('map/object', () => {
+group('map/object', () => {
   const obj = {
     key1: 1,
     key2: 2,
@@ -33,11 +31,11 @@ describe('map/object', () => {
   });
 
   bench('lodash/map', () => {
-    mapLodash(obj, value => value * 2);
+    lodash.map(obj, value => value * 2);
   });
 });
 
-describe('map/largeArray', () => {
+group('map/largeArray', () => {
   const largeArray = generateArray(10000);
 
   bench('es-toolkit/map', () => {
@@ -45,11 +43,11 @@ describe('map/largeArray', () => {
   });
 
   bench('lodash/map', () => {
-    mapLodash(largeArray, value => value * 2);
+    lodash.map(largeArray, value => value * 2);
   });
 });
 
-describe('map/largeObject', () => {
+group('map/largeObject', () => {
   const largeObject = generateObject(10000);
 
   bench('es-toolkit/map', () => {
@@ -57,6 +55,6 @@ describe('map/largeObject', () => {
   });
 
   bench('lodash/map', () => {
-    mapLodash(largeObject, value => value * 2);
+    lodash.map(largeObject, value => value * 2);
   });
 });

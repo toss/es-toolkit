@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { size as sizeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { size: sizeLodash } = lodash;
-
-describe('size', () => {
+group('size', () => {
   bench('es-toolkit/size', () => {
     sizeToolkit([1, 2, 3, 4]);
     sizeToolkit('hello');
@@ -23,14 +21,14 @@ describe('size', () => {
   });
 
   bench('lodash/size', () => {
-    sizeLodash([1, 2, 3, 4]);
-    sizeLodash('hello');
-    sizeLodash({ a: 1, b: 2, c: 3 });
-    sizeLodash([]);
-    sizeLodash('');
-    sizeLodash({});
-    sizeLodash(new Set([1, 2, 3]));
-    sizeLodash(
+    lodash.size([1, 2, 3, 4]);
+    lodash.size('hello');
+    lodash.size({ a: 1, b: 2, c: 3 });
+    lodash.size([]);
+    lodash.size('');
+    lodash.size({});
+    lodash.size(new Set([1, 2, 3]));
+    lodash.size(
       new Map([
         ['a', 1],
         ['b', 2],

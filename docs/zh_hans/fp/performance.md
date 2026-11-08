@@ -12,10 +12,10 @@
 
 ## 测量方法
 
-以上数字是在此分支上使用 Vitest 测得的。
+如需自行运行，请使用以下命令：
 
 ```bash
-yarn vitest bench performance/fp/pipe.bench.ts --run
+yarn bench fp/pipe
 ```
 
 准确的基准测试代码见 `benchmarks/performance/fp/pipe.bench.ts`。

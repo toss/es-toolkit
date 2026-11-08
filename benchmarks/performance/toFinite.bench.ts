@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toFinite as toFiniteToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toFinite: toFiniteLodash } = lodash;
-
-describe('toFinite', () => {
+group('toFinite', () => {
   bench('es-toolkit/compat/toFinite', () => {
     toFiniteToolkitCompat({ valueOf: () => 1 });
     toFiniteToolkitCompat({ valueOf: () => 2 });
@@ -16,12 +14,12 @@ describe('toFinite', () => {
   });
 
   bench('lodash/toFinite', () => {
-    toFiniteLodash({ valueof: () => 1 });
-    toFiniteLodash({ valueof: () => 2 });
-    toFiniteLodash({ toString: () => '3' });
-    toFiniteLodash('0b101010');
-    toFiniteLodash('0o12345');
-    toFiniteLodash('0x1a2b3c');
-    toFiniteLodash('1.1');
+    lodash.toFinite({ valueof: () => 1 });
+    lodash.toFinite({ valueof: () => 2 });
+    lodash.toFinite({ toString: () => '3' });
+    lodash.toFinite('0b101010');
+    lodash.toFinite('0o12345');
+    lodash.toFinite('0x1a2b3c');
+    lodash.toFinite('1.1');
   });
 });

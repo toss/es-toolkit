@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { castArray as castArrayToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { castArray: castArrayLodash } = lodash;
-
-describe('castArray', () => {
+group('castArray', () => {
   bench('es-toolkit/castArray', () => {
     castArrayToolkit(1);
     castArrayToolkit([1]);
@@ -12,8 +10,8 @@ describe('castArray', () => {
   });
 
   bench('lodash/castArray', () => {
-    castArrayLodash(1);
-    castArrayLodash([1]);
-    castArrayLodash();
+    lodash.castArray(1);
+    lodash.castArray([1]);
+    lodash.castArray();
   });
 });

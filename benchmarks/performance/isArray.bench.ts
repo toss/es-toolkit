@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isArray as isArrayToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isArray: isArrayLodash } = lodash;
-
-describe('isArray', () => {
+group('isArray', () => {
   bench('es-toolkit/isArray', () => {
     isArrayToolkit([1, 2, 3]);
     isArrayToolkit('abc');
@@ -12,8 +10,8 @@ describe('isArray', () => {
   });
 
   bench('lodash/isArray', () => {
-    isArrayLodash([1, 2, 3]);
-    isArrayLodash('abc');
-    isArrayLodash(() => {});
+    lodash.isArray([1, 2, 3]);
+    lodash.isArray('abc');
+    lodash.isArray(() => {});
   });
 });

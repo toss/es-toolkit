@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { inRange as inRangeToolkit } from 'es-toolkit';
 import { inRange as inRangeCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { inRange: inRangeLodash } = lodash;
-
-describe('inRange', () => {
+group('inRange', () => {
   bench('es-toolkit/inRange', () => {
     inRangeToolkit(3, 5);
   });
@@ -15,6 +13,6 @@ describe('inRange', () => {
   });
 
   bench('lodash/inRange', () => {
-    inRangeLodash(3, 5);
+    lodash.inRange(3, 5);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { floor as floorToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { floor: floorLodash } = lodash;
-
-describe('floor', () => {
+group('floor', () => {
   bench('es-toolkit/floor', () => {
     floorToolkit(4.006);
     floorToolkit(4.006, 0);
@@ -21,17 +19,17 @@ describe('floor', () => {
   });
 
   bench('lodash/floor', () => {
-    floorLodash(4.006);
-    floorLodash(4.006, 0);
-    floorLodash(4.016, 2);
-    floorLodash(4.1, 2);
-    floorLodash(4.4, 2);
-    floorLodash(4160, -2);
-    floorLodash(4.006, NaN);
-    floorLodash(4.016, 2.6);
-    floorLodash(4.016, '+2');
-    floorLodash(5e1, 2);
-    floorLodash('5e', 1);
-    floorLodash('5e1e1', 1);
+    lodash.floor(4.006);
+    lodash.floor(4.006, 0);
+    lodash.floor(4.016, 2);
+    lodash.floor(4.1, 2);
+    lodash.floor(4.4, 2);
+    lodash.floor(4160, -2);
+    lodash.floor(4.006, NaN);
+    lodash.floor(4.016, 2.6);
+    lodash.floor(4.016, '+2');
+    lodash.floor(5e1, 2);
+    lodash.floor('5e', 1);
+    lodash.floor('5e1e1', 1);
   });
 });

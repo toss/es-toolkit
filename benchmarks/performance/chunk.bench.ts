@@ -1,13 +1,11 @@
-import { bench, describe } from 'vitest';
 import { chunk as chunkToolkit } from 'es-toolkit';
 import { chunk as chunkCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { chunk: chunkLodash } = lodash;
-
-describe('chunk', () => {
+group('chunk', () => {
   bench('lodash/chunk', () => {
-    chunkLodash([1, 2, 3, 4, 5, 6], 3);
+    lodash.chunk([1, 2, 3, 4, 5, 6], 3);
   });
 
   bench('es-toolkit/chunk', () => {
@@ -19,11 +17,11 @@ describe('chunk', () => {
   });
 });
 
-describe('chunk/largeArray', () => {
+group('chunk/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('lodash/chunk', () => {
-    chunkLodash(largeArray, 100);
+    lodash.chunk(largeArray, 100);
   });
 
   bench('es-toolkit/chunk', () => {

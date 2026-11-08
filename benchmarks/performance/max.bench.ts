@@ -1,20 +1,18 @@
-import { bench, describe } from 'vitest';
 import { max as maxToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { max: maxLodash } = lodash;
-
-describe('max', () => {
+group('max', () => {
   bench('es-toolkit/max', () => {
     maxToolkit([1, 2, 3]);
   });
 
   bench('lodash/max', () => {
-    maxLodash([1, 2, 3]);
+    lodash.max([1, 2, 3]);
   });
 });
 
-describe('max/largeArray', () => {
+group('max/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/max', () => {
@@ -22,6 +20,6 @@ describe('max/largeArray', () => {
   });
 
   bench('lodash/max', () => {
-    maxLodash(largeArray);
+    lodash.max(largeArray);
   });
 });

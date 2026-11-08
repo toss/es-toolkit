@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { sample as sampleToolkit } from 'es-toolkit';
 import { sample as sampleToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { sample: sampleLodash } = lodash;
-
-describe('sample', () => {
+group('sample', () => {
   bench('es-toolkit/sample', () => {
     const array = [1, 2, 3, 4, 5];
     sampleToolkit(array);
@@ -18,11 +16,11 @@ describe('sample', () => {
 
   bench('lodash/sample', () => {
     const array = [1, 2, 3, 4, 5];
-    sampleLodash(array);
+    lodash.sample(array);
   });
 });
 
-describe('sample/largeArray', () => {
+group('sample/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/sample', () => {
@@ -34,6 +32,6 @@ describe('sample/largeArray', () => {
   });
 
   bench('lodash/sample', () => {
-    sampleLodash(largeArray);
+    lodash.sample(largeArray);
   });
 });

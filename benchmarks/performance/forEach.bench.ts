@@ -1,20 +1,18 @@
-import { bench, describe } from 'vitest';
 import { forEach as forEachToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { forEach: forEachLodash } = lodash;
-
-describe('forEach', () => {
+group('forEach', () => {
   bench('es-toolkit/compat/forEach', () => {
     forEachToolkit([1, 2, 3, 4, 5, 6], x => x + 3);
   });
 
   bench('lodash/forEach', () => {
-    forEachLodash([1, 2, 3, 4, 5, 6], x => x + 3);
+    lodash.forEach([1, 2, 3, 4, 5, 6], x => x + 3);
   });
 });
 
-describe('forEach/largeArray', () => {
+group('forEach/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/compat/forEach', () => {
@@ -22,11 +20,11 @@ describe('forEach/largeArray', () => {
   });
 
   bench('lodash/forEach', () => {
-    forEachLodash(largeArray, x => x + 3);
+    lodash.forEach(largeArray, x => x + 3);
   });
 });
 
-describe('forEach/string', () => {
+group('forEach/string', () => {
   const string = [1, 2, 3, 4, 5, 6].join('');
 
   bench('es-toolkit/compat/forEach', () => {
@@ -34,11 +32,11 @@ describe('forEach/string', () => {
   });
 
   bench('lodash/forEach', () => {
-    forEachLodash(string, x => x.toUpperCase());
+    lodash.forEach(string, x => x.toUpperCase());
   });
 });
 
-describe('forEach/object', () => {
+group('forEach/object', () => {
   const string = Object.fromEntries([1, 2, 3, 4, 5, 6].map(value => [value, value]));
 
   bench('es-toolkit/compat/forEach', () => {
@@ -46,6 +44,6 @@ describe('forEach/object', () => {
   });
 
   bench('lodash/forEach', () => {
-    forEachLodash(string, x => x + 3);
+    lodash.forEach(string, x => x + 3);
   });
 });

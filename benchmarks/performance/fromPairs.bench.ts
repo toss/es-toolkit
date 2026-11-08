@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { fromPairs as fromPairsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { fromPairs: fromPairsLodash } = lodash;
-
-describe('fromPairs', () => {
+group('fromPairs', () => {
   const data = [
     ['a', 1],
     ['b', 2],
@@ -16,7 +14,7 @@ describe('fromPairs', () => {
   });
 
   bench('lodash/fromPairs', () => {
-    fromPairsLodash(data);
+    lodash.fromPairs(data);
   });
 
   bench('javascript/fromEntries', () => {
@@ -24,7 +22,7 @@ describe('fromPairs', () => {
   });
 });
 
-describe('fromPairs/largeArray', () => {
+group('fromPairs/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i]);
 
   bench('es-toolkit/fromPairs', () => {
@@ -32,7 +30,7 @@ describe('fromPairs/largeArray', () => {
   });
 
   bench('lodash/fromPairs', () => {
-    fromPairsLodash(largeArray);
+    lodash.fromPairs(largeArray);
   });
 
   bench('javascript/fromEntries', () => {

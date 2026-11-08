@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { gte as gteToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { gte: gteLodash } = lodash;
-
-describe('gte', () => {
+group('gte', () => {
   bench('es-toolkit/compat/gte', () => {
     gteToolkitCompat(3, 1);
     gteToolkitCompat(3, 3);
@@ -12,8 +10,8 @@ describe('gte', () => {
   });
 
   bench('lodash/gte', () => {
-    gteLodash(3, 1);
-    gteLodash(3, 3);
-    gteLodash(1, 3);
+    lodash.gte(3, 1);
+    lodash.gte(3, 3);
+    lodash.gte(1, 3);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { uniqueId as uniqueIdToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { uniqueId: uniqueIdLodash } = lodash;
-
-describe('uniqueId', () => {
+group('uniqueId', () => {
   bench('es-toolkit/compat/uniqueId', () => {
     uniqueIdToolkitCompat();
     uniqueIdToolkitCompat();
@@ -19,15 +17,15 @@ describe('uniqueId', () => {
   });
 
   bench('lodash/uniqueId', () => {
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash();
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
-    uniqueIdLodash('prefix_');
+    lodash.uniqueId();
+    lodash.uniqueId();
+    lodash.uniqueId();
+    lodash.uniqueId();
+    lodash.uniqueId();
+    lodash.uniqueId('prefix_');
+    lodash.uniqueId('prefix_');
+    lodash.uniqueId('prefix_');
+    lodash.uniqueId('prefix_');
+    lodash.uniqueId('prefix_');
   });
 });

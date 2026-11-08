@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { random as randomToolkit } from 'es-toolkit';
 import { random as randomCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { random: randomLodash } = lodash;
-
-describe('random', () => {
+group('random', () => {
   bench('es-toolkit/random', () => {
     randomToolkit(1, 10);
   });
@@ -15,6 +13,6 @@ describe('random', () => {
   });
 
   bench('lodash/random', () => {
-    randomLodash(1, 10, true);
+    lodash.random(1, 10, true);
   });
 });

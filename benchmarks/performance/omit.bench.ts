@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { omit as omitToolkit } from 'es-toolkit';
 import { omit as omitToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { omit: omitLodash } = lodash;
-
-describe('omit: simple', () => {
+group('omit: simple', () => {
   bench('es-toolkit/omit', () => {
     omitToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
   });
@@ -15,16 +13,16 @@ describe('omit: simple', () => {
   });
 
   bench('lodash/omit', () => {
-    omitLodash({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+    lodash.omit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
   });
 });
 
-describe('omit: complex', () => {
+group('omit: complex', () => {
   bench('es-toolkit/compat/omit', () => {
     omitToolkitCompat({ foo: { bar: { baz: 1 } }, quux: 2, a: { b: 3 } }, ['foo.bar.baz', 'quux']);
   });
 
   bench('lodash/omit', () => {
-    omitLodash({ foo: { bar: { baz: 1 } }, quux: 2, a: { b: 3 } }, ['foo.bar.baz', 'quux']);
+    lodash.omit({ foo: { bar: { baz: 1 } }, quux: 2, a: { b: 3 } }, ['foo.bar.baz', 'quux']);
   });
 });

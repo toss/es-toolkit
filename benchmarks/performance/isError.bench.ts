@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isError as isErrorToolkit } from 'es-toolkit';
 import { isError as isErrorCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isError: isErrorLodash } = lodash;
-
-describe('isError', () => {
+group('isError', () => {
   bench('es-toolkit/isError', () => {
     isErrorToolkit(new Error());
     isErrorToolkit(1);
@@ -21,9 +19,9 @@ describe('isError', () => {
   });
 
   bench('lodash/isError', () => {
-    isErrorLodash(new Error());
-    isErrorLodash(1);
-    isErrorLodash('Error');
-    isErrorLodash({ name: 'Error', message: '' });
+    lodash.isError(new Error());
+    lodash.isError(1);
+    lodash.isError('Error');
+    lodash.isError({ name: 'Error', message: '' });
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { conformsTo as conformsToToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { conformsTo: conformsToLodash } = lodash;
-
-describe('conformsTo', () => {
+group('conformsTo', () => {
   bench('es-toolkit/conformsTo', () => {
     conformsToToolkit(
       { a: 1, b: 2 },
@@ -16,7 +14,7 @@ describe('conformsTo', () => {
   });
 
   bench('lodash/conformsTo', () => {
-    conformsToLodash(
+    lodash.conformsTo(
       { a: 1, b: 2 },
       {
         a: (n: number) => n > 0,

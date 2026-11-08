@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { mean as meanToolkit } from 'es-toolkit';
 import { mean as meanToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { mean: meanLodash } = lodash;
-
-describe('mean', () => {
+group('mean', () => {
   bench('es-toolkit/mean', () => {
     meanToolkit([1, 2, 3]);
   });
@@ -15,11 +13,11 @@ describe('mean', () => {
   });
 
   bench('lodash/mean', () => {
-    meanLodash([1, 2, 3]);
+    lodash.mean([1, 2, 3]);
   });
 });
 
-describe('mean/largeArray', () => {
+group('mean/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/mean', () => {
@@ -31,6 +29,6 @@ describe('mean/largeArray', () => {
   });
 
   bench('lodash/mean', () => {
-    meanLodash(largeArray);
+    lodash.mean(largeArray);
   });
 });

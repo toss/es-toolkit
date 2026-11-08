@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { overSome as overSomeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { overSome: overSomeLodash } = lodash;
-
-describe('overSome', () => {
+group('overSome', () => {
   bench('es-toolkit/overSome', () => {
     const isValid = overSomeToolkit(
       value => typeof value === 'string',
@@ -14,7 +12,7 @@ describe('overSome', () => {
   });
 
   bench('lodash/overSome', () => {
-    const isValid = overSomeLodash(
+    const isValid = lodash.overSome(
       value => typeof value === 'string',
       value => typeof value === 'number'
     );

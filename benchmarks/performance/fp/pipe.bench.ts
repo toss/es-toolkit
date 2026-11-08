@@ -1,4 +1,3 @@
-import { bench, describe } from 'vitest';
 import {
   chunk as chunkToolkit,
   filter as filterToolkit,
@@ -7,7 +6,7 @@ import {
   take as takeToolkit,
   uniq as uniqToolkit,
 } from 'es-toolkit/fp';
-import lodashFp from 'lodash/fp';
+import lodashFp from 'lodash/fp.js';
 import {
   chunk as chunkRemeda,
   filter as filterRemeda,
@@ -16,19 +15,12 @@ import {
   take as takeRemeda,
   unique as uniqueRemeda,
 } from 'remeda';
+import { bench, group } from '../harness.ts';
 
 const array = Array.from({ length: 10000 }, (_, i) => i);
 const duplicated = Array.from({ length: 10000 }, (_, i) => i % 1000);
-const {
-  chunk: chunkLodash,
-  filter: filterLodash,
-  map: mapLodash,
-  pipe: pipeLodash,
-  take: takeLodash,
-  uniq: uniqLodash,
-} = lodashFp;
 
-describe('pipe/map', () => {
+group('pipe/map', () => {
   bench('es-toolkit/fp', () => {
     pipeToolkit(
       array,
@@ -44,11 +36,11 @@ describe('pipe/map', () => {
   });
 
   bench('lodash/fp', () => {
-    pipeLodash(mapLodash((x: number) => x * 2))(array);
+    lodashFp.pipe(lodashFp.map((x: number) => x * 2))(array);
   });
 });
 
-describe('pipe/filter + map', () => {
+group('pipe/filter + map', () => {
   bench('es-toolkit/fp', () => {
     pipeToolkit(
       array,
@@ -66,14 +58,14 @@ describe('pipe/filter + map', () => {
   });
 
   bench('lodash/fp', () => {
-    pipeLodash(
-      filterLodash((x: number) => x % 2 === 0),
-      mapLodash((x: number) => x + 1)
+    lodashFp.pipe(
+      lodashFp.filter((x: number) => x % 2 === 0),
+      lodashFp.map((x: number) => x + 1)
     )(array);
   });
 });
 
-describe('pipe/map + filter + take(5) (lazy short-circuit)', () => {
+group('pipe/map + filter + take(5) (lazy short-circuit)', () => {
   bench('es-toolkit/fp', () => {
     pipeToolkit(
       array,
@@ -93,15 +85,15 @@ describe('pipe/map + filter + take(5) (lazy short-circuit)', () => {
   });
 
   bench('lodash/fp', () => {
-    pipeLodash(
-      mapLodash((x: number) => x * 2),
-      filterLodash((x: number) => x % 3 === 0),
-      takeLodash(5)
+    lodashFp.pipe(
+      lodashFp.map((x: number) => x * 2),
+      lodashFp.filter((x: number) => x % 3 === 0),
+      lodashFp.take(5)
     )(array);
   });
 });
 
-describe('pipe/uniq', () => {
+group('pipe/uniq', () => {
   bench('es-toolkit/fp', () => {
     pipeToolkit(duplicated, uniqToolkit());
   });
@@ -111,11 +103,11 @@ describe('pipe/uniq', () => {
   });
 
   bench('lodash/fp', () => {
-    pipeLodash(uniqLodash)(duplicated);
+    lodashFp.pipe(lodashFp.uniq)(duplicated);
   });
 });
 
-describe('pipe/chunk(10)', () => {
+group('pipe/chunk(10)', () => {
   bench('es-toolkit/fp', () => {
     pipeToolkit(array, chunkToolkit(10));
   });
@@ -125,6 +117,6 @@ describe('pipe/chunk(10)', () => {
   });
 
   bench('lodash/fp', () => {
-    pipeLodash(chunkLodash(10))(array);
+    lodashFp.pipe(lodashFp.chunk(10))(array);
   });
 });

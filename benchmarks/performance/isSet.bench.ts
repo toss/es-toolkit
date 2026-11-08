@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isSet as isSetToolkit } from 'es-toolkit';
 import { isSet as isSetToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isSet: isSetLodash } = lodash;
-
-describe('isSet', () => {
+group('isSet', () => {
   bench('es-toolkit/isSet', () => {
     isSetToolkit(new Set());
     isSetToolkit(new WeakSet());
@@ -23,10 +21,10 @@ describe('isSet', () => {
   });
 
   bench('lodash/isSet', () => {
-    isSetLodash(new Set());
-    isSetLodash(new WeakSet());
-    isSetLodash([]);
-    isSetLodash({});
-    isSetLodash(null);
+    lodash.isSet(new Set());
+    lodash.isSet(new WeakSet());
+    lodash.isSet([]);
+    lodash.isSet({});
+    lodash.isSet(null);
   });
 });

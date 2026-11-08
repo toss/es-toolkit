@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { eq as eqToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { eq: eqLodash } = lodash;
-
-describe('eq', () => {
+group('eq', () => {
   bench('es-toolkit/compat/eq', () => {
     eqToolkitCompat(NaN, NaN);
     eqToolkitCompat(NaN, 0);
@@ -14,10 +12,10 @@ describe('eq', () => {
   });
 
   bench('lodash/eq', () => {
-    eqLodash(NaN, NaN);
-    eqLodash(NaN, 0);
-    eqLodash(0, NaN);
-    eqLodash(0, -0);
-    eqLodash('abc', 'abc');
+    lodash.eq(NaN, NaN);
+    lodash.eq(NaN, 0);
+    lodash.eq(0, NaN);
+    lodash.eq(0, -0);
+    lodash.eq('abc', 'abc');
   });
 });

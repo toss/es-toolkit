@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toLength as toLengthToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toLength: toLengthLodash } = lodash;
-
-describe('toLength', () => {
+group('toLength', () => {
   bench('es-toolkit/compat/toLength', () => {
     toLengthToolkitCompat(3.2);
     toLengthToolkitCompat(-1);
@@ -17,13 +15,13 @@ describe('toLength', () => {
   });
 
   bench('lodash/toLength', () => {
-    toLengthLodash(3.2);
-    toLengthLodash(-1);
-    toLengthLodash(Number.MAX_SAFE_INTEGER + 1);
-    toLengthLodash('42');
-    toLengthLodash(null);
-    toLengthLodash(undefined);
-    toLengthLodash(NaN);
-    toLengthLodash(Infinity);
+    lodash.toLength(3.2);
+    lodash.toLength(-1);
+    lodash.toLength(Number.MAX_SAFE_INTEGER + 1);
+    lodash.toLength('42');
+    lodash.toLength(null);
+    lodash.toLength(undefined);
+    lodash.toLength(NaN);
+    lodash.toLength(Infinity);
   });
 });

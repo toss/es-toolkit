@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { intersectionBy as intersectionByToolkit } from 'es-toolkit';
 import { intersectionBy as intersectionByCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { intersectionBy: intersectionByLodash } = lodash;
-
-describe('intersectionBy', () => {
+group('intersectionBy', () => {
   bench('es-toolkit/intersectionBy', () => {
     const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const array2 = [{ id: 2 }, { id: 4 }];
@@ -24,11 +22,11 @@ describe('intersectionBy', () => {
     const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const array2 = [{ id: 2 }, { id: 4 }];
     const mapper = item => item.id;
-    intersectionByLodash(array1, array2, mapper);
+    lodash.intersectionBy(array1, array2, mapper);
   });
 });
 
-describe('intersectionBy/largeArrays', () => {
+group('intersectionBy/largeArrays', () => {
   const array1 = Array.from({ length: 10000 }, (_, i) => ({ id: i }));
   const array2 = Array.from({ length: 10000 }, (_, i) => ({ id: i + 5000 }));
   const mapper = item => item.id;
@@ -42,6 +40,6 @@ describe('intersectionBy/largeArrays', () => {
   });
 
   bench('lodash/intersectionBy', () => {
-    intersectionByLodash(array1, array2, mapper);
+    lodash.intersectionBy(array1, array2, mapper);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isObject as isObjectToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isObject: isObjectLodash } = lodash;
-
-describe('isObject', () => {
+group('isObject', () => {
   bench('es-toolkit/isObject', () => {
     isObjectToolkit([1, 2, 3]);
     isObjectToolkit(true);
@@ -17,13 +15,13 @@ describe('isObject', () => {
   });
 
   bench('lodash/isObject', () => {
-    isObjectLodash([1, 2, 3]);
-    isObjectLodash(true);
-    isObjectLodash(new Date());
-    isObjectLodash(new Error());
-    isObjectLodash(1);
-    isObjectLodash(/x/);
-    isObjectLodash('a');
+    lodash.isObject([1, 2, 3]);
+    lodash.isObject(true);
+    lodash.isObject(new Date());
+    lodash.isObject(new Error());
+    lodash.isObject(1);
+    lodash.isObject(/x/);
+    lodash.isObject('a');
     isObjectToolkit(Array.prototype.slice);
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { findKey as findKeyToolkit } from 'es-toolkit';
 import { findKey as findKeyCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { findKey: findKeyLodash } = lodash;
-
-describe('findKey', () => {
+group('findKey', () => {
   const users = {
     pebbles: { age: 24, active: true },
     barney: { age: 36, active: true },
@@ -17,7 +15,7 @@ describe('findKey', () => {
   });
 
   bench('lodash/findKey', () => {
-    findKeyLodash(users, o => o.age < 40);
+    lodash.findKey(users, o => o.age < 40);
   });
 
   bench('es-toolkit/compat/findKey', () => {
@@ -25,7 +23,7 @@ describe('findKey', () => {
   });
 });
 
-describe('findKey/largeObject', () => {
+group('findKey/largeObject', () => {
   const largeUsers: Record<string, { age: number }> = {};
   for (let i = 0; i < 10000; i++) {
     largeUsers[`user${i}`] = { age: Number(i) };
@@ -36,7 +34,7 @@ describe('findKey/largeObject', () => {
   });
 
   bench('lodash/findKey', () => {
-    findKeyLodash(largeUsers, o => o.age === 7000);
+    lodash.findKey(largeUsers, o => o.age === 7000);
   });
 
   bench('es-toolkit/compat/findKey', () => {

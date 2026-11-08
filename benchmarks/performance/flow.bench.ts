@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { flow as flowToolkit } from 'es-toolkit';
 import { flow as flowCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { flow: flowLodash } = lodash;
-
-describe('flow', () => {
+group('flow', () => {
   const add = (x: number, y: number) => x + y;
   const square = (n: number) => n * n;
 
@@ -20,7 +18,7 @@ describe('flow', () => {
   });
 
   bench('lodash/flow', () => {
-    const combined = flowLodash(add, square);
+    const combined = lodash.flow(add, square);
     combined(1, 2);
   });
 });

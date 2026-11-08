@@ -1,15 +1,13 @@
-import { bench, describe } from 'vitest';
 import { repeat as repeatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { repeat: repeatLodash } = lodash;
-
-describe('repeat', () => {
+group('repeat', () => {
   bench('es-toolkit/repeat', () => {
     repeatToolkit('abc', 2);
   });
 
   bench('lodash/repeat', () => {
-    repeatLodash('abc', 2);
+    lodash.repeat('abc', 2);
   });
 });

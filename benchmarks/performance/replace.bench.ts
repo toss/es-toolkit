@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { replace as replaceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { replace: replaceLodash } = lodash;
-
-describe('replace', () => {
+group('replace', () => {
   bench('es-toolkit/compat/replace', () => {
     replaceToolkitCompat('abc', 'de', '123');
     replaceToolkitCompat('abc', /[bd]/g, '-');
@@ -13,9 +11,9 @@ describe('replace', () => {
   });
 
   bench('lodash/replace', () => {
-    replaceLodash('abc', 'de', '123');
-    replaceLodash('abc', /[bd]/g, '-');
-    replaceLodash('abc', 'de', substring => substring.toUpperCase());
-    replaceLodash('abc', /[bd]/g, substring => substring.toUpperCase());
+    lodash.replace('abc', 'de', '123');
+    lodash.replace('abc', /[bd]/g, '-');
+    lodash.replace('abc', 'de', substring => substring.toUpperCase());
+    lodash.replace('abc', /[bd]/g, substring => substring.toUpperCase());
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { invokeMap as invokeMapToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { invokeMap: invokeMapLodash } = lodash;
-
-describe('invokeMap', () => {
+group('invokeMap', () => {
   const stringArray = ['a', 'b', 'c'];
   const numberObject = { a: 1, b: 2, c: 3 };
   const largeArray = Array.from({ length: 1000 }, (_, i) => String(i));
@@ -21,9 +19,9 @@ describe('invokeMap', () => {
   });
 
   bench('lodash/invokeMap', () => {
-    invokeMapLodash(stringArray, 'toUpperCase');
-    invokeMapLodash(numberObject, 'toFixed', 1);
-    invokeMapLodash(largeArray, 'toString');
-    invokeMapLodash(array, func, '(', ')');
+    lodash.invokeMap(stringArray, 'toUpperCase');
+    lodash.invokeMap(numberObject, 'toFixed', 1);
+    lodash.invokeMap(largeArray, 'toString');
+    lodash.invokeMap(array, func, '(', ')');
   });
 });

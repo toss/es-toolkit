@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isLength as isLengthToolkit } from 'es-toolkit';
 import { isLength as isLengthToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isLength: isLengthLodash } = lodash;
-
-describe('isLength', () => {
+group('isLength', () => {
   bench('es-toolkit/isLength', () => {
     isLengthToolkit(100);
     isLengthToolkit(0);
@@ -37,17 +35,17 @@ describe('isLength', () => {
   });
 
   bench('lodash/isLength', () => {
-    isLengthLodash(100);
-    isLengthLodash(0);
-    isLengthLodash(-1);
-    isLengthLodash(1.5);
-    isLengthLodash(Number.MAX_SAFE_INTEGER);
-    isLengthLodash(Number.MAX_SAFE_INTEGER + 1);
-    isLengthLodash('100');
-    isLengthLodash(true);
-    isLengthLodash(null);
-    isLengthLodash(undefined);
-    isLengthLodash({});
-    isLengthLodash([]);
+    lodash.isLength(100);
+    lodash.isLength(0);
+    lodash.isLength(-1);
+    lodash.isLength(1.5);
+    lodash.isLength(Number.MAX_SAFE_INTEGER);
+    lodash.isLength(Number.MAX_SAFE_INTEGER + 1);
+    lodash.isLength('100');
+    lodash.isLength(true);
+    lodash.isLength(null);
+    lodash.isLength(undefined);
+    lodash.isLength({});
+    lodash.isLength([]);
   });
 });

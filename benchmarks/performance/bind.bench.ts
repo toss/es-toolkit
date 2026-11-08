@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { bind as bindToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { bind: bindLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 function fn(this: any) {
   const result = [this];
@@ -10,7 +8,7 @@ function fn(this: any) {
   return result.concat(Array.from(arguments));
 }
 
-describe('bind - without placeholder', () => {
+group('bind - without placeholder', () => {
   bench('es-toolkit/bind - without placeholder', () => {
     const object = {};
     bindToolkit(fn, object, 'a');
@@ -18,11 +16,11 @@ describe('bind - without placeholder', () => {
 
   bench('lodash/bind - without placeholder', () => {
     const object = {};
-    bindLodash(fn, object, 'a');
+    lodash.bind(fn, object, 'a');
   });
 });
 
-describe('bind - with placeholder', () => {
+group('bind - with placeholder', () => {
   bench('es-toolkit/bind - with placeholder', () => {
     const object = {};
     bindToolkit(fn, object, 'a', bindToolkit.placeholder);
@@ -30,6 +28,6 @@ describe('bind - with placeholder', () => {
 
   bench('lodash/bind - with placeholder', () => {
     const object = {};
-    bindLodash(fn, object, 'a', bindLodash.placeholder);
+    lodash.bind(fn, object, 'a', lodash.bind.placeholder);
   });
 });

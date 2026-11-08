@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { escapeRegExp as escapeRegExpToolkit } from 'es-toolkit';
 import { escapeRegExp as escapeRegExpCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { escapeRegExp: escapeRegExpLodash } = lodash;
-
-describe('escape', () => {
+group('escape', () => {
   const longString = '^$.*+?()[]{}|\\'.repeat(100);
   bench('es-toolkit/escapeRegExp', () => {
     escapeRegExpToolkit('^$.*+?()[]{}|\\');
@@ -16,7 +14,7 @@ describe('escape', () => {
   });
 
   bench('lodash/escapeRegExp', () => {
-    escapeRegExpLodash('^$.*+?()[]{}|\\');
+    lodash.escapeRegExp('^$.*+?()[]{}|\\');
   });
 
   bench('es-toolkit/escapeRegExp - long string', () => {
@@ -28,6 +26,6 @@ describe('escape', () => {
   });
 
   bench('lodash/escapeRegExp long string', () => {
-    escapeRegExpLodash(longString);
+    lodash.escapeRegExp(longString);
   });
 });

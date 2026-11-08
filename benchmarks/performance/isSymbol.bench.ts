@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isSymbol as isSymbolToolkit } from 'es-toolkit';
 import { isSymbol as isSymbolToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isSymbol: isSymbolLodash } = lodash;
-
-describe('isSymbol', () => {
+group('isSymbol', () => {
   bench('es-toolkit/isSymbol', () => {
     isSymbolToolkit(Symbol('a'));
     isSymbolToolkit(Symbol.for('a'));
@@ -25,11 +23,11 @@ describe('isSymbol', () => {
   });
 
   bench('lodash/isSymbol', () => {
-    isSymbolLodash(Symbol('a'));
-    isSymbolLodash(Symbol.for('a'));
-    isSymbolLodash(Symbol.iterator);
-    isSymbolLodash('');
-    isSymbolLodash({});
-    isSymbolLodash(123);
+    lodash.isSymbol(Symbol('a'));
+    lodash.isSymbol(Symbol.for('a'));
+    lodash.isSymbol(Symbol.iterator);
+    lodash.isSymbol('');
+    lodash.isSymbol({});
+    lodash.isSymbol(123);
   });
 });

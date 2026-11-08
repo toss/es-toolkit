@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { once as onceToolkit } from 'es-toolkit';
 import { once as onceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { once: onceLodash } = lodash;
-
-describe('once', () => {
+group('once', () => {
   bench('es-toolkit/once', () => {
     onceToolkit(() => undefined);
   });
@@ -15,6 +13,6 @@ describe('once', () => {
   });
 
   bench('lodash/once', () => {
-    onceLodash(() => undefined);
+    lodash.once(() => undefined);
   });
 });

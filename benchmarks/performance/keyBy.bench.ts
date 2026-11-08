@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { keyBy as keyByToolkit } from 'es-toolkit';
 import { keyBy as keyByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { keyBy: keyByLodash } = lodash;
-
-describe('keyBy', () => {
+group('keyBy', () => {
   bench('es-toolkit/keyBy', () => {
     const people = [
       { name: 'mike', age: 20 },
@@ -39,11 +37,11 @@ describe('keyBy', () => {
       { name: 'emma', age: 25 },
     ];
 
-    keyByLodash(people, person => person.name);
+    lodash.keyBy(people, person => person.name);
   });
 });
 
-describe('keyBy/largeArray', () => {
+group('keyBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/keyBy', () => {
@@ -55,6 +53,6 @@ describe('keyBy/largeArray', () => {
   });
 
   bench('lodash/keyBy', () => {
-    keyByLodash(largeArray, person => person.name);
+    lodash.keyBy(largeArray, person => person.name);
   });
 });

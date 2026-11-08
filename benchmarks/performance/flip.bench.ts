@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { flip as flipToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { flip: flipLodash } = lodash;
-
-describe('flip', () => {
+group('flip', () => {
   function fn(a: any, b: any, c: any, d: any) {
     return [a, b, c, d];
   }
@@ -14,6 +12,6 @@ describe('flip', () => {
   });
 
   bench('lodash/flip', () => {
-    flipLodash(fn);
+    lodash.flip(fn);
   });
 });

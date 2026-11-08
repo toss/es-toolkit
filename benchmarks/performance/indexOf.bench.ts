@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { indexOf as indexOfToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { indexOf: indexOfLodash } = lodash;
-
-describe('indexOf', () => {
+group('indexOf', () => {
   const array = [1, 2, 3, 4, NaN, '1', '2', '3', '4', 'NaN'];
 
   bench('es-toolkit/compat/indexOf', () => {
@@ -16,10 +14,10 @@ describe('indexOf', () => {
   });
 
   bench('lodash/indexOf', () => {
-    indexOfLodash(array, 3);
-    indexOfLodash(array, NaN);
-    indexOfLodash(array, '1');
-    indexOfLodash(array, 'NaN', -5);
-    indexOfLodash(array, 'NaN', -100);
+    lodash.indexOf(array, 3);
+    lodash.indexOf(array, NaN);
+    lodash.indexOf(array, '1');
+    lodash.indexOf(array, 'NaN', -5);
+    lodash.indexOf(array, 'NaN', -100);
   });
 });

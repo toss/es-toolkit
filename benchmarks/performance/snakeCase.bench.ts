@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { snakeCase as snakeCaseToolkit } from 'es-toolkit';
 import { snakeCase as snakeCaseToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { snakeCase: snakeCaseLodash } = lodash;
-
-describe('snakeCase', () => {
+group('snakeCase', () => {
   bench('es-toolkit/snakeCase', () => {
     snakeCaseToolkit('hello world');
     snakeCaseToolkit('--foo--bar__baz 123');
@@ -23,10 +21,10 @@ describe('snakeCase', () => {
   });
 
   bench('lodash/snakeCase', () => {
-    snakeCaseLodash('hello world');
-    snakeCaseLodash('--foo--bar__baz 123');
-    snakeCaseLodash('123numericValues');
-    snakeCaseLodash('XMLHttpRequest');
-    snakeCaseLodash('hello-World_of XML_httpRequest');
+    lodash.snakeCase('hello world');
+    lodash.snakeCase('--foo--bar__baz 123');
+    lodash.snakeCase('123numericValues');
+    lodash.snakeCase('XMLHttpRequest');
+    lodash.snakeCase('hello-World_of XML_httpRequest');
   });
 });

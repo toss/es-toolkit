@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { wrap as wrapToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { wrap: wrapLodash } = lodash;
-
-describe('wrap', () => {
+group('wrap', () => {
   bench('es-toolkit/compat/wrap', () => {
     wrapToolkit(
       (x: any) => x,
@@ -13,14 +11,14 @@ describe('wrap', () => {
   });
 
   bench('lodash/wrap', () => {
-    wrapLodash(
+    lodash.wrap(
       (x: any) => x,
       (value, x) => value(x)
     );
   });
 });
 
-describe('wrap/invoked', () => {
+group('wrap/invoked', () => {
   bench('es-toolkit/compat/wrap', () => {
     const wrapped = wrapToolkit(
       (x: string) => x.toUpperCase(),
@@ -30,7 +28,7 @@ describe('wrap/invoked', () => {
   });
 
   bench('lodash/wrap', () => {
-    const wrapped = wrapLodash(
+    const wrapped = lodash.wrap(
       (x: string) => x.toUpperCase(),
       (value, x: string) => `<p>${value(x)}</p>`
     );

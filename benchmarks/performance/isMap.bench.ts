@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isMap as isMapToolkit } from 'es-toolkit';
 import { isMap as isMapToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isMap: isMapLodash } = lodash;
-
-describe('isMap', () => {
+group('isMap', () => {
   bench('es-toolkit/isMap', () => {
     isMapToolkit(new Map());
     isMapToolkit(new Map([['key', 'value']]));
@@ -25,11 +23,11 @@ describe('isMap', () => {
   });
 
   bench('lodash/isMap', () => {
-    isMapLodash(new Map());
-    isMapLodash(new Map([['key', 'value']]));
-    isMapLodash(new WeakMap());
-    isMapLodash([]);
-    isMapLodash({});
-    isMapLodash(null);
+    lodash.isMap(new Map());
+    lodash.isMap(new Map([['key', 'value']]));
+    lodash.isMap(new WeakMap());
+    lodash.isMap([]);
+    lodash.isMap({});
+    lodash.isMap(null);
   });
 });

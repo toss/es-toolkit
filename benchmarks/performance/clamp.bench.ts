@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { clamp as clampToolkit } from 'es-toolkit';
 import { clamp as clampCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { clamp: clampLodash } = lodash;
-
-describe('clamp', () => {
+group('clamp', () => {
   bench('es-toolkit/clamp', () => {
     clampToolkit(10, 5, 15);
     clampToolkit(10, 5);
@@ -17,7 +15,7 @@ describe('clamp', () => {
   });
 
   bench('lodash/clamp', () => {
-    clampLodash(10, 5, 15);
-    clampLodash(10, 5);
+    lodash.clamp(10, 5, 15);
+    lodash.clamp(10, 5);
   });
 });

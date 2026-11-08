@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { escape as escapeToolkit } from 'es-toolkit';
 import { escape as escapeToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { escape: escapeLodash } = lodash;
-
-describe('escape', () => {
+group('escape', () => {
   bench('es-toolkit/escape', () => {
     escapeToolkit('fred, barney, & pebbles');
   });
@@ -15,11 +13,11 @@ describe('escape', () => {
   });
 
   bench('lodash/escape', () => {
-    escapeLodash('fred, barney, & pebbles');
+    lodash.escape('fred, barney, & pebbles');
   });
 });
 
-describe('escape (long string)', () => {
+group('escape (long string)', () => {
   const longString = 'fred, barney, & pebbles'.repeat(100);
 
   bench('es-toolkit/escape', () => {
@@ -31,6 +29,6 @@ describe('escape (long string)', () => {
   });
 
   bench('lodash/escape', () => {
-    escapeLodash(longString);
+    lodash.escape(longString);
   });
 });

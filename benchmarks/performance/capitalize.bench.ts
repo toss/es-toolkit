@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { capitalize as capitalizeToolkit } from 'es-toolkit';
 import { capitalize as capitalizeToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { capitalize: capitalizeLodash } = lodash;
-
-describe('capitalize', () => {
+group('capitalize', () => {
   bench('es-toolkit/capitalize', () => {
     const str = 'camelCase';
     capitalizeToolkit(str);
@@ -18,6 +16,6 @@ describe('capitalize', () => {
 
   bench('lodash/capitalize', () => {
     const str = 'camelCase';
-    capitalizeLodash(str);
+    lodash.capitalize(str);
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { takeRight as takeRightToolkit } from 'es-toolkit';
 import { takeRight as takeRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { takeRight: takeRightLodash } = lodash;
-
-describe('takeRight', () => {
+group('takeRight', () => {
   bench('es-toolkit/takeRight', () => {
     takeRightToolkit([1, 2, 3, 4], 2);
   });
@@ -15,11 +13,11 @@ describe('takeRight', () => {
   });
 
   bench('lodash/takeRight', () => {
-    takeRightLodash([1, 2, 3, 4], 2);
+    lodash.takeRight([1, 2, 3, 4], 2);
   });
 });
 
-describe('takeRight/largeArray', () => {
+group('takeRight/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/takeRight', () => {
@@ -31,6 +29,6 @@ describe('takeRight/largeArray', () => {
   });
 
   bench('lodash/takeRight', () => {
-    takeRightLodash(largeArray, 100);
+    lodash.takeRight(largeArray, 100);
   });
 });

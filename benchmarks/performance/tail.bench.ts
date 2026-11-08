@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { tail as tailToolkit } from 'es-toolkit';
 import { tail as tailToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { tail: tailLodash } = lodash;
-
-describe('tail', () => {
+group('tail', () => {
   bench('es-toolkit/tail', () => {
     tailToolkit([1, 2, 3, 4]);
   });
@@ -15,11 +13,11 @@ describe('tail', () => {
   });
 
   bench('lodash/tail', () => {
-    tailLodash([1, 2, 3, 4]);
+    lodash.tail([1, 2, 3, 4]);
   });
 });
 
-describe('tail/largeArray', () => {
+group('tail/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/tail', () => {
@@ -31,6 +29,6 @@ describe('tail/largeArray', () => {
   });
 
   bench('lodash/tail', () => {
-    tailLodash(largeArray);
+    lodash.tail(largeArray);
   });
 });

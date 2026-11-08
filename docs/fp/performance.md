@@ -12,10 +12,10 @@
 
 ## Measurement Method
 
-The numbers above were measured on this branch with Vitest:
+To run the benchmark yourself:
 
 ```bash
-yarn vitest bench performance/fp/pipe.bench.ts --run
+yarn bench fp/pipe
 ```
 
 See `benchmarks/performance/fp/pipe.bench.ts` for the exact benchmark code.

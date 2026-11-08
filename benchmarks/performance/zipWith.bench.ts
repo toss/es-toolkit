@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { zipWith as zipWithToolkit } from 'es-toolkit';
 import { zipWith as zipWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { zipWith: zipWithLodash } = lodash;
-
-describe('zipWith', () => {
+group('zipWith', () => {
   bench('es-toolkit/zipWith', () => {
     const arr1 = [1, 2];
     const arr2 = [3, 4];
@@ -24,11 +22,11 @@ describe('zipWith', () => {
     const arr1 = [1, 2];
     const arr2 = [3, 4];
     const arr3 = [5, 6];
-    zipWithLodash(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
+    lodash.zipWith(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
   });
 });
 
-describe('zipWith/largeArray', () => {
+group('zipWith/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/zipWith', () => {
@@ -40,6 +38,6 @@ describe('zipWith/largeArray', () => {
   });
 
   bench('lodash/zipWith', () => {
-    zipWithLodash(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
+    lodash.zipWith(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
   });
 });

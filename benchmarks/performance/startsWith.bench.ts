@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { startsWith as startsWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { startsWith: startsWithLodash } = lodash;
-
-describe('startsWith', () => {
+group('startsWith', () => {
   bench('es-toolkit/startsWith', () => {
     const str = 'fooBar';
     startsWithToolkit(str, 'foo');
@@ -13,7 +11,7 @@ describe('startsWith', () => {
 
   bench('lodash/startsWith', () => {
     const str = 'fooBar';
-    startsWithLodash(str, 'foo');
-    startsWithLodash(str, 'Bar', 3);
+    lodash.startsWith(str, 'foo');
+    lodash.startsWith(str, 'Bar', 3);
   });
 });

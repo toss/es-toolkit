@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toUpper as toUpperToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toUpper: toUpperLodash } = lodash;
-
-describe('toUpper', () => {
+group('toUpper', () => {
   const basicStrings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];
 
   const spacedStr = 'hello   world';
@@ -50,25 +48,25 @@ describe('toUpper', () => {
   });
 
   bench('lodash/toUpper', () => {
-    basicStrings.forEach(str => toUpperLodash(str));
+    basicStrings.forEach(str => lodash.toUpper(str));
 
-    toUpperLodash(spacedStr);
-    toUpperLodash(specialCharsStr);
-    toUpperLodash(newlineStr);
-    unicodeStrs.forEach(str => toUpperLodash(str));
-    latinOperators.forEach(op => toUpperLodash(op));
+    lodash.toUpper(spacedStr);
+    lodash.toUpper(specialCharsStr);
+    lodash.toUpper(newlineStr);
+    unicodeStrs.forEach(str => lodash.toUpper(str));
+    latinOperators.forEach(op => lodash.toUpper(op));
 
-    toUpperLodash(number);
-    toUpperLodash(negZero);
-    toUpperLodash(posZero);
-    toUpperLodash(infinite);
-    toUpperLodash(nan);
-    toUpperLodash(nullValue);
-    toUpperLodash(undefinedValue);
-    arrays.forEach(arr => toUpperLodash(arr));
-    toUpperLodash(nestedArrays);
-    symbols.forEach(sym => toUpperLodash(sym));
-    objects.forEach(obj => toUpperLodash(obj));
-    toUpperLodash(mixedArray);
+    lodash.toUpper(number);
+    lodash.toUpper(negZero);
+    lodash.toUpper(posZero);
+    lodash.toUpper(infinite);
+    lodash.toUpper(nan);
+    lodash.toUpper(nullValue);
+    lodash.toUpper(undefinedValue);
+    arrays.forEach(arr => lodash.toUpper(arr));
+    lodash.toUpper(nestedArrays);
+    symbols.forEach(sym => lodash.toUpper(sym));
+    objects.forEach(obj => lodash.toUpper(obj));
+    lodash.toUpper(mixedArray);
   });
 });

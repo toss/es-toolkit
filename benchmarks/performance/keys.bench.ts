@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { keys as keysToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { keys: keysLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 class Foo {
   a = 1;
@@ -12,12 +10,12 @@ class Foo {
 
 const object = new Foo();
 
-describe('keys', () => {
+group('keys', () => {
   bench('es-toolkit/compat/keys', () => {
     keysToolkit(object);
   });
 
   bench('lodash/keys', () => {
-    keysLodash(object);
+    lodash.keys(object);
   });
 });

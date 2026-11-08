@@ -1,16 +1,14 @@
-import { bench, describe } from 'vitest';
 import { initial as initialToolkit } from 'es-toolkit';
 import { initial as initialToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { initial: initialLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 // Helper function to generate a large array
 function generateLargeArray(size: number) {
   return Array.from({ length: size }, (_, index) => index);
 }
 
-describe('initial', () => {
+group('initial', () => {
   bench('es-toolkit/initial', () => {
     initialToolkit([1, 2, 3, 4, 5, 6]);
   });
@@ -20,11 +18,11 @@ describe('initial', () => {
   });
 
   bench('lodash/initial', () => {
-    initialLodash([1, 2, 3, 4, 5, 6]);
+    lodash.initial([1, 2, 3, 4, 5, 6]);
   });
 });
 
-describe('initial/largeArray', () => {
+group('initial/largeArray', () => {
   const largeArray = generateLargeArray(1000000);
 
   bench('es-toolkit/initial', () => {
@@ -36,6 +34,6 @@ describe('initial/largeArray', () => {
   });
 
   bench('lodash/initial', () => {
-    initialLodash(largeArray);
+    lodash.initial(largeArray);
   });
 });

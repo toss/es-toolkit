@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { subtract as subtractToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { subtract: subtractLodash } = lodash;
-
-describe('subtract function benchmark', () => {
+group('subtract function benchmark', () => {
   bench('es-toolkit/compat/subtract', () => {
     subtractToolkitCompat(2, 3);
     subtractToolkitCompat(-1, -5);
@@ -14,10 +12,10 @@ describe('subtract function benchmark', () => {
   });
 
   bench('lodash/subtract', () => {
-    subtractLodash(2, 3);
-    subtractLodash(-1, -5);
-    subtractLodash(NaN, 3);
-    subtractLodash(3, NaN);
-    subtractLodash(NaN, NaN);
+    lodash.subtract(2, 3);
+    lodash.subtract(-1, -5);
+    lodash.subtract(NaN, 3);
+    lodash.subtract(3, NaN);
+    lodash.subtract(NaN, NaN);
   });
 });

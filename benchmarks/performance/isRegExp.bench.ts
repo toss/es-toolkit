@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isRegExp as isRegExpToolkit } from 'es-toolkit';
 import { isRegExp as isRegExpToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isRegExp: isRegExpLodash } = lodash;
-
-describe('isRegExp', () => {
+group('isRegExp', () => {
   bench('es-toolkit/isRegExp', () => {
     isRegExpToolkit(new RegExp(''));
     isRegExpToolkit(/abc/);
@@ -19,8 +17,8 @@ describe('isRegExp', () => {
   });
 
   bench('lodash/isRegExp', () => {
-    isRegExpLodash(new RegExp(''));
-    isRegExpLodash(/abc/);
-    isRegExpLodash('/abc/');
+    lodash.isRegExp(new RegExp(''));
+    lodash.isRegExp(/abc/);
+    lodash.isRegExp('/abc/');
   });
 });

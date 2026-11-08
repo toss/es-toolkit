@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { lowerCase as lowerCaseToolkit } from 'es-toolkit';
 import { lowerCase as lowerCaseToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { lowerCase: lowerCaseLodash } = lodash;
-
-describe('lowerCase - short string', () => {
+group('lowerCase - short string', () => {
   bench('es-toolkit/lowerCase', () => {
     const str = 'camelCase';
     lowerCaseToolkit(str);
@@ -18,11 +16,11 @@ describe('lowerCase - short string', () => {
 
   bench('lodash/lowerCase', () => {
     const str = 'camelCase';
-    lowerCaseLodash(str);
+    lodash.lowerCase(str);
   });
 });
 
-describe('lowerCase - long string', () => {
+group('lowerCase - long string', () => {
   const LONG_STR = 'camelCaseLongString'.repeat(1000);
   bench('es-toolkit/lowerCase', () => {
     lowerCaseToolkit(LONG_STR);
@@ -33,6 +31,6 @@ describe('lowerCase - long string', () => {
   });
 
   bench('lodash/lowerCase', () => {
-    lowerCaseLodash(LONG_STR);
+    lodash.lowerCase(LONG_STR);
   });
 });

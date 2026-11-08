@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { minBy as minByToolkit } from 'es-toolkit';
 import { minBy as minByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { minBy: minByLodash } = lodash;
-
-describe('minBy', () => {
+group('minBy', () => {
   bench('es-toolkit/minBy', () => {
     const people = [
       { name: 'Mark', age: 30 },
@@ -30,11 +28,11 @@ describe('minBy', () => {
       { name: 'Nunu', age: 20 },
       { name: 'Overmars', age: 35 },
     ];
-    minByLodash(people, person => person.age);
+    lodash.minBy(people, person => person.age);
   });
 });
 
-describe('minBy/largeArray', () => {
+group('minBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/minBy', () => {
@@ -46,6 +44,6 @@ describe('minBy/largeArray', () => {
   });
 
   bench('lodash/minBy', () => {
-    minByLodash(largeArray, person => person.age);
+    lodash.minBy(largeArray, person => person.age);
   });
 });

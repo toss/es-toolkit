@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toString as toStringToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toString: toStringLodash } = lodash;
-
-describe('toString', () => {
+group('toString', () => {
   const number = -0;
   const object = Object(number);
   const char = 'a';
@@ -22,11 +20,11 @@ describe('toString', () => {
   });
 
   bench('lodash/toString', () => {
-    toStringLodash(number);
-    toStringLodash(object);
-    toStringLodash(char);
-    toStringLodash(longString);
-    toStringLodash(array);
-    toStringLodash(nestedArray);
+    lodash.toString(number);
+    lodash.toString(object);
+    lodash.toString(char);
+    lodash.toString(longString);
+    lodash.toString(array);
+    lodash.toString(nestedArray);
   });
 });

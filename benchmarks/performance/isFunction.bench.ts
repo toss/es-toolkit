@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isFunction as isFunctionToolkit } from 'es-toolkit';
 import { isFunction as isFunctionToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isFunction: isFunctionLodash } = lodash;
-
-describe('isFunction', () => {
+group('isFunction', () => {
   bench('es-toolkit/isFunction', () => {
     isFunctionToolkit(true);
     isFunctionToolkit(new Date());
@@ -39,18 +37,18 @@ describe('isFunction', () => {
   });
 
   bench('lodash/isFunction', () => {
-    isFunctionLodash(true);
-    isFunctionLodash(new Date());
-    isFunctionLodash(new Error());
-    isFunctionLodash({ a: 1 });
-    isFunctionLodash(1);
-    isFunctionLodash(/x/);
-    isFunctionLodash(Array.from({ length: 10000 }));
-    isFunctionLodash(async function () {});
-    isFunctionLodash(function* () {});
-    isFunctionLodash(Proxy);
-    isFunctionLodash(Int8Array);
-    isFunctionLodash(() => {});
-    isFunctionLodash(Array.prototype.slice);
+    lodash.isFunction(true);
+    lodash.isFunction(new Date());
+    lodash.isFunction(new Error());
+    lodash.isFunction({ a: 1 });
+    lodash.isFunction(1);
+    lodash.isFunction(/x/);
+    lodash.isFunction(Array.from({ length: 10000 }));
+    lodash.isFunction(async function () {});
+    lodash.isFunction(function* () {});
+    lodash.isFunction(Proxy);
+    lodash.isFunction(Int8Array);
+    lodash.isFunction(() => {});
+    lodash.isFunction(Array.prototype.slice);
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isTypedArray as isTypedArrayToolkit } from 'es-toolkit';
 import { isTypedArray as isTypedArrayCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isTypedArray: isTypedArrayLodash } = lodash;
-
-describe('isTypedArrayToolkit', () => {
+group('isTypedArrayToolkit', () => {
   bench('es-toolkit/isTypedArray', () => {
     isTypedArrayToolkit(new Uint8Array(new ArrayBuffer(8)));
     isTypedArrayToolkit(new Uint8ClampedArray(new ArrayBuffer(8)));
@@ -35,16 +33,16 @@ describe('isTypedArrayToolkit', () => {
   });
 
   bench('lodash/isTypedArray', () => {
-    isTypedArrayLodash(new Uint8Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint8ClampedArray(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint16Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Uint32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new BigUint64Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int8Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int16Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Int32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new BigInt64Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Float32Array(new ArrayBuffer(8)));
-    isTypedArrayLodash(new Float64Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Uint8Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Uint8ClampedArray(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Uint16Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Uint32Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new BigUint64Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Int8Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Int16Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Int32Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new BigInt64Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Float32Array(new ArrayBuffer(8)));
+    lodash.isTypedArray(new Float64Array(new ArrayBuffer(8)));
   });
 });

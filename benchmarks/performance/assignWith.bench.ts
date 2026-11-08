@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { assignWith as assignWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { assignWith: assignWithLodash } = lodash;
-
-describe('assignWith', () => {
+group('assignWith', () => {
   bench('es-toolkit/assignWith', () => {
     assignWithToolkit({ a: 1 }, { b: 2 }, { c: 3 }, { a: 4 }, (objValue, srcValue) => {
       return objValue === undefined ? srcValue : objValue;
@@ -12,7 +10,7 @@ describe('assignWith', () => {
   });
 
   bench('lodash/assignWith', () => {
-    assignWithLodash({ a: 1 }, { b: 2 }, { c: 3 }, { a: 4 }, (objValue, srcValue) => {
+    lodash.assignWith({ a: 1 }, { b: 2 }, { c: 3 }, { a: 4 }, (objValue, srcValue) => {
       return objValue === undefined ? srcValue : objValue;
     });
   });

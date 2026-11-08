@@ -1,9 +1,7 @@
-import { bench, describe } from 'vitest';
 import { flattenDeep as flattenDeepToolkit } from 'es-toolkit';
 import { flattenDeep as flattenDeepToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { flattenDeep: flattenDeepLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const createNestedArray = (values: number[]): any[] => {
   if (values.length === 0) {
@@ -13,7 +11,7 @@ const createNestedArray = (values: number[]): any[] => {
   return [first, createNestedArray(rest)];
 };
 
-describe('flattenDeep', () => {
+group('flattenDeep', () => {
   const arr = createNestedArray(Array.from({ length: 30 }, (_, index) => index));
 
   bench('es-toolkit/flattenDeep', () => {
@@ -25,7 +23,7 @@ describe('flattenDeep', () => {
   });
 
   bench('lodash/flattenDeep', () => {
-    flattenDeepLodash(arr);
+    lodash.flattenDeep(arr);
   });
 
   bench('js built-in/flat(Infinity)', () => {

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { compact as compactToolkit } from 'es-toolkit';
 import { compact as compactToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { compact: compactLodash } = lodash;
-
-describe('compact', () => {
+group('compact', () => {
   bench('es-toolkit', () => {
     compactToolkit([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
   });
@@ -15,11 +13,11 @@ describe('compact', () => {
   });
 
   bench('lodash', () => {
-    compactLodash([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+    lodash.compact([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
   });
 });
 
-describe('compact/largeArray', () => {
+group('compact/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => (i % 10 === 0 ? undefined : i));
 
   bench('es-toolkit', () => {
@@ -31,6 +29,6 @@ describe('compact/largeArray', () => {
   });
 
   bench('lodash', () => {
-    compactLodash(largeArray);
+    lodash.compact(largeArray);
   });
 });

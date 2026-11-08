@@ -1,14 +1,12 @@
-import { bench, describe } from 'vitest';
 import { isPlainObject as isPlainObjectToolkit } from 'es-toolkit';
 import { isPlainObject as isPlainObjectCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { isPlainObject: isPlainObjectLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const object = Object.create(null);
 const buffer = Buffer.from('hello, world');
 
-describe('isPlainObject', () => {
+group('isPlainObject', () => {
   bench('es-toolkit/isPlainObject', () => {
     isPlainObjectToolkit({});
     isPlainObjectToolkit([]);
@@ -26,10 +24,10 @@ describe('isPlainObject', () => {
   });
 
   bench('lodash/isPlainObject', () => {
-    isPlainObjectLodash({});
-    isPlainObjectLodash([]);
-    isPlainObjectLodash(null);
-    isPlainObjectLodash(object);
-    isPlainObjectLodash(buffer);
+    lodash.isPlainObject({});
+    lodash.isPlainObject([]);
+    lodash.isPlainObject(null);
+    lodash.isPlainObject(object);
+    lodash.isPlainObject(buffer);
   });
 });

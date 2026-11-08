@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { forEachRight as forEachRightToolkit } from 'es-toolkit';
 import { forEachRight as forEachRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { forEachRight: forEachRightLodash } = lodash;
-
-describe('forEachRight', () => {
+group('forEachRight', () => {
   bench('es-toolkit/forEachRight', () => {
     forEachRightToolkit([1, 2, 3, 4, 5, 6], x => x + 3);
   });
@@ -15,11 +13,11 @@ describe('forEachRight', () => {
   });
 
   bench('lodash/forEachRight', () => {
-    forEachRightLodash([1, 2, 3, 4, 5, 6], x => x + 3);
+    lodash.forEachRight([1, 2, 3, 4, 5, 6], x => x + 3);
   });
 });
 
-describe('forEachRight/largeArray', () => {
+group('forEachRight/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/forEachRight', () => {
@@ -31,6 +29,6 @@ describe('forEachRight/largeArray', () => {
   });
 
   bench('lodash/forEachRight', () => {
-    forEachRightLodash(largeArray, x => x + 3);
+    lodash.forEachRight(largeArray, x => x + 3);
   });
 });

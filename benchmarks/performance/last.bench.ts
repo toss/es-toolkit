@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { last as lastToolkit } from 'es-toolkit';
 import { last as lastToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { last: lastLodash } = lodash;
-
-describe('last', () => {
+group('last', () => {
   bench('es-toolkit/last', () => {
     const people = [
       { name: 'mike', age: 20 },
@@ -39,11 +37,11 @@ describe('last', () => {
       { name: 'emma', age: 25 },
     ];
 
-    lastLodash(people);
+    lodash.last(people);
   });
 });
 
-describe('last/largeArray', () => {
+group('last/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/last', () => {
@@ -55,6 +53,6 @@ describe('last/largeArray', () => {
   });
 
   bench('lodash/last', () => {
-    lastLodash(largeArray);
+    lodash.last(largeArray);
   });
 });

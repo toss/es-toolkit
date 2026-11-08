@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isWeakSet as isWeakSetToolkit } from 'es-toolkit';
 import { isWeakSet as isWeakSetToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isWeakSet: isWeakSetLodash } = lodash;
-
-describe('isWeakSet', () => {
+group('isWeakSet', () => {
   bench('es-toolkit/isWeakSet', () => {
     isWeakSetToolkit(new WeakMap());
     isWeakSetToolkit(new Map());
@@ -20,9 +18,9 @@ describe('isWeakSet', () => {
   });
 
   bench('lodash/isWeakSet', () => {
-    isWeakSetLodash(new WeakMap());
-    isWeakSetLodash(new Map());
-    isWeakSetLodash('');
-    isWeakSetLodash(123);
+    lodash.isWeakSet(new WeakMap());
+    lodash.isWeakSet(new Map());
+    lodash.isWeakSet('');
+    lodash.isWeakSet(123);
   });
 });

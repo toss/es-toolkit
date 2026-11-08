@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { curryRight as curryRightToolkit } from 'es-toolkit';
 import { curryRight as curryRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { curryRight: curryRightLodash } = lodash;
-
-describe('curryRight', () => {
+group('curryRight', () => {
   const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
 
   bench('es-toolkit/curryRight', () => {
@@ -17,11 +15,11 @@ describe('curryRight', () => {
   });
 
   bench('lodash/curryRight', () => {
-    curryRightLodash(fn)(true)('a')(1);
+    lodash.curryRight(fn)(true)('a')(1);
   });
 });
 
-describe('curryRight - compat', () => {
+group('curryRight - compat', () => {
   const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
 
   bench('es-toolkit/compat/curryRight', () => {
@@ -29,11 +27,11 @@ describe('curryRight - compat', () => {
   });
 
   bench('lodash/curryRight', () => {
-    curryRightLodash(fn)(true)(1, 'a');
+    lodash.curryRight(fn)(true)(1, 'a');
   });
 });
 
-describe('curryRight - compat with placeholder', () => {
+group('curryRight - compat with placeholder', () => {
   const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
 
   bench('es-toolkit/compat/curryRight', () => {
@@ -41,6 +39,6 @@ describe('curryRight - compat with placeholder', () => {
   });
 
   bench('lodash/curryRight', () => {
-    curryRightLodash(fn)(true)(1, curryRightLodash.placeholder)('a');
+    lodash.curryRight(fn)(true)(1, lodash.curryRight.placeholder)('a');
   });
 });

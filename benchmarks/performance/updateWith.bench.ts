@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { updateWith as updateWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { updateWith: lodashUpdateWith } = lodash;
+import { bench, group } from './harness.ts';
 
 function customizer(value: unknown) {
   if (value == null) {
@@ -11,7 +9,7 @@ function customizer(value: unknown) {
   return value;
 }
 
-describe('updateWith - dot notation', () => {
+group('updateWith - dot notation', () => {
   const obj = { a: { b: { c: 3 } } };
 
   bench('es-toolkit/updateWith', () => {
@@ -19,11 +17,11 @@ describe('updateWith - dot notation', () => {
   });
 
   bench('lodash/updateWith', () => {
-    lodashUpdateWith(obj, 'a.b.c', value => (value as number) + 1, customizer);
+    lodash.updateWith(obj, 'a.b.c', value => (value as number) + 1, customizer);
   });
 });
 
-describe('updateWith - array notation', () => {
+group('updateWith - array notation', () => {
   const obj = { a: [{ b: { c: 3 } }] };
 
   bench('es-toolkit/updateWith', () => {
@@ -31,11 +29,11 @@ describe('updateWith - array notation', () => {
   });
 
   bench('lodash/updateWith', () => {
-    lodashUpdateWith(obj, 'a[0].b.c', value => (value as number) + 1, customizer);
+    lodash.updateWith(obj, 'a[0].b.c', value => (value as number) + 1, customizer);
   });
 });
 
-describe('updateWith - custom objects', () => {
+group('updateWith - custom objects', () => {
   const obj = {};
 
   bench('es-toolkit/updateWith', () => {
@@ -43,6 +41,6 @@ describe('updateWith - custom objects', () => {
   });
 
   bench('lodash/updateWith', () => {
-    lodashUpdateWith(obj, '[0].a.b.c', value => (value as number) + 1, customizer);
+    lodash.updateWith(obj, '[0].a.b.c', value => (value as number) + 1, customizer);
   });
 });

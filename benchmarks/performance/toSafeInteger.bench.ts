@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toSafeInteger as toSafeIntegerToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toSafeInteger: toSafeIntegerLodash } = lodash;
-
-describe('toSafeInteger', () => {
+group('toSafeInteger', () => {
   bench('es-toolkit/compat/toSafeInteger', () => {
     toSafeIntegerToolkitCompat({ valueOf: () => 1 });
     toSafeIntegerToolkitCompat({ valueOf: () => 2 });
@@ -16,12 +14,12 @@ describe('toSafeInteger', () => {
   });
 
   bench('lodash/toSafeInteger', () => {
-    toSafeIntegerLodash({ valueof: () => 1 });
-    toSafeIntegerLodash({ valueof: () => 2 });
-    toSafeIntegerLodash({ toString: () => '3' });
-    toSafeIntegerLodash('0b101010');
-    toSafeIntegerLodash('0o12345');
-    toSafeIntegerLodash('0x1a2b3c');
-    toSafeIntegerLodash('1.1');
+    lodash.toSafeInteger({ valueof: () => 1 });
+    lodash.toSafeInteger({ valueof: () => 2 });
+    lodash.toSafeInteger({ toString: () => '3' });
+    lodash.toSafeInteger('0b101010');
+    lodash.toSafeInteger('0o12345');
+    lodash.toSafeInteger('0x1a2b3c');
+    lodash.toSafeInteger('1.1');
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { flattenDepth as flattenDepthToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { flattenDepth: flattenDepthLodash } = lodash;
-
-describe('flattenDepth', () => {
+group('flattenDepth', () => {
   const arr = [1, [2, 3], [4, [5, 6]]];
 
   bench('es-toolkit/flattenDepth', () => {
@@ -12,6 +10,6 @@ describe('flattenDepth', () => {
   });
 
   bench('lodash/flattenDepth', () => {
-    flattenDepthLodash(arr, 2);
+    lodash.flattenDepth(arr, 2);
   });
 });

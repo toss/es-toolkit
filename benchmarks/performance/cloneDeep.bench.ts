@@ -1,10 +1,9 @@
-import { bench, describe } from 'vitest';
 import { cloneDeep as cloneDeepToolkit } from 'es-toolkit';
 import { cloneDeep as cloneDeepCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
 import createRfdc from 'rfdc';
+import { bench, group } from './harness.ts';
 
-const { cloneDeep: cloneDeepLodash } = lodash;
 const rfdcWithCircle = createRfdc({
   circles: true,
 });
@@ -25,7 +24,7 @@ const obj = {
   nested2: { a: { b: { c: { d: { e: { f: { g: 'es-toolkit' } } } } } } },
 };
 
-describe('cloneDeep', () => {
+group('cloneDeep', () => {
   bench('es-toolkit/cloneDeep', () => {
     cloneDeepToolkit(obj);
   });
@@ -35,7 +34,7 @@ describe('cloneDeep', () => {
   });
 
   bench('lodash/cloneDeep', () => {
-    cloneDeepLodash(obj);
+    lodash.cloneDeep(obj);
   });
 
   bench('node/JSON.parse', () => {

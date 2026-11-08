@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { trimEnd as trimEndToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { trimEnd: trimEndLodash } = lodash;
-
-describe('trimEnd', () => {
+group('trimEnd', () => {
   bench('es-toolkit/trimEnd', () => {
     const str = 'kebab-case';
     trimEndToolkit(str, 'se');
@@ -12,6 +10,6 @@ describe('trimEnd', () => {
 
   bench('lodash/trimEnd', () => {
     const str = 'kebab-case';
-    trimEndLodash(str, 'se');
+    lodash.trimEnd(str, 'se');
   });
 });

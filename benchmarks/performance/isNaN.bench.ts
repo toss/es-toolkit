@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isNaN as isNaNToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isNaN: isNaNLodash } = lodash;
-
-describe('isNaN', () => {
+group('isNaN', () => {
   bench('es-toolkit/isNaN', () => {
     isNaNToolkit(NaN);
     isNaNToolkit(1);
@@ -14,10 +12,10 @@ describe('isNaN', () => {
   });
 
   bench('lodash/isNaN', () => {
-    isNaNLodash(NaN);
-    isNaNLodash(1);
-    isNaNLodash(null);
-    isNaNLodash(undefined);
-    isNaNLodash('NaN');
+    lodash.isNaN(NaN);
+    lodash.isNaN(1);
+    lodash.isNaN(null);
+    lodash.isNaN(undefined);
+    lodash.isNaN('NaN');
   });
 });

@@ -1,12 +1,10 @@
-import { bench, describe } from 'vitest';
 import { uniq as uniqToolkit } from 'es-toolkit';
 import { uniq as uniqToolkitCompat } from 'es-toolkit/compat';
 import { randomInt } from 'crypto';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { uniq: uniqLodash } = lodash;
-
-describe('uniq', () => {
+group('uniq', () => {
   bench('es-toolkit/uniq', () => {
     uniqToolkit([11, 2, 3, 44, 11, 2, 3]);
   });
@@ -16,11 +14,11 @@ describe('uniq', () => {
   });
 
   bench('lodash/uniq', () => {
-    uniqLodash([11, 2, 3, 44, 11, 2, 3]);
+    lodash.uniq([11, 2, 3, 44, 11, 2, 3]);
   });
 });
 
-describe('uniq/largeArray', () => {
+group('uniq/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, () => randomInt(0, 10000));
 
   bench('es-toolkit/uniq', () => {
@@ -32,6 +30,6 @@ describe('uniq/largeArray', () => {
   });
 
   bench('lodash/uniq', () => {
-    uniqLodash(largeArray);
+    lodash.uniq(largeArray);
   });
 });

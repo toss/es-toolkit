@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { cond as condToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { cond: condLodash } = lodash;
-
-describe('cond', () => {
+group('cond', () => {
   const isA = (obj: { a: number }) => obj && obj.a === 1;
   const isB = (obj: { b: number }) => obj && obj.b === 1;
   const isC = (obj: { c: number }) => obj && obj.c;
@@ -25,7 +23,7 @@ describe('cond', () => {
   const objNone = { a: 0, b: 0, c: 0 };
 
   const funcToolkit = condToolkitCompat(pairs as any) as (obj: any) => string;
-  const funcLodash = condLodash(pairs as any) as (obj: any) => string;
+  const funcLodash = lodash.cond(pairs as any) as (obj: any) => string;
 
   bench(
     'es-toolkit/compat/cond',

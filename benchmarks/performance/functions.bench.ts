@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { functions as functionsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { functions: functionsLodash } = lodash;
-
-describe('functions', () => {
+group('functions', () => {
   const testObject = {
     a: 'a',
     b: () => 'b',
@@ -18,11 +16,11 @@ describe('functions', () => {
   });
 
   bench('lodash/functions', () => {
-    functionsLodash(testObject);
+    lodash.functions(testObject);
   });
 });
 
-describe('functions/largeObject', () => {
+group('functions/largeObject', () => {
   const largeObject = Object.fromEntries(
     Array.from({ length: 1000 }, (_, i) => [`key${i}`, i % 2 === 0 ? () => i : i])
   );
@@ -32,6 +30,6 @@ describe('functions/largeObject', () => {
   });
 
   bench('lodash/functions', () => {
-    functionsLodash(largeObject);
+    lodash.functions(largeObject);
   });
 });

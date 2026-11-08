@@ -1,12 +1,10 @@
-import { bench, describe } from 'vitest';
 import { lowerFirst as lowerFirstToolkit } from 'es-toolkit';
 import { lowerFirst as lowerFirstCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { lowerFirst: lowerFirstLodash } = lodash;
-
-describe('lowerFirst', () => {
-  describe('short string', () => {
+group('lowerFirst', () => {
+  group('short string', () => {
     bench('es-toolkit/lowerFirst', () => {
       const str = 'camelCase';
       lowerFirstToolkit(str);
@@ -19,11 +17,11 @@ describe('lowerFirst', () => {
 
     bench('lodash/lowerFirst', () => {
       const str = 'camelCase';
-      lowerFirstLodash(str);
+      lodash.lowerFirst(str);
     });
   });
 
-  describe('long string', () => {
+  group('long string', () => {
     const LONG_STR = 'camelCaseLongString'.repeat(1000);
     bench('es-toolkit/lowerFirst', () => {
       lowerFirstToolkit(LONG_STR);
@@ -34,7 +32,7 @@ describe('lowerFirst', () => {
     });
 
     bench('lodash/lowerFirst', () => {
-      lowerFirstLodash(LONG_STR);
+      lodash.lowerFirst(LONG_STR);
     });
   });
 });

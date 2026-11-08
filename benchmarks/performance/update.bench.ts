@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { update as updateToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { update: lodashUpdate } = lodash;
-
-describe('update - dot notation', () => {
+group('update - dot notation', () => {
   const obj = { a: { b: { c: 3 } } };
 
   bench('es-toolkit/update', () => {
@@ -12,11 +10,11 @@ describe('update - dot notation', () => {
   });
 
   bench('lodash/update', () => {
-    lodashUpdate(obj, 'a.b.c', value => (value as number) + 1);
+    lodash.update(obj, 'a.b.c', value => (value as number) + 1);
   });
 });
 
-describe('update - array notation', () => {
+group('update - array notation', () => {
   const obj = { a: [{ b: { c: 3 } }] };
 
   bench('es-toolkit/update', () => {
@@ -24,11 +22,11 @@ describe('update - array notation', () => {
   });
 
   bench('lodash/update', () => {
-    lodashUpdate(obj, 'a[0].b.c', value => (value as number) + 1);
+    lodash.update(obj, 'a[0].b.c', value => (value as number) + 1);
   });
 });
 
-describe('update - deep path creation', () => {
+group('update - deep path creation', () => {
   const obj = {};
 
   bench('es-toolkit/update', () => {
@@ -36,6 +34,6 @@ describe('update - deep path creation', () => {
   });
 
   bench('lodash/update', () => {
-    lodashUpdate(obj, 'a.b.c.d.e', () => 'value');
+    lodash.update(obj, 'a.b.c.d.e', () => 'value');
   });
 });

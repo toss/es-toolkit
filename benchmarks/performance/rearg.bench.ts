@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { rearg as reargToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { rearg: reargLodash } = lodash;
-
-describe('rearg', () => {
+group('rearg', () => {
   function fn() {
     // eslint-disable-next-line prefer-rest-params
     return Array.from(arguments);
@@ -15,6 +13,6 @@ describe('rearg', () => {
   });
 
   bench('lodash/rearg', () => {
-    reargLodash(fn, [2, 0, 1]);
+    lodash.rearg(fn, [2, 0, 1]);
   });
 });

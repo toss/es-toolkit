@@ -1,9 +1,7 @@
-import { bench, describe } from 'vitest';
 import { mergeWith as mergeWithToolkit } from 'es-toolkit';
 import { mergeWith as mergeWithCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { mergeWith: mergeWithLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const object = { a: 1, b: 2 };
 
@@ -15,9 +13,9 @@ const merge = (targetValue: unknown, sourceValue: unknown) => {
   }
 };
 
-describe('mergeWith', () => {
+group('mergeWith', () => {
   bench('lodash/mergeWith', () => {
-    mergeWithLodash(object, other, merge);
+    lodash.mergeWith(object, other, merge);
   });
 
   bench('es-toolkit/mergeWith', () => {

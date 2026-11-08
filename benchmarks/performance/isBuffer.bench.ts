@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isBuffer as isBufferToolkit } from 'es-toolkit';
 import { isBuffer as isBufferToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isBuffer: isBufferLodash } = lodash;
-
-describe('isBuffer', () => {
+group('isBuffer', () => {
   bench('es-toolkit/isBuffer', () => {
     isBufferToolkit(Buffer.from('test'));
   });
@@ -15,6 +13,6 @@ describe('isBuffer', () => {
   });
 
   bench('lodash/isBuffer', () => {
-    isBufferLodash(Buffer.from('test'));
+    lodash.isBuffer(Buffer.from('test'));
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { unzipWith as unzipWithToolkit } from 'es-toolkit';
 import { unzipWith as unzipWithCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { unzipWith: unzipWithLodash } = lodash;
-
-describe('unzipWith', () => {
+group('unzipWith', () => {
   bench('es-toolkit/unzipWith', () => {
     unzipWithToolkit(
       [
@@ -29,7 +27,7 @@ describe('unzipWith', () => {
   });
 
   bench('lodash/unzipWith', () => {
-    unzipWithLodash(
+    lodash.unzipWith(
       [
         [1000, 2000],
         [3000, 4000],
@@ -40,7 +38,7 @@ describe('unzipWith', () => {
   });
 });
 
-describe('unzipWith, large arrays', () => {
+group('unzipWith, large arrays', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i + 1]);
 
   bench('es-toolkit/unzipWith', () => {
@@ -52,6 +50,6 @@ describe('unzipWith, large arrays', () => {
   });
 
   bench('lodash/unzipWith', () => {
-    unzipWithLodash(largeArray, (a, b) => a + b);
+    lodash.unzipWith(largeArray, (a, b) => a + b);
   });
 });

@@ -12,10 +12,10 @@
 
 ## 測定方法
 
-上記の数値は、このブランチで Vitest を使って測定しました。
+自分で実行するには、次のコマンドを使います。
 
 ```bash
-yarn vitest bench performance/fp/pipe.bench.ts --run
+yarn bench fp/pipe
 ```
 
 正確なベンチマークコードは `benchmarks/performance/fp/pipe.bench.ts` を参照してください。

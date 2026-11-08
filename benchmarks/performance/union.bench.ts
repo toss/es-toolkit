@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { union as unionToolkit } from 'es-toolkit';
 import { union as unionToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { union: unionLodash } = lodash;
-
-describe('union', () => {
+group('union', () => {
   bench('es-toolkit/union', () => {
     const array1 = [1, 2, 3];
     const array2 = [3, 4, 5];
@@ -21,11 +19,11 @@ describe('union', () => {
   bench('lodash/union', () => {
     const array1 = [1, 2, 3];
     const array2 = [3, 4, 5];
-    unionLodash(array1, array2);
+    lodash.union(array1, array2);
   });
 });
 
-describe('union/largeArray', () => {
+group('union/largeArray', () => {
   const largeArray1 = Array.from({ length: 10000 }, (_, i) => i);
   const largeArray2 = Array.from({ length: 10000 }, (_, i) => i + 5000);
 
@@ -38,6 +36,6 @@ describe('union/largeArray', () => {
   });
 
   bench('lodash/union', () => {
-    unionLodash(largeArray1, largeArray2);
+    lodash.union(largeArray1, largeArray2);
   });
 });

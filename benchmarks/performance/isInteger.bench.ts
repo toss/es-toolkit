@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isInteger as isIntegerToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isInteger: isIntegerLodash } = lodash;
-
-describe('isInteger', () => {
+group('isInteger', () => {
   bench('es-toolkit/isInteger', () => {
     const vals = [1, 1.1, '1', [], {}, () => false, Infinity];
     for (let i = 0; i < vals.length; i++) {
@@ -15,7 +13,7 @@ describe('isInteger', () => {
   bench('lodash/isInteger', () => {
     const vals = [1, 1.1, '1', [], {}, () => false, Infinity];
     for (let i = 0; i < vals.length; i++) {
-      isIntegerLodash(vals[i]);
+      lodash.isInteger(vals[i]);
     }
   });
 });

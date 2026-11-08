@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { at as atToolkit } from 'es-toolkit';
 import { at as atToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { at: atLodash } = lodash;
-
-describe('at', () => {
+group('at', () => {
   const data = ['a', 'b', 'c', 'd', 'e'];
   const indices = [0, 2, -2, 1.5, -1.5];
 
@@ -18,7 +16,7 @@ describe('at', () => {
   });
 
   bench('lodash/at', () => {
-    atLodash(data, indices);
+    lodash.at(data, indices);
   });
 
   bench('Array.prototype.at', () => {
@@ -26,7 +24,7 @@ describe('at', () => {
   });
 });
 
-describe('at/largeArray', () => {
+group('at/largeArray', () => {
   const largeData = Array.from({ length: 10000 }, (_, i) => i);
   const largeIndices = Array.from({ length: 1000 }, (_, i) => i * 2);
 
@@ -39,7 +37,7 @@ describe('at/largeArray', () => {
   });
 
   bench('lodash/at', () => {
-    atLodash(largeData, largeIndices);
+    lodash.at(largeData, largeIndices);
   });
 
   bench('Array.prototype.at', () => {

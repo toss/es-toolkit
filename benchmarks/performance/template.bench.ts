@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { template as templateToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { template: templateLodash } = lodash;
-
-describe('template (interpolate)', () => {
+group('template (interpolate)', () => {
   bench('es-toolkit/template', () => {
     const compiled = templateToolkit('hello <%= user %>!');
 
@@ -13,13 +11,13 @@ describe('template (interpolate)', () => {
   });
 
   bench('lodash/template', () => {
-    const compiled = templateLodash('hello <%= user %>!');
+    const compiled = lodash.template('hello <%= user %>!');
     compiled({ user: 'fred' });
     compiled({ user: 'pebbles' });
   });
 });
 
-describe('template (evaluate)', () => {
+group('template (evaluate)', () => {
   bench('es-toolkit/template', () => {
     const compiled = templateToolkit('<% if (user === "fred") { %>hello fred!<% } else { %>hello pebbles!<% } %>');
     compiled({ user: 'fred' });
@@ -27,13 +25,13 @@ describe('template (evaluate)', () => {
   });
 
   bench('lodash/template', () => {
-    const compiled = templateLodash('<% if (user === "fred") { %>hello fred!<% } else { %>hello pebbles!<% } %>');
+    const compiled = lodash.template('<% if (user === "fred") { %>hello fred!<% } else { %>hello pebbles!<% } %>');
     compiled({ user: 'fred' });
     compiled({ user: 'pebbles' });
   });
 });
 
-describe('template (escape)', () => {
+group('template (escape)', () => {
   bench('es-toolkit/template', () => {
     const compiled = templateToolkit('<%- user %>');
 
@@ -42,7 +40,7 @@ describe('template (escape)', () => {
   });
 
   bench('lodash/template', () => {
-    const compiled = templateLodash('<%- user %>');
+    const compiled = lodash.template('<%- user %>');
     compiled({ user: '<script>' });
     compiled({ user: '<script type="text/javascript">alert("xss");</script>' });
   });

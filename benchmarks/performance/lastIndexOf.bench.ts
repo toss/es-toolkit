@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { lastIndexOf as indexOfToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { lastIndexOf: indexOfLodash } = lodash;
-
-describe('lastIndexOf', () => {
+group('lastIndexOf', () => {
   const largeArray = Array(1_000_000)
     .fill(0)
     .map((_, i) => i);
@@ -19,10 +17,10 @@ describe('lastIndexOf', () => {
   });
 
   bench('lodash/lastIndexOf', () => {
-    indexOfLodash(array, 1);
-    indexOfLodash(array, NaN);
-    indexOfLodash(array, '1');
-    indexOfLodash(array, 'NaN', -5);
-    indexOfLodash(array, 'NaN', -100);
+    lodash.lastIndexOf(array, 1);
+    lodash.lastIndexOf(array, NaN);
+    lodash.lastIndexOf(array, '1');
+    lodash.lastIndexOf(array, 'NaN', -5);
+    lodash.lastIndexOf(array, 'NaN', -100);
   });
 });

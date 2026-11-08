@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { nthArg as nthArgToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { nthArg: nthArgLodash } = lodash;
-
-describe('nthArg', () => {
+group('nthArg', () => {
   const array = [1, 2, 3];
 
   bench('es-toolkit/compat/nthArg', () => {
@@ -13,12 +11,12 @@ describe('nthArg', () => {
   });
 
   bench('lodash/nthArg', () => {
-    nthArgLodash(0)(...array);
-    nthArgLodash(-1)(...array);
+    lodash.nthArg(0)(...array);
+    lodash.nthArg(-1)(...array);
   });
 });
 
-describe('nthArg/largeArray', () => {
+group('nthArg/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/compat/nthArg', () => {
@@ -27,7 +25,7 @@ describe('nthArg/largeArray', () => {
   });
 
   bench('lodash/nthArg', () => {
-    nthArgLodash(0)(...largeArray);
-    nthArgLodash(-1)(...largeArray);
+    lodash.nthArg(0)(...largeArray);
+    lodash.nthArg(-1)(...largeArray);
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { dropRightWhile as dropRightWhileToolkit } from 'es-toolkit';
 import { dropRightWhile as dropRightWhileToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { dropRightWhile: dropRightWhileLodash } = lodash;
-
-describe('dropRightWhile', () => {
+group('dropRightWhile', () => {
   bench('es-toolkit/dropRightWhile', () => {
     dropRightWhileToolkit([1.2, 2.3, 3.4], x => x < 2);
   });
@@ -15,11 +13,11 @@ describe('dropRightWhile', () => {
   });
 
   bench('lodash/dropRightWhile', () => {
-    dropRightWhileLodash([1.2, 2.3, 3.4], x => x < 2);
+    lodash.dropRightWhile([1.2, 2.3, 3.4], x => x < 2);
   });
 });
 
-describe('dropRightWhile/largeArray', () => {
+group('dropRightWhile/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/dropRightWhile', () => {
@@ -31,6 +29,6 @@ describe('dropRightWhile/largeArray', () => {
   });
 
   bench('lodash/dropRightWhile', () => {
-    dropRightWhileLodash(largeArray, x => x < 5000);
+    lodash.dropRightWhile(largeArray, x => x < 5000);
   });
 });

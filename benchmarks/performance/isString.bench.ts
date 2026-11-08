@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isString as isStringToolkit } from 'es-toolkit';
 import { isString as isStringToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isString: isStringLodash } = lodash;
-
-describe('isString', () => {
+group('isString', () => {
   bench('es-toolkit/isString', () => {
     isStringToolkit('');
     isStringToolkit(true);
@@ -25,11 +23,11 @@ describe('isString', () => {
   });
 
   bench('lodash/isString', () => {
-    isStringLodash('');
-    isStringLodash(true);
-    isStringLodash(undefined);
-    isStringLodash(123);
-    isStringLodash(String(''));
-    isStringLodash(Object(''));
+    lodash.isString('');
+    lodash.isString(true);
+    lodash.isString(undefined);
+    lodash.isString(123);
+    lodash.isString(String(''));
+    lodash.isString(Object(''));
   });
 });

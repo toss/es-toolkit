@@ -1,13 +1,11 @@
-import { bench, describe } from 'vitest';
 import { unescape as unescapeToolkit } from 'es-toolkit';
 import { unescape as unescapeCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { unescape: unescapeLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const longString = 'fred, barney, &amp; pebbles'.repeat(50);
 
-describe('unescape', () => {
+group('unescape', () => {
   bench('es-toolkit/unescape', () => {
     unescapeToolkit('fred, barney, &amp; pebbles');
   });
@@ -17,11 +15,11 @@ describe('unescape', () => {
   });
 
   bench('lodash/unescape', () => {
-    unescapeLodash('fred, barney, &amp; pebbles');
+    lodash.unescape('fred, barney, &amp; pebbles');
   });
 });
 
-describe('unescape/long', () => {
+group('unescape/long', () => {
   bench('es-toolkit/unescape - long string', () => {
     unescapeToolkit(longString);
   });
@@ -31,6 +29,6 @@ describe('unescape/long', () => {
   });
 
   bench('lodash/unescape long string', () => {
-    unescapeLodash(longString);
+    lodash.unescape(longString);
   });
 });

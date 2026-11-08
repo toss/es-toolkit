@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { includes as includesToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { includes: includesLodash } = lodash;
-
-describe('includes (object)', () => {
+group('includes (object)', () => {
   const object = {
     a: 1,
     b: 'a',
@@ -27,18 +25,18 @@ describe('includes (object)', () => {
   });
 
   bench('lodash/includes', () => {
-    includesLodash(object, 1);
-    includesLodash(object, 'a');
-    includesLodash(object, NaN);
-    includesLodash(object, undefined);
-    includesLodash(object, null);
-    includesLodash(object, Infinity);
-    includesLodash(object, -0);
-    includesLodash(object, 1, -1);
+    lodash.includes(object, 1);
+    lodash.includes(object, 'a');
+    lodash.includes(object, NaN);
+    lodash.includes(object, undefined);
+    lodash.includes(object, null);
+    lodash.includes(object, Infinity);
+    lodash.includes(object, -0);
+    lodash.includes(object, 1, -1);
   });
 });
 
-describe('includes (array)', () => {
+group('includes (array)', () => {
   const array = [1, 'a', NaN, undefined, null, Infinity, Symbol('sym1'), -0];
 
   bench('es-toolkit/includes', () => {
@@ -54,19 +52,19 @@ describe('includes (array)', () => {
   });
 
   bench('lodash/includes', () => {
-    includesLodash(array, 1);
-    includesLodash(array, 'a');
-    includesLodash(array, NaN);
-    includesLodash(array, undefined);
-    includesLodash(array, null);
-    includesLodash(array, Infinity);
-    includesLodash(array, Symbol('sym1'));
-    includesLodash(array, -0);
-    includesLodash(array, 0, -1);
+    lodash.includes(array, 1);
+    lodash.includes(array, 'a');
+    lodash.includes(array, NaN);
+    lodash.includes(array, undefined);
+    lodash.includes(array, null);
+    lodash.includes(array, Infinity);
+    lodash.includes(array, Symbol('sym1'));
+    lodash.includes(array, -0);
+    lodash.includes(array, 0, -1);
   });
 });
 
-describe('includes (string)', () => {
+group('includes (string)', () => {
   const string = 'abcdefg';
 
   bench('es-toolkit/compat/includes', () => {
@@ -75,7 +73,7 @@ describe('includes (string)', () => {
   });
 
   bench('lodash/includes', () => {
-    includesLodash(string, 'bc');
-    includesLodash(string, 'd');
+    lodash.includes(string, 'bc');
+    lodash.includes(string, 'd');
   });
 });

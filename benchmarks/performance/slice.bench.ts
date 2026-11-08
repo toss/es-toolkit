@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { slice as sliceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { slice: sliceLodash } = lodash;
-
-describe('slice', () => {
+group('slice', () => {
   const array = Array(1000);
   bench('es-toolkit/compat/slice', () => {
     sliceToolkitCompat(array);
@@ -14,9 +12,9 @@ describe('slice', () => {
   });
 
   bench('lodash/slice', () => {
-    sliceLodash(array);
-    sliceLodash(array, 1);
-    sliceLodash(array, 1, 2);
-    sliceLodash(array, 1, 1000);
+    lodash.slice(array);
+    lodash.slice(array, 1);
+    lodash.slice(array, 1, 2);
+    lodash.slice(array, 1, 1000);
   });
 });

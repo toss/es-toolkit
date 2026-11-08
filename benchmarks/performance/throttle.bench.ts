@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { throttle as throttleToolkit } from 'es-toolkit';
 import { throttle as throttleCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { throttle: throttleLodash } = lodash;
-
-describe('throttle', () => {
+group('throttle', () => {
   bench('es-toolkit/throttle', () => {
     throttleToolkit(() => undefined, 1000)();
   });
@@ -15,6 +13,6 @@ describe('throttle', () => {
   });
 
   bench('lodash/throttle', () => {
-    throttleLodash(() => undefined, 1000)();
+    lodash.throttle(() => undefined, 1000)();
   });
 });

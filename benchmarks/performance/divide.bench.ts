@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { divide as divideToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { divide: divideLodash } = lodash;
-
-describe('divide function benchmark', () => {
+group('divide function benchmark', () => {
   bench('es-toolkit/compat/divide', () => {
     divideToolkitCompat(3, 4);
     divideToolkitCompat(-3, -4);
@@ -14,10 +12,10 @@ describe('divide function benchmark', () => {
   });
 
   bench('lodash/divide', () => {
-    divideLodash(3, 4);
-    divideLodash(-3, -4);
-    divideLodash(NaN, 3);
-    divideLodash(3, NaN);
-    divideLodash(NaN, NaN);
+    lodash.divide(3, 4);
+    lodash.divide(-3, -4);
+    lodash.divide(NaN, 3);
+    lodash.divide(3, NaN);
+    lodash.divide(NaN, NaN);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { forIn as forInToolkitCompat, times } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { forIn: forInLodash } = lodash;
-
-describe('forIn', () => {
+group('forIn', () => {
   const bigObject = Object.fromEntries(times(1000, i => [i, i]));
   const iteratee = (value: number, key: string, object: typeof bigObject) => [value, key, object];
 
@@ -13,6 +11,6 @@ describe('forIn', () => {
   });
 
   bench('lodash/forIn', () => {
-    forInLodash(bigObject, iteratee);
+    lodash.forIn(bigObject, iteratee);
   });
 });

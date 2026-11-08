@@ -1,8 +1,8 @@
-import { bench, describe } from 'vitest';
 import { hash as hashToolkit } from 'es-toolkit/util/hash';
 import objectHash from 'object-hash';
 import { hash as hashOhash } from 'ohash';
-import { hash as hashToolkitBrowser } from '../../src/util/hash/browser';
+import { bench, group } from './harness.ts';
+import { hash as hashToolkitBrowser } from '../../src/util/hash/browser.ts';
 
 const smallObject = { id: 1, name: 'Alice', active: true };
 
@@ -20,7 +20,7 @@ const largeArray = Array.from({ length: 1000 }, (_, i) => ({
 
 const longString = 'lorem ipsum dolor sit amet '.repeat(400); // ~10KB
 
-describe('hash: small object', () => {
+group('hash: small object', () => {
   bench('es-toolkit/util/hash (node)', () => {
     hashToolkit(smallObject);
   });
@@ -38,7 +38,7 @@ describe('hash: small object', () => {
   });
 });
 
-describe('hash: medium object (100 keys)', () => {
+group('hash: medium object (100 keys)', () => {
   bench('es-toolkit/util/hash (node)', () => {
     hashToolkit(mediumObject);
   });
@@ -56,7 +56,7 @@ describe('hash: medium object (100 keys)', () => {
   });
 });
 
-describe('hash: large array (1,000 objects)', () => {
+group('hash: large array (1,000 objects)', () => {
   bench('es-toolkit/util/hash (node)', () => {
     hashToolkit(largeArray);
   });
@@ -74,7 +74,7 @@ describe('hash: large array (1,000 objects)', () => {
   });
 });
 
-describe('hash: long string (~10KB)', () => {
+group('hash: long string (~10KB)', () => {
   bench('es-toolkit/util/hash (node)', () => {
     hashToolkit(longString);
   });

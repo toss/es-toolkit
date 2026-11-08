@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { pullAt as pullAtToolkit } from 'es-toolkit';
 import { pullAt as pullAtToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { pullAt: pullAtLodash } = lodash;
-
-describe('pullAt', () => {
+group('pullAt', () => {
   bench('es-toolkit/pullAt', () => {
     const array = [0, 1, 2, 3, 4, 5];
     const indexes = [3, 5, 1, 2];
@@ -21,11 +19,11 @@ describe('pullAt', () => {
   bench('lodash/pullAt', () => {
     const array = [0, 1, 2, 3, 4, 5];
     const indexes = [3, 5, 1, 2];
-    pullAtLodash(array, indexes);
+    lodash.pullAt(array, indexes);
   });
 });
 
-describe('pullAt/largeArray', () => {
+group('pullAt/largeArray', () => {
   bench('es-toolkit/pullAt', () => {
     const largeArray = Array.from({ length: 10000 }, (_, i) => i);
     const largeIndexes = Array.from({ length: 1000 }, (_, i) => i + 1000);
@@ -41,6 +39,6 @@ describe('pullAt/largeArray', () => {
   bench('lodash/pullAt', () => {
     const largeArray = Array.from({ length: 10000 }, (_, i) => i);
     const largeIndexes = Array.from({ length: 1000 }, (_, i) => i + 1000);
-    pullAtLodash(largeArray, largeIndexes);
+    lodash.pullAt(largeArray, largeIndexes);
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { intersection as intersectionToolkit } from 'es-toolkit';
 import { intersection as intersectionCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { intersection: intersectionLodash } = lodash;
-
-describe('intersection, small arrays', () => {
+group('intersection, small arrays', () => {
   const array1 = [1, 2, 3];
   const array2 = [2, 4];
 
@@ -18,11 +16,11 @@ describe('intersection, small arrays', () => {
   });
 
   bench('lodash/intersection', () => {
-    intersectionLodash(array1, array2);
+    lodash.intersection(array1, array2);
   });
 });
 
-describe('intersection, large arrays', () => {
+group('intersection, large arrays', () => {
   const array1 = Array.from({ length: 10000 }, () => Math.floor(Math.random() * 1000));
   const array2 = Array.from({ length: 10000 }, () => Math.floor(Math.random() * 1000));
 
@@ -35,6 +33,6 @@ describe('intersection, large arrays', () => {
   });
 
   bench('lodash/intersection', () => {
-    intersectionLodash(array1, array2);
+    lodash.intersection(array1, array2);
   });
 });

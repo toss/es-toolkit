@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { range as rangeToolkit } from 'es-toolkit';
 import { range as rangeCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { range: rangeLodash } = lodash;
-
-describe('range', () => {
+group('range', () => {
   bench('es-toolkit/range', () => {
     rangeToolkit(0, 100, 1);
   });
@@ -15,6 +13,6 @@ describe('range', () => {
   });
 
   bench('lodash/range', () => {
-    rangeLodash(0, 100, 1);
+    lodash.range(0, 100, 1);
   });
 });

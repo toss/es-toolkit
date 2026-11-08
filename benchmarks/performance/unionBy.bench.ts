@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { unionBy as unionByToolkit } from 'es-toolkit';
 import { unionBy as unionByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { unionBy: unionByLodash } = lodash;
-
-describe('unionBy', () => {
+group('unionBy', () => {
   const array1 = [{ id: 1 }, { id: 2 }];
   const array2 = [{ id: 2 }, { id: 3 }];
   const getId = (x: { id: number }) => x.id;
@@ -19,11 +17,11 @@ describe('unionBy', () => {
   });
 
   bench('lodash/unionBy', () => {
-    unionByLodash(array1, array2, getId);
+    lodash.unionBy(array1, array2, getId);
   });
 });
 
-describe('unionBy/largeArray', () => {
+group('unionBy/largeArray', () => {
   const largeArray1 = Array.from({ length: 10000 }, (_, i) => ({ id: i }));
   const largeArray2 = Array.from({ length: 10000 }, (_, i) => ({ id: i + 5000 }));
   const getId = (x: { id: number }) => x.id;
@@ -37,6 +35,6 @@ describe('unionBy/largeArray', () => {
   });
 
   bench('lodash/unionBy', () => {
-    unionByLodash(largeArray1, largeArray2, getId);
+    lodash.unionBy(largeArray1, largeArray2, getId);
   });
 });

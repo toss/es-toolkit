@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { flowRight as flowRightToolkit } from 'es-toolkit';
 import { flowRight as flowRightCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { flowRight: flowRightLodash } = lodash;
-
-describe('flowRight', () => {
+group('flowRight', () => {
   const add = (x: number, y: number) => x + y;
   const square = (n: number) => n * n;
 
@@ -20,7 +18,7 @@ describe('flowRight', () => {
   });
 
   bench('lodash/flowRight', () => {
-    const combined = flowRightLodash(add, square);
+    const combined = lodash.flowRight(add, square);
     combined(1, 2);
   });
 });

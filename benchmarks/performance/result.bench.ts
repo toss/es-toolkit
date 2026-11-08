@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { result as resultToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { result: resultLodash } = lodash;
-
-describe('result', () => {
+group('result', () => {
   const object = {
     a: 1,
     b: () => 'b',
@@ -27,17 +25,17 @@ describe('result', () => {
   });
 
   bench('lodash/result', () => {
-    resultLodash(object, 'a');
-    resultLodash(object, 'b');
-    resultLodash(object, 'c.d.e');
-    resultLodash(object, 'f');
-    resultLodash(object, 'arr[2]');
-    resultLodash(object, 'nonexistent', 'default');
-    resultLodash(null, 'a', 'default');
+    lodash.result(object, 'a');
+    lodash.result(object, 'b');
+    lodash.result(object, 'c.d.e');
+    lodash.result(object, 'f');
+    lodash.result(object, 'arr[2]');
+    lodash.result(object, 'nonexistent', 'default');
+    lodash.result(null, 'a', 'default');
   });
 });
 
-describe('result/largeObject', () => {
+group('result/largeObject', () => {
   const largeObject = Object.fromEntries(
     Array.from({ length: 1000 }, (_, i) => [`key${i}`, i % 2 === 0 ? () => i : { nested: { value: i } }])
   );
@@ -49,8 +47,8 @@ describe('result/largeObject', () => {
   });
 
   bench('lodash/result', () => {
-    resultLodash(largeObject, 'key500');
-    resultLodash(largeObject, 'key501.nested.value');
-    resultLodash(largeObject, 'key999.nested.value', 'default');
+    lodash.result(largeObject, 'key500');
+    lodash.result(largeObject, 'key501.nested.value');
+    lodash.result(largeObject, 'key999.nested.value', 'default');
   });
 });

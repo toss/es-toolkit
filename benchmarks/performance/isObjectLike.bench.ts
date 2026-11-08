@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isObjectLike as isObjectLikeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isObjectLike: isObjectLikeLodash } = lodash;
-
-describe('isObjectLike', () => {
+group('isObjectLike', () => {
   bench('es-toolkit/isObjectLike', () => {
     isObjectLikeToolkit([1, 2, 3]);
     isObjectLikeToolkit(true);
@@ -16,12 +14,12 @@ describe('isObjectLike', () => {
   });
 
   bench('lodash/isObjectLike', () => {
-    isObjectLikeLodash([1, 2, 3]);
-    isObjectLikeLodash(true);
-    isObjectLikeLodash(new Date());
-    isObjectLikeLodash(new Error());
-    isObjectLikeLodash(1);
-    isObjectLikeLodash(/x/);
-    isObjectLikeLodash('a');
+    lodash.isObjectLike([1, 2, 3]);
+    lodash.isObjectLike(true);
+    lodash.isObjectLike(new Date());
+    lodash.isObjectLike(new Error());
+    lodash.isObjectLike(1);
+    lodash.isObjectLike(/x/);
+    lodash.isObjectLike('a');
   });
 });

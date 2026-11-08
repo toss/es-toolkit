@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { sumBy as sumByToolkit } from 'es-toolkit';
 import { sumBy as sumByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { sumBy: sumByLodash } = lodash;
-
-describe('sumBy', () => {
+group('sumBy', () => {
   bench('es-toolkit/sumBy', () => {
     const items = [{ a: 1 }, { a: 2 }, { a: 3 }];
     sumByToolkit(items, x => x.a);
@@ -18,11 +16,11 @@ describe('sumBy', () => {
 
   bench('lodash/sumBy', () => {
     const items = [{ a: 1 }, { a: 2 }, { a: 3 }];
-    sumByLodash(items, x => x.a);
+    lodash.sumBy(items, x => x.a);
   });
 });
 
-describe('sumBy/largeArray', () => {
+group('sumBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i }));
 
   bench('es-toolkit/sumBy', () => {
@@ -34,6 +32,6 @@ describe('sumBy/largeArray', () => {
   });
 
   bench('lodash/sumBy', () => {
-    sumByLodash(largeArray, x => x.a);
+    lodash.sumBy(largeArray, x => x.a);
   });
 });

@@ -1,9 +1,7 @@
-import { bench, describe } from 'vitest';
 import { orderBy as orderByToolkit } from 'es-toolkit';
 import { orderBy as orderByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { orderBy: orderByLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const users = [
   { user: 'fred', age: 48, nested: { user: 'fred' } },
@@ -12,7 +10,7 @@ const users = [
   { user: 'barney', age: 36, nested: { user: 'bar' } },
 ];
 
-describe('orderBy', () => {
+group('orderBy', () => {
   bench('es-toolkit/orderBy', () => {
     orderByToolkit(users, ['user', 'age'], ['asc', 'desc']);
     orderByToolkit(users, [user => user.user, user => user.age], ['asc', 'desc']);
@@ -24,26 +22,26 @@ describe('orderBy', () => {
   });
 
   bench('lodash/orderBy', () => {
-    orderByLodash(users, ['user', 'age'], ['asc', 'desc']);
-    orderByLodash(users, [user => user.user, user => user.age], ['asc', 'desc']);
+    lodash.orderBy(users, ['user', 'age'], ['asc', 'desc']);
+    lodash.orderBy(users, [user => user.user, user => user.age], ['asc', 'desc']);
   });
 });
 
-describe('orderBy (nested property names)', () => {
+group('orderBy (nested property names)', () => {
   bench('es-toolkit/compat/orderBy', () => {
     orderByToolkitCompat(users, [['nested', 'user'], ['age']], ['asc', 'desc']);
   });
 
   bench('lodash/orderBy', () => {
-    orderByLodash(users, [['nested', 'user'], ['age']], ['asc', 'desc']);
+    lodash.orderBy(users, [['nested', 'user'], ['age']], ['asc', 'desc']);
   });
 });
 
-describe('orderBy (property path)', () => {
+group('orderBy (property path)', () => {
   bench('es-toolkit/compat/orderBy', () => {
     orderByToolkitCompat(users, ['nested.user', 'age'], ['asc', 'desc']);
   });
   bench('lodash/orderBy', () => {
-    orderByLodash(users, ['nested.user', 'age'], ['asc', 'desc']);
+    lodash.orderBy(users, ['nested.user', 'age'], ['asc', 'desc']);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { pullAllWith as pullAllWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { pullAllWith: pullAllWithLodash } = lodash;
-
-describe('pullAllWith', () => {
+group('pullAllWith', () => {
   const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 4 }, { x: 5 }];
   const valuesToRemove = [{ x: 2 }, { x: 4 }];
 
@@ -15,11 +13,11 @@ describe('pullAllWith', () => {
   });
 
   bench('lodash/pullAllWith', () => {
-    pullAllWithLodash([...array], valuesToRemove, comparator);
+    lodash.pullAllWith([...array], valuesToRemove, comparator);
   });
 });
 
-describe('pullAllWith/largeArray', () => {
+group('pullAllWith/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ x: i }));
   const valuesToRemove = Array.from({ length: 1000 }, (_, i) => ({ x: i + 1000 }));
 
@@ -30,6 +28,6 @@ describe('pullAllWith/largeArray', () => {
   });
 
   bench('lodash/pullAllWith', () => {
-    pullAllWithLodash([...largeArray], valuesToRemove, comparator);
+    lodash.pullAllWith([...largeArray], valuesToRemove, comparator);
   });
 });

@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { constant as constantToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { constant: constantToLodash } = lodash;
-
-describe('constant', () => {
+group('constant', () => {
   bench(
     'es-toolkit/compat/constant',
     () => {
@@ -21,10 +19,10 @@ describe('constant', () => {
   bench(
     'lodash/constant',
     () => {
-      constantToLodash([1, 2, 3]);
-      constantToLodash({ a: 1 });
-      constantToLodash(1);
-      constantToLodash('a');
+      lodash.constant([1, 2, 3]);
+      lodash.constant({ a: 1 });
+      lodash.constant(1);
+      lodash.constant('a');
     },
     {
       time: 50,

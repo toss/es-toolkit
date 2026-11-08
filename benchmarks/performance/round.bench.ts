@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { round as roundToolkit } from 'es-toolkit';
 import { round as roundCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { round: roundLodash } = lodash;
-
-describe('round', () => {
+group('round', () => {
   bench('es-toolkit/round', () => {
     roundToolkit(1.2345, 2);
   });
@@ -15,11 +13,11 @@ describe('round', () => {
   });
 
   bench('lodash/round', () => {
-    roundLodash(1.2345, 2);
+    lodash.round(1.2345, 2);
   });
 });
 
-describe('round (compat)', () => {
+group('round (compat)', () => {
   bench('es-toolkit/compat/round', () => {
     roundCompat(4.006);
     roundCompat(4.006, 0);
@@ -33,14 +31,14 @@ describe('round (compat)', () => {
   });
 
   bench('lodash/round', () => {
-    roundLodash(4.006);
-    roundLodash(4.006, 0);
-    roundLodash(4.016, 2);
-    roundLodash(4.1, 2);
-    roundLodash(4.4, 2);
-    roundLodash(4160, -2);
-    roundLodash(4.006, NaN);
-    roundLodash(4.016, 2.6);
-    roundLodash(5e1, 2);
+    lodash.round(4.006);
+    lodash.round(4.006, 0);
+    lodash.round(4.016, 2);
+    lodash.round(4.1, 2);
+    lodash.round(4.4, 2);
+    lodash.round(4160, -2);
+    lodash.round(4.006, NaN);
+    lodash.round(4.016, 2.6);
+    lodash.round(5e1, 2);
   });
 });

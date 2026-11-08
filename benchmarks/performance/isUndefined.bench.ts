@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isUndefined as isUndefinedToolkit } from 'es-toolkit';
 import { isUndefined as isUndefinedToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isUndefined: isUndefinedLodash } = lodash;
-
-describe('isUndefined', () => {
+group('isUndefined', () => {
   bench('es-toolkit/isUndefined', () => {
     isUndefinedToolkit(undefined);
     isUndefinedToolkit(null);
@@ -21,9 +19,9 @@ describe('isUndefined', () => {
   });
 
   bench('lodash/isUndefined', () => {
-    isUndefinedLodash(undefined);
-    isUndefinedLodash(null);
-    isUndefinedLodash('');
-    isUndefinedLodash(123);
+    lodash.isUndefined(undefined);
+    lodash.isUndefined(null);
+    lodash.isUndefined('');
+    lodash.isUndefined(123);
   });
 });

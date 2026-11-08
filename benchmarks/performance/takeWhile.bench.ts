@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { takeWhile as takeWhileToolkit } from 'es-toolkit';
 import { takeWhile as takeWhileCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { takeWhile: takeWhileLodash } = lodash;
-
-describe('takeWhile', () => {
+group('takeWhile', () => {
   bench('es-toolkit/takeWhile', () => {
     takeWhileToolkit([5, 4, 3, 2, 1], n => n < 4);
   });
@@ -15,11 +13,11 @@ describe('takeWhile', () => {
   });
 
   bench('lodash/takeWhile', () => {
-    takeWhileLodash([5, 4, 3, 2, 1], n => n < 4);
+    lodash.takeWhile([5, 4, 3, 2, 1], n => n < 4);
   });
 });
 
-describe('takeWhile/largeArray', () => {
+group('takeWhile/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/takeWhile', () => {
@@ -31,6 +29,6 @@ describe('takeWhile/largeArray', () => {
   });
 
   bench('lodash/takeWhile', () => {
-    takeWhileLodash(largeArray, n => n < 100);
+    lodash.takeWhile(largeArray, n => n < 100);
   });
 });

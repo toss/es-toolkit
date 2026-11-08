@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { ary as aryToolkit } from 'es-toolkit';
 import { ary as aryCompactToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { ary: aryLodash } = lodash;
-
-describe('ary', () => {
+group('ary', () => {
   bench('es-toolkit/ary', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     aryToolkit((_a, _b, _c) => undefined, 2);
@@ -18,6 +16,6 @@ describe('ary', () => {
 
   bench('lodash/ary', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    aryLodash((_a, _b, _c) => undefined, 2);
+    lodash.ary((_a, _b, _c) => undefined, 2);
   });
 });

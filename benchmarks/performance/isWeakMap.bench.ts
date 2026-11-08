@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isWeakMap as isWeakMapToolkit } from 'es-toolkit';
 import { isWeakMap as isWeakMapToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isWeakMap: isWeakMapLodash } = lodash;
-
-describe('isWeakMap', () => {
+group('isWeakMap', () => {
   bench('es-toolkit/isWeakMap', () => {
     isWeakMapToolkit(new WeakMap());
     isWeakMapToolkit(new Map());
@@ -20,9 +18,9 @@ describe('isWeakMap', () => {
   });
 
   bench('lodash/isWeakMap', () => {
-    isWeakMapLodash(new WeakMap());
-    isWeakMapLodash(new Map());
-    isWeakMapLodash('');
-    isWeakMapLodash(123);
+    lodash.isWeakMap(new WeakMap());
+    lodash.isWeakMap(new Map());
+    lodash.isWeakMap('');
+    lodash.isWeakMap(123);
   });
 });

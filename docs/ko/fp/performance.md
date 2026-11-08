@@ -12,10 +12,10 @@
 
 ## 측정 방법
 
-위 숫자는 이 브랜치에서 Vitest로 측정했어요.
+직접 실행하려면 아래 명령을 사용하세요.
 
 ```bash
-yarn vitest bench performance/fp/pipe.bench.ts --run
+yarn bench fp/pipe
 ```
 
 정확한 벤치마크 코드는 `benchmarks/performance/fp/pipe.bench.ts`에서 확인할 수 있어요.

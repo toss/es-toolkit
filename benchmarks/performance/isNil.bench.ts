@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isNil as isNilToolkit } from 'es-toolkit';
 import { isNil as isNilCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isNil: isNilLodash } = lodash;
-
-describe('isNil', () => {
+group('isNil', () => {
   bench('es-toolkit/isNil', () => {
     isNilToolkit(null);
     isNilToolkit(undefined);
@@ -21,9 +19,9 @@ describe('isNil', () => {
   });
 
   bench('lodash/isNil', () => {
-    isNilLodash(null);
-    isNilLodash(undefined);
-    isNilLodash(123);
-    isNilLodash([1, 2, 3]);
+    lodash.isNil(null);
+    lodash.isNil(undefined);
+    lodash.isNil(123);
+    lodash.isNil([1, 2, 3]);
   });
 });

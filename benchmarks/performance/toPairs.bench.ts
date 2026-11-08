@@ -1,30 +1,28 @@
-import { bench, describe } from 'vitest';
 import { toPairs as toPairsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { toPairs: toPairsLodash } = lodash;
-
-describe('toPairs with object', () => {
+group('toPairs with object', () => {
   bench('es-toolkit/toPairs', () => {
     toPairsToolkit({ a: 1, b: 2 });
   });
 
   bench('lodash/toPairs', () => {
-    toPairsLodash({ a: 1, b: 2 });
+    lodash.toPairs({ a: 1, b: 2 });
   });
 });
 
-describe('toPairs with set', () => {
+group('toPairs with set', () => {
   bench('es-toolkit/toPairs', () => {
     toPairsToolkit(new Set([1, 2]));
   });
 
   bench('lodash/toPairs', () => {
-    toPairsLodash(new Set([1, 2]));
+    lodash.toPairs(new Set([1, 2]));
   });
 });
 
-describe('toPairs with map', () => {
+group('toPairs with map', () => {
   const map = new Map();
   map.set('a', 1);
   map.set('b', 2);
@@ -34,6 +32,6 @@ describe('toPairs with map', () => {
   });
 
   bench('lodash/toPairs', () => {
-    toPairsLodash(map);
+    lodash.toPairs(map);
   });
 });

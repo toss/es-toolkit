@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { kebabCase as kebabCaseToolkit } from 'es-toolkit';
 import { kebabCase as kebabCaseToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { kebabCase: kebabCaseLodash } = lodash;
-
-describe('kebabCase', () => {
+group('kebabCase', () => {
   bench('es-toolkit/kebabCase', () => {
     kebabCaseToolkit('hello world');
     kebabCaseToolkit('--foo--bar__baz 123');
@@ -23,10 +21,10 @@ describe('kebabCase', () => {
   });
 
   bench('lodash/kebabCase', () => {
-    kebabCaseLodash('hello world');
-    kebabCaseLodash('--foo--bar__baz 123');
-    kebabCaseLodash('123numericValues');
-    kebabCaseLodash('XMLHttpRequest');
-    kebabCaseLodash('hello-World_of XML_httpRequest');
+    lodash.kebabCase('hello world');
+    lodash.kebabCase('--foo--bar__baz 123');
+    lodash.kebabCase('123numericValues');
+    lodash.kebabCase('XMLHttpRequest');
+    lodash.kebabCase('hello-World_of XML_httpRequest');
   });
 });

@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { take as takeToolkit } from 'es-toolkit';
 import { take as takeToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { take: takeLodash } = lodash;
-
-describe('take', () => {
+group('take', () => {
   bench('es-toolkit/take', () => {
     takeToolkit([1, 2, 3, 4], 2);
   });
@@ -15,11 +13,11 @@ describe('take', () => {
   });
 
   bench('lodash/take', () => {
-    takeLodash([1, 2, 3, 4], 2);
+    lodash.take([1, 2, 3, 4], 2);
   });
 });
 
-describe('take/largeArray', () => {
+group('take/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/take', () => {
@@ -31,6 +29,6 @@ describe('take/largeArray', () => {
   });
 
   bench('lodash/take', () => {
-    takeLodash(largeArray, 100);
+    lodash.take(largeArray, 100);
   });
 });

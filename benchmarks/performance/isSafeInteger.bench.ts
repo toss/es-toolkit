@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { isSafeInteger as isSafeIntegerToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isSafeInteger: isSafeIntegerLodash } = lodash;
-
-describe('after', () => {
+group('after', () => {
   bench('es-toolkit/isSafeInteger', () => {
     const vals = [1, 1.1, '1', [], {}, () => false, Infinity, Number.MAX_SAFE_INTEGER + 1, Number.MIN_SAFE_INTEGER - 1];
     for (let i = 0; i < vals.length; i++) {
@@ -15,7 +13,7 @@ describe('after', () => {
   bench('lodash/isSafeInteger', () => {
     const vals = [1, 1.1, '1', [], {}, () => false, Infinity, Number.MAX_SAFE_INTEGER + 1, Number.MIN_SAFE_INTEGER - 1];
     for (let i = 0; i < vals.length; i++) {
-      isSafeIntegerLodash(vals[i]);
+      lodash.isSafeInteger(vals[i]);
     }
   });
 });

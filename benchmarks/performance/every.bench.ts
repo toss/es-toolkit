@@ -1,13 +1,11 @@
-import { bench, describe } from 'vitest';
 import { every as everyEsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { every: everyLodash } = lodash;
+import { bench, group } from './harness.ts';
 
 const generateArray = (length: number, max: number) => Array.from({ length }, () => Math.floor(Math.random() * max));
 const array = generateArray(1_000_000, 1000);
 
-describe('every, all true', () => {
+group('every, all true', () => {
   const alwaysTruePredicate = () => true;
 
   bench('es-toolkit/every, all true', () => {
@@ -15,11 +13,11 @@ describe('every, all true', () => {
   });
 
   bench('lodash/every, all true', () => {
-    everyLodash(array, alwaysTruePredicate);
+    lodash.every(array, alwaysTruePredicate);
   });
 });
 
-describe('every, all false', () => {
+group('every, all false', () => {
   const alwaysFalsePredicate = () => false;
 
   bench('es-toolkit/every, all false', () => {
@@ -27,11 +25,11 @@ describe('every, all false', () => {
   });
 
   bench('lodash/every, all false', () => {
-    everyLodash(array, alwaysFalsePredicate);
+    lodash.every(array, alwaysFalsePredicate);
   });
 });
 
-describe('every, fail in middle', () => {
+group('every, fail in middle', () => {
   const middleFailPredicate = (n: number, index: number) => index < array.length / 2;
 
   bench('es-toolkit/every, fail in middle', () => {
@@ -39,6 +37,6 @@ describe('every, fail in middle', () => {
   });
 
   bench('lodash/every, fail in middle', () => {
-    everyLodash(array, middleFailPredicate);
+    lodash.every(array, middleFailPredicate);
   });
 });

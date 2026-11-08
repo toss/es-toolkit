@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { endsWith as endsWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { endsWith: endsWithLodash } = lodash;
-
-describe('endsWith', () => {
+group('endsWith', () => {
   bench('es-toolkit/endsWith', () => {
     const str = 'fooBar';
     endsWithToolkit(str, 'Bar');
@@ -13,7 +11,7 @@ describe('endsWith', () => {
 
   bench('lodash/endsWith', () => {
     const str = 'fooBar';
-    endsWithLodash(str, 'Bar');
-    endsWithLodash(str, 'foo', 3);
+    lodash.endsWith(str, 'Bar');
+    lodash.endsWith(str, 'foo', 3);
   });
 });

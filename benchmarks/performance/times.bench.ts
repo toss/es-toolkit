@@ -1,15 +1,13 @@
-import { bench, describe } from 'vitest';
 import { times as timesCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { times: timesLodash } = lodash;
-
-describe('times', () => {
+group('times', () => {
   bench('es-toolkit/compat/times', () => {
     timesCompatToolkit(1000, i => i * 2);
   });
 
   bench('lodash/times', () => {
-    timesLodash(1000, i => i * 2);
+    lodash.times(1000, i => i * 2);
   });
 });

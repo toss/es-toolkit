@@ -1,20 +1,18 @@
-import { bench, describe } from 'vitest';
 import { join as joinToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { join: joinLodash } = lodash;
-
-describe('join', () => {
+group('join', () => {
   bench('es-toolkit', () => {
     joinToolkit([1, 2, 3], ',');
   });
 
   bench('lodash', () => {
-    joinLodash([1, 2, 3], ',');
+    lodash.join([1, 2, 3], ',');
   });
 });
 
-describe('join/largeArray', () => {
+group('join/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit', () => {
@@ -22,6 +20,6 @@ describe('join/largeArray', () => {
   });
 
   bench('lodash', () => {
-    joinLodash(largeArray, ',');
+    lodash.join(largeArray, ',');
   });
 });

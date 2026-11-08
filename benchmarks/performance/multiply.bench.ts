@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { multiply as multiplyToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { multiply: multiplyLodash } = lodash;
-
-describe('multiply function benchmark', () => {
+group('multiply function benchmark', () => {
   bench('es-toolkit/compat/multiply', () => {
     multiplyToolkitCompat(3, 4);
     multiplyToolkitCompat(-3, -4);
@@ -14,10 +12,10 @@ describe('multiply function benchmark', () => {
   });
 
   bench('lodash/multiply', () => {
-    multiplyLodash(3, 4);
-    multiplyLodash(-3, -4);
-    multiplyLodash(NaN, 3);
-    multiplyLodash(3, NaN);
-    multiplyLodash(NaN, NaN);
+    lodash.multiply(3, 4);
+    lodash.multiply(-3, -4);
+    lodash.multiply(NaN, 3);
+    lodash.multiply(3, NaN);
+    lodash.multiply(NaN, NaN);
   });
 });

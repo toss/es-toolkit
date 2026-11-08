@@ -1,8 +1,8 @@
-import { bench, describe } from 'vitest';
 import { Queue as QueueToolkit } from 'es-toolkit';
 import QueueYocto from 'yocto-queue';
+import { bench, group } from './harness.ts';
 
-describe('Queue', () => {
+group('Queue', () => {
   bench('es-toolkit/Queue', () => {
     const queue = new QueueToolkit<number>();
 
@@ -40,7 +40,7 @@ describe('Queue', () => {
   });
 });
 
-describe('Queue/iterate', () => {
+group('Queue/iterate', () => {
   const queueToolkit = new QueueToolkit<number>();
   const queueYocto = new QueueYocto<number>();
 

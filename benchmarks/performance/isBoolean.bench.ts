@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { isBoolean as isBooleanToolkit } from 'es-toolkit';
 import { isBoolean as isBooleanToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { isBoolean: isBooleanLodash } = lodash;
-
-describe('isBoolean', () => {
+group('isBoolean', () => {
   bench('es-toolkit/isBoolean', () => {
     isBooleanToolkit(true);
     isBooleanToolkit(false);
@@ -27,12 +25,12 @@ describe('isBoolean', () => {
   });
 
   bench('lodash/isBoolean', () => {
-    isBooleanLodash(true);
-    isBooleanLodash(false);
-    isBooleanLodash(undefined);
-    isBooleanLodash('');
-    isBooleanLodash(123);
-    isBooleanLodash({});
-    isBooleanLodash(Boolean());
+    lodash.isBoolean(true);
+    lodash.isBoolean(false);
+    lodash.isBoolean(undefined);
+    lodash.isBoolean('');
+    lodash.isBoolean(123);
+    lodash.isBoolean({});
+    lodash.isBoolean(Boolean());
   });
 });

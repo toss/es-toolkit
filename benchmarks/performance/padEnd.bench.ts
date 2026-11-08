@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { padEnd as padEndToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { padEnd: padEndLodash } = lodash;
-
-describe('padEnd', () => {
+group('padEnd', () => {
   bench('es-toolkit/padEnd', () => {
     const str = 'abc';
     padEndToolkit(str, 6, '_-');
@@ -12,6 +10,6 @@ describe('padEnd', () => {
 
   bench('lodash/padEnd', () => {
     const str = 'abc';
-    padEndLodash(str, 6, '_-');
+    lodash.padEnd(str, 6, '_-');
   });
 });

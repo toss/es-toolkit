@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { sortedIndex as sortedIndexToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, group } from './harness.ts';
 
-const { sortedIndex: sortedIndexLodash } = lodash;
-
-describe('sortedIndex', () => {
+group('sortedIndex', () => {
   const largeArray = Array.from({ length: 1000000 }, (_, i) => i * 2);
   const array = [...largeArray, NaN, undefined, null];
 
@@ -15,9 +13,9 @@ describe('sortedIndex', () => {
     sortedIndexToolkitCompat(array, null);
   });
   bench('lodash/sortedIndex', () => {
-    sortedIndexLodash(array, 39);
-    sortedIndexLodash(array, NaN);
-    sortedIndexLodash(array, undefined);
-    sortedIndexLodash(array, null);
+    lodash.sortedIndex(array, 39);
+    lodash.sortedIndex(array, NaN);
+    lodash.sortedIndex(array, undefined);
+    lodash.sortedIndex(array, null);
   });
 });
