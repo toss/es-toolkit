@@ -107,7 +107,7 @@ export function cloneDeepWith<T>(value: T): T;
  * console.log(clonedArr); // [2, 3, 4]
  * console.log(clonedArr === arr); // false
  */
-export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>): any | T {
+export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>): any {
   return cloneDeepWithImpl(obj, undefined, obj, new Map(), customizer);
 }
 

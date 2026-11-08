@@ -18,7 +18,7 @@ es-toolkit は、2022年初頭以降にリリースされたすべてのブラ�
 es-toolkit はモダンな JavaScript を積極的に活用し、小さく効率的なコードベースを維持しています。
 上記より古いバージョンのブラウザをサポートするには、ビルド設定を追加できます。Chrome 51 や Safari 10 のように ES2015 のみをサポートするさらに古いブラウザでも、正しく動作させることができます。下記の[古いブラウザをサポートする](#古いブラウザをサポートする)を参照してください。
 
-es-toolkit は新しいバージョンをリリースするたびに、サポートするブラウザで正しく動作することを検証しています。[`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) などの ESLint プラグインによる静的検証を行い、さらに実際の Playwright ベースの E2E テストで再検証しています。
+es-toolkit は新しいバージョンをリリースするたびに、サポートするブラウザで正しく動作することを検証しています。[`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) などのリントルールによる静的検証を行い、さらに実際の Playwright ベースの E2E テストで再検証しています。
 
 ::: tip `es-toolkit/compat` を使っていますか？
 `es-toolkit/compat` は、トランスパイルやポリフィルなしで、Node.js 6 や ES2015 対応ブラウザといったはるかに古い環境でも動作します。詳しくは[`es-toolkit/compat` のブラウザと Node.js のサポート](/ja/compat/environment-support)を参照してください。

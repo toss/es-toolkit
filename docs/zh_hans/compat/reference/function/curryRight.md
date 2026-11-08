@@ -92,7 +92,7 @@ console.log(todayLoginAction('张三'));
 
 // 首先固定时间
 const morningFormat = curriedFormat('早上9点');
-console.log(morningFormat('评论', '李四'));
+console.log(morningFormat('李四', '评论'));
 // "李四 在 早上9点 评论了"
 ```
 
@@ -111,15 +111,14 @@ const curriedTake = curryRight(takeFromEnd);
 // 创建用逗号分隔的函数
 const takeWithComma = curriedTake(', ');
 
-// 获取最后3项
-const takeLast3 = takeWithComma(3);
-
 const fruits = ['苹果', '香蕉', '橙子', '葡萄', '猕猴桃'];
-console.log(takeLast3(fruits)); // "橙子, 葡萄, 猕猴桃"
+
+// 获取最后3项
+console.log(takeWithComma(fruits, 3)); // "橙子, 葡萄, 猕猴桃"
 
 // 使用不同的分隔符
 const takeWithDash = curriedTake(' - ');
-console.log(takeWithDash(2, fruits)); // "葡萄 - 猕猴桃"
+console.log(takeWithDash(fruits, 2)); // "葡萄 - 猕猴桃"
 ```
 
 在函数组合中使用:

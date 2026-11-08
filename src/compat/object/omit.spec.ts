@@ -66,6 +66,7 @@ describe('omit', () => {
   });
 
   // Manipulating prototypes is an anti-pattern
+  // oxlint-disable-next-line vitest/no-disabled-tests
   it.skip('should work with a primitive `object`', () => {
     stringProto.a = 1;
     stringProto.b = 2;

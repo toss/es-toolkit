@@ -24,7 +24,7 @@ Creates a random number between 0 and 1.
 import { random } from 'es-toolkit/compat';
 
 random();
-// Returns: 0.123456789 (decimal between 0~1)
+// Returns: 0 or 1 (returns as integer by default)
 
 random(true);
 // Returns: 0.987654321 (returns as decimal)
@@ -41,7 +41,7 @@ Creates a random number from 0 to max.
 import { random } from 'es-toolkit/compat';
 
 random(5);
-// Returns: 3.456789 (decimal between 0~5)
+// Returns: 2 (integer between 0~5)
 
 random(10, true);
 // Returns: 7.123456 (decimal between 0~10)
@@ -58,7 +58,7 @@ Creates a random number from min to max.
 import { random } from 'es-toolkit/compat';
 
 random(1, 5);
-// Returns: 3.456789 (decimal between 1~5)
+// Returns: 3 (integer between 1~5)
 
 random(0, 10, true);
 // Returns: 6.789012 (decimal between 0~10)
@@ -73,7 +73,7 @@ Range is automatically swapped if reversed.
 import { random } from 'es-toolkit/compat';
 
 random(5, 1);
-// Returns: 3.456789 (range becomes 1~5)
+// Returns: 3 (range becomes 1~5, returns an integer)
 ```
 
 Guard object handles special cases.
@@ -83,12 +83,12 @@ import { random } from 'es-toolkit/compat';
 
 const guard = { 5: 5 };
 random(5, 5, guard);
-// Returns: 2.345678 (decimal between 0~5)
+// Returns: 5 (integer between 0~5)
 ```
 
 #### Parameters
 
-- `floating` (`boolean`, optional): Whether to return a decimal. Default is `true`.
+- `floating` (`boolean`, optional): Whether to return a decimal. Default is `false`.
 - `max` (`number`): The maximum value of the range (exclusive).
 - `min` (`number`): The minimum value of the range (inclusive).
 - `index` (`string | number`): The key to check in the guard object.
