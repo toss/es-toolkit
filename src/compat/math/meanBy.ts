@@ -1,6 +1,6 @@
 import { sumBy } from './sumBy.ts';
 import { identity } from '../../function/identity.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**

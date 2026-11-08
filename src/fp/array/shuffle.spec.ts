@@ -8,6 +8,6 @@ describe('shuffle', () => {
     const result = pipe(input, shuffle());
 
     expect(result).not.toBe(input);
-    expect(result.toSorted()).toEqual(input);
+    expect(result.toSorted((a, b) => a - b)).toEqual(input);
   });
 });

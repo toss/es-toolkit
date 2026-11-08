@@ -90,10 +90,12 @@ async function checkEntryPoint(specifier, esmBarrel, cjsBarrel) {
 }
 
 async function checkNotExported(specifier) {
-  for (const [format, loadModule] of [
+  /** @type {Array<[string, () => unknown]>} */
+  const loaders = [
     ['ESM', () => load(specifier)],
     ['CJS', () => require(specifier)],
-  ]) {
+  ];
+  for (const [format, loadModule] of loaders) {
     try {
       await loadModule();
       broken.push(`${specifier} (${format}): internal module is exported`);

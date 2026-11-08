@@ -1,5 +1,5 @@
-import { IterateeShorthand } from './IterateeShorthand.ts';
-import { ObjectIterator } from './ObjectIterator.ts';
+import type { IterateeShorthand } from './IterateeShorthand.ts';
+import type { ObjectIterator } from './ObjectIterator.ts';
 
 export type ObjectIteratee<TObject> = ObjectIterator<TObject, unknown> | IterateeShorthand<TObject[keyof TObject]>;
 

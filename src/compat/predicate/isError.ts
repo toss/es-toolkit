@@ -1,3 +1,5 @@
+import { isObjectLike } from './isObjectLike.ts';
+import { isPlainObject } from './isPlainObject.ts';
 import { getTag } from '../_internal/getTag.ts';
 
 /**
@@ -14,5 +16,15 @@ import { getTag } from '../_internal/getTag.ts';
  * ```
  */
 export function isError(value: any): value is Error {
-  return getTag(value) === '[object Error]';
+  if (!isObjectLike(value)) {
+    return false;
+  }
+
+  const tag = getTag(value);
+
+  return (
+    tag === '[object Error]' ||
+    tag === '[object DOMException]' ||
+    (typeof value.message === 'string' && typeof value.name === 'string' && !isPlainObject(value))
+  );
 }

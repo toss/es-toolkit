@@ -1,5 +1,5 @@
 import { findKey as findKeyToolkit } from '../../object/findKey.ts';
-import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+import type { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 import { identity } from '../function/identity.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';

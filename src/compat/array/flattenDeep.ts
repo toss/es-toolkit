@@ -1,5 +1,5 @@
 import { flattenDepth } from './flattenDepth.ts';
-import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
+import type { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 
 /**
  * Recursively flattens array.

@@ -8,6 +8,7 @@ import { strictArgs } from '../_internal/strictArgs';
 describe('values', () => {
   it(`should get string keyed values of \`object\``, () => {
     const object = { a: 1, b: 2 };
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = values(object).sort();
 
     expect(actual).toEqual([1, 2]);
@@ -15,6 +16,7 @@ describe('values', () => {
 
   it(`should work with an object that has a \`length\` property`, () => {
     const object = { 0: 'a', 1: 'b', length: 2 };
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = values(object).sort();
 
     expect(actual).toEqual([2, 'a', 'b']);
@@ -29,6 +31,7 @@ describe('values', () => {
     const expected = [1];
     // eslint-disable-next-line
     // @ts-ignore
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = values(new Foo()).sort();
 
     expect(actual).toEqual(expected);
@@ -38,6 +41,7 @@ describe('values', () => {
     const vals = [args, strictArgs];
     const expected = lodashStable.map(vals, lodashStable.constant([1, 2, 3]));
 
+    // oxlint-disable-next-line typescript/require-array-sort-compare
     const actual = lodashStable.map(vals, value => values(value).sort());
 
     expect(actual).toEqual(expected);

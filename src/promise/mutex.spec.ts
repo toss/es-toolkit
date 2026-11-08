@@ -16,7 +16,7 @@ describe('Mutex', () => {
 
     const spy = vi.fn();
 
-    mutex.acquire().then(spy);
+    void mutex.acquire().then(spy);
 
     await delay(0);
 
@@ -39,7 +39,7 @@ describe('Mutex', () => {
 
     const spy = vi.fn();
 
-    mutex.acquire().then(spy);
+    void mutex.acquire().then(spy);
 
     mutex.release();
 

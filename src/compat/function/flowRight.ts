@@ -1,6 +1,6 @@
 import { flatten } from '../../array/flatten.ts';
 import { flowRight as flowRightToolkit } from '../../function/flowRight.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 
 /**
  * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.

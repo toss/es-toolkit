@@ -5,7 +5,7 @@ import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { isObject } from '../predicate/isObject.ts';
-import { PropertyPath } from '../types/PropertyPath.ts';
+import type { PropertyPath } from '../types/PropertyPath.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
