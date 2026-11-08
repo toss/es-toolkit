@@ -310,7 +310,19 @@ function copyProperties<T>(
     const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
     if (descriptor == null || descriptor.writable) {
-      target[key] = cloneDeepWithImpl(source[key], key, objectToClone, stack, customizer);
+      const clonedValue = cloneDeepWithImpl(source[key], key, objectToClone, stack, customizer);
+
+      if (key === '__proto__') {
+        // Assigning to `__proto__` would set the prototype of `target` instead of creating an own property.
+        Object.defineProperty(target, key, {
+          value: clonedValue,
+          writable: true,
+          enumerable: true,
+          configurable: true,
+        });
+      } else {
+        target[key] = clonedValue;
+      }
     }
   }
 }

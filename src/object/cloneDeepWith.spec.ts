@@ -157,4 +157,13 @@ describe('cloneDeepWith', () => {
 
     expect(cloned).toEqual({ a: 2, b: { c: 4, d: { e: 6 } } });
   });
+
+  it('should keep an own `__proto__` key instead of using it as the prototype', () => {
+    const source = JSON.parse('{"__proto__": {"isAdmin": true}, "x": 1}');
+    const cloned = cloneDeepWith(source, () => undefined);
+
+    expect(Object.keys(cloned)).toEqual(['__proto__', 'x']);
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.isAdmin).toBeUndefined();
+  });
 });
