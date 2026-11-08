@@ -1,7 +1,7 @@
 import { keysIn } from './keysIn.ts';
 import { getSymbolsIn } from '../_internal/getSymbolsIn.ts';
-import { ValueKeyIteratee } from '../_internal/ValueKeyIteratee.ts';
-import { ValueKeyIterateeTypeGuard } from '../_internal/ValueKeyIterateeTypeGuard.ts';
+import type { ValueKeyIteratee } from '../_internal/ValueKeyIteratee.ts';
+import type { ValueKeyIterateeTypeGuard } from '../_internal/ValueKeyIterateeTypeGuard.ts';
 import { identity } from '../function/identity.ts';
 import { isSymbol } from '../predicate/isSymbol.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';

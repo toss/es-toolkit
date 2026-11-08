@@ -1,7 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { mapKeys as mapKeysToolkit } from '../../object/mapKeys.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
-import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+import type { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**

@@ -1,7 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { objectValues } from '../_internal/objectValues.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
-import { ValueIteratorTypeGuard } from '../_internal/ValueIteratorTypeGuard.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratorTypeGuard } from '../_internal/ValueIteratorTypeGuard.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 

@@ -1,9 +1,9 @@
 import { flattenDepth } from './flattenDepth.ts';
 import { map } from './map.ts';
 import { identity } from '../../function/identity.ts';
-import { ListIterator } from '../_internal/ListIterator.ts';
-import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
-import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import type { ListIterator } from '../_internal/ListIterator.ts';
+import type { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
+import type { ObjectIterator } from '../_internal/ObjectIterator.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**

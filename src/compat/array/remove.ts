@@ -1,6 +1,6 @@
 import { identity } from '../../function/identity.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { ListIteratee } from '../_internal/ListIteratee.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { iteratee } from '../util/iteratee.ts';

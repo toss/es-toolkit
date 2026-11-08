@@ -1,7 +1,7 @@
 import { flatMapDepth } from './flatMapDepth.ts';
-import { ListIterator } from '../_internal/ListIterator.ts';
-import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
-import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import type { ListIterator } from '../_internal/ListIterator.ts';
+import type { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
+import type { ObjectIterator } from '../_internal/ObjectIterator.ts';
 
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.

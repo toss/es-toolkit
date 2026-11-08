@@ -1,7 +1,7 @@
 import { flattenDepth } from './flattenDepth.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { toKey } from '../_internal/toKey.ts';

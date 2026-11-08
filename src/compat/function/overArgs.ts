@@ -1,6 +1,6 @@
 import { flatten } from '../../array/flatten.ts';
 import { identity } from '../../function/identity.ts';
-import { Many } from '../_internal/Many.ts';
+import type { Many } from '../_internal/Many.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**

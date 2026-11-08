@@ -1,9 +1,9 @@
 import { identity } from '../../function/identity.ts';
 import { range } from '../../math/range.ts';
-import { ArrayIterator } from '../_internal/ArrayIterator.ts';
-import { ListIterator } from '../_internal/ListIterator.ts';
-import { ObjectIterator } from '../_internal/ObjectIterator.ts';
-import { TupleIterator } from '../_internal/TupleIterator.ts';
+import type { ArrayIterator } from '../_internal/ArrayIterator.ts';
+import type { ListIterator } from '../_internal/ListIterator.ts';
+import type { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import type { TupleIterator } from '../_internal/TupleIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 

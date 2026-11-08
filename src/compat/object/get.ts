@@ -3,7 +3,7 @@ import type { GetFieldType } from '../_internal/GetFieldType.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
-import { PropertyPath } from '../types/PropertyPath.ts';
+import type { PropertyPath } from '../types/PropertyPath.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
