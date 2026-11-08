@@ -1,4 +1,4 @@
-import { PartialShallow } from './PartialShallow.ts';
+import type { PartialShallow } from './PartialShallow.ts';
 
 export type ListIteratee<T> =
   | ((value: T, index: number, collection: ArrayLike<T>) => unknown)

@@ -1,5 +1,5 @@
 import { conformsTo } from './conformsTo.ts';
-import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
+import type { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
 import { cloneDeep } from '../object/cloneDeep.ts';
 
 /**

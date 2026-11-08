@@ -1,4 +1,4 @@
-import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
+import type { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';

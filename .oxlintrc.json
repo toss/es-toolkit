@@ -83,6 +83,11 @@
       "rules": {
         "no-console": "error",
         "es-toolkit/no-object-entries": "error",
+        // Keep src loadable by Node.js type stripping without a bundler or loader, so that benchmarks can
+        // import it directly. Type-only imports are enforced by `verbatimModuleSyntax` in tsconfig.json.
+        "import/extensions": ["error", "always", { "ignorePackages": true }],
+        "typescript/parameter-properties": "error",
+        "typescript/no-namespace": "error",
         // `es-toolkit/util/hash` must stay opt-in: nothing reachable from the main entrypoints may import
         // it, or the platform-conditional export would leak into every bundle. tests/check-dist.spec.ts
         // verifies the same invariant on the packed artifact.
@@ -195,6 +200,9 @@
       "rules": {
         "no-console": "off",
         "es-toolkit/no-object-entries": "off",
+        "import/extensions": "off",
+        "typescript/parameter-properties": "off",
+        "typescript/no-namespace": "off",
         "no-restricted-imports": "off",
         "es-x/no-arbitrary-module-namespace-names": "off",
         "es-x/no-array-prototype-at": "off",

@@ -1,7 +1,7 @@
 import { hasOwn } from '../_internal/hasOwn.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
