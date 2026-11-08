@@ -1,4 +1,4 @@
-import { debounce as debounceToolkit } from '../../function/debounce.ts';
+const MAX_SET_TIMEOUT_DELAY = 2147483647;
 
 interface DebounceSettings {
   /**
@@ -167,60 +167,154 @@ export function debounce<F extends (...args: any[]) => any>(
     options = {};
   }
 
-  const { leading = false, trailing = true, maxWait } = options;
+  const { leading = false, trailing = true } = options;
+  const waitMs = debounceMs || 0;
 
-  const edges = Array(2);
+  let maxWaitMs: number | undefined = undefined;
 
-  if (leading) {
-    edges[0] = 'leading';
+  if (options.maxWait != null) {
+    maxWaitMs = Math.max(options.maxWait || 0, waitMs);
   }
 
-  if (trailing) {
-    edges[1] = 'trailing';
-  }
+  const pendingCall: { thisArg: unknown; args: Parameters<F> | undefined } = { thisArg: undefined, args: undefined };
+  let lastResult: ReturnType<F> | undefined = undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined = undefined;
+  let lastCalledAt: number | undefined = undefined;
+  let lastInvokedAt = 0;
 
-  let result: ReturnType<F> | undefined = undefined;
-  let pendingAt: number | null = null;
+  function debounced(this: unknown, ...args: Parameters<F>): ReturnType<F> | undefined {
+    const now = Date.now();
+    const shouldInvokeNow = shouldInvoke(now);
 
-  const _debounced = debounceToolkit(
-    function (this: any, ...args: Parameters<F>) {
-      result = func.apply(this, args);
-      pendingAt = null;
-    },
-    debounceMs,
-    { edges }
-  );
+    pendingCall.thisArg = this;
+    pendingCall.args = args;
+    lastCalledAt = now;
 
-  const debounced = function (this: any, ...args: Parameters<F>) {
-    if (maxWait != null) {
-      if (pendingAt === null) {
-        pendingAt = Date.now();
+    if (shouldInvokeNow) {
+      if (timer === undefined) {
+        return handleLeadingEdge(now);
       }
 
-      if (Date.now() - pendingAt >= maxWait) {
-        if (leading || trailing) {
-          result = func.apply(this, args);
-        }
-
-        pendingAt = Date.now();
-
-        _debounced.cancel();
-        _debounced.schedule();
-
-        return result;
+      // A burst that outlasts `maxWait` is invoked in the middle, even when `leading` is `false`.
+      if (maxWaitMs !== undefined) {
+        clearTimeout(timer);
+        startTimer(now, waitMs);
+        return invoke(now);
       }
     }
 
-    _debounced.apply(this, args);
-    return result;
-  };
+    if (timer === undefined) {
+      startTimer(now, waitMs);
+    }
 
-  const flush = () => {
-    _debounced.flush();
-    return result;
-  };
+    return lastResult;
+  }
 
-  debounced.cancel = _debounced.cancel;
+  function cancel(): void {
+    if (timer !== undefined) {
+      clearTimeout(timer);
+    }
+
+    timer = undefined;
+    lastCalledAt = undefined;
+    lastInvokedAt = 0;
+    clearPendingCall();
+  }
+
+  function flush(): ReturnType<F> | undefined {
+    if (timer === undefined) {
+      return lastResult;
+    }
+
+    return handleTrailingEdge(Date.now());
+  }
+
+  function onTimerExpired(dueAt: number): void {
+    const now = Date.now();
+    // Node.js timers can fire about 1ms before `Date.now()` reaches `dueAt`.
+    const checkedAt = Math.max(now, dueAt);
+
+    if (shouldInvoke(checkedAt)) {
+      handleTrailingEdge(now);
+      return;
+    }
+
+    startTimer(now, getRemainingWaitMs(checkedAt));
+  }
+
+  function shouldInvoke(now: number): boolean {
+    if (lastCalledAt === undefined) {
+      return true;
+    }
+
+    const msSinceLastCall = now - lastCalledAt;
+
+    // A negative gap means the system clock moved backwards.
+    return (
+      msSinceLastCall >= waitMs || msSinceLastCall < 0 || (maxWaitMs !== undefined && now - lastInvokedAt >= maxWaitMs)
+    );
+  }
+
+  function getRemainingWaitMs(now: number): number {
+    const msUntilWaitEnds = waitMs - (now - (lastCalledAt as number));
+
+    if (maxWaitMs === undefined) {
+      return msUntilWaitEnds;
+    }
+
+    return Math.min(msUntilWaitEnds, maxWaitMs - (now - lastInvokedAt));
+  }
+
+  function handleLeadingEdge(now: number): ReturnType<F> | undefined {
+    lastInvokedAt = now;
+    startTimer(now, waitMs);
+
+    if (leading) {
+      return invoke(now);
+    }
+
+    return lastResult;
+  }
+
+  function handleTrailingEdge(now: number): ReturnType<F> | undefined {
+    timer = undefined;
+
+    if (trailing && pendingCall.args !== undefined) {
+      return invoke(now);
+    }
+
+    clearPendingCall();
+    return lastResult;
+  }
+
+  function invoke(now: number): ReturnType<F> {
+    const thisArg = pendingCall.thisArg;
+    const args = pendingCall.args as Parameters<F>;
+
+    clearPendingCall();
+    lastInvokedAt = now;
+    lastResult = func.apply(thisArg, args);
+    return lastResult as ReturnType<F>;
+  }
+
+  function clearPendingCall(): void {
+    pendingCall.thisArg = undefined;
+    pendingCall.args = undefined;
+  }
+
+  function startTimer(now: number, delayMs: number): void {
+    const timerDelayMs = Math.min(delayMs, MAX_SET_TIMEOUT_DELAY);
+    const dueAt = now + timerDelayMs;
+
+    timer = setTimeout(() => onTimerExpired(dueAt), timerDelayMs);
+
+    // Without a trailing call the timer only tracks time, so it should not keep Node.js running.
+    if (!trailing && typeof timer.unref === 'function') {
+      timer.unref();
+    }
+  }
+
+  debounced.cancel = cancel;
   debounced.flush = flush;
 
   return debounced;

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -581,5 +581,65 @@ describe('debounce', () => {
     await delay(96);
 
     expect(callCount).toBe(0);
+  });
+
+  it('should cap timer delays at the `setTimeout` limit', () => {
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+    const debounced = debounce(noop, Infinity);
+
+    debounced();
+
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), 2147483647);
+
+    debounced.cancel();
+    setTimeoutSpy.mockRestore();
+  });
+
+  it('should not invoke `func` on `flush` when `trailing` is `false`', () => {
+    const func = vi.fn();
+    const debounced = debounce(func, 100, { leading: true, trailing: false });
+
+    debounced();
+    debounced();
+    debounced.flush();
+
+    expect(func).toHaveBeenCalledTimes(1);
+
+    debounced.cancel();
+  });
+});
+
+describe('debounce with fake timers', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should raise `maxWait` to `wait` when it is shorter', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const debounced = debounce(() => calledAt.push(Date.now() - start), 100, { maxWait: 50 });
+
+    debounced();
+    vi.advanceTimersByTime(40);
+    debounced();
+    vi.advanceTimersByTime(40);
+    debounced();
+    vi.advanceTimersByTime(200);
+
+    expect(calledAt).toEqual([100]);
+  });
+
+  it('should treat a `NaN` `wait` and `maxWait` as `0`', () => {
+    const func = vi.fn();
+    const debounced = debounce(func, NaN, { maxWait: NaN });
+
+    debounced();
+    vi.advanceTimersByTime(1);
+
+    expect(func).toHaveBeenCalledTimes(1);
   });
 });
