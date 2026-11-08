@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { reduce } from './reduce';
 
 describe('reduce', () => {
@@ -157,6 +157,68 @@ describe('reduce', () => {
     const result = reduce(set, (acc, value) => acc && value, true);
 
     expect(result).toBe(false);
+  });
+
+  it('should use null as the initial value', () => {
+    const set = new Set([1, 2]);
+    const callback = vi.fn((acc: number | null, value: number) => (acc ?? 0) + value);
+
+    const result = reduce(set, callback, null);
+
+    expect(result).toBe(3);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[0]).toEqual([null, 1, 1, set]);
+    expect(callback.mock.calls[1]).toEqual([1, 2, 2, set]);
+  });
+
+  it('should use undefined as the initial value', () => {
+    const set = new Set([1, 2]);
+    const callback = vi.fn((acc: number | undefined, value: number) => (acc ?? 0) + value);
+
+    const result = reduce(set, callback, undefined);
+
+    expect(result).toBe(3);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[0]).toEqual([undefined, 1, 1, set]);
+    expect(callback.mock.calls[1]).toEqual([1, 2, 2, set]);
+  });
+
+  it('should return null initial value for an empty Set', () => {
+    const set = new Set<number>();
+    const callback = vi.fn((acc: number | null, value: number) => (acc ?? 0) + value);
+
+    expect(reduce(set, callback, null)).toBeNull();
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should return undefined initial value for an empty Set', () => {
+    const set = new Set<number>();
+    const callback = vi.fn((acc: number | undefined, value: number) => (acc ?? 0) + value);
+
+    expect(reduce(set, callback, undefined)).toBeUndefined();
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should pass a null value returned by the callback to the next call', () => {
+    const set = new Set([1, 2]);
+    const callback = vi.fn((acc: number | null, value: number) => (acc === null ? value : null));
+
+    const result = reduce(set, callback, 0);
+
+    expect(result).toBe(2);
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback.mock.calls[1]).toEqual([null, 2, 2, set]);
+  });
+
+  it('should use a null first element as the initial value', () => {
+    const set = new Set<number | null>([null, 2]);
+    const callback = vi.fn((acc: number | null, value: number | null) => acc ?? value);
+
+    const result = reduce(set, callback);
+
+    expect(result).toBe(2);
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback.mock.calls[0]).toEqual([null, 2, 2, set]);
   });
 
   it('should work with multiplication', () => {

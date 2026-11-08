@@ -35,7 +35,7 @@ Common commands:
 ```bash
 yarn vitest run                   # Run all tests
 yarn vitest run src/array/chunk   # Run tests for a specific function
-yarn lint                         # ESLint
+yarn lint                         # oxlint (type-aware, see .oxlintrc.json)
 tsc --noEmit                      # Typecheck
 ```
 

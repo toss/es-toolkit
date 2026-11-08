@@ -1,5 +1,5 @@
 import { hash as sha256 } from 'node:crypto';
-import { serialize } from '../serialize/serialize.ts';
+import { serialize } from '../serialize.ts';
 
 /**
  * Hashes any value into a stable 43-character string.

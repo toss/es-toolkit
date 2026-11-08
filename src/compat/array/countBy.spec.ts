@@ -59,6 +59,7 @@ describe('countBy', () => {
     expect(Object.getPrototypeOf(actual)).toBe(Object.prototype);
     expect(actual instanceof Object).toBe(true);
     expect(typeof actual.hasOwnProperty).toBe('function');
+    // oxlint-disable-next-line typescript/no-base-to-string, typescript/restrict-template-expressions
     expect(`${actual}`).toBe('[object Object]');
     expect(Object.getPrototypeOf(countBy([]))).toBe(Object.prototype);
   });

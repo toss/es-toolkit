@@ -32,7 +32,7 @@ describe('Semaphore/contention', () => {
     await semaphore.acquire();
 
     try {
-      await null;
+      await Promise.resolve();
     } finally {
       semaphore.release();
     }

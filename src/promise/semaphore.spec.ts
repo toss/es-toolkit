@@ -16,7 +16,7 @@ describe('Semaphore', () => {
 
     const spy = vi.fn();
 
-    sema.acquire().then(spy);
+    void sema.acquire().then(spy);
 
     await delay(0);
 
@@ -39,7 +39,7 @@ describe('Semaphore', () => {
 
     const spy = vi.fn();
 
-    sema.acquire().then(spy);
+    void sema.acquire().then(spy);
 
     sema.release();
 
@@ -57,8 +57,8 @@ describe('Semaphore', () => {
     const spy1 = vi.fn();
     const spy2 = vi.fn();
 
-    semaphore.acquire().then(spy1);
-    semaphore.acquire().then(spy2);
+    void semaphore.acquire().then(spy1);
+    void semaphore.acquire().then(spy2);
 
     await delay(0);
 
@@ -81,8 +81,8 @@ describe('Semaphore', () => {
   it('should not allow acquiring more permits than the capacity', async () => {
     const semaphore = new Semaphore(1);
 
-    semaphore.acquire();
-    semaphore.acquire();
+    void semaphore.acquire();
+    void semaphore.acquire();
 
     semaphore.release();
     semaphore.release();
@@ -90,8 +90,8 @@ describe('Semaphore', () => {
     const spy1 = vi.fn();
     const spy2 = vi.fn();
 
-    semaphore.acquire().then(spy1);
-    semaphore.acquire().then(spy2);
+    void semaphore.acquire().then(spy1);
+    void semaphore.acquire().then(spy2);
 
     await delay(0);
 
@@ -135,15 +135,15 @@ describe('Semaphore', () => {
     const spy3 = vi.fn();
     const spy4 = vi.fn();
 
-    semaphore.acquire().then(spy1);
+    void semaphore.acquire().then(spy1);
     semaphore.release();
 
     await delay(0);
 
     expect(spy1).toHaveBeenCalledTimes(1);
 
-    semaphore.acquire().then(spy2);
-    semaphore.acquire().then(spy3);
+    void semaphore.acquire().then(spy2);
+    void semaphore.acquire().then(spy3);
     semaphore.release();
 
     await delay(0);
@@ -151,7 +151,7 @@ describe('Semaphore', () => {
     expect(spy2).toHaveBeenCalledTimes(1);
     expect(spy3).not.toHaveBeenCalled();
 
-    semaphore.acquire().then(spy4);
+    void semaphore.acquire().then(spy4);
     semaphore.release();
 
     await delay(0);

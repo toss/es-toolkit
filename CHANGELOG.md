@@ -1,5 +1,20 @@
 # es-toolkit Changelog
 
+## Version v1.53.2
+
+Released on November 6th, 2026.
+
+- Added support for per-function imports like `es-toolkit/array/chunk`. ([#2173](https://github.com/toss/es-toolkit/pull/2173))
+- Fixed `reduceAsync` to preserve explicitly provided `null` and `undefined` initial values. ([#2176](https://github.com/toss/es-toolkit/pull/2176))
+- Fixed circular dependency warnings in bundlers when importing `orderBy` or `sortBy`. ([#2187](https://github.com/toss/es-toolkit/pull/2187))
+- Fixed `truncate` in `es-toolkit/compat` to preserve separator boundaries, matching Lodash's behavior. ([#2180](https://github.com/toss/es-toolkit/pull/2180))
+- Fixed `isError` in `es-toolkit/compat` to return `true` for `DOMException` and error-like objects, matching Lodash's behavior. ([#2188](https://github.com/toss/es-toolkit/pull/2188))
+- Fixed incorrect example outputs in the documentation for `random`, `keysIn`, `setWith`, and `curryRight`. ([#2183](https://github.com/toss/es-toolkit/pull/2183))
+- Replaced Prettier and ESLint with oxfmt and oxlint, and forbade circular imports. ([#2185](https://github.com/toss/es-toolkit/pull/2185), [#2189](https://github.com/toss/es-toolkit/pull/2189), [#2190](https://github.com/toss/es-toolkit/pull/2190))
+- Enhanced the dist and browser compatibility checks to verify the packed tarball and only exported functions. ([#2182](https://github.com/toss/es-toolkit/pull/2182), [#2192](https://github.com/toss/es-toolkit/pull/2192))
+
+We sincerely thank @D-Sketon, @frogscooper, @MycroCosmo, @raon0211, @subotac, and @ys0v9 for their contributions. We appreciate your great efforts!
+
 ## Version v1.53.1
 
 Released on October 31st, 2026.

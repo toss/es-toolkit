@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { each, map } from '..';
 import { rangeRight } from './rangeRight';
+import { each, map } from '..';
 import { falsey } from '../_internal/falsey';
 
 describe('rangeRight methods', () => {
