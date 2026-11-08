@@ -1,6 +1,6 @@
 import { method as methodToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const object = {
   a: {
@@ -12,10 +12,10 @@ const object = {
 
 group('method', () => {
   bench('es-toolkit/compat', () => {
-    methodToolkit('a.b', 1, 2)(object);
+    do_not_optimize(methodToolkit('a.b', 1, 2)(object));
   });
 
   bench('lodash', () => {
-    lodash.method('a.b', 1, 2)(object);
+    do_not_optimize(lodash.method('a.b', 1, 2)(object));
   });
 });

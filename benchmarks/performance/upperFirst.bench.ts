@@ -1,38 +1,38 @@
 import { upperFirst as upperFirstToolkit } from 'es-toolkit';
 import { upperFirst as upperFirstCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('upperFirst', () => {
   group('short string', () => {
     bench('es-toolkit/upperFirst', () => {
       const str = 'camelCase';
-      upperFirstToolkit(str);
+      do_not_optimize(upperFirstToolkit(str));
     });
 
     bench('es-toolkit/compat/upperFirst', () => {
       const str = 'camelCase';
-      upperFirstCompatToolkit(str);
+      do_not_optimize(upperFirstCompatToolkit(str));
     });
 
     bench('lodash/upperFirst', () => {
       const str = 'camelCase';
-      lodash.upperFirst(str);
+      do_not_optimize(lodash.upperFirst(str));
     });
   });
 
   group('long string', () => {
     const LONG_STR = 'camelCaseLongString'.repeat(1000);
     bench('es-toolkit/upperFirst', () => {
-      upperFirstToolkit(LONG_STR);
+      do_not_optimize(upperFirstToolkit(LONG_STR));
     });
 
     bench('es-toolkit/compat/upperFirst', () => {
-      upperFirstCompatToolkit(LONG_STR);
+      do_not_optimize(upperFirstCompatToolkit(LONG_STR));
     });
 
     bench('lodash/upperFirst', () => {
-      lodash.upperFirst(LONG_STR);
+      do_not_optimize(lodash.upperFirst(LONG_STR));
     });
   });
 });

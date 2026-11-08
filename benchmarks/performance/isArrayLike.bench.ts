@@ -1,26 +1,26 @@
 import { isArrayLike as isArrayLikeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('isArrayLike', () => {
   bench('es-toolkit/isArrayLike', () => {
-    isArrayLikeToolkit(true);
-    isArrayLikeToolkit(new Date());
-    isArrayLikeToolkit(new Error());
-    isArrayLikeToolkit({ a: 1 });
-    isArrayLikeToolkit(1);
-    isArrayLikeToolkit(/x/);
-    isArrayLikeToolkit(Array.from({ length: 10000 }));
-    isArrayLikeToolkit({ length: 1000 });
+    do_not_optimize(isArrayLikeToolkit(true));
+    do_not_optimize(isArrayLikeToolkit(new Date()));
+    do_not_optimize(isArrayLikeToolkit(new Error()));
+    do_not_optimize(isArrayLikeToolkit({ a: 1 }));
+    do_not_optimize(isArrayLikeToolkit(1));
+    do_not_optimize(isArrayLikeToolkit(/x/));
+    do_not_optimize(isArrayLikeToolkit(Array.from({ length: 10000 })));
+    do_not_optimize(isArrayLikeToolkit({ length: 1000 }));
   });
   bench('lodash/isArrayLike', () => {
-    lodash.isArrayLike(true);
-    lodash.isArrayLike(new Date());
-    lodash.isArrayLike(new Error());
-    lodash.isArrayLike({ a: 1 });
-    lodash.isArrayLike(1);
-    lodash.isArrayLike(/x/);
-    lodash.isArrayLike(Array.from({ length: 10000 }));
-    lodash.isArrayLike({ length: 1000 });
+    do_not_optimize(lodash.isArrayLike(true));
+    do_not_optimize(lodash.isArrayLike(new Date()));
+    do_not_optimize(lodash.isArrayLike(new Error()));
+    do_not_optimize(lodash.isArrayLike({ a: 1 }));
+    do_not_optimize(lodash.isArrayLike(1));
+    do_not_optimize(lodash.isArrayLike(/x/));
+    do_not_optimize(lodash.isArrayLike(Array.from({ length: 10000 })));
+    do_not_optimize(lodash.isArrayLike({ length: 1000 }));
   });
 });

@@ -1,6 +1,6 @@
 import { isMatchWith as isMatchWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const customizer = (objValue: unknown, srcValue: unknown) => {
   if (typeof objValue === 'string' && typeof srcValue === 'string') {
@@ -10,11 +10,11 @@ const customizer = (objValue: unknown, srcValue: unknown) => {
 
 group('isMatchWith', () => {
   bench('es-toolkit/compat/isMatchWith', () => {
-    isMatchWithToolkitCompat({ a: 'A' }, { a: 'a' }, customizer);
+    do_not_optimize(isMatchWithToolkitCompat({ a: 'A' }, { a: 'a' }, customizer));
   });
 
   bench('lodash/isMatchWith', () => {
-    lodash.isMatchWith({ a: 'A' }, { a: 'a' }, customizer);
+    do_not_optimize(lodash.isMatchWith({ a: 'A' }, { a: 'a' }, customizer));
   });
 });
 
@@ -44,11 +44,11 @@ group('isMatchWith - complex objects', () => {
   };
 
   bench('es-toolkit/compat/isMatchWith', () => {
-    isMatchWithToolkitCompat(targetObject, sourceObject, customizer);
+    do_not_optimize(isMatchWithToolkitCompat(targetObject, sourceObject, customizer));
   });
 
   bench('lodash/isMatchWith', () => {
-    lodash.isMatchWith(targetObject, sourceObject, customizer);
+    do_not_optimize(lodash.isMatchWith(targetObject, sourceObject, customizer));
   });
 });
 
@@ -65,10 +65,10 @@ group('isMatchWith - arrays', () => {
   ];
 
   bench('es-toolkit/compat/isMatchWith', () => {
-    isMatchWithToolkitCompat(targetArray, sourceArray, customizer);
+    do_not_optimize(isMatchWithToolkitCompat(targetArray, sourceArray, customizer));
   });
 
   bench('lodash/isMatchWith', () => {
-    lodash.isMatchWith(targetArray, sourceArray, customizer);
+    do_not_optimize(lodash.isMatchWith(targetArray, sourceArray, customizer));
   });
 });

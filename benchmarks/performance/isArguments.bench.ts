@@ -1,25 +1,25 @@
 import { isArguments as isArgumentsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('isArguments', () => {
   bench('es-toolkit/isArguments', () => {
-    isArgumentsToolkit([1, 2, 3]);
-    isArgumentsToolkit(true);
-    isArgumentsToolkit(new Date());
-    isArgumentsToolkit(new Error());
-    isArgumentsToolkit(1);
-    isArgumentsToolkit(/x/);
-    isArgumentsToolkit('a');
+    do_not_optimize(isArgumentsToolkit([1, 2, 3]));
+    do_not_optimize(isArgumentsToolkit(true));
+    do_not_optimize(isArgumentsToolkit(new Date()));
+    do_not_optimize(isArgumentsToolkit(new Error()));
+    do_not_optimize(isArgumentsToolkit(1));
+    do_not_optimize(isArgumentsToolkit(/x/));
+    do_not_optimize(isArgumentsToolkit('a'));
   });
 
   bench('lodash/isArguments', () => {
-    lodash.isArguments([1, 2, 3]);
-    lodash.isArguments(true);
-    lodash.isArguments(new Date());
-    lodash.isArguments(new Error());
-    lodash.isArguments(1);
-    lodash.isArguments(/x/);
-    lodash.isArguments('a');
+    do_not_optimize(lodash.isArguments([1, 2, 3]));
+    do_not_optimize(lodash.isArguments(true));
+    do_not_optimize(lodash.isArguments(new Date()));
+    do_not_optimize(lodash.isArguments(new Error()));
+    do_not_optimize(lodash.isArguments(1));
+    do_not_optimize(lodash.isArguments(/x/));
+    do_not_optimize(lodash.isArguments('a'));
   });
 });

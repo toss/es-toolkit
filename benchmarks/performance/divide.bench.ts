@@ -1,21 +1,21 @@
 import { divide as divideToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('divide function benchmark', () => {
   bench('es-toolkit/compat/divide', () => {
-    divideToolkitCompat(3, 4);
-    divideToolkitCompat(-3, -4);
-    divideToolkitCompat(NaN, 3);
-    divideToolkitCompat(3, NaN);
-    divideToolkitCompat(NaN, NaN);
+    do_not_optimize(divideToolkitCompat(3, 4));
+    do_not_optimize(divideToolkitCompat(-3, -4));
+    do_not_optimize(divideToolkitCompat(NaN, 3));
+    do_not_optimize(divideToolkitCompat(3, NaN));
+    do_not_optimize(divideToolkitCompat(NaN, NaN));
   });
 
   bench('lodash/divide', () => {
-    lodash.divide(3, 4);
-    lodash.divide(-3, -4);
-    lodash.divide(NaN, 3);
-    lodash.divide(3, NaN);
-    lodash.divide(NaN, NaN);
+    do_not_optimize(lodash.divide(3, 4));
+    do_not_optimize(lodash.divide(-3, -4));
+    do_not_optimize(lodash.divide(NaN, 3));
+    do_not_optimize(lodash.divide(3, NaN));
+    do_not_optimize(lodash.divide(NaN, NaN));
   });
 });

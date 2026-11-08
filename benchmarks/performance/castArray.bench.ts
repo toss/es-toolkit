@@ -1,17 +1,17 @@
 import { castArray as castArrayToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('castArray', () => {
   bench('es-toolkit/castArray', () => {
-    castArrayToolkit(1);
-    castArrayToolkit([1]);
-    castArrayToolkit();
+    do_not_optimize(castArrayToolkit(1));
+    do_not_optimize(castArrayToolkit([1]));
+    do_not_optimize(castArrayToolkit());
   });
 
   bench('lodash/castArray', () => {
-    lodash.castArray(1);
-    lodash.castArray([1]);
-    lodash.castArray();
+    do_not_optimize(lodash.castArray(1));
+    do_not_optimize(lodash.castArray([1]));
+    do_not_optimize(lodash.castArray());
   });
 });

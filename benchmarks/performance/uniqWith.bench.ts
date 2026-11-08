@@ -2,19 +2,19 @@ import { uniqWith as uniqWithToolkit } from 'es-toolkit';
 import { uniqWith as uniqWithToolkitCompat } from 'es-toolkit/compat';
 import { randomInt } from 'crypto';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('uniqWith, small arrays', () => {
   bench('es-toolkit/uniqWith', () => {
-    uniqWithToolkit([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y));
+    do_not_optimize(uniqWithToolkit([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y)));
   });
 
   bench('es-toolkit/compat/uniqWith', () => {
-    uniqWithToolkitCompat([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y));
+    do_not_optimize(uniqWithToolkitCompat([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y)));
   });
 
   bench('lodash/uniqWith', () => {
-    lodash.uniqWith([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y));
+    do_not_optimize(lodash.uniqWith([2.1, 1.2, 2.3], (x, y) => Math.floor(x) === Math.floor(y)));
   });
 });
 
@@ -23,14 +23,14 @@ group('uniqWith, large arrays', () => {
   const comparator = (x: number, y: number) => Math.floor(x) === Math.floor(y);
 
   bench('es-toolkit/uniqWith', () => {
-    uniqWithToolkit(array, comparator);
+    do_not_optimize(uniqWithToolkit(array, comparator));
   });
 
   bench('es-toolkit/compat/uniqWith', () => {
-    uniqWithToolkitCompat(array, comparator);
+    do_not_optimize(uniqWithToolkitCompat(array, comparator));
   });
 
   bench('lodash/uniqWith', () => {
-    lodash.uniqWith(array, comparator);
+    do_not_optimize(lodash.uniqWith(array, comparator));
   });
 });

@@ -1,7 +1,7 @@
 import { maxBy as maxByToolkit } from 'es-toolkit';
 import { maxBy as maxByCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('maxBy', () => {
   bench('es-toolkit/maxBy', () => {
@@ -10,7 +10,7 @@ group('maxBy', () => {
       { name: 'Nunu', age: 30 },
       { name: 'Overmars', age: 20 },
     ];
-    maxByToolkit(people, person => person.age);
+    do_not_optimize(maxByToolkit(people, person => person.age));
   });
 
   bench('es-toolkit/compat/maxBy', () => {
@@ -19,7 +19,7 @@ group('maxBy', () => {
       { name: 'Nunu', age: 30 },
       { name: 'Overmars', age: 20 },
     ];
-    maxByCompat(people, person => person.age);
+    do_not_optimize(maxByCompat(people, person => person.age));
   });
 
   bench('lodash/maxBy', () => {
@@ -28,7 +28,7 @@ group('maxBy', () => {
       { name: 'Nunu', age: 30 },
       { name: 'Overmars', age: 20 },
     ];
-    lodash.maxBy(people, person => person.age);
+    do_not_optimize(lodash.maxBy(people, person => person.age));
   });
 });
 
@@ -36,14 +36,14 @@ group('maxBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/maxBy', () => {
-    maxByToolkit(largeArray, person => person.age);
+    do_not_optimize(maxByToolkit(largeArray, person => person.age));
   });
 
   bench('es-toolkit/compat/maxBy', () => {
-    maxByCompat(largeArray, person => person.age);
+    do_not_optimize(maxByCompat(largeArray, person => person.age));
   });
 
   bench('lodash/maxBy', () => {
-    lodash.maxBy(largeArray, person => person.age);
+    do_not_optimize(lodash.maxBy(largeArray, person => person.age));
   });
 });

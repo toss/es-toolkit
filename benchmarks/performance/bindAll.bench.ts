@@ -1,6 +1,6 @@
 import { bindAll as bindAllToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const object = {
   greet() {
@@ -14,20 +14,20 @@ const object = {
 
 group('bindAll - single method', () => {
   bench('es-toolkit/bindAll - single method', () => {
-    bindAllToolkit(object, 'greet');
+    do_not_optimize(bindAllToolkit(object, 'greet'));
   });
 
   bench('lodash/bindAll - single method', () => {
-    lodash.bindAll(object, 'greet');
+    do_not_optimize(lodash.bindAll(object, 'greet'));
   });
 });
 
 group('bindAll - multiple methods', () => {
   bench('es-toolkit/bindAll - multiple methods', () => {
-    bindAllToolkit(object, ['greet', 'farewell']);
+    do_not_optimize(bindAllToolkit(object, ['greet', 'farewell']));
   });
 
   bench('lodash/bindAll - multiple methods', () => {
-    lodash.bindAll(object, ['greet', 'farewell']);
+    do_not_optimize(lodash.bindAll(object, ['greet', 'farewell']));
   });
 });

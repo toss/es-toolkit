@@ -1,18 +1,18 @@
 import { once as onceToolkit } from 'es-toolkit';
 import { once as onceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('once', () => {
   bench('es-toolkit/once', () => {
-    onceToolkit(() => undefined);
+    do_not_optimize(onceToolkit(() => undefined));
   });
 
   bench('es-toolkit/compat/once', () => {
-    onceToolkitCompat(() => undefined);
+    do_not_optimize(onceToolkitCompat(() => undefined));
   });
 
   bench('lodash/once', () => {
-    lodash.once(() => undefined);
+    do_not_optimize(lodash.once(() => undefined));
   });
 });

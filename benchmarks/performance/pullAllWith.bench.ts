@@ -1,6 +1,6 @@
 import { pullAllWith as pullAllWithToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('pullAllWith', () => {
   const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 4 }, { x: 5 }];
@@ -9,11 +9,11 @@ group('pullAllWith', () => {
   const comparator = (a: { x: number }, b: { x: number }) => a.x === b.x;
 
   bench('es-toolkit/pullAllWith', () => {
-    pullAllWithToolkit([...array], valuesToRemove, comparator);
+    do_not_optimize(pullAllWithToolkit([...array], valuesToRemove, comparator));
   });
 
   bench('lodash/pullAllWith', () => {
-    lodash.pullAllWith([...array], valuesToRemove, comparator);
+    do_not_optimize(lodash.pullAllWith([...array], valuesToRemove, comparator));
   });
 });
 
@@ -24,10 +24,10 @@ group('pullAllWith/largeArray', () => {
   const comparator = (a: { x: number }, b: { x: number }) => a.x === b.x;
 
   bench('es-toolkit/pullAllWith', () => {
-    pullAllWithToolkit([...largeArray], valuesToRemove, comparator);
+    do_not_optimize(pullAllWithToolkit([...largeArray], valuesToRemove, comparator));
   });
 
   bench('lodash/pullAllWith', () => {
-    lodash.pullAllWith([...largeArray], valuesToRemove, comparator);
+    do_not_optimize(lodash.pullAllWith([...largeArray], valuesToRemove, comparator));
   });
 });

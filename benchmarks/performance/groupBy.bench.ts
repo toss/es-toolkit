@@ -1,7 +1,7 @@
 import { groupBy as groupByToolkit } from 'es-toolkit';
 import { groupBy as groupByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('groupBy', () => {
   bench('es-toolkit/groupBy', () => {
@@ -13,7 +13,7 @@ group('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    groupByToolkit(array, item => item.category);
+    do_not_optimize(groupByToolkit(array, item => item.category));
   });
 
   bench('es-toolkit/compat/groupBy', () => {
@@ -25,7 +25,7 @@ group('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    groupByToolkitCompat(array, item => item.category);
+    do_not_optimize(groupByToolkitCompat(array, item => item.category));
   });
 
   bench('lodash/groupBy', () => {
@@ -37,7 +37,7 @@ group('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    lodash.groupBy(array, item => item.category);
+    do_not_optimize(lodash.groupBy(array, item => item.category));
   });
 });
 
@@ -48,10 +48,10 @@ group('groupBy/largeArray', () => {
   }));
 
   bench('es-toolkit/groupBy', () => {
-    groupByToolkit(largeArray, item => item.category);
+    do_not_optimize(groupByToolkit(largeArray, item => item.category));
   });
 
   bench('lodash/groupBy', () => {
-    lodash.groupBy(largeArray, item => item.category);
+    do_not_optimize(lodash.groupBy(largeArray, item => item.category));
   });
 });

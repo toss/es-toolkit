@@ -1,7 +1,7 @@
 import { merge as mergeToolkit } from 'es-toolkit';
 import { merge as mergeCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const object = {
   a: [{ b: 2 }, { d: 4 }],
@@ -13,14 +13,14 @@ const other = {
 
 group('merge', () => {
   bench('lodash/merge', () => {
-    lodash.merge(object, other);
+    do_not_optimize(lodash.merge(object, other));
   });
 
   bench('es-toolkit/merge', () => {
-    mergeToolkit(object, other);
+    do_not_optimize(mergeToolkit(object, other));
   });
 
   bench('es-toolkit/compat/merge', () => {
-    mergeCompatToolkit(object, other);
+    do_not_optimize(mergeCompatToolkit(object, other));
   });
 });

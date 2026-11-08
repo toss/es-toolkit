@@ -1,15 +1,15 @@
 import { constant as constantToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('constant', () => {
   bench(
     'es-toolkit/compat/constant',
     () => {
-      constantToolkitCompat([1, 2, 3]);
-      constantToolkitCompat({ a: 1 });
-      constantToolkitCompat(1);
-      constantToolkitCompat('a');
+      do_not_optimize(constantToolkitCompat([1, 2, 3]));
+      do_not_optimize(constantToolkitCompat({ a: 1 }));
+      do_not_optimize(constantToolkitCompat(1));
+      do_not_optimize(constantToolkitCompat('a'));
     },
     {
       time: 50,
@@ -19,10 +19,10 @@ group('constant', () => {
   bench(
     'lodash/constant',
     () => {
-      lodash.constant([1, 2, 3]);
-      lodash.constant({ a: 1 });
-      lodash.constant(1);
-      lodash.constant('a');
+      do_not_optimize(lodash.constant([1, 2, 3]));
+      do_not_optimize(lodash.constant({ a: 1 }));
+      do_not_optimize(lodash.constant(1));
+      do_not_optimize(lodash.constant('a'));
     },
     {
       time: 50,

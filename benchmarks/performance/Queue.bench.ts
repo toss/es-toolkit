@@ -1,17 +1,17 @@
 import { Queue as QueueToolkit } from 'es-toolkit';
 import QueueYocto from 'yocto-queue';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('Queue', () => {
   bench('es-toolkit/Queue', () => {
     const queue = new QueueToolkit<number>();
 
     for (let i = 0; i < 10000; i++) {
-      queue.enqueue(i);
+      do_not_optimize(queue.enqueue(i));
     }
 
     while (queue.size > 0) {
-      queue.dequeue();
+      do_not_optimize(queue.dequeue());
     }
   });
 
@@ -19,11 +19,11 @@ group('Queue', () => {
     const queue = new QueueYocto<number>();
 
     for (let i = 0; i < 10000; i++) {
-      queue.enqueue(i);
+      do_not_optimize(queue.enqueue(i));
     }
 
     while (queue.size > 0) {
-      queue.dequeue();
+      do_not_optimize(queue.dequeue());
     }
   });
 
@@ -31,11 +31,11 @@ group('Queue', () => {
     const array: number[] = [];
 
     for (let i = 0; i < 10000; i++) {
-      array.push(i);
+      do_not_optimize(array.push(i));
     }
 
     while (array.length > 0) {
-      array.shift();
+      do_not_optimize(array.shift());
     }
   });
 });

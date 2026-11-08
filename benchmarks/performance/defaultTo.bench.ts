@@ -1,21 +1,21 @@
 import { defaultTo as defaultToToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('defaultTo', () => {
   bench('es-toolkit/compat/defaultTo', () => {
-    defaultToToolkitCompat(null, 123);
-    defaultToToolkitCompat(undefined, '64');
-    defaultToToolkitCompat(NaN, 0);
-    defaultToToolkitCompat(true, 0);
-    defaultToToolkitCompat(123, 0);
+    do_not_optimize(defaultToToolkitCompat(null, 123));
+    do_not_optimize(defaultToToolkitCompat(undefined, '64'));
+    do_not_optimize(defaultToToolkitCompat(NaN, 0));
+    do_not_optimize(defaultToToolkitCompat(true, 0));
+    do_not_optimize(defaultToToolkitCompat(123, 0));
   });
 
   bench('lodash/defaultTo', () => {
-    lodash.defaultTo(null, 123);
-    lodash.defaultTo(undefined, '64');
-    lodash.defaultTo(NaN, 0);
-    lodash.defaultTo(true, 0);
-    lodash.defaultTo(123, 0);
+    do_not_optimize(lodash.defaultTo(null, 123));
+    do_not_optimize(lodash.defaultTo(undefined, '64'));
+    do_not_optimize(lodash.defaultTo(NaN, 0));
+    do_not_optimize(lodash.defaultTo(true, 0));
+    do_not_optimize(lodash.defaultTo(123, 0));
   });
 });

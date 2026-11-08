@@ -1,6 +1,6 @@
 import { fromPairs as fromPairsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('fromPairs', () => {
   const data = [
@@ -10,15 +10,15 @@ group('fromPairs', () => {
   ];
 
   bench('es-toolkit/fromPairs', () => {
-    fromPairsToolkit(data);
+    do_not_optimize(fromPairsToolkit(data));
   });
 
   bench('lodash/fromPairs', () => {
-    lodash.fromPairs(data);
+    do_not_optimize(lodash.fromPairs(data));
   });
 
   bench('javascript/fromEntries', () => {
-    Object.fromEntries(data);
+    do_not_optimize(Object.fromEntries(data));
   });
 });
 
@@ -26,14 +26,14 @@ group('fromPairs/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i]);
 
   bench('es-toolkit/fromPairs', () => {
-    fromPairsToolkit(largeArray);
+    do_not_optimize(fromPairsToolkit(largeArray));
   });
 
   bench('lodash/fromPairs', () => {
-    lodash.fromPairs(largeArray);
+    do_not_optimize(lodash.fromPairs(largeArray));
   });
 
   bench('javascript/fromEntries', () => {
-    Object.fromEntries(largeArray);
+    do_not_optimize(Object.fromEntries(largeArray));
   });
 });

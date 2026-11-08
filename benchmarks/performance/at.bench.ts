@@ -1,26 +1,26 @@
 import { at as atToolkit } from 'es-toolkit';
 import { at as atToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('at', () => {
   const data = ['a', 'b', 'c', 'd', 'e'];
   const indices = [0, 2, -2, 1.5, -1.5];
 
   bench('es-toolkit/at', () => {
-    atToolkit(data, indices);
+    do_not_optimize(atToolkit(data, indices));
   });
 
   bench('es-toolkit/compat/at', () => {
-    atToolkitCompat(data, indices);
+    do_not_optimize(atToolkitCompat(data, indices));
   });
 
   bench('lodash/at', () => {
-    lodash.at(data, indices);
+    do_not_optimize(lodash.at(data, indices));
   });
 
   bench('Array.prototype.at', () => {
-    indices.map(i => data.at(i));
+    do_not_optimize(indices.map(i => data.at(i)));
   });
 });
 
@@ -29,18 +29,18 @@ group('at/largeArray', () => {
   const largeIndices = Array.from({ length: 1000 }, (_, i) => i * 2);
 
   bench('es-toolkit/at', () => {
-    atToolkit(largeData, largeIndices);
+    do_not_optimize(atToolkit(largeData, largeIndices));
   });
 
   bench('es-toolkit/compat/at', () => {
-    atToolkitCompat(largeData, largeIndices);
+    do_not_optimize(atToolkitCompat(largeData, largeIndices));
   });
 
   bench('lodash/at', () => {
-    lodash.at(largeData, largeIndices);
+    do_not_optimize(lodash.at(largeData, largeIndices));
   });
 
   bench('Array.prototype.at', () => {
-    largeIndices.map(i => largeData.at(i));
+    do_not_optimize(largeIndices.map(i => largeData.at(i)));
   });
 });

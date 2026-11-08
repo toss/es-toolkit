@@ -1,13 +1,13 @@
 import { delay as delayToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('delay', () => {
   bench('es-toolkit/compat/delay', () => {
-    delayToolkitCompat(() => {}, 1000);
+    do_not_optimize(delayToolkitCompat(() => {}, 1000));
   });
 
   bench('lodash/delay', () => {
-    lodash.delay(() => {}, 1000);
+    do_not_optimize(lodash.delay(() => {}, 1000));
   });
 });

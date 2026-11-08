@@ -1,3 +1,5 @@
+export { do_not_optimize } from 'mitata';
+
 export interface Benchmark {
   group: string;
   name: string;

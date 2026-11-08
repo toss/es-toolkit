@@ -1,6 +1,6 @@
 import { hasIn as hasInToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('hasIn', () => {
   // 기본 객체 경로 테스트 (문자열)
@@ -8,11 +8,11 @@ group('hasIn', () => {
     const obj = { a: { b: 3 } };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'a.b');
+      do_not_optimize(hasInToolkit(obj, 'a.b'));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(obj, 'a.b');
+      do_not_optimize(lodash.hasIn(obj, 'a.b'));
     });
   });
 
@@ -21,11 +21,11 @@ group('hasIn', () => {
     const obj = { a: { b: 3 } };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, ['a', 'b']);
+      do_not_optimize(hasInToolkit(obj, ['a', 'b']));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(obj, ['a', 'b']);
+      do_not_optimize(lodash.hasIn(obj, ['a', 'b']));
     });
   });
 
@@ -39,11 +39,11 @@ group('hasIn', () => {
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(rect, 'area');
+      do_not_optimize(hasInToolkit(rect, 'area'));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(rect, 'area');
+      do_not_optimize(lodash.hasIn(rect, 'area'));
     });
   });
 
@@ -55,11 +55,11 @@ group('hasIn', () => {
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(rect, ['dimensions', 'width']);
+      do_not_optimize(hasInToolkit(rect, ['dimensions', 'width']));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(rect, ['dimensions', 'width']);
+      do_not_optimize(lodash.hasIn(rect, ['dimensions', 'width']));
     });
   });
 
@@ -68,11 +68,11 @@ group('hasIn', () => {
     const obj = {};
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'toString');
+      do_not_optimize(hasInToolkit(obj, 'toString'));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(obj, 'toString');
+      do_not_optimize(lodash.hasIn(obj, 'toString'));
     });
   });
 
@@ -89,11 +89,11 @@ group('hasIn', () => {
     const child = new Child();
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(child, 'method');
+      do_not_optimize(hasInToolkit(child, 'method'));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(child, 'method');
+      do_not_optimize(lodash.hasIn(child, 'method'));
     });
   });
 
@@ -102,11 +102,11 @@ group('hasIn', () => {
     const obj = { a: 1 };
 
     bench('es-toolkit/hasIn', () => {
-      hasInToolkit(obj, 'nonExistent');
+      do_not_optimize(hasInToolkit(obj, 'nonExistent'));
     });
 
     bench('lodash/hasIn', () => {
-      lodash.hasIn(obj, 'nonExistent');
+      do_not_optimize(lodash.hasIn(obj, 'nonExistent'));
     });
   });
 
@@ -115,19 +115,19 @@ group('hasIn', () => {
     const deepObj = { a: { b: { c: { d: { e: { f: 1 } } } } } };
 
     bench('es-toolkit/hasIn deep path (string)', () => {
-      hasInToolkit(deepObj, 'a.b.c.d.e.f');
+      do_not_optimize(hasInToolkit(deepObj, 'a.b.c.d.e.f'));
     });
 
     bench('lodash/hasIn deep path (string)', () => {
-      lodash.hasIn(deepObj, 'a.b.c.d.e.f');
+      do_not_optimize(lodash.hasIn(deepObj, 'a.b.c.d.e.f'));
     });
 
     bench('es-toolkit/hasIn deep path (array)', () => {
-      hasInToolkit(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']);
+      do_not_optimize(hasInToolkit(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']));
     });
 
     bench('lodash/hasIn deep path (array)', () => {
-      lodash.hasIn(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']);
+      do_not_optimize(lodash.hasIn(deepObj, ['a', 'b', 'c', 'd', 'e', 'f']));
     });
   });
 });

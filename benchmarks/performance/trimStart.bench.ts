@@ -1,15 +1,15 @@
 import { trimStart as trimStartToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('trimStart', () => {
   bench('es-toolkit/trimStart', () => {
     const str = 'kebab-case';
-    trimStartToolkit(str, 'se');
+    do_not_optimize(trimStartToolkit(str, 'se'));
   });
 
   bench('lodash/trimStart', () => {
     const str = 'kebab-case';
-    lodash.trimStart(str, 'se');
+    do_not_optimize(lodash.trimStart(str, 'se'));
   });
 });

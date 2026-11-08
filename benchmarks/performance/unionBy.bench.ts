@@ -1,7 +1,7 @@
 import { unionBy as unionByToolkit } from 'es-toolkit';
 import { unionBy as unionByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('unionBy', () => {
   const array1 = [{ id: 1 }, { id: 2 }];
@@ -9,15 +9,15 @@ group('unionBy', () => {
   const getId = (x: { id: number }) => x.id;
 
   bench('es-toolkit/unionBy', () => {
-    unionByToolkit(array1, array2, getId);
+    do_not_optimize(unionByToolkit(array1, array2, getId));
   });
 
   bench('es-toolkit/compat/unionBy', () => {
-    unionByToolkitCompat(array1, array2, getId);
+    do_not_optimize(unionByToolkitCompat(array1, array2, getId));
   });
 
   bench('lodash/unionBy', () => {
-    lodash.unionBy(array1, array2, getId);
+    do_not_optimize(lodash.unionBy(array1, array2, getId));
   });
 });
 
@@ -27,14 +27,14 @@ group('unionBy/largeArray', () => {
   const getId = (x: { id: number }) => x.id;
 
   bench('es-toolkit/unionBy', () => {
-    unionByToolkit(largeArray1, largeArray2, getId);
+    do_not_optimize(unionByToolkit(largeArray1, largeArray2, getId));
   });
 
   bench('es-toolkit/compat/unionBy', () => {
-    unionByToolkitCompat(largeArray1, largeArray2, getId);
+    do_not_optimize(unionByToolkitCompat(largeArray1, largeArray2, getId));
   });
 
   bench('lodash/unionBy', () => {
-    lodash.unionBy(largeArray1, largeArray2, getId);
+    do_not_optimize(lodash.unionBy(largeArray1, largeArray2, getId));
   });
 });

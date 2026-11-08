@@ -1,7 +1,7 @@
 import { after as afterToolkit } from 'es-toolkit';
 import { after as afterCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('after', () => {
   bench('es-toolkit/after', () => {
@@ -9,7 +9,7 @@ group('after', () => {
     const n = 10;
     const afterFn = afterToolkit(n, add);
     for (let i = 0; i < n + 1; i++) {
-      afterFn(1, 2);
+      do_not_optimize(afterFn(1, 2));
     }
   });
 
@@ -18,7 +18,7 @@ group('after', () => {
     const n = 10;
     const afterFn = afterCompatToolkit(n, add);
     for (let i = 0; i < n + 1; i++) {
-      afterFn(1, 2);
+      do_not_optimize(afterFn(1, 2));
     }
   });
 
@@ -27,7 +27,7 @@ group('after', () => {
     const n = 10;
     const afterFn = lodash.after(n, add);
     for (let i = 0; i < n + 1; i++) {
-      afterFn(1, 2);
+      do_not_optimize(afterFn(1, 2));
     }
   });
 });

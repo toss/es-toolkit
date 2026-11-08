@@ -1,24 +1,24 @@
 import { toPairsIn as toPairsInToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('toPairsIn with object', () => {
   bench('es-toolkit/toPairsIn', () => {
-    toPairsInToolkit({ a: 1, b: 2 });
+    do_not_optimize(toPairsInToolkit({ a: 1, b: 2 }));
   });
 
   bench('lodash/toPairsIn', () => {
-    lodash.toPairsIn({ a: 1, b: 2 });
+    do_not_optimize(lodash.toPairsIn({ a: 1, b: 2 }));
   });
 });
 
 group('toPairsIn with set', () => {
   bench('es-toolkit/toPairsIn', () => {
-    toPairsInToolkit(new Set([1, 2]));
+    do_not_optimize(toPairsInToolkit(new Set([1, 2])));
   });
 
   bench('lodash/toPairsIn', () => {
-    lodash.toPairsIn(new Set([1, 2]));
+    do_not_optimize(lodash.toPairsIn(new Set([1, 2])));
   });
 });
 
@@ -28,10 +28,10 @@ group('toPairsIn with map', () => {
   map.set('b', 2);
 
   bench('es-toolkit/toPairsIn', () => {
-    toPairsInToolkit(map);
+    do_not_optimize(toPairsInToolkit(map));
   });
 
   bench('lodash/toPairsIn', () => {
-    lodash.toPairsIn(map);
+    do_not_optimize(lodash.toPairsIn(map));
   });
 });

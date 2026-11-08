@@ -1,6 +1,6 @@
 import { cloneWith as cloneWithToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const obj = {
   number: 29,
@@ -21,16 +21,16 @@ function customizer(value: any) {
 
 group('cloneWith', () => {
   bench('lodash/cloneWith', () => {
-    lodash.cloneWith(obj);
+    do_not_optimize(lodash.cloneWith(obj));
   });
   bench('es-toolkit/compat/cloneWith', () => {
-    cloneWithToolkitCompat(obj);
+    do_not_optimize(cloneWithToolkitCompat(obj));
   });
 
   bench('lodash/cloneWith (with customizer)', () => {
-    lodash.cloneWith(obj, customizer);
+    do_not_optimize(lodash.cloneWith(obj, customizer));
   });
   bench('es-toolkit/compat/cloneWith (with customizer)', () => {
-    cloneWithToolkitCompat(obj, customizer);
+    do_not_optimize(cloneWithToolkitCompat(obj, customizer));
   });
 });

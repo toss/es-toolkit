@@ -1,6 +1,6 @@
 import { functionsIn as functionsInToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('functionsIn', () => {
   class Foo {
@@ -27,16 +27,16 @@ group('functionsIn', () => {
   };
 
   bench('es-toolkit/compat/functionsIn', () => {
-    functionsInToolkitCompat(foo);
-    functionsInToolkitCompat(plainObject);
-    functionsInToolkitCompat(null);
-    functionsInToolkitCompat(undefined);
+    do_not_optimize(functionsInToolkitCompat(foo));
+    do_not_optimize(functionsInToolkitCompat(plainObject));
+    do_not_optimize(functionsInToolkitCompat(null));
+    do_not_optimize(functionsInToolkitCompat(undefined));
   });
 
   bench('lodash/functionsIn', () => {
-    lodash.functionsIn(foo);
-    lodash.functionsIn(plainObject);
-    lodash.functionsIn(null);
-    lodash.functionsIn(undefined);
+    do_not_optimize(lodash.functionsIn(foo));
+    do_not_optimize(lodash.functionsIn(plainObject));
+    do_not_optimize(lodash.functionsIn(null));
+    do_not_optimize(lodash.functionsIn(undefined));
   });
 });

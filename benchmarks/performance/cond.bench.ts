@@ -1,6 +1,6 @@
 import { cond as condToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('cond', () => {
   const isA = (obj: { a: number }) => obj && obj.a === 1;
@@ -28,10 +28,10 @@ group('cond', () => {
   bench(
     'es-toolkit/compat/cond',
     () => {
-      funcToolkit(objA);
-      funcToolkit(objB);
-      funcToolkit(objC);
-      funcToolkit(objNone);
+      do_not_optimize(funcToolkit(objA));
+      do_not_optimize(funcToolkit(objB));
+      do_not_optimize(funcToolkit(objC));
+      do_not_optimize(funcToolkit(objNone));
     },
     {
       time: 100,
@@ -41,10 +41,10 @@ group('cond', () => {
   bench(
     'lodash/cond',
     () => {
-      funcLodash(objA);
-      funcLodash(objB);
-      funcLodash(objC);
-      funcLodash(objNone);
+      do_not_optimize(funcLodash(objA));
+      do_not_optimize(funcLodash(objB));
+      do_not_optimize(funcLodash(objC));
+      do_not_optimize(funcLodash(objNone));
     },
     {
       time: 100,

@@ -1,6 +1,6 @@
 import { result as resultToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('result', () => {
   const object = {
@@ -15,23 +15,23 @@ group('result', () => {
   };
 
   bench('es-toolkit/result', () => {
-    resultToolkit(object, 'a');
-    resultToolkit(object, 'b');
-    resultToolkit(object, 'c.d.e');
-    resultToolkit(object, 'f');
-    resultToolkit(object, 'arr[2]');
-    resultToolkit(object, 'nonexistent', 'default');
-    resultToolkit(null, 'a', 'default');
+    do_not_optimize(resultToolkit(object, 'a'));
+    do_not_optimize(resultToolkit(object, 'b'));
+    do_not_optimize(resultToolkit(object, 'c.d.e'));
+    do_not_optimize(resultToolkit(object, 'f'));
+    do_not_optimize(resultToolkit(object, 'arr[2]'));
+    do_not_optimize(resultToolkit(object, 'nonexistent', 'default'));
+    do_not_optimize(resultToolkit(null, 'a', 'default'));
   });
 
   bench('lodash/result', () => {
-    lodash.result(object, 'a');
-    lodash.result(object, 'b');
-    lodash.result(object, 'c.d.e');
-    lodash.result(object, 'f');
-    lodash.result(object, 'arr[2]');
-    lodash.result(object, 'nonexistent', 'default');
-    lodash.result(null, 'a', 'default');
+    do_not_optimize(lodash.result(object, 'a'));
+    do_not_optimize(lodash.result(object, 'b'));
+    do_not_optimize(lodash.result(object, 'c.d.e'));
+    do_not_optimize(lodash.result(object, 'f'));
+    do_not_optimize(lodash.result(object, 'arr[2]'));
+    do_not_optimize(lodash.result(object, 'nonexistent', 'default'));
+    do_not_optimize(lodash.result(null, 'a', 'default'));
   });
 });
 
@@ -41,14 +41,14 @@ group('result/largeObject', () => {
   );
 
   bench('es-toolkit/result', () => {
-    resultToolkit(largeObject, 'key500');
-    resultToolkit(largeObject, 'key501.nested.value');
-    resultToolkit(largeObject, 'key999.nested.value', 'default');
+    do_not_optimize(resultToolkit(largeObject, 'key500'));
+    do_not_optimize(resultToolkit(largeObject, 'key501.nested.value'));
+    do_not_optimize(resultToolkit(largeObject, 'key999.nested.value', 'default'));
   });
 
   bench('lodash/result', () => {
-    lodash.result(largeObject, 'key500');
-    lodash.result(largeObject, 'key501.nested.value');
-    lodash.result(largeObject, 'key999.nested.value', 'default');
+    do_not_optimize(lodash.result(largeObject, 'key500'));
+    do_not_optimize(lodash.result(largeObject, 'key501.nested.value'));
+    do_not_optimize(lodash.result(largeObject, 'key999.nested.value', 'default'));
   });
 });

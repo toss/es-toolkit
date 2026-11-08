@@ -1,6 +1,6 @@
 import { toPlainObject as toPlainObjectCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('toPlainObject', () => {
   class Foo {
@@ -10,10 +10,10 @@ group('toPlainObject', () => {
   const foo = new Foo();
 
   bench('es-toolkit/compat/toPlainObject', () => {
-    toPlainObjectCompatToolkit(foo);
+    do_not_optimize(toPlainObjectCompatToolkit(foo));
   });
 
   bench('lodash/toPlainObject', () => {
-    lodash.toPlainObject(foo);
+    do_not_optimize(lodash.toPlainObject(foo));
   });
 });

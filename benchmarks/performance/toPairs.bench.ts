@@ -1,24 +1,24 @@
 import { toPairs as toPairsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('toPairs with object', () => {
   bench('es-toolkit/toPairs', () => {
-    toPairsToolkit({ a: 1, b: 2 });
+    do_not_optimize(toPairsToolkit({ a: 1, b: 2 }));
   });
 
   bench('lodash/toPairs', () => {
-    lodash.toPairs({ a: 1, b: 2 });
+    do_not_optimize(lodash.toPairs({ a: 1, b: 2 }));
   });
 });
 
 group('toPairs with set', () => {
   bench('es-toolkit/toPairs', () => {
-    toPairsToolkit(new Set([1, 2]));
+    do_not_optimize(toPairsToolkit(new Set([1, 2])));
   });
 
   bench('lodash/toPairs', () => {
-    lodash.toPairs(new Set([1, 2]));
+    do_not_optimize(lodash.toPairs(new Set([1, 2])));
   });
 });
 
@@ -28,10 +28,10 @@ group('toPairs with map', () => {
   map.set('b', 2);
 
   bench('es-toolkit/toPairs', () => {
-    toPairsToolkit(map);
+    do_not_optimize(toPairsToolkit(map));
   });
 
   bench('lodash/toPairs', () => {
-    lodash.toPairs(map);
+    do_not_optimize(lodash.toPairs(map));
   });
 });

@@ -1,7 +1,7 @@
 import { spread as spreadToolkit } from 'es-toolkit';
 import { spread as spreadCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('spread', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -11,14 +11,14 @@ group('spread', () => {
   }
 
   bench('es-toolkit/spread', () => {
-    spreadToolkit(fn);
+    do_not_optimize(spreadToolkit(fn));
   });
 
   bench('es-toolkit/compat/spread', () => {
-    spreadCompat(fn, 1);
+    do_not_optimize(spreadCompat(fn, 1));
   });
 
   bench('lodash/spread', () => {
-    lodash.spread(fn, 1);
+    do_not_optimize(lodash.spread(fn, 1));
   });
 });

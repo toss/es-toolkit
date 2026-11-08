@@ -1,5 +1,5 @@
 import { isSubsetWith } from 'es-toolkit';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const areItemsEqual = (a: { id: number }, b: { id: number }) => a.id === b.id;
 
@@ -8,7 +8,7 @@ group('isSubsetWith', () => {
   const subset = [{ id: 1 }, { id: 2 }];
 
   bench('es-toolkit/isSubsetWith', () => {
-    isSubsetWith(superset, subset, areItemsEqual);
+    do_not_optimize(isSubsetWith(superset, subset, areItemsEqual));
   });
 });
 
@@ -17,6 +17,6 @@ group('isSubsetWith/largeArray', () => {
   const subset = Array.from({ length: 2500 }, (_, index) => ({ id: index * 2 }));
 
   bench('es-toolkit/isSubsetWith', () => {
-    isSubsetWith(largeArray, subset, areItemsEqual);
+    do_not_optimize(isSubsetWith(largeArray, subset, areItemsEqual));
   });
 });

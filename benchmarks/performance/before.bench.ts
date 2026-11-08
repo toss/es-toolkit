@@ -1,7 +1,7 @@
 import { before as beforeToolkit } from 'es-toolkit';
 import { before as beforeToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('before', () => {
   bench(
@@ -12,7 +12,7 @@ group('before', () => {
       const beforeFn = beforeToolkit(10, add);
 
       for (let i = 0; i < n; i++) {
-        beforeFn(1, 2);
+        do_not_optimize(beforeFn(1, 2));
       }
     },
     {
@@ -27,7 +27,7 @@ group('before', () => {
       const beforeFn = beforeToolkitCompat(10, add);
 
       for (let i = 0; i < n; i++) {
-        beforeFn(1, 2);
+        do_not_optimize(beforeFn(1, 2));
       }
     },
     {
@@ -43,7 +43,7 @@ group('before', () => {
       const beforeFn = lodash.before(10, add);
 
       for (let i = 0; i < n; i++) {
-        beforeFn(1, 2);
+        do_not_optimize(beforeFn(1, 2));
       }
     },
     {

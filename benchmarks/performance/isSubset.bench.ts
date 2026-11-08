@@ -1,6 +1,6 @@
 import { isSubset as isSubsetToolkit } from 'es-toolkit';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const isSubsetLodash = (array: any[], subset: any[]) => {
   return lodash.difference(array, subset).length === 0;
@@ -8,11 +8,11 @@ const isSubsetLodash = (array: any[], subset: any[]) => {
 
 group('isSubset', () => {
   bench('es-toolkit/isSubset', () => {
-    isSubsetToolkit([1, 2, 3], [1, 2]);
+    do_not_optimize(isSubsetToolkit([1, 2, 3], [1, 2]));
   });
 
   bench('lodash/difference implementation', () => {
-    isSubsetLodash([1, 2, 3], [1, 2]);
+    do_not_optimize(isSubsetLodash([1, 2, 3], [1, 2]));
   });
 });
 
@@ -21,10 +21,10 @@ group('isSubset/largeArray', () => {
   const subset = Array.from({ length: 1000 }, (_, index) => index);
 
   bench('es-toolkit/isSubset', () => {
-    isSubsetToolkit(largeArray, subset);
+    do_not_optimize(isSubsetToolkit(largeArray, subset));
   });
 
   bench('lodash/difference implementation', () => {
-    isSubsetLodash(largeArray, subset);
+    do_not_optimize(isSubsetLodash(largeArray, subset));
   });
 });

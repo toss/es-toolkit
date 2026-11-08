@@ -1,6 +1,6 @@
 import { findLastKey as findLastKeyCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('findLastKey', () => {
   const users = {
@@ -10,11 +10,11 @@ group('findLastKey', () => {
   };
 
   bench('lodash/findLastKey', () => {
-    lodash.findLastKey(users, o => o.age < 40);
+    do_not_optimize(lodash.findLastKey(users, o => o.age < 40));
   });
 
   bench('es-toolkit/compat/findLastKey', () => {
-    findLastKeyCompatToolkit(users, o => o.age < 40);
+    do_not_optimize(findLastKeyCompatToolkit(users, o => o.age < 40));
   });
 });
 
@@ -25,10 +25,10 @@ group('findLastKey/largeObject', () => {
   }
 
   bench('lodash/findLastKey', () => {
-    lodash.findLastKey(largeUsers, o => o.age === 7000);
+    do_not_optimize(lodash.findLastKey(largeUsers, o => o.age === 7000));
   });
 
   bench('es-toolkit/compat/findLastKey', () => {
-    findLastKeyCompatToolkit(largeUsers, o => o.age === 7000);
+    do_not_optimize(findLastKeyCompatToolkit(largeUsers, o => o.age === 7000));
   });
 });

@@ -1,13 +1,13 @@
 import { parseInt as parseIntToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('parseInt', () => {
   bench('es-toolkit/parseInt', () => {
-    parseIntToolkit('10');
+    do_not_optimize(parseIntToolkit('10'));
   });
 
   bench('lodash/parseInt', () => {
-    lodash.parseInt('10');
+    do_not_optimize(lodash.parseInt('10'));
   });
 });

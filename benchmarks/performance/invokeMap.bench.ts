@@ -1,6 +1,6 @@
 import { invokeMap as invokeMapToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('invokeMap', () => {
   const stringArray = ['a', 'b', 'c'];
@@ -12,16 +12,16 @@ group('invokeMap', () => {
   };
 
   bench('es-toolkit/invokeMap/compat', () => {
-    invokeMapToolkitCompat(stringArray, 'toUpperCase');
-    invokeMapToolkitCompat(numberObject, 'toFixed', 1);
-    invokeMapToolkitCompat(largeArray, 'toString');
-    invokeMapToolkitCompat(array, func, '(', ')');
+    do_not_optimize(invokeMapToolkitCompat(stringArray, 'toUpperCase'));
+    do_not_optimize(invokeMapToolkitCompat(numberObject, 'toFixed', 1));
+    do_not_optimize(invokeMapToolkitCompat(largeArray, 'toString'));
+    do_not_optimize(invokeMapToolkitCompat(array, func, '(', ')'));
   });
 
   bench('lodash/invokeMap', () => {
-    lodash.invokeMap(stringArray, 'toUpperCase');
-    lodash.invokeMap(numberObject, 'toFixed', 1);
-    lodash.invokeMap(largeArray, 'toString');
-    lodash.invokeMap(array, func, '(', ')');
+    do_not_optimize(lodash.invokeMap(stringArray, 'toUpperCase'));
+    do_not_optimize(lodash.invokeMap(numberObject, 'toFixed', 1));
+    do_not_optimize(lodash.invokeMap(largeArray, 'toString'));
+    do_not_optimize(lodash.invokeMap(array, func, '(', ')'));
   });
 });

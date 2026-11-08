@@ -1,19 +1,23 @@
 import { wrap as wrapToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('wrap', () => {
   bench('es-toolkit/compat/wrap', () => {
-    wrapToolkit(
-      (x: any) => x,
-      (value, x) => value(x)
+    do_not_optimize(
+      wrapToolkit(
+        (x: any) => x,
+        (value, x) => value(x)
+      )
     );
   });
 
   bench('lodash/wrap', () => {
-    lodash.wrap(
-      (x: any) => x,
-      (value, x) => value(x)
+    do_not_optimize(
+      lodash.wrap(
+        (x: any) => x,
+        (value, x) => value(x)
+      )
     );
   });
 });
@@ -24,7 +28,7 @@ group('wrap/invoked', () => {
       (x: string) => x.toUpperCase(),
       (value, x: string) => `<p>${value(x)}</p>`
     );
-    wrapped('hello');
+    do_not_optimize(wrapped('hello'));
   });
 
   bench('lodash/wrap', () => {
@@ -32,6 +36,6 @@ group('wrap/invoked', () => {
       (x: string) => x.toUpperCase(),
       (value, x: string) => `<p>${value(x)}</p>`
     );
-    wrapped('hello');
+    do_not_optimize(wrapped('hello'));
   });
 });

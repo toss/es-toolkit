@@ -1,18 +1,18 @@
 import { negate as negateToolkit } from 'es-toolkit';
 import { negate as negateCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('compact', () => {
   bench('es-toolkit', () => {
-    negateToolkit(() => true)();
+    do_not_optimize(negateToolkit(() => true)());
   });
 
   bench('es-toolkit/compat', () => {
-    negateCompatToolkit(() => true)();
+    do_not_optimize(negateCompatToolkit(() => true)());
   });
 
   bench('lodash', () => {
-    lodash.negate(() => true)();
+    do_not_optimize(lodash.negate(() => true)());
   });
 });

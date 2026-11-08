@@ -1,6 +1,6 @@
 import { functions as functionsToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('functions', () => {
   const testObject = {
@@ -12,11 +12,11 @@ group('functions', () => {
   };
 
   bench('es-toolkit/functions', () => {
-    functionsToolkit(testObject);
+    do_not_optimize(functionsToolkit(testObject));
   });
 
   bench('lodash/functions', () => {
-    lodash.functions(testObject);
+    do_not_optimize(lodash.functions(testObject));
   });
 });
 
@@ -26,10 +26,10 @@ group('functions/largeObject', () => {
   );
 
   bench('es-toolkit/functions', () => {
-    functionsToolkit(largeObject);
+    do_not_optimize(functionsToolkit(largeObject));
   });
 
   bench('lodash/functions', () => {
-    lodash.functions(largeObject);
+    do_not_optimize(lodash.functions(largeObject));
   });
 });

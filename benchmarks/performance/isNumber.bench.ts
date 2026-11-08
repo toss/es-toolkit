@@ -1,31 +1,31 @@
 import { isNumber as isNumberToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('isNumber', () => {
   bench('es-toolkit/isNumber', () => {
-    isNumberToolkit(1);
-    isNumberToolkit(1.5);
-    isNumberToolkit(NaN);
-    isNumberToolkit(Infinity);
-    isNumberToolkit('1');
-    isNumberToolkit(true);
-    isNumberToolkit(null);
-    isNumberToolkit(undefined);
-    isNumberToolkit({});
-    isNumberToolkit([]);
+    do_not_optimize(isNumberToolkit(1));
+    do_not_optimize(isNumberToolkit(1.5));
+    do_not_optimize(isNumberToolkit(NaN));
+    do_not_optimize(isNumberToolkit(Infinity));
+    do_not_optimize(isNumberToolkit('1'));
+    do_not_optimize(isNumberToolkit(true));
+    do_not_optimize(isNumberToolkit(null));
+    do_not_optimize(isNumberToolkit(undefined));
+    do_not_optimize(isNumberToolkit({}));
+    do_not_optimize(isNumberToolkit([]));
   });
 
   bench('lodash/isNumber', () => {
-    lodash.isNumber(1);
-    lodash.isNumber(1.5);
-    lodash.isNumber(NaN);
-    lodash.isNumber(Infinity);
-    lodash.isNumber('1');
-    lodash.isNumber(true);
-    lodash.isNumber(null);
-    lodash.isNumber(undefined);
-    lodash.isNumber({});
-    lodash.isNumber([]);
+    do_not_optimize(lodash.isNumber(1));
+    do_not_optimize(lodash.isNumber(1.5));
+    do_not_optimize(lodash.isNumber(NaN));
+    do_not_optimize(lodash.isNumber(Infinity));
+    do_not_optimize(lodash.isNumber('1'));
+    do_not_optimize(lodash.isNumber(true));
+    do_not_optimize(lodash.isNumber(null));
+    do_not_optimize(lodash.isNumber(undefined));
+    do_not_optimize(lodash.isNumber({}));
+    do_not_optimize(lodash.isNumber([]));
   });
 });

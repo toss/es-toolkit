@@ -1,4 +1,4 @@
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const mockCreatePackageTarball = () => {
   return new Promise(resolve => {
@@ -39,18 +39,18 @@ group('function call overhead comparison', () => {
   const processTarball = () => ({ exports: {} });
 
   bench('Original: Function calls with recreation', () => {
-    createTarball();
-    processTarball();
+    do_not_optimize(createTarball());
+    do_not_optimize(processTarball());
 
-    createTarball();
-    processTarball();
+    do_not_optimize(createTarball());
+    do_not_optimize(processTarball());
   });
 
   bench('Optimized: Function calls with reuse', () => {
     const sharedTarball = createTarball();
     void sharedTarball;
 
-    processTarball();
-    processTarball();
+    do_not_optimize(processTarball());
+    do_not_optimize(processTarball());
   });
 });

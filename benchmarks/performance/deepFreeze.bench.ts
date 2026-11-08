@@ -1,6 +1,6 @@
 import { deepFreeze as deepFreezeToolkit } from 'es-toolkit';
 import { deepFreeze as deepFreezeEs6 } from 'deep-freeze-es6';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 // Freezing mutates the object, so each iteration needs a fresh one.
 // Object creation cost is included equally in every case.
@@ -16,10 +16,10 @@ const createObject = () => ({
 
 group('deepFreeze', () => {
   bench('es-toolkit/deepFreeze', () => {
-    deepFreezeToolkit(createObject());
+    do_not_optimize(deepFreezeToolkit(createObject()));
   });
 
   bench('deep-freeze-es6/deepFreeze', () => {
-    deepFreezeEs6(createObject());
+    do_not_optimize(deepFreezeEs6(createObject()));
   });
 });

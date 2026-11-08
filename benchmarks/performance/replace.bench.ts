@@ -1,19 +1,19 @@
 import { replace as replaceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('replace', () => {
   bench('es-toolkit/compat/replace', () => {
-    replaceToolkitCompat('abc', 'de', '123');
-    replaceToolkitCompat('abc', /[bd]/g, '-');
-    replaceToolkitCompat('abc', 'de', substring => substring.toUpperCase());
-    replaceToolkitCompat('abc', /[bd]/g, substring => substring.toUpperCase());
+    do_not_optimize(replaceToolkitCompat('abc', 'de', '123'));
+    do_not_optimize(replaceToolkitCompat('abc', /[bd]/g, '-'));
+    do_not_optimize(replaceToolkitCompat('abc', 'de', substring => substring.toUpperCase()));
+    do_not_optimize(replaceToolkitCompat('abc', /[bd]/g, substring => substring.toUpperCase()));
   });
 
   bench('lodash/replace', () => {
-    lodash.replace('abc', 'de', '123');
-    lodash.replace('abc', /[bd]/g, '-');
-    lodash.replace('abc', 'de', substring => substring.toUpperCase());
-    lodash.replace('abc', /[bd]/g, substring => substring.toUpperCase());
+    do_not_optimize(lodash.replace('abc', 'de', '123'));
+    do_not_optimize(lodash.replace('abc', /[bd]/g, '-'));
+    do_not_optimize(lodash.replace('abc', 'de', substring => substring.toUpperCase()));
+    do_not_optimize(lodash.replace('abc', /[bd]/g, substring => substring.toUpperCase()));
   });
 });

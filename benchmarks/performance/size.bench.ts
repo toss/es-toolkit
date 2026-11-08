@@ -1,39 +1,43 @@
 import { size as sizeToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('size', () => {
   bench('es-toolkit/size', () => {
-    sizeToolkit([1, 2, 3, 4]);
-    sizeToolkit('hello');
-    sizeToolkit({ a: 1, b: 2, c: 3 });
-    sizeToolkit([]);
-    sizeToolkit('');
-    sizeToolkit({});
-    sizeToolkit(new Set([1, 2, 3]));
-    sizeToolkit(
-      new Map([
-        ['a', 1],
-        ['b', 2],
-        ['c', 3],
-      ])
+    do_not_optimize(sizeToolkit([1, 2, 3, 4]));
+    do_not_optimize(sizeToolkit('hello'));
+    do_not_optimize(sizeToolkit({ a: 1, b: 2, c: 3 }));
+    do_not_optimize(sizeToolkit([]));
+    do_not_optimize(sizeToolkit(''));
+    do_not_optimize(sizeToolkit({}));
+    do_not_optimize(sizeToolkit(new Set([1, 2, 3])));
+    do_not_optimize(
+      sizeToolkit(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+          ['c', 3],
+        ])
+      )
     );
   });
 
   bench('lodash/size', () => {
-    lodash.size([1, 2, 3, 4]);
-    lodash.size('hello');
-    lodash.size({ a: 1, b: 2, c: 3 });
-    lodash.size([]);
-    lodash.size('');
-    lodash.size({});
-    lodash.size(new Set([1, 2, 3]));
-    lodash.size(
-      new Map([
-        ['a', 1],
-        ['b', 2],
-        ['c', 3],
-      ])
+    do_not_optimize(lodash.size([1, 2, 3, 4]));
+    do_not_optimize(lodash.size('hello'));
+    do_not_optimize(lodash.size({ a: 1, b: 2, c: 3 }));
+    do_not_optimize(lodash.size([]));
+    do_not_optimize(lodash.size(''));
+    do_not_optimize(lodash.size({}));
+    do_not_optimize(lodash.size(new Set([1, 2, 3])));
+    do_not_optimize(
+      lodash.size(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+          ['c', 3],
+        ])
+      )
     );
   });
 });

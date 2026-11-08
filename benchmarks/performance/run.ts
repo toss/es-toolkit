@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { benchmarks } from './harness.ts';
 
@@ -36,6 +36,7 @@ for (const file of files) {
 function findFiles(patterns: string[]) {
   const all = readdirSync(root, { recursive: true, encoding: 'utf8' })
     .filter(file => file.endsWith('.bench.ts'))
+    .map(file => file.split(sep).join('/'))
     .sort();
 
   if (patterns.length === 0) {
@@ -54,15 +55,28 @@ function findFiles(patterns: string[]) {
 
 async function runFileBenchmarks(file: string): Promise<Result[]> {
   const start = benchmarks.length;
-  await import(pathToFileURL(join(root, file)).href);
+  try {
+    await import(pathToFileURL(join(root, file)).href);
+  } catch (error) {
+    console.error(`Failed to load ${file}:`, error);
+    process.exitCode = 1;
+    return [];
+  }
 
-  return benchmarks.slice(start).map(({ group, name }, offset) => {
-    const stdout = execFileSync(process.execPath, [...process.execArgv, runFile, file, String(offset)], {
-      cwd: root,
-      encoding: 'utf8',
-    });
-    return { group, name, ns: JSON.parse(stdout).ns };
-  });
+  const results: Result[] = [];
+  for (const [offset, { group, name }] of benchmarks.slice(start).entries()) {
+    try {
+      const stdout = execFileSync(process.execPath, [...process.execArgv, runFile, file, String(offset)], {
+        cwd: root,
+        encoding: 'utf8',
+      });
+      results.push({ group, name, ns: JSON.parse(stdout).ns });
+    } catch {
+      console.error(`Failed: ${file} > ${group} > ${name}`);
+      process.exitCode = 1;
+    }
+  }
+  return results;
 }
 
 function printFile(file: string, results: Result[]) {

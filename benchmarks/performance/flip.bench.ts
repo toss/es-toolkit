@@ -1,6 +1,6 @@
 import { flip as flipToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-import { bench, group } from './harness.ts';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 group('flip', () => {
   function fn(a: any, b: any, c: any, d: any) {
@@ -8,10 +8,10 @@ group('flip', () => {
   }
 
   bench('es-toolkit/flip', () => {
-    flipToolkit(fn);
+    do_not_optimize(flipToolkit(fn));
   });
 
   bench('lodash/flip', () => {
-    lodash.flip(fn);
+    do_not_optimize(lodash.flip(fn));
   });
 });
