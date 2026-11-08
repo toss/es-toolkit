@@ -12,7 +12,7 @@
 
 ## 测量方法
 
-如需自行运行，请使用以下命令：
+每个基准测试都使用 [mitata](https://github.com/evanwashere/mitata) 在独立的 Node.js 进程中运行，以上数字是运行 5 次后的中位数。如需自行运行，请使用以下命令：
 
 ```bash
 yarn bench fp/pipe

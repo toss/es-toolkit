@@ -12,7 +12,7 @@
 
 ## 측정 방법
 
-직접 실행하려면 아래 명령을 사용하세요.
+각 벤치마크는 [mitata](https://github.com/evanwashere/mitata)로 별도의 Node.js 프로세스에서 실행하고, 위 숫자는 5번 실행한 결과의 중앙값이에요. 직접 실행하려면 아래 명령을 사용하세요.
 
 ```bash
 yarn bench fp/pipe

@@ -12,7 +12,7 @@
 
 ## Measurement Method
 
-To run the benchmark yourself:
+Each benchmark runs in its own Node.js process with [mitata](https://github.com/evanwashere/mitata), and the numbers above are the median of five runs. To run the benchmark yourself:
 
 ```bash
 yarn bench fp/pipe
