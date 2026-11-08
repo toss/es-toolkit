@@ -1,4 +1,3 @@
-import { capitalize as capitalizeToolkit } from '../../string/capitalize.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -13,5 +12,10 @@ import { toString } from '../util/toString.ts';
  * const convertedStr3 = capitalize('') // returns ''
  */
 export function capitalize<T extends string>(str?: T): string extends T ? string : Capitalize<Lowercase<T>> {
-  return capitalizeToolkit(toString(str)) as string extends T ? string : Capitalize<Lowercase<T>>;
+  const lowercased = toString(str).toLowerCase();
+  const characters = Array.from(lowercased);
+
+  return (characters.length === 0 ? '' : characters[0].toUpperCase() + characters.slice(1).join('')) as string extends T
+    ? string
+    : Capitalize<Lowercase<T>>;
 }

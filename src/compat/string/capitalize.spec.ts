@@ -14,6 +14,13 @@ describe('capitalize', () => {
     expect(capitalize('FOO BAR')).toBe('Foo bar');
   });
 
+  it('should lowercase the string before capitalizing', () => {
+    expect(capitalize('İstanbul')).toBe('I\u0307stanbul');
+    expect(capitalize('İ')).toBe('I\u0307');
+    expect(capitalize('𐐀bc')).toBe('𐐀bc');
+    expect(capitalize('ßeta')).toBe('SSeta');
+  });
+
   it('should return an empty string for an empty string', () => {
     expect(capitalize('')).toBe('');
   });
