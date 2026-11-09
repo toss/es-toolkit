@@ -111,4 +111,26 @@ describe('assign', () => {
     const result = assign({}, ...values);
     expect(result).toEqual({ workId: undefined, exerciseId: '1' });
   });
+
+  it(`\`assign\` should coerce null and undefined targets`, () => {
+    expect(assign(null, { a: 1 })).toEqual({ a: 1 });
+    expect(assign(undefined, { a: 1 })).toEqual({ a: 1 });
+  });
+
+  it(`\`assign\` should box primitive targets`, () => {
+    const numberTarget = assign(1, { a: 1 }) as any;
+    expect(numberTarget).toBeInstanceOf(Number);
+    expect(numberTarget.valueOf()).toBe(1);
+    expect(numberTarget.a).toBe(1);
+
+    const stringTarget = assign('x', { a: 1 }) as any;
+    expect(stringTarget).toBeInstanceOf(String);
+    expect(stringTarget.valueOf()).toBe('x');
+    expect(stringTarget.a).toBe(1);
+
+    const booleanTarget = assign(true, { a: 1 }) as any;
+    expect(booleanTarget).toBeInstanceOf(Boolean);
+    expect(booleanTarget.valueOf()).toBe(true);
+    expect(booleanTarget.a).toBe(1);
+  });
 });
