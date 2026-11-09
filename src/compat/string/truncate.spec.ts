@@ -143,6 +143,19 @@ describe('truncate', () => {
     expect(truncate('¥§✈✉🤓', { length: 4, omission: '…' })).toEqual('¥§✈…');
   });
 
+  it('should count an emoji sequence as a single character like Lodash', () => {
+    expect(truncate('👨‍👩‍👧 family photos from 🇰🇷', { length: 12 })).toEqual('👨‍👩‍👧 family ...');
+    expect(truncate('👨‍👩‍👧 가족 🇰🇷 국기 👍🏽 좋아요', { length: 8, separator: ' ' })).toEqual('👨‍👩‍👧 가족...');
+  });
+
+  it('should not cut an emoji sequence in half', () => {
+    expect(truncate('📅 Weekly sync 👨‍👩‍👧‍👦 notes', { length: 16, omission: '…' })).toEqual('📅 Weekly sync 👨‍👩‍👧‍👦…');
+  });
+
+  it('should count an emoji sequence in `omission` as a single character', () => {
+    expect(truncate('Sprint 👍🏽 review notes', { length: 10, omission: '👨‍👩‍👧' })).toEqual('Sprint 👍🏽 👨‍👩‍👧');
+  });
+
   it('should handle null and undefined strings', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
