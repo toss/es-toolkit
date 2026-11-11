@@ -42,7 +42,7 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   let omission = '...';
 
   if (isObject(options)) {
-    length = parseLength(options.length);
+    length = 'length' in options ? parseLength(options.length) : 30;
     omission = 'omission' in options ? `${options.omission}` : '...';
   }
 
@@ -113,7 +113,7 @@ export function truncate(string?: string, options?: TruncateOptions): string {
 
 function parseLength(length: number | undefined) {
   if (length == null) {
-    return 30;
+    return 0;
   }
 
   if (length <= 0) {
