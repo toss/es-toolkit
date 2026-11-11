@@ -16,3 +16,21 @@ group('throttle', () => {
     do_not_optimize(lodash.throttle(() => undefined, 1000)());
   });
 });
+
+describe('throttle: repeated calls', () => {
+  const throttledToolkit = throttleToolkit(() => undefined, 1000);
+  const throttledCompatToolkit = throttleCompatToolkit(() => undefined, 1000);
+  const throttledLodash = throttleLodash(() => undefined, 1000);
+
+  bench('es-toolkit/throttle', () => {
+    throttledToolkit();
+  });
+
+  bench('es-toolkit/compat/throttle', () => {
+    throttledCompatToolkit();
+  });
+
+  bench('lodash/throttle', () => {
+    throttledLodash();
+  });
+});
