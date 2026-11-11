@@ -1,29 +1,27 @@
-import { bench, describe } from 'vitest';
 import { isError as isErrorToolkit } from 'es-toolkit';
 import { isError as isErrorCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isError: isErrorLodash } = lodash;
-
-describe('isError', () => {
+group('isError', () => {
   bench('es-toolkit/isError', () => {
-    isErrorToolkit(new Error());
-    isErrorToolkit(1);
-    isErrorToolkit('Error');
-    isErrorToolkit({ name: 'Error', message: '' });
+    do_not_optimize(isErrorToolkit(new Error()));
+    do_not_optimize(isErrorToolkit(1));
+    do_not_optimize(isErrorToolkit('Error'));
+    do_not_optimize(isErrorToolkit({ name: 'Error', message: '' }));
   });
 
   bench('es-toolkit/compat/isError', () => {
-    isErrorCompatToolkit(new Error());
-    isErrorCompatToolkit(1);
-    isErrorCompatToolkit('Error');
-    isErrorCompatToolkit({ name: 'Error', message: '' });
+    do_not_optimize(isErrorCompatToolkit(new Error()));
+    do_not_optimize(isErrorCompatToolkit(1));
+    do_not_optimize(isErrorCompatToolkit('Error'));
+    do_not_optimize(isErrorCompatToolkit({ name: 'Error', message: '' }));
   });
 
   bench('lodash/isError', () => {
-    isErrorLodash(new Error());
-    isErrorLodash(1);
-    isErrorLodash('Error');
-    isErrorLodash({ name: 'Error', message: '' });
+    do_not_optimize(lodash.isError(new Error()));
+    do_not_optimize(lodash.isError(1));
+    do_not_optimize(lodash.isError('Error'));
+    do_not_optimize(lodash.isError({ name: 'Error', message: '' }));
   });
 });

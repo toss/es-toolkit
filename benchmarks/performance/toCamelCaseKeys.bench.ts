@@ -1,6 +1,6 @@
-import { bench, describe } from 'vitest';
 import { toCamelCaseKeys as toCamelCaseKeysToolkit } from 'es-toolkit';
-import lodashFp from 'lodash/fp';
+import lodashFp from 'lodash/fp.js';
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const toCamelCaseKeysWithLodashFp = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.camelCase)(obj);
@@ -24,12 +24,12 @@ const testObject = {
   ],
 };
 
-describe('toCamelCaseKeys', () => {
+group('toCamelCaseKeys', () => {
   bench('es-toolkit/toCamelCaseKeys (deep nested)', () => {
-    toCamelCaseKeysToolkit(testObject);
+    do_not_optimize(toCamelCaseKeysToolkit(testObject));
   });
 
   bench('lodash/fp/toCamelCaseKeys (shallow comparison)', () => {
-    toCamelCaseKeysWithLodashFp(testObject);
+    do_not_optimize(toCamelCaseKeysWithLodashFp(testObject));
   });
 });

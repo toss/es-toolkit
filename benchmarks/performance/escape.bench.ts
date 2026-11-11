@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { escape as escapeToolkit } from 'es-toolkit';
 import { escape as escapeToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { escape: escapeLodash } = lodash;
-
-describe('escape', () => {
+group('escape', () => {
   bench('es-toolkit/escape', () => {
-    escapeToolkit('fred, barney, & pebbles');
+    do_not_optimize(escapeToolkit('fred, barney, & pebbles'));
   });
 
   bench('es-toolkit/compat/escape', () => {
-    escapeToolkitCompat('fred, barney, & pebbles');
+    do_not_optimize(escapeToolkitCompat('fred, barney, & pebbles'));
   });
 
   bench('lodash/escape', () => {
-    escapeLodash('fred, barney, & pebbles');
+    do_not_optimize(lodash.escape('fred, barney, & pebbles'));
   });
 });
 
-describe('escape (long string)', () => {
+group('escape (long string)', () => {
   const longString = 'fred, barney, & pebbles'.repeat(100);
 
   bench('es-toolkit/escape', () => {
-    escapeToolkit(longString);
+    do_not_optimize(escapeToolkit(longString));
   });
 
   bench('es-toolkit/compat/escape', () => {
-    escapeToolkitCompat(longString);
+    do_not_optimize(escapeToolkitCompat(longString));
   });
 
   bench('lodash/escape', () => {
-    escapeLodash(longString);
+    do_not_optimize(lodash.escape(longString));
   });
 });

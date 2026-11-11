@@ -1,33 +1,31 @@
-import { bench, describe } from 'vitest';
 import { deburr as deburrToolkit } from 'es-toolkit';
 import { deburr as deburrCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { deburr: deburrLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const longWord = 'déjà vu'.repeat(1000);
-describe('deburr', () => {
+group('deburr', () => {
   bench('lodash/deburr', () => {
-    deburrLodash('déjà vu');
+    do_not_optimize(lodash.deburr('déjà vu'));
   });
 
   bench('es-toolkit/compat/deburr', () => {
-    deburrCompatToolkit('déjà vu');
+    do_not_optimize(deburrCompatToolkit('déjà vu'));
   });
 
   bench('es-toolkit/deburr', () => {
-    deburrToolkit('déjà vu');
+    do_not_optimize(deburrToolkit('déjà vu'));
   });
 
   bench('lodash/deburr - long words', () => {
-    deburrLodash(longWord);
+    do_not_optimize(lodash.deburr(longWord));
   });
 
   bench('es-toolkit/compat/deburr - long words', () => {
-    deburrCompatToolkit(longWord);
+    do_not_optimize(deburrCompatToolkit(longWord));
   });
 
   bench('es-toolkit/deburr - long words', () => {
-    deburrToolkit(longWord);
+    do_not_optimize(deburrToolkit(longWord));
   });
 });

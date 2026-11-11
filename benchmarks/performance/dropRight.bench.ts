@@ -1,36 +1,34 @@
-import { bench, describe } from 'vitest';
 import { dropRight as dropRightToolkit } from 'es-toolkit';
 import { dropRight as dropRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { dropRight: dropRightLodash } = lodash;
-
-describe('dropRight', () => {
+group('dropRight', () => {
   bench('es-toolkit/dropRight', () => {
-    dropRightToolkit([1, 2, 3, 4, 5, 6], 3);
+    do_not_optimize(dropRightToolkit([1, 2, 3, 4, 5, 6], 3));
   });
 
   bench('es-toolkit/compat/dropRight', () => {
-    dropRightToolkitCompat([1, 2, 3, 4, 5, 6], 3);
+    do_not_optimize(dropRightToolkitCompat([1, 2, 3, 4, 5, 6], 3));
   });
 
   bench('lodash/dropRight', () => {
-    dropRightLodash([1, 2, 3, 4, 5, 6], 3);
+    do_not_optimize(lodash.dropRight([1, 2, 3, 4, 5, 6], 3));
   });
 });
 
-describe('dropRight/largeArray', () => {
+group('dropRight/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/dropRight', () => {
-    dropRightToolkit(largeArray, 5000);
+    do_not_optimize(dropRightToolkit(largeArray, 5000));
   });
 
   bench('es-toolkit/compat/dropRight', () => {
-    dropRightToolkitCompat(largeArray, 5000);
+    do_not_optimize(dropRightToolkitCompat(largeArray, 5000));
   });
 
   bench('lodash/dropRight', () => {
-    dropRightLodash(largeArray, 5000);
+    do_not_optimize(lodash.dropRight(largeArray, 5000));
   });
 });

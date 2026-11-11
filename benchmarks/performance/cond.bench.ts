@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { cond as condToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { cond: condLodash } = lodash;
-
-describe('cond', () => {
+group('cond', () => {
   const isA = (obj: { a: number }) => obj && obj.a === 1;
   const isB = (obj: { b: number }) => obj && obj.b === 1;
   const isC = (obj: { c: number }) => obj && obj.c;
@@ -25,15 +23,15 @@ describe('cond', () => {
   const objNone = { a: 0, b: 0, c: 0 };
 
   const funcToolkit = condToolkitCompat(pairs as any) as (obj: any) => string;
-  const funcLodash = condLodash(pairs as any) as (obj: any) => string;
+  const funcLodash = lodash.cond(pairs as any) as (obj: any) => string;
 
   bench(
     'es-toolkit/compat/cond',
     () => {
-      funcToolkit(objA);
-      funcToolkit(objB);
-      funcToolkit(objC);
-      funcToolkit(objNone);
+      do_not_optimize(funcToolkit(objA));
+      do_not_optimize(funcToolkit(objB));
+      do_not_optimize(funcToolkit(objC));
+      do_not_optimize(funcToolkit(objNone));
     },
     {
       time: 100,
@@ -43,10 +41,10 @@ describe('cond', () => {
   bench(
     'lodash/cond',
     () => {
-      funcLodash(objA);
-      funcLodash(objB);
-      funcLodash(objC);
-      funcLodash(objNone);
+      do_not_optimize(funcLodash(objA));
+      do_not_optimize(funcLodash(objB));
+      do_not_optimize(funcLodash(objC));
+      do_not_optimize(funcLodash(objNone));
     },
     {
       time: 100,

@@ -1,20 +1,18 @@
-import { bench, describe } from 'vitest';
 import { pick as pickToolkit } from 'es-toolkit';
 import { pick as pickCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { pick: pickLodash } = lodash;
-
-describe('pick', () => {
+group('pick', () => {
   bench('es-toolkit/pick', () => {
-    pickToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+    do_not_optimize(pickToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']));
   });
 
   bench('es-toolkit/compat/pick', () => {
-    pickCompatToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+    do_not_optimize(pickCompatToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']));
   });
 
   bench('lodash/pick', () => {
-    pickLodash({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+    do_not_optimize(lodash.pick({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']));
   });
 });

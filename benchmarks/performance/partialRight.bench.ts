@@ -1,42 +1,40 @@
-import { bench, describe } from 'vitest';
 import { partialRight as partialRightToolkit } from 'es-toolkit';
 import { partialRight as partialRightToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { partialRight: partialRightLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const fn = function () {
   // eslint-disable-next-line prefer-rest-params
   return Array.from(arguments);
 };
 
-describe('partial - without placeholder', () => {
+group('partial - without placeholder', () => {
   bench('es-toolkit/partialRight - without placeholder', () => {
-    partialRightToolkit(fn, 'a');
+    do_not_optimize(partialRightToolkit(fn, 'a'));
   });
 
   bench('es-toolkit/compat/partialRight - without placeholder', () => {
-    partialRightToolkitCompat(fn, 'a');
+    do_not_optimize(partialRightToolkitCompat(fn, 'a'));
   });
 
   bench('lodash/partialRight - without placeholder', () => {
-    partialRightLodash(fn, 'a');
+    do_not_optimize(lodash.partialRight(fn, 'a'));
   });
 });
 
-describe('partial - with placeholder', () => {
+group('partial - with placeholder', () => {
   bench('es-toolkit/partialRight - with placeholder', () => {
     const { placeholder } = partialRightToolkit;
-    partialRightToolkit(fn, placeholder, 'b', placeholder);
+    do_not_optimize(partialRightToolkit(fn, placeholder, 'b', placeholder));
   });
 
   bench('es-toolkit/compat/partialRight - with placeholder', () => {
     const { placeholder } = partialRightToolkitCompat;
-    partialRightToolkitCompat(fn, placeholder, 'b', placeholder);
+    do_not_optimize(partialRightToolkitCompat(fn, placeholder, 'b', placeholder));
   });
 
   bench('lodash/partialRight - with placeholder', () => {
-    const { placeholder } = partialRightLodash;
-    partialRightLodash(fn, placeholder, 'b', placeholder);
+    const { placeholder } = lodash.partialRight;
+    do_not_optimize(lodash.partialRight(fn, placeholder, 'b', placeholder));
   });
 });

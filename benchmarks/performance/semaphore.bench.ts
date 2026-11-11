@@ -1,5 +1,5 @@
-import { bench, describe } from 'vitest';
 import { Semaphore as SemaphoreToolkit } from 'es-toolkit';
+import { bench, group } from './harness.ts';
 
 async function drainSemaphore(waiterCount: number) {
   const semaphore = new SemaphoreToolkit(1);
@@ -19,13 +19,13 @@ async function drainSemaphore(waiterCount: number) {
   await Promise.all(waiters);
 }
 
-describe('Semaphore', () => {
+group('Semaphore', () => {
   bench('es-toolkit/Semaphore', async () => {
     await drainSemaphore(10);
   });
 });
 
-describe('Semaphore/contention', () => {
+group('Semaphore/contention', () => {
   const semaphore = new SemaphoreToolkit(1);
 
   async function task() {
@@ -43,7 +43,7 @@ describe('Semaphore/contention', () => {
   });
 });
 
-describe('Semaphore/largeQueue', () => {
+group('Semaphore/largeQueue', () => {
   bench('es-toolkit/Semaphore', async () => {
     await drainSemaphore(30_000);
   });

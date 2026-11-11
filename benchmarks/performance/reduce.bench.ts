@@ -1,29 +1,27 @@
-import { bench, describe } from 'vitest';
 import { reduce as reduceToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { reduce: reduceLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const array = [1, 2, 3, 4, 5];
 
-describe('reduce', () => {
+group('reduce', () => {
   bench('es-toolkit/compat/reduce', () => {
-    reduceToolkitCompat(array, (acc, x) => acc + x, 0);
+    do_not_optimize(reduceToolkitCompat(array, (acc, x) => acc + x, 0));
   });
 
   bench('lodash/reduce', () => {
-    reduceLodash(array, (acc, x) => acc + x, 0);
+    do_not_optimize(lodash.reduce(array, (acc, x) => acc + x, 0));
   });
 });
 
-describe('reduce - large array', () => {
+group('reduce - large array', () => {
   const largeArray = Array.from({ length: 1e6 }, (_, i) => i);
 
   bench('es-toolkit/compat/reduce', () => {
-    reduceToolkitCompat(largeArray, (acc, x) => acc + x, 0);
+    do_not_optimize(reduceToolkitCompat(largeArray, (acc, x) => acc + x, 0));
   });
 
   bench('lodash/reduce', () => {
-    reduceLodash(largeArray, (acc, x) => acc + x, 0);
+    do_not_optimize(lodash.reduce(largeArray, (acc, x) => acc + x, 0));
   });
 });

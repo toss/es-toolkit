@@ -1,39 +1,37 @@
-import { bench, describe } from 'vitest';
 import { sample as sampleToolkit } from 'es-toolkit';
 import { sample as sampleToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { sample: sampleLodash } = lodash;
-
-describe('sample', () => {
+group('sample', () => {
   bench('es-toolkit/sample', () => {
     const array = [1, 2, 3, 4, 5];
-    sampleToolkit(array);
+    do_not_optimize(sampleToolkit(array));
   });
 
   bench('es-toolkit/compat/sample', () => {
     const array = [1, 2, 3, 4, 5];
-    sampleToolkitCompat(array);
+    do_not_optimize(sampleToolkitCompat(array));
   });
 
   bench('lodash/sample', () => {
     const array = [1, 2, 3, 4, 5];
-    sampleLodash(array);
+    do_not_optimize(lodash.sample(array));
   });
 });
 
-describe('sample/largeArray', () => {
+group('sample/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/sample', () => {
-    sampleToolkit(largeArray);
+    do_not_optimize(sampleToolkit(largeArray));
   });
 
   bench('es-toolkit/compat/sample', () => {
-    sampleToolkitCompat(largeArray);
+    do_not_optimize(sampleToolkitCompat(largeArray));
   });
 
   bench('lodash/sample', () => {
-    sampleLodash(largeArray);
+    do_not_optimize(lodash.sample(largeArray));
   });
 });

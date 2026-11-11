@@ -1,40 +1,38 @@
-import { bench, describe } from 'vitest';
 import { over as overToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { over: overLodash } = lodash;
-
-describe('over - math functions', () => {
+group('over - math functions', () => {
   const mathFunctions = [Math.max, Math.min];
   bench('es-toolkit/over - math functions', () => {
     const func = overToolkitCompat(mathFunctions);
-    func(1, 2, 3, 4);
-    func(-10, 20, -5, 15);
-    func(3.14, 2.71, 1.414, 1.732);
+    do_not_optimize(func(1, 2, 3, 4));
+    do_not_optimize(func(-10, 20, -5, 15));
+    do_not_optimize(func(3.14, 2.71, 1.414, 1.732));
   });
 
   bench('lodash/over - math functions', () => {
-    const func = overLodash(mathFunctions);
-    func(1, 2, 3, 4);
-    func(-10, 20, -5, 15);
-    func(3.14, 2.71, 1.414, 1.732);
+    const func = lodash.over(mathFunctions);
+    do_not_optimize(func(1, 2, 3, 4));
+    do_not_optimize(func(-10, 20, -5, 15));
+    do_not_optimize(func(3.14, 2.71, 1.414, 1.732));
   });
 });
 
-describe('over - string functions', () => {
+group('over - string functions', () => {
   const greet = (name: string) => `Hello, ${name}!`;
   const shout = (name: string) => `HEY, ${name.toUpperCase()}!!!`;
   bench('es-toolkit/over - string functions', () => {
     const func = overToolkitCompat([greet, shout]);
-    func('world');
-    func('javascript');
-    func('es-toolkit');
+    do_not_optimize(func('world'));
+    do_not_optimize(func('javascript'));
+    do_not_optimize(func('es-toolkit'));
   });
 
   bench('lodash/over - string functions', () => {
-    const func = overLodash([greet, shout]);
-    func('world');
-    func('javascript');
-    func('es-toolkit');
+    const func = lodash.over([greet, shout]);
+    do_not_optimize(func('world'));
+    do_not_optimize(func('javascript'));
+    do_not_optimize(func('es-toolkit'));
   });
 });

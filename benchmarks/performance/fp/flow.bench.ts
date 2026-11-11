@@ -1,53 +1,52 @@
-import { bench, describe } from 'vitest';
 import { filter as filterToolkit, flow as flowToolkit, map as mapToolkit, take as takeToolkit } from 'es-toolkit/fp';
-import lodashFp from 'lodash/fp';
+import lodashFp from 'lodash/fp.js';
+import { bench, do_not_optimize, group } from '../harness.ts';
 
 const array = Array.from({ length: 10000 }, (_, i) => i);
-const { filter: filterLodash, flow: flowLodash, map: mapLodash, take: takeLodash } = lodashFp;
 
-describe('flow/scalar composition', () => {
+group('flow/scalar composition', () => {
   const add = (x: number, y: number) => x + y;
   const square = (n: number) => n * n;
 
   bench('es-toolkit/fp', () => {
     const combined = flowToolkit(add, square);
-    combined(1, 2);
+    do_not_optimize(combined(1, 2));
   });
 
   bench('lodash/fp', () => {
-    const combined = flowLodash(add, square);
-    combined(1, 2);
+    const combined = lodashFp.flow(add, square);
+    do_not_optimize(combined(1, 2));
   });
 });
 
-describe('flow/map', () => {
+group('flow/map', () => {
   bench('es-toolkit/fp', () => {
     const combined = flowToolkit(mapToolkit((x: number) => x * 2));
-    combined(array);
+    do_not_optimize(combined(array));
   });
 
   bench('lodash/fp', () => {
-    const combined = flowLodash(mapLodash((x: number) => x * 2));
-    combined(array);
+    const combined = lodashFp.flow(lodashFp.map((x: number) => x * 2));
+    do_not_optimize(combined(array));
   });
 });
 
-describe('flow/map + filter + take(5) (lazy short-circuit)', () => {
+group('flow/map + filter + take(5) (lazy short-circuit)', () => {
   bench('es-toolkit/fp', () => {
     const combined = flowToolkit(
       mapToolkit((x: number) => x * 2),
       filterToolkit(x => x % 3 === 0),
       takeToolkit(5)
     );
-    combined(array);
+    do_not_optimize(combined(array));
   });
 
   bench('lodash/fp', () => {
-    const combined = flowLodash(
-      mapLodash((x: number) => x * 2),
-      filterLodash((x: number) => x % 3 === 0),
-      takeLodash(5)
+    const combined = lodashFp.flow(
+      lodashFp.map((x: number) => x * 2),
+      lodashFp.filter((x: number) => x % 3 === 0),
+      lodashFp.take(5)
     );
-    combined(array);
+    do_not_optimize(combined(array));
   });
 });

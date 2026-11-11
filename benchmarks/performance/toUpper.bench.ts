@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toUpper as toUpperToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toUpper: toUpperLodash } = lodash;
-
-describe('toUpper', () => {
+group('toUpper', () => {
   const basicStrings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];
 
   const spacedStr = 'hello   world';
@@ -27,48 +25,48 @@ describe('toUpper', () => {
   const mixedArray = [1, 'b', Symbol('test'), null, undefined];
 
   bench('es-toolkit/compat/toUpper', () => {
-    basicStrings.forEach(str => toUpperToolkitCompat(str));
+    do_not_optimize(basicStrings.forEach(str => toUpperToolkitCompat(str)));
 
-    toUpperToolkitCompat(spacedStr);
-    toUpperToolkitCompat(specialCharsStr);
-    toUpperToolkitCompat(newlineStr);
-    unicodeStrs.forEach(str => toUpperToolkitCompat(str));
-    latinOperators.forEach(op => toUpperToolkitCompat(op));
+    do_not_optimize(toUpperToolkitCompat(spacedStr));
+    do_not_optimize(toUpperToolkitCompat(specialCharsStr));
+    do_not_optimize(toUpperToolkitCompat(newlineStr));
+    do_not_optimize(unicodeStrs.forEach(str => toUpperToolkitCompat(str)));
+    do_not_optimize(latinOperators.forEach(op => toUpperToolkitCompat(op)));
 
-    toUpperToolkitCompat(number);
-    toUpperToolkitCompat(negZero);
-    toUpperToolkitCompat(posZero);
-    toUpperToolkitCompat(infinite);
-    toUpperToolkitCompat(nan);
-    toUpperToolkitCompat(nullValue);
-    toUpperToolkitCompat(undefinedValue);
-    arrays.forEach(arr => toUpperToolkitCompat(arr));
-    toUpperToolkitCompat(nestedArrays);
-    symbols.forEach(sym => toUpperToolkitCompat(sym));
-    objects.forEach(obj => toUpperToolkitCompat(obj));
-    toUpperToolkitCompat(mixedArray);
+    do_not_optimize(toUpperToolkitCompat(number));
+    do_not_optimize(toUpperToolkitCompat(negZero));
+    do_not_optimize(toUpperToolkitCompat(posZero));
+    do_not_optimize(toUpperToolkitCompat(infinite));
+    do_not_optimize(toUpperToolkitCompat(nan));
+    do_not_optimize(toUpperToolkitCompat(nullValue));
+    do_not_optimize(toUpperToolkitCompat(undefinedValue));
+    do_not_optimize(arrays.forEach(arr => toUpperToolkitCompat(arr)));
+    do_not_optimize(toUpperToolkitCompat(nestedArrays));
+    do_not_optimize(symbols.forEach(sym => toUpperToolkitCompat(sym)));
+    do_not_optimize(objects.forEach(obj => toUpperToolkitCompat(obj)));
+    do_not_optimize(toUpperToolkitCompat(mixedArray));
   });
 
   bench('lodash/toUpper', () => {
-    basicStrings.forEach(str => toUpperLodash(str));
+    do_not_optimize(basicStrings.forEach(str => lodash.toUpper(str)));
 
-    toUpperLodash(spacedStr);
-    toUpperLodash(specialCharsStr);
-    toUpperLodash(newlineStr);
-    unicodeStrs.forEach(str => toUpperLodash(str));
-    latinOperators.forEach(op => toUpperLodash(op));
+    do_not_optimize(lodash.toUpper(spacedStr));
+    do_not_optimize(lodash.toUpper(specialCharsStr));
+    do_not_optimize(lodash.toUpper(newlineStr));
+    do_not_optimize(unicodeStrs.forEach(str => lodash.toUpper(str)));
+    do_not_optimize(latinOperators.forEach(op => lodash.toUpper(op)));
 
-    toUpperLodash(number);
-    toUpperLodash(negZero);
-    toUpperLodash(posZero);
-    toUpperLodash(infinite);
-    toUpperLodash(nan);
-    toUpperLodash(nullValue);
-    toUpperLodash(undefinedValue);
-    arrays.forEach(arr => toUpperLodash(arr));
-    toUpperLodash(nestedArrays);
-    symbols.forEach(sym => toUpperLodash(sym));
-    objects.forEach(obj => toUpperLodash(obj));
-    toUpperLodash(mixedArray);
+    do_not_optimize(lodash.toUpper(number));
+    do_not_optimize(lodash.toUpper(negZero));
+    do_not_optimize(lodash.toUpper(posZero));
+    do_not_optimize(lodash.toUpper(infinite));
+    do_not_optimize(lodash.toUpper(nan));
+    do_not_optimize(lodash.toUpper(nullValue));
+    do_not_optimize(lodash.toUpper(undefinedValue));
+    do_not_optimize(arrays.forEach(arr => lodash.toUpper(arr)));
+    do_not_optimize(lodash.toUpper(nestedArrays));
+    do_not_optimize(symbols.forEach(sym => lodash.toUpper(sym)));
+    do_not_optimize(objects.forEach(obj => lodash.toUpper(obj)));
+    do_not_optimize(lodash.toUpper(mixedArray));
   });
 });

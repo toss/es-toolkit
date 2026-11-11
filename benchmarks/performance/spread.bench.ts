@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { spread as spreadToolkit } from 'es-toolkit';
 import { spread as spreadCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { spread: spreadLodash } = lodash;
-
-describe('spread', () => {
+group('spread', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function fn(_a: unknown, _b: unknown, _c: unknown) {
     // eslint-disable-next-line prefer-rest-params
@@ -13,14 +11,14 @@ describe('spread', () => {
   }
 
   bench('es-toolkit/spread', () => {
-    spreadToolkit(fn);
+    do_not_optimize(spreadToolkit(fn));
   });
 
   bench('es-toolkit/compat/spread', () => {
-    spreadCompat(fn, 1);
+    do_not_optimize(spreadCompat(fn, 1));
   });
 
   bench('lodash/spread', () => {
-    spreadLodash(fn, 1);
+    do_not_optimize(lodash.spread(fn, 1));
   });
 });

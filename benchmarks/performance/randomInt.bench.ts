@@ -1,15 +1,13 @@
-import { bench, describe } from 'vitest';
 import { randomInt as randomIntToolkit } from 'es-toolkit';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { random: randomLodash } = lodash;
-
-describe('randomInt', () => {
+group('randomInt', () => {
   bench('es-toolkit/randomInt', () => {
-    randomIntToolkit(1, 10);
+    do_not_optimize(randomIntToolkit(1, 10));
   });
 
   bench('lodash/randomInt', () => {
-    randomLodash(1, 10, false);
+    do_not_optimize(lodash.random(1, 10, false));
   });
 });
