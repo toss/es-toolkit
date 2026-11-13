@@ -1,32 +1,30 @@
-import { bench, describe } from 'vitest';
 import { isSet as isSetToolkit } from 'es-toolkit';
 import { isSet as isSetToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { isSet: isSetLodash } = lodash;
-
-describe('isSet', () => {
+group('isSet', () => {
   bench('es-toolkit/isSet', () => {
-    isSetToolkit(new Set());
-    isSetToolkit(new WeakSet());
-    isSetToolkit([]);
-    isSetToolkit({});
-    isSetToolkit(null);
+    do_not_optimize(isSetToolkit(new Set()));
+    do_not_optimize(isSetToolkit(new WeakSet()));
+    do_not_optimize(isSetToolkit([]));
+    do_not_optimize(isSetToolkit({}));
+    do_not_optimize(isSetToolkit(null));
   });
 
   bench('es-toolkit/isSetCompat', () => {
-    isSetToolkitCompat(new Set());
-    isSetToolkitCompat(new WeakSet());
-    isSetToolkitCompat([]);
-    isSetToolkitCompat({});
-    isSetToolkitCompat(null);
+    do_not_optimize(isSetToolkitCompat(new Set()));
+    do_not_optimize(isSetToolkitCompat(new WeakSet()));
+    do_not_optimize(isSetToolkitCompat([]));
+    do_not_optimize(isSetToolkitCompat({}));
+    do_not_optimize(isSetToolkitCompat(null));
   });
 
   bench('lodash/isSet', () => {
-    isSetLodash(new Set());
-    isSetLodash(new WeakSet());
-    isSetLodash([]);
-    isSetLodash({});
-    isSetLodash(null);
+    do_not_optimize(lodash.isSet(new Set()));
+    do_not_optimize(lodash.isSet(new WeakSet()));
+    do_not_optimize(lodash.isSet([]));
+    do_not_optimize(lodash.isSet({}));
+    do_not_optimize(lodash.isSet(null));
   });
 });

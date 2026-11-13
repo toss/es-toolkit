@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -384,5 +384,41 @@ describe('throttle', () => {
 
     await delay(64);
     expect(callCount).toBe(2);
+  });
+
+  it('should not keep Node.js running when `trailing` is `false`', () => {
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+    const throttled = throttle(noop, 1000, { trailing: false });
+
+    throttled();
+    const timer = setTimeoutSpy.mock.results[0].value as { hasRef(): boolean };
+
+    expect(timer.hasRef()).toBe(false);
+
+    throttled.cancel();
+    setTimeoutSpy.mockRestore();
+  });
+});
+
+describe('throttle with fake timers', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should not restart the window when called inside it', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const throttled = throttle(() => calledAt.push(Date.now() - start), 16);
+
+    throttled();
+    vi.advanceTimersByTime(5);
+    throttled();
+    vi.advanceTimersByTime(100);
+
+    expect(calledAt).toEqual([0, 16]);
   });
 });

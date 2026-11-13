@@ -1,15 +1,13 @@
-import { bench, describe } from 'vitest';
 import { noop as noopToolkit } from 'es-toolkit';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { noop: noopLodash } = lodash;
-
-describe('noop', () => {
+group('noop', () => {
   bench('es-toolkit/noop', () => {
-    noopToolkit();
+    do_not_optimize(noopToolkit());
   });
 
   bench('lodash/noop', () => {
-    noopLodash();
+    do_not_optimize(lodash.noop());
   });
 });

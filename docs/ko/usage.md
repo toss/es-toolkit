@@ -10,11 +10,13 @@ next:
 
 # 설치 및 사용하기
 
+## 설치
+
 Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolkit)에서 설치할 수 있어요. Deno에서는 [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서 설치할 수 있어요.
 
 브라우저에서 바로 쓰는 경우, [CDN에서 가져올 수](#브라우저) 있어요.
 
-## Node.js
+### Node.js
 
 es-toolkit은 Node.js 18 또는 이후 버전을 지원해요. es-toolkit을 설치하기 위해서는 아래 명령어를 사용해주세요.
 
@@ -34,15 +36,7 @@ yarn add es-toolkit
 
 :::
 
-es-toolkit의 함수를 사용하려면 아래와 같이 `import` 해서 사용하면 돼요.
-
-```typescript
-import { sum } from 'es-toolkit';
-
-sum([1, 2, 3]);
-```
-
-## Deno
+### Deno
 
 es-toolkit을 Deno에서도 사용할 수 있어요. [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서 아래 명령어로 설치하세요.
 
@@ -58,7 +52,7 @@ import { sum } from '@es-toolkit/es-toolkit';
 sum([1, 2, 3]);
 ```
 
-## Bun
+### Bun
 
 es-toolkit은 Bun에서도 사용할 수 있어요. 아래 명령어를 사용해주세요.
 
@@ -66,7 +60,7 @@ es-toolkit은 Bun에서도 사용할 수 있어요. 아래 명령어를 사용�
 bun add es-toolkit
 ```
 
-## 브라우저
+### 브라우저
 
 [jsdelivr](https://www.jsdelivr.com) 또는 [unpkg](https://unpkg.com) 같은 CDN에서 es-toolkit을 쓸 수 있어요. Lodash와 같이 `_` 변수에 모든 함수가 포함돼요.
 
@@ -108,3 +102,26 @@ bun add es-toolkit
 ```
 
 :::
+
+## 사용법
+
+### 메인 라이브러리에서 가져오기
+
+대부분의 경우에는 `es-toolkit` 메인 라이브러리에서 함수를 가져오면 돼요.
+
+```typescript
+import { chunk, debounce } from 'es-toolkit';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```
+
+### 개별 파일에서 가져오기
+
+함수를 개별 파일에서 가져오고 싶다면, `es-toolkit/{category}/{function}`에서 직접 가져오세요. 경로는 [`/reference/array/chunk`](./reference/array/chunk.md)처럼 함수의 레퍼런스 페이지 경로와 같아요.
+
+```typescript
+import { chunk } from 'es-toolkit/array/chunk';
+import { debounce } from 'es-toolkit/function/debounce';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```

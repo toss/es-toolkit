@@ -1,9 +1,9 @@
 import { identity } from '../../function/identity.ts';
 import { mapValues as mapValuesToolkit } from '../../object/mapValues.ts';
-import { ArrayIterator } from '../_internal/ArrayIterator.ts';
-import { ObjectIterator } from '../_internal/ObjectIterator.ts';
-import { StringIterator } from '../_internal/StringIterator.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import type { ArrayIterator } from '../_internal/ArrayIterator.ts';
+import type { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import type { StringIterator } from '../_internal/StringIterator.ts';
+import type { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**

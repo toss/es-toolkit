@@ -107,7 +107,7 @@ export { delay } from './function/delay.ts';
 export { flip } from './function/flip.ts';
 export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
-export { memoize } from './function/memoize.ts';
+export { memoize, type MapCache, type MapCacheConstructor, type MemoizedFunction } from './function/memoize.ts';
 export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
 export { once } from './function/once.ts';

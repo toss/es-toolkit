@@ -1,45 +1,43 @@
-import { bench, describe } from 'vitest';
 import { toPath as toPathToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toPath: toPathLodash } = lodash;
-
-describe('toPath: super simple', () => {
+group('toPath: super simple', () => {
   bench('es-toolkit/toPath', () => {
-    toPathToolkit('a');
+    do_not_optimize(toPathToolkit('a'));
   });
 
   bench('lodash/toPath', () => {
-    toPathLodash('a');
+    do_not_optimize(lodash.toPath('a'));
   });
 });
 
-describe('toPath: dots', () => {
+group('toPath: dots', () => {
   bench('es-toolkit/toPath', () => {
-    toPathToolkit('a.b.c');
+    do_not_optimize(toPathToolkit('a.b.c'));
   });
 
   bench('lodash/toPath', () => {
-    toPathLodash('a.b.c');
+    do_not_optimize(lodash.toPath('a.b.c'));
   });
 });
 
-describe('toPath: brackets', () => {
+group('toPath: brackets', () => {
   bench('es-toolkit/toPath', () => {
-    toPathToolkit('a[b][c]');
+    do_not_optimize(toPathToolkit('a[b][c]'));
   });
 
   bench('lodash/toPath', () => {
-    toPathLodash('a[b][c]');
+    do_not_optimize(lodash.toPath('a[b][c]'));
   });
 });
 
-describe('toPath: complex', () => {
+group('toPath: complex', () => {
   bench('es-toolkit/toPath', () => {
-    toPathToolkit('a[b].c[0].d["e"]');
+    do_not_optimize(toPathToolkit('a[b].c[0].d["e"]'));
   });
 
   bench('lodash/toPath', () => {
-    toPathLodash('a[b].c[0].d["e"]');
+    do_not_optimize(lodash.toPath('a[b].c[0].d["e"]'));
   });
 });

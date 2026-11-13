@@ -18,7 +18,7 @@ es-toolkit은 2022년 초 이후 출시된 모든 브라우저에서 별도 설�
 es-toolkit은 현대적인 JavaScript를 적극적으로 활용해서 작고 효율적인 코드베이스를 유지하고 있어요.
 그래서 위 표보다 오래된 브라우저를 지원하려면 빌드 설정을 추가해야 해요. 설정을 추가하면 Chrome 51이나 Safari 10처럼 ES2015만 지원하는 브라우저에서도 올바르게 동작해요. 자세한 방법은 아래 [오래된 브라우저 지원하기](#오래된-브라우저-지원하기)를 참고하세요.
 
-es-toolkit은 새 버전을 릴리스할 때마다 지원하는 브라우저에서 올바르게 동작하는지 검증하고 있어요. 먼저 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 같은 ESLint 플러그인으로 정적으로 검증하고, 실제 브라우저에서 Playwright 기반 E2E 테스트를 실행해 다시 한번 검증해요.
+es-toolkit은 새 버전을 릴리스할 때마다 지원하는 브라우저에서 올바르게 동작하는지 검증하고 있어요. 먼저 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 같은 린트 규칙으로 정적으로 검증하고, 실제 브라우저에서 Playwright 기반 E2E 테스트를 실행해 다시 한번 검증해요.
 
 ::: tip `es-toolkit/compat`을 사용하고 있나요?
 `es-toolkit/compat`은 트랜스파일이나 폴리필 없이도 Node.js 6, ES2015 브라우저처럼 훨씬 오래된 환경에서 동작해요. 자세한 내용은 [`es-toolkit/compat`의 브라우저 및 Node.js 지원](/ko/compat/environment-support)을 참고하세요.

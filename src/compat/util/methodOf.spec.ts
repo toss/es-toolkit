@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { constant, each, map, noop } from '..';
 import { methodOf as methodOfToolkit } from './methodOf';
 import { times } from './times';
+import { constant, each, map, noop } from '..';
 import { stubFour } from '../_internal/stubFour';
 import { stubOne } from '../_internal/stubOne';
 import { stubThree } from '../_internal/stubThree';

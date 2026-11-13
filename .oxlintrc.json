@@ -1,0 +1,407 @@
+{
+  "plugins": ["eslint", "typescript", "import"],
+  // ESLint plugins run through oxlint's JS plugin support. They are re-exported from
+  // .scripts/oxlint so that they resolve under Yarn PnP; local-plugin.mjs holds project rules.
+  "jsPlugins": [
+    "./.scripts/oxlint/eslint-plugin-es-x.mjs",
+    "./.scripts/oxlint/eslint-plugin-compat.mjs",
+    "./.scripts/oxlint/eslint-plugin-perfectionist.mjs",
+    "./.scripts/oxlint/local-plugin.mjs"
+  ],
+  // Type-aware rules run through oxlint-tsgolint using the root tsconfig.json.
+  "options": { "typeAware": true },
+  "categories": { "correctness": "error" },
+  // `builtin` keeps the ES globals declared so that es-x can track `Object.groupBy`-style calls.
+  "env": { "builtin": true, "browser": true, "node": true, "es2024": true },
+  "ignorePatterns": [
+    ".yarn/**",
+    ".pnp.*",
+    "coverage/**",
+    "**/dist/**",
+    "**/cache/**",
+    "tests/browser-compat/generated/**",
+    "tests/browser-compat/dist-fixtures/**",
+    "**/*.d.ts",
+    "**/*.tgz",
+    "es-toolkit-plugin/skills/*/docs",
+    "**/*.vue"
+  ],
+  "settings": {
+    // Browser support floor: Chrome 98 / Safari 15.4 (see docs/browser-support.md).
+    "browsers": ["chrome 98", "safari 15.4"],
+    // Without type information es-x only sees static calls such as `Object.groupBy`; aggressive mode
+    // also reports instance methods such as `.toReversed()` by name.
+    "es-x": { "aggressive": true }
+  },
+  "rules": {
+    "no-implicit-coercion": "error",
+    "no-warning-comments": ["warn", { "terms": ["TODO", "FIXME", "XXX", "BUG"], "location": "anywhere" }],
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "prefer-object-has-own": "error",
+    "import/no-cycle": ["error", { "ignoreTypes": true }],
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-require-imports": "warn",
+    "typescript/no-non-null-asserted-optional-chain": "warn",
+    "typescript/no-inferrable-types": "warn",
+    "typescript/array-type": ["error", { "default": "array-simple" }],
+    "typescript/no-unused-vars": ["error", { "ignoreRestSiblings": true, "caughtErrors": "none" }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.spec.ts", "**/*.spec.tsx"],
+      "plugins": ["vitest"],
+      "rules": {
+        // Rules from @vitest/eslint-plugin's recommended preset that are outside oxlint's correctness category.
+        "vitest/no-identical-title": "error",
+        "vitest/no-import-node-test": "error",
+        "vitest/no-interpolation-in-snapshots": "error",
+        "vitest/no-mocks-import": "error",
+        "vitest/no-unneeded-async-expect-function": "error",
+        "vitest/prefer-called-exactly-once-with": "error",
+        "vitest/no-conditional-expect": "warn",
+        "vitest/no-commented-out-tests": "warn",
+        "vitest/valid-expect": "warn",
+        // vi.fn() infers its type from the implementation or from how the mock is used; spelling it
+        // out as a type argument on every mock is noise.
+        "vitest/require-mock-type-parameters": "off",
+        // Tests call the function directly inside it() instead of using it.each(), test.for(),
+        // describe.each(), or their modifiers such as it.skip.each() and it.skipIf(condition).each().
+        "es-toolkit/no-each": "error",
+        // Tests assert on method references (`expect(obj.method).toBe(...)`) and build sparse fixtures
+        // with `delete array[i]`; these type-aware rules are meant for production code.
+        "typescript/unbound-method": "off",
+        "typescript/no-array-delete": "off"
+      }
+    },
+    {
+      "files": ["tests/**"],
+      "rules": { "typescript/unbound-method": "off" }
+    },
+    {
+      "files": ["src/**/*.ts"],
+      "rules": {
+        "no-console": "error",
+        "es-toolkit/no-object-entries": "error",
+        // Keep src loadable by Node.js type stripping without a bundler or loader, so that benchmarks can
+        // import it directly. Type-only imports are enforced by `verbatimModuleSyntax` in tsconfig.json.
+        "import/extensions": ["error", "always", { "ignorePackages": true }],
+        "typescript/parameter-properties": "error",
+        "typescript/no-namespace": "error",
+        // `es-toolkit/util/hash` must stay opt-in: nothing reachable from the main entrypoints may import
+        // it, or the platform-conditional export would leak into every bundle. tests/check-dist.spec.ts
+        // verifies the same invariant on the packed artifact.
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["es-toolkit/util/hash", "**/util/hash", "**/util/hash/**"],
+                "message": "hash is opt-in only; it must never be reachable from es-toolkit entrypoints. Consumers import it explicitly via es-toolkit/util/hash."
+              },
+              {
+                "group": ["**/compat.ts", "!./compat.ts"],
+                "message": "Import the module itself. The compat barrel re-exports every function, so importing it creates an import cycle that CommonJS consumers see as a circular dependency warning."
+              }
+            ]
+          }
+        ],
+        // Browser support floor: Chrome 98 / Safari 15.4. These rules ensure new code does not silently
+        // raise the minimum supported browsers. Everything from eslint-plugin-es-x's no-new-in-es2022
+        // through no-new-in-es2026 presets is listed explicitly because oxlint cannot reference presets.
+        // ES2022
+        "es-x/no-arbitrary-module-namespace-names": "off", // syntax only; erased by bundlers
+        "es-x/no-array-prototype-at": "off", // Chrome 92+ / Safari 15.4+
+        "es-x/no-class-instance-fields": "off", // Chrome 72+ / Safari 14.1+
+        "es-x/no-class-private-fields": "off", // Chrome 74+ / Safari 14.1+
+        "es-x/no-class-private-methods": "off", // Chrome 84+ / Safari 15+
+        "es-x/no-class-static-block": "error",
+        "es-x/no-class-static-fields": "off", // Chrome 72+ / Safari 14.1+
+        "es-x/no-error-cause": "off", // Chrome 93+ / Safari 15+
+        "es-x/no-object-hasown": "off", // Chrome 93+ / Safari 15.4+
+        "es-x/no-private-in": "off", // Chrome 91+ / Safari 15+
+        "es-x/no-regexp-d-flag": "off", // Chrome 90+ / Safari 15+
+        "es-x/no-regexp-unicode-property-escapes-2022": "error",
+        "es-x/no-string-prototype-at": "off", // Chrome 92+ / Safari 15.4+
+        "es-x/no-top-level-await": "off", // not applicable to library source
+        // ES2023
+        "es-x/no-array-prototype-findlast-findlastindex": "off", // Chrome 97+ / Safari 15.4+
+        "es-x/no-array-prototype-toreversed": "error",
+        "es-x/no-array-prototype-tosorted": "error",
+        "es-x/no-array-prototype-tospliced": "error",
+        "es-x/no-array-prototype-with": "error",
+        "es-x/no-hashbang": "error",
+        "es-x/no-regexp-unicode-property-escapes-2023": "error",
+        // ES2024
+        "es-x/no-arraybuffer-prototype-transfer": "error",
+        "es-x/no-atomics-waitasync": "error",
+        "es-x/no-map-groupby": "error",
+        "es-x/no-object-groupby": "error",
+        "es-x/no-promise-withresolvers": "error",
+        "es-x/no-regexp-v-flag": "error",
+        "es-x/no-resizable-and-growable-arraybuffers": "error",
+        "es-x/no-string-prototype-iswellformed": "error",
+        "es-x/no-string-prototype-towellformed": "error",
+        // ES2025
+        "es-x/no-dataview-prototype-getfloat16-setfloat16": "error",
+        "es-x/no-dynamic-import-options": "error",
+        "es-x/no-float16array": "error",
+        "es-x/no-import-attributes": "error",
+        "es-x/no-iterator-prototype-drop": "error",
+        "es-x/no-iterator-prototype-every": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-filter": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-find": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-flatmap": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-foreach": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-map": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-reduce": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-some": "off", // name collides with Array.prototype in aggressive mode
+        "es-x/no-iterator-prototype-take": "error",
+        "es-x/no-iterator-prototype-toarray": "error",
+        "es-x/no-iterator": "error",
+        "es-x/no-json-modules": "error",
+        "es-x/no-math-f16round": "error",
+        "es-x/no-promise-try": "error",
+        "es-x/no-regexp-duplicate-named-capturing-groups": "error",
+        "es-x/no-regexp-escape": "error",
+        "es-x/no-regexp-modifiers": "error",
+        "es-x/no-set-prototype-difference": "error",
+        "es-x/no-set-prototype-intersection": "error",
+        "es-x/no-set-prototype-isdisjointfrom": "error",
+        "es-x/no-set-prototype-issubsetof": "error",
+        "es-x/no-set-prototype-issupersetof": "error",
+        "es-x/no-set-prototype-symmetricdifference": "error",
+        "es-x/no-set-prototype-union": "error",
+        "es-x/no-trailing-dynamic-import-commas": "error",
+        // ES2026
+        "es-x/no-array-fromasync": "error",
+        "es-x/no-error-iserror": "error",
+        "es-x/no-iterator-concat": "error",
+        "es-x/no-json-israwjson": "error",
+        "es-x/no-json-parse-reviver-context-parameter": "error",
+        "es-x/no-json-rawjson": "error",
+        "es-x/no-map-prototype-getorinsert": "error",
+        "es-x/no-map-prototype-getorinsertcomputed": "error",
+        "es-x/no-math-sumprecise": "error",
+        "es-x/no-uint8array-frombase64": "error",
+        "es-x/no-uint8array-fromhex": "error",
+        "es-x/no-uint8array-prototype-setfrombase64": "error",
+        "es-x/no-uint8array-prototype-setfromhex": "error",
+        "es-x/no-uint8array-prototype-tobase64": "error",
+        "es-x/no-uint8array-prototype-tohex": "error",
+        "es-x/no-weakmap-prototype-getorinsert": "error",
+        "es-x/no-weakmap-prototype-getorinsertcomputed": "error",
+        // Web APIs (structuredClone etc.) newer than Chrome 98 / Safari 15.4.
+        "compat/compat": "error"
+      }
+    },
+    {
+      "files": ["src/**/*.spec.ts"],
+      "rules": {
+        "no-console": "off",
+        "es-toolkit/no-object-entries": "off",
+        "import/extensions": "off",
+        "typescript/parameter-properties": "off",
+        "typescript/no-namespace": "off",
+        "no-restricted-imports": "off",
+        "es-x/no-arbitrary-module-namespace-names": "off",
+        "es-x/no-array-prototype-at": "off",
+        "es-x/no-class-instance-fields": "off",
+        "es-x/no-class-private-fields": "off",
+        "es-x/no-class-private-methods": "off",
+        "es-x/no-class-static-block": "off",
+        "es-x/no-class-static-fields": "off",
+        "es-x/no-error-cause": "off",
+        "es-x/no-object-hasown": "off",
+        "es-x/no-private-in": "off",
+        "es-x/no-regexp-d-flag": "off",
+        "es-x/no-regexp-unicode-property-escapes-2022": "off",
+        "es-x/no-string-prototype-at": "off",
+        "es-x/no-top-level-await": "off",
+        "es-x/no-array-prototype-findlast-findlastindex": "off",
+        "es-x/no-array-prototype-toreversed": "off",
+        "es-x/no-array-prototype-tosorted": "off",
+        "es-x/no-array-prototype-tospliced": "off",
+        "es-x/no-array-prototype-with": "off",
+        "es-x/no-hashbang": "off",
+        "es-x/no-regexp-unicode-property-escapes-2023": "off",
+        "es-x/no-arraybuffer-prototype-transfer": "off",
+        "es-x/no-atomics-waitasync": "off",
+        "es-x/no-map-groupby": "off",
+        "es-x/no-object-groupby": "off",
+        "es-x/no-promise-withresolvers": "off",
+        "es-x/no-regexp-v-flag": "off",
+        "es-x/no-resizable-and-growable-arraybuffers": "off",
+        "es-x/no-string-prototype-iswellformed": "off",
+        "es-x/no-string-prototype-towellformed": "off",
+        "es-x/no-dataview-prototype-getfloat16-setfloat16": "off",
+        "es-x/no-dynamic-import-options": "off",
+        "es-x/no-float16array": "off",
+        "es-x/no-import-attributes": "off",
+        "es-x/no-iterator-prototype-drop": "off",
+        "es-x/no-iterator-prototype-every": "off",
+        "es-x/no-iterator-prototype-filter": "off",
+        "es-x/no-iterator-prototype-find": "off",
+        "es-x/no-iterator-prototype-flatmap": "off",
+        "es-x/no-iterator-prototype-foreach": "off",
+        "es-x/no-iterator-prototype-map": "off",
+        "es-x/no-iterator-prototype-reduce": "off",
+        "es-x/no-iterator-prototype-some": "off",
+        "es-x/no-iterator-prototype-take": "off",
+        "es-x/no-iterator-prototype-toarray": "off",
+        "es-x/no-iterator": "off",
+        "es-x/no-json-modules": "off",
+        "es-x/no-math-f16round": "off",
+        "es-x/no-promise-try": "off",
+        "es-x/no-regexp-duplicate-named-capturing-groups": "off",
+        "es-x/no-regexp-escape": "off",
+        "es-x/no-regexp-modifiers": "off",
+        "es-x/no-set-prototype-difference": "off",
+        "es-x/no-set-prototype-intersection": "off",
+        "es-x/no-set-prototype-isdisjointfrom": "off",
+        "es-x/no-set-prototype-issubsetof": "off",
+        "es-x/no-set-prototype-issupersetof": "off",
+        "es-x/no-set-prototype-symmetricdifference": "off",
+        "es-x/no-set-prototype-union": "off",
+        "es-x/no-trailing-dynamic-import-commas": "off",
+        "es-x/no-array-fromasync": "off",
+        "es-x/no-error-iserror": "off",
+        "es-x/no-iterator-concat": "off",
+        "es-x/no-json-israwjson": "off",
+        "es-x/no-json-parse-reviver-context-parameter": "off",
+        "es-x/no-json-rawjson": "off",
+        "es-x/no-map-prototype-getorinsert": "off",
+        "es-x/no-map-prototype-getorinsertcomputed": "off",
+        "es-x/no-math-sumprecise": "off",
+        "es-x/no-uint8array-frombase64": "off",
+        "es-x/no-uint8array-fromhex": "off",
+        "es-x/no-uint8array-prototype-setfrombase64": "off",
+        "es-x/no-uint8array-prototype-setfromhex": "off",
+        "es-x/no-uint8array-prototype-tobase64": "off",
+        "es-x/no-uint8array-prototype-tohex": "off",
+        "es-x/no-weakmap-prototype-getorinsert": "off",
+        "es-x/no-weakmap-prototype-getorinsertcomputed": "off",
+        "compat/compat": "off"
+      }
+    },
+    {
+      "files": ["src/util/hash/**/*.ts"],
+      "rules": { "no-restricted-imports": "off" }
+    },
+    {
+      // Node-only entrypoints are not bound by the browser floor.
+      "files": ["src/server/**/*.ts", "src/util/hash/node.ts"],
+      "rules": {
+        "es-x/no-arbitrary-module-namespace-names": "off",
+        "es-x/no-array-prototype-at": "off",
+        "es-x/no-class-instance-fields": "off",
+        "es-x/no-class-private-fields": "off",
+        "es-x/no-class-private-methods": "off",
+        "es-x/no-class-static-block": "off",
+        "es-x/no-class-static-fields": "off",
+        "es-x/no-error-cause": "off",
+        "es-x/no-object-hasown": "off",
+        "es-x/no-private-in": "off",
+        "es-x/no-regexp-d-flag": "off",
+        "es-x/no-regexp-unicode-property-escapes-2022": "off",
+        "es-x/no-string-prototype-at": "off",
+        "es-x/no-top-level-await": "off",
+        "es-x/no-array-prototype-findlast-findlastindex": "off",
+        "es-x/no-array-prototype-toreversed": "off",
+        "es-x/no-array-prototype-tosorted": "off",
+        "es-x/no-array-prototype-tospliced": "off",
+        "es-x/no-array-prototype-with": "off",
+        "es-x/no-hashbang": "off",
+        "es-x/no-regexp-unicode-property-escapes-2023": "off",
+        "es-x/no-arraybuffer-prototype-transfer": "off",
+        "es-x/no-atomics-waitasync": "off",
+        "es-x/no-map-groupby": "off",
+        "es-x/no-object-groupby": "off",
+        "es-x/no-promise-withresolvers": "off",
+        "es-x/no-regexp-v-flag": "off",
+        "es-x/no-resizable-and-growable-arraybuffers": "off",
+        "es-x/no-string-prototype-iswellformed": "off",
+        "es-x/no-string-prototype-towellformed": "off",
+        "es-x/no-dataview-prototype-getfloat16-setfloat16": "off",
+        "es-x/no-dynamic-import-options": "off",
+        "es-x/no-float16array": "off",
+        "es-x/no-import-attributes": "off",
+        "es-x/no-iterator-prototype-drop": "off",
+        "es-x/no-iterator-prototype-every": "off",
+        "es-x/no-iterator-prototype-filter": "off",
+        "es-x/no-iterator-prototype-find": "off",
+        "es-x/no-iterator-prototype-flatmap": "off",
+        "es-x/no-iterator-prototype-foreach": "off",
+        "es-x/no-iterator-prototype-map": "off",
+        "es-x/no-iterator-prototype-reduce": "off",
+        "es-x/no-iterator-prototype-some": "off",
+        "es-x/no-iterator-prototype-take": "off",
+        "es-x/no-iterator-prototype-toarray": "off",
+        "es-x/no-iterator": "off",
+        "es-x/no-json-modules": "off",
+        "es-x/no-math-f16round": "off",
+        "es-x/no-promise-try": "off",
+        "es-x/no-regexp-duplicate-named-capturing-groups": "off",
+        "es-x/no-regexp-escape": "off",
+        "es-x/no-regexp-modifiers": "off",
+        "es-x/no-set-prototype-difference": "off",
+        "es-x/no-set-prototype-intersection": "off",
+        "es-x/no-set-prototype-isdisjointfrom": "off",
+        "es-x/no-set-prototype-issubsetof": "off",
+        "es-x/no-set-prototype-issupersetof": "off",
+        "es-x/no-set-prototype-symmetricdifference": "off",
+        "es-x/no-set-prototype-union": "off",
+        "es-x/no-trailing-dynamic-import-commas": "off",
+        "es-x/no-array-fromasync": "off",
+        "es-x/no-error-iserror": "off",
+        "es-x/no-iterator-concat": "off",
+        "es-x/no-json-israwjson": "off",
+        "es-x/no-json-parse-reviver-context-parameter": "off",
+        "es-x/no-json-rawjson": "off",
+        "es-x/no-map-prototype-getorinsert": "off",
+        "es-x/no-map-prototype-getorinsertcomputed": "off",
+        "es-x/no-math-sumprecise": "off",
+        "es-x/no-uint8array-frombase64": "off",
+        "es-x/no-uint8array-fromhex": "off",
+        "es-x/no-uint8array-prototype-setfrombase64": "off",
+        "es-x/no-uint8array-prototype-setfromhex": "off",
+        "es-x/no-uint8array-prototype-tobase64": "off",
+        "es-x/no-uint8array-prototype-tohex": "off",
+        "es-x/no-weakmap-prototype-getorinsert": "off",
+        "es-x/no-weakmap-prototype-getorinsertcomputed": "off",
+        "compat/compat": "off"
+      }
+    },
+    {
+      // es-toolkit/iterator (and its fp variant) intentionally requires runtimes with native ES2025
+      // iterator helpers, so the Iterator floor rules do not apply there. Other post-ES2021 features
+      // remain forbidden.
+      "files": ["src/iterator/**/*.ts", "src/fp/iterator/**/*.ts"],
+      "rules": {
+        "es-x/no-iterator-prototype-drop": "off",
+        "es-x/no-iterator-prototype-every": "off",
+        "es-x/no-iterator-prototype-filter": "off",
+        "es-x/no-iterator-prototype-find": "off",
+        "es-x/no-iterator-prototype-flatmap": "off",
+        "es-x/no-iterator-prototype-foreach": "off",
+        "es-x/no-iterator-prototype-map": "off",
+        "es-x/no-iterator-prototype-reduce": "off",
+        "es-x/no-iterator-prototype-some": "off",
+        "es-x/no-iterator-prototype-take": "off",
+        "es-x/no-iterator-prototype-toarray": "off",
+        "es-x/no-iterator": "off",
+        "es-x/no-iterator-concat": "off"
+      }
+    },
+    {
+      // Entrypoint re-export lists stay alphabetised (replaces prettier-plugin-sort-re-exports).
+      "files": ["src/**/index.ts", "src/**/compat.ts"],
+      "rules": {
+        "perfectionist/sort-exports": [
+          "error",
+          { "type": "natural", "ignoreCase": true, "partitionByNewLine": true, "partitionByComment": true }
+        ]
+      }
+    }
+  ]
+}

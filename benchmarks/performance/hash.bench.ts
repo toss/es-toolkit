@@ -1,8 +1,8 @@
-import { bench, describe } from 'vitest';
 import { hash as hashToolkit } from 'es-toolkit/util/hash';
 import objectHash from 'object-hash';
 import { hash as hashOhash } from 'ohash';
-import { hash as hashToolkitBrowser } from '../../src/util/hash/browser';
+import { bench, do_not_optimize, group } from './harness.ts';
+import { hash as hashToolkitBrowser } from '../../src/util/hash/browser.ts';
 
 const smallObject = { id: 1, name: 'Alice', active: true };
 
@@ -20,74 +20,74 @@ const largeArray = Array.from({ length: 1000 }, (_, i) => ({
 
 const longString = 'lorem ipsum dolor sit amet '.repeat(400); // ~10KB
 
-describe('hash: small object', () => {
+group('hash: small object', () => {
   bench('es-toolkit/util/hash (node)', () => {
-    hashToolkit(smallObject);
+    do_not_optimize(hashToolkit(smallObject));
   });
 
   bench('es-toolkit/util/hash (browser impl)', () => {
-    hashToolkitBrowser(smallObject);
+    do_not_optimize(hashToolkitBrowser(smallObject));
   });
 
   bench('ohash', () => {
-    hashOhash(smallObject);
+    do_not_optimize(hashOhash(smallObject));
   });
 
   bench('object-hash', () => {
-    objectHash(smallObject);
+    do_not_optimize(objectHash(smallObject));
   });
 });
 
-describe('hash: medium object (100 keys)', () => {
+group('hash: medium object (100 keys)', () => {
   bench('es-toolkit/util/hash (node)', () => {
-    hashToolkit(mediumObject);
+    do_not_optimize(hashToolkit(mediumObject));
   });
 
   bench('es-toolkit/util/hash (browser impl)', () => {
-    hashToolkitBrowser(mediumObject);
+    do_not_optimize(hashToolkitBrowser(mediumObject));
   });
 
   bench('ohash', () => {
-    hashOhash(mediumObject);
+    do_not_optimize(hashOhash(mediumObject));
   });
 
   bench('object-hash', () => {
-    objectHash(mediumObject);
+    do_not_optimize(objectHash(mediumObject));
   });
 });
 
-describe('hash: large array (1,000 objects)', () => {
+group('hash: large array (1,000 objects)', () => {
   bench('es-toolkit/util/hash (node)', () => {
-    hashToolkit(largeArray);
+    do_not_optimize(hashToolkit(largeArray));
   });
 
   bench('es-toolkit/util/hash (browser impl)', () => {
-    hashToolkitBrowser(largeArray);
+    do_not_optimize(hashToolkitBrowser(largeArray));
   });
 
   bench('ohash', () => {
-    hashOhash(largeArray);
+    do_not_optimize(hashOhash(largeArray));
   });
 
   bench('object-hash', () => {
-    objectHash(largeArray);
+    do_not_optimize(objectHash(largeArray));
   });
 });
 
-describe('hash: long string (~10KB)', () => {
+group('hash: long string (~10KB)', () => {
   bench('es-toolkit/util/hash (node)', () => {
-    hashToolkit(longString);
+    do_not_optimize(hashToolkit(longString));
   });
 
   bench('es-toolkit/util/hash (browser impl)', () => {
-    hashToolkitBrowser(longString);
+    do_not_optimize(hashToolkitBrowser(longString));
   });
 
   bench('ohash', () => {
-    hashOhash(longString);
+    do_not_optimize(hashOhash(longString));
   });
 
   bench('object-hash', () => {
-    objectHash(longString);
+    do_not_optimize(objectHash(longString));
   });
 });

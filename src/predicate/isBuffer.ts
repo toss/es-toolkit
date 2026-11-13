@@ -1,4 +1,5 @@
-import { globalThis } from '../_internal/globalThis';
+// oxlint-disable-next-line no-shadow-restricted-names -- deliberately shadows the global with the polyfilled one
+import { globalThis } from '../_internal/globalThis.ts';
 
 /**
  * Checks if the given value is a Buffer instance.

@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { keys as keysToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { keys: keysLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 class Foo {
   a = 1;
@@ -12,12 +10,12 @@ class Foo {
 
 const object = new Foo();
 
-describe('keys', () => {
+group('keys', () => {
   bench('es-toolkit/compat/keys', () => {
-    keysToolkit(object);
+    do_not_optimize(keysToolkit(object));
   });
 
   bench('lodash/keys', () => {
-    keysLodash(object);
+    do_not_optimize(lodash.keys(object));
   });
 });

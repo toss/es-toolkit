@@ -1,4 +1,4 @@
-import { IterateeShorthand } from './IterateeShorthand';
-import { ListIterator } from './ListIterator.ts';
+import type { IterateeShorthand } from './IterateeShorthand';
+import type { ListIterator } from './ListIterator.ts';
 
 export type ListIterateeCustom<T, R> = ListIterator<T, R> | IterateeShorthand<T>;

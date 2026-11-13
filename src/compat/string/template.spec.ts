@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import * as esToolkit from '../index';
@@ -481,5 +481,132 @@ describe('template', () => {
     const compiled = template('a{{x}}b', { interpolate: /\{\{([\s\S]+?)\}\}/g }, { g: 1 });
 
     expect(compiled({ x: '?' })).toBe('a?b');
+  });
+
+  describe('option validation', () => {
+    const marker = '__templateOptionMarker';
+
+    afterEach(() => {
+      delete (globalThis as any)[marker];
+      delete (Object.prototype as any).sourceURL;
+    });
+
+    it('should reject an invalid `variable` option', () => {
+      expect(() => template('hi', { variable: `a = (globalThis.${marker} = 1)` })).toThrow('Invalid `variable` option');
+      expect(() => template('hi', { variable: `a, b = (globalThis.${marker} = 1, 0)` })).toThrow(
+        'Invalid `variable` option'
+      );
+      expect(() => template('hi', { variable: `){ globalThis.${marker} = 1 }; with(obj` })).toThrow(
+        'Invalid `variable` option'
+      );
+      expect(() => template('hi', { variable: `{[globalThis.${marker} = true]: x}` })).toThrow(
+        'Invalid `variable` option'
+      );
+      expect(() => template('hi', { variable: `[a = globalThis.${marker} = 1]` })).toThrow('Invalid `variable` option');
+      expect(() => template('hi', { variable: 'a/*' })).toThrow('Invalid `variable` option');
+      expect(() => template('hi', { variable: 'a\nb' })).toThrow('Invalid `variable` option');
+      expect(() => template('hi', { variable: 'a\u2028b' })).toThrow('Invalid `variable` option');
+      expect((globalThis as any)[marker]).toBeUndefined();
+    });
+
+    it('should reject an invalid `imports` key', () => {
+      expect(() => template('hi', { imports: { [`x = (globalThis.${marker} = 1)`]: undefined } })).toThrow(
+        'Invalid `imports` option'
+      );
+      expect(() => template('hi', { imports: { [`{ [(globalThis.${marker} = 1, 0)]: x }`]: undefined } })).toThrow(
+        'Invalid `imports` option'
+      );
+      expect(() => template('hi', { imports: { [`a, b = (globalThis.${marker} = 1)`]: undefined } })).toThrow(
+        'Invalid `imports` option'
+      );
+      expect(() => template('hi', { imports: { [`a){ globalThis.${marker} = 1 }; (function(`]: undefined } })).toThrow(
+        'Invalid `imports` option'
+      );
+      expect((globalThis as any)[marker]).toBeUndefined();
+    });
+
+    it('should keep the `sourceURL` option on one comment line when it contains a line separator', () => {
+      expect(template('hi', { sourceURL: `a.js\u2028globalThis.${marker} = 1\u2028//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\u2029globalThis.${marker} = 1\u2029//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\nglobalThis.${marker} = 1\n//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\rglobalThis.${marker} = 1\r//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\u000bglobalThis.${marker} = 1\u000b//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\u00a0globalThis.${marker} = 1\u00a0//` })()).toBe('hi');
+      expect(template('hi', { sourceURL: `a.js\ufeffglobalThis.${marker} = 1\ufeff//` })()).toBe('hi');
+      expect((globalThis as any)[marker]).toBeUndefined();
+    });
+
+    it('should read a `variable` object only once', () => {
+      let calls = 0;
+      const variable = {
+        toString() {
+          calls += 1;
+
+          if (calls === 1) {
+            return 'safe';
+          }
+
+          return `a = (globalThis.${marker} = 1)`;
+        },
+      };
+
+      template('hi', { variable: variable as unknown as string })();
+
+      expect((globalThis as any)[marker]).toBeUndefined();
+    });
+
+    it('should ignore an inherited `sourceURL` option', () => {
+      (Object.prototype as any).sourceURL = `a.js\u2028globalThis.${marker} = 1\u2028//`;
+
+      template('hi')();
+
+      expect((globalThis as any)[marker]).toBeUndefined();
+    });
+
+    it('should accept identifiers as the `variable` option', () => {
+      expect(template('<%= data.x %>', { variable: 'data' })({ x: 'ok' })).toBe('ok');
+      expect(template('<%= $value.x %>', { variable: '$value' })({ x: 'ok' })).toBe('ok');
+      expect(template('<%= _private.x %>', { variable: '_private' })({ x: 'ok' })).toBe('ok');
+      expect(template('<%= 변수.x %>', { variable: '변수' })({ x: 'ok' })).toBe('ok');
+      expect(template('<%= a1.x %>', { variable: 'a1' })({ x: 'ok' })).toBe('ok');
+    });
+
+    it('should accept identifiers as `imports` keys', () => {
+      const compiled = template('<%= $add(1) %>', { imports: { $add: (value: number) => value + 1 } });
+
+      expect(compiled()).toBe('2');
+    });
+
+    it('should validate a `variable` from `templateSettings`', () => {
+      const previous = templateSettings.variable;
+
+      templateSettings.variable = 'data';
+      expect(template('<%= data.a %>')({ a: 1 })).toBe('1');
+
+      templateSettings.variable = 'a = 1';
+      expect(() => template('hi')).toThrow('Invalid `variable` option');
+
+      templateSettings.variable = previous;
+    });
+
+    it('should accept an array with one name as the `variable` option', () => {
+      const variable = ['data'] as unknown as string;
+
+      expect(template('<%= data.a %>', { variable })({ a: 1 })).toBe('1');
+    });
+
+    it('should reject an array with several names as the `variable` option', () => {
+      const variable = ['a', 'b'] as unknown as string;
+
+      expect(() => template('hi', { variable })).toThrow('Invalid `variable` option');
+    });
+
+    it('should keep `source` the same with and without a `sourceURL`', () => {
+      expect(template('hi', { sourceURL: 'a.js' }).source).toBe(template('hi').source);
+    });
+
+    it('should accept a path as the `sourceURL` option', () => {
+      expect(template('hi', { sourceURL: '/basic/greeting.jst' })()).toBe('hi');
+    });
   });
 });

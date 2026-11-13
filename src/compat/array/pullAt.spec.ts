@@ -158,4 +158,18 @@ describe('pullAt', () => {
     expect(actual).toEqual([3]);
     expect(array.a.b).toEqual({});
   });
+
+  it('should not delete properties from a built-in prototype', () => {
+    const key = 'pullAtBuiltInPrototypeProbe';
+
+    (String.prototype as any)[key] = 1;
+
+    try {
+      pullAt(['x'], [`0.constructor.prototype.${key}`] as any);
+
+      expect((String.prototype as any)[key]).toBe(1);
+    } finally {
+      delete (String.prototype as any)[key];
+    }
+  });
 });

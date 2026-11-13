@@ -1,10 +1,8 @@
-import { bench, describe } from 'vitest';
 import { toString as toStringToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { toString: toStringLodash } = lodash;
-
-describe('toString', () => {
+group('toString', () => {
   const number = -0;
   const object = Object(number);
   const char = 'a';
@@ -13,20 +11,20 @@ describe('toString', () => {
   const nestedArray = [array, array, array, array];
 
   bench('es-toolkit/compat/toString', () => {
-    toStringToolkitCompat(number);
-    toStringToolkitCompat(object);
-    toStringToolkitCompat(char);
-    toStringToolkitCompat(longString);
-    toStringToolkitCompat(array);
-    toStringToolkitCompat(nestedArray);
+    do_not_optimize(toStringToolkitCompat(number));
+    do_not_optimize(toStringToolkitCompat(object));
+    do_not_optimize(toStringToolkitCompat(char));
+    do_not_optimize(toStringToolkitCompat(longString));
+    do_not_optimize(toStringToolkitCompat(array));
+    do_not_optimize(toStringToolkitCompat(nestedArray));
   });
 
   bench('lodash/toString', () => {
-    toStringLodash(number);
-    toStringLodash(object);
-    toStringLodash(char);
-    toStringLodash(longString);
-    toStringLodash(array);
-    toStringLodash(nestedArray);
+    do_not_optimize(lodash.toString(number));
+    do_not_optimize(lodash.toString(object));
+    do_not_optimize(lodash.toString(char));
+    do_not_optimize(lodash.toString(longString));
+    do_not_optimize(lodash.toString(array));
+    do_not_optimize(lodash.toString(nestedArray));
   });
 });

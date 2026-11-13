@@ -1,0 +1,156 @@
+{
+  // es-toolkit/compat runtime floor: Node.js 6 (see docs/compat/environment-support.md).
+  // compat exists for migrating lodash code, which often lives in old environments, so it must run there
+  // with no transpilation and no polyfills: ES2015 syntax and ES2015 built-ins only. Every ES2016+ feature
+  // is forbidden here, including the ones the browser floor in .oxlintrc.json allows, except `?.` and `??`,
+  // which the build lowers to ES2019 syntax (see tsdown.config.ts). The Node.js 6 CI lane
+  // (tests/browser-compat, `node6-check`) runs the built package on a real Node.js 6 and also covers the
+  // main-library files that compat imports, which this config does not lint.
+  //
+  // This is a second oxlint pass (`yarn lint` runs it on src/compat) because eslint-plugin-compat reads its
+  // browser targets from the top-level `settings`, which oxlint overrides cannot change per directory.
+  "plugins": [],
+  "jsPlugins": ["./.scripts/oxlint/eslint-plugin-es-x.mjs", "./.scripts/oxlint/eslint-plugin-compat.mjs"],
+  "categories": { "correctness": "off" },
+  "env": { "builtin": true, "node": true },
+  "ignorePatterns": ["**/*.d.ts", "**/*.spec.ts"],
+  "settings": {
+    "browsers": ["node 6"],
+    "es-x": { "aggressive": true }
+  },
+  "rules": {
+    "prefer-object-has-own": "off", // Object.hasOwn is ES2022; use `hasOwn` from `_internal/hasOwn.ts` instead
+    // ES2016
+    "es-x/no-array-prototype-includes": "off", // ES2016, but Node.js 6 ships it
+    "es-x/no-exponential-operators": "error",
+    // ES2017
+    "es-x/no-async-functions": "error",
+    "es-x/no-atomics": "error",
+    "es-x/no-object-entries": "error",
+    "es-x/no-object-getownpropertydescriptors": "error",
+    "es-x/no-object-values": "error",
+    "es-x/no-shared-array-buffer": "error",
+    "es-x/no-string-prototype-padstart-padend": "error",
+    "es-x/no-trailing-function-commas": "error",
+    // ES2018
+    "es-x/no-async-iteration": "error",
+    "es-x/no-malformed-template-literals": "error",
+    "es-x/no-promise-prototype-finally": "error",
+    "es-x/no-regexp-lookbehind-assertions": "error",
+    "es-x/no-regexp-named-capture-groups": "error",
+    "es-x/no-regexp-s-flag": "error",
+    "es-x/no-regexp-unicode-property-escapes": "error",
+    "es-x/no-rest-spread-properties": "error",
+    // ES2019
+    "es-x/no-array-prototype-flat": "error",
+    "es-x/no-json-superset": "error",
+    "es-x/no-object-fromentries": "error",
+    "es-x/no-optional-catch-binding": "error",
+    "es-x/no-regexp-unicode-property-escapes-2019": "error",
+    "es-x/no-string-prototype-trimstart-trimend": "error",
+    "es-x/no-symbol-prototype-description": "error",
+    // ES2020
+    "es-x/no-bigint": "error",
+    "es-x/no-dynamic-import": "error",
+    "es-x/no-export-ns-from": "error",
+    "es-x/no-global-this": "error",
+    "es-x/no-import-meta": "error",
+    "es-x/no-nullish-coalescing-operators": "off", // lowered by the build
+    "es-x/no-optional-chaining": "off", // lowered by the build
+    "es-x/no-promise-all-settled": "error",
+    "es-x/no-regexp-unicode-property-escapes-2020": "error",
+    "es-x/no-string-prototype-matchall": "error",
+    "es-x/no-symbol-matchall": "error",
+    // ES2021
+    "es-x/no-logical-assignment-operators": "error",
+    "es-x/no-numeric-separators": "error",
+    "es-x/no-promise-any": "error",
+    "es-x/no-regexp-unicode-property-escapes-2021": "error",
+    "es-x/no-string-prototype-replaceall": "error",
+    "es-x/no-weakrefs": "error",
+    // ES2022
+    "es-x/no-arbitrary-module-namespace-names": "off", // syntax only; erased by bundlers
+    "es-x/no-array-prototype-at": "error",
+    "es-x/no-class-instance-fields": "error",
+    "es-x/no-class-private-fields": "error",
+    "es-x/no-class-private-methods": "error",
+    "es-x/no-class-static-block": "error",
+    "es-x/no-class-static-fields": "error",
+    "es-x/no-error-cause": "error",
+    "es-x/no-object-hasown": "error",
+    "es-x/no-private-in": "error",
+    "es-x/no-regexp-d-flag": "error",
+    "es-x/no-regexp-unicode-property-escapes-2022": "error",
+    "es-x/no-string-prototype-at": "error",
+    "es-x/no-top-level-await": "off", // not applicable to library source
+    // ES2023
+    "es-x/no-array-prototype-findlast-findlastindex": "error",
+    "es-x/no-array-prototype-toreversed": "error",
+    "es-x/no-array-prototype-tosorted": "error",
+    "es-x/no-array-prototype-tospliced": "error",
+    "es-x/no-array-prototype-with": "error",
+    "es-x/no-hashbang": "error",
+    "es-x/no-regexp-unicode-property-escapes-2023": "error",
+    // ES2024
+    "es-x/no-arraybuffer-prototype-transfer": "error",
+    "es-x/no-atomics-waitasync": "error",
+    "es-x/no-map-groupby": "error",
+    "es-x/no-object-groupby": "error",
+    "es-x/no-promise-withresolvers": "error",
+    "es-x/no-regexp-v-flag": "error",
+    "es-x/no-resizable-and-growable-arraybuffers": "error",
+    "es-x/no-string-prototype-iswellformed": "error",
+    "es-x/no-string-prototype-towellformed": "error",
+    // ES2025
+    "es-x/no-dataview-prototype-getfloat16-setfloat16": "error",
+    "es-x/no-dynamic-import-options": "error",
+    "es-x/no-float16array": "error",
+    "es-x/no-import-attributes": "error",
+    "es-x/no-iterator-prototype-drop": "error",
+    "es-x/no-iterator-prototype-every": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-filter": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-find": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-flatmap": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-foreach": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-map": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-reduce": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-some": "off", // name collides with Array.prototype in aggressive mode
+    "es-x/no-iterator-prototype-take": "error",
+    "es-x/no-iterator-prototype-toarray": "error",
+    "es-x/no-iterator": "error",
+    "es-x/no-json-modules": "error",
+    "es-x/no-math-f16round": "error",
+    "es-x/no-promise-try": "error",
+    "es-x/no-regexp-duplicate-named-capturing-groups": "error",
+    "es-x/no-regexp-escape": "error",
+    "es-x/no-regexp-modifiers": "error",
+    "es-x/no-set-prototype-difference": "error",
+    "es-x/no-set-prototype-intersection": "error",
+    "es-x/no-set-prototype-isdisjointfrom": "error",
+    "es-x/no-set-prototype-issubsetof": "error",
+    "es-x/no-set-prototype-issupersetof": "error",
+    "es-x/no-set-prototype-symmetricdifference": "error",
+    "es-x/no-set-prototype-union": "error",
+    "es-x/no-trailing-dynamic-import-commas": "error",
+    // ES2026
+    "es-x/no-array-fromasync": "error",
+    "es-x/no-error-iserror": "error",
+    "es-x/no-iterator-concat": "error",
+    "es-x/no-json-israwjson": "error",
+    "es-x/no-json-parse-reviver-context-parameter": "error",
+    "es-x/no-json-rawjson": "error",
+    "es-x/no-map-prototype-getorinsert": "error",
+    "es-x/no-map-prototype-getorinsertcomputed": "error",
+    "es-x/no-math-sumprecise": "error",
+    "es-x/no-uint8array-frombase64": "error",
+    "es-x/no-uint8array-fromhex": "error",
+    "es-x/no-uint8array-prototype-setfrombase64": "error",
+    "es-x/no-uint8array-prototype-setfromhex": "error",
+    "es-x/no-uint8array-prototype-tobase64": "error",
+    "es-x/no-uint8array-prototype-tohex": "error",
+    "es-x/no-weakmap-prototype-getorinsert": "error",
+    "es-x/no-weakmap-prototype-getorinsertcomputed": "error",
+    // Web APIs (structuredClone, AbortController, ...) missing in Node.js 6.
+    "compat/compat": "error"
+  }
+}

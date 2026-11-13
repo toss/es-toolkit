@@ -1,33 +1,31 @@
-import { bench, describe } from 'vitest';
 import { escapeRegExp as escapeRegExpToolkit } from 'es-toolkit';
 import { escapeRegExp as escapeRegExpCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { escapeRegExp: escapeRegExpLodash } = lodash;
-
-describe('escape', () => {
+group('escape', () => {
   const longString = '^$.*+?()[]{}|\\'.repeat(100);
   bench('es-toolkit/escapeRegExp', () => {
-    escapeRegExpToolkit('^$.*+?()[]{}|\\');
+    do_not_optimize(escapeRegExpToolkit('^$.*+?()[]{}|\\'));
   });
 
   bench('es-toolkit/compat/escapeRegExp', () => {
-    escapeRegExpCompatToolkit('^$.*+?()[]{}|\\');
+    do_not_optimize(escapeRegExpCompatToolkit('^$.*+?()[]{}|\\'));
   });
 
   bench('lodash/escapeRegExp', () => {
-    escapeRegExpLodash('^$.*+?()[]{}|\\');
+    do_not_optimize(lodash.escapeRegExp('^$.*+?()[]{}|\\'));
   });
 
   bench('es-toolkit/escapeRegExp - long string', () => {
-    escapeRegExpToolkit(longString);
+    do_not_optimize(escapeRegExpToolkit(longString));
   });
 
   bench('es-toolkit/compat/escapeRegExp - long string', () => {
-    escapeRegExpCompatToolkit(longString);
+    do_not_optimize(escapeRegExpCompatToolkit(longString));
   });
 
   bench('lodash/escapeRegExp long string', () => {
-    escapeRegExpLodash(longString);
+    do_not_optimize(lodash.escapeRegExp(longString));
   });
 });

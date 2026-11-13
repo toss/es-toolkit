@@ -1,25 +1,23 @@
-import { bench, describe } from 'vitest';
 import { has as hasToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { has: hasLodash } = lodash;
-
-describe('has with string', () => {
+group('has with string', () => {
   bench('es-toolkit/has', () => {
-    hasToolkit({ a: { b: 3 } }, 'a.b');
+    do_not_optimize(hasToolkit({ a: { b: 3 } }, 'a.b'));
   });
 
   bench('lodash/has', () => {
-    hasLodash({ a: { b: 3 } }, 'a.b');
+    do_not_optimize(lodash.has({ a: { b: 3 } }, 'a.b'));
   });
 });
 
-describe('has with string array', () => {
+group('has with string array', () => {
   bench('es-toolkit/has', () => {
-    hasToolkit({ a: { b: 3 } }, ['a', 'b']);
+    do_not_optimize(hasToolkit({ a: { b: 3 } }, ['a', 'b']));
   });
 
   bench('lodash/has', () => {
-    hasLodash({ a: { b: 3 } }, ['a', 'b']);
+    do_not_optimize(lodash.has({ a: { b: 3 } }, ['a', 'b']));
   });
 });

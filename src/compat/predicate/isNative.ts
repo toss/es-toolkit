@@ -1,5 +1,7 @@
+// oxlint-disable-next-line no-shadow-restricted-names -- deliberately shadows the global with the polyfilled one
 import { globalThis } from '../../_internal/globalThis.ts';
 
+// oxlint-disable-next-line typescript/unbound-method -- always invoked through .call below
 const functionToString = Function.prototype.toString;
 
 /**
@@ -11,6 +13,7 @@ const REGEXP_SYNTAX_CHARS = /[\\^$.*+?()[\]{}|]/g;
 /** Used to detect if a method is native. */
 const IS_NATIVE_FUNCTION_REGEXP = RegExp(
   `^${functionToString
+    // oxlint-disable-next-line typescript/unbound-method -- passed as a value to read its source text
     .call(Object.prototype.hasOwnProperty)
     .replace(REGEXP_SYNTAX_CHARS, '\\$&')
     .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?')}$`

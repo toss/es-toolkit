@@ -52,7 +52,7 @@ Foo.prototype.c = 3;
 keysIn(new Foo());
 // => ['a', 'b', 'c'] (프로토타입 속성 'c'도 포함)
 
-// constructor는 제외해요
+// constructor와 열거 불가능한 메서드는 제외해요
 class MyClass {
   constructor() {
     this.prop = 1;
@@ -62,7 +62,7 @@ class MyClass {
 MyClass.prototype.inherited = 2;
 
 keysIn(new MyClass());
-// => ['prop', 'method', 'inherited'] (constructor는 제외됨)
+// => ['prop', 'inherited'] (constructor와 열거 불가능한 method는 제외됨)
 ```
 
 배열형 객체들을 특별히 처리해요.

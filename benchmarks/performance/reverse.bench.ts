@@ -1,19 +1,17 @@
-import { bench, describe } from 'vitest';
 import { reverse as reverseCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { reverse: reverseLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const testArray = Array.from({ length: 1000 }, (_, i) => i);
 
-describe('Reverse function performance tests', () => {
+group('Reverse function performance tests', () => {
   bench('es-toolkit compat reverse', () => {
     const arrayCopy = [...testArray];
-    reverseCompat(arrayCopy);
+    do_not_optimize(reverseCompat(arrayCopy));
   });
 
   bench('lodash reverse', () => {
     const arrayCopy = [...testArray];
-    reverseLodash(arrayCopy);
+    do_not_optimize(lodash.reverse(arrayCopy));
   });
 });

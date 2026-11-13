@@ -194,6 +194,11 @@ describe('some', () => {
     expect(some(args, value => value === 1)).toBe(true);
   });
 
+  it('should not treat the `length` property of a plain array-like object as an element', () => {
+    expect(some({ 0: 0, 1: '', length: 2 })).toBe(false);
+    expect(some({ length: 3 }, (value: unknown) => value === 3)).toBe(false);
+  });
+
   it('should handle sparse arrays correctly', () => {
     // eslint-disable-next-line no-sparse-arrays
     const sparseArray = [1, , 3, , 5] as any[];

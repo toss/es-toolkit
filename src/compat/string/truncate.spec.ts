@@ -41,6 +41,38 @@ describe('truncate', () => {
     expect(truncate(string, { length: 24, separator: /,? +/g })).toBe('hi-diddly-ho there...');
   });
 
+  it('should keep the truncated string when a separator starts at the truncation boundary', () => {
+    expect(truncate('hello world remainder', { length: 14, separator: /,? +/ })).toBe('hello world...');
+    expect(truncate('a-bc-d', { length: 4, omission: '', separator: '-' })).toBe('a-bc');
+    expect(truncate('a bc d', { length: 4, omission: '', separator: / / })).toBe('a bc');
+    expect(truncate('a bc d', { length: 4, omission: '', separator: / /g })).toBe('a bc');
+    expect(truncate('a--bc--d', { length: 5, omission: '', separator: '--' })).toBe('a--bc');
+    expect(truncate('🤓 ab cd', { length: 4, omission: '', separator: ' ' })).toBe('🤓 ab');
+  });
+
+  it('should truncate to the omission when the last separator is at the start of the string', () => {
+    expect(truncate('-abcdef', { length: 5, separator: '-' })).toBe('...');
+    expect(truncate(' abcdef', { length: 5, separator: / / })).toBe('...');
+    expect(truncate(' abcdef', { length: 5, separator: /,? +/ })).toBe('...');
+  });
+
+  it('should advance past empty separator matches without changing `lastIndex`', () => {
+    const global = /(?=🤓|b)/g;
+    global.lastIndex = 1;
+    expect(truncate('🤓ab cde', { length: 4, omission: '', separator: global })).toBe('🤓a');
+    expect(global.lastIndex).toBe(1);
+
+    const unicode = /(?=🤓|b)/gu;
+    unicode.lastIndex = 1;
+    expect(truncate('🤓ab cde', { length: 4, omission: '', separator: unicode })).toBe('🤓a');
+    expect(unicode.lastIndex).toBe(1);
+
+    const unicodeSets = new RegExp('(?=🤓|b)', 'gv');
+    unicodeSets.lastIndex = 1;
+    expect(truncate('🤓ab cde', { length: 4, omission: '', separator: unicodeSets })).toBe('🤓a');
+    expect(unicodeSets.lastIndex).toBe(1);
+  });
+
   it('should treat negative `length` as `0`', () => {
     forEach([0, -2], length => {
       expect(truncate(string, { length: length })).toBe('...');

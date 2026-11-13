@@ -1,27 +1,25 @@
-import { bench, describe } from 'vitest';
 import { min as minToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { min: minLodash } = lodash;
-
-describe('min', () => {
+group('min', () => {
   bench('es-toolkit/min', () => {
-    minToolkit([1, 2, 3]);
+    do_not_optimize(minToolkit([1, 2, 3]));
   });
 
   bench('lodash/min', () => {
-    minLodash([1, 2, 3]);
+    do_not_optimize(lodash.min([1, 2, 3]));
   });
 });
 
-describe('min/largeArray', () => {
+group('min/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   bench('es-toolkit/min', () => {
-    minToolkit(largeArray);
+    do_not_optimize(minToolkit(largeArray));
   });
 
   bench('lodash/min', () => {
-    minLodash(largeArray);
+    do_not_optimize(lodash.min(largeArray));
   });
 });

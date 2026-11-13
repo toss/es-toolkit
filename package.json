@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.53.0",
+  "version": "1.53.2",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -16,24 +16,40 @@
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
+    "./array/*": "./src/array/*.ts",
     "./bigint": "./src/bigint/index.ts",
+    "./bigint/*": "./src/bigint/*.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
+    "./error/*": "./src/error/*.ts",
     "./fp": "./src/fp/index.ts",
     "./fp/iterator": "./src/fp/iterator/index.ts",
     "./function": "./src/function/index.ts",
+    "./function/*": "./src/function/*.ts",
     "./iterator": "./src/iterator/index.ts",
+    "./iterator/*": "./src/iterator/*.ts",
+    "./iterator/_internal/*": null,
     "./map": "./src/map/index.ts",
+    "./map/*": "./src/map/*.ts",
     "./math": "./src/math/index.ts",
+    "./math/*": "./src/math/*.ts",
     "./object": "./src/object/index.ts",
+    "./object/*": "./src/object/*.ts",
     "./predicate": "./src/predicate/index.ts",
+    "./predicate/*": "./src/predicate/*.ts",
     "./promise": "./src/promise/index.ts",
+    "./promise/*": "./src/promise/*.ts",
     "./query-string": "./src/query-string/index.ts",
     "./set": "./src/set/index.ts",
+    "./set/*": "./src/set/*.ts",
     "./string": "./src/string/index.ts",
+    "./string/*": "./src/string/*.ts",
     "./server": "./src/server/index.ts",
     "./types": "./src/types/index.ts",
+    "./types/*": "./src/types/*.ts",
     "./util": "./src/util/index.ts",
+    "./util/*": "./src/util/*.ts",
+    "./util/hash/*": null,
     "./util/hash": {
       "node": "./src/util/hash/node.ts",
       "default": "./src/util/hash/browser.ts"
@@ -76,53 +92,45 @@
   "scripts": {
     "bench": "yarn workspace benchmarks bench",
     "build": "tsdown && ./.scripts/postbuild.sh",
-    "format": "prettier --write .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "gen:benchmark": "node ./.scripts/generate-benchmark.mjs",
     "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
-    "lint": "eslint --config eslint.config.mjs --concurrency=auto",
+    "lint": "oxlint && oxlint -c .oxlintrc.compat.json src/compat",
+    "lint:fix": "oxlint --fix && oxlint -c .oxlintrc.compat.json --fix src/compat",
     "packlint": "packlint sort -R",
     "prepack": "yarn build",
     "test": "vitest --coverage",
-    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
+    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && oxfmt $0",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "@eslint/js": "^9.39.2",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@fixture-kit/core": "^1.1.0",
     "@types/broken-link-checker": "0.7.3",
     "@types/jscodeshift": "^0.12.0",
     "@types/node": "^24.10.9",
-    "@types/tar": "^6.1.13",
-    "@typescript-eslint/parser": "^8.26.1",
     "@vitest/coverage-istanbul": "^4.1.10",
-    "@vitest/eslint-plugin": "^1.6.6",
     "@vue/compiler-sfc": "^3.5.10",
     "broken-link-checker": "0.7.8",
-    "eslint": "^9.39.2",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-compat": "^7.0.2",
     "eslint-plugin-es-x": "^10.0.0",
-    "eslint-plugin-no-for-of-array": "^0.0.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.28.0",
+    "eslint-plugin-perfectionist": "^5.13.0",
     "execa": "^9.3.0",
     "fast-check": "4.8.0",
-    "globals": "^15.9.0",
     "happy-dom": "20.9.0",
     "jscodeshift": "^17.0.0",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
+    "oxlint-tsgolint": "^7.0.2005",
     "packlint": "^0.2.4",
-    "prettier": "^3.2.5",
-    "prettier-plugin-sort-re-exports": "^0.1.0",
     "rolldown": "^1.2.15",
-    "tar": "^6",
     "tsdown": "^0.23.1",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.6.0",
     "vercel": "^54.4.1",
     "vitest": "^4.1.10"
   },
@@ -151,6 +159,16 @@
           "default": "./dist/array/index.js"
         }
       },
+      "./array/*": {
+        "import": {
+          "types": "./dist/array/*.d.mts",
+          "default": "./dist/array/*.mjs"
+        },
+        "require": {
+          "types": "./dist/array/*.d.ts",
+          "default": "./dist/array/*.js"
+        }
+      },
       "./bigint": {
         "import": {
           "types": "./dist/bigint/index.d.mts",
@@ -159,6 +177,16 @@
         "require": {
           "types": "./dist/bigint/index.d.ts",
           "default": "./dist/bigint/index.js"
+        }
+      },
+      "./bigint/*": {
+        "import": {
+          "types": "./dist/bigint/*.d.mts",
+          "default": "./dist/bigint/*.mjs"
+        },
+        "require": {
+          "types": "./dist/bigint/*.d.ts",
+          "default": "./dist/bigint/*.js"
         }
       },
       "./compat": {
@@ -201,6 +229,16 @@
           "default": "./dist/error/index.js"
         }
       },
+      "./error/*": {
+        "import": {
+          "types": "./dist/error/*.d.mts",
+          "default": "./dist/error/*.mjs"
+        },
+        "require": {
+          "types": "./dist/error/*.d.ts",
+          "default": "./dist/error/*.js"
+        }
+      },
       "./fp": {
         "import": {
           "types": "./dist/fp/index.d.mts",
@@ -231,6 +269,16 @@
           "default": "./dist/function/index.js"
         }
       },
+      "./function/*": {
+        "import": {
+          "types": "./dist/function/*.d.mts",
+          "default": "./dist/function/*.mjs"
+        },
+        "require": {
+          "types": "./dist/function/*.d.ts",
+          "default": "./dist/function/*.js"
+        }
+      },
       "./iterator": {
         "import": {
           "types": "./dist/iterator/index.d.mts",
@@ -241,6 +289,17 @@
           "default": "./dist/iterator/index.js"
         }
       },
+      "./iterator/*": {
+        "import": {
+          "types": "./dist/iterator/*.d.mts",
+          "default": "./dist/iterator/*.mjs"
+        },
+        "require": {
+          "types": "./dist/iterator/*.d.ts",
+          "default": "./dist/iterator/*.js"
+        }
+      },
+      "./iterator/_internal/*": null,
       "./map": {
         "import": {
           "types": "./dist/map/index.d.mts",
@@ -249,6 +308,16 @@
         "require": {
           "types": "./dist/map/index.d.ts",
           "default": "./dist/map/index.js"
+        }
+      },
+      "./map/*": {
+        "import": {
+          "types": "./dist/map/*.d.mts",
+          "default": "./dist/map/*.mjs"
+        },
+        "require": {
+          "types": "./dist/map/*.d.ts",
+          "default": "./dist/map/*.js"
         }
       },
       "./math": {
@@ -261,6 +330,16 @@
           "default": "./dist/math/index.js"
         }
       },
+      "./math/*": {
+        "import": {
+          "types": "./dist/math/*.d.mts",
+          "default": "./dist/math/*.mjs"
+        },
+        "require": {
+          "types": "./dist/math/*.d.ts",
+          "default": "./dist/math/*.js"
+        }
+      },
       "./object": {
         "import": {
           "types": "./dist/object/index.d.mts",
@@ -269,6 +348,16 @@
         "require": {
           "types": "./dist/object/index.d.ts",
           "default": "./dist/object/index.js"
+        }
+      },
+      "./object/*": {
+        "import": {
+          "types": "./dist/object/*.d.mts",
+          "default": "./dist/object/*.mjs"
+        },
+        "require": {
+          "types": "./dist/object/*.d.ts",
+          "default": "./dist/object/*.js"
         }
       },
       "./predicate": {
@@ -281,6 +370,16 @@
           "default": "./dist/predicate/index.js"
         }
       },
+      "./predicate/*": {
+        "import": {
+          "types": "./dist/predicate/*.d.mts",
+          "default": "./dist/predicate/*.mjs"
+        },
+        "require": {
+          "types": "./dist/predicate/*.d.ts",
+          "default": "./dist/predicate/*.js"
+        }
+      },
       "./promise": {
         "import": {
           "types": "./dist/promise/index.d.mts",
@@ -289,6 +388,16 @@
         "require": {
           "types": "./dist/promise/index.d.ts",
           "default": "./dist/promise/index.js"
+        }
+      },
+      "./promise/*": {
+        "import": {
+          "types": "./dist/promise/*.d.mts",
+          "default": "./dist/promise/*.mjs"
+        },
+        "require": {
+          "types": "./dist/promise/*.d.ts",
+          "default": "./dist/promise/*.js"
         }
       },
       "./query-string": {
@@ -311,6 +420,16 @@
           "default": "./dist/set/index.js"
         }
       },
+      "./set/*": {
+        "import": {
+          "types": "./dist/set/*.d.mts",
+          "default": "./dist/set/*.mjs"
+        },
+        "require": {
+          "types": "./dist/set/*.d.ts",
+          "default": "./dist/set/*.js"
+        }
+      },
       "./string": {
         "import": {
           "types": "./dist/string/index.d.mts",
@@ -321,12 +440,30 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./string/*": {
+        "import": {
+          "types": "./dist/string/*.d.mts",
+          "default": "./dist/string/*.mjs"
+        },
+        "require": {
+          "types": "./dist/string/*.d.ts",
+          "default": "./dist/string/*.js"
+        }
+      },
       "./types": {
         "import": {
           "types": "./dist/types/index.d.mts"
         },
         "require": {
           "types": "./dist/types/index.d.ts"
+        }
+      },
+      "./types/*": {
+        "import": {
+          "types": "./dist/types/*.d.mts"
+        },
+        "require": {
+          "types": "./dist/types/*.d.ts"
         }
       },
       "./util": {
@@ -339,6 +476,17 @@
           "default": "./dist/util/index.js"
         }
       },
+      "./util/*": {
+        "import": {
+          "types": "./dist/util/*.d.mts",
+          "default": "./dist/util/*.mjs"
+        },
+        "require": {
+          "types": "./dist/util/*.d.ts",
+          "default": "./dist/util/*.js"
+        }
+      },
+      "./util/hash/*": null,
       "./util/hash": {
         "node": {
           "import": {
@@ -366,12 +514,6 @@
     "types": "./dist/index.d.ts"
   },
   "dependenciesMeta": {
-    "@trivago/prettier-plugin-sort-imports@4.3.0": {
-      "unplugged": true
-    },
-    "prettier-plugin-sort-re-exports@0.0.1": {
-      "unplugged": true
-    },
     "vitepress-plugin-sandpack@1.1.4": {
       "unplugged": true
     }

@@ -1,10 +1,9 @@
-import { bench, describe } from 'vitest';
 import { cloneDeep as cloneDeepToolkit } from 'es-toolkit';
 import { cloneDeep as cloneDeepCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
 import createRfdc from 'rfdc';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { cloneDeep: cloneDeepLodash } = lodash;
 const rfdcWithCircle = createRfdc({
   circles: true,
 });
@@ -25,32 +24,32 @@ const obj = {
   nested2: { a: { b: { c: { d: { e: { f: { g: 'es-toolkit' } } } } } } },
 };
 
-describe('cloneDeep', () => {
+group('cloneDeep', () => {
   bench('es-toolkit/cloneDeep', () => {
-    cloneDeepToolkit(obj);
+    do_not_optimize(cloneDeepToolkit(obj));
   });
 
   bench('es-toolkit/compat/cloneDeep', () => {
-    cloneDeepCompatToolkit(obj);
+    do_not_optimize(cloneDeepCompatToolkit(obj));
   });
 
   bench('lodash/cloneDeep', () => {
-    cloneDeepLodash(obj);
+    do_not_optimize(lodash.cloneDeep(obj));
   });
 
   bench('node/JSON.parse', () => {
-    JSON.parse(JSON.stringify(obj));
+    do_not_optimize(JSON.parse(JSON.stringify(obj)));
   });
 
   bench('node/structuredClone', () => {
-    structuredClone(obj);
+    do_not_optimize(structuredClone(obj));
   });
 
   bench('rfdc without circle', () => {
-    rfdc(obj);
+    do_not_optimize(rfdc(obj));
   });
 
   bench('rfdc with circle', () => {
-    rfdcWithCircle(obj);
+    do_not_optimize(rfdcWithCircle(obj));
   });
 });

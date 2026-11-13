@@ -1,5 +1,5 @@
 import { get } from './get.ts';
-import { PropertyPath } from '../types/PropertyPath.ts';
+import type { PropertyPath } from '../types/PropertyPath.ts';
 
 export function property<T, R>(path: PropertyPath): (obj: T) => R;
 

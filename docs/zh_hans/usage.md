@@ -10,11 +10,13 @@ next:
 
 # 使用方法
 
+## 安装
+
 es-toolkit 可通过 [npm](https://npmjs.com/package/es-toolkit) 安装，适用于 Node.js 和 Bun，也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。
 
 你也可以通过 [从 CDN 导入](#浏览器) 的方式在浏览器中使用 es-toolkit。
 
-## Node.js
+### Node.js
 
 es-toolkit 支持 Node.js 18及更高版本。使用以下命令安装 es-toolkit：
 
@@ -34,15 +36,7 @@ yarn add es-toolkit
 
 :::
 
-要使用 es-toolkit 的函数，只需像下面这样使用 `import` 语句即可。
-
-```typescript
-import { sum } from 'es-toolkit';
-
-sum([1, 2, 3]);
-```
-
-## Deno
+### Deno
 
 es-toolkit 也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。使用以下命令安装 es-toolkit：
 
@@ -58,7 +52,7 @@ import { sum } from '@es-toolkit/es-toolkit';
 sum([1, 2, 3]);
 ```
 
-## Bun
+### Bun
 
 es-toolkit 也支持 Bun。您可以使用以下命令安装它：
 
@@ -66,7 +60,7 @@ es-toolkit 也支持 Bun。您可以使用以下命令安装它：
 bun add es-toolkit
 ```
 
-## 浏览器
+### 浏览器
 
 你可以在诸如 [jsdelivr](https://www.jsdelivr.com) 或 [unpkg](https://unpkg.com) 等CDN上找到 es-toolkit。我们将 `_` 定义为包含所有函数，类似于 Lodash。
 
@@ -108,3 +102,26 @@ es-toolkit 也可在 [esm.sh](https://esm.sh) 上用于现代浏览器。
 ```
 
 :::
+
+## 用法
+
+### 从主库导入
+
+大多数情况下，从 `es-toolkit` 主库导入函数即可。
+
+```typescript
+import { chunk, debounce } from 'es-toolkit';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```
+
+### 从单个文件导入
+
+如果想从单个文件导入函数，请直接从 `es-toolkit/{category}/{function}` 导入。路径与函数的参考页面路径相同，例如 [`/reference/array/chunk`](./reference/array/chunk.md)。
+
+```typescript
+import { chunk } from 'es-toolkit/array/chunk';
+import { debounce } from 'es-toolkit/function/debounce';
+
+chunk([1, 2, 3, 4, 5, 6], 3);
+```

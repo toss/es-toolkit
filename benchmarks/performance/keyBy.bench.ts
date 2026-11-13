@@ -1,11 +1,9 @@
-import { bench, describe } from 'vitest';
 import { keyBy as keyByToolkit } from 'es-toolkit';
 import { keyBy as keyByToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { keyBy: keyByLodash } = lodash;
-
-describe('keyBy', () => {
+group('keyBy', () => {
   bench('es-toolkit/keyBy', () => {
     const people = [
       { name: 'mike', age: 20 },
@@ -15,7 +13,7 @@ describe('keyBy', () => {
       { name: 'emma', age: 25 },
     ];
 
-    keyByToolkit(people, person => person.name);
+    do_not_optimize(keyByToolkit(people, person => person.name));
   });
 
   bench('es-toolkit/compat/keyBy', () => {
@@ -27,7 +25,7 @@ describe('keyBy', () => {
       { name: 'emma', age: 25 },
     ];
 
-    keyByToolkitCompat(people, person => person.name);
+    do_not_optimize(keyByToolkitCompat(people, person => person.name));
   });
 
   bench('lodash/keyBy', () => {
@@ -39,22 +37,22 @@ describe('keyBy', () => {
       { name: 'emma', age: 25 },
     ];
 
-    keyByLodash(people, person => person.name);
+    do_not_optimize(lodash.keyBy(people, person => person.name));
   });
 });
 
-describe('keyBy/largeArray', () => {
+group('keyBy/largeArray', () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
 
   bench('es-toolkit/keyBy', () => {
-    keyByToolkit(largeArray, person => person.name);
+    do_not_optimize(keyByToolkit(largeArray, person => person.name));
   });
 
   bench('es-toolkit/compat/keyBy', () => {
-    keyByToolkitCompat(largeArray, person => person.name);
+    do_not_optimize(keyByToolkitCompat(largeArray, person => person.name));
   });
 
   bench('lodash/keyBy', () => {
-    keyByLodash(largeArray, person => person.name);
+    do_not_optimize(lodash.keyBy(largeArray, person => person.name));
   });
 });

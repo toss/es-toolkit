@@ -1,5 +1,46 @@
 # es-toolkit Changelog
 
+## Version v1.53.2
+
+Released on November 6th, 2026.
+
+- Added support for per-function imports like `es-toolkit/array/chunk`. ([#2173](https://github.com/toss/es-toolkit/pull/2173))
+- Fixed `reduceAsync` to preserve explicitly provided `null` and `undefined` initial values. ([#2176](https://github.com/toss/es-toolkit/pull/2176))
+- Fixed circular dependency warnings in bundlers when importing `orderBy` or `sortBy`. ([#2187](https://github.com/toss/es-toolkit/pull/2187))
+- Fixed `truncate` in `es-toolkit/compat` to preserve separator boundaries, matching Lodash's behavior. ([#2180](https://github.com/toss/es-toolkit/pull/2180))
+- Fixed `isError` in `es-toolkit/compat` to return `true` for `DOMException` and error-like objects, matching Lodash's behavior. ([#2188](https://github.com/toss/es-toolkit/pull/2188))
+- Fixed incorrect example outputs in the documentation for `random`, `keysIn`, `setWith`, and `curryRight`. ([#2183](https://github.com/toss/es-toolkit/pull/2183))
+- Replaced Prettier and ESLint with oxfmt and oxlint, and forbade circular imports. ([#2185](https://github.com/toss/es-toolkit/pull/2185), [#2189](https://github.com/toss/es-toolkit/pull/2189), [#2190](https://github.com/toss/es-toolkit/pull/2190))
+- Enhanced the dist and browser compatibility checks to verify the packed tarball and only exported functions. ([#2182](https://github.com/toss/es-toolkit/pull/2182), [#2192](https://github.com/toss/es-toolkit/pull/2192))
+
+We sincerely thank @D-Sketon, @frogscooper, @MycroCosmo, @raon0211, @subotac, and @ys0v9 for their contributions. We appreciate your great efforts!
+
+## Version v1.53.1
+
+Released on October 31st, 2026.
+
+This release includes security fixes for `es-toolkit/compat`, and we recommend upgrading.
+The fixes match Lodash, so results may differ if you relied on the previous behavior.
+
+- Fixed `compat/template` to reject `variable` values and `imports` keys that are not
+  plain parameter names, and to replace all whitespace in `sourceURL`, preventing code injection.
+- Fixed `compat/defaultsDeep` to ignore `__proto__` keys, preventing prototype pollution.
+- Fixed `compat/unset`, `compat/omit`, and `compat/pullAt` to stop when `__proto__`,
+  `constructor`, or `prototype` appears before the last path key, preventing the deletion
+  of built-in prototype properties.
+
+The following are other fixes in this release.
+
+- Fixed `clone` to preserve the offset and length of a `DataView`. ([#2166])
+- Fixed `split` to keep surrogate pairs and combining marks together for an empty separator. ([#2171])
+- Fixed `withTimeout` to clear its timer after the operation completes. ([#2170])
+- Fixed `compat/pickBy` to not treat objects with a numeric length as array-like. ([#2165])
+- Fixed `compat/findLast` and `compat/some` to not treat `length` as an element of
+  array-likes. ([#2168])
+
+We sincerely thank @arba-octo, @dayongkr, @frogscooper, and @KooYS for their contributions.
+We appreciate your great efforts!
+
 ## Version v1.53.0
 
 Released on October 24th, 2026.

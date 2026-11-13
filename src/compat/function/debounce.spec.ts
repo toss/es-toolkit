@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -359,6 +359,7 @@ describe('debounce', () => {
   });
 
   // FIXME: flaky test
+  // oxlint-disable-next-line vitest/no-disabled-tests
   it.skip('should queue a trailing call for subsequent debounced calls after `maxWait`', async () => {
     let callCount = 0;
 
@@ -580,5 +581,83 @@ describe('debounce', () => {
     await delay(96);
 
     expect(callCount).toBe(0);
+  });
+
+  it('should cap timer delays at the `setTimeout` limit', () => {
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+    const debounced = debounce(noop, Infinity);
+
+    debounced();
+
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), 2147483647);
+
+    debounced.cancel();
+    setTimeoutSpy.mockRestore();
+  });
+
+  it('should not invoke `func` on `flush` when `trailing` is `false`', () => {
+    const func = vi.fn();
+    const debounced = debounce(func, 100, { leading: true, trailing: false });
+
+    debounced();
+    debounced();
+    debounced.flush();
+
+    expect(func).toHaveBeenCalledTimes(1);
+
+    debounced.cancel();
+  });
+
+  it('should not throw when `setTimeout` returns a timer without a callable `unref`', () => {
+    const func = vi.fn();
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+
+    setTimeoutSpy.mockReturnValueOnce(undefined as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    setTimeoutSpy.mockReturnValueOnce(null as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    setTimeoutSpy.mockReturnValueOnce({ unref: true } as unknown as ReturnType<typeof setTimeout>);
+    expect(() => debounce(func, 100, { leading: true, trailing: false })()).not.toThrow();
+
+    expect(func).toHaveBeenCalledTimes(3);
+
+    setTimeoutSpy.mockRestore();
+  });
+});
+
+describe('debounce with fake timers', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should raise `maxWait` to `wait` when it is shorter', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const debounced = debounce(() => calledAt.push(Date.now() - start), 100, { maxWait: 50 });
+
+    debounced();
+    vi.advanceTimersByTime(40);
+    debounced();
+    vi.advanceTimersByTime(40);
+    debounced();
+    vi.advanceTimersByTime(200);
+
+    expect(calledAt).toEqual([100]);
+  });
+
+  it('should treat a `NaN` `wait` and `maxWait` as `0`', () => {
+    const func = vi.fn();
+    const debounced = debounce(func, NaN, { maxWait: NaN });
+
+    debounced();
+    vi.advanceTimersByTime(1);
+
+    expect(func).toHaveBeenCalledTimes(1);
   });
 });

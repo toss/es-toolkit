@@ -18,7 +18,7 @@ es-toolkit 在 2022 年初以后发布的所有浏览器中无需任何配置即
 es-toolkit 积极使用现代 JavaScript,以保持代码库小巧高效。
 如果要支持比上述版本更旧的浏览器,可以添加构建配置。这样即使在只支持 ES2015 的更旧浏览器(如 Chrome 51 或 Safari 10)中,es-toolkit 也能正常工作。参见下面的[支持更旧的浏览器](#支持更旧的浏览器)。
 
-es-toolkit 每次发布新版本时,都会验证其在支持的浏览器中是否正常工作:先通过 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 等 ESLint 插件进行静态验证,再通过真实的基于 Playwright 的 E2E 测试进行二次验证。
+es-toolkit 每次发布新版本时,都会验证其在支持的浏览器中是否正常工作:先通过 [`eslint-plugin-es-x`](https://github.com/eslint-community/eslint-plugin-es-x) 等 lint 规则进行静态验证,再通过真实的基于 Playwright 的 E2E 测试进行二次验证。
 
 ::: tip 在使用 `es-toolkit/compat`?
 `es-toolkit/compat` 无需任何转译或 polyfill,即可在更旧的环境中运行,最低支持 Node.js 6 和 ES2015 浏览器。参见[`es-toolkit/compat` 的浏览器和 Node.js 支持](/zh_hans/compat/environment-support)。

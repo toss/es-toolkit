@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { methodOf as methodOfToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { methodOf: methodOfLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 const object = {
   a: {
@@ -12,12 +10,12 @@ const object = {
   },
 };
 
-describe('methodOf', () => {
+group('methodOf', () => {
   bench('es-toolkit/compat', () => {
-    methodOfToolkit(object, 1, 2)('a.b');
+    do_not_optimize(methodOfToolkit(object, 1, 2)('a.b'));
   });
 
   bench('lodash', () => {
-    methodOfLodash(object, 1, 2)('a.b');
+    do_not_optimize(lodash.methodOf(object, 1, 2)('a.b'));
   });
 });

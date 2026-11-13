@@ -4,24 +4,24 @@
     "remeda": "remeda"
   },
   "environment": {
-    "node": "v22.18.0",
-    "platform": "Darwin arm64",
-    "cpu": "Apple M4 Max",
+    "node": "v24.21.0",
+    "platform": "darwin arm64",
+    "cpu": "Apple M3 Max",
     "cpuCores": 16,
     "memory": "64.00 GB"
   },
   "data": {
     "pipe/map": {
-      "esToolkit": 20063,
-      "remeda": 6849
+      "esToolkit": 18696,
+      "remeda": 6708
     },
     "pipe/filter + map": {
-      "esToolkit": 12305,
-      "remeda": 4092
+      "esToolkit": 10948,
+      "remeda": 4090
     },
     "pipe/uniq": {
-      "esToolkit": 16295,
-      "remeda": 4358
+      "esToolkit": 14031,
+      "remeda": 4247
     }
   }
 }

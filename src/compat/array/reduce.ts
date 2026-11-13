@@ -1,7 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { range } from '../../math/range.ts';
-import { MemoListIterator } from '../_internal/MemoListIterator.ts';
-import { MemoObjectIterator } from '../_internal/MemoObjectIterator.ts';
+import type { MemoListIterator } from '../_internal/MemoListIterator.ts';
+import type { MemoObjectIterator } from '../_internal/MemoObjectIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 

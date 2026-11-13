@@ -132,3 +132,6 @@ create_compat_alias "object" "assignInWith" "extendWith"
 
 # Verify that every generated compat entry point is actually importable
 node ./.scripts/check-compat-entrypoints-loadable.mjs
+
+# Verify that every per-function entry point (es-toolkit/<category>/<fn>) is importable
+node ./.scripts/check-subpath-entrypoints.mjs

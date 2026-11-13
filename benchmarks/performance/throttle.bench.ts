@@ -1,20 +1,36 @@
-import { bench, describe } from 'vitest';
 import { throttle as throttleToolkit } from 'es-toolkit';
 import { throttle as throttleCompatToolkit } from 'es-toolkit/compat';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { throttle: throttleLodash } = lodash;
-
-describe('throttle', () => {
+group('throttle', () => {
   bench('es-toolkit/throttle', () => {
-    throttleToolkit(() => undefined, 1000)();
+    do_not_optimize(throttleToolkit(() => undefined, 1000)());
   });
 
   bench('es-toolkit/compat/throttle', () => {
-    throttleCompatToolkit(() => undefined, 1000)();
+    do_not_optimize(throttleCompatToolkit(() => undefined, 1000)());
   });
 
   bench('lodash/throttle', () => {
-    throttleLodash(() => undefined, 1000)();
+    do_not_optimize(lodash.throttle(() => undefined, 1000)());
+  });
+});
+
+describe('throttle: repeated calls', () => {
+  const throttledToolkit = throttleToolkit(() => undefined, 1000);
+  const throttledCompatToolkit = throttleCompatToolkit(() => undefined, 1000);
+  const throttledLodash = throttleLodash(() => undefined, 1000);
+
+  bench('es-toolkit/throttle', () => {
+    throttledToolkit();
+  });
+
+  bench('es-toolkit/compat/throttle', () => {
+    throttledCompatToolkit();
+  });
+
+  bench('lodash/throttle', () => {
+    throttledLodash();
   });
 });

@@ -1,25 +1,23 @@
-import { bench, describe } from 'vitest';
 import { identity as identityToolkit } from 'es-toolkit';
 import lodash from 'lodash';
+import { bench, do_not_optimize, group } from './harness.ts';
 
-const { identity: identityLodash } = lodash;
-
-describe('identity', () => {
+group('identity', () => {
   bench('es-toolkit/identity', () => {
-    identityToolkit(5);
-    identityToolkit('hello');
-    identityToolkit({ key: 'value' });
-    identityToolkit([1, 2, 3]);
-    identityToolkit(true);
-    identityToolkit(false);
+    do_not_optimize(identityToolkit(5));
+    do_not_optimize(identityToolkit('hello'));
+    do_not_optimize(identityToolkit({ key: 'value' }));
+    do_not_optimize(identityToolkit([1, 2, 3]));
+    do_not_optimize(identityToolkit(true));
+    do_not_optimize(identityToolkit(false));
   });
 
   bench('lodash/identity', () => {
-    identityLodash(5);
-    identityLodash('hello');
-    identityLodash({ key: 'value' });
-    identityLodash([1, 2, 3]);
-    identityLodash(true);
-    identityLodash(false);
+    do_not_optimize(lodash.identity(5));
+    do_not_optimize(lodash.identity('hello'));
+    do_not_optimize(lodash.identity({ key: 'value' }));
+    do_not_optimize(lodash.identity([1, 2, 3]));
+    do_not_optimize(lodash.identity(true));
+    do_not_optimize(lodash.identity(false));
   });
 });

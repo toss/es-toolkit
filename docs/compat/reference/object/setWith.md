@@ -42,7 +42,7 @@ setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
   return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
 });
 console.log(obj3);
-// Result: { a: { '0': { b: { c: 'nested' } } } }
+// Result: { a: [{ b: { c: 'nested' } }] }
 
 // Use Object constructor as customizer
 const obj4 = {};

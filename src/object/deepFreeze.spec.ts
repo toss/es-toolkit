@@ -81,10 +81,10 @@ describe('deepFreeze', () => {
 
     expect(() => {
       (obj as any).user = {};
-    }).toThrow();
+    }).toThrow(TypeError);
 
     expect(() => {
       (obj as any).user.age = 22;
-    }).toThrow();
+    }).toThrow(TypeError);
   });
 });

@@ -1,8 +1,6 @@
-import { bench, describe } from 'vitest';
 import { flatMapDepth as flatMapDepthToolkitCompat } from 'es-toolkit/compat';
 import lodash from 'lodash';
-
-const { flatMapDepth: flatMapDepthLodash } = lodash;
+import { bench, do_not_optimize, group } from './harness.ts';
 
 function createNestedArray(arr: any[], depth: number) {
   let result = arr;
@@ -13,19 +11,19 @@ function createNestedArray(arr: any[], depth: number) {
   return result;
 }
 
-describe('flatMapDepth', () => {
+group('flatMapDepth', () => {
   const iterateeDepth = (item: number) => createNestedArray([item, item, item], 10);
   const arr = Array.from({ length: 30 }, (_, i) => i);
 
   bench('es-toolkit/compat/flatMapDepth', () => {
-    flatMapDepthToolkitCompat(arr, iterateeDepth, 100);
+    do_not_optimize(flatMapDepthToolkitCompat(arr, iterateeDepth, 100));
   });
 
   bench('lodash/flatMapDepth', () => {
-    flatMapDepthLodash(arr, iterateeDepth, 100);
+    do_not_optimize(lodash.flatMapDepth(arr, iterateeDepth, 100));
   });
 
   bench('js built-in/map.flat', () => {
-    arr.map(iterateeDepth).flat(100);
+    do_not_optimize(arr.map(iterateeDepth).flat(100));
   });
 });
