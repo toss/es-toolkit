@@ -56,7 +56,7 @@ export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], 
 }
 
 function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
-  const parent = get(object, path.slice(0, -1), object);
+  const parent = path.length < 2 ? object : get(object, path.slice(0, -1));
 
   if (parent == null) {
     return undefined;
