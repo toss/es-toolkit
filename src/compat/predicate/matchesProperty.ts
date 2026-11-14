@@ -86,7 +86,7 @@ export function matchesProperty<T, V>(property: PropertyPath, source: T): (targe
     const result = get(target, property as PropertyKey | PropertyKey[]);
 
     if (result === undefined) {
-      return has(target, property as PropertyKey | PropertyKey[]);
+      return result === source && has(target, property as PropertyKey | PropertyKey[]);
     }
 
     if (source === undefined) {
