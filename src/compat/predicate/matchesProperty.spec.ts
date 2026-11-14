@@ -340,6 +340,7 @@ describe('matchesProperty', () => {
     const expected = [false, false, true];
 
     expect(actual).toEqual(expected);
+    expect(objects.map(matchesProperty('b', 1))).toEqual([false, true, false]);
 
     objects = [
       { a: { a: 1 } },
