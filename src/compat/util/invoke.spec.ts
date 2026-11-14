@@ -80,4 +80,13 @@ describe('invoke', () => {
     const object = { a: null };
     expect(invoke(object, 'a.b')).toBeUndefined();
   });
+
+  it('should not fall back to `object` when an intermediate path is missing', () => {
+    const object = { save: () => 'root save', db: undefined };
+
+    expect(invoke(object, 'db.save')).toBeUndefined();
+    expect(invoke(object, 'missing.save')).toBeUndefined();
+    expect(invoke(object, ['missing', 'save'])).toBeUndefined();
+    expect(invoke(['ab'], 'a[0]')).toBeUndefined();
+  });
 });

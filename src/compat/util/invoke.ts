@@ -56,22 +56,17 @@ export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], 
 }
 
 function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
-  const parent = get(object, path.slice(0, -1), object);
+  if (path.length === 1) {
+    const func = get(object, toKey(path[0]));
+    return func?.apply(object, args);
+  }
+
+  const parent = get(object, path.slice(0, -1));
 
   if (parent == null) {
     return undefined;
   }
 
-  let lastKey = last(path);
-  const lastValue = lastKey?.valueOf();
-
-  if (typeof lastValue === 'number') {
-    lastKey = toKey(lastValue);
-  } else {
-    lastKey = String(lastKey);
-  }
-
-  const func = get(parent, lastKey as PropertyKey);
-
+  const func = get(parent, toKey(last(path)));
   return func?.apply(parent, args);
 }
