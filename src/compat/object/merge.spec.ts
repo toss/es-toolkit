@@ -403,4 +403,29 @@ describe('merge', () => {
     expect(Object.keys(actual.x)).toEqual(['0']);
     expect((actual.x as any).a).toBeUndefined();
   });
+
+  it('should not alias plain object sources over primitive target values', () => {
+    const defaults = { retry: { count: 3 } };
+    const overrides = { retry: { count: 5 } };
+    const actual = merge({ retry: false }, defaults, overrides);
+
+    expect(actual.retry).toEqual({ count: 5 });
+    expect(actual.retry).not.toBe(defaults.retry);
+    expect(defaults.retry).toEqual({ count: 3 });
+
+    const fn = () => {};
+    const source = { a: { b: 1 } };
+    const result = merge({ a: fn }, source);
+
+    expect(result.a).toEqual({ b: 1 });
+    expect(result.a).not.toBe(source.a);
+  });
+
+  it('should clone typed array sources over primitive target values', () => {
+    const source = { a: new Uint8Array([1, 2]) };
+    const actual = merge({ a: 1 }, source);
+
+    expect(actual.a).toEqual(new Uint8Array([1, 2]));
+    expect(actual.a).not.toBe(source.a);
+  });
 });
