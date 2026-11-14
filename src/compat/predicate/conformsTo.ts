@@ -37,7 +37,7 @@ export function conformsTo<T>(target: T, source: ConformsPredicateObject<T>): bo
   }
 
   const keys = Object.keys(source) as Array<keyof T>;
-  for (let i = 0; i < keys.length; i++) {
+  for (let i = keys.length - 1; i >= 0; i--) {
     const key = keys[i];
     const predicate = source[key];
     const value = target[key];
