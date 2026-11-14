@@ -316,6 +316,7 @@ function mergeWithDeep(
     }
 
     const merged = merge(targetValue, sourceValue, key, target, source, stack);
+    const isNonObjectTarget = targetValue == null || typeof targetValue !== 'object';
 
     if (merged !== undefined) {
       target[key] = merged;
@@ -330,9 +331,9 @@ function mergeWithDeep(
         isTypedArray(sourceValue))
     ) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
-    } else if (targetValue == null && isPlainObject(sourceValue)) {
+    } else if (isNonObjectTarget && isPlainObject(sourceValue)) {
       target[key] = mergeWithDeep({}, sourceValue, merge, stack);
-    } else if (targetValue == null && isTypedArray(sourceValue)) {
+    } else if (isNonObjectTarget && isTypedArray(sourceValue)) {
       target[key] = cloneDeep(sourceValue);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
