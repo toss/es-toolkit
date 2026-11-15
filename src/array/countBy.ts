@@ -35,7 +35,7 @@ export function countBy<T, K extends PropertyKey>(
   arr: readonly T[],
   mapper: (item: T, index: number, array: readonly T[]) => K
 ): Record<K, number> {
-  const result = {} as Record<K, number>;
+  const result = Object.create(null) as Record<K, number>;
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
@@ -44,5 +44,5 @@ export function countBy<T, K extends PropertyKey>(
     result[key] = (result[key] ?? 0) + 1;
   }
 
-  return result;
+  return Object.setPrototypeOf(result, Object.prototype);
 }
