@@ -43,4 +43,14 @@ describe('countBy', () => {
       large: 3,
     });
   });
+
+  it('should correctly count items with inherited property names like toString and constructor', () => {
+    const arr = ['toString', 'constructor', 'toString', 'valueOf', 'a'];
+    const result = countBy(arr, x => x);
+
+    expect(result.toString).toBe(2);
+    expect(result.constructor).toBe(1);
+    expect(result.valueOf).toBe(1);
+    expect(result.a).toBe(1);
+  });
 });
