@@ -76,6 +76,40 @@ describe('retry', () => {
     expect(func).toHaveBeenCalledTimes(0);
   });
 
+  it('should stop waiting for the delay when the signal is aborted', async () => {
+    const error = new Error('failure');
+    const func = vi.fn().mockRejectedValue(error);
+    const controller = new AbortController();
+    const delay = 1000;
+
+    // The first attempt fails right away, so the signal is aborted while waiting for the delay.
+    setTimeout(() => controller.abort(), 50);
+
+    const start = performance.now();
+    await expect(retry(func, { delay, retries: 5, signal: controller.signal })).rejects.toBe(error);
+    const end = performance.now();
+
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(end - start).toBeLessThan(delay / 2);
+  });
+
+  it('should not wait for the delay when the signal is aborted during an attempt', async () => {
+    const error = new Error('failure');
+    const controller = new AbortController();
+    const func = vi.fn(async () => {
+      controller.abort();
+      throw error;
+    });
+    const delay = 1000;
+
+    const start = performance.now();
+    await expect(retry(func, { delay, retries: 5, signal: controller.signal })).rejects.toBe(error);
+    const end = performance.now();
+
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(end - start).toBeLessThan(delay / 2);
+  });
+
   it('should retry when shouldRetry returns true', async () => {
     const error = { status: 500, message: 'Server Error' };
     const func = vi.fn().mockRejectedValueOnce(error).mockResolvedValue('success');

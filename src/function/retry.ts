@@ -151,7 +151,12 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
 
       if (attempts < retries) {
         const currentDelay = typeof delay === 'function' ? delay(attempts, error) : delay;
-        await delayToolkit(currentDelay);
+        try {
+          await delayToolkit(currentDelay, { signal });
+        } catch {
+          // `delay` only rejects when the signal is aborted while waiting.
+          throw error;
+        }
       }
     }
   }
