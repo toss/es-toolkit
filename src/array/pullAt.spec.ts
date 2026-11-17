@@ -74,6 +74,22 @@ describe('pullAt', () => {
     expect(result).toEqual([10, 50]);
   });
 
+  it('should not remove anything for a negative index that is out of range', () => {
+    const array = [10, 20, 30];
+    const result = pullAt(array, [-5]);
+
+    expect(array).toEqual([10, 20, 30]);
+    expect(result).toEqual([undefined]);
+  });
+
+  it('should only remove existing elements when an out-of-range negative index is mixed in', () => {
+    const array = [10, 20, 30];
+    const result = pullAt(array, [0, -5]);
+
+    expect(array).toEqual([20, 30]);
+    expect(result).toEqual([10, undefined]);
+  });
+
   it('should work with objects', () => {
     const foo = { foo: 1 };
     const bar = { foo: 2 };
