@@ -21,7 +21,9 @@ export function pullAt<T>(arr: T[], indicesToRemove: readonly number[]): T[] {
   const indices = new Set(indicesToRemove.map(index => (index < 0 ? index + arr.length : index)).sort((x, y) => y - x));
 
   for (const index of indices) {
-    arr.splice(index, 1);
+    if (index >= 0) {
+      arr.splice(index, 1);
+    }
   }
 
   return removed;
