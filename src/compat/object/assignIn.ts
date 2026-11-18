@@ -133,6 +133,8 @@ export function assignIn<R>(object: any, ...otherArgs: any[]): R;
  * console.log(result); // Output: { a: 1, b: 2, c: 3 }
  */
 export function assignIn(object: any, ...sources: any[]): any {
+  object = Object(object);
+
   for (let i = 0; i < sources.length; i++) {
     assignInImpl(object, sources[i]);
   }

@@ -172,6 +172,8 @@ export function assignWith<R>(object: any, ...otherArgs: any[]): R;
  * console.log(result); // Output: { a: 1, b: 2, c: 3 }
  */
 export function assignWith(object: any, ...sources: any[]): any {
+  object = Object(object);
+
   let getValueToAssign = sources[sources.length - 1];
 
   if (typeof getValueToAssign === 'function') {
