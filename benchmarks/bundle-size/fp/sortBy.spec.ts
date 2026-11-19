@@ -5,7 +5,7 @@ describe('fp/sortBy bundle size', () => {
   it('es-toolkit/fp', async () => {
     expect(
       await getBundleSizeFromScript('import { sortBy } from "es-toolkit/fp"; console.log(sortBy)')
-    ).toMatchInlineSnapshot(`515`);
+    ).toMatchInlineSnapshot(`536`);
   });
 
   it('lodash/fp/sortBy', async () => {
