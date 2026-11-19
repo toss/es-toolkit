@@ -52,6 +52,13 @@ describe('round function', () => {
     expect(round(8.88888, 5)).toBe(8.88888);
   });
 
+  it('rounds numbers with floating point precision issues correctly', () => {
+    expect(round(1.005, 2)).toBe(1.01);
+    expect(round(5.015, 2)).toBe(5.02);
+    expect(round(1.555, 2)).toBe(1.56);
+    expect(round(1e21, 2)).toBe(1e21);
+  });
+
   it('handles edge cases where precision is not integer', () => {
     const value = 1.2345;
     const precision = 3.1;

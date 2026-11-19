@@ -19,6 +19,15 @@ export function round(value: number, precision = 0): number {
   if (!Number.isInteger(precision)) {
     throw new Error('Precision must be an integer.');
   }
-  const multiplier = Math.pow(10, precision);
-  return Math.round(value * multiplier) / multiplier;
+  if (precision === 0 || !Number.isFinite(value)) {
+    return Math.round(value);
+  }
+  const isNegativeZero = Object.is(value, -0);
+  const [magnitude, exponent = 0] = (isNegativeZero ? '-0' : value.toString()).split('e');
+  let adjusted: string | number = Math.round(Number(`${magnitude}e${Number(exponent) + precision}`));
+  if (Object.is(adjusted, -0)) {
+    adjusted = '-0';
+  }
+  const [newMagnitude, newExponent = 0] = adjusted.toString().split('e');
+  return Number(`${newMagnitude}e${Number(newExponent) - precision}`);
 }
