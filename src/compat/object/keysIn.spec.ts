@@ -153,6 +153,33 @@ describe('keys methods', () => {
     expect(actual).toEqual(['0', 'length']);
   });
 
+  it(`\`keysIn\` should include inherited indices of array-like objects`, () => {
+    const object = Object.create({ 0: 'a' });
+    object.length = 1;
+
+    expect(func(object).sort()).toEqual(['0', 'length']);
+  });
+
+  it(`\`keysIn\` should include inherited \`constructor\` properties of array-like objects`, () => {
+    const object = Object.create({ constructor: 1, inherited: 2 });
+    object[0] = 'a';
+    object.length = 1;
+
+    expect(func(object).sort()).toEqual(['0', 'constructor', 'inherited', 'length']);
+  });
+
+  it(`\`keysIn\` should skip inherited \`constructor\` properties of non-array-like objects`, () => {
+    const object = Object.create({ constructor: 1, inherited: 2 });
+
+    expect(func(object).sort()).toEqual(['inherited']);
+  });
+
+  it(`\`keysIn\` should include own \`constructor\` properties of non-array-like objects`, () => {
+    const object = { constructor: 1, inherited: 2 };
+
+    expect(func(object).sort()).toEqual(['constructor', 'inherited']);
+  });
+
   it(`\`keysIn\` should coerce primitives to objects (test in IE 9)`, () => {
     const expected = primitives.map(value => (typeof value === 'string' ? ['0'] : []));
 

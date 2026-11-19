@@ -1,6 +1,7 @@
 import { isBuffer } from '../../predicate/isBuffer.ts';
 import { hasOwn } from '../_internal/hasOwn.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
+import { isArguments } from '../predicate/isArguments.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 import { times } from '../util/times.ts';
@@ -44,7 +45,7 @@ export function keysIn(object?: any): string[] {
         return prototypeKeysIn(object);
       }
 
-      return keysInImpl(object);
+      return keysInImpl(object).filter(key => key !== 'constructor' || hasOwn(object, key));
     }
 
     default: {
@@ -70,6 +71,10 @@ function prototypeKeysIn(object: object): string[] {
 }
 
 function arrayLikeKeysIn(object: ArrayLike<any>): string[] {
+  if (!Array.isArray(object) && !isArguments(object) && !isBuffer(object) && !isTypedArray(object)) {
+    return keysInImpl(object);
+  }
+
   const indices = times(object.length, index => `${index}`);
 
   const filteredKeys = new Set(indices);
