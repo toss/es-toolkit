@@ -148,4 +148,52 @@ describe('orderBy', () => {
       { name: 'a', value: undefined },
     ]);
   });
+
+  it('should sort symbol values after regular values without throwing', () => {
+    const symbolA = Symbol('a');
+    const symbolB = Symbol('b');
+    const items = [
+      { name: 'a', value: symbolB },
+      { name: 'b', value: 2 },
+      { name: 'c', value: symbolA },
+      { name: 'd', value: 1 },
+      { name: 'e', value: NaN },
+      { name: 'f', value: null },
+      { name: 'g', value: undefined },
+    ];
+
+    expect(orderBy(items, ['value'], ['asc'])).toEqual([
+      { name: 'd', value: 1 },
+      { name: 'b', value: 2 },
+      { name: 'a', value: symbolB },
+      { name: 'c', value: symbolA },
+      { name: 'e', value: NaN },
+      { name: 'f', value: null },
+      { name: 'g', value: undefined },
+    ]);
+  });
+
+  it('should sort symbol values before regular values when descending', () => {
+    const symbolA = Symbol('a');
+    const symbolB = Symbol('b');
+    const items = [
+      { name: 'a', value: symbolB },
+      { name: 'b', value: 2 },
+      { name: 'c', value: symbolA },
+      { name: 'd', value: 1 },
+      { name: 'e', value: NaN },
+      { name: 'f', value: null },
+      { name: 'g', value: undefined },
+    ];
+
+    expect(orderBy(items, ['value'], ['desc'])).toEqual([
+      { name: 'g', value: undefined },
+      { name: 'f', value: null },
+      { name: 'e', value: NaN },
+      { name: 'a', value: symbolB },
+      { name: 'c', value: symbolA },
+      { name: 'b', value: 2 },
+      { name: 'd', value: 1 },
+    ]);
+  });
 });

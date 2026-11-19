@@ -89,4 +89,28 @@ describe('sortBy', () => {
       { user: 'e', age: undefined },
     ]);
   });
+
+  it('should sort symbol values after regular values without throwing', () => {
+    const symbolA = Symbol('a');
+    const symbolB = Symbol('b');
+    const items = [
+      { name: 'a', value: symbolB },
+      { name: 'b', value: 2 },
+      { name: 'c', value: symbolA },
+      { name: 'd', value: 1 },
+      { name: 'e', value: NaN },
+      { name: 'f', value: null },
+      { name: 'g', value: undefined },
+    ];
+
+    expect(sortBy(items, ['value'])).toEqual([
+      { name: 'd', value: 1 },
+      { name: 'b', value: 2 },
+      { name: 'a', value: symbolB },
+      { name: 'c', value: symbolA },
+      { name: 'e', value: NaN },
+      { name: 'f', value: null },
+      { name: 'g', value: undefined },
+    ]);
+  });
 });
