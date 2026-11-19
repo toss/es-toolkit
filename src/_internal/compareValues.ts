@@ -1,14 +1,18 @@
-// Weight used to push `NaN`, `null` and `undefined` after other values when sorting,
-// in the order `NaN` < `null` < `undefined`.
+// Weight used to push `Symbol`, `NaN`, `null` and `undefined` after other values when sorting,
+// in the order `Symbol` < `NaN` < `null` < `undefined`.
+// Symbols are ranked here because comparing them with `<` throws a `TypeError`.
 function nullishRank(value: any): number {
-  if (Number.isNaN(value)) {
+  if (typeof value === 'symbol') {
     return 1;
   }
-  if (value === null) {
+  if (Number.isNaN(value)) {
     return 2;
   }
-  if (value === undefined) {
+  if (value === null) {
     return 3;
+  }
+  if (value === undefined) {
+    return 4;
   }
   return 0;
 }
@@ -17,7 +21,7 @@ function compareAscending(a: any, b: any): 0 | -1 | 1 {
   const aRank = nullishRank(a);
   const bRank = nullishRank(b);
 
-  // Compare by rank first: regular value (0) < NaN (1) < null (2) < undefined (3).
+  // Compare by rank first: regular value (0) < Symbol (1) < NaN (2) < null (3) < undefined (4).
   if (aRank < bRank) {
     return -1;
   }
