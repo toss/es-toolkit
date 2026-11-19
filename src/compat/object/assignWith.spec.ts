@@ -14,6 +14,10 @@ describe('assignWith', () => {
     expect(assignWith({}, expected, noop)).toEqual(expected);
   });
 
+  it('should assign a customizer result of `null`', () => {
+    expect(assignWith({ a: 1 }, { b: 2 }, () => null)).toEqual({ a: 1, b: null });
+  });
+
   it('should assign properties from a source object to a target object', () => {
     const target = { a: 1 };
     const source = { b: 2 };
