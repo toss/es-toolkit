@@ -1,5 +1,7 @@
+import type { Toolkit } from '../toolkit.ts';
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
-type __ = typeof curryPlaceholder;
+type __ = typeof curryPlaceholder | Toolkit;
 
 interface CurriedFunction1<T1, R> {
   (): CurriedFunction1<T1, R>;
@@ -228,7 +230,7 @@ export function curry(
     return func.apply(this, partialArgs);
   };
 
-  wrapper.placeholder = curryPlaceholder;
+  wrapper.placeholder = curry.placeholder;
 
   return wrapper;
 }
@@ -251,7 +253,7 @@ function makeCurry(
     }
     return func.apply(this, providedArgs);
   }
-  wrapper.placeholder = curryPlaceholder;
+  wrapper.placeholder = curry.placeholder;
   return wrapper;
 }
 
