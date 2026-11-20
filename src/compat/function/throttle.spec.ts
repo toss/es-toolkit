@@ -421,4 +421,28 @@ describe('throttle with fake timers', () => {
 
     expect(calledAt).toEqual([0, 16]);
   });
+
+  it('should not invoke on the leading edge when `leading` is set to `undefined`', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const throttled = throttle(() => calledAt.push(Date.now() - start), 100, { leading: undefined });
+
+    throttled();
+    vi.advanceTimersByTime(200);
+
+    expect(calledAt).toEqual([100]);
+  });
+
+  it('should not invoke on the trailing edge when `trailing` is set to `undefined`', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const throttled = throttle(() => calledAt.push(Date.now() - start), 100, { trailing: undefined });
+
+    throttled();
+    vi.advanceTimersByTime(50);
+    throttled();
+    vi.advanceTimersByTime(200);
+
+    expect(calledAt).toEqual([0]);
+  });
 });
