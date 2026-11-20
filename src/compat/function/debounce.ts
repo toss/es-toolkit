@@ -167,11 +167,14 @@ export function debounce<F extends (...args: any[]) => any>(
     options = {};
   }
 
-  const { leading = false, trailing = true } = options;
+  const { leading = false } = options;
+  // Like Lodash, check whether `trailing` and `maxWait` are set, not whether they are `undefined`:
+  // `{ trailing: undefined }` turns off the trailing call, and `{ maxWait: undefined }` sets `maxWait` to `wait`.
+  const trailing = 'trailing' in options ? Boolean(options.trailing) : true;
   const waitMs = debounceMs || 0;
   let maxWaitMs: number | undefined = undefined;
 
-  if (options.maxWait !== undefined) {
+  if ('maxWait' in options) {
     maxWaitMs = Math.max(options.maxWait || 0, waitMs);
   }
 

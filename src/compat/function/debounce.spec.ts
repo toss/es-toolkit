@@ -651,6 +651,30 @@ describe('debounce with fake timers', () => {
     expect(calledAt).toEqual([100]);
   });
 
+  it('should not invoke on the trailing edge when `trailing` is set to `undefined`', () => {
+    const func = vi.fn();
+    const debounced = debounce(func, 100, { trailing: undefined });
+
+    debounced();
+    vi.advanceTimersByTime(200);
+
+    expect(func).not.toHaveBeenCalled();
+  });
+
+  it('should use `wait` as `maxWait` when `maxWait` is set to `undefined`', () => {
+    const start = Date.now();
+    const calledAt: number[] = [];
+    const debounced = debounce(() => calledAt.push(Date.now() - start), 100, { maxWait: undefined });
+
+    for (let i = 0; i < 5; i++) {
+      debounced();
+      vi.advanceTimersByTime(50);
+    }
+    vi.advanceTimersByTime(200);
+
+    expect(calledAt).toEqual([100, 200, 300]);
+  });
+
   it('should treat a `NaN` `wait` and `maxWait` as `0`', () => {
     const func = vi.fn();
     const debounced = debounce(func, NaN, { maxWait: NaN });

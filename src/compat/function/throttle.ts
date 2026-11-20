@@ -123,7 +123,13 @@ export function throttle<F extends (...args: any[]) => any>(
   throttleMs = 0,
   options: ThrottleSettings = {}
 ): DebouncedFunc<F> {
-  const { leading = true, trailing = true } = options;
+  if (typeof options !== 'object') {
+    options = {};
+  }
+
+  // Like Lodash, `{ leading: undefined }` or `{ trailing: undefined }` turns that call off.
+  const leading = 'leading' in options ? Boolean(options.leading) : true;
+  const trailing = 'trailing' in options ? Boolean(options.trailing) : true;
 
   return debounce(func, throttleMs, {
     leading,
