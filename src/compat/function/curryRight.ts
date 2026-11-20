@@ -1,5 +1,7 @@
+import type { Toolkit } from '../toolkit.ts';
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
-type __ = typeof curryRightPlaceholder;
+type __ = typeof curryRightPlaceholder | Toolkit;
 
 interface RightCurriedFunction1<T1, R> {
   (): RightCurriedFunction1<T1, R>;
@@ -155,7 +157,7 @@ export function curryRight(
     return func.apply(this, partialArgs);
   };
 
-  wrapper.placeholder = curryRightPlaceholder;
+  wrapper.placeholder = curryRight.placeholder;
 
   return wrapper;
 }
@@ -178,7 +180,7 @@ function makeCurryRight(
     }
     return func.apply(this, providedArgs);
   }
-  wrapper.placeholder = curryRightPlaceholder;
+  wrapper.placeholder = curryRight.placeholder;
   return wrapper;
 }
 

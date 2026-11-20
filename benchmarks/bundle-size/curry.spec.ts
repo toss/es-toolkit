@@ -14,6 +14,6 @@ describe('curry bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'curry');
-    expect(bundleSize).toMatchInlineSnapshot(`711`);
+    expect(bundleSize).toMatchInlineSnapshot(`735`);
   });
 });
