@@ -79,6 +79,12 @@ describe('truncate', () => {
     });
   });
 
+  it('should distinguish an omitted `length` from an explicit `undefined` length', () => {
+    expect(truncate('abcdef')).toBe('abcdef');
+    expect(truncate('abcdef', { length: undefined })).toBe('...');
+    expect(truncate('', { length: undefined })).toBe('');
+  });
+
   it('should coerce `length` to an integer', () => {
     forEach(['', NaN, 4.6, '4'], (length, index) => {
       const actual = index > 1 ? 'h...' : '...';
