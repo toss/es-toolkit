@@ -66,4 +66,15 @@ describe('pickBy', () => {
       return true;
     });
   });
+
+  it('should return the same record type for index signature objects', () => {
+    // https://github.com/toss/es-toolkit/issues/1987
+    const numberLookup: Record<number, { id: number }> = {};
+    const pickedNumbers = pickBy(numberLookup, () => true);
+    expectTypeOf(pickedNumbers).toEqualTypeOf<Record<number, { id: number }>>();
+
+    const stringLookup: Record<string, { id: number }> = {};
+    const pickedStrings = pickBy(stringLookup, () => true);
+    expectTypeOf(pickedStrings).toEqualTypeOf<Record<string, { id: number }>>();
+  });
 });
