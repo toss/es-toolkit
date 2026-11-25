@@ -19,18 +19,10 @@ import type { ObjectKeys } from '../types/ObjectKeys.ts';
  * const result = pickBy(obj, shouldPick);
  * // result will be { b: 'pick' }
  */
-export function pickBy<T>(
-  obj: Record<number, T>,
-  shouldPick: (value: T, key: string) => boolean
-): Record<number, T>;
-export function pickBy<T>(
-  obj: Record<string, T>,
-  shouldPick: (value: T, key: string) => boolean
-): Record<string, T>;
 export function pickBy<T extends Record<string, any>>(
   obj: T,
   shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
-): Partial<T>;
+): string extends keyof T ? T : number extends keyof T ? T : Partial<T>;
 export function pickBy<T extends Record<string, any>>(
   obj: T,
   shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean

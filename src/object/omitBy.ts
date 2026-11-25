@@ -19,18 +19,10 @@ import type { ObjectKeys } from '../types/ObjectKeys.ts';
  * const result = omitBy(obj, shouldOmit);
  * // result will be { a: 1, c: 3 }
  */
-export function omitBy<T>(
-  obj: Record<number, T>,
-  shouldOmit: (value: T, key: string) => boolean
-): Record<number, T>;
-export function omitBy<T>(
-  obj: Record<string, T>,
-  shouldOmit: (value: T, key: string) => boolean
-): Record<string, T>;
 export function omitBy<T extends Record<string, any>>(
   obj: T,
   shouldOmit: (value: T[keyof T], key: ObjectKeys<T>) => boolean
-): Partial<T>;
+): string extends keyof T ? T : number extends keyof T ? T : Partial<T>;
 export function omitBy<T extends Record<string, any>>(
   obj: T,
   shouldOmit: (value: T[keyof T], key: ObjectKeys<T>) => boolean
