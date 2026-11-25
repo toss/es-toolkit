@@ -22,6 +22,10 @@ import type { ObjectKeys } from '../types/ObjectKeys.ts';
 export function pickBy<T extends Record<string, any>>(
   obj: T,
   shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
+): string extends keyof T ? T : number extends keyof T ? T : Partial<T>;
+export function pickBy<T extends Record<string, any>>(
+  obj: T,
+  shouldPick: (value: T[keyof T], key: ObjectKeys<T>) => boolean
 ): Partial<T> {
   const result: Partial<T> = {};
 

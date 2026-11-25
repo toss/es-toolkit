@@ -66,4 +66,18 @@ describe('omitBy', () => {
       return false;
     });
   });
+
+  it('should return the same record type for index signature objects', () => {
+    // https://github.com/toss/es-toolkit/issues/1987
+    // Record types are inherently partial (no key is guaranteed to exist),
+    // so the result must not be wrapped in Partial, which would wrongly
+    // add undefined to the value type.
+    const numberLookup: Record<number, { id: number }> = {};
+    const omittedNumbers = omitBy(numberLookup, () => true);
+    expectTypeOf(omittedNumbers).toEqualTypeOf<Record<number, { id: number }>>();
+
+    const stringLookup: Record<string, { id: number }> = {};
+    const omittedStrings = omitBy(stringLookup, () => true);
+    expectTypeOf(omittedStrings).toEqualTypeOf<Record<string, { id: number }>>();
+  });
 });
