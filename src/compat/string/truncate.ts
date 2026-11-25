@@ -1,4 +1,6 @@
 import { regexMultiByte } from '../_internal/regexMultiByte.ts';
+import { unicodeSize } from '../_internal/unicodeSize.ts';
+import { unicodeToArray } from '../_internal/unicodeToArray.ts';
 import { isObject } from '../predicate/isObject.ts';
 
 type TruncateOptions = {
@@ -48,15 +50,17 @@ export function truncate(string?: string, options?: TruncateOptions): string {
 
   let i = string.length;
 
-  // Unicode length of omission string
-  const lengthOmission = Array.from(omission).length;
+  // Unicode length of omission string, counting an emoji sequence such as 👨‍👩‍👧 as one symbol like Lodash
+  const lengthOmission = regexMultiByte.test(omission) ? unicodeSize(omission) : omission.length;
   // Unicode length of the string if it is truncated
   const lengthBase = Math.max(length - lengthOmission, 0);
 
   let strArray: string[] | undefined = undefined;
   const unicode = regexMultiByte.test(string);
   if (unicode) {
-    strArray = Array.from(string);
+    // Split into the symbols Lodash counts, so a cut never lands inside an emoji sequence.
+    // The first `length + 1` are enough to tell whether the string is longer and where to cut it.
+    strArray = unicodeToArray(string, length + 1);
     i = strArray.length;
   }
 
