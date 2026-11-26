@@ -19,4 +19,14 @@ describe('zipWith', () => {
     const result = zipWith([10, 20, 30], [1, 2, 3], (a, b, index) => a + b + index);
     expect(result).toEqual([11, 23, 35]);
   });
+
+  it('passes undefined for missing elements and preserves each callback result', () => {
+    const result = zipWith([10], [1, 2, 3], (...args) => args);
+
+    expect(result).toEqual([
+      [10, 1, 0],
+      [undefined, 2, 1],
+      [undefined, 3, 2],
+    ]);
+  });
 });
