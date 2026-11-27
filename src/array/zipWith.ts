@@ -106,18 +106,19 @@ export function zipWith<T, U, V, W, R>(
  * // result will be ['1a', '2b', '3c']
  */
 export function zipWith<T, R>(arr1: readonly T[], ...rest: any[]): R[] {
-  const arrs = [arr1, ...rest.slice(0, -1)];
-  const combine = rest[rest.length - 1] as (...items: any[]) => R;
+  const combine = rest.pop() as (...items: any[]) => R;
+  const arrs = [arr1, ...rest];
 
   const maxIndex = Math.max(...arrs.map(arr => arr.length));
   const result: R[] = Array(maxIndex);
-  const args: Array<T | number> = Array(arrs.length + 1);
+  const arrayCount = arrs.length;
+  const args: Array<T | number> = Array(arrayCount + 1);
 
   for (let i = 0; i < maxIndex; i++) {
-    for (let j = 0; j < arrs.length; j++) {
+    for (let j = 0; j < arrayCount; j++) {
       args[j] = arrs[j][i];
     }
-    args[arrs.length] = i;
+    args[arrayCount] = i;
     result[i] = combine(...args);
   }
 
